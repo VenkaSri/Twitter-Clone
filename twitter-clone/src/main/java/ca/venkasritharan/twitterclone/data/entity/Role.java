@@ -1,22 +1,21 @@
 package ca.venkasritharan.twitterclone.data.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
+@Setter
+@Getter
 @Entity
-@Data
-@Table(name = "nottwitterusersroles")
+@Table(name = "roles")
 public class Role {
 
   @Id
-  @Column(name = "rolesid")
-  private int id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "roleid")
+  private long id;
 
-  @Column(name = "rolename")
-  private String rolename;
-
-  @OneToMany(mappedBy = "nottwitterusersroles")
-  private List<UserRole> roleList;
+  @Column(length = 60)
+  private String name;
 }
