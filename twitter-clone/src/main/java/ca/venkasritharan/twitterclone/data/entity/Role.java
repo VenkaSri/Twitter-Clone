@@ -13,7 +13,6 @@ public class Role {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "roleid")
   private long id;
 
   @Column(length = 60)

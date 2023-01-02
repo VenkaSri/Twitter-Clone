@@ -38,8 +38,10 @@ public class SecurityConfig {
     http.csrf().disable()
             .authorizeHttpRequests((authorize) ->
                     //authorize.anyRequest().authenticated()
-                    authorize.requestMatchers()
-
+                    authorize.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+                            //.requestMatchers(HttpMethod.GET, "/api/categories/**").permitAll()
+                            .requestMatchers("/api/auth/**").permitAll()
+                            .anyRequest().authenticated());
     return http.build();
   }
 
