@@ -33,4 +33,11 @@ public class TweetController {
   public ResponseEntity<TweetDTO> getTweetById(@PathVariable(name = "id") long id) {
     return ResponseEntity.ok(tweetService.getTweetById(id));
   }
+
+  @PutMapping("{id}")
+  public ResponseEntity<TweetDTO> editTweetById(@RequestBody TweetDTO tweetDTO,
+                                                @PathVariable(name = "id") long id) {
+    TweetDTO updatedTweet = tweetService.editTweetById(id, tweetDTO);
+    return new ResponseEntity<>(updatedTweet, HttpStatus.OK);
+  }
 }

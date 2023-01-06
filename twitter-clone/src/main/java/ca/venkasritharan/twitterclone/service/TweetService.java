@@ -7,7 +7,8 @@ import java.util.List;
 
 public interface TweetService {
 
-  TweetDTO postTweet(TweetDTO clientResponse);
+  TweetDTO postTweet(TweetDTO tweetDTO);
   List<Tweet> getAllTweets();
   TweetDTO getTweetById(long id);
+  TweetDTO editTweetById(long id, TweetDTO tweetDTO);
 }
