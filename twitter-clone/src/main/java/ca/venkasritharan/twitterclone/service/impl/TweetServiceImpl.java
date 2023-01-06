@@ -7,6 +7,7 @@ import ca.venkasritharan.twitterclone.repository.TweetsHistoryRepository;
 import ca.venkasritharan.twitterclone.repository.TweetsRepository;
 import ca.venkasritharan.twitterclone.service.TweetService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -52,8 +53,10 @@ public class TweetServiceImpl implements TweetService {
   }
 
   @Override
+  @Transactional
   public void deleteById(long id) {
     Tweet tweet = tweetsRepository.findById(id).orElseThrow();
+    tweetsHistoryRepository.deleteAllByTweetId(tweet.getTweetId());
     tweetsRepository.delete(tweet);
   }
 
