@@ -6,6 +6,9 @@ import ca.venkasritharan.twitterclone.repository.TweetsRepository;
 import ca.venkasritharan.twitterclone.service.TweetService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class TweetServiceImpl implements TweetService {
 
@@ -22,6 +25,13 @@ public class TweetServiceImpl implements TweetService {
     tweetsRepository.save(tweet);
     setDataFromTableToTweetObject(tweet, clientResponse);
     return clientResponse;
+  }
+
+  @Override
+  public List<Tweet> getAllTweets() {
+    List<Tweet> tweets = tweetsRepository.findAll();
+    return tweets;
+
   }
 
   public void setClientResponseToTweetObject(TweetDTO tweetDTO, Tweet tweet) {
