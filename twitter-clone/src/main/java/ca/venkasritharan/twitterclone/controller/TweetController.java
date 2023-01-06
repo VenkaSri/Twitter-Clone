@@ -28,4 +28,9 @@ public class TweetController {
   public List<Tweet> getAllTweets() {
     return tweetService.getAllTweets();
   }
+
+  @GetMapping("{id}")
+  public ResponseEntity<TweetDTO> getTweetById(@PathVariable(name = "id") long id) {
+    return ResponseEntity.ok(tweetService.getTweetById(id));
+  }
 }

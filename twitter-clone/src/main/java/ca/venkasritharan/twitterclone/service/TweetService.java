@@ -9,4 +9,5 @@ public interface TweetService {
 
   TweetDTO postTweet(TweetDTO clientResponse);
   List<Tweet> getAllTweets();
+  TweetDTO getTweetById(long id);
 }

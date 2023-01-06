@@ -32,6 +32,12 @@ public class TweetServiceImpl implements TweetService {
     return tweets;
   }
 
+  @Override
+  public TweetDTO getTweetById(long id) {
+    Tweet tweet = tweetsRepository.findById(id).orElseThrow();
+    return mapToDTO(tweet);
+  }
+
   private TweetDTO mapToDTO(Tweet tweet)  {
     TweetDTO tweetDTO = new TweetDTO();
     tweetDTO.setId(tweet.getTweetId());
@@ -39,7 +45,7 @@ public class TweetServiceImpl implements TweetService {
     tweetDTO.setCreatedAt(tweet.getCreatedAt());
     return tweetDTO;
   }
-  
+
   private Tweet mapToEntity(TweetDTO tweetDTO)  {
     Tweet tweet = new Tweet();
     tweet.setText(tweetDTO.getText());
