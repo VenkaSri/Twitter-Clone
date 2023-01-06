@@ -51,6 +51,12 @@ public class TweetServiceImpl implements TweetService {
     return mapToDTO(editedTweet);
   }
 
+  @Override
+  public void deleteById(long id) {
+    Tweet tweet = tweetsRepository.findById(id).orElseThrow();
+    tweetsRepository.delete(tweet);
+  }
+
   private TweetDTO mapToDTO(Tweet tweet)  {
     TweetDTO tweetDTO = new TweetDTO();
     tweetDTO.setId(tweet.getTweetId());

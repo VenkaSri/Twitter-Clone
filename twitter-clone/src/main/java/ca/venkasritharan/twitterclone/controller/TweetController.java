@@ -40,4 +40,10 @@ public class TweetController {
     TweetDTO updatedTweet = tweetService.editTweetById(id, tweetDTO);
     return new ResponseEntity<>(updatedTweet, HttpStatus.OK);
   }
+
+  @DeleteMapping("{id}")
+  public ResponseEntity<String> deleteById(@PathVariable(name = "id") long id) {
+    tweetService.deleteById(id);
+    return new ResponseEntity<>("Tweet deleted.", HttpStatus.OK);
+  }
 }

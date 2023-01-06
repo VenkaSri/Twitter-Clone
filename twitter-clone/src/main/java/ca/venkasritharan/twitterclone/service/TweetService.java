@@ -11,4 +11,5 @@ public interface TweetService {
   List<Tweet> getAllTweets();
   TweetDTO getTweetById(long id);
   TweetDTO editTweetById(long id, TweetDTO tweetDTO);
+  public void deleteById(long id);
 }

@@ -14,7 +14,8 @@ import java.time.LocalDate;
 @Table(name = "tweets_history")
 public class TweetHistory {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(generator="my_seq")
+  @SequenceGenerator(name="my_seq",sequenceName="tweets_history_seq", allocationSize=1)
   private Long tweetVersionId;
   private Long tweetId;
   private String text;
