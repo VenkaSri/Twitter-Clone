@@ -19,30 +19,32 @@ public class TweetServiceImpl implements TweetService {
   }
 
   @Override
-  public TweetDTO postTweet(TweetDTO clientResponse) {
-    Tweet tweet = new Tweet();
-    setClientResponseToTweetObject(clientResponse, tweet);
-    tweetsRepository.save(tweet);
-    setDataFromTableToTweetObject(tweet, clientResponse);
-    return clientResponse;
+  public TweetDTO postTweet(TweetDTO tweetDTO) {
+    Tweet tweet = mapToEntity(tweetDTO);
+    Tweet newTweet = tweetsRepository.save(tweet);
+    TweetDTO tweetResponse = mapToDTO(newTweet);
+    return tweetResponse;
   }
 
   @Override
   public List<Tweet> getAllTweets() {
     List<Tweet> tweets = tweetsRepository.findAll();
     return tweets;
-
   }
 
-  public void setClientResponseToTweetObject(TweetDTO tweetDTO, Tweet tweet) {
-    tweet.setText(tweetDTO.getText());
-    tweet.setCreatedAt(tweetDTO.getCreatedAt());
-  }
-
-  public void setDataFromTableToTweetObject(Tweet tweet, TweetDTO tweetDTO) {
+  private TweetDTO mapToDTO(Tweet tweet)  {
+    TweetDTO tweetDTO = new TweetDTO();
     tweetDTO.setId(tweet.getTweetId());
     tweetDTO.setText(tweet.getText());
     tweetDTO.setCreatedAt(tweet.getCreatedAt());
+    return tweetDTO;
+  }
+  
+  private Tweet mapToEntity(TweetDTO tweetDTO)  {
+    Tweet tweet = new Tweet();
+    tweet.setText(tweetDTO.getText());
+    tweet.setCreatedAt(tweetDTO.getCreatedAt());
+    return tweet;
   }
 
 }
