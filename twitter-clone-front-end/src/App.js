@@ -1,10 +1,13 @@
 import React from 'react';
-import LeftSideBar from './components/sidebars/LeftSideBar';
+
+import Header from './components/sidebars/Header';
+import RightSideBar from './components/sidebars/RightSideBar';
+import MainContainer from './components/main/MainContainer';
 
 function App() {
   return (
-    <div >
-      <LeftSideBar />
+    <div className="max-w-screen-2xl m-auto">
+      <Header />
     </div>
   );
 }
