@@ -14,6 +14,13 @@ module.exports = {
       'lg': '1024px',
       'xl': '1280px',
       '2xl': '1520px',
+    },
+    extend: {
+      spacing: {
+        '130': '36.5625rem',
+        '120': '500px',
+        '100': '400px',
+      },
     }
   },
   plugins: [],

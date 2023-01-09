@@ -6,8 +6,9 @@ import MainContainer from './components/main/MainContainer';
 
 function App() {
   return (
-    <div className="max-w-screen-2xl m-auto">
+    <div className="max-w-screen-2xl m-auto flex">
       <Header />
+      <MainContainer />
     </div>
   );
 }
