@@ -1,11 +1,16 @@
 import React from "react";
 
-import logo from '../images/nottwitter.png';
+import Links from "./Links";
+
+import logo from "../images/nottwitter.png";
 
 const Header = () => {
   return (
-    <div className="border border-blue-400 h-screen w-72 flex ">
-      <div className="border border-blue-400 h-10 w-20 ml-8 mt-4 rounded-full"><img src={logo} alt="Logo" className="w-8"/></div>
+    <div className="border-r border-r-slate-200 h-screen w-72 flex flex-col">
+      <div className="h-14 w-14 rounded-full ml-5 mt-4 flex justify-center items-center">
+        <img src={logo} alt="Logo" className="w-8" />
+      </div>
+      <Links />
     </div>
   );
 };

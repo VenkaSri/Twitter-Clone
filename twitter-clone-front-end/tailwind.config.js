@@ -5,6 +5,9 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
+    fontFamily: {
+      custom1: ["Custom-1", "sans-serif"],
+    },
     screens: {
       'sm': '640px',
       'md': '768px',
