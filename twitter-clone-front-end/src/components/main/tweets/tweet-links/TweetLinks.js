@@ -9,9 +9,9 @@ import TweetStat from "./TweetStat";
 
 const TweetLinks = () => {
   return (
-    <div className="flex w-5/6 justify-between ">
+    <div className="flex w-5/6 justify-between">
       <TweetStat />
-      <a className="flex text-sm gap-2">
+      {/* <a className="flex text-sm gap-2">
         <img src={replyIcon} className="w-5" alt="reply icon"></img>
         233
       </a>
@@ -23,7 +23,7 @@ const TweetLinks = () => {
       </a>
       <a>
         <img src={shareIcon} className="w-5" alt="share icon"></img>
-      </a>
+      </a> */}
     </div>
   );
 };
