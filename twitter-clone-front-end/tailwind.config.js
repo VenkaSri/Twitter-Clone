@@ -7,6 +7,11 @@ module.exports = {
   theme: {
     fontFamily: {
       custom1: ["Custom-1", "sans-serif"],
+      custom2: ["Custom-2", "sans-serif"],
+      cReg: ["Chrip Regular", "sans-serif"],
+      cMed: ["Chrip Medium", "sans-serif"],
+      cBold: ["Chirp Bold", "sans-serif"],
+      cHeavy: ["Chirp Heavy", "sans-serif"],
     },
     screens: {
       'sm': '640px',

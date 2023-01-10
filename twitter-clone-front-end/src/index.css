@@ -6,3 +6,29 @@
   font-family: "Custom-1";
   src: url("./font/chirp_regular.otf");
 }
+
+@font-face {
+  font-family: "Custom-2";
+  src: url("./font/chirp_light.otf");
+}
+
+
+@font-face {
+  font-family: "Chrip Regular";
+  src: url("./font/chirp_regular.otf");
+}
+
+@font-face {
+  font-family: "Chrip Medium";
+  src: url("./font/chirp_medium.otf");
+}
+
+@font-face {
+  font-family: "Chirp Bold";
+  src: url("./font/chirp_bold.otf");
+}
+
+@font-face {
+  font-family: "Chirp Heavy";
+  src: url("./font/chirp_heavy.otf");
+}

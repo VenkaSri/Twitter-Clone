@@ -1,4 +1,4 @@
-import Tweet from "./Tweet"; 
+import Tweet from "./Tweet";
 
 const TweetsFeed = () => {
   return <div className="h-auto">

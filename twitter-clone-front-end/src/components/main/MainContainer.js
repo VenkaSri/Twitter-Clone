@@ -1,7 +1,7 @@
 import React from "react";
 
 import MainHeader from "./MainHeader";  
-import TweetsFeed from "./TweetsFeed";
+import TweetsFeed from "./tweets/TweetsFeed";
 
 const MainContainer = () => {
   return (
