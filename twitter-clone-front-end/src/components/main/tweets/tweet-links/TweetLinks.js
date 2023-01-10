@@ -1,15 +1,16 @@
-import replyIcon from "../../images/tweet/twitter-reply.png";
-import retweetIcon from "../../images/tweet/twitter-retweet.png";
-import likeIcon from "../../images/tweet/twitter-like.png";
-import shareIcon from "../../images/tweet/twitter-share.png";
-import statsIcon from "../../images/tweet/twitter-stats.png";
+
+import replyIcon from "../../../images/tweet/twitter-reply.png";
+import retweetIcon from "../../../images/tweet/twitter-retweet.png";
+import likeIcon from "../../../images/tweet/twitter-like.png";
+import shareIcon from "../../../images/tweet/twitter-share.png";
+
+import TweetStat from "./TweetStat";
+
 
 const TweetLinks = () => {
   return (
-    <div className="flex w-5/6 justify-between">
-      <a className="flex text-sm gap-2">
-        <img src={statsIcon} className="w-5" alt="reply icon"></img>
-      </a>
+    <div className="flex w-5/6 justify-between ">
+      <TweetStat />
       <a className="flex text-sm gap-2">
         <img src={replyIcon} className="w-5" alt="reply icon"></img>
         233
