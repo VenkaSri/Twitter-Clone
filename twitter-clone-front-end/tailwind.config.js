@@ -12,6 +12,7 @@ module.exports = {
       cMed: ["Chrip Medium", "sans-serif"],
       cBold: ["Chirp Bold", "sans-serif"],
       cHeavy: ["Chirp Heavy", "sans-serif"],
+      cThin: ["Chirp Thin", "sans-serif"],
     },
     screens: {
       'sm': '640px',

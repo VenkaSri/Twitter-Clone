@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+
+  .clip-tweet-reply-div {
+
+    clip-path: polygon(2% 0, 32% 0, 52% 28%, 100% 50%, 48% 72%, 29% 100%, 0 100%);
+
+  }
+}
+
 @font-face {
   font-family: "Custom-1";
   src: url("./font/chirp_regular.otf");
@@ -32,3 +41,9 @@
   font-family: "Chirp Heavy";
   src: url("./font/chirp_heavy.otf");
 }
+
+@font-face {
+  font-family: "Chirp Thin";
+  src: url("./font/chirp_thin.otf");
+}
+
