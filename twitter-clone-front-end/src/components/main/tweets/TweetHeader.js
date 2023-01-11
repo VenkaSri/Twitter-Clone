@@ -1,18 +1,16 @@
-import moreIcon from "../../images/tweet/twitter-more.png";
+import TweetMore from "./tweet-header/TweetMore";
 
 const TweetHeader = () => {
   return (
-    <div className="flex justify-between w-120">
-      <div className="flex gap-1">
+    <div className="flex justify-between items-center w-120 -mt-2">
+      <div className="flex gap-1 justify-center items-center">
         <span className="font-cBold">Venka</span>
-        <span className="font-cReg ml-1">@venkaaa</span>
-        <span className="font-cReg text-gray-500 tx-sm">&#x2022; 13h</span>
+        <span className="font-cReg ml-1 text-[#536471]">@venkaaa</span>
+        <span>·</span>
+        <span className="font-cReg text-gray-500 text-sm">13h</span>
       </div>
-      <div>
-      <a className="flex mr-4 text-sm gap-2">
-        <img src={moreIcon} className="w-5" alt="reply icon"></img>
-      </a>
-      </div>
+      <TweetMore />
+
     </div>
   );
 };
