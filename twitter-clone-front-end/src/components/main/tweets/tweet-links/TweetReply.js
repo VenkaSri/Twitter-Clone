@@ -1,28 +1,23 @@
-import React, { useRef } from "react";
-import statIcon from "../../../images/tweet/tweetStats/twitter-reply.png";
-import statIconBlue from "../../../images/tweet/tweetStats/twitter-stats1.png";
-
-const originalImg = statIcon;
-const hoverImg = statIconBlue;
+import React, { useState, useEffect } from "react";
+import Reply from "./reply/Reply";
+import ReplyCount from "./reply/ReplyCount";
 
 const TweetReply = () => {
-  const imageRef = useRef(null);
-
+  const [hoverState, setHoverState] = useState(false);
+  
+  const mouseEnterHandler = () => {
+    setHoverState(true);
+  }
+  const mouseLeaveHandler = () => {
+    setHoverState(false);
+  }
+  
   return (
-    <div
-      // onMouseOver={() => {
-      //   imageRef.current.src = hoverImg;
-      // }}
-      // onMouseOut={() => {
-      //   imageRef.current.src = originalImg;
-      // }}
-      className="-ml-2 w-9 h-9 rounded-full flex justify-center items-center hover:bg-[#E1EEF7]"
-    >
-      
-      {/* <img src={originalImg} alt="" ref={imageRef} /> */}
+    <div className="w-20 h-10 border border-red-500 flex justify-center items-center">
+      <Reply updateMouseEnter={mouseEnterHandler} updateMouseLeave={mouseLeaveHandler}/>
+      <ReplyCount hover={hoverState}/>
     </div>
   );
 };
 
 export default TweetReply;
-
