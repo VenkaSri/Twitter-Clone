@@ -1,4 +1,4 @@
-import { EXPLORE, SETTINGS } from "../../utils/Paths";
+import { EXPLORE, SETTINGS } from "../../utils/ButtonLinkObjects";
 import SideBarLink from "./SidebarLink";
 
 const Links = () => {
