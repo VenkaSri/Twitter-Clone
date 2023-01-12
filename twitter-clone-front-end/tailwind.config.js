@@ -15,7 +15,7 @@ module.exports = {
       cThin: ["Chirp Thin", "sans-serif"],
     },
     fontSize: {
-      '.5xl': '1.31rem',
+      '.5xl': '1.25rem',
       '1xl': '1.35rem',
     },
     screens: {
