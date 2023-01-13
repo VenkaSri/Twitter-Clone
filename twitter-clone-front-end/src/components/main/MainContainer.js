@@ -5,7 +5,7 @@ import TweetsFeed from "./tweets/TweetsFeed";
 
 const MainContainer = () => {
   return (
-    <div className="border-r border-r-slate-100 w-130 mt-1">
+    <div className="border-r border-r-slate-100 w-130">
        <MainHeader />
        <TweetsFeed />
     </div>
