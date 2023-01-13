@@ -7,7 +7,7 @@ const Tweet = () => {
   return (
     <div className="flex gap-4 border-b border-b-slate-200 cursor-pointer pb-2 pt-2 pl-4 hover:bg-[#f7f7f7]">
       <div>
-        <img src={ProfilePic} className="w-12 rounded-full" />
+        <img src={ProfilePic} className="w-12 rounded-full" alt="profile"/>
       </div>
       <div>
           <TweetHeader />

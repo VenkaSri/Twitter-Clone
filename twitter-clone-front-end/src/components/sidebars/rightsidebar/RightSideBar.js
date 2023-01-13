@@ -5,7 +5,7 @@ import Card from "../../UI/Card";
 
 const RightSideBar = () => {
   return (
-    <div className="h-screen w-97 flex justify-center pt-4">
+    <div className="h-screen w-97 flex justify-center pt-4 sticky top-0">
       <Card>
         <div className="flex flex-col ml-4 mt-2 gap-1">
           <h2 className="text-xl font-cHeavy">New to Twitter?</h2>
