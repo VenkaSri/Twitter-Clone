@@ -6,7 +6,7 @@ import RightSideBar from './components/sidebars/rightsidebar/RightSideBar';
 
 function App() {
   return (
-    <div className="max-w-screen-2xl m-auto flex">
+    <div className="max-w-screen-2xl m-auto flex dark:bg-black">
       <Header />
       <MainContainer />
       <RightSideBar />
