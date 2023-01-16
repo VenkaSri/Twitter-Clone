@@ -1,6 +1,6 @@
 const SideBarLink = (props) => {
   return (
-    <div className="w-37 h-13 rounded-full flex items-center hover:bg-[#E6E7E7] cursor-pointer">
+    <button className="w-37 h-13 rounded-full flex items-center hover:bg-[#E6E7E7]">
       <svg
         viewBox="0 0 24 24"
         width="26"
@@ -15,7 +15,7 @@ const SideBarLink = (props) => {
       <div className="ml-4 font-custom2  font-bold text-.5xl">
         {props.name}
       </div>
-    </div>
+    </button>
   );
 };
 

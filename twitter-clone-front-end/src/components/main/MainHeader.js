@@ -13,7 +13,7 @@ const MainHeader = () => {
         <CircleButton buttonInfo={Setting} />
       </div>
       <div>
-<ExploreButtonsList />
+        <ExploreButtonsList />
       </div>
     </div>
   );
