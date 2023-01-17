@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
@@ -20,5 +21,5 @@ public class Tweet {
   @SequenceGenerator(name="my_seq",sequenceName="tweets_tweet_id_seq", allocationSize=1)
   private Long tweetId;
   private String text;
-  private LocalDate createdAt;
+  private LocalDateTime createdAt;
 }

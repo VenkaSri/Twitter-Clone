@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -19,5 +20,5 @@ public class TweetHistory {
   private Long tweetVersionId;
   private Long tweetId;
   private String text;
-  private LocalDate createdAt;
+  private LocalDateTime createdAt;
 }
