@@ -7,7 +7,9 @@ const Footer =  () => {
 
 const LandingFooter = () => {
   return <React.Fragment>
-    {ReactDOM.createPortal(<Footer />, document.getElementById('landing-footer'))};
+    <div className="w-screen h-8 bg-[#1D9BF0] sticky bottom-0">
+      <p>Don't miss what's happening</p>
+    </div>
   </React.Fragment>
 }
 
