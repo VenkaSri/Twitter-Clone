@@ -8,13 +8,13 @@ import LandingFooter from "./components/footer/LandingFooter";
 function App() {
   return (
     <React.Fragment>
-      <div className="max-w-screen-2xl m-auto flex flex-col border border-rose-500 dark:bg-black">
-        <div className="flex ">
+      <div className="max-w-screen-2xl m-auto flex flex-col h-full dark:bg-black">
+        <div className="flex">
           <Header />
           <MainContainer />
           <RightSideBar />
         </div>
-        <div >
+        <div className="mt-auto">
         <LandingFooter />
         </div>
       </div>
