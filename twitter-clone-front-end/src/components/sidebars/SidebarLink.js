@@ -12,7 +12,7 @@ const SideBarLink = (props) => {
           ></path>
         </g>
       </svg>
-      <div className="ml-4 font-custom2  font-bold text-.5xl">
+      <div className="ml-4 font-custom2  font-bold text-[1.25rem]">
         {props.name}
       </div>
     </button>

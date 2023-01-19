@@ -3,7 +3,7 @@ import SideBarLink from "./SidebarLink";
 
 const Links = () => {
   return (
-    <div className="ml-5">
+    <div className="ml-5 mt-4">
       <ul>
         <SideBarLink svgPath={EXPLORE} name="Explore" />
         <SideBarLink svgPath={SETTINGS} name="Settings" />

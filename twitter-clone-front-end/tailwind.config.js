@@ -15,17 +15,6 @@ module.exports = {
       cHeavy: ["Chirp Heavy", "sans-serif"],
       cThin: ["Chirp Thin", "sans-serif"],
     },
-    fontSize: {
-      'xxs': '0.875rem',
-      '3xs': '0.83rem',
-      '.5xl': '1.25rem',
-      '1xl': '1.35rem',
-      'ssm': '.90rem',
-      'xl': '1.2rem',
-      '3xl': '1.953rem',
-      '4xl': '2.441rem',
-      '5xl': '3.052rem',
-    },
     screens: {
       'sm': '640px',
       'md': '768px',
