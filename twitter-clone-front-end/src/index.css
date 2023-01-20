@@ -4,11 +4,7 @@
 
 @layer utilities {
 
-  .clip-tweet-reply-div {
 
-    clip-path: polygon(2% 0, 32% 0, 52% 28%, 100% 50%, 48% 72%, 29% 100%, 0 100%);
-
-  }
 }
 
 @font-face {

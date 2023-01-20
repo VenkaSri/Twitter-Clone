@@ -1,15 +1,16 @@
 import React from "react";
 
+import { ForYou, Trending, News, Sports, Entertainment } from "../../../utils/explore/NavObjects";
 import ExplorePageButton from "../../UI/explore/ExplorePageButton";
 const ExploreButtonsList = () => {
   return (
-    <ul className="w-full h-13.5 flex justify-between">
-      <ExplorePageButton name={"For you"}/>
-      <ExplorePageButton name={"Trending"}/>
-      <ExplorePageButton name={"News"}/>
-      <ExplorePageButton name={"Sports"}/>
-      <ExplorePageButton name={"Entertainment"}/>
-    </ul>
+    <nav className="w-[37.375rem] h-[3.375rem] flex border-b border-b-slate-20 ">
+      <ExplorePageButton buttonObject={ForYou}/>
+      <ExplorePageButton buttonObject={News}/>
+      <ExplorePageButton buttonObject={Trending}/>
+      <ExplorePageButton buttonObject={Sports}/>
+      <ExplorePageButton buttonObject={Entertainment}/>
+    </nav>
   );
 };
 

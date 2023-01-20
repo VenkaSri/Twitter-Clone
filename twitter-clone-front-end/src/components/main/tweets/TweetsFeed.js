@@ -8,6 +8,21 @@ const TweetsFeed = () => {
     <Tweet />
     <Tweet />
     <Tweet />
+    <Tweet />
+    <Tweet />
+    <Tweet />
+    <Tweet />
+    <Tweet />
+    <Tweet />
+    <Tweet />
+    <Tweet />
+    <Tweet />
+    <Tweet />
+    <Tweet />
+    <Tweet />
+    <Tweet />
+    <Tweet />
+    <Tweet />
 
 
   </div>

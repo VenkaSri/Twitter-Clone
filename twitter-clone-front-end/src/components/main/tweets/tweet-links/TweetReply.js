@@ -2,7 +2,7 @@ import React from "react";
 
 const TweetReply = () => {
   return (
-    <div className="group w-20 mr-2 h-15 clip-tweet-reply-div flex justify-start items-center">
+    <div className="group w-20 mr-2 h-15 clip-tweet-reply-div flex justify-start items-center ">
         <svg viewBox="0 -10 23 42" width="30" height="40" className="group-hover:bg-[#E1EEF7] fill-[#536471] group-hover:fill-[#1d9bf0] rounded-full w-9 h-9" >
           <g>
             <path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.366c4.49 0 8.129 3.64 8.129 8.13 0 2.96-1.607 5.68-4.196 
