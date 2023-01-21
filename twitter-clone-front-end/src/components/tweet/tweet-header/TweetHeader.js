@@ -1,4 +1,4 @@
-import TweetMore from "./tweet-header/TweetMore";
+import TweetMore from "./TweetMore";
 
 const TweetHeader = () => {
   return (

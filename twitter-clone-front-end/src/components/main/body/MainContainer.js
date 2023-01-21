@@ -1,8 +1,9 @@
 import React from "react";
 import { Routes, Route, useRoutes } from "react-router-dom";
+import ForYou from "../../../pages/explore/ForYou";
 
-import MainHeader from "./MainHeader";
-import TweetsFeed from "./tweets/TweetsFeed";
+import MainHeader from "../header/MainHeader";
+import TweetsFeed from "./TweetsFeed";
 
 const MainContainer = () => {
   let routes = useRoutes([
@@ -12,7 +13,7 @@ const MainContainer = () => {
     },
     {
       path: "/",
-      element: <TweetsFeed />,
+      element: <ForYou />,
     },
   ]);
   return (

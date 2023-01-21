@@ -1,4 +1,4 @@
-import { EXPLORE, SETTINGS } from "../../utils/ButtonLinkObjects";
+import { EXPLORE, SETTINGS } from "../../../utils/ButtonLinkObjects";
 import SideBarLink from "./SidebarLink";
 
 const Links = () => {

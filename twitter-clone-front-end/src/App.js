@@ -1,7 +1,7 @@
 import React from "react";
 
-import Header from "./components/sidebars/Header";
-import MainContainer from "./components/main/MainContainer";
+import Header from "./components/sidebars/leftsidebar/Header";
+import MainContainer from "./components/main/body/MainContainer";
 import RightSideBar from "./components/sidebars/rightsidebar/RightSideBar";
 import LandingFooter from "./components/footer/LandingFooterModal";
 

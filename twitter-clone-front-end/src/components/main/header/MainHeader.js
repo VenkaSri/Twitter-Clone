@@ -1,9 +1,9 @@
 import React from "react";
 
-import CircleButton from "../UI/CircleButton";
-import { Setting } from "../../utils/ButtonLinkObjects";
-import Search from "./header/Search";
-import ExploreButtonsList from "./header/ExploreButtonsList";
+import CircleButton from "../../UI/CircleButton";
+import { Setting } from "../../../utils/ButtonLinkObjects";
+import Search from "./Search";
+import ExploreButtonsList from "./ExploreButtonsList";
 
 const MainHeader = () => {
   return (

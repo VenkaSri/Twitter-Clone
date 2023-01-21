@@ -2,7 +2,7 @@ import React from "react";
 
 import Links from "./Links";
 
-import logo from "../images/nottwitter.png";
+import logo from "../../images/nottwitter.png";
 
 const Header = () => {
   return (
