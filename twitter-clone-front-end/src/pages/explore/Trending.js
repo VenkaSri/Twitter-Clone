@@ -1,21 +1,32 @@
-import React, { useEffect} from "react";
+import React, { useEffect, useState} from "react";
 
 import axios from "axios";
 
 const baseURL = "http://localhost:8080/api/tweets";
+// const baseURL = "https://jsonplaceholder.typicode.com/users";
 
 const Trending = () => {
-  const [post, setPost] = React.useState(null);
+  const [post, setPost] = useState([]);
 
   useEffect(() => {
     axios.get(baseURL).then((response) => {
-      console.log(response.data)
+      console.log(response);
+      console.log(response.data);
+      setPost(response.data);
     });
   }, []);
 
+
+
   return (
-    <div className="border border-rose-500 max-w-[37.375rem]">
-    </div>
+    <ul>
+        {
+          post
+            .map(tweet =>
+              <li key={tweet.tweetId}>{tweet.text}</li>
+            )
+        }
+      </ul>
   );
 };
 
