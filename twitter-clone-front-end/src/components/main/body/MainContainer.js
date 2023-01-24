@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route, useRoutes } from "react-router-dom";
 import ForYou from "../../../pages/explore/ForYou";
+import Trending from "../../../pages/explore/Trending";
 
 import MainHeader from "../header/MainHeader";
 import TweetsFeed from "./TweetsFeed";
@@ -14,6 +15,10 @@ const MainContainer = () => {
     {
       path: "/",
       element: <ForYou />,
+    },
+    {
+      path: "/explore/tabs/trending",
+      element: <Trending />,
     },
   ]);
   return (
