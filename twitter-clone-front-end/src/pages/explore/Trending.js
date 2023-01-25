@@ -3,7 +3,6 @@ import React, { useEffect, useState} from "react";
 import axios from "axios";
 
 const baseURL = "http://localhost:8080/api/tweets";
-// const baseURL = "https://jsonplaceholder.typicode.com/users";
 
 const Trending = () => {
   const [post, setPost] = useState([]);
