@@ -42,7 +42,6 @@ public class TrendServiceImpl implements TrendService {
 
     try {
       JsonNode jsonNode = mapper.readTree(carFact);
-
       System.out.println(jsonNode.get(0).get("trends"));
     } catch (JsonMappingException e) {
       e.printStackTrace();

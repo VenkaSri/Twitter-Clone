@@ -2,10 +2,11 @@ import React from "react";
 
 import SignInButtonList from "../../UI/explore/sign-in-links/SignInButtonList";
 import Card from "../../UI/Card";
+import FooterLinks from "./FooterLinks";
 
 const RightSideBar = () => {
   return (
-    <div className="h-full w-97 flex justify-center pt-4 sticky top-0">
+    <div className="h-full w-97 flex flex-col items-center pt-4 sticky top-0">
       <Card>
         <div className="flex flex-col ml-4 mt-2 gap-1">
           <h2 className="text-xl font-cHeavy">New to Twitter?</h2>
@@ -17,6 +18,7 @@ const RightSideBar = () => {
             By signing up, you agree to the <span className="text-[#1D9BF0]">Terms of Service</span> and <span className="text-[#1D9BF0]">Privacy Policy</span>, including <span className="text-[#1D9BF0]">Cookie Use.</span></p>
         </div>
       </Card>
+      <FooterLinks />
     </div>
   );
 };
