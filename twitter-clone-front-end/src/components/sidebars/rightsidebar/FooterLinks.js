@@ -2,16 +2,17 @@ import React from "react";
 
 const FooterLinks = () => {
   return (
-    <div className="border border-rose-500 h-[3.75rem] w-72 flex flex-col">
-      <div className="text-[0.800rem] w-72 max-w-72 flex justify-between">
-        <a>Terms of Service</a>
-        <a>Privacy Poacy</a>
-        <a>Cookie Poacy</a>
-      </div>
-      <div className="text-[0.800rem] w-72 max-w-72 flex">
-        <a>Terms of Service</a>
-        <a>Privacy Poacy</a>
-        <a>Cookie Poacy</a>
+    <div className="h-[3.75rem] w-[18.75rem] flex flex-col ml-12 mt-4">
+      <div className="text-[0.800rem] font-cLight text-[#5D6D79] gap-x-[0.938rem] flex flex-wrap">
+        <a href="/#">Terms of Service</a>
+        <a href="/#">Privacy Policy</a>
+        <a href="/#">Cookie Policy</a>
+        <a href="/#">Accessibility</a>
+        <a href="/#">Ads info</a>
+        <a href="/#">More ···</a>
+        <a href="https://github.com/VenkaSri/Twitter-Clone" target="_blank" rel="noreferrer">Repo</a>
+        <a href="/#">© 2023 Venka</a>
+        
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import FooterLinks from "./FooterLinks";
 
 const RightSideBar = () => {
   return (
-    <div className="h-full w-97 flex flex-col items-center pt-4 sticky top-0">
+    <div className="h-full w-97 flex flex-col pt-4 sticky top-0">
       <Card>
         <div className="flex flex-col ml-4 mt-2 gap-1">
           <h2 className="text-xl font-cHeavy">New to Twitter?</h2>
