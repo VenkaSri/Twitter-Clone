@@ -16,13 +16,6 @@ module.exports = {
       cHeavy: ["Chirp Heavy", "sans-serif"],
       cThin: ["Chirp Thin", "sans-serif"],
     },
-    screens: {
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1024px',
-      'xl': '1280px',
-      '2xl': '1520px',
-    },
     extend: {
       spacing: {
         '130': '37.375rem',
