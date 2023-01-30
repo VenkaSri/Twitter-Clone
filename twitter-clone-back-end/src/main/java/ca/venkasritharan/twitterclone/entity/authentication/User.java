@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.Set;
 
@@ -25,13 +26,16 @@ public class User {
   @Column(nullable = false)
   private String password;
   private String name;
-  @Column(nullable = false, unique = true)
+  @Column(unique = true)
   private String email;
+  @Column(unique = true)
+  private String phoneNumber;
   private Long tweetCount;
   private Long followerCount;
   private Long followingCount;
 
-  @OneToMany
+
+  @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinTable(name = "users_roles",
           joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
           inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))

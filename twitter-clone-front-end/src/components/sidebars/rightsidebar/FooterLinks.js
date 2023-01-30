@@ -6,7 +6,7 @@ const FooterLinks = () => {
   return (
     <div className="h-[3.75rem] w-[18.75rem] flex flex-col ml-12 mt-4">
       <div className="text-[0.800rem] font-cLight text-[#5D6D79] gap-x-[0.938rem] flex flex-wrap">
-        <Link to="/#">Terms of Service</Link>
+        <Link to="/Twitter-Clone/#">Terms of Service</Link>
         <Link to="/#">Privacy Policy</Link>
         <Link to="/#">Cookie Policy</Link>
         <Link to="/#">Accessibility</Link>

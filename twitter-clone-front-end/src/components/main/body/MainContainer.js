@@ -14,7 +14,7 @@ const MainContainer = () => {
       element: <TweetsFeed />,
     },
     {
-      path: "/",
+      path: "/Twitter-Clone",
       element: <ForYou />,
     },
     {

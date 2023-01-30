@@ -7,7 +7,7 @@ import FooterLinks from "./FooterLinks";
 const RightSideBar = () => {
   let routes = useRoutes([
     {
-      path: "/",
+      path: "/Twitter-Clone",
       element: <FooterLinks />,
     },
     {
