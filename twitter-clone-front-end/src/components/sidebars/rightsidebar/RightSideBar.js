@@ -1,10 +1,20 @@
 import React from "react";
-
+import { useRoutes } from "react-router-dom";
 import SignInButtonList from "../../UI/explore/sign-in-links/SignInButtonList";
 import Card from "../../UI/Card";
 import FooterLinks from "./FooterLinks";
 
 const RightSideBar = () => {
+  let routes = useRoutes([
+    {
+      path: "/",
+      element: <FooterLinks />,
+    },
+    {
+      path: "/#",
+      element: <FooterLinks />,
+    },
+  ]);
   return (
     <div className="h-full w-97 flex flex-col pt-4 sticky top-0">
       <Card>
@@ -18,7 +28,7 @@ const RightSideBar = () => {
             By signing up, you agree to the <span className="text-[#1D9BF0]">Terms of Service</span> and <span className="text-[#1D9BF0]">Privacy Policy</span>, including <span className="text-[#1D9BF0]">Cookie Use.</span></p>
         </div>
       </Card>
-      <FooterLinks />
+      { routes }
     </div>
   );
 };
