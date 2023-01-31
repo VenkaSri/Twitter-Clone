@@ -16,7 +16,7 @@ const RightSideBar = () => {
     },
   ]);
   return (
-    <div className="h-screen w-[25.62rem] flex flex-col pt-4 sticky top-0">
+    <div className="w-[21.875rem] mr-[0.625rem] mt-[0.75rem]">
       <Card>
         <div className="flex flex-col ml-4 mt-2 gap-1">
           <h2 className="text-xl font-cHeavy">New to Twitter?</h2>

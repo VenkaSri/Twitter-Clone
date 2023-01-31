@@ -1,23 +1,19 @@
 import React from "react";
 
 import Header from "./components/sidebars/leftsidebar/Header";
-import MainContainer from "./components/main/body/MainContainer";
+import Main from "./components/main/Main";
 import RightSideBar from "./components/sidebars/rightsidebar/RightSideBar";
 import LandingFooter from "./components/footer/LandingFooterModal";
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 
-ReactGA.initialize('UA-255822850-1');
+ReactGA.initialize("UA-255822850-1");
 
 function App() {
   return (
-    <React.Fragment>
-      <div className="flex grow dark:bg-black">
-          <Header />
-          <MainContainer />
-          <RightSideBar />
-      </div>
-      <LandingFooter />
-    </React.Fragment>
+    <div className="flex grow">
+      <Header />
+      <Main />
+    </div>
   );
 }
 
