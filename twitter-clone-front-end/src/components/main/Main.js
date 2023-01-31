@@ -7,6 +7,7 @@ import RightSideBar from "../sidebars/rightsidebar/RightSideBar";
 
 import MainHeader from "./header/MainHeader";
 import TweetsFeed from "./body/TweetsFeed";
+import LandingFooter from "../footer/LandingFooter";
 
 const Main = () => {
   let routes = useRoutes([
@@ -29,7 +30,6 @@ const Main = () => {
         <MainHeader />
         <RightSideBar />
       </div>
-       
     </div>
   );
 };
