@@ -24,7 +24,7 @@ const Main = () => {
     },
   ]);
   return (
-    <div className="grow-[2.9] flex">
+    <div className="grow-[2] flex">
       <div className="w-[61.875rem] flex justify-between">
         <MainHeader />
         <RightSideBar />

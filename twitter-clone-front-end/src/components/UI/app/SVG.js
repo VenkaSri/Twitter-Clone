@@ -1,8 +1,7 @@
 const SVG = (props) => {
   return (
     <svg
-      viewBox="0 0 24 24"
-      className="absolute group-hover:bg-[#F8E0EB] fill-[#333333] ml-3.5 group-hover:fill-[#F91880]"
+      viewBox="0 0 24 24" className="w-[26.25px]"
     >
       <g>
         <path d={props.svgPath}></path>
