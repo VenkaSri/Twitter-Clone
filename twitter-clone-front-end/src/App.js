@@ -7,12 +7,11 @@ import LandingFooter from "./components/footer/LandingFooterModal";
 import ReactGA from 'react-ga';
 
 ReactGA.initialize('UA-255822850-1');
-ReactGA.pageview(window.location.pathname + window.location.search);
 
 function App() {
   return (
     <React.Fragment>
-      <div className="max-w-screen-2xl m-auto flex dark:bg-black">
+      <div className="flex grow dark:bg-black">
           <Header />
           <MainContainer />
           <RightSideBar />

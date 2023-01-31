@@ -1,5 +1,5 @@
 const Card = props => {
-  return <div className={`w-80.1 border border-[#f2f2f2] h-72 rounded-xl self-center`}>
+  return <div className={`w-[21.75rem] border border-[#f2f2f2] h-72 rounded-xl self-center`}>
     {props.children}
   </div>
 }
