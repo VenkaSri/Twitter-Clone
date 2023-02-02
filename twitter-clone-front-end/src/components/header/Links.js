@@ -1,11 +1,13 @@
 
 import SVG from "../UI/app/SVG";
-import { EXPLORE, SETTINGS  } from "../../utils/ButtonLinkObjects";
+import { EXPLORE, SETTINGS, LOGO  } from "../../utils/ButtonLinkObjects";
 
 const Links = () => {
   return (
     <>
-      <div className="w-[52px] h-[56px] my-[0.25rem]"></div>
+        <div className="flex p-[0.75rem] w-[50px] hover:bg-[#E8F5FE] rounded-full fill-[#1D9BF0] group-hover:bg-[#E6E7E7]">
+          <SVG svgPath={LOGO}/>
+        </div>
       <a href="/#" className="group my-[0.25rem] flex items-center ">
         <div className="flex p-[0.75rem] h-[3.141rem] w-[9.942rem] rounded-full group-hover:bg-[#E6E7E7]">
           <SVG svgPath={EXPLORE}/>
