@@ -17,4 +17,5 @@ public class RegisterDTO {
   private LocalDate dob;
   private String email;
   private String phoneNumber;
+  private String password;
 }

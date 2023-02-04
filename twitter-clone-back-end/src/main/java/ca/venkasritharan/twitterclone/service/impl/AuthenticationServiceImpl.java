@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,10 +22,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   private AuthenticationManager authenticationManager;
   private UserRepository userRepository;
   private ModelMapper mapper;
+  private PasswordEncoder passwordEncoder;
 
-  public AuthenticationServiceImpl(AuthenticationManager authenticationManager, UserRepository userRepository) {
+
+  public AuthenticationServiceImpl(AuthenticationManager authenticationManager, UserRepository userRepository, PasswordEncoder passwordEncoder) {
     this.authenticationManager = authenticationManager;
     this.userRepository = userRepository;
+    this.passwordEncoder = passwordEncoder;
   }
 
   @Override
@@ -38,7 +42,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   @Override
   public String register(RegisterDTO registerDTO) {
     checkIfAccountExistsWith(registerDTO.getPhoneNumber(), registerDTO.getEmail());
-    User user =  new User();
+    User user = mapNewUserEntity(registerDTO);
 
 
 
@@ -54,8 +58,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
   }
 
-  private void mapNewUserEntity(RegisterDTO registerDTO) {
-    User user = mapper.map(registerDTO, User.class);
-    userRepository.save(user);
+  private User mapNewUserEntity(RegisterDTO registerDTO) {
+    User user = new User();
+    user.setEmail(registerDTO.getEmail());
+    user.setName(registerDTO.getName());
+    user.setPhoneNumber(registerDTO.getPhoneNumber());
+    user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+    return userRepository.save(user);
   }
 }
