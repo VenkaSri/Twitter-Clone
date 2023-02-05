@@ -15,7 +15,7 @@ function App() {
         <Header />
         <Main />
       </div>
-      <div className="border border-rose-500">
+      <div>
         <LandingFooter />
       </div>
     </div>

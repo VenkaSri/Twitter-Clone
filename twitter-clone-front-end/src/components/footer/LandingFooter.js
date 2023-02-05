@@ -19,11 +19,11 @@ const SignUp = {
 
 const LandingFooter = () => {
   return (
-    <div className="w-screen h-14.2 w-full  bg-[#1D9BF0] fixed bottom-0 z-[100] flex justify-center items-center">
-      <div className="max-w-screen-2xl flex m-auto w-2/3 justify-between pl-14">
-        <div className="text-white ">
+    <div className="h-[4.5rem] bg-[#1D9BF0] z-[100] flex justify-center items-center">
+      <div className="flex w-[61.875rem] h-[3rem] justify-between ml-56">
+        <div className="text-white self-center">
           <p className="text-2xl font-cBold">Don&rsquo;t miss what&rsquo;s happening</p>
-          <p className="font-cMed text-[0.938rem]">People on Twitter are the first to know.</p>
+          <p className="font-cLight text-[0.938rem]">People on Twitter are the first to know.</p>
         </div>
         <div className="self-center flex gap-4">
           <FooterButton buttonInfo={LogIn}/>

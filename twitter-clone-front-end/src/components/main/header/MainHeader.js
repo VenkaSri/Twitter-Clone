@@ -7,7 +7,7 @@ import ExploreButtonsList from "./ExploreButtonsList";
 
 const MainHeader = () => {
   return (
-    <div className="flex flex-col bg-white/[.90] sticky top-0 backdrop-blur-[4.7px]">
+    <div className="flex flex-col bg-white/[.90] sticky top-0 backdrop-blur-[4.7px] border-r border-r-slate-100">
       <div className="w-[37.375rem] h-[3.313rem] flex justify-around items-center">
         <Search />
         <CircleButton buttonInfo={Setting} />
