@@ -11,11 +11,11 @@ ReactGA.initialize("UA-255822850-1");
 
 function App() {
   return (
-    <div className="flex flex-col grow ">
-      <div className="h-screen w-screen absolute flex" id="modals">
+    <div className="flex flex-col grow">
+      <div className="h-screen w-screen absolute flex" >
         <Layer />
       </div>
-      <div className="flex grow z-10">
+      <div className="flex grow">
         <Header />
         <Main />
       </div>
