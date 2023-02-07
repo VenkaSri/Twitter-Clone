@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import LandingFooter from "../../footer/LandingFooter";
 import FormDialog from "../../UI/home/FormDialog";
-import SignUpForm from "../../../pages/authentication/SignUpForm";
+import SignUpForm from "../../../pages/authentication/signup/SignUpForm";
 import { TabRounded } from "@mui/icons-material";
 import FormModalContext from "../../../context/modals/form-modal-context";
 
