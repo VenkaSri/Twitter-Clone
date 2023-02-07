@@ -2,6 +2,7 @@ package ca.venkasritharan.twitterclone.service.impl;
 
 import ca.venkasritharan.twitterclone.dto.LoginDTO;
 import ca.venkasritharan.twitterclone.dto.RegisterDTO;
+import ca.venkasritharan.twitterclone.entity.authentication.Role;
 import ca.venkasritharan.twitterclone.entity.authentication.User;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import ca.venkasritharan.twitterclone.service.AuthenticationService;
@@ -15,6 +16,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -43,10 +47,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   public String register(RegisterDTO registerDTO) {
     checkIfAccountExistsWith(registerDTO.getPhoneNumber(), registerDTO.getEmail());
     User user = mapNewUserEntity(registerDTO);
+    mapNewUserRoleEntity(user);
+    userRepository.save(user);
 
-
-
-    return null;
+    return "User registered successfully";
   }
 
   private void checkIfAccountExistsWith(String phoneNumber, String email) {
@@ -64,6 +68,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     user.setName(registerDTO.getName());
     user.setPhoneNumber(registerDTO.getPhoneNumber());
     user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+    user.setUsername(registerDTO.getUsername());
     return userRepository.save(user);
+  }
+
+  private void mapNewUserRoleEntity(User user) {
+    Set<Role> roles = new HashSet<>();
+    Role userRole = new Role();
+    userRole.setName("ROLE_USER");
+    roles.add(userRole);
+    user.setRoles(roles);
   }
 }

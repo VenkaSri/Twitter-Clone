@@ -1,6 +1,7 @@
 package ca.venkasritharan.twitterclone.controller;
 
 import ca.venkasritharan.twitterclone.dto.LoginDTO;
+import ca.venkasritharan.twitterclone.dto.RegisterDTO;
 import ca.venkasritharan.twitterclone.service.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,12 @@ public class AuthenticationController {
   public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
     String response = authenticationService.login(loginDTO);
     return new ResponseEntity<>(response, HttpStatus.OK);
+  }
+
+  @PostMapping(value = {"/register", "/signup"})
+  public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO) {
+    String response = authenticationService.register(registerDTO);
+    return new ResponseEntity<>(response, HttpStatus.CREATED);
   }
 
 }
