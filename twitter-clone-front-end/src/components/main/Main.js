@@ -10,20 +10,6 @@ import TweetsFeed from "./body/TweetsFeed";
 import LandingFooter from "../footer/LandingFooter";
 
 const Main = () => {
-  let routes = useRoutes([
-    {
-      path: "/explore/tabs/for-you",
-      element: <TweetsFeed />,
-    },
-    {
-      path: "/Twitter-Clone",
-      element: <ForYou />,
-    },
-    {
-      path: "/explore/tabs/trending",
-      element: <Trending />,
-    },
-  ]);
   return (
     <div className="grow-[2] flex">
       <div className="w-[61.875rem] flex justify-between">

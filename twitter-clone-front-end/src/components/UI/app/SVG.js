@@ -1,7 +1,7 @@
 const SVG = (props) => {
   return (
     <svg
-      viewBox="0 0 24 24" className="w-[26.25px]"
+      viewBox="0 0 24 24"
     >
       <g>
         <path d={props.svgPath}></path>
@@ -12,3 +12,4 @@ const SVG = (props) => {
 
 
 export default SVG;
+
