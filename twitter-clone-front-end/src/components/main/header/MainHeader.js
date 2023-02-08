@@ -4,6 +4,11 @@ import CircleButton from "../../UI/CircleButton";
 import { Setting } from "../../../utils/ButtonLinkObjects";
 import Search from "./Search";
 import ExploreButtonsList from "./ExploreButtonsList";
+import TweetsFeed from "../body/TweetsFeed";
+import { createBrowserRouter, Route, RouterProvider, Routes } from "react-router-dom";
+
+
+
 
 const MainHeader = () => {
   return (
@@ -15,6 +20,9 @@ const MainHeader = () => {
       <div>
         <ExploreButtonsList />
       </div>
+      <Routes>
+        <Route path="/explore/tabs/for-you" element={<TweetsFeed />}/>
+      </Routes>
     </div>
   );
 };

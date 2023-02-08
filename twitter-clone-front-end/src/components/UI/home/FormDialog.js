@@ -12,7 +12,7 @@ const FormDialog = (props) => {
         PaperProps={{
           sx: {
             width: "600px",
-            height: "100%",
+            height: "650px",
             borderRadius: "20px",
             display: "flex",
           },

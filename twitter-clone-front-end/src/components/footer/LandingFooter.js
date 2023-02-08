@@ -36,7 +36,7 @@ const LandingFooter = () => {
           </p>
         </div>
         <div className="self-center flex gap-4">
-        <FooterButton buttonInfo={LogIn} />
+          <FooterButton buttonInfo={LogIn} />
           <FooterButton buttonInfo={SignUp} />
         </div>
       </div>
