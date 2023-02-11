@@ -8,16 +8,20 @@ const Links = () => {
         <div className="flex p-[0.75rem] w-[50px] hover:bg-[#E8F5FE] rounded-full fill-[#1D9BF0] group-hover:bg-[#E6E7E7]">
           <SVG svgPath={LOGO}/>
         </div>
-      <a href="/#" className="group my-[0.25rem] flex items-center ">
-        <div className="flex p-[0.75rem] h-[3.141rem] w-[9.942rem] rounded-full group-hover:bg-[#E6E7E7]">
+      <a href="/#" className="group my-[0.25rem] flex items-center max-xl:w-[50.25px]">
+        <div className="flex p-[0.75rem] h-[3.141rem] w-[9.942rem] rounded-full group-hover:bg-[#E6E7E7] max-xl:w-[50.25px] max-xl:relative">
+        <div className="w-[26.25px] max-xl:absolute">
           <SVG svgPath={EXPLORE}/>
-          <span className="font-cReg text-[1.25rem] self-center ml-4">Explore</span>
+        </div>
+          <span className="font-cReg text-[1.25rem] self-center ml-4 max-xl:invisible">Explore</span>
         </div>
       </a>
-      <a href="/#" className="group my-[0.25rem] flex items-center ">
-        <div className="flex p-[0.75rem] h-[3.141rem] w-[9.942rem] rounded-full group-hover:bg-[#E6E7E7]">
+      <a href="/#" className="group my-[0.25rem] flex items-center max-xl:w-[50.25px]">
+        <div className="flex p-[0.75rem] h-[3.141rem] w-[9.942rem] rounded-full group-hover:bg-[#E6E7E7] max-xl:w-[50.25px] max-xl:relative">
+          <div className="w-[26.25px] max-xl:absolute">
           <SVG svgPath={SETTINGS}/>
-          <span className="font-cReg text-[1.25rem] self-center ml-4">Settings</span>
+          </div>
+          <span className="font-cReg text-[1.25rem] self-center ml-4 max-xl:invisible">Settings</span>
         </div>
       </a>
     </>

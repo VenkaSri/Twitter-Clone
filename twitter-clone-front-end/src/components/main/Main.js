@@ -12,7 +12,7 @@ import LandingFooter from "../footer/LandingFooter";
 const Main = () => {
   return (
     <div className="grow-[2] flex">
-      <div className="w-[61.875rem] flex justify-between">
+      <div className="w-[61.875rem] min-[1090px]:w-[57.5rem] flex justify-between border border-rose-500">
         <MainHeader />
         <RightSideBar />
       </div>
