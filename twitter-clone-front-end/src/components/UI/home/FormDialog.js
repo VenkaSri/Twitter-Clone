@@ -8,7 +8,7 @@ const FormDialog = (props) => {
   return (
     <div>
       <Dialog
-        open={ctx.isModalOpen}
+        open={true}
         PaperProps={{
           sx: {
             width: "600px",
