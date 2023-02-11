@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import LandingFooter from "../../footer/LandingFooter";
 import FormDialog from "../../UI/home/FormDialog";
 import SignUpForm from "../../../pages/authentication/signup/SignUpForm";
+import SignUpStepOne from "../../authentication/signup/SignUpStepOne";
 import { TabRounded } from "@mui/icons-material";
 import FormModalContext from "../../../context/modals/form-modal-context";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -16,7 +17,7 @@ const Layer = () => {
               path="/i/flow/signup"
               element={
                 <FormDialog>
-                  <SignUpForm />
+                  <SignUpStepOne />
                 </FormDialog>
               }
             />

@@ -10,6 +10,7 @@ import SignUpHome from "../../../components/authentication/signup/SignUpHome";
 
 const SignUpForm = () => {
   const ctx = useContext(FormModalContext);
+
   return (
     <div className="flex flex-col ">
       <SignUpHome />
