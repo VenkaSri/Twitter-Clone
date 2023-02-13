@@ -3,7 +3,10 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import SVG from "../../UI/app/SVG";
 import { CLOSE, LOGO } from "../../../utils/ButtonLinkObjects";
-import TextField from "../../UI/form/TextField";
+import { TextField } from "@mui/material";
+import FormTextField from "../../UI/form/FormTextField";
+import DOBInput from "./DOBInput";
+
 
 const SignUpStepOne = () => {
   return (
@@ -23,16 +26,19 @@ const SignUpStepOne = () => {
       <div className="w-[26.563rem] h-[26.5rem] self-center flex flex-col  mt-8 ">
         <h1 className="font-cBold text-[2rem]">Create your account</h1>
         <div className="flex flex-col gap-[25px] mt-6">
-          <TextField />
-
+          <FormTextField labelName="Name"/>
+          <FormTextField labelName="Phone"/>
         </div>
-        <div>
-          <h3>Date of birth</h3>
-          <p>
+        <div className="mt-10">
+          <h3 className="font-cBold">Date of birth</h3>
+          <p className="text-[14px] font-cReg text-[#536471] mt-2">
             This will not be shown publicly. Confirm your own age, even if this
             account is for a business, a pet, or something else.
           </p>
         </div>
+        
+      <DOBInput />
+        
       </div>
     </>
   );
