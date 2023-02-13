@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import SVG from "../../UI/app/SVG";
 import { CLOSE, LOGO } from "../../../utils/ButtonLinkObjects";
+import TextField from "../../UI/form/TextField";
 
 const SignUpStepOne = () => {
   return (
@@ -21,14 +22,16 @@ const SignUpStepOne = () => {
       </div>
       <div className="w-[26.563rem] h-[26.5rem] self-center flex flex-col  mt-8 ">
         <h1 className="font-cBold text-[2rem]">Create your account</h1>
-        <div className="">
-          <div className="border border-[#CFD9DE] group  h-[57px] flex rounded-[4px] focus-within:border-2 focus-within:border-[#1d9bf0]">
-            <label className="flex flex-col relative ml-2 ">
-              <span className="absolute text-[18px] top-3 z-50 group-focus-within:top-1 group-focus-within:text-[14px] transition-all duration-75">Name</span>
-              <input type="text" className="absolute bottom-0 mb-2  focus:outline-none "/>
-            </label>
-            
-          </div>
+        <div className="flex flex-col gap-[25px] mt-6">
+          <TextField />
+
+        </div>
+        <div>
+          <h3>Date of birth</h3>
+          <p>
+            This will not be shown publicly. Confirm your own age, even if this
+            account is for a business, a pet, or something else.
+          </p>
         </div>
       </div>
     </>
