@@ -12,6 +12,33 @@ const months = moment.months().map((month) => (
   </option>
 ));
 
+let dayArr = [];
+for (let i = 1; i < 32; i++) {
+  dayArr.push(i);
+}
+
+let yearArr = [];
+const year = new Date().getFullYear();
+yearArr.push(year);
+  for (let i = 1; i < 100; i++) {
+    yearArr.push(year - i);
+  }
+
+const days = dayArr.map((day) => (
+  <option value={day} key={day}>
+    {day}
+  </option>
+));
+
+const years = yearArr.map((year) => (
+  <option value={year} key={year}>
+    {year}
+  </option>
+));
+
+  
+
+
 const DOBInput = () => {
   return (
     <div className="flex mt-6 ]">
@@ -73,7 +100,7 @@ const DOBInput = () => {
             IconComponent={KeyboardArrowDownIcon}
           >
             <option disabled value={30}></option>
-            {months}
+            {days}
           </NativeSelect>
         </FormControl>
         <FormControl
@@ -102,11 +129,11 @@ const DOBInput = () => {
           IconComponent={KeyboardArrowDownIcon}
         >
           <option disabled value={30}></option>
-          {months}
+          {years}
         </NativeSelect>
       </FormControl>
       </div>
-
+     
 
     </div>
   );

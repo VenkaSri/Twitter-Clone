@@ -38,8 +38,11 @@ const SignUpStepOne = () => {
         </div>
         
       <DOBInput />
-        
+      
       </div>
+      <div className=" h-[100px] flex items-center justify-center mt-auto sticky">
+        <button className="w-[440px] h-[52px] rounded-full border border-rose-500">Next</button> 
+      </div> 
     </>
   );
 };
