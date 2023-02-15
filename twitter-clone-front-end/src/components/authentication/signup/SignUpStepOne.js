@@ -11,7 +11,7 @@ import DOBInput from "./DOBInput";
 const SignUpStepOne = () => {
   return (
     <>
-      <div className="ml-4 mr-4 mt-2 flex items-center bg-[#fff] sticky top-0">
+      <div className="ml-4 mr-4 mt-2 flex items-center bg-[#fff] sticky top-0 bg-[#fff] z-50">
         <Link
           role="button"
           to={"/"}
@@ -23,7 +23,7 @@ const SignUpStepOne = () => {
         </Link>
         <span className="ml-6 text-xl font-cBold">Step 1 of 5</span>
       </div>
-      <div className="w-[26.563rem] h-[26.5rem] self-center flex flex-col  mt-8 ">
+      <div className="w-[26.563rem] h-[26.5rem] self-center flex flex-col  mt-8 shrink-0">
         <h1 className="font-cBold text-[2rem]">Create your account</h1>
         <div className="flex flex-col gap-[25px] mt-6">
           <FormTextField labelName="Name"/>
@@ -40,8 +40,8 @@ const SignUpStepOne = () => {
       <DOBInput />
       
       </div>
-      <div className=" h-[100px] flex items-center justify-center mt-auto sticky">
-        <button className="w-[440px] h-[52px] rounded-full border border-rose-500">Next</button> 
+      <div className=" h-[100px] max-h-[100px] bg-[#fff] flex items-center justify-center mt-auto sticky bottom-0 z-50 shrink-0">
+        <button className="w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#86888B]">Next</button> 
       </div> 
     </>
   );
