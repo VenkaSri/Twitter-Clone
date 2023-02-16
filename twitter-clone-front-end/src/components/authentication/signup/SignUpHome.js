@@ -105,6 +105,4 @@ const SignUpHome = () => {
 
 export default SignUpHome;
 
-//   </div>
 
-// </div>

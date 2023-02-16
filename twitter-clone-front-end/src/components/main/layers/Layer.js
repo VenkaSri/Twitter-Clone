@@ -7,6 +7,9 @@ import SignUpStepOne from "../../authentication/signup/SignUpStepOne";
 import { TabRounded } from "@mui/icons-material";
 import FormModalContext from "../../../context/modals/form-modal-context";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import SignUpHome from "../../authentication/signup/SignUpHome";
+import AuthenticateHome from "../../authentication/signup/AuthenticateHome";
+import Authentication from "../../authentication/signup/Authentication";
 
 const Layer = () => {
 
@@ -17,7 +20,7 @@ const Layer = () => {
               path="/i/flow/signup"
               element={
                 <FormDialog>
-                  <SignUpStepOne />
+                  <Authentication />
                 </FormDialog>
               }
             />
