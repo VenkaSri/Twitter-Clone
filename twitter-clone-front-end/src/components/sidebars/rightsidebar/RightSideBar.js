@@ -25,7 +25,7 @@ const RightSideBar = () => {
           </p>
         </div>
         <SignInButtonList />
-        <div className="ml-4 mt-4">
+        <div className="ml-3 mt-4">
           <p className="text-[0.83rem] font-custom2 text-gray-900">
             By signing up, you agree to the{" "}
             <span className="text-[#1D9BF0]">Terms of Service</span> and{" "}

@@ -12,7 +12,7 @@ import TweetsFeed from "../../../main/body/TweetsFeed";
 
 const SignInButtonList = () => {
   return (
-    <div className="w-[18.75rem] flex flex-col mt-[2rem] gap-[1.5rem] self-center">
+    <div className="w-[20.25rem] flex flex-col mt-[1rem] gap-[1rem] self-center ">
       <SignInButton>
         <div className="w-[1.25rem]">
           <svg viewBox="0 0 48 48">
@@ -49,11 +49,11 @@ const SignInButtonList = () => {
           <p className="font-cBold">Sign up with Apple</p>
         </div>
       </SignInButton>
-      <button className="h-[2.4rem] text-white bg-[#000] rounded-full hover:bg-[#272C30]  flex items-center justify-center grow">
+      <SignInButton>
         <div>
           <p className="font-cBold">Create account</p>
         </div>
-      </button>
+      </SignInButton>
     </div>
   );
 };
