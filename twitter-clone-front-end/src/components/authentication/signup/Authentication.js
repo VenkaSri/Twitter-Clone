@@ -2,19 +2,11 @@ import React, { useRef } from "react";
 
 import SVG from "../../../components/UI/app/SVG";
 import { CLOSE, LOGO } from "../../../utils/ButtonLinkObjects";
-import ReCAPTCHA from "react-google-recaptcha";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 const Authentication = () => {
   const captchaRef = useRef(null);
 
-  const handleSubmit = (e) =>{
-    e.preventDefault();
-    const token = captchaRef.current.getValue();
-    console.log(token);
-    captchaRef.current.reset();
-}
 
   return (
     <>
@@ -36,7 +28,6 @@ const Authentication = () => {
         <form>
           <label htmlFor="name">Name</label>
           <input type="text" id="name" className="input" />
-          <ReCAPTCHA sitekey="6Lc734UkAAAAAByK5rnqinuBiMLFiJpg_47UasWv" ref={captchaRef} onChange={handleSubmit}/>
           <button>Submit</button>
         </form>
       </div>
