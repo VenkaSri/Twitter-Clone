@@ -65,7 +65,7 @@ const SignUpStepOne = (props) => {
             }}
           />}
           {!authType && <TextField
-            type="number"
+            type="tel"
             id="outlined-basic"
             label="Phone"
             variant="filled"
