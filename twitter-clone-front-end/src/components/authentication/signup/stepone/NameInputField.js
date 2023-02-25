@@ -6,19 +6,32 @@ const NameInputField = () => {
   const [nameInputIsValid, setNameInputIsValid] = useState(false);
   const [enteredName, setEnteredName] = useState("");
   const nameInputRef = useRef();
+  const [nameInputTyped, setNameInputTyped] = useState(false);
 
 
   const enteredNameHandler = (event) => {
+    setNameInputTyped(true);
     setEnteredName(event.target.value);
+    console.log(event.target.value);
   };
 
   const enteredNameIsValid = () => {
-    if (enteredName.length === 1 && enteredName === ' ') {
-      setNameInputIsValid(true);
-      return;
+    if (nameInputTyped) {
+      if (!enteredName.replace(/\s/g, '').length) {
+          setNameInputIsValid(true);
+      } else {
+        setNameInputIsValid(false);
+      }
     }
-    setNameInputIsValid(false);
   }
+
+  const styles = {
+    floatingLabelFocusStyle: {
+        color: "red"
+    }
+}
+  
+  const nameInputClassess = nameInputIsValid ? "border border-[#FF0000] h-[3.688rem] group rounded-[4px] focus-within:border-2 focus-within:border-[#ff000] !bg-[#fff] max-h-[3.688rem]" : "border border-[#CFD9DE] h-[3.688rem] group rounded-[4px] focus-within:border-2 focus-within:border-[#1d9bf0] !bg-[#fff] max-h-[3.688rem]";
 
   return (
     <div className="flex flex-col grow">
@@ -30,12 +43,11 @@ const NameInputField = () => {
         variant="filled"
         InputProps={{
           className:
-            "border border-[#CFD9DE] h-[3.688rem] group rounded-[4px] focus-within:border-2 focus-within:border-[#1d9bf0] !bg-[#fff] max-h-[3.688rem]",
+          nameInputClassess,
           disableUnderline: true,
         }}
         InputLabelProps={{
-          className:
-            "!text-[17px] font-cReg text-[#657480] focus-within:text-[#1d9bf0]",
+          
         }}
         onChange={enteredNameHandler}
         onBlur={enteredNameIsValid}
