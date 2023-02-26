@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 
 import { TextField } from "@mui/material";
 
-const NameInputField = () => {
+const EmailTextField = () => {
   const [nameInputIsValid, setNameInputIsValid] = useState(false);
   const [enteredName, setEnteredName] = useState("");
   const nameInputRef = useRef();
@@ -42,9 +42,9 @@ const NameInputField = () => {
     <div className="flex flex-col grow">
       <TextField
         inputRef={nameInputRef}
-        type="text"
+        type="email"
         id="outlined-basic"
-        label="Name"
+        label="Email"
         variant="filled"
         InputProps={{
           className: nameInputClassess,
@@ -58,11 +58,11 @@ const NameInputField = () => {
       />
       {nameInputIsValid && (
         <p className="text-[#F4212E] font-cReg ml-2 text-[13px] ">
-          What’s your name?
+          Please enter a valid email.
         </p>
       )}
     </div>
   );
 };
 
-export default NameInputField;
+export default EmailTextField;
