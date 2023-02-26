@@ -1,47 +1,43 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 import { TextField } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+import { object, string, number, date, InferType } from 'yup';
+
+const schema = yup.object({
+  name:yup.string().matches(/[^\s\\]/, {message: "Whats your name?"}),
+})
+
+
 
 const NameInputField = () => {
-  const [nameInputIsValid, setNameInputIsValid] = useState(false);
-  const [enteredName, setEnteredName] = useState("");
-  const nameInputRef = useRef();
-  const [nameInputTyped, setNameInputTyped] = useState(false);
+  const { register, handleSubmit, watch, formState: {errors} } = useForm({
+    defaultValues: {
+      name: ""
+    },
+    resolver: yupResolver(schema)
+  });
 
-  const enteredNameHandler = (event) => {
-    setNameInputTyped(true);
-    if (!(event.target.value).replace(/\s/g, "").length) {
-      setNameInputIsValid(true);
-    } else {
-      setNameInputIsValid(false);
-    }
 
-    setEnteredName(event.target.value);
-    console.log(event.target.value);
-  };
-
-  const enteredNameIsValid = () => {
-    if (nameInputTyped) {
-      if (!enteredName.replace(/\s/g, "").length) {
-        setNameInputIsValid(true);
-      } else {
-        setNameInputIsValid(false);
-      }
-    }
-  };
-
-  const nameInputClassess = nameInputIsValid
-    ? "border border-[#FF0000] h-[3.688rem] group rounded-[4px] focus-within:border-2 focus-within:border-[#ff000] !bg-[#fff] max-h-[3.688rem]"
-    : "border border-[#CFD9DE] h-[3.688rem] group rounded-[4px] focus-within:border-2 focus-within:border-[#1d9bf0] !bg-[#fff] max-h-[3.688rem]";
   
-    const nameInputLabelClasses = nameInputIsValid 
-    ? "!text-[#ff0000] "
-    : "";
 
+  const onSubmit = (data) => console.log(data)
+  useEffect(() => {
+    const subscription = watch(handleSubmit(onSubmit));
+    return () => subscription.unsubscribe();
+}, [handleSubmit, watch]);
+
+const nameInputClassess = errors.name 
+? "border border-[#ff0000] h-[3.688rem] group rounded-[4px] focus-within:border-2 focus-within:border-[#ff0000] !bg-[#fff] max-h-[3.688rem]"
+: "border border-[#CFD9DE] h-[3.688rem] group rounded-[4px] focus-within:border-2 focus-within:border-[#1d9bf0] !bg-[#fff] max-h-[3.688rem]"; 
+  
   return (
     <div className="flex flex-col grow">
       <TextField
-        inputRef={nameInputRef}
+      {...register("name")}
+        name="name"
         type="text"
         id="outlined-basic"
         label="Name"
@@ -50,17 +46,9 @@ const NameInputField = () => {
           className: nameInputClassess,
           disableUnderline: true,
         }}
-        InputLabelProps={{
-          className: nameInputLabelClasses,
-        }}
-        onChange={enteredNameHandler}
-        onBlur={enteredNameIsValid}
+  
       />
-      {nameInputIsValid && (
-        <p className="text-[#F4212E] font-cReg ml-2 text-[13px] ">
-          What’s your name?
-        </p>
-      )}
+      <p>{errors.name?.message}</p>
     </div>
   );
 };
