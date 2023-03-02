@@ -2,6 +2,7 @@ package ca.venkasritharan.twitterclone.service.impl;
 
 import ca.venkasritharan.twitterclone.dto.LoginDTO;
 import ca.venkasritharan.twitterclone.dto.RegisterDTO;
+import ca.venkasritharan.twitterclone.dto.ValidateEmailOrPhoneDTO;
 import ca.venkasritharan.twitterclone.entity.authentication.Role;
 import ca.venkasritharan.twitterclone.entity.authentication.User;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
@@ -53,12 +54,24 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     return "User registered successfully";
   }
 
+  @Override
+  public String validateEmailOrPhone(ValidateEmailOrPhoneDTO validateEmailOrPhoneDTO) {
+
+    if (userRepository.existsByPhoneNumber(validateEmailOrPhoneDTO.getEmailOrPhoneNumber())) {
+      return "An account with number already exists";
+    }
+    if (userRepository.existsByEmail(validateEmailOrPhoneDTO.getEmailOrPhoneNumber())) {
+      return "Email has already been taken.";
+    }
+    return "";
+  }
+
   private void checkIfAccountExistsWith(String phoneNumber, String email) {
     if (userRepository.existsByPhoneNumber(phoneNumber)) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "An account with associated with this number already exists.");
+      System.out.println("exists");
     }
     if (userRepository.existsByEmail(email)) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "An account with associated with this number already exists.");
+      System.out.println("exists");
     }
   }
 

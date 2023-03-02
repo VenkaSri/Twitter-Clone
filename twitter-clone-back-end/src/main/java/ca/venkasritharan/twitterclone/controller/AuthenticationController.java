@@ -2,15 +2,14 @@ package ca.venkasritharan.twitterclone.controller;
 
 import ca.venkasritharan.twitterclone.dto.LoginDTO;
 import ca.venkasritharan.twitterclone.dto.RegisterDTO;
+import ca.venkasritharan.twitterclone.dto.ValidateEmailOrPhoneDTO;
 import ca.venkasritharan.twitterclone.service.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/api/auth")
 public class AuthenticationController {
@@ -31,6 +30,12 @@ public class AuthenticationController {
   public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO) {
     String response = authenticationService.register(registerDTO);
     return new ResponseEntity<>(response, HttpStatus.CREATED);
+  }
+
+  @PostMapping("/emailOrPhone")
+  public String validateEmailOrPhone(@RequestBody ValidateEmailOrPhoneDTO validateEmailOrPhoneDTO) {
+    String response = authenticationService.validateEmailOrPhone(validateEmailOrPhoneDTO);
+    return response;
   }
 
 }
