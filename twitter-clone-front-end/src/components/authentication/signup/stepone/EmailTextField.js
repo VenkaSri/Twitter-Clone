@@ -1,63 +1,68 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { TextField } from "@mui/material";
 
 const EmailTextField = () => {
-  const [nameInputIsValid, setNameInputIsValid] = useState(false);
-  const [enteredName, setEnteredName] = useState("");
-  const nameInputRef = useRef();
-  const [nameInputTyped, setNameInputTyped] = useState(false);
+  const [enteredEmail, setEnteredEmail] = useState("");
+  const [emailIsValid, setEmailIsValid] = useState(false);
 
-  const enteredNameHandler = (event) => {
-    setNameInputTyped(true);
-    if (!(event.target.value).replace(/\s/g, "").length) {
-      setNameInputIsValid(true);
-    } else {
-      setNameInputIsValid(false);
-    }
-
-    setEnteredName(event.target.value);
-    console.log(event.target.value);
+  const enteredEmailHandler = (event) => {
+    setEnteredEmail(event.target.value);
   };
 
-  const enteredNameIsValid = () => {
-    if (nameInputTyped) {
-      if (!enteredName.replace(/\s/g, "").length) {
-        setNameInputIsValid(true);
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+
+      if (enteredEmail.length < 0 || onlySpaces(enteredEmail)) {
+        setEmailIsValid(false);
       } else {
-        setNameInputIsValid(false);
+        setEmailIsValid(!handleEmailValidation(enteredEmail.trim()));
       }
-    }
+    }, 500);
+
+      return () => {
+        setEmailIsValid(false);
+        clearTimeout(identifier);
+      };
+    }, [enteredEmail]);
+
+  const handleEmailValidation = (text) => {
+    return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(text);
   };
 
-  const nameInputClassess = nameInputIsValid
-    ? "border border-[#FF0000] h-[3.688rem] group rounded-[4px] focus-within:border-2 focus-within:border-[#ff000] !bg-[#fff] max-h-[3.688rem]"
+  const onlySpaces = (text) => {
+    return !/[^\s\\]/.test(text);
+  };
+
+  const emailInputClassess = emailIsValid
+    ? "border border-[#ff0000] h-[3.688rem] group rounded-[4px] focus-within:border-2 focus-within:border-[#ff0000] !bg-[#fff] max-h-[3.688rem]"
     : "border border-[#CFD9DE] h-[3.688rem] group rounded-[4px] focus-within:border-2 focus-within:border-[#1d9bf0] !bg-[#fff] max-h-[3.688rem]";
-  
-    const nameInputLabelClasses = nameInputIsValid 
-    ? "!text-[#ff0000] "
-    : "";
+
+  const emailInputLabelClasses = emailIsValid ? "#ff0000" : "#1d9bf0";
 
   return (
     <div className="flex flex-col grow">
       <TextField
-        inputRef={nameInputRef}
-        type="email"
+        name="email"
+        type="text"
         id="outlined-basic"
         label="Email"
         variant="filled"
         InputProps={{
-          className: nameInputClassess,
+          className: emailInputClassess,
           disableUnderline: true,
         }}
-        InputLabelProps={{
-          className: nameInputLabelClasses,
+        sx={{
+          "& label": {
+            "&.Mui-focused": {
+              color: emailInputLabelClasses,
+            },
+          },
         }}
-        onChange={enteredNameHandler}
-        onBlur={enteredNameIsValid}
+        onChange={enteredEmailHandler}
       />
-      {nameInputIsValid && (
-        <p className="text-[#F4212E] font-cReg ml-2 text-[13px] ">
+      {emailIsValid && (
+        <p className="font-cReg text-[14px] ml-2 text-[#ff0000]">
           Please enter a valid email.
         </p>
       )}

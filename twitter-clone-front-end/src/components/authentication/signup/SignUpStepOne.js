@@ -7,6 +7,7 @@ import { TextField } from "@mui/material";
 import DOBInput from "./DOBInput";
 import NameInputField from "./stepone/NameInputField";
 import EmailTextField from "./stepone/EmailTextField";
+import PhoneTextField from "./stepone/PhoneTextField";
 
 const SignUpStepOne = (props) => {
   const [authType, setAuthType] = useState(false);
@@ -47,23 +48,8 @@ const SignUpStepOne = (props) => {
           {authType && (
             <EmailTextField />
           )}
-          {!authType && (
-            <TextField
-              type="tel"
-              id="outlined-basic"
-              label="Phone"
-              variant="filled"
-              InputProps={{
-                className:
-                  "border border-[#CFD9DE] h-[3.688rem] group rounded-[4px] focus-within:border-2 focus-within:border-[#1d9bf0] !bg-[#fff] max-h-[3.688rem]",
-                disableUnderline: true,
-              }}
-              InputLabelProps={{
-                className:
-                  "!text-[17px] font-cReg text-[#657480] focus-within:text-[#1d9bf0]",
-              }}
-            />
-          )}
+          {!authType && 
+          <EmailTextField />}
         </div>
         {!authType && (
           <div
