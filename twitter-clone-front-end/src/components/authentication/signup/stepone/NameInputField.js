@@ -1,15 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { nameActions } from "../../../../state/auth/sign-up/StepOne";
 
 const schema = yup.object({
   name: yup.string().matches(/[^\s\\]/, { message: "Whats your name?" }),
 });
 
 const NameInputField = () => {
+  const dispatch = useDispatch();
+  const name = useSelector(state => state.name.name);
   const {
     register,
     handleSubmit,
@@ -22,7 +26,7 @@ const NameInputField = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => dispatch(nameActions.assignName(data.name));
   useEffect(() => {
     const subscription = watch(handleSubmit(onSubmit));
     return () => subscription.unsubscribe();
