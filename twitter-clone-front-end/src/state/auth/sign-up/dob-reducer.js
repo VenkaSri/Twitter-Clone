@@ -19,6 +19,9 @@ const dobSlice = createSlice({
     },
     setYear(state, action) {
       state.year = action.payload;
+    },
+    isDOBSet(state, action) {
+      state.isDOBSet = action.payload;
     }
   }
 });

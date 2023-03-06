@@ -1,13 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 
 import NativeSelect from "@mui/material/NativeSelect";
 import { FormControl, InputLabel } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { dobActions } from "../../../../state/auth/sign-up/dob-reducer";
 
 const DOBSelectField = (props) => {
-  const dispatch = useDispatch;
+
   return (
     <FormControl
       sx={{
@@ -16,7 +14,7 @@ const DOBSelectField = (props) => {
         borderRadius: "4px",
         flexGrow: props.style.flexGrow,
         width: props.style.width || 0,
-        marginRight: props.style.marginRight || 0
+        marginRight: props.style.marginRight || 0,
       }}
     >
       <InputLabel
@@ -30,14 +28,12 @@ const DOBSelectField = (props) => {
         disableUnderline
         defaultValue={30}
         inputProps={{
-          name: "age",
+          name: props.label,
           id: "uncontrolled-native",
           className: " !ml-[6px] !mt-[6px] !text-[18px]",
         }}
         IconComponent={KeyboardArrowDownIcon}
-        onChange={(event) => {
-          dispatch(dobActions.setMonth(event.target.value));
-        }}
+        onChange={props.onChange}
       >
         <option disabled value={30}></option>
         {props.field}
