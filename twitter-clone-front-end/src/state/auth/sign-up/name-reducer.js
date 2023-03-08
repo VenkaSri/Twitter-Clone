@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const nameInitialState = {
-  name: "", 
+  name: "",
   isNameValid: false,
-  hasEnteredInput: false
-}
-
+  hasEnteredInput: false,
+};
 
 const nameSlice = createSlice({
   name: "name",
@@ -19,12 +18,9 @@ const nameSlice = createSlice({
     },
     setHasEnteredInput(state, action) {
       state.hasEnteredInput = action.payload;
-    }
-
-  }
+    },
+  },
 });
-
-
 
 export const nameActions = nameSlice.actions;
 export default nameSlice.reducer;

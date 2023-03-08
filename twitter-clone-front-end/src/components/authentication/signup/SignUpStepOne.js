@@ -1,13 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 import SVG from "../../UI/app/SVG";
 import { CLOSE } from "../../../utils/ButtonLinkObjects";
-import { TextField } from "@mui/material";
 import DOBInput from "./DOBInput";
 import NameInputField from "./stepone/NameInputField";
 import EmailTextField from "./stepone/EmailTextField";
 import PhoneTextField from "./stepone/PhoneTextField";
+import { useSelector } from "react-redux";
 
 const SignUpStepOne = (props) => {
   const [authType, setAuthType] = useState(false);
@@ -21,12 +21,10 @@ const SignUpStepOne = (props) => {
     setAuthType(true);
   };
 
-  // const nameInputFocusHandler = () => {
-  //   setNameInputFocus(true);
-  // }
+  const stepOne = useSelector(state => state.stepOne);
+  const dob = useSelector(state => state.dob);
 
-
-
+  
   return (
     <>
       <div className="ml-4 mr-4 mt-2 flex items-center bg-[#fff] sticky top-0 bg-[#fff] z-50">
@@ -77,8 +75,8 @@ const SignUpStepOne = (props) => {
         <DOBInput />
       </div>
       <div className=" h-[100px] max-h-[100px] bg-[#fff] flex items-center justify-center mt-auto sticky bottom-0 z-50 shrink-0">
-        <button className="w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#86888B]">
-          Next
+        <button className="w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#000]" >
+          {(stepOne.isEmailEntered && stepOne.isNameEntered && stepOne.isDOBEntered) && "Next"}
         </button>
       </div>
     </>

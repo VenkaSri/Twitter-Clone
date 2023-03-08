@@ -4,7 +4,7 @@ const emailInitialState = {
   enteredEmail: "",
   apiResponse: "",
   isValid: false,
-  isAvailable: true,
+  isAvailable: false,
   hasOnlySpaces: true,
   hasEnteredInput: false
 }
