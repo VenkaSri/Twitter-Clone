@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { emailActions } from "../../../../state/auth/sign-up/email-reducer";
+import { stepOneActions } from "../../../../state/auth/sign-up/stepone-reducer";
 import axios from "axios";
 import { TextField } from "@mui/material";
 
@@ -22,27 +23,28 @@ const EmailTextField = () => {
 
   useEffect(() => {
     const identifier = setTimeout(() => {
-      if (email.enteredEmail.length < 0 || onlySpaces(email.enteredEmail)) {
-        dispatch(emailActions.isEmailValid(false));
-      } else {
-        dispatch(
-          emailActions.isEmailValid(
-            !handleEmailValidation(email.enteredEmail.trim())
-          )
-        );
-        axios
-          .post(BASE_URL, {
-            emailOrPhoneNumber: email.enteredEmail.trim(),
-          })
-          .then((response) => {
-            if (response.data === "") {
-              dispatch(emailActions.isEmailAvailable(true));
-            } else {
-              dispatch(emailActions.isEmailAvailable(false));
-              dispatch(emailActions.setAPIResponse(response.data));
-            }
-          });
-      }
+        if (email.enteredEmail.length < 0 || onlySpaces(email.enteredEmail)) {
+          dispatch(emailActions.isEmailValid(false));
+        } else {
+          dispatch(
+            emailActions.isEmailValid(
+              !handleEmailValidation(email.enteredEmail.trim())
+            )
+          );
+          axios
+            .post(BASE_URL, {
+              emailOrPhoneNumber: email.enteredEmail.trim(),
+            })
+            .then((response) => {
+              if (response.data === "") {
+                dispatch(emailActions.isEmailAvailable(true));
+              } else {
+                dispatch(emailActions.isEmailAvailable(false));
+                dispatch(emailActions.setAPIResponse(response.data));
+              }
+            });
+        }
+        if (email.isValid && email.isAvailable) dispatch(stepOneActions.setEmailEntered(true));
     }, 500);
 
     return () => {
@@ -79,6 +81,9 @@ const EmailTextField = () => {
           },
         }}
         onChange={(event) => {
+          dispatch(
+            emailActions.setHasEnteredInput(true)
+          );
           dispatch(emailActions.setEmail(event.target.value));
         }}
       />

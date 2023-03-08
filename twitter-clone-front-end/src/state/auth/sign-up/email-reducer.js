@@ -6,6 +6,7 @@ const emailInitialState = {
   isValid: false,
   isAvailable: true,
   hasOnlySpaces: true,
+  hasEnteredInput: false
 }
 
 const emailSlice = createSlice({
@@ -26,6 +27,9 @@ const emailSlice = createSlice({
     },
     isThereOnlySpaces(state, action) {
       state.hasOnlySpaces = action.payload;
+    },
+    setHasEnteredInput(state, action) {
+      state.hasEnteredInput = action.payload;
     }
   }
 });
