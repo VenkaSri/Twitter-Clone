@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import LandingFooter from "../../footer/LandingFooter";
 import FormDialog from "../../UI/home/FormDialog";
@@ -7,7 +8,9 @@ import SignUpStepOne from "../../authentication/signup/SignUpStepOne";
 import {  Route, Routes } from "react-router-dom";
 
 
+
 const Layer = () => {
+  const steps = useSelector((state) => state.steps);
   return (
     <div className="relative flex flex-col justify-center grow">
       <Routes>
@@ -15,7 +18,7 @@ const Layer = () => {
           path="/i/flow/signup"
           element={
               <FormDialog>
-                <SignUpStepOne />
+                {(steps.stepTwo) ? <SignUpStepTwo /> : <SignUpStepOne />}
               </FormDialog>
           }
         />

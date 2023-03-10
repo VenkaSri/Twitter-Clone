@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import { Link } from "react-router-dom";
 import SVG from "../../UI/app/SVG";
@@ -7,11 +8,14 @@ import DOBInput from "./DOBInput";
 import NameInputField from "./stepone/NameInputField";
 import EmailTextField from "./stepone/EmailTextField";
 import { useSelector } from "react-redux";
+import { stepsActions } from "../../../state/auth/form/steps-reducer";
 
 const SignUpStepOne = (props) => {
   const [authType, setAuthType] = useState(false);
-
-
+  const dispatch = useDispatch();
+  const nextStepHandler = () => {
+    dispatch(stepsActions.setStepTwo(true));
+  }
   const handleAuthTypeFalse = () => {
     setAuthType(false);
   };
@@ -79,7 +83,7 @@ const SignUpStepOne = (props) => {
         <DOBInput />
       </div>
       <div className=" h-[100px] max-h-[100px] bg-[#fff] flex items-center justify-center mt-auto sticky bottom-0 z-50 shrink-0 overflow-y-hidden">
-        <button className={submitButtonClasses} disabled={disable}>
+        <button className={submitButtonClasses} disabled={disable} onClick={nextStepHandler}>
           Next
         </button>
       </div>
