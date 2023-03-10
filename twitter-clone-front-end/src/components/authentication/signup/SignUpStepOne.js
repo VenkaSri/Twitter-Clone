@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 import SVG from "../../UI/app/SVG";
@@ -6,7 +6,6 @@ import { CLOSE } from "../../../utils/ButtonLinkObjects";
 import DOBInput from "./DOBInput";
 import NameInputField from "./stepone/NameInputField";
 import EmailTextField from "./stepone/EmailTextField";
-import PhoneTextField from "./stepone/PhoneTextField";
 import { useSelector } from "react-redux";
 
 const SignUpStepOne = (props) => {
@@ -22,7 +21,12 @@ const SignUpStepOne = (props) => {
   };
 
   const stepOne = useSelector(state => state.stepOne);
-  const dob = useSelector(state => state.dob);
+  const submitButtonClasses = (stepOne.isEmailEntered && stepOne.isNameEntered && stepOne.isDOBEntered) 
+  ? "w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#000]"
+  : "w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#86888b]";
+
+  const disable = (stepOne.isEmailEntered && stepOne.isNameEntered && stepOne.isDOBEntered) 
+  ? false : true;
 
   
   return (
@@ -74,9 +78,9 @@ const SignUpStepOne = (props) => {
         </div>
         <DOBInput />
       </div>
-      <div className=" h-[100px] max-h-[100px] bg-[#fff] flex items-center justify-center mt-auto sticky bottom-0 z-50 shrink-0">
-        <button className="w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#000]" >
-          {(stepOne.isEmailEntered && stepOne.isNameEntered && stepOne.isDOBEntered) && "Next"}
+      <div className=" h-[100px] max-h-[100px] bg-[#fff] flex items-center justify-center mt-auto sticky bottom-0 z-50 shrink-0 overflow-y-hidden">
+        <button className={submitButtonClasses} disabled={disable}>
+          Next
         </button>
       </div>
     </>
