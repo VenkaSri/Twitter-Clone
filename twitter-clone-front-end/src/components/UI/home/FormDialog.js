@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import Dialog from "@mui/material/Dialog";
-import FormModalContext from "../../../context/modals/form-modal-context";
+import { DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import StepsHeader from "../../authentication/signup/StepsHeader";
+import StepOne from "../../authentication/signup/stepone/StepOne";
+import StepsFooter from "../../authentication/signup/StepsFooter";
 
 const FormDialog = (props) => {
-  const ctx = useContext(FormModalContext);
   return (
     <div>
       <Dialog
@@ -18,7 +20,9 @@ const FormDialog = (props) => {
           },
         }} 
       >
-        {props.children}
+        <DialogTitle style={{padding: 0}}><StepsHeader /></DialogTitle>
+        <DialogContent style={{padding: 0}}><StepOne /></DialogContent>
+        <DialogActions style={{padding: 0, display: "flex"}}><StepsFooter /></DialogActions>
       </Dialog>
     </div>
   );
