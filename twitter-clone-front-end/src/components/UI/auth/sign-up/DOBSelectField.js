@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 
-import NativeSelect from "@mui/material/NativeSelect";
-import { FormControl, InputLabel } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useDispatch, useSelector } from "react-redux";
 import { dobActions } from "../../../../state/auth/sign-up/dob-reducer";
 import { stepOneActions } from "../../../../state/auth/sign-up/stepone-reducer";
+import { hover } from "@testing-library/user-event/dist/hover";
 
 const DOBSelectField = (props) => {
   const dispatch = useDispatch();
@@ -33,37 +33,37 @@ const DOBSelectField = (props) => {
   }, [dob.month, dob.year, dob.day, dispatch]);
 
   return (
-    <FormControl
-      sx={{
-        border: "1px solid #CFD9DE",
-        height: "58px",
-        borderRadius: "4px",
-        flexGrow: props.style.flexGrow,
-        width: props.style.width || 0,
-        marginRight: props.style.marginRight || 0,
-      }}
-    >
-      <InputLabel
-        variant="standard"
-        htmlFor="uncontrolled-native"
-        sx={{ fontSize: 20, m: "6px" }}
-      >
-        {props.label}
+    <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+      <InputLabel htmlFor="demo-simple-select-filled" shrink={true}>
+        Age
       </InputLabel>
-      <NativeSelect
-        disableUnderline
-        defaultValue={30}
-        inputProps={{
-          name: props.label,
-          id: "uncontrolled-native",
-          className: " !ml-[6px] !mt-[6px] !text-[18px]",
+      <Select
+        labelId="demo-simple-select-filled-label"
+        id="demo-simple-select-filled"
+        label="Age"
+        sx={{
+          bgcolor: "transparent",
+          border: "1px solid #808080",
+          borderRadius: "4px",
+          "&.Mui-focused": {
+            borderColor: "#0000FF",
+            borderWidth: "1px",
+            borderStyle: "solid",
+            bgcolor: "transparent",
+          },
+          "&:hover": {
+            bgcolor: "transparent",
+          },
         }}
-        IconComponent={KeyboardArrowDownIcon}
-        onChange={selectedValueHandler}
+        disableUnderline
       >
-        <option disabled value={30}></option>
-        {props.field}
-      </NativeSelect>
+        <MenuItem value="">
+          <em>None</em>
+        </MenuItem>
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
+      </Select>
     </FormControl>
   );
 };
