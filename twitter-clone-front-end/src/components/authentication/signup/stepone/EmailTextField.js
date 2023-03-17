@@ -9,7 +9,6 @@ import { TextField } from "@mui/material";
 const BASE_URL = "http://localhost:8080/api/auth/emailOrPhone";
 
 const handleEmailValidation = (text) => {
-  console.log(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(text));
   return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(text);
 };
 
@@ -45,6 +44,7 @@ const EmailTextField = () => {
       if (email.enteredEmail === "") setIsEmailUnavailable(false);
       if (email.enteredEmail.length < 0 || onlySpaces(email.enteredEmail)) {
         setIsNameInvalid(false);
+        dispatch(stepOneActions.setEmailEntered(false));
       } else {
         if (handleEmailValidation(email.enteredEmail.trim())) {
           callAPI();
@@ -53,7 +53,6 @@ const EmailTextField = () => {
           dispatch(stepOneActions.setEmailEntered(false));
         }
       }
-      
     }, 500);
 
     return () => {
