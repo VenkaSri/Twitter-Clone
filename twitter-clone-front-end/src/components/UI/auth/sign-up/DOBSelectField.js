@@ -33,36 +33,43 @@ const DOBSelectField = (props) => {
   }, [dob.month, dob.year, dob.day, dispatch]);
 
   return (
-    <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+    <FormControl variant="filled" sx={{
+      height: "58px",
+      borderRadius: "4px",
+      flexGrow: props.style.flexGrow,
+      width: props.style.width || 0,
+      marginRight: props.style.marginRight || 0,
+    }}>
       <InputLabel htmlFor="demo-simple-select-filled" shrink={true}>
-        Age
+      {props.label}
       </InputLabel>
       <Select
         labelId="demo-simple-select-filled-label"
         id="demo-simple-select-filled"
-        label="Age"
+        label={props.label}
         sx={{
           bgcolor: "transparent",
-          border: "1px solid #808080",
+          border: "1px solid #cfd9de",
           borderRadius: "4px",
           "&.Mui-focused": {
-            borderColor: "#0000FF",
-            borderWidth: "1px",
-            borderStyle: "solid",
+            border: "2px solid #1d9bf0",
             bgcolor: "transparent",
           },
           "&:hover": {
             bgcolor: "transparent",
           },
+          "&:focus": {
+            bgcolor: "transparent",
+          },
+          
         }}
+        defaultValue=""
         disableUnderline
+        IconComponent={KeyboardArrowDownIcon}
+        onChange={selectedValueHandler}
       >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
+        <MenuItem value="" disabled></MenuItem>
+        {props.field}
       </Select>
     </FormControl>
   );

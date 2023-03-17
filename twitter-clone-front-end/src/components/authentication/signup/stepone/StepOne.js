@@ -47,7 +47,7 @@ const StepOne = () => {
         Use phone instead
       </div>
     )}
-    <div className="">
+    <div className="mt-10">
       <h3 className="font-cBold">Date of birth</h3>
       <p className="text-[14px] font-cReg text-[#536471] mt-2">
         This will not be shown publicly. Confirm your own age, even if this

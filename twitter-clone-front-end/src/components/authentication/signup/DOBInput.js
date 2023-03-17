@@ -2,11 +2,12 @@ import React from "react";
 
 import DOBSelectField from "../../UI/auth/sign-up/DOBSelectField";
 import moment from "moment";
+import { MenuItem } from "@mui/material";
 
 const months = moment.months().map((month) => (
-  <option value={month} key={month}>
+  <MenuItem value={month} key={month}>
     {month}
-  </option>
+  </MenuItem>
 ));
 
 let dayArr = [];
@@ -22,15 +23,15 @@ for (let i = 1; i < 100; i++) {
 }
 
 const days = dayArr.map((day) => (
-  <option value={day} key={day}>
+  <MenuItem value={day} key={day}>
     {day}
-  </option>
+  </MenuItem>
 ));
 
 const years = yearArr.map((year) => (
-  <option value={year} key={year}>
+  <MenuItem value={year} key={year}>
     {year}
-  </option>
+  </MenuItem>
 ));
 
 const DOBInput = () => {
