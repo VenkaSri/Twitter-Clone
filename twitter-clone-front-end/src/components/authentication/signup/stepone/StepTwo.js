@@ -8,8 +8,7 @@ const StepTwo = () => {
   const name = useSelector((state) => state.name);
   const email = useSelector((state) => state.email);
   const dob = useSelector((state) => state.dob);
-  console.log(dob.day)
-  const userDob = `${dob.month} ${dob.day}, ${dob.year}`;
+  const userDob = `${dob.month}-${dob.day}-${dob.year}`;
   return (
     <div className="h-full min-h-[440px] px-[5rem] overflow-auto">
       <h1 className="font-cBold text-[2rem]">Create your account</h1>
@@ -18,7 +17,7 @@ const StepTwo = () => {
         <InputField label="Email" inputValue={email.enteredEmail} />
         <InputField
           label="Date of Birth"
-          inputValue={moment(userDob).format("MMM D, YYYY")}
+          inputValue={(moment(userDob, "MMMM DD, YYYY").format("MMM DD, YYYY"))}
         />
       </div>
       <div className="mt-10">

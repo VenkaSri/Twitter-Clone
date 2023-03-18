@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { resetActions } from "./reset-reducer";
 
 const dobInitialState = {
   month: "",
   day: "",
   year: "",
-  isDOBSet: false
+  isDOBSet: false,
+  shouldAutoFocus: false,
 }
 
 const dobSlice = createSlice({
@@ -22,7 +24,13 @@ const dobSlice = createSlice({
     },
     isDOBSet(state, action) {
       state.isDOBSet = action.payload;
+    },
+    setAutoFocus(state, action) {
+      state.shouldAutoFocus = action.payload;
     }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(resetActions.resetAll, () => dobInitialState);
   }
 });
 

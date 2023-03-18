@@ -5,16 +5,6 @@ import Card from "../../UI/Card";
 import FooterLinks from "./FooterLinks";
 
 const RightSideBar = () => {
-  let routes = useRoutes([
-    {
-      path: "/Twitter-Clone",
-      element: <FooterLinks />,
-    },
-    {
-      path: "/#",
-      element: <FooterLinks />,
-    },
-  ]);
   return (
     <div className="w-[21.875rem] mr-[0.625rem] mt-[0.75rem]">
       <Card>
@@ -34,7 +24,6 @@ const RightSideBar = () => {
           </p>
         </div>
       </Card>
-      {routes}
     </div>
   );
 };

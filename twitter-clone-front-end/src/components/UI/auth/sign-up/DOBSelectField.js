@@ -5,7 +5,6 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useDispatch, useSelector } from "react-redux";
 import { dobActions } from "../../../../state/auth/sign-up/dob-reducer";
 import { stepOneActions } from "../../../../state/auth/sign-up/stepone-reducer";
-import { hover } from "@testing-library/user-event/dist/hover";
 
 const DOBSelectField = (props) => {
   const dispatch = useDispatch();
@@ -26,6 +25,23 @@ const DOBSelectField = (props) => {
     }
   };
 
+  const currentValueHandler = () => {
+    switch (props.label) {
+      case "Month":
+        return dob.month;
+      case "Day":
+        return dob.day;
+      case "Year":
+        return dob.year;
+      default:
+        break;
+    }
+  };
+
+  const autoFocusHandler = () => {
+    if (props.label === "Month") return dob.shouldAutoFocus;
+  }
+
   useEffect(() => {
     if (dob.month !== "" && dob.day !== "" && dob.year !== "") {
       dispatch(stepOneActions.setDOBEntered(true));
@@ -33,43 +49,49 @@ const DOBSelectField = (props) => {
   }, [dob.month, dob.year, dob.day, dispatch]);
 
   return (
-    <FormControl variant="filled" sx={{
-      height: "58px",
-      borderRadius: "4px",
-      flexGrow: props.style.flexGrow,
-      width: props.style.width || 0,
-      marginRight: props.style.marginRight || 0,
-    }}>
+    <FormControl
+      variant="filled"
+      sx={{
+        bgcolor: "#fff",
+        "&.Mui-focused": {
+          bgcolor: "white",
+        },
+        height: "58px",
+        borderRadius: "4px",
+        flexGrow: props.style.flexGrow,
+        width: props.style.width || 0,
+        marginRight: props.style.marginRight || 0,
+      }}
+    >
       <InputLabel htmlFor="demo-simple-select-filled" shrink={true}>
-      {props.label}
+        {props.label}
       </InputLabel>
       <Select
         labelId="demo-simple-select-filled-label"
         id="demo-simple-select-filled"
         label={props.label}
         sx={{
-          bgcolor: "transparent",
+          backgroundColor: "#fff",
           border: "1px solid #cfd9de",
           borderRadius: "4px",
           "&.Mui-focused": {
             border: "2px solid #1d9bf0",
-            bgcolor: "transparent",
+            bgcolor: "white",
           },
           "&:hover": {
-            bgcolor: "transparent",
+            bgcolor: "white",
           },
-          "&:focus": {
-            bgcolor: "transparent",
-          },
-          
         }}
         defaultValue=""
+        value={currentValueHandler()}
         disableUnderline
         IconComponent={KeyboardArrowDownIcon}
         onChange={selectedValueHandler}
+        autoFocus = {autoFocusHandler()}
       >
         <MenuItem value="" disabled></MenuItem>
         {props.field}
+        
       </Select>
     </FormControl>
   );

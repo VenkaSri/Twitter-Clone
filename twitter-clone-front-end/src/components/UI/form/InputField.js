@@ -1,17 +1,38 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
 import { InputAdornment, TextField } from "@mui/material";
 import SVG from "../app/SVG";
 import { CONFIRMED_CHECKMARK } from "../../../utils/ButtonLinkObjects";
+import { useDispatch } from "react-redux";
+import { stepsActions } from "../../../state/auth/form/steps-reducer";
+import { nameActions } from "../../../state/auth/sign-up/name-reducer";
+import { emailActions } from "../../../state/auth/sign-up/email-reducer";
+import { dobActions } from "../../../state/auth/sign-up/dob-reducer";
 
 const InputField = (props) => {
-  
+  const dispatch = useDispatch();
+
+  const editFieldHandler = () => {
+    dispatch(stepsActions.setStepTwo(false));
+    switch(props.label) {
+      case "Name": 
+        dispatch(nameActions.setAutoFocus(true));
+        break;
+      case "Email": 
+        dispatch(emailActions.setAutoFocus(true));
+        break;
+      case "Date of Birth": 
+        dispatch(dobActions.setAutoFocus(true));
+        break;
+      default: 
+        break;
+    }
+  }
 
   return (
     <div className="flex flex-col grow">
       <TextField
-        name="name"
+        name={props.label}
         type="text"
         id="outlined-basic"
         label={props.label}
@@ -39,6 +60,7 @@ const InputField = (props) => {
             },
           },
         }}
+        onClick={editFieldHandler}
       />
     </div>
   );

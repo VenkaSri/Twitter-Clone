@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { resetActions } from "./reset-reducer";
 
 const stepOneInitialState = {
   isNameEntered: false,
@@ -20,6 +21,9 @@ const stepOneSlice = createSlice({
       state.isDOBEntered = action.payload;
     }
   },
+  extraReducers: (builder) => {
+    builder.addCase(resetActions.resetAll, () => stepOneInitialState);
+  }
 });
 
 export const stepOneActions = stepOneSlice.actions;
