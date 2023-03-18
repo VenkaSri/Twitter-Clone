@@ -8,15 +8,11 @@ import StepOne from "../../authentication/signup/stepone/StepOne";
 import StepsHeader from "../../authentication/signup/StepsHeader";
 import StepsFooter from "../../authentication/signup/StepsFooter";
 import StepTwo from "../../authentication/signup/stepone/StepTwo";
-import { useDispatch } from "react-redux";
-import { resetActions } from "../../../state/auth/sign-up/reset-reducer";
 
 const Layer = () => {
   const steps = useSelector((state) => state.steps);
-  const dispatch = useDispatch();
-  const stateResetHandler = () => {
-    dispatch(resetActions.resetAll());
-  };
+  const currentStep = useSelector(state => state.steps.currentStep);
+
   return (
     <div className="relative flex flex-col justify-center grow">
       <Routes>
@@ -29,7 +25,7 @@ const Layer = () => {
           path="/i/flow/signup"
           element={
             <FormDialog
-              steps={steps.stepTwo ? <StepTwo /> : <StepOne />}
+              steps={currentStep === 2 ? <StepTwo /> : <StepOne />}
               header={<StepsHeader />}
               footer={<StepsFooter />}
             />

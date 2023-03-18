@@ -5,8 +5,9 @@ import { stepsActions } from "../../../state/auth/form/steps-reducer";
 
 const StepsFooter = () => {
   const dispatch = useDispatch();
+  const currentStep = useSelector((state) => state.steps.currentStep);
   const nextStepHandler = () => {
-    dispatch(stepsActions.setStepTwo(true));
+    dispatch(stepsActions.setCurrentStep(currentStep + 1));
   };
   const stepOne = useSelector((state) => state.stepOne);
   const submitButtonClasses =
