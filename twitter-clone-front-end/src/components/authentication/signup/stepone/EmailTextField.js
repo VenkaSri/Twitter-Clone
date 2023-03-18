@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { emailActions } from "../../../../state/auth/sign-up/email-reducer";
 import { stepOneActions } from "../../../../state/auth/sign-up/stepone-reducer";
 import axios from "axios";
@@ -8,66 +7,52 @@ import { TextField } from "@mui/material";
 
 const BASE_URL = "http://localhost:8080/api/auth/emailOrPhone";
 
-const handleEmailValidation = (text) => {
-  return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(text);
-};
+const handleEmailValidation = (text) =>
+  /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(text);
 
-// if the users only enter spaces
-const onlySpaces = (text) => {
-  return !/[^\s\\]/.test(text);
-};
+const onlySpaces = (text) => !/[^\s\\]/.test(text);
 
 const EmailTextField = () => {
   const dispatch = useDispatch();
   const email = useSelector((state) => state.email);
-  const [isEmailInvalid, setIsNameInvalid] = useState(false);
-  const [isEmailUnavailable, setIsEmailUnavailable] = useState(false);
-  const callAPI = () => {
-    axios
-      .post(BASE_URL, {
-        emailOrPhoneNumber: email.enteredEmail.trim(),
-      })
-      .then((response) => {
-        if (response.data === "") {
-          setIsEmailUnavailable(false);
-          dispatch(stepOneActions.setEmailEntered(true));
-        } else {
-          setIsEmailUnavailable(true);
-          dispatch(stepOneActions.setEmailEntered(false));
-          dispatch(emailActions.setAPIResponse(response.data));
-        }
-      });
-  };
+  const [isInvalid, setIsInvalid] = useState(false);
+  const [isUnavailable, setIsUnavailable] = useState(false);
 
   useEffect(() => {
     const identifier = setTimeout(() => {
-      if (email.enteredEmail === "") setIsEmailUnavailable(false);
-      if (email.enteredEmail.length < 0 || onlySpaces(email.enteredEmail)) {
-        setIsNameInvalid(false);
+      if (!email.enteredEmail || onlySpaces(email.enteredEmail)) {
+        setIsInvalid(false);
         dispatch(stepOneActions.setEmailEntered(false));
-      } else {
-        if (handleEmailValidation(email.enteredEmail.trim())) {
-          callAPI();
-        } else {
-          setIsNameInvalid(true);
-          dispatch(stepOneActions.setEmailEntered(false));
-        }
+        return setIsUnavailable(false);
       }
+      if (!handleEmailValidation(email.enteredEmail.trim())) {
+        setIsInvalid(true);
+        dispatch(stepOneActions.setEmailEntered(false));
+        return setIsUnavailable(false);
+      }
+      axios
+        .post(BASE_URL, { emailOrPhoneNumber: email.enteredEmail.trim() })
+        .then((response) => {
+          setIsUnavailable(Boolean(response.data));
+          dispatch(stepOneActions.setEmailEntered(!response.data));
+          if (response.data) {
+            dispatch(emailActions.setAPIResponse(response.data));
+          }
+        });
     }, 500);
 
     return () => {
-      setIsNameInvalid(false);
+      setIsInvalid(false);
+      setIsUnavailable(false);
       clearTimeout(identifier);
     };
   }, [email.enteredEmail, dispatch]);
 
-  const emailInputClassess =
-    isEmailInvalid || isEmailUnavailable
-      ? "border border-[#ff0000] h-[3.688rem] group rounded-[4px] focus-within:border-2 focus-within:border-[#ff0000] !bg-[#fff] max-h-[3.688rem]"
-      : "border border-[#CFD9DE] h-[3.688rem] group rounded-[4px] focus-within:border-2 focus-within:border-[#1d9bf0] !bg-[#fff] max-h-[3.688rem]";
-
-  const emailInputLabelClasses =
-    isEmailInvalid || isEmailUnavailable ? "#ff0000" : "#1d9bf0";
+  const inputClass = `border border-[${
+    isInvalid || isUnavailable ? "#ff0000" : "#CFD9DE"
+  }] h-[3.688rem] group rounded-[4px] focus-within:border-2 focus-within:border-[${
+    isInvalid || isUnavailable ? "#ff0000" : "#1d9bf0"
+  }] !bg-[#fff] max-h-[3.688rem]`;
 
   return (
     <div className="flex flex-col grow">
@@ -75,31 +60,23 @@ const EmailTextField = () => {
         name="email"
         type="text"
         id="outlined-basic"
+        value={email.enteredEmail}
         label="Email"
         variant="filled"
-        InputProps={{
-          className: emailInputClassess,
-          disableUnderline: true,
-        }}
+        InputProps={{ className: inputClass, disableUnderline: true }}
         sx={{
-          "& label": {
-            "&.Mui-focused": {
-              color: emailInputLabelClasses,
-            },
+          "& label.Mui-focused": {
+            color: isInvalid || isUnavailable ? "#ff0000" : "#1d9bf0",
           },
         }}
-        onChange={(event) => {
-          dispatch(emailActions.setEmail(event.target.value));
-        }}
+        onChange={(event) =>
+          dispatch(emailActions.setEmail(event.target.value))
+        }
+        autoFocus={email.shouldAutoFocus}
       />
-      {isEmailInvalid && (
+      {(isInvalid || isUnavailable) && (
         <p className="font-cReg text-[14px] ml-2 text-[#ff0000]">
-          Please enter a valid email.
-        </p>
-      )}
-      {isEmailUnavailable && (
-        <p className="font-cReg text-[14px] ml-2 text-[#ff0000]">
-          {email.apiResponse}
+          {isInvalid ? "Please enter a valid email." : email.apiResponse}
         </p>
       )}
     </div>
