@@ -15,6 +15,8 @@ const StepsFooter = () => {
       ? "w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#000]"
       : "w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#86888b]";
 
+  const stepTwo = "bg-[#1D9BF0]  hover:bg-[#198CD8] text-[#fff] w-[440px] h-[52px] rounded-full font-cBold";
+
   const disable =
     stepOne.isEmailEntered && stepOne.isNameEntered && stepOne.isDOBEntered
       ? false
@@ -22,11 +24,11 @@ const StepsFooter = () => {
   return (
       <div className="h-[100px] max-h-[100px] bg-[#fff] flex items-center justify-center sticky bottom-0 z-50 grow">
         <button
-          className={submitButtonClasses}
+          className={currentStep === 2 ? stepTwo : submitButtonClasses}
           disabled={disable}
           onClick={nextStepHandler}
         >
-          Next
+          {currentStep === 2 ? "Sign Up" : "Next"}
         </button>
       </div>
 

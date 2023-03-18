@@ -20,16 +20,15 @@ const StepTwo = () => {
           inputValue={(moment(userDob, "MMMM DD, YYYY").format("MMM DD, YYYY"))}
         />
       </div>
-      <div className="mt-10">
-        <h3 className="font-cBold">Date of birth</h3>
-        <p className="text-[14px] font-cReg text-[#536471] mt-2">
-          By signing up, you agree to the Terms of Service and Privacy Policy,
-          including Cookie Use. Twitter may use your contact information,
+      <div className="mt-20">
+        <p className="text-[13px] font-cLight text-[#536471] leading-none">
+          By signing up, you agree to the <span className="text-[#1D9BF0]">Terms of Service</span> and <span className="text-[#1D9BF0]">Privay Policy</span>,
+          including <span className="text-[#1D9BF0]">Cookie use</span>. Twitter may use your contact information,
           including your email address and phone number for purposes outlined in
           our Privacy Policy, like keeping your account secure and personalizing
-          our services, including ads. Learn more. Others will be able to find
+          our services, including ads. <span className="text-[#1D9BF0]">Learn more</span>. Others will be able to find
           you by email or phone number, when provided, unless you choose
-          otherwise here.
+          otherwise <span className="text-[#1D9BF0]">here</span>.
         </p>
       </div>
     </div>

@@ -18,7 +18,7 @@ const FormDialog = (props) => {
         }}
       >
         <DialogTitle style={{ padding: 0 }}>{props.header}</DialogTitle>
-        <DialogContent style={{ padding: 0 }}>{props.steps}</DialogContent>
+        <DialogContent style={{ padding: 0, marginTop: 10 }}>{props.steps}</DialogContent>
         <DialogActions style={{ padding: 0, display: "flex" }}>
           {props.footer}
         </DialogActions>
