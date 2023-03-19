@@ -3,7 +3,7 @@ import React from "react";
 import { InputAdornment, TextField } from "@mui/material";
 import SVG from "../app/SVG";
 import { CONFIRMED_CHECKMARK } from "../../../utils/ButtonLinkObjects";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { stepsActions } from "../../../state/auth/form/steps-reducer";
 import { nameActions } from "../../../state/auth/sign-up/name-reducer";
 import { emailActions } from "../../../state/auth/sign-up/email-reducer";
@@ -11,7 +11,7 @@ import { dobActions } from "../../../state/auth/sign-up/dob-reducer";
 
 const InputField = (props) => {
   const dispatch = useDispatch();
-
+  const currentStep = useSelector((state) => state.steps.currentStep)
   const editFieldHandler = () => {
     dispatch(stepsActions.setStepTwo(false));
     switch(props.label) {
@@ -47,8 +47,8 @@ const InputField = (props) => {
           disableUnderline: true,
           endAdornment: (
             <InputAdornment position="end">
-              <div className="w-5 fill-[#00BA7C] mt-4">
-                <SVG svgPath={CONFIRMED_CHECKMARK} />
+              <div className={props.svg.style}>
+                <SVG svgPath={props.svg.path} />
               </div>
             </InputAdornment>
           ),
