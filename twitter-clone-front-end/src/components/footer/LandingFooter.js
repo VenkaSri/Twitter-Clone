@@ -25,8 +25,8 @@ const SignUp = {
 
 const LandingFooter = () => {
   return (
-    <div className="h-[4.5rem] w-screen bg-[#1D9BF0] flex justify-end  items-center absolute bottom-0 max-xl:justify-center">
-      <div className="flex w-[61.875rem] h-[3rem] justify-between border border-rose-500 mr-[25px]">
+    <div className="h-[4.5rem] w-screen bg-[#1D9BF0] flex justify-center  items-center absolute bottom-0 max-xl:justify-center">
+      <div className="flex w-[61.875rem] h-[3rem] justify-between mr-[25px]">
         <div className="text-white self-center">
           <p className="text-2xl font-cBold">
             Don&rsquo;t miss what&rsquo;s happening
