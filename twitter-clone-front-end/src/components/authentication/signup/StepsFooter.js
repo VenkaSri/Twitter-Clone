@@ -7,6 +7,7 @@ const StepsFooter = () => {
   const dispatch = useDispatch();
   const currentStep = useSelector((state) => state.steps.currentStep);
   const nextStepHandler = () => {
+    if (currentStep === 3) return;
     dispatch(stepsActions.setCurrentStep(currentStep + 1));
   };
   const stepOne = useSelector((state) => state.stepOne);
