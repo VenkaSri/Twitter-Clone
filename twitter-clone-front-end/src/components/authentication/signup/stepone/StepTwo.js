@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import InputField from "../../../UI/form/InputField";
+import { CONFIRMED_CHECKMARK } from "../../../../utils/ButtonLinkObjects";
 import moment from "moment";
 
 const StepTwo = () => {
@@ -13,12 +14,12 @@ const StepTwo = () => {
     <div className="h-full min-h-[440px] px-[5rem] overflow-auto">
       <h1 className="font-cBold text-[2rem]">Create your account</h1>
       <div className="flex flex-col gap-[25px] mt-6">
-        <InputField label="Name" inputValue={name.name} />
-        <InputField label="Email" inputValue={email.enteredEmail} />
+        <InputField label="Name" inputValue={name.name} svg={{path: CONFIRMED_CHECKMARK, style: "w-5 fill-[#00BA7C] mt-4"}}/>
+        <InputField label="Email" inputValue={email.enteredEmail} svg={{path: CONFIRMED_CHECKMARK, style: "w-5 fill-[#00BA7C] mt-4"}}/>
         <InputField
           label="Date of Birth"
           inputValue={(moment(userDob, "MMMM DD, YYYY").format("MMM DD, YYYY"))}
-        />
+          svg={{path: CONFIRMED_CHECKMARK, style: "w-5 fill-[#00BA7C] mt-4"}}/>
       </div>
       <div className="mt-20">
         <p className="text-[13px] font-cLight text-[#536471] leading-none">
