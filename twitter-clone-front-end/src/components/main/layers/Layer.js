@@ -8,9 +8,11 @@ import StepOne from "../../authentication/signup/stepone/StepOne";
 import StepsHeader from "../../authentication/signup/StepsHeader";
 import StepsFooter from "../../authentication/signup/StepsFooter";
 import StepTwo from "../../authentication/signup/stepone/StepTwo";
+import FinalStep from "../../authentication/signup/FinalStep";
+
+const stepsContent = [<StepOne />, <StepTwo />, <FinalStep />]
 
 const Layer = () => {
-  const steps = useSelector((state) => state.steps);
   const currentStep = useSelector(state => state.steps.currentStep);
 
   return (
@@ -25,7 +27,7 @@ const Layer = () => {
           path="/i/flow/signup"
           element={
             <FormDialog
-              steps={currentStep === 2 ? <StepTwo /> : <StepOne />}
+            steps={stepsContent[currentStep - 1]} 
               header={<StepsHeader />}
               footer={<StepsFooter />}
             />
