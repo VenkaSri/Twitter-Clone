@@ -33,8 +33,12 @@ const EmailTextField = () => {
       axios
         .post(BASE_URL, { emailOrPhoneNumber: email.enteredEmail.trim() })
         .then((response) => {
+          console.log(response.data.status)
           if (response.data.status === 409) {
+            dispatch(stepOneActions.setEmailEntered(false));
             setIsUnavailable(true);
+          } else {
+            dispatch(stepOneActions.setEmailEntered(true));
           }
         });
     }, 500);

@@ -2,12 +2,20 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { stepsActions } from "../../../state/auth/form/steps-reducer";
+import { dobActions } from "../../../state/auth/sign-up/dob-reducer";
+import { emailActions } from "../../../state/auth/sign-up/email-reducer";
+import { nameActions } from "../../../state/auth/sign-up/name-reducer";
 
 const StepsFooter = () => {
   const dispatch = useDispatch();
   const currentStep = useSelector((state) => state.steps.currentStep);
   const nextStepHandler = () => {
     if (currentStep === 3) return;
+    if (currentStep === 1) {
+      dispatch(nameActions.setAutoFocus(false));
+      dispatch(dobActions.setAutoFocus(false));
+      dispatch(emailActions.setAutoFocus(false));
+    }
     dispatch(stepsActions.setCurrentStep(currentStep + 1));
   };
   const stepOne = useSelector((state) => state.stepOne);

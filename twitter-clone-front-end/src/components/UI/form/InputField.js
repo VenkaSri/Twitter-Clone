@@ -13,7 +13,7 @@ const InputField = (props) => {
   const dispatch = useDispatch();
   const currentStep = useSelector((state) => state.steps.currentStep)
   const editFieldHandler = () => {
-    dispatch(stepsActions.setStepTwo(false));
+    dispatch(stepsActions.setCurrentStep(currentStep - 1));
     switch(props.label) {
       case "Name": 
         dispatch(nameActions.setAutoFocus(true));
@@ -60,7 +60,7 @@ const InputField = (props) => {
             },
           },
         }}
-        onClick={editFieldHandler}
+        onClick={currentStep === 2 ? editFieldHandler : null}
       />
     </div>
   );
