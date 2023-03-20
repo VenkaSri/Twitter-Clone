@@ -7,6 +7,7 @@ import ca.venkasritharan.twitterclone.entity.authentication.Role;
 import ca.venkasritharan.twitterclone.entity.authentication.User;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import ca.venkasritharan.twitterclone.service.AuthenticationService;
+import ca.venkasritharan.twitterclone.util.response.Response;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,16 +56,20 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   }
 
   @Override
-  public String validateEmailOrPhone(ValidateEmailOrPhoneDTO validateEmailOrPhoneDTO) {
-
-    if (userRepository.existsByPhoneNumber(validateEmailOrPhoneDTO.getEmailOrPhoneNumber())) {
-      return "An account with number already exists";
+  public Response<String> validateEmailOrPhone(ValidateEmailOrPhoneDTO validateEmailOrPhoneDTO) {
+    try {
+      if (userRepository.existsByPhoneNumber(validateEmailOrPhoneDTO.getEmailOrPhoneNumber())) {
+        return new Response<>(409, "An account with that phone number already exists");
+      }
+      if (userRepository.existsByEmail(validateEmailOrPhoneDTO.getEmailOrPhoneNumber())) {
+        return new Response<>(409, "An account with that email already exists");
+      }
+      return new Response<>(200, "Validation successful");
+    } catch (Exception e) {
+      return new Response<>(500, "An error occurred while validating email or phone number");
     }
-    if (userRepository.existsByEmail(validateEmailOrPhoneDTO.getEmailOrPhoneNumber())) {
-      return "Email has already been taken.";
-    }
-    return "";
   }
+
 
   private void checkIfAccountExistsWith(String phoneNumber, String email) {
     if (userRepository.existsByPhoneNumber(phoneNumber)) {

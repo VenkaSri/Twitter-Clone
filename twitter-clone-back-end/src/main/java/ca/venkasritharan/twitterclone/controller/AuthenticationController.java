@@ -4,6 +4,7 @@ import ca.venkasritharan.twitterclone.dto.LoginDTO;
 import ca.venkasritharan.twitterclone.dto.RegisterDTO;
 import ca.venkasritharan.twitterclone.dto.ValidateEmailOrPhoneDTO;
 import ca.venkasritharan.twitterclone.service.AuthenticationService;
+import ca.venkasritharan.twitterclone.util.response.Response;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,9 +34,9 @@ public class AuthenticationController {
   }
 
   @PostMapping("/emailOrPhone")
-  public String validateEmailOrPhone(@RequestBody ValidateEmailOrPhoneDTO validateEmailOrPhoneDTO) {
-    String response = authenticationService.validateEmailOrPhone(validateEmailOrPhoneDTO);
-    return response;
+  public Response<String> validateEmailOrPhone(@RequestBody ValidateEmailOrPhoneDTO validateEmailOrPhoneDTO) {
+
+    return authenticationService.validateEmailOrPhone(validateEmailOrPhoneDTO);
   }
 
 }

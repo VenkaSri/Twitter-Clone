@@ -1,4 +1,4 @@
-package ca.venkasritharan.twitterclone.dto;
+package ca.venkasritharan.twitterclone.util.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ValidateEmailOrPhoneDTO {
-  private String emailOrPhoneNumber;
-
+public class Response<T> {
+  private int status;
+  private String message;
 }
