@@ -33,10 +33,8 @@ const EmailTextField = () => {
       axios
         .post(BASE_URL, { emailOrPhoneNumber: email.enteredEmail.trim() })
         .then((response) => {
-          setIsUnavailable(Boolean(response.data));
-          dispatch(stepOneActions.setEmailEntered(!response.data));
-          if (response.data) {
-            dispatch(emailActions.setAPIResponse(response.data));
+          if (response.data.status === 409) {
+            setIsUnavailable(true);
           }
         });
     }, 500);
@@ -76,7 +74,7 @@ const EmailTextField = () => {
       />
       {(isInvalid || isUnavailable) && (
         <p className="font-cReg text-[14px] ml-2 text-[#ff0000]">
-          {isInvalid ? "Please enter a valid email." : email.apiResponse}
+          {isInvalid ? "Please enter a valid email." : "Email has already been taken."}
         </p>
       )}
     </div>

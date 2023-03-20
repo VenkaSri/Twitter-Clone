@@ -3,7 +3,6 @@ import { resetActions } from "./reset-reducer";
 
 const emailInitialState = {
   enteredEmail: "",
-  apiResponse: "",
   isValid: false,
   isAvailable: false,
   hasOnlySpaces: true,
@@ -17,9 +16,6 @@ const emailSlice = createSlice({
   reducers: {
     setEmail(state, action) {
       state.enteredEmail = action.payload;
-    },
-    setAPIResponse(state, action) {
-      state.apiResponse = action.payload;
     },
     isEmailValid(state, action) {
       state.isValid = action.payload;
