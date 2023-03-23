@@ -26,6 +26,8 @@ const StepsFooter = () => {
 
   const stepTwo = "bg-[#1D9BF0]  hover:bg-[#198CD8] text-[#fff] w-[440px] h-[52px] rounded-full font-cBold";
 
+  
+
   const disable =
     stepOne.isEmailEntered && stepOne.isNameEntered && stepOne.isDOBEntered
       ? false

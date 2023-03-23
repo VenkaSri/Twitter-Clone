@@ -11,13 +11,14 @@ import { passwordActions } from "../../../state/auth/sign-up/password-reducer";
 
 const handlePasswordLengthValidation = (text) => /^.{8,}$/.test(text);
 
-const handlePasswordStrengthValidation = (text) => /^.{8,}$/.test(text);
+const handlePasswordStrengthValidation = (text) => /^(.)\1*$/.test(text);
 
 const FinalStep = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isInValid, setIsInValid] = useState(false);
   const password = useSelector((state) => state.password);
   const [hasAnyValue, setHasAnyValue] = useState(false);
+  const [isNotStrong, setIsNotStrong] = useState(false);
   const dispatch = useDispatch();
 
   const togglePasswordVisibility = () => {
@@ -25,14 +26,21 @@ const FinalStep = () => {
   };
 
   useEffect(() => {
-    if (!handlePasswordLengthValidation(password.enteredPassword)) {
-      console.log("invalid");
-      setIsInValid(true);
-    } else {
-      console.log("valid");
-      setIsInValid(false);
+    if (hasAnyValue) {
+      if (!handlePasswordLengthValidation(password.enteredPassword)) {
+        setIsInValid(true);
+        setIsNotStrong(false);
+      } else {
+        if (handlePasswordStrengthValidation(password.enteredPassword)) {
+          setIsNotStrong(true);
+          setIsInValid(false);
+        } else {
+          setIsNotStrong(false);
+          setIsInValid(false);
+        }
+      }
     }
-  }, [password.enteredPassword]);
+  }, [password.enteredPassword, hasAnyValue]);
 
   return (
     <div className="h-full min-h-[224px] h-[224px] px-[5rem] flex flex-col">
@@ -47,9 +55,13 @@ const FinalStep = () => {
             height: "60px",
             paddingLeft: "8px",
             paddingTop: "8px",
-            border: "1px solid #CFD9DE",
+            borderStyle: "solid",
+            borderWidth: 1,
+            borderColor: isInValid || isNotStrong ? "#FF0000" : "#CFD9DE",
             "&:focus-within": {
-              border: "2px solid #1d9bf0",
+              borderStyle: "solid",
+              borderWidth: 2,
+              borderColor: isInValid || isNotStrong ? "#FF0000" : "#1d9bf0",
             },
             borderRadius: "4px",
           }}
@@ -61,7 +73,7 @@ const FinalStep = () => {
             sx={{
               fontSize: "17px",
               "&.Mui-focused": {
-                color: "#1d9bf0",
+                color: isInValid || isNotStrong ? "#FF0000" : "#1d9bf0",
               },
             }}
           >
@@ -96,6 +108,11 @@ const FinalStep = () => {
             {isInValid
               ? "Your password needs to be at least 8 characters. Please enter a longer one."
               : ""}
+          </p>
+        )}
+        {hasAnyValue && (
+          <p className="font-cReg text-[14px] ml-2 text-[#ff0000]">
+            {isNotStrong ? "Please enter a stronger password." : ""}
           </p>
         )}
       </div>
