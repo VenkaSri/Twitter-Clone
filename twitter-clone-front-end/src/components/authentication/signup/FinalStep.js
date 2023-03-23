@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { FormControl, Input, InputAdornment, InputLabel } from "@mui/material";
 import {
@@ -6,13 +6,33 @@ import {
   HIDE_PASSWORD,
 } from "../../../utils/ButtonLinkObjects";
 import SVG from "../../UI/app/SVG";
+import { useDispatch, useSelector } from "react-redux";
+import { passwordActions } from "../../../state/auth/sign-up/password-reducer";
+
+const handlePasswordLengthValidation = (text) => /^.{8,}$/.test(text);
+
+const handlePasswordStrengthValidation = (text) => /^.{8,}$/.test(text);
 
 const FinalStep = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isInValid, setIsInValid] = useState(false);
+  const password = useSelector((state) => state.password);
+  const [hasAnyValue, setHasAnyValue] = useState(false);
+  const dispatch = useDispatch();
 
   const togglePasswordVisibility = () => {
     setShowPassword((show) => !show);
   };
+
+  useEffect(() => {
+    if (!handlePasswordLengthValidation(password.enteredPassword)) {
+      console.log("invalid");
+      setIsInValid(true);
+    } else {
+      console.log("valid");
+      setIsInValid(false);
+    }
+  }, [password.enteredPassword]);
 
   return (
     <div className="h-full min-h-[224px] h-[224px] px-[5rem] flex flex-col">
@@ -65,8 +85,19 @@ const FinalStep = () => {
                 </div>
               </InputAdornment>
             }
+            onChange={(e) => {
+              dispatch(passwordActions.setEnteredPassword(e.target.value));
+              setHasAnyValue(true);
+            }}
           />
         </FormControl>
+        {hasAnyValue && (
+          <p className="font-cReg text-[14px] ml-2 text-[#ff0000]">
+            {isInValid
+              ? "Your password needs to be at least 8 characters. Please enter a longer one."
+              : ""}
+          </p>
+        )}
       </div>
     </div>
   );
