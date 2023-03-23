@@ -27,7 +27,7 @@ const Layer = () => {
           path="/i/flow/signup"
           element={
             <FormDialog
-            steps={<FinalStep />} 
+            steps={stepsContent[currentStep - 1]} 
               header={<StepsHeader />}
               footer={<StepsFooter />}
             />

@@ -5,6 +5,7 @@ const stepOneInitialState = {
   isNameEntered: false,
   isEmailEntered: false,
   isDOBEntered: false,
+  isPasswordEntered: false
 };
 
 const stepOneSlice = createSlice({
@@ -19,7 +20,7 @@ const stepOneSlice = createSlice({
     },
     setDOBEntered(state, action) {
       state.isDOBEntered = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(resetActions.resetAll, () => stepOneInitialState);

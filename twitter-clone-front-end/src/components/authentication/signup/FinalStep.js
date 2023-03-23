@@ -30,17 +30,20 @@ const FinalStep = () => {
       if (!handlePasswordLengthValidation(password.enteredPassword)) {
         setIsInValid(true);
         setIsNotStrong(false);
+        dispatch(passwordActions.setPasswordValidity(false));
       } else {
         if (handlePasswordStrengthValidation(password.enteredPassword)) {
           setIsNotStrong(true);
           setIsInValid(false);
+          dispatch(passwordActions.setPasswordValidity(false));
         } else {
           setIsNotStrong(false);
           setIsInValid(false);
+          dispatch(passwordActions.setPasswordValidity(true));
         }
       }
     }
-  }, [password.enteredPassword, hasAnyValue]);
+  }, [password.enteredPassword, hasAnyValue, dispatch]);
 
   return (
     <div className="h-full min-h-[224px] h-[224px] px-[5rem] flex flex-col">
@@ -48,7 +51,7 @@ const FinalStep = () => {
         <h1 className="font-cBold text-[2rem]">You'll need a password</h1>
         <p>Make sure it's 8 characters or more.</p>
       </div>
-      <div>
+      <div className="mt-4">
         <FormControl
           sx={{
             width: "100%",

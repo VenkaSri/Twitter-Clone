@@ -1,11 +1,23 @@
 import React from "react";
 
 import Dialog from "@mui/material/Dialog";
-import { DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import { createTheme, DialogActions, DialogContent, DialogTitle, ThemeProvider } from "@mui/material";
+;
+
+const theme = createTheme({
+  components: {
+    MuiBackdrop: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "rgba(0,0,0,0.4)",
+        },
+      },
+    },
+  }}) 
 
 const FormDialog = (props) => {
   return (
-    <div>
+    <ThemeProvider theme={theme} >
       <Dialog
         open={true}
         PaperProps={{
@@ -14,8 +26,11 @@ const FormDialog = (props) => {
             height: "650px",
             borderRadius: "20px",
             display: "flex",
+            boxShadow: "none",
+            
           },
         }}
+        
       >
         <DialogTitle style={{ padding: 0 }}>{props.header}</DialogTitle>
         <DialogContent style={{ padding: 0, marginTop: 10 }}>{props.steps}</DialogContent>
@@ -23,7 +38,7 @@ const FormDialog = (props) => {
           {props.footer}
         </DialogActions>
       </Dialog>
-    </div>
+      </ThemeProvider>
   );
 };
 

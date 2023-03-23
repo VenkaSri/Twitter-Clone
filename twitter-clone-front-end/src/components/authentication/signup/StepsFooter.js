@@ -19,30 +19,62 @@ const StepsFooter = () => {
     dispatch(stepsActions.setCurrentStep(currentStep + 1));
   };
   const stepOne = useSelector((state) => state.stepOne);
-  const submitButtonClasses =
-    stepOne.isEmailEntered && stepOne.isNameEntered && stepOne.isDOBEntered
-      ? "w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#000]"
-      : "w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#86888b]";
+  const password = useSelector((state) => state.password);
 
-  const stepTwo = "bg-[#1D9BF0]  hover:bg-[#198CD8] text-[#fff] w-[440px] h-[52px] rounded-full font-cBold";
+  const disableHandler = () => {
+    switch (currentStep) {
+      case 1:
+        return stepOne.isEmailEntered &&
+          stepOne.isNameEntered &&
+          stepOne.isDOBEntered
+          ? false
+          : true;
+      case 2:
+        return stepOne.isEmailEntered &&
+          stepOne.isNameEntered &&
+          stepOne.isDOBEntered
+          ? false
+          : true;
+      case 3:
+        return password.isPasswordValid ? false : true;
+      default:
+        break;
+    }
+  };
 
-  
+  const enableClassHandler = () => {
+    switch (currentStep) {
+      case 1:
+        return stepOne.isEmailEntered &&
+          stepOne.isNameEntered &&
+          stepOne.isDOBEntered
+          ? "w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#000] hover:bg-[#272c30]"
+          : "w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#86888b]";
+      case 2:
+        return stepOne.isEmailEntered &&
+          stepOne.isNameEntered &&
+          stepOne.isDOBEntered
+          ? "w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#1D9BF0] hover:bg-[#198CD8]"
+          : "bg-[#1D9BF0] hover:bg-[#198CD8] text-[#fff] w-[440px] h-[52px] rounded-full font-cBold";
+      case 3:
+        return password.isPasswordValid
+          ? "w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#000] hover:bg-[#272c30]"
+          : "w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#86888b]";
+      default:
+        break;
+    }
+  };
 
-  const disable =
-    stepOne.isEmailEntered && stepOne.isNameEntered && stepOne.isDOBEntered
-      ? false
-      : true;
   return (
-      <div className="h-[100px] max-h-[100px] bg-[#fff] flex items-center justify-center sticky bottom-0 z-50 grow">
-        <button
-          className={currentStep === 2 ? stepTwo : submitButtonClasses}
-          disabled={disable}
-          onClick={nextStepHandler}
-        >
-          {currentStep === 2 ? "Sign Up" : "Next"}
-        </button>
-      </div>
-
+    <div className="h-[100px] max-h-[100px] bg-[#fff] flex items-center justify-center sticky bottom-0 z-50 grow">
+      <button
+        className={enableClassHandler(currentStep)}
+        disabled={disableHandler(currentStep)}
+        onClick={nextStepHandler}
+      >
+        {currentStep === 2 ? "Sign Up" : "Next"}
+      </button>
+    </div>
   );
 };
 
