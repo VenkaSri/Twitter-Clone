@@ -9,7 +9,7 @@ import { stepsActions } from "../../../state/auth/form/steps-reducer";
 
 const StepsHeader = () => {
   const dispatch = useDispatch();
-  const currentStep = useSelector((state) => state.steps.currentStep);
+  const currentStep = useSelector(state => state.rootReducer.signUp.steps.currentStep);
   const handleReset = () => {
     dispatch(resetActions.resetAll());
   };

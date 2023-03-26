@@ -14,7 +14,7 @@ const onlySpaces = (text) => !/[^\s\\]/.test(text);
 
 const EmailTextField = () => {
   const dispatch = useDispatch();
-  const email = useSelector((state) => state.email);
+  const email = useSelector((state) => state.rootReducer.signUp.email);
   const [isInvalid, setIsInvalid] = useState(false);
   const [isUnavailable, setIsUnavailable] = useState(false);
 
@@ -77,7 +77,9 @@ const EmailTextField = () => {
       />
       {(isInvalid || isUnavailable) && (
         <p className="font-cReg text-[14px] ml-2 text-[#ff0000]">
-          {isInvalid ? "Please enter a valid email." : "Email has already been taken."}
+          {isInvalid
+            ? "Please enter a valid email."
+            : "Email has already been taken."}
         </p>
       )}
     </div>

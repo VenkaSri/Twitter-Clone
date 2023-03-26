@@ -13,7 +13,7 @@ import FinalStep from "../../authentication/signup/FinalStep";
 const stepsContent = [<StepOne />, <StepTwo />, <FinalStep />]
 
 const Layer = () => {
-  const currentStep = useSelector(state => state.steps.currentStep);
+  const currentStep = useSelector(state => state.rootReducer.signUp.steps.currentStep);
 
   return (
     <div className="relative flex flex-col justify-center grow">
@@ -41,5 +41,3 @@ const Layer = () => {
 
 export default Layer;
 
-
- // stepsContent[currentStep - 1]

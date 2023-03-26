@@ -8,7 +8,7 @@ import { stepOneActions } from "../../../../state/auth/sign-up/stepone-reducer";
 
 const DOBSelectField = (props) => {
   const dispatch = useDispatch();
-  const dob = useSelector((state) => state.dob);
+  const dob = useSelector((state) => state.rootReducer.signUp.dob);
   const selectedValueHandler = (event) => {
     switch (props.label) {
       case "Month":

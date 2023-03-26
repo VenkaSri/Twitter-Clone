@@ -2,7 +2,6 @@ import React from "react";
 
 import { InputAdornment, TextField } from "@mui/material";
 import SVG from "../app/SVG";
-import { CONFIRMED_CHECKMARK } from "../../../utils/ButtonLinkObjects";
 import { useDispatch, useSelector } from "react-redux";
 import { stepsActions } from "../../../state/auth/form/steps-reducer";
 import { nameActions } from "../../../state/auth/sign-up/name-reducer";
@@ -11,7 +10,7 @@ import { dobActions } from "../../../state/auth/sign-up/dob-reducer";
 
 const InputField = (props) => {
   const dispatch = useDispatch();
-  const currentStep = useSelector((state) => state.steps.currentStep)
+  const currentStep = useSelector((state) => state.rootReducer.signUp.steps.currentStep)
   const editFieldHandler = () => {
     dispatch(stepsActions.setCurrentStep(currentStep - 1));
     switch(props.label) {

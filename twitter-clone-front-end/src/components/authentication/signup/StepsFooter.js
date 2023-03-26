@@ -8,7 +8,12 @@ import { nameActions } from "../../../state/auth/sign-up/name-reducer";
 
 const StepsFooter = () => {
   const dispatch = useDispatch();
-  const currentStep = useSelector((state) => state.steps.currentStep);
+  const {
+    stepOne,
+    password,
+    steps: { currentStep },
+  } = useSelector((state) => state.rootReducer.signUp);
+
   const nextStepHandler = () => {
     if (currentStep === 3) return;
     if (currentStep === 1) {
@@ -18,10 +23,8 @@ const StepsFooter = () => {
     }
     dispatch(stepsActions.setCurrentStep(currentStep + 1));
   };
-  const stepOne = useSelector((state) => state.stepOne);
-  const password = useSelector((state) => state.password);
 
-  const disableHandler = () => {
+  const disableHandler = (currentStep) => {
     switch (currentStep) {
       case 1:
         return stepOne.isEmailEntered &&
@@ -42,7 +45,7 @@ const StepsFooter = () => {
     }
   };
 
-  const enableClassHandler = () => {
+  const enableClassHandler = (currentStep) => {
     switch (currentStep) {
       case 1:
         return stepOne.isEmailEntered &&

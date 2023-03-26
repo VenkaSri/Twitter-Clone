@@ -30,5 +30,8 @@ const nameSlice = createSlice({
   }
 });
 
+
 export const nameActions = nameSlice.actions;
 export default nameSlice.reducer;
+
+

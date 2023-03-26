@@ -6,10 +6,9 @@ import { CONFIRMED_CHECKMARK } from "../../../../utils/ButtonLinkObjects";
 import moment from "moment";
 
 const StepTwo = () => {
-  const name = useSelector((state) => state.name);
-  const email = useSelector((state) => state.email);
-  const dob = useSelector((state) => state.dob);
+  const { name, email, dob } = useSelector((state) => state.rootReducer.signUp);
   const userDob = `${dob.month}-${dob.day}-${dob.year}`;
+  
   return (
     <div className="h-full min-h-[440px] px-[5rem] overflow-auto">
       <h1 className="font-cBold text-[2rem]">Create your account</h1>

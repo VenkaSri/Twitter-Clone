@@ -8,7 +8,7 @@ const onlySpaces = (text) => !/[^\s\\]/.test(text);
 
 const NameInputField = () => {
   const dispatch = useDispatch();
-  const name = useSelector((state) => state.name);
+  const name = useSelector(state => state.rootReducer.signUp.name);
   const [isNameValid, setIsNameValid] = useState(false);
   const nameInputClassess = `border border-[${
     isNameValid ? "#ff0000" : "#CFD9DE"

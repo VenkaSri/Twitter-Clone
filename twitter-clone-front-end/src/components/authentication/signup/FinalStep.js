@@ -16,7 +16,7 @@ const handlePasswordStrengthValidation = (text) => /^(.)\1*$/.test(text);
 const FinalStep = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isInValid, setIsInValid] = useState(false);
-  const password = useSelector((state) => state.password);
+  const password = useSelector((state) => state.rootReducer.signUp.password);
   const [hasAnyValue, setHasAnyValue] = useState(false);
   const [isNotStrong, setIsNotStrong] = useState(false);
   const dispatch = useDispatch();
