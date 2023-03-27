@@ -15,12 +15,14 @@ const StepsFooter = () => {
   } = useSelector((state) => state.rootReducer.signUp);
 
   const nextStepHandler = () => {
-    if (currentStep === 3) return;
+    if (currentStep === 4) return;
+    if (currentStep === 3) dispatch(stepsActions.setCurrentStep(currentStep + 1));
     if (currentStep === 1) {
       dispatch(nameActions.setAutoFocus(false));
       dispatch(dobActions.setAutoFocus(false));
       dispatch(emailActions.setAutoFocus(false));
     }
+
     dispatch(stepsActions.setCurrentStep(currentStep + 1));
   };
 
@@ -39,6 +41,7 @@ const StepsFooter = () => {
           ? false
           : true;
       case 3:
+
         return password.isPasswordValid ? false : true;
       default:
         break;

@@ -9,8 +9,9 @@ import StepsHeader from "../../authentication/signup/StepsHeader";
 import StepsFooter from "../../authentication/signup/StepsFooter";
 import StepTwo from "../../authentication/signup/stepone/StepTwo";
 import FinalStep from "../../authentication/signup/FinalStep";
+import ProfilePicture from "../../authentication/signup/ProfilePicture";
 
-const stepsContent = [<StepOne />, <StepTwo />, <FinalStep />]
+const stepsContent = [<StepOne />, <StepTwo />, <FinalStep />, <ProfilePicture />]
 
 const Layer = () => {
   const currentStep = useSelector(state => state.rootReducer.signUp.steps.currentStep);
@@ -34,7 +35,7 @@ const Layer = () => {
           }
         />
       </Routes>
-      <LandingFooter />
+      {currentStep === 4 ? null : <LandingFooter /> }
     </div>
   );
 };
