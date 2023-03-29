@@ -28,10 +28,16 @@ public class AuthenticationController {
   }
 
   @PostMapping(value = {"/register", "/signup"})
-  public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO) {
-    String response = authenticationService.register(registerDTO);
-    return new ResponseEntity<>(response, HttpStatus.CREATED);
+  public Response<String> register(@RequestBody RegisterDTO registerDTO) {
+   return authenticationService.register(registerDTO);
+
   }
+
+//  @PostMapping(value = {"/sign-up"})
+//  public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO) {
+//    String response = authenticationService.register(registerDTO);
+//    return new ResponseEntity<>(response, HttpStatus.CREATED);
+//  }
 
   @PostMapping("/emailOrPhone")
   public Response<String> validateEmailOrPhone(@RequestBody ValidateEmailOrPhoneDTO validateEmailOrPhoneDTO) {

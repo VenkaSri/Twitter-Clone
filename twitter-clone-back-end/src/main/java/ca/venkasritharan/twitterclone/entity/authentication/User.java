@@ -21,14 +21,10 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-  @Column(nullable = false, unique = true)
   private String username;
-  @Column(nullable = false)
   private String password;
   private String name;
-  @Column(unique = true)
   private String email;
-  @Column(unique = true)
   private String phoneNumber;
   private Long tweetCount;
   private Long followerCount;

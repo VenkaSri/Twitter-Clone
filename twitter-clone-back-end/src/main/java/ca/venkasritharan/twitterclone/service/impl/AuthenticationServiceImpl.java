@@ -46,13 +46,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   }
 
   @Override
-  public String register(RegisterDTO registerDTO) {
+  public Response<String>  register(RegisterDTO registerDTO) {
     checkIfAccountExistsWith(registerDTO.getPhoneNumber(), registerDTO.getEmail());
     User user = mapNewUserEntity(registerDTO);
     mapNewUserRoleEntity(user);
     userRepository.save(user);
 
-    return "User registered successfully";
+    return new Response<>(200, "Validation successful");
   }
 
   @Override
@@ -71,12 +71,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   }
 
 
-  private void checkIfAccountExistsWith(String phoneNumber, String email) {
-    if (userRepository.existsByPhoneNumber(phoneNumber)) {
-      System.out.println("exists");
-    }
-    if (userRepository.existsByEmail(email)) {
-      System.out.println("exists");
+  private Response<String> checkIfAccountExistsWith(String phoneNumber, String email) {
+    try {
+      if (userRepository.existsByPhoneNumber(phoneNumber)) {
+        return new Response<>(409, "An account with that phone number already exists.");
+      }
+      if (userRepository.existsByEmail(email)) {
+        System.out.println("An account with that email already exists.");
+        return new Response<>(409, "An account with that email already exists.");
+      }
+      return new Response<>(200, "User Successfully Registered");
+    } catch (Exception e) {
+      return new Response<>(500, "An error occurred while signing up.");
     }
   }
 
@@ -86,9 +92,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     user.setName(registerDTO.getName());
     user.setPhoneNumber(registerDTO.getPhoneNumber());
     user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
-    user.setUsername(registerDTO.getUsername());
+//    user.setUsername(registerDTO.getUsername());
     return userRepository.save(user);
   }
+
+  private String generateUsername() {
+
+    return "";
+  }
+
+  
+
+
 
   private void mapNewUserRoleEntity(User user) {
     Set<Role> roles = new HashSet<>();
