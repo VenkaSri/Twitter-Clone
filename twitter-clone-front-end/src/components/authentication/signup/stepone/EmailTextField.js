@@ -44,6 +44,7 @@ const EmailTextField = () => {
 
     return () => {
       setIsInvalid(false);
+      dispatch(stepOneActions.setEmailEntered(false)); 
       setIsUnavailable(false);
       clearTimeout(identifier);
     };
