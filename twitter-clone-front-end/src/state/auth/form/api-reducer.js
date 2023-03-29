@@ -2,15 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 import { resetActions } from "../sign-up/reset-reducer";
 
 const initialState = {
-  currentStep: 3,
+  loading: true,
 };
 
-const stepsSlice = createSlice({
-  name: "steps",
+const apiSlice = createSlice({
+  name: "registerApi",
   initialState,
   reducers: {
-    setCurrentStep(state, action) {
-      state.currentStep = action.payload;
+    setLoading(state, action) {
+      state.loading = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -18,5 +18,5 @@ const stepsSlice = createSlice({
   },
 });
 
-export const stepsActions = stepsSlice.actions;
-export default stepsSlice.reducer;
+export const apiActions = apiSlice.actions;
+export default apiSlice.reducer;

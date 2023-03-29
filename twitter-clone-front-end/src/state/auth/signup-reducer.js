@@ -6,6 +6,7 @@ import dobReducer from "./sign-up/dob-reducer";
 import steponeReducer from "./sign-up/stepone-reducer";
 import stepsReducer from "./form/steps-reducer";
 import passwordReducer from "./sign-up/password-reducer";
+import apiReducer from "./form/api-reducer";
 
 const signUpReducer = combineReducers({
   name: nameReducer,
@@ -14,6 +15,7 @@ const signUpReducer = combineReducers({
   stepOne: steponeReducer,
   steps: stepsReducer,
   password: passwordReducer,
+  api: apiReducer
 });
 
 export default signUpReducer;

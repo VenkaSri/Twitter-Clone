@@ -8,7 +8,7 @@ const ProfilePicture = () => {
     <div className="h-full min-h-[440px] px-[5rem] ">
       <h1 className="font-cBold text-[2rem]">Pick a profile picture</h1>
       <p className="text-[13px] font-cLight text-[#536471] leading-none">Have a favorite selfie? Upload it now.</p>
-      <div>
+      <div className='w-full h-[330px] flex justify-center items-center'>
         <div className='w-[184px] h-[184px]'>
           <img  src={DEFAULT_PROFILE_PICTURE} className="rounded-full "/>
         </div>
