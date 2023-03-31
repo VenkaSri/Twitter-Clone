@@ -18,10 +18,10 @@ const StepsFooter = () => {
 
   const register = () => {
     var data = JSON.stringify({
-      name: "hfasdf",
-      // dob: (moment(userDob, "YYYY-MMMM-DD").format("YYYY-MM-DD")),
+      name: name.name,
+      dob: (moment(userDob, "YYYY-MMMM-DD").format("YYYY-MM-DD")),
       password: password.enteredPassword,
-      email: "fasdf@gmail.com",
+      email: email.enteredEmail,
     });
 
     var config = {
@@ -36,13 +36,25 @@ const StepsFooter = () => {
     dispatch(apiActions.setLoading(false));
     axios(config)
       .then(function (response) {
-        dispatch(stepsActions.setCurrentStep(currentStep + 1));
-        dispatch(apiActions.setLoading(true));
+        getNameAndUsername(email.enteredEmail);
       })
       .catch(function (error) {
         console.log(error);
       });
   };
+
+  const getNameAndUsername = (email) => {
+    console.log(email)
+    axios.get(`http://localhost:8080/api/user/username/${email}`)
+    .then((response) => {
+      dispatch(stepsActions.setCurrentStep(currentStep + 1));
+        dispatch(apiActions.setLoading(true));
+      console.log(response.data);
+    });
+  }
+  
+
+  
   const dispatch = useDispatch();
   const {
     stepOne,
