@@ -3,6 +3,7 @@ package ca.venkasritharan.twitterclone.service.impl;
 import ca.venkasritharan.twitterclone.entity.authentication.User;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import ca.venkasritharan.twitterclone.service.UsernameService;
+import ca.venkasritharan.twitterclone.util.response.Response;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,6 +13,13 @@ import java.util.Random;
 public class UsernameServiceImpl implements UsernameService {
 
   private UserRepository userRepository;
+
+  @Override
+  public Response<String> getUsername(String email) {
+    Optional<User> user = userRepository.findByEmail(email);
+    System.out.println("username " + user.get().getUsername());
+    return new Response<>(200, user.get().getUsername());
+  }
 
   public UsernameServiceImpl(UserRepository userRepository) {
     this.userRepository = userRepository;
