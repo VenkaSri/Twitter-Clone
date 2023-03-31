@@ -21,9 +21,8 @@ public class ProfileController {
   }
 
   @GetMapping("/username/{email}")
-  public void getUsername(@PathVariable(name = "email") String emailOrPhone) {
-    System.out.println(emailOrPhone);
-   usernameService.getUsername(emailOrPhone);
+  public Response<String> getUsername(@PathVariable(name = "email") String emailOrPhone) {
+    return usernameService.getUsername(emailOrPhone);
   }
 
 }

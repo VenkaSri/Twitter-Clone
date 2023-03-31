@@ -17,7 +17,6 @@ public class UsernameServiceImpl implements UsernameService {
   @Override
   public Response<String> getUsername(String email) {
     Optional<User> user = userRepository.findByEmail(email);
-    System.out.println("username " + user.get().getUsername());
     return new Response<>(200, user.get().getUsername());
   }
 
