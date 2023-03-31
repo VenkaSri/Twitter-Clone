@@ -26,10 +26,38 @@ public class UsernameServiceImpl implements UsernameService {
 
   @Override
   public void assignUsername(String email) {
+    System.out.println(email);
     Optional<User> user = userRepository.findByEmail(email);
+    checkNameLength(user.get().getName(), email);
+  }
+
+  public void checkNameLength(String name, String email) {
+    if (name.length() == 15) {
+      checkIfUserNameExists(name, email);
+    } else if (name.length() < 15) {
+      checkIfUserNameExists(name, email);
+    } else {
+      checkIfUserNameExists(name.replaceAll("\\s+", "").substring(0, 15), email);
+    }
+  }
+
+  private void checkIfUserNameExists(String name, String email) {
+    if (userRepository.existsByUsername(name)) {
+        String halvedName = name.substring(0, name.length() / 2);
+        checkNameLength(generateRandomUsername(halvedName, 15 - halvedName.length()), email);
+    } else {
+      Optional<User> user = userRepository.findByEmail(email);
+      user.get().setUsername(name);
+      userRepository.save(user.get());
+    }
+  }
+
+  private String generateRandomUsername(String name, int size) {
     Random random = new Random(System.currentTimeMillis());
-    String username = user.get().getName() + 1000000 + random.nextInt(5000000);
-    user.get().setUsername(username);
-    userRepository.save(user.get());
+    int min = (int) Math.pow(10, size - 1);
+    int max = (int) Math.pow(10, size) - 1;
+    int randomNum = min + random.nextInt(max - min + 1);
+    String username =  name + randomNum;
+    return username;
   }
 }
