@@ -1,7 +1,7 @@
 import React from "react";
 
 import Header from "../UI/header/Header";
-import { EXPLORE, SETTINGS, HOME, BELL, MESSAGE, BOOKMARK, TWITTER_BLUE, PROFILE, USER_MORE } from "../../utils/ButtonLinkObjects";
+import { EXPLORE, HOME, BELL, MESSAGE, BOOKMARK, TWITTER_BLUE, PROFILE, USER_MORE } from "../../utils/ButtonLinkObjects";
 
 const LoggedInHeader = () => {
   const headerButtonContent = [
