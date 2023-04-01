@@ -34,7 +34,6 @@ public class AuthenticationController {
   public Response<String> register(@RequestBody RegisterDTO registerDTO) {
     Response<String> response = authenticationService.register(registerDTO);
     usernameService.assignUsername(registerDTO.getEmail());
-    usernameService.getUsername(registerDTO.getEmail());
     return response;
   }
 

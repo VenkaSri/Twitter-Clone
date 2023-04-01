@@ -96,11 +96,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     return userRepository.save(user);
   }
 
-  private String generateUsername() {
-
-    return "";
-  }
-
   
 
 

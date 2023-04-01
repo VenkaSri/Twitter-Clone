@@ -44,6 +44,7 @@ public class UsernameServiceImpl implements UsernameService {
   private void checkIfUserNameExists(String name, String email) {
     if (userRepository.existsByUsername(name)) {
         String halvedName = name.substring(0, name.length() / 2);
+
         checkNameLength(generateRandomUsername(halvedName, 15 - halvedName.length()), email);
     } else {
       Optional<User> user = userRepository.findByEmail(email);
@@ -54,9 +55,9 @@ public class UsernameServiceImpl implements UsernameService {
 
   private String generateRandomUsername(String name, int size) {
     Random random = new Random(System.currentTimeMillis());
-    int min = (int) Math.pow(10, size - 1);
-    int max = (int) Math.pow(10, size) - 1;
-    int randomNum = min + random.nextInt(max - min + 1);
+    long min = (long) Math.pow(10, size - 1);
+    long max = (long) Math.pow(10, size) - 1;
+    long randomNum = (min + random.nextLong((max - min + 1)));
     String username =  name + randomNum;
     return username;
   }
