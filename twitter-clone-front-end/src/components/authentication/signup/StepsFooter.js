@@ -49,7 +49,8 @@ const StepsFooter = () => {
     axios
       .get(GET_USERNAME_URL + `${email.enteredEmail}`)
       .then((response) => {
-        dispatch(userInfoActions.setUsername(response.data.message));
+        dispatch(userInfoActions.setUsername(response.data.data.username));
+        dispatch(userInfoActions.setName(response.data.data.name));
         dispatch(apiActions.setLoading(true));
         dispatch(userInfoActions.setAuthentication(true));
       })

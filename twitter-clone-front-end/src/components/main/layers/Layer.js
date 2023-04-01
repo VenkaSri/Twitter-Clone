@@ -10,8 +10,10 @@ import StepsFooter from "../../authentication/signup/StepsFooter";
 import StepTwo from "../../authentication/signup/stepone/StepTwo";
 import FinalStep from "../../authentication/signup/FinalStep";
 import ProfilePicture from "../../authentication/signup/ProfilePicture";
+import Username from "../../authentication/signup/Username";
 
-const stepsContent = [<StepOne />, <StepTwo />, <FinalStep />, <ProfilePicture />]
+const stepsContent = [<StepOne />, <StepTwo />, <FinalStep />, <Username />]
+//<ProfilePicture />
 
 const Layer = () => {
   const currentStep = useSelector(state => state.rootReducer.signUp.steps.currentStep);

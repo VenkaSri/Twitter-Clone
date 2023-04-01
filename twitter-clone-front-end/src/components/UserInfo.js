@@ -8,7 +8,7 @@ import { Popover } from "@mui/material";
 import { useSelector } from "react-redux";
 
 const UserInfo = () => {
-  const username = useSelector((state) => state.rootReducer.userInfo.userName);
+  const user = useSelector((state) => state.rootReducer.userInfo);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -30,9 +30,9 @@ const UserInfo = () => {
       >
         <ProfilePicture source={TestAvatar} size={40} />
         <div className="flex flex-col ml-4 grow-0 leading-[20px]">
-          <span className="inline-block font-cBold">No One</span>
+          <span className="inline-block font-cBold">{user.name}</span>
           <span className="text-[#536471] font-cReg text-[15px]">
-            @{username}
+            @{user.username}
           </span>
         </div>
         <div className="ml-auto">
