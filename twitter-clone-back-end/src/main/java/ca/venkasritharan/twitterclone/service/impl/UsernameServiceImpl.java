@@ -6,6 +6,8 @@ import ca.venkasritharan.twitterclone.service.UsernameService;
 import ca.venkasritharan.twitterclone.util.response.Response;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
@@ -15,9 +17,15 @@ public class UsernameServiceImpl implements UsernameService {
   private UserRepository userRepository;
 
   @Override
-  public Response<String> getUsername(String email) {
+  public Response<Map<String, Object>> getNameAndUsername(String email) {
     Optional<User> user = userRepository.findByEmail(email);
-    return new Response<>(200, user.get().getUsername());
+    if (!user.isPresent()) {
+      return new Response<>(404, null);
+    }
+    Map<String, Object> responseData = new HashMap<>();
+    responseData.put("username", user.get().getUsername());
+    responseData.put("name", user.get().getName());
+    return new Response<>(200, responseData);
   }
 
   public UsernameServiceImpl(UserRepository userRepository) {

@@ -1,15 +1,11 @@
 package ca.venkasritharan.twitterclone.service.impl;
 
-import ca.venkasritharan.twitterclone.entity.Trend;
-import ca.venkasritharan.twitterclone.entity.Trends;
 import ca.venkasritharan.twitterclone.service.TrendService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
