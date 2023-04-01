@@ -15,6 +15,9 @@ function App() {
   const currStep = useSelector(
     (state) => state.rootReducer.signUp.steps.currentStep
   );
+  const isUserAuthenticated = useSelector(
+    (state) => state.rootReducer.userInfo.isAuthenticated
+  );
   return (
     <div className="flex flex-col grow">
       <Routes>
@@ -23,7 +26,7 @@ function App() {
           element={
             <>
               <div className="flex grow">
-                {currStep === 4 ? <LoggedInHeader /> : <LoggedOutHeader />}
+                {isUserAuthenticated ? <LoggedInHeader /> : <LoggedOutHeader />}
                 {currStep === 4 ? <MainContainer /> : <Main />}
               </div>
               <div className="w-screen flex">

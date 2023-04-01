@@ -1,14 +1,7 @@
 import SignInButton from "./SignInButton";
-import { google, apple, email } from "../../../../utils/SignInButtonObjects";
 import SVG from "../../app/SVG";
 import { APPLE } from "../../../../utils/ButtonLinkObjects";
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-  useRoutes,
-} from "react-router-dom";
-import TweetsFeed from "../../../main/body/TweetsFeed";
 
 const SignInButtonList = () => {
   return (

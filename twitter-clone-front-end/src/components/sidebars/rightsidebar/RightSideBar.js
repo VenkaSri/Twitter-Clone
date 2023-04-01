@@ -1,8 +1,6 @@
 import React from "react";
-import { useRoutes } from "react-router-dom";
 import SignInButtonList from "../../UI/explore/sign-in-links/SignInButtonList";
 import Card from "../../UI/Card";
-import FooterLinks from "./FooterLinks";
 
 const RightSideBar = () => {
   return (

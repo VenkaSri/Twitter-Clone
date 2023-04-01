@@ -8,8 +8,9 @@ import { nameActions } from "../../../state/auth/sign-up/name-reducer";
 import axios from "axios";
 import moment from "moment";
 import { apiActions } from "../../../state/auth/form/api-reducer";
+import { userInfoActions } from "../../../state/authentication/userInfo-reducer";
+import { BASE_URL, GET_USERNAME_URL } from "../../../config";
 
-const BASE_URL = "http://localhost:8080/api/auth/register";
 const StepsFooter = () => {
   const loading = useSelector((state) => state.rootReducer.signUp.api.loading);
   const { name, email, dob } = useSelector((state) => state.rootReducer.signUp);
@@ -17,9 +18,10 @@ const StepsFooter = () => {
   let buttonText;
 
   const register = () => {
+    dispatch(apiActions.setLoading(false));
     var data = JSON.stringify({
       name: name.name,
-      dob: (moment(userDob, "YYYY-MMMM-DD").format("YYYY-MM-DD")),
+      dob: moment(userDob, "YYYY-MMMM-DD").format("YYYY-MM-DD"),
       password: password.enteredPassword,
       email: email.enteredEmail,
     });
@@ -33,28 +35,31 @@ const StepsFooter = () => {
       },
       data: data,
     };
-    dispatch(apiActions.setLoading(false));
+
     axios(config)
       .then(function (response) {
-        getNameAndUsername(email.enteredEmail);
+        getUserName();
       })
       .catch(function (error) {
         console.log(error);
       });
   };
 
-  const getNameAndUsername = (email) => {
-    console.log(email)
-    axios.get(`http://localhost:8080/api/user/username/${email}`)
-    .then((response) => {
-      dispatch(stepsActions.setCurrentStep(currentStep + 1));
+  const getUserName = () => {
+    axios
+      .get(GET_USERNAME_URL + `${email.enteredEmail}`)
+      .then((response) => {
+        dispatch(userInfoActions.setUsername(response.data.message));
         dispatch(apiActions.setLoading(true));
-      console.log(response.data);
-    });
-  }
-  
+        dispatch(userInfoActions.setAuthentication(true));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
-  
+    dispatch(stepsActions.setCurrentStep(currentStep + 1));
+  };
+
   const dispatch = useDispatch();
   const {
     stepOne,
@@ -71,9 +76,10 @@ const StepsFooter = () => {
       dispatch(nameActions.setAutoFocus(false));
       dispatch(dobActions.setAutoFocus(false));
       dispatch(emailActions.setAutoFocus(false));
+      dispatch(stepsActions.setCurrentStep(currentStep + 1));
     }
-
-    dispatch(stepsActions.setCurrentStep(currentStep + 1));
+    if (currentStep === 2)
+      dispatch(stepsActions.setCurrentStep(currentStep + 1));
   };
 
   const disableHandler = (currentStep) => {

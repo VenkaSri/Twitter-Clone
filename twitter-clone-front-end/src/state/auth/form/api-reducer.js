@@ -11,6 +11,7 @@ const apiSlice = createSlice({
   reducers: {
     setLoading(state, action) {
       state.loading = action.payload;
+      console.log(state.loading);
     },
   },
   extraReducers: (builder) => {
