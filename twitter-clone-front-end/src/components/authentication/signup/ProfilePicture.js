@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import DEFAULT_PROFILE_PICTURE from "../../images/sign-up/twitter-avi-gender-balanced-figure.png";
+import DEFAULT_PROFILE_PICTURE from "../../../assets/images/avatars/default_avi.png";
 import SVG from '../../UI/app/SVG';
 import { UPLOAD_IMAGE } from '../../../utils/ButtonLinkObjects';
 import ImageUploading from 'react-images-uploading';

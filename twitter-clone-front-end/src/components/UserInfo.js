@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import ProfilePicture from "./ProfilePicture";
-import TestAvatar from "../assets/images/avatars/test.jpg";
+import DefaultAvatar from "../assets/images/avatars/default_avi.png";
 import MoreOptions from "./UI/button/MoreOptions";
 import { Popover } from "@mui/material";
 
@@ -30,7 +30,7 @@ const UserInfo = () => {
         className="flex items-center p-[12px] rounded-full hover:bg-[#e7e7e8] cursor-pointer"
         id="userInfo"
       >
-        <ProfilePicture source={TestAvatar} size={40} />
+        <ProfilePicture source={DefaultAvatar} size={40} />
         <div className="flex flex-col ml-4 grow-0 leading-[20px]">
           <span className="inline-block font-cBold">{user.name}</span>
           <span className="text-[#536471] font-cReg text-[15px]">
