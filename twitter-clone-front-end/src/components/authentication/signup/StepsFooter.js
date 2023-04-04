@@ -14,6 +14,7 @@ import { BASE_URL, GET_USERNAME_URL } from "../../../config";
 const StepsFooter = () => {
   const loading = useSelector((state) => state.rootReducer.signUp.api.loading);
   const { name, email, dob } = useSelector((state) => state.rootReducer.signUp);
+  const isUsernameSet = useSelector((state) => state.rootReducer.userInfo.isUsernameSet);
   const userDob = `${dob.year}-${dob.month}-${dob.day}`;
   let buttonText;
 
@@ -58,7 +59,7 @@ const StepsFooter = () => {
         console.log(error);
       });
 
-    dispatch(stepsActions.setCurrentStep(currentStep + 1));
+
   };
 
   const dispatch = useDispatch();
@@ -69,18 +70,26 @@ const StepsFooter = () => {
   } = useSelector((state) => state.rootReducer.signUp);
 
   const nextStepHandler = () => {
-    if (currentStep === 4) return;
-    if (currentStep === 3) {
-      return register();
+    switch (currentStep) {
+      case 1:
+        dispatch(nameActions.setAutoFocus(false));
+        dispatch(dobActions.setAutoFocus(false));
+        dispatch(emailActions.setAutoFocus(false));
+        dispatch(stepsActions.setCurrentStep(currentStep + 1));
+        break;
+      case 2:
+        dispatch(stepsActions.setCurrentStep(currentStep + 1));
+        break;
+      case 3:
+        register();
+        dispatch(stepsActions.setCurrentStep(currentStep + 1));
+        break;
+      case 4:
+        dispatch(stepsActions.setCurrentStep(currentStep + 1));
+        return;
+      default:
+        break;
     }
-    if (currentStep === 1) {
-      dispatch(nameActions.setAutoFocus(false));
-      dispatch(dobActions.setAutoFocus(false));
-      dispatch(emailActions.setAutoFocus(false));
-      dispatch(stepsActions.setCurrentStep(currentStep + 1));
-    }
-    if (currentStep === 2)
-      dispatch(stepsActions.setCurrentStep(currentStep + 1));
   };
 
   const disableHandler = (currentStep) => {
@@ -99,13 +108,15 @@ const StepsFooter = () => {
           : false;
       case 3:
         return password.isPasswordValid ? false : true;
+      case 4:
+        return !isUsernameSet;
       default:
         break;
     }
   };
 
   if (currentStep === 4) {
-    buttonText = "Skip for now";
+    buttonText = "Skip for noww";
   } else {
     buttonText = currentStep === 2 ? "Sign Up" : "Next";
   }
