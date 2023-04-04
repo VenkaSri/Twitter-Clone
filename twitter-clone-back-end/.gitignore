@@ -189,4 +189,4 @@ HELP.md
 mvnw
 mvnw.cmd
 .mvn/wrapper
-.env
+src/main/resources/.env

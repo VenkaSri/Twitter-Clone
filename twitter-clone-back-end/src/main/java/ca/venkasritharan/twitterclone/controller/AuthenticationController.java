@@ -6,7 +6,6 @@ import ca.venkasritharan.twitterclone.dto.ValidateEmailOrPhoneDTO;
 import ca.venkasritharan.twitterclone.service.AuthenticationService;
 import ca.venkasritharan.twitterclone.service.UsernameService;
 import ca.venkasritharan.twitterclone.util.response.Response;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,11 +36,6 @@ public class AuthenticationController {
     return response;
   }
 
-//  @PostMapping(value = {"/sign-up"})
-//  public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO) {
-//    String response = authenticationService.register(registerDTO);
-//    return new ResponseEntity<>(response, HttpStatus.CREATED);
-//  }
 
   @PostMapping("/emailOrPhone")
   public Response<String> validateEmailOrPhone(@RequestBody ValidateEmailOrPhoneDTO validateEmailOrPhoneDTO) {
