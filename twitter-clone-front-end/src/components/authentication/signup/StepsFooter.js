@@ -30,7 +30,7 @@ const StepsFooter = () => {
     var config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: BASE_URL,
+      url: process.env.REACT_APP_BASE_URL,
       headers: {
         "Content-Type": "application/json",
       },
@@ -48,7 +48,7 @@ const StepsFooter = () => {
 
   const getUserName = () => {
     axios
-      .get(GET_USERNAME_URL + `${email.enteredEmail}`)
+      .get(process.env.REACT_APP_GET_USERNAME_URL + `${email.enteredEmail}`)
       .then((response) => {
         dispatch(userInfoActions.setUsername(response.data.data.username));
         dispatch(userInfoActions.setName(response.data.data.name));

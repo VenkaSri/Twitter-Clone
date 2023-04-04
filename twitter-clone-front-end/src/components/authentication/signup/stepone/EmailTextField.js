@@ -31,7 +31,7 @@ const EmailTextField = () => {
         return setIsUnavailable(false);
       }
       axios
-        .post(BASE_URL, { emailOrPhoneNumber: email.enteredEmail.trim() })
+        .post(process.env.REACT_APP_EMAIL_PHONE, { emailOrPhoneNumber: email.enteredEmail.trim() })
         .then((response) => {
           if (response.data.status === 409) {
             dispatch(stepOneActions.setEmailEntered(false));
