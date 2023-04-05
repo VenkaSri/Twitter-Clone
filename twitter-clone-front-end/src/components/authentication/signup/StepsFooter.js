@@ -9,7 +9,6 @@ import axios from "axios";
 import moment from "moment";
 import { apiActions } from "../../../state/auth/form/api-reducer";
 import { userInfoActions } from "../../../state/authentication/userInfo-reducer";
-import { BASE_URL, GET_USERNAME_URL } from "../../../config";
 
 const StepsFooter = () => {
   const loading = useSelector((state) => state.rootReducer.signUp.api.loading);
@@ -58,8 +57,6 @@ const StepsFooter = () => {
       .catch(function (error) {
         console.log(error);
       });
-
-
   };
 
   const dispatch = useDispatch();

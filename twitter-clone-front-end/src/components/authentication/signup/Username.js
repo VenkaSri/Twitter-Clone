@@ -5,6 +5,7 @@ import { FormControl, Input, InputAdornment, InputLabel } from "@mui/material";
 import SVG from "../../UI/app/SVG";
 import { CONFIRMED_CHECKMARK } from "../../../utils/ButtonLinkObjects";
 import { userInfoActions } from "../../../state/authentication/userInfo-reducer";
+import axios from "axios";
 
 const userNameValidation = (text) => /^[a-zA-Z0-9_]*$/.test(text);
 
@@ -20,7 +21,25 @@ const Username = () => {
     setHasEnteredInput(true);
   };
 
+  const checkIfUsernameExists = () => {
+    axios
+      .get(process.env.REACT_APP_CHECK_USERNAME + `${username}`)
+      .then((response) => {
+        const isValid = response.data.status !== 200;
+        const errorText = isValid
+          ? ""
+          : "That username has been taken. Please choose another.";
+        dispatch(userInfoActions.setUsernameValidity(isValid));
+        setIsNameValid(!isValid);
+        setErrorText(errorText);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
+    let identifier;
     if (hasEnteredInput) {
       if (username.length < 4) {
         dispatch(userInfoActions.setUsernameValidity(false));
@@ -35,11 +54,15 @@ const Username = () => {
         setIsNameValid(true);
         setErrorText("Your username can only contain letters, numbers and '_'");
       } else {
-        dispatch(userInfoActions.setUsernameValidity(true));
-        setIsNameValid(false);
-        setErrorText("");
+        identifier = setTimeout(() => {
+          checkIfUsernameExists();
+        }, 600);
       }
     }
+
+    return () => {
+      clearTimeout(identifier);
+    };
   }, [username, hasEnteredInput]);
 
   return (
@@ -87,13 +110,14 @@ const Username = () => {
           value={username}
           endAdornment={
             <InputAdornment position="end">
-              {!isNameValid && (<div
-                className="w-[20px] h-[20px] mr-[10px] cursor-pointer fill-[#00BA7C]"
-                onMouseDown={(e) => e.preventDefault()}
-              >
-                <SVG svgPath={CONFIRMED_CHECKMARK} />
-              </div>)}
-              
+              {!isNameValid && (
+                <div
+                  className="w-[20px] h-[20px] mr-[10px] cursor-pointer fill-[#00BA7C]"
+                  onMouseDown={(e) => e.preventDefault()}
+                >
+                  <SVG svgPath={CONFIRMED_CHECKMARK} />
+                </div>
+              )}
             </InputAdornment>
           }
           startAdornment={
