@@ -39,6 +39,16 @@ public class UsernameServiceImpl implements UsernameService {
     checkNameLength(user.get().getName(), email);
   }
 
+  @Override
+  public Response<String> checkUsername(String username) {
+    Optional<User> user = userRepository.findByUsername(username);
+    if (!user.isPresent()) {
+
+      return new Response<>(404, null);
+    }
+    return new Response<>(200, user.get().getUsername());
+  }
+
   public void checkNameLength(String name, String email) {
     if (name.length() == 15) {
       checkIfUserNameExists(name, email);

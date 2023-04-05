@@ -25,4 +25,9 @@ public class ProfileController {
     return usernameService.getNameAndUsername(emailOrPhone);
   }
 
+  @GetMapping("/{username}")
+  public Response<String> checkUsername(@PathVariable(name = "username")  String username) {
+    return usernameService.checkUsername(username);
+  }
+
 }
