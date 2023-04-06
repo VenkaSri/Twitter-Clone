@@ -26,8 +26,14 @@ public class ProfileController {
   }
 
   @GetMapping("/{username}")
-  public Response<String> checkUsername(@PathVariable(name = "username")  String username) {
+  public Response<String> checkUsername(@PathVariable String username) {
     return usernameService.checkUsername(username);
   }
+
+  @PostMapping("/{username}/{email}")
+  public Response<String> updateUsername(@PathVariable(name = "email") String emailOrPhone, @PathVariable String username) {
+    return usernameService.updateUsername(username, emailOrPhone);
+  }
+
 
 }

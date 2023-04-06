@@ -43,10 +43,17 @@ public class UsernameServiceImpl implements UsernameService {
   public Response<String> checkUsername(String username) {
     Optional<User> user = userRepository.findByUsername(username);
     if (!user.isPresent()) {
-
-      return new Response<>(404, null);
+      return new Response<>(200, "Username " + username + " is available");
     }
-    return new Response<>(200, user.get().getUsername());
+    return new Response<>(404, "User with username " + username + " already exists");
+  }
+
+  @Override
+  public Response<String> updateUsername(String username, String email) {
+    User userByEmail = userRepository.findByEmail(email).get();
+    userByEmail.setUsername(username);
+    userRepository.save(userByEmail);
+    return new Response<>(200, "Username updated for user with email " + email);
   }
 
   public void checkNameLength(String name, String email) {
