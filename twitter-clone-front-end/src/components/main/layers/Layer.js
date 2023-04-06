@@ -17,7 +17,9 @@ const stepsContent = [<StepOne />, <StepTwo />, <FinalStep />, <Username />]
 
 const Layer = () => {
   const currentStep = useSelector(state => state.rootReducer.signUp.steps.currentStep);
-
+  const isUserAuthenticated = useSelector(
+    (state) => state.rootReducer.userInfo.isAuthenticated
+  );
   return (
     <div className="relative flex flex-col justify-center grow">
       <Routes>
@@ -37,7 +39,7 @@ const Layer = () => {
           }
         />
       </Routes>
-      {currentStep === 4 ? null : <LandingFooter /> }
+      {isUserAuthenticated ? null : <LandingFooter /> }
     </div>
   );
 };

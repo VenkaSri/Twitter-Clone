@@ -6,18 +6,19 @@ import SVG from "../../UI/app/SVG";
 import { CONFIRMED_CHECKMARK } from "../../../utils/ButtonLinkObjects";
 import { userInfoActions } from "../../../state/authentication/userInfo-reducer";
 import axios from "axios";
+import { usernameActions } from "../../../state/auth/sign-up/username-reducer";
 
 const userNameValidation = (text) => /^[a-zA-Z0-9_]*$/.test(text);
 
 const Username = () => {
-  const username = useSelector((state) => state.rootReducer.userInfo.username);
+  const dispatch = useDispatch();
+  const username = useSelector((state) => state.rootReducer.signUp.username.enteredUsername);
   const [hasEnteredInput, setHasEnteredInput] = useState(false);
   const [isNameValid, setIsNameValid] = useState(false);
   const [errorText, setErrorText] = useState("");
-  const dispatch = useDispatch();
-
+  
   const usernameChangeHandle = (event) => {
-    dispatch(userInfoActions.setUsername(event.target.value));
+    dispatch(usernameActions.setUsername(event.target.value));
     setHasEnteredInput(true);
   };
 
@@ -25,10 +26,11 @@ const Username = () => {
     axios
       .get(process.env.REACT_APP_CHECK_USERNAME + `${username}`)
       .then((response) => {
-        const isValid = response.data.status !== 200;
+        const isValid = response.data.status === 200;
         const errorText = isValid
           ? ""
           : "That username has been taken. Please choose another.";
+
         dispatch(userInfoActions.setUsernameValidity(isValid));
         setIsNameValid(!isValid);
         setErrorText(errorText);
@@ -45,10 +47,6 @@ const Username = () => {
         dispatch(userInfoActions.setUsernameValidity(false));
         setIsNameValid(true);
         setErrorText("Your username must be longer than 4 characters.");
-      } else if (username.length > 15) {
-        dispatch(userInfoActions.setUsernameValidity(false));
-        setIsNameValid(true);
-        setErrorText("Your username must be shorter than 15 characters.");
       } else if (!userNameValidation(username)) {
         dispatch(userInfoActions.setUsernameValidity(false));
         setIsNameValid(true);
@@ -104,6 +102,7 @@ const Username = () => {
           Username
         </InputLabel>
         <Input
+          inputProps={{maxLength: 15}}
           disableUnderline
           id="standard-adornment-password"
           type="text"

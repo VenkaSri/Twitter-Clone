@@ -27,7 +27,7 @@ function App() {
             <>
               <div className="flex grow">
                 {isUserAuthenticated ? <LoggedInHeader /> : <LoggedOutHeader />}
-                {currStep === 4 ? <MainContainer /> : <Main />}
+                {isUserAuthenticated ? <MainContainer /> : <Main />}
               </div>
               <div className="w-screen flex">
                 <Layer />

@@ -9,9 +9,11 @@ import axios from "axios";
 import moment from "moment";
 import { apiActions } from "../../../state/auth/form/api-reducer";
 import { userInfoActions } from "../../../state/authentication/userInfo-reducer";
+import { usernameActions } from "../../../state/auth/sign-up/username-reducer";
 
 const StepsFooter = () => {
   const loading = useSelector((state) => state.rootReducer.signUp.api.loading);
+  const username = useSelector((state) => state.rootReducer.signUp.username.enteredUsername);
   const { name, email, dob } = useSelector((state) => state.rootReducer.signUp);
   const isUsernameSet = useSelector((state) => state.rootReducer.userInfo.isUsernameSet);
   const userDob = `${dob.year}-${dob.month}-${dob.day}`;
@@ -38,6 +40,7 @@ const StepsFooter = () => {
 
     axios(config)
       .then(function (response) {
+        dispatch(userInfoActions.setAuthentication(true));
         getUserName();
       })
       .catch(function (error) {
@@ -50,14 +53,27 @@ const StepsFooter = () => {
       .get(process.env.REACT_APP_GET_USERNAME_URL + `${email.enteredEmail}`)
       .then((response) => {
         dispatch(userInfoActions.setUsername(response.data.data.username));
+        dispatch(usernameActions.setUsername(response.data.data.username));
         dispatch(userInfoActions.setName(response.data.data.name));
         dispatch(apiActions.setLoading(true));
-        dispatch(userInfoActions.setAuthentication(true));
       })
       .catch(function (error) {
         console.log(error);
       });
   };
+
+  const  updateUsername = () => {
+    console.log(username);
+    axios
+      .post(process.env.REACT_APP_CHECK_USERNAME + `${username}/asfsdf@gmail.com`)
+      .then((response) => {
+        console.log(response.data.data)
+        dispatch(userInfoActions.setUsername(username));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   const dispatch = useDispatch();
   const {
@@ -82,6 +98,7 @@ const StepsFooter = () => {
         dispatch(stepsActions.setCurrentStep(currentStep + 1));
         break;
       case 4:
+        updateUsername();
         dispatch(stepsActions.setCurrentStep(currentStep + 1));
         return;
       default:
