@@ -13,6 +13,7 @@ const userNameValidation = (text) => /^[a-zA-Z0-9_]*$/.test(text);
 const Username = () => {
   const dispatch = useDispatch();
   const username = useSelector((state) => state.rootReducer.signUp.username.enteredUsername);
+  const email = useSelector((state) => state.rootReducer.signUp.email.enteredEmail);
   const [hasEnteredInput, setHasEnteredInput] = useState(false);
   const [isNameValid, setIsNameValid] = useState(false);
   const [errorText, setErrorText] = useState("");
@@ -24,7 +25,7 @@ const Username = () => {
 
   const checkIfUsernameExists = () => {
     axios
-      .get(process.env.REACT_APP_CHECK_USERNAME + `${username}`)
+      .get(process.env.REACT_APP_CHECK_USERNAME + `${username}?email=${email}`)
       .then((response) => {
         const isValid = response.data.status === 200;
         const errorText = isValid
