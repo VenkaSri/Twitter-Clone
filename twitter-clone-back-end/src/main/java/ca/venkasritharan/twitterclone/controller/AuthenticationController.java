@@ -37,10 +37,9 @@ public class AuthenticationController {
   }
 
 
-  @PostMapping("/emailOrPhone")
-  public Response<String> validateEmailOrPhone(@RequestBody ValidateEmailOrPhoneDTO validateEmailOrPhoneDTO) {
-
-    return authenticationService.validateEmailOrPhone(validateEmailOrPhoneDTO);
+  @GetMapping("/check-emailOrPhone")
+  public Response<String> validateEmailOrPhone(@RequestParam("emailOrPhone") String emailOrPhone) {
+    return authenticationService.validateEmailOrPhone(emailOrPhone);
   }
 
 }

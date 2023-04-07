@@ -56,15 +56,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   }
 
   @Override
-  public Response<String> validateEmailOrPhone(ValidateEmailOrPhoneDTO validateEmailOrPhoneDTO) {
+  public Response<String> validateEmailOrPhone(String emailOrPhone) {
     try {
-      if (userRepository.existsByPhoneNumber(validateEmailOrPhoneDTO.getEmailOrPhoneNumber())) {
+      if (userRepository.existsByEmail(emailOrPhone)) {
         return new Response<>(409, "An account with that phone number already exists");
       }
-      if (userRepository.existsByEmail(validateEmailOrPhoneDTO.getEmailOrPhoneNumber())) {
-        return new Response<>(409, "An account with that email already exists");
-      }
-      return new Response<>(200, "Validation successful");
+      return new Response<>(200, "Email is available.");
     } catch (Exception e) {
       return new Response<>(500, "An error occurred while validating email or phone number");
     }

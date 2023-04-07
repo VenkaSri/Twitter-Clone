@@ -8,5 +8,5 @@ import ca.venkasritharan.twitterclone.util.response.Response;
 public interface AuthenticationService {
   String login(LoginDTO loginDTO);
   Response<String> register(RegisterDTO registerDTO);
-  Response<String> validateEmailOrPhone(ValidateEmailOrPhoneDTO validateEmailOrPhoneDTO);
+  Response<String> validateEmailOrPhone(String emailOrPhone);
 }
