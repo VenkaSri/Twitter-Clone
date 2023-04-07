@@ -40,10 +40,13 @@ public class UsernameServiceImpl implements UsernameService {
   }
 
   @Override
-  public Response<String> checkUsername(String username) {
+  public Response<String> checkUsername(String username, String email) {
     Optional<User> user = userRepository.findByUsername(username);
+    User userByEmail = userRepository.findByEmail(email).get();
     if (!user.isPresent()) {
       return new Response<>(200, "Username " + username + " is available");
+    } else if (userByEmail.getUsername().equals(user.get().getUsername())){
+      return new Response<>(200, "No change to username");
     }
     return new Response<>(404, "User with username " + username + " already exists");
   }

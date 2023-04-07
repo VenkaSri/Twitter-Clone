@@ -26,8 +26,8 @@ public class ProfileController {
   }
 
   @GetMapping("/{username}")
-  public Response<String> checkUsername(@PathVariable String username) {
-    return usernameService.checkUsername(username);
+  public Response<String> checkUsername(@PathVariable String username, @RequestParam(name = "email") String email) {
+    return usernameService.checkUsername(username, email);
   }
 
   @PostMapping("/{username}/{email}")
