@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DOBInput from "../DOBInput";
 import NameInputField from "./NameInputField";
 import EmailTextField from "./EmailTextField";
-import { stepsActions } from "../../../../state/auth/form/steps-reducer";;
+import { stepsActions } from "../../../state/auth/form/steps-reducer";;
 
 const StepOne = () => {
   const [authType, setAuthType] = useState(false);

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TextField } from "@mui/material";
-import { nameActions } from "../../../../state/auth/sign-up/name-reducer";
-import { stepOneActions } from "../../../../state/auth/sign-up/stepone-reducer";
+import { nameActions } from "../../../state/auth/sign-up/name-reducer";
+import { stepOneActions } from "../../../state/auth/sign-up/stepone-reducer";
 
 const onlySpaces = (text) => !/[^\s\\]/.test(text);
 

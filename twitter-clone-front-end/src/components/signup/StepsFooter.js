@@ -1,15 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { stepsActions } from "../../../state/auth/form/steps-reducer";
-import { dobActions } from "../../../state/auth/sign-up/dob-reducer";
-import { emailActions } from "../../../state/auth/sign-up/email-reducer";
-import { nameActions } from "../../../state/auth/sign-up/name-reducer";
+import { stepsActions } from "../../state/auth/form/steps-reducer";
+import { dobActions } from "../../state/auth/sign-up/dob-reducer";
+import { emailActions } from "../../state/auth/sign-up/email-reducer";
+import { nameActions } from "../../state/auth/sign-up/name-reducer";
 import axios from "axios";
 import moment from "moment";
-import { apiActions } from "../../../state/auth/form/api-reducer";
-import { userInfoActions } from "../../../state/authentication/userInfo-reducer";
-import { usernameActions } from "../../../state/auth/sign-up/username-reducer";
+import { apiActions } from "../../state/auth/form/api-reducer";
+import { userInfoActions } from "../../state/authentication/userInfo-reducer";
+import { usernameActions } from "../../state/auth/sign-up/username-reducer";
 
 const StepsFooter = () => {
   const loading = useSelector((state) => state.rootReducer.signUp.api.loading);
@@ -65,7 +65,7 @@ const StepsFooter = () => {
   const  updateUsername = () => {
     console.log(username);
     axios
-      .post(process.env.REACT_APP_CHECK_USERNAME + `${username}/asfsdf@gmail.com`)
+      .post(process.env.REACT_APP_CHECK_USERNAME + `${username}/${email.enteredEmail}`)
       .then((response) => {
         console.log(response.data.data)
         dispatch(userInfoActions.setUsername(username));
@@ -154,6 +154,11 @@ const StepsFooter = () => {
           ? "w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#000] hover:bg-[#272c30]"
           : "w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#86888b]";
       case 4:
+        if (isUsernameSet) {
+          buttonText = "Next";
+          return "w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#000] hover:bg-[#272c30]";
+
+        }
         return "w-[440px] h-[52px] font-cBold text-[#000] rounded-full border ";
       default:
         break;
@@ -163,7 +168,7 @@ const StepsFooter = () => {
   return (
     <>
       {loading ? (
-        <div className="h-[100px] max-h-[100px] bg-[#fff] flex items-center justify-center sticky bottom-0 z-50 grow">
+        <div className="h-[100px] max-h-[100px] bg-[#fff] flex items-center justify-center sticky bottom-0 z-50 grow border border-rose-500">
           <button
             className={enableClassHandler(currentStep)}
             disabled={disableHandler(currentStep)}

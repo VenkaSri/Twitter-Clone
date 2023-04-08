@@ -1,15 +1,15 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
-import SVG from "../../UI/app/SVG";
+import SVG from "../UI/app/SVG";
 import {
   CLOSE,
   FORM_BACK_BUTTON,
   LOGO,
-} from "../../../utils/ButtonLinkObjects";
+} from "../../utils/ButtonLinkObjects";
 import { useDispatch, useSelector } from "react-redux";
-import { resetActions } from "../../../state/auth/sign-up/reset-reducer";
-import { stepsActions } from "../../../state/auth/form/steps-reducer";
+import { resetActions } from "../../state/auth/sign-up/reset-reducer";
+import { stepsActions } from "../../state/auth/form/steps-reducer";
 
 const StepsHeader = () => {
   const loading = useSelector((state) => state.rootReducer.signUp.api.loading);

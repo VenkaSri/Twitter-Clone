@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { resetActions } from "../sign-up/reset-reducer";
 
 const initialState = {
-  currentStep: 1,
+  currentStep: 5,
 };
 
 const stepsSlice = createSlice({

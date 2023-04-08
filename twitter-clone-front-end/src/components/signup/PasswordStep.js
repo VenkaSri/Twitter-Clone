@@ -5,16 +5,16 @@ import { Oval } from "react-loader-spinner";
 import {
   REVEAL_PASSWORD,
   HIDE_PASSWORD,
-} from "../../../utils/ButtonLinkObjects";
-import SVG from "../../UI/app/SVG";
+} from "../../utils/ButtonLinkObjects";
+import SVG from "../UI/app/SVG";
 import { useDispatch, useSelector } from "react-redux";
-import { passwordActions } from "../../../state/auth/sign-up/password-reducer";
+import { passwordActions } from "../../state/auth/sign-up/password-reducer";
 
 const handlePasswordLengthValidation = (text) => /^.{8,}$/.test(text);
 
 const handlePasswordStrengthValidation = (text) => /^(.)\1*$/.test(text);
 
-const FinalStep = () => {
+const PasswordStep = () => {
   const [showPassword, setShowPassword] = useState(false);
   const loading = useSelector((state) => state.rootReducer.signUp.api.loading);
   const [isInValid, setIsInValid] = useState(false);
@@ -145,4 +145,4 @@ const FinalStep = () => {
   );
 };
 
-export default FinalStep;
+export default PasswordStep;

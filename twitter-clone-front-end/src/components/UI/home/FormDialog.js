@@ -27,16 +27,12 @@ const FormDialog = (props) => {
             borderRadius: "20px",
             display: "flex",
             boxShadow: "none",
-            
+            overflow: "hidden"
           },
         }}
         
       >
-        <DialogTitle style={{ padding: 0 }}>{props.header}</DialogTitle>
-        <DialogContent style={{ padding: 0, marginTop: 10 }}>{props.steps}</DialogContent>
-        <DialogActions style={{ padding: 0, display: "flex" }}>
-          {props.footer}
-        </DialogActions>
+        {props.content}
       </Dialog>
       </ThemeProvider>
   );

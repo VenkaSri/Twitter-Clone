@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { FormControl, Input, InputAdornment, InputLabel } from "@mui/material";
-import SVG from "../../UI/app/SVG";
-import { CONFIRMED_CHECKMARK } from "../../../utils/ButtonLinkObjects";
-import { userInfoActions } from "../../../state/authentication/userInfo-reducer";
+import SVG from "../UI/app/SVG";
+import { CONFIRMED_CHECKMARK } from "../../utils/ButtonLinkObjects";
+import { userInfoActions } from "../../state/authentication/userInfo-reducer";
 import axios from "axios";
-import { usernameActions } from "../../../state/auth/sign-up/username-reducer";
+import { usernameActions } from "../../state/auth/sign-up/username-reducer";
 
 const userNameValidation = (text) => /^[a-zA-Z0-9_]*$/.test(text);
 
@@ -60,6 +60,7 @@ const Username = () => {
     }
 
     return () => {
+      dispatch(userInfoActions.setUsernameValidity(false));
       clearTimeout(identifier);
     };
   }, [username, hasEnteredInput]);

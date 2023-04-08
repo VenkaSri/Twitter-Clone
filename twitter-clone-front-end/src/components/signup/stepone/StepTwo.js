@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import InputField from "../../../UI/form/InputField";
-import { CONFIRMED_CHECKMARK } from "../../../../utils/ButtonLinkObjects";
+import InputField from "../../UI/form/InputField";
+import { CONFIRMED_CHECKMARK } from "../../../utils/ButtonLinkObjects";
 import moment from "moment";
 
 const StepTwo = () => {
