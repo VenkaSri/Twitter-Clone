@@ -21,10 +21,10 @@ public class AccountServiceImpl implements AccountService {
   }
 
   @Override
-  public Response<Map<String, Object>> getAllAccounts() {
+  public Response<Map<String, Object>> getAllAccounts(String emailOrPhone) {
     Map<String, Object> responseData = new HashMap<>();
     List<User> users = getUsers(0, 50);
-    List<Map<String, String>> userList = mapUsersToResponse(users);
+    List<Map<String, String>> userList = mapUsersToResponse(users, emailOrPhone);
     responseData.put("users", userList);
     return new Response<>(200, responseData);
   }
@@ -34,13 +34,15 @@ public class AccountServiceImpl implements AccountService {
     return userRepository.findAll(pageable).getContent();
   }
 
-  private List<Map<String, String>> mapUsersToResponse(List<User> users) {
+  private List<Map<String, String>> mapUsersToResponse(List<User> users, String emailOrPhone) {
     List<Map<String, String>> userList = new ArrayList<>();
     for (User user : users) {
-      Map<String, String> userMap = new HashMap<>();
-      userMap.put("username", user.getUsername());
-      userMap.put("name", user.getName());
-      userList.add(userMap);
+      if (!user.getEmail().equals(emailOrPhone)) {
+        Map<String, String> userMap = new HashMap<>();
+        userMap.put("username", user.getUsername());
+        userMap.put("name", user.getName());
+        userList.add(userMap);
+      }
     }
     return userList;
   }

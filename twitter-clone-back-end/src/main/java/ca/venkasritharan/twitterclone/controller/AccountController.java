@@ -2,10 +2,7 @@ package ca.venkasritharan.twitterclone.controller;
 
 import ca.venkasritharan.twitterclone.service.AccountService;
 import ca.venkasritharan.twitterclone.util.response.Response;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -22,7 +19,7 @@ public class AccountController {
   }
 
   @GetMapping("/allAccounts")
-  public Response<Map<String, Object>> getAllAccounts() {
-    return accountService.getAllAccounts();
+  public Response<Map<String, Object>> getAllAccounts(@RequestParam(name = "emailOrPhone") String emailOrPhone) {
+    return accountService.getAllAccounts(emailOrPhone);
   }
 }

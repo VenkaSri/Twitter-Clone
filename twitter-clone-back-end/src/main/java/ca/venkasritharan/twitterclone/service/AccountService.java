@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface AccountService {
-  Response<Map<String, Object>> getAllAccounts();
+  Response<Map<String, Object>> getAllAccounts(String emailOrPhone);
 }
