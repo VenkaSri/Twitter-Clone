@@ -8,12 +8,16 @@ import FollowButton from './UI/button/FollowButton';
 
 const FollowCard = ({ user }) => {
 
+  const handleFollowClick = () => {
+    console.log("clicked");
+  }
+
   return (
     <div className='h-[4.5rem] flex items-center'>
       <ProfilePicture source={DefaultAvatar} size={48}/>
       <UserProfileInfo name={user.name} username={user.username}/>
       <div className='ml-auto'>
-        <FollowButton />
+        <FollowButton onClick={handleFollowClick}/>
       </div>
     </div>
   )

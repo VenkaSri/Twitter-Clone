@@ -8,7 +8,9 @@ import { useSelector } from "react-redux";
 const FollowSuggestions = () => {
   const [loading, setLoading] = useState(false);
   const [followCards, setFollowCards] = useState([]);
-  const email = useSelector((state) => state.rootReducer.signUp.email.enteredEmail);
+  const email = useSelector(
+    (state) => state.rootReducer.signUp.email.enteredEmail
+  );
 
   useEffect(() => {
     setLoading(true);
@@ -25,11 +27,13 @@ const FollowSuggestions = () => {
       .catch((error) => console.error(error));
   }, []);
 
-  
-  
   return (
     <>
-    {loading ? <Skeleton variant="rounded" width={425} height={72} /> : followCards}
+      {loading ? (
+        <Skeleton variant="rounded" width={425} height={72} />
+      ) : (
+        followCards
+      )}
     </>
   );
 };
