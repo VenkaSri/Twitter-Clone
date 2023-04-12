@@ -5,7 +5,7 @@ const initialState = {
   username: "",
   isAuthenticated: false,
   isUsernameSet: true,
-
+  hasOneFollowing: false,
 }
 
 const userInfoSlice = createSlice({
@@ -23,6 +23,9 @@ const userInfoSlice = createSlice({
     },
     setUsernameValidity(state, action) {
       state.isUsernameSet = action.payload;
+    },
+    setOneFollowingValidity(state, action) {
+      state.hasOneFollowing = action.payload;
     }
   }
 })
