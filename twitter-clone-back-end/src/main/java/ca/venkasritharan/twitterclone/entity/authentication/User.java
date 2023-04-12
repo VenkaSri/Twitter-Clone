@@ -1,5 +1,6 @@
 package ca.venkasritharan.twitterclone.entity.authentication;
 
+import ca.venkasritharan.twitterclone.entity.UserFollows;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -31,6 +33,11 @@ public class User {
   private Long tweetCount;
   private Long followerCount;
   private Long followingCount;
+  @OneToMany(mappedBy = "user")
+  private Set<UserFollows> followers = new HashSet<>();
+
+  @OneToMany(mappedBy = "followedUser")
+  private Set<UserFollows> following = new HashSet<>();
 
 
   @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -38,4 +45,5 @@ public class User {
           joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
           inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
   private Set<Role> roles;
+
 }
