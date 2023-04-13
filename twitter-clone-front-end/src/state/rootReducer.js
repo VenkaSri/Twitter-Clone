@@ -1,11 +1,13 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
 import signUpReducer from "./auth/signup-reducer";
-import userInfoReducer from "./authentication/userInfo-reducer"
+import userInfoReducer from "./authentication/userInfo-reducer";
+import dialogStateReducer from "./dialog/dialogState-reducer";
 
 const rootReducer = combineReducers({
   signUp: signUpReducer,
-  userInfo: userInfoReducer
+  userInfo: userInfoReducer,
+  dialogState: dialogStateReducer,
 })
 
 
