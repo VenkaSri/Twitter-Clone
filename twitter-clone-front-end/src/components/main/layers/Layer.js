@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useSelector } from "react-redux";
 
 import LandingFooter from "../../footer/LandingFooter";
@@ -15,6 +15,8 @@ import { FinalStep } from "../../signup/FinalStep";
 import SignUpStep from "../../SignUpStep";
 import DialogHeader from "../../signup/dialog/DialogHeader";
 import DialogFooter from "../../UI/dialog/DialogFooter";
+import UnfollowDialog from "../../UnfollowDialog";
+import Dialog from "../../UI/dialog/Dialog";
 
 const stepsContent = [
   <StepOne />,
@@ -29,6 +31,12 @@ const Layer = () => {
   const currentStep = useSelector(
     (state) => state.rootReducer.signUp.steps.currentStep
   );
+  const handleClose = useSelector((state) => state.rootReducer.dialogState.isCancelled);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleDialogClose = () => {
+    setIsDialogOpen(false);
+  };
   const isUserAuthenticated = useSelector(
     (state) => state.rootReducer.userInfo.isAuthenticated
   );
@@ -51,7 +59,9 @@ const Layer = () => {
           }
         />
       </Routes>
+      
       {isUserAuthenticated ? null : <LandingFooter />}
+      {<Dialog height={'300px'} width={'320px'} content={<UnfollowDialog handleClose={handleDialogClose}/>}/>}
     </div>
   );
 };
