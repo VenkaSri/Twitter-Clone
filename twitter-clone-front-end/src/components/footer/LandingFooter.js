@@ -2,6 +2,10 @@ import React, { useContext } from "react";
 import FormModalContext from "../../context/modals/form-modal-context";
 
 import FooterButton from "../UI/footer/FooterButton";
+import { useDispatch } from "react-redux";
+import { unfollowDialogActions } from "../../state/dialog/dialogState-reducer";
+import { useNavigate } from "react-router-dom";
+
 
 const LogIn = {
   width: "4.75rem",
@@ -24,6 +28,11 @@ const SignUp = {
 };
 
 const LandingFooter = () => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/i/flow/signup");
+  }
+
   return (
     <div className="h-[4.5rem] w-screen bg-[#1D9BF0] flex justify-center  items-center absolute bottom-0 max-xl:justify-center">
       <div className="flex w-[61.875rem] h-[3rem] justify-between mr-[25px]">
@@ -37,7 +46,7 @@ const LandingFooter = () => {
         </div>
         <div className="self-center flex gap-4">
           <FooterButton buttonInfo={LogIn} />
-          <FooterButton buttonInfo={SignUp} />
+          <FooterButton buttonInfo={SignUp} onClick={handleClick}/>
         </div>
       </div>
     </div>

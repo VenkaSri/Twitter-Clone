@@ -19,6 +19,7 @@ const Dialog = ({content, width, height, handleClose}) => {
   return (
     <ThemeProvider theme={theme} >
       <MUIDialog
+      transitionDuration={0}
         open={true}
         onClose={handleClose}
         PaperProps={{

@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const FollowButton = ({ onClick, isFollowing }) => {
-  let buttonText = isFollowing ? "Following" : "Follow";
+
   let style = isFollowing
   ? "h-[2rem] w-[6.188rem] rounded-full text-[0.938rem] font-cBold border border-[#cfd9de]"
   : "h-[2rem] w-[4.875rem] rounded-full bg-[#000] hover:bg-[#272c30] text-[#FFF] text-[0.938rem] font-cBold";
 
-  const [btnText, setBtnText] = useState(buttonText);
+  const [btnText, setBtnText] = useState(isFollowing ? "Following" : "Follow");
   const [btnStyle, setBtnStyle] = useState(style);
 
-  
+  useEffect(() => {
+    if (isFollowing) {
+      setBtnText("Following");
+    } else {
+      setBtnText("Follow");
+      setBtnStyle("h-[2rem] w-[4.875rem] rounded-full bg-[#000] hover:bg-[#272c30] text-[#FFF] text-[0.938rem] font-cBold");
+    }
+  }, [isFollowing]);
 
   const mouseOverHandler = () => {
     if (isFollowing) {

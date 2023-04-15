@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isCancelled: false,
+  isFormDialogOpen: false,
+  selectUser: "",
 }
 
 const unfollowDialogSlice = createSlice({
@@ -9,7 +11,13 @@ const unfollowDialogSlice = createSlice({
   initialState,
   reducers: {
     cancelDialog(state, action) {
-      state.name = action.payload;
+      state.isCancelled = action.payload;
+    },
+    setFormDialogOpen(state, action) {
+      state.isFormDialogOpen = action.payload;
+    },
+    setSelectedUser(state, action) {
+      state.selectUser = action.payload;
     }
   }
 })

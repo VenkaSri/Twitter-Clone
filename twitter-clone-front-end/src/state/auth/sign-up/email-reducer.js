@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { resetActions } from "./reset-reducer";
 
 const emailInitialState = {
-  enteredEmail: "venka@gmail.com",
+  enteredEmail: "",
   isValid: false,
   isAvailable: false,
   hasOnlySpaces: true,

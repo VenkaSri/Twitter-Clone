@@ -1,15 +1,12 @@
-import React, {useState} from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 
 import LandingFooter from "../../footer/LandingFooter";
 import FormDialog from "../../UI/home/FormDialog";
 import { Route, Routes } from "react-router-dom";
 import StepOne from "../../signup/stepone/StepOne";
-import StepsHeader from "../../signup/StepsHeader";
-import StepsFooter from "../../signup/StepsFooter";
 import StepTwo from "../../signup/stepone/StepTwo";
 import PasswordStep from "../../signup/PasswordStep";
-import ProfilePicture from "../../signup/ProfilePicture";
 import Username from "../../signup/Username";
 import { FinalStep } from "../../signup/FinalStep";
 import SignUpStep from "../../SignUpStep";
@@ -31,12 +28,11 @@ const Layer = () => {
   const currentStep = useSelector(
     (state) => state.rootReducer.signUp.steps.currentStep
   );
-  const handleClose = useSelector((state) => state.rootReducer.dialogState.isCancelled);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const handleDialogClose = () => {
-    setIsDialogOpen(false);
-  };
+  const handleClose = useSelector(
+    (state) => state.rootReducer.dialogState.isCancelled
+  );
+
   const isUserAuthenticated = useSelector(
     (state) => state.rootReducer.userInfo.isAuthenticated
   );
@@ -51,17 +47,19 @@ const Layer = () => {
               content={
                 <SignUpStep
                   header={<DialogHeader />}
-                  content={<FinalStep />}
-                  footer={<DialogFooter currentStep={currentStep}/>}
+                  content={stepsContent[currentStep - 1]}
+                  footer={<DialogFooter currentStep={currentStep} />}
                 />
               }
             />
           }
         />
       </Routes>
-      
+
       {isUserAuthenticated ? null : <LandingFooter />}
-      {<Dialog height={'300px'} width={'320px'} content={<UnfollowDialog handleClose={handleDialogClose}/>}/>}
+      {handleClose && (
+        <Dialog height={"300px"} width={"320px"} content={<UnfollowDialog />} />
+      )}
     </div>
   );
 };

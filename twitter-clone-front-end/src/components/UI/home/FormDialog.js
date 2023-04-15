@@ -1,6 +1,7 @@
 import React from "react";
 
 import Dialog from "@mui/material/Dialog";
+import  {Fade} from "@mui/material";
 import { createTheme, DialogActions, DialogContent, DialogTitle, ThemeProvider } from "@mui/material";
 ;
 
@@ -19,6 +20,7 @@ const FormDialog = (props) => {
   return (
     <ThemeProvider theme={theme} >
       <Dialog
+      transitionDuration={0}
         open={true}
         PaperProps={{
           sx: {

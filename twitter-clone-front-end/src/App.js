@@ -12,9 +12,6 @@ import MainContainer from "./components/UI/main/MainContainer";
 ReactGA.initialize("UA-255822850-1");
 
 function App() {
-  const currStep = useSelector(
-    (state) => state.rootReducer.signUp.steps.currentStep
-  );
   const isUserAuthenticated = useSelector(
     (state) => state.rootReducer.userInfo.isAuthenticated
   );
