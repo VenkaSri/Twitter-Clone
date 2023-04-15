@@ -28,4 +28,9 @@ public class AccountController {
     return accountService.follow(followerEmail, followedUsername);
   }
 
+  @DeleteMapping("/users/follow")
+  public Response<String> unFollowUser(@RequestParam String followerEmail, @RequestParam String followedUsername) {
+    return accountService.unfollow(followerEmail, followedUsername);
+  }
+
 }

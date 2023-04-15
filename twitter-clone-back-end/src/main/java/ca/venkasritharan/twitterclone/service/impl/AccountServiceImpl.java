@@ -63,6 +63,33 @@ public class AccountServiceImpl implements AccountService {
     return mapToEntity(follower.getId(), followedUser.getId());
   }
 
+  @Override
+  public Response<String> unfollow(String followerEmailOrPhone, String followedUsername) {
+    User follower = userRepository.findByEmail(followerEmailOrPhone).orElse(null);
+    User followedUser = userRepository.findByUsername(followedUsername).orElse(null);
+
+    if (follower == null || followedUser == null) {
+      return new Response<>(404, "Invalid email or username");
+    }
+
+    Optional<Follower> followerEntityOpt = followerRepository.findByFollowerAndFollowed(follower, followedUser);
+
+    if (!followerEntityOpt.isPresent()) {
+      return new Response<>(404, "User not following this account");
+    }
+
+    Follower followerEntity = followerEntityOpt.get();
+    followerRepository.delete(followerEntity);
+
+    follower.setFollowingCount(follower.getFollowingCount());
+    followedUser.setFollowerCount(followedUser.getFollowerCount());
+
+    userRepository.save(follower);
+    userRepository.save(followedUser);
+
+    return new Response<>(200, "User unfollowed successfully");
+  }
+
   public Response<String> mapToEntity(long followerId, long followedId) {
     User follower = userRepository.findById(followerId).orElse(null);
     User followedUser = userRepository.findById(followedId).orElse(null);
