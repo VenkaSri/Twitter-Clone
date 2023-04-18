@@ -47,7 +47,7 @@ const Layer = () => {
               content={
                 <SignUpStep
                   header={<DialogHeader />}
-                  content={stepsContent[currentStep - 1]}
+                  content={<PasswordStep />}
                   footer={<DialogFooter currentStep={currentStep} />}
                 />
               }

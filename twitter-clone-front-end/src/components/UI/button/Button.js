@@ -24,6 +24,7 @@ const Button = ({ onClick, buttonProps }) => {
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      disabled={buttonProps.disabled}
     >
       {buttonProps.text}
     </button>
