@@ -1,20 +1,61 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Button from "../../UI/button/Button";
+import axios from "axios";
 import { useUserData } from "../../../hooks/user-data";
 import { useDispatch, useSelector } from "react-redux";
-import { nameActions } from "../../../state/auth/sign-up/name-reducer";
-import { dobActions } from "../../../state/auth/sign-up/dob-reducer";
-import { emailActions } from "../../../state/auth/sign-up/email-reducer";
 import { stepsActions } from "../../../state/auth/form/steps-reducer";
+import { apiActions } from "../../../state/auth/form/api-reducer";
+import moment from "moment";
+import { userInfoActions } from "../../../state/authentication/userInfo-reducer";
+import { usernameActions } from "../../../state/auth/sign-up/username-reducer";
 
 const StepThreeFooter = () => {
-  const { isPasswordEntered } = useUserData();
+  const { password, name, email, dob } = useUserData();
   const currentStep = useSelector((state) => state.rootReducer.signUp.steps.currentStep);
+  const userDob = `${dob.year}-${dob.month}-${dob.day}`;
   const dispatch = useDispatch();
+  const register = () => {
+    dispatch(apiActions.setLoading(false));
+    var data = JSON.stringify({
+      name: name.name,
+      dob: moment(userDob, "YYYY-MMMM-DD").format("YYYY-MM-DD"),
+      password: password.enteredPassword,
+      email: email.enteredEmail,
+    });
 
-  useEffect(() => {
-    console.log(isPasswordEntered);
-  }, [isPasswordEntered])
+    var config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: process.env.REACT_APP_BASE_URL,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        dispatch(userInfoActions.setAuthentication(true));
+        getUserName();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const getUserName = () => {
+    axios
+      .get(process.env.REACT_APP_GET_USERNAME_URL + `${email.enteredEmail}`)
+      .then((response) => {
+        dispatch(userInfoActions.setUsername(response.data.data.username));
+        dispatch(usernameActions.setUsername(response.data.data.username));
+        dispatch(userInfoActions.setName(response.data.data.name));
+        dispatch(apiActions.setLoading(true));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   const buttonInfo = {
     height: 52,
@@ -22,15 +63,16 @@ const StepThreeFooter = () => {
     text: "Next",
     txtColor: "#FFF",
     hoverBgColor: "#272c30",
-    disabled: (isPasswordEntered),
+    disabled: !(password.isPasswordValid),
     bgColorEnabled: "#000",
     bgColorDisabled: "#86888b",
-    ...(isPasswordEntered
+    ...(password.isPasswordValid
       ? { bgColor: "#000" }
       : { bgColor: "#86888b" }),
   };
 
   const handledNext = () => {
+    register();
     dispatch(stepsActions.setCurrentStep(currentStep + 1));
   }
 
