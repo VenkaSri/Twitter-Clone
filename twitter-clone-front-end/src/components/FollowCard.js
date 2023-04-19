@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import ProfilePicture from "./ProfilePicture";
 import DefaultAvatar from "../assets/images/avatars/default_avi.png";
@@ -12,12 +12,14 @@ import { unfollowDialogActions } from "../state/dialog/dialogState-reducer";
 const FollowCard = ({ user }) => {
   const { hasOneFollowing } = useUserData();
   const { userEmail } = useUserData();
+  const [isFollowing, setIsFollowing] = useState(false);
   const dispatch = useDispatch();
   const handleFollowClick = () => {
     if (hasOneFollowing) {
       console.log(user.username);
       dispatch(unfollowDialogActions.setSelectedUser(user.username));
       dispatch(unfollowDialogActions.cancelDialog(true));
+      setIsFollowing(false);
     } else {
       axios
         .post(
@@ -26,6 +28,7 @@ const FollowCard = ({ user }) => {
         )
         .then(() => {
           dispatch(userInfoActions.setOneFollowingValidity(true));
+          setIsFollowing(true);
         })
         .catch((error) => {
           console.error(error);
@@ -33,7 +36,7 @@ const FollowCard = ({ user }) => {
     }
   };
 
-  console.log("Follow card = " + hasOneFollowing);
+  console.log("Follow card = " + isFollowing);
   return (
     <div className="h-[4.5rem] flex items-center">
       <ProfilePicture source={DefaultAvatar} size={48} />
@@ -41,7 +44,8 @@ const FollowCard = ({ user }) => {
       <div className="ml-auto">
         <FollowButton
           onClick={handleFollowClick}
-          isFollowing={hasOneFollowing}
+          hasOneFollowing={hasOneFollowing}
+          isFollowing={isFollowing}
         />
       </div>
     </div>
