@@ -7,15 +7,17 @@ import { CONFIRMED_CHECKMARK } from "../../utils/ButtonLinkObjects";
 import { userInfoActions } from "../../state/authentication/userInfo-reducer";
 import axios from "axios";
 import { usernameActions } from "../../state/auth/sign-up/username-reducer";
+import { useUserData } from "../../hooks/user-data";
 
 const userNameValidation = (text) => /^[a-zA-Z0-9_]*$/.test(text);
 
 const Username = () => {
+  
   const dispatch = useDispatch();
-  const username = useSelector((state) => state.rootReducer.signUp.username.enteredUsername);
+  const username = useSelector((state) => state.rootReducer.signUp.username);
   const email = useSelector((state) => state.rootReducer.signUp.email.enteredEmail);
   const [hasEnteredInput, setHasEnteredInput] = useState(false);
-  const [isNameValid, setIsNameValid] = useState(false);
+  const [svg, setSvg] = useState(true);
   const [errorText, setErrorText] = useState("");
   
   const usernameChangeHandle = (event) => {
@@ -25,7 +27,7 @@ const Username = () => {
 
   const checkIfUsernameExists = () => {
     axios
-      .get(process.env.REACT_APP_CHECK_USERNAME + `${username}?email=${email}`)
+      .get(process.env.REACT_APP_CHECK_USERNAME + `${username.enteredUsername}?email=${email}`)
       .then((response) => {
         const isValid = response.data.status === 200;
         const errorText = isValid
@@ -33,8 +35,9 @@ const Username = () => {
           : "That username has been taken. Please choose another.";
 
         dispatch(userInfoActions.setUsernameValidity(isValid));
-        setIsNameValid(!isValid);
+        dispatch(usernameActions.setUsernameValid(!isValid));
         setErrorText(errorText);
+        setSvg(true);
       })
       .catch(function (error) {
         console.log(error);
@@ -44,13 +47,22 @@ const Username = () => {
   useEffect(() => {
     let identifier;
     if (hasEnteredInput) {
-      if (username.length < 4) {
+      if (username.enteredUsername.length === 0) {
+        setSvg(false);
+        dispatch(usernameActions.setUsernameValid(false));
+        dispatch(userInfoActions.setUsernameValidity(true));
+        dispatch(usernameActions.setNewUserNameEntered(false));
+        return;
+      };
+      if (username.enteredUsername.length < 4) {
+        dispatch(usernameActions.setNewUserNameEntered(true));
         dispatch(userInfoActions.setUsernameValidity(false));
-        setIsNameValid(true);
+        dispatch(usernameActions.setUsernameValid(true));
         setErrorText("Your username must be longer than 4 characters.");
-      } else if (!userNameValidation(username)) {
+      } else if (!userNameValidation(username.enteredUsername)) {
         dispatch(userInfoActions.setUsernameValidity(false));
-        setIsNameValid(true);
+        dispatch(usernameActions.setNewUserNameEntered(true));
+        dispatch(usernameActions.setUsernameValid(true));
         setErrorText("Your username can only contain letters, numbers and '_'");
       } else {
         identifier = setTimeout(() => {
@@ -63,7 +75,7 @@ const Username = () => {
       dispatch(userInfoActions.setUsernameValidity(false));
       clearTimeout(identifier);
     };
-  }, [username, hasEnteredInput]);
+  }, [username.enteredUsername, hasEnteredInput]);
 
   return (
     <div className="h-full min-h-[440px] px-[5rem] ">
@@ -79,12 +91,12 @@ const Username = () => {
           paddingTop: "8px",
           borderStyle: "solid",
           borderWidth: 1,
-          borderColor: !isNameValid ? "#1d9bf0" : "#FF0000",
+          borderColor: !username.isUsernameValid ? "#1d9bf0" : "#FF0000",
           marginTop: "50px",
           "&:focus-within": {
             borderStyle: "solid",
             borderWidth: 2,
-            borderColor: !isNameValid ? "#1d9bf0" : "#FF0000",
+            borderColor: !username.isUsernameValid ? "#1d9bf0" : "#FF0000",
           },
           borderRadius: "4px",
         }}
@@ -95,9 +107,9 @@ const Username = () => {
           className="ml-[6px] mt-[4px] "
           sx={{
             fontSize: "17px",
-            color: isNameValid ? "#FF0000" : "#1d9bf0",
+            color: username.isUsernameValid ? "#FF0000" : "#1d9bf0",
             "&.Mui-focused": {
-              color: isNameValid ? "#FF0000" : "#1d9bf0",
+              color: username.isUsernameValid ? "#FF0000" : "#1d9bf0",
             },
           }}
         >
@@ -108,15 +120,15 @@ const Username = () => {
           disableUnderline
           id="standard-adornment-password"
           type="text"
-          value={username}
+          value={username.enteredUsername}
           endAdornment={
             <InputAdornment position="end">
-              {!isNameValid && (
+              {!username.isUsernameValid && (
                 <div
                   className="w-[20px] h-[20px] mr-[10px] cursor-pointer fill-[#00BA7C]"
                   onMouseDown={(e) => e.preventDefault()}
                 >
-                  <SVG svgPath={CONFIRMED_CHECKMARK} />
+                  {svg && <SVG svgPath={CONFIRMED_CHECKMARK} />}
                 </div>
               )}
             </InputAdornment>
@@ -125,9 +137,9 @@ const Username = () => {
             <InputAdornment
               position="start"
               sx={{
-                color: isNameValid ? "#FF0000" : "#1d9bf0",
+                color: username.isUsernameValid ? "#FF0000" : "#1d9bf0",
                 "&.Mui-focused": {
-                  color: isNameValid ? "#FF0000" : "#1d9bf0",
+                  color: username.isUsernameValid ? "#FF0000" : "#1d9bf0",
                 },
               }}
             >
@@ -143,7 +155,7 @@ const Username = () => {
           autoFocus
         />
       </FormControl>
-      {isNameValid && (
+      {username.isUsernameValid && (
         <p className="font-cReg text-[14px] ml-2 text-[#ff0000]">{errorText}</p>
       )}
     </div>

@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  enteredUsername: "",
-  isUsernameSet: true,
-
+  enteredUsername: "Test",
+  isNewUsernameEntered: false,
+  isUsernameValid: false,
 }
 
 const usernameSlice = createSlice({
@@ -13,8 +13,11 @@ const usernameSlice = createSlice({
     setUsername(state, action) {
       state.enteredUsername = action.payload;
     },
-    setUsernameValidity(state, action) {
-      state.isUsernameSet = action.payload;
+    setNewUserNameEntered(state, action) {
+      state.isNewUsernameEntered = action.payload;
+    },
+    setUsernameValid(state, action) {
+      state.isUsernameValid = (action.payload);
     }
   }
 })

@@ -1,11 +1,11 @@
 import React from "react";
-import Button from "../UI/button/Button";
-import { useUserData } from "../../hooks/user-data";
+import Button from "../../UI/button/Button";
+import { useUserData } from "../../../hooks/user-data";
 import { useDispatch, useSelector } from "react-redux";
-import { nameActions } from "../../state/auth/sign-up/name-reducer";
-import { dobActions } from "../../state/auth/sign-up/dob-reducer";
-import { emailActions } from "../../state/auth/sign-up/email-reducer";
-import { stepsActions } from "../../state/auth/form/steps-reducer";
+import { nameActions } from "../../../state/auth/sign-up/name-reducer";
+import { dobActions } from "../../../state/auth/sign-up/dob-reducer";
+import { emailActions } from "../../../state/auth/sign-up/email-reducer";
+import { stepsActions } from "../../../state/auth/form/steps-reducer";
 
 const StepOneFooter = () => {
   const { isEmailEntered, isDOBEntered, isNameEntered } = useUserData();
