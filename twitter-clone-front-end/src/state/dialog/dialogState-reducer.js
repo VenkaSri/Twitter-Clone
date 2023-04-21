@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isCancelled: false,
   isFormDialogOpen: false,
+  isUnfollowed: false,
   selectUser: "",
 }
 
@@ -18,6 +19,9 @@ const unfollowDialogSlice = createSlice({
     },
     setSelectedUser(state, action) {
       state.selectUser = action.payload;
+    },
+    setIsUnfollowed(state, action) {
+      state.isUnfollowed = action.payload;
     }
   }
 })

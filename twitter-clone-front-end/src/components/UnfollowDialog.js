@@ -44,6 +44,7 @@ const UnfollowDialog = () => {
       .then(() => {
         dispatch(userInfoActions.setOneFollowingValidity(false));
         dispatch(unfollowDialogActions.cancelDialog(false));
+        dispatch(unfollowDialogActions.setIsUnfollowed(true));
       })
       .catch((error) => {
         console.error(error);
