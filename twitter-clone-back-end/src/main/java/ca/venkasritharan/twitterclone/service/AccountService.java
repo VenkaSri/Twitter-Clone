@@ -1,5 +1,6 @@
 package ca.venkasritharan.twitterclone.service;
 
+import ca.venkasritharan.twitterclone.entity.authentication.User;
 import ca.venkasritharan.twitterclone.util.response.Response;
 
 import java.util.List;
@@ -10,4 +11,5 @@ public interface AccountService {
 
   Response<String> follow(String followerEmailOrPhone, String followedUsername);
   Response<String> unfollow(String followerEmailOrPhone, String followedUsername);
+
 }

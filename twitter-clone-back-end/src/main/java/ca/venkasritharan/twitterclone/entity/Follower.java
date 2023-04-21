@@ -1,5 +1,6 @@
 package ca.venkasritharan.twitterclone.entity;
 
+import ca.venkasritharan.twitterclone.dto.FollowInfoDTO;
 import ca.venkasritharan.twitterclone.entity.authentication.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -38,6 +39,10 @@ public class Follower {
   public void decreaseFollowerAndFollowingCounts() {
     follower.setFollowingCount(follower.getFollowingCount() - 1);
     followed.setFollowerCount(followed.getFollowerCount() - 1);
+  }
+
+  public FollowInfoDTO toFollowerInfo() {
+    return new FollowInfoDTO(follower.getId(), follower.getUsername());
   }
 
 
