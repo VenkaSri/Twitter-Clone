@@ -10,12 +10,12 @@ import { userInfoActions } from "../state/authentication/userInfo-reducer";
 import { unfollowDialogActions } from "../state/dialog/dialogState-reducer";
 import { followActions } from "../state/follow/follow-reducer";
 
-const FollowCard = ({ user, onFollow, onUnfollow }) => {
+const FollowCard = ({ user, onFollow, text }) => {
   const [btnStyle, setBtnStyle] = useState(
     "h-[2rem] w-[4.875rem] rounded-full bg-[#000] hover:bg-[#272c30] text-[#FFF] text-[0.938rem] font-cBold"
   );
   const [btnText, setBtnText] = useState("Follow");
-  
+  const [isFollowing, setIsFollowing] = useState(false);
   
 
   const handleClick = () => {
@@ -31,7 +31,7 @@ const FollowCard = ({ user, onFollow, onUnfollow }) => {
         <FollowButton
           onClick={handleClick}
           btnStyle={btnStyle}
-          btnText={btnText}
+          btnText={text}
         />
       </div>
     </div>

@@ -16,13 +16,17 @@ const FollowSuggestions = () => {
     (state) => state.rootReducer.signUp.email.enteredEmail
   );
 
+  const followers = useSelector((state) => state.rootReducer.userInfo.followers);
+
 
   const handleFollow = (usr) => {
     console.log(usr);
   }
 
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
+
+    console.log(followers)
     axios
       .get(process.env.REACT_APP_GET_FOLLOWERS + 269)
       .then((response) => {
@@ -33,48 +37,25 @@ const FollowSuggestions = () => {
   }, []);
 
 
-  useEffect(() => {
-    setLoading(true);
-    axios
-      .get(process.env.REACT_APP_GET_ALL_ACCOUNTS + `?emailOrPhone=${email}`)
-      .then((response) => {
-        const users = response.data.data.users;
-        setFiftyUsers(users);
-        checkIfUserFollows();
-        const followCards = users.map((user) => ({
-          ...user,
-          isFollwing: false,
-        }));
-        setFollowCards(followCards);
-        setLoading(false);
-      })
-      .catch((error) => console.error(error));
-  }, [followedUsers]);
+  
 
   const checkIfUserFollows = () => {
-    followedUsers.forEach((user)=> {
-      for (const u of fiftyUsers) {
-        if (u.username === user) {
-          console.log(user + ' is in the users array!');
-          break;
-        }
-      }
+    const followCards = fiftyUsers.map(user => {
+      const isFollowing = followedUsers.includes(user.username);
+      const text = isFollowing ? 'Following' : 'Follow';
+      return <FollowCard key={user.username} user={user} text={text} onFollow={() => handleFollow(user.username)
+      }/>;
     });
-  }
+    setFollowCards(followCards);
+  };
+  
 
   return (
     <>
       {loading ? (
         <Skeleton variant="rounded" width={425} height={72} />
       ) : (
-        followCards.map((user) => (
-          <FollowCard
-            key={user.username}
-            user={user}
-            onFollow={() => handleFollow(user.username)}
-          />
-        ))
-      )}
+       <>{followCards.map(card => card)}</>)}
     </>
   );
 };
