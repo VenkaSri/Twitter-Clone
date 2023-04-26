@@ -4,7 +4,7 @@ import axios from "axios";
 import { useUserData } from "../../../hooks/user-data";
 import { useDispatch, useSelector } from "react-redux";
 import { stepsActions } from "../../../state/auth/form/steps-reducer";
-import { userInfoActions } from "../../../state/authentication/userInfo-reducer";
+import { userInfoActions } from "../../../state/user/userInfo-reducer";
 
 const UsernameStepFooter = () => {
   const { email, username, isUsernameSet } = useUserData();

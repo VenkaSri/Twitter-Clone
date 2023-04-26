@@ -6,12 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { stepsActions } from "../../../state/auth/form/steps-reducer";
 import { apiActions } from "../../../state/auth/form/api-reducer";
 import moment from "moment";
-import { userInfoActions } from "../../../state/authentication/userInfo-reducer";
+import { userInfoActions } from "../../../state/user/userInfo-reducer";
 import { usernameActions } from "../../../state/auth/sign-up/username-reducer";
 
 const StepThreeFooter = () => {
   const { password, name, email, dob } = useUserData();
-  const currentStep = useSelector((state) => state.rootReducer.signUp.steps.currentStep);
+  const currentStep = useSelector(
+    (state) => state.rootReducer.signUp.steps.currentStep
+  );
   const userDob = `${dob.year}-${dob.month}-${dob.day}`;
   const dispatch = useDispatch();
   const register = () => {
@@ -63,7 +65,7 @@ const StepThreeFooter = () => {
     text: "Next",
     txtColor: "#FFF",
     hoverBgColor: "#272c30",
-    disabled: !(password.isPasswordValid),
+    disabled: !password.isPasswordValid,
     bgColorEnabled: "#000",
     bgColorDisabled: "#86888b",
     ...(password.isPasswordValid
@@ -74,11 +76,11 @@ const StepThreeFooter = () => {
   const handledNext = () => {
     register();
     dispatch(stepsActions.setCurrentStep(currentStep + 1));
-  }
+  };
 
   return (
     <div className="w-full h-[6.25rem] max:h-[6.25rem] flex justify-center items-center">
-      <Button buttonProps={buttonInfo} onClick={handledNext}/>
+      <Button buttonProps={buttonInfo} onClick={handledNext} />
     </div>
   );
 };

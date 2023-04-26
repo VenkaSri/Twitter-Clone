@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FormControl, Input, InputAdornment, InputLabel } from "@mui/material";
 import SVG from "../UI/app/SVG";
 import { CONFIRMED_CHECKMARK } from "../../utils/ButtonLinkObjects";
-import { userInfoActions } from "../../state/authentication/userInfo-reducer";
+import { userInfoActions } from "../../state/user/userInfo-reducer";
 import axios from "axios";
 import { usernameActions } from "../../state/auth/sign-up/username-reducer";
 import { useUserData } from "../../hooks/user-data";
@@ -12,14 +12,15 @@ import { useUserData } from "../../hooks/user-data";
 const userNameValidation = (text) => /^[a-zA-Z0-9_]*$/.test(text);
 
 const Username = () => {
-  
   const dispatch = useDispatch();
   const username = useSelector((state) => state.rootReducer.signUp.username);
-  const email = useSelector((state) => state.rootReducer.signUp.email.enteredEmail);
+  const email = useSelector(
+    (state) => state.rootReducer.signUp.email.enteredEmail
+  );
   const [hasEnteredInput, setHasEnteredInput] = useState(false);
   const [svg, setSvg] = useState(true);
   const [errorText, setErrorText] = useState("");
-  
+
   const usernameChangeHandle = (event) => {
     dispatch(usernameActions.setUsername(event.target.value));
     setHasEnteredInput(true);
@@ -27,7 +28,10 @@ const Username = () => {
 
   const checkIfUsernameExists = () => {
     axios
-      .get(process.env.REACT_APP_CHECK_USERNAME + `${username.enteredUsername}?email=${email}`)
+      .get(
+        process.env.REACT_APP_CHECK_USERNAME +
+          `${username.enteredUsername}?email=${email}`
+      )
       .then((response) => {
         const isValid = response.data.status === 200;
         const errorText = isValid
@@ -53,7 +57,7 @@ const Username = () => {
         dispatch(userInfoActions.setUsernameValidity(true));
         dispatch(usernameActions.setNewUserNameEntered(false));
         return;
-      };
+      }
       if (username.enteredUsername.length < 4) {
         dispatch(usernameActions.setNewUserNameEntered(true));
         dispatch(userInfoActions.setUsernameValidity(false));
@@ -116,7 +120,7 @@ const Username = () => {
           Username
         </InputLabel>
         <Input
-          inputProps={{maxLength: 15}}
+          inputProps={{ maxLength: 15 }}
           disableUnderline
           id="standard-adornment-password"
           type="text"

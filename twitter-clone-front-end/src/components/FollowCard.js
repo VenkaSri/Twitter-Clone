@@ -6,22 +6,20 @@ import UserProfileInfo from "./UserProfileInfo";
 import FollowButton from "./UI/button/FollowButton";
 import { useUserData } from "../hooks/user-data";
 import { useDispatch, useSelector } from "react-redux";
-import { userInfoActions } from "../state/authentication/userInfo-reducer";
+import { userInfoActions } from "../state/user/userInfo-reducer";
 import { unfollowDialogActions } from "../state/dialog/dialogState-reducer";
 import { followActions } from "../state/follow/follow-reducer";
 
-const FollowCard = ({ user, onFollow, text }) => {
+const FollowCard = ({ user, onFollow }) => {
   const [btnStyle, setBtnStyle] = useState(
     "h-[2rem] w-[4.875rem] rounded-full bg-[#000] hover:bg-[#272c30] text-[#FFF] text-[0.938rem] font-cBold"
   );
   const [btnText, setBtnText] = useState("Follow");
   const [isFollowing, setIsFollowing] = useState(false);
-  
 
   const handleClick = () => {
-      onFollow();
+    onFollow();
   };
-
 
   return (
     <div className="h-[4.5rem] flex items-center">
@@ -31,7 +29,7 @@ const FollowCard = ({ user, onFollow, text }) => {
         <FollowButton
           onClick={handleClick}
           btnStyle={btnStyle}
-          btnText={text}
+          btnText={btnText}
         />
       </div>
     </div>

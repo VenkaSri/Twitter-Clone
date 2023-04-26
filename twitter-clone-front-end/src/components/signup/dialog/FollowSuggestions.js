@@ -4,58 +4,50 @@ import FollowCard from "../../FollowCard";
 import axios from "axios";
 import { Skeleton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { unfollowDialogActions } from "../../../state/dialog/dialogState-reducer";
+import { follow } from "../../user/api";
+import { useUserData } from "../../../hooks/user-data";
+import { userInfoActions } from "../../../state/user/userInfo-reducer";
 
 const FollowSuggestions = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const [followedUsers, setFollowedUsers] = useState([]);
-  const [fiftyUsers, setFiftyUsers] = useState([]);
   const [followCards, setFollowCards] = useState([]);
-  const email = useSelector(
-    (state) => state.rootReducer.signUp.email.enteredEmail
+  const { userEmail } = useUserData();
+  const allAccounts = useSelector(
+    (state) => state.rootReducer.globalState.allAccounts
   );
-
-  const followers = useSelector((state) => state.rootReducer.userInfo.followers);
-
-
   const handleFollow = (usr) => {
-    console.log(usr);
-  }
-
+    const fetchData = async () => {
+      const response = await follow(userEmail, usr);
+      if (response === 200)
+        dispatch(userInfoActions.setOneFollowingValidity(true));
+    };
+    fetchData();
+  };
+  const userInfo = useSelector((state) => state.rootReducer.userInfo);
   useEffect(() => {
-    // setLoading(true);
-
-    console.log(followers)
-    axios
-      .get(process.env.REACT_APP_GET_FOLLOWERS + 269)
-      .then((response) => {
-        // console.log(response.data.data.users);
-        setFollowedUsers(response.data.data.users);
-      })
-      .catch((error) => console.error(error));
-  }, []);
-
-
-  
-
-  const checkIfUserFollows = () => {
-    const followCards = fiftyUsers.map(user => {
-      const isFollowing = followedUsers.includes(user.username);
-      const text = isFollowing ? 'Following' : 'Follow';
-      return <FollowCard key={user.username} user={user} text={text} onFollow={() => handleFollow(user.username)
-      }/>;
+    const usersToFollow = allAccounts.filter(
+      (user) => !userInfo.followers.includes(user.username)
+    );
+    const followCards = usersToFollow.map((user) => {
+      return (
+        <FollowCard
+          key={user.username}
+          user={user}
+          onFollow={() => handleFollow(user.username)}
+        />
+      );
     });
     setFollowCards(followCards);
-  };
-  
+  }, [allAccounts, userInfo.followers]);
 
   return (
     <>
       {loading ? (
         <Skeleton variant="rounded" width={425} height={72} />
       ) : (
-       <>{followCards.map(card => card)}</>)}
+        <>{followCards.map((card) => card)}</>
+      )}
     </>
   );
 };

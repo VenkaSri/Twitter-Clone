@@ -8,8 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import LoggedInHeader from "./components/header/LoggedInHeader";
 import LoggedOutHeader from "./components/header/LoggedOutHeader";
 import MainContainer from "./components/UI/main/MainContainer";
-import fetchFollowers from "./components/user/followers-api";
-import { userInfoActions } from "./state/authentication/userInfo-reducer";
+import { fetchAllAccounts, fetchFollowers } from "./components/user/api";
+import { globalInfoActions } from "./state/app/global-reducer";
+import { userInfoActions } from "./state/user/userInfo-reducer";
 
 ReactGA.initialize("UA-255822850-1");
 
@@ -19,18 +20,16 @@ function App() {
     (state) => state.rootReducer.userInfo.isAuthenticated
   );
 
-  const email = useSelector(
-    (state) => state.rootReducer.userInfo.email
-  );
-
+  const userInfo = useSelector((state) => state.rootReducer.userInfo);
   useEffect(() => {
     const fetchData = async () => {
-      const users = await fetchFollowers(email);
-      console.log(users);
+      const allAccounts = await fetchAllAccounts(userInfo.email);
+      const followers = await fetchFollowers(userInfo.userId);
+      dispatch(globalInfoActions.setAllAccounts(allAccounts));
+      dispatch(userInfoActions.setFollowers(followers));
     };
     fetchData();
   }, []);
-  
 
   return (
     <div className="flex flex-col grow">

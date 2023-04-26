@@ -4,7 +4,7 @@ import Button from "./UI/button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { unfollowDialogActions } from "../state/dialog/dialogState-reducer";
 import { useUserData } from "../hooks/user-data";
-import { userInfoActions } from "../state/authentication/userInfo-reducer";
+import { userInfoActions } from "../state/user/userInfo-reducer";
 
 const unFollowBtn = {
   height: 44,

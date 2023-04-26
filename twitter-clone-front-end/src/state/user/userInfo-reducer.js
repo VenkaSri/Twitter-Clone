@@ -9,8 +9,9 @@ const initialState = {
   hasOneFollowing: false,
   followers: [],
   following: [],
-  tweets: []
-}
+  tweets: [],
+  userId: 269,
+};
 
 const userInfoSlice = createSlice({
   name: "userInfo",
@@ -33,10 +34,12 @@ const userInfoSlice = createSlice({
     },
     setFollowers(state, action) {
       state.followers = action.payload;
-    }
-  }
-})
-
+    },
+    setUserId(state, action) {
+      state.userId = action.payload;
+    },
+  },
+});
 
 export const userInfoActions = userInfoSlice.actions;
 export default userInfoSlice.reducer;
