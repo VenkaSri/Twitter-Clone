@@ -3,7 +3,6 @@ import { useUserData } from "../../../hooks/user-data";
 
 const FinalStepFooter = () => {
   const { hasOneFollowing } = useUserData();
-  console.log(hasOneFollowing);
   const buttonClass = hasOneFollowing
     ? "w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#000] hover:bg-[#272c30]"
     : "w-[440px] h-[52px] font-cBold text-[#fff] rounded-full bg-[#86888b]";

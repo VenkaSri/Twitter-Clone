@@ -14,10 +14,21 @@ const FollowCard = ({ user, onFollow }) => {
   const [btnStyle, setBtnStyle] = useState(
     "h-[2rem] w-[4.875rem] rounded-full bg-[#000] hover:bg-[#272c30] text-[#FFF] text-[0.938rem] font-cBold"
   );
+
   const [btnText, setBtnText] = useState("Follow");
-  const [isFollowing, setIsFollowing] = useState(false);
 
   const handleClick = () => {
+    if (user.isFollowing === true) {
+      setBtnText("Follow");
+      setBtnStyle(
+        "h-[2rem] w-[4.875rem] rounded-full bg-[#000] hover:bg-[#272c30] text-[#FFF] text-[0.938rem] font-cBold"
+      );
+    } else {
+      setBtnText("Following");
+      setBtnStyle(
+        "h-[2rem] w-[6.188rem] rounded-full text-[0.938rem] font-cBold border border-[#cfd9de]"
+      );
+    }
     onFollow();
   };
 
@@ -28,8 +39,8 @@ const FollowCard = ({ user, onFollow }) => {
       <div className="ml-auto">
         <FollowButton
           onClick={handleClick}
-          btnStyle={btnStyle}
           btnText={btnText}
+          btnStyle={btnStyle}
         />
       </div>
     </div>

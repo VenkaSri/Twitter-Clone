@@ -36,4 +36,17 @@ const follow = async (email, username) => {
   }
 };
 
-export { fetchAllAccounts, fetchFollowers, follow };
+const unfollow = async (email, username) => {
+  console.log(process.env.REACT_APP_UNFOLLOW_ACCOUNT);
+  try {
+    const response = await axios.delete(
+      process.env.REACT_APP_UNFOLLOW_ACCOUNT +
+        `?followerEmail=${email}&followedUsername=${username}`
+    );
+    return response.data.status;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export { fetchAllAccounts, fetchFollowers, follow, unfollow };
