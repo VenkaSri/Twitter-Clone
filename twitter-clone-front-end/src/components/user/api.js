@@ -6,7 +6,7 @@ const fetchAllAccounts = async (email) => {
       process.env.REACT_APP_GET_ALL_ACCOUNTS + `?emailOrPhone=${email}`
     );
     const users = response.data.data.users;
-    return users;
+    return users.map((user) => ({ ...user, isFollowing: false }));
   } catch (error) {
     console.error(error);
   }

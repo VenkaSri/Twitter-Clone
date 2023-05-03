@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react-test-renderer";
 
 const initialState = {
   isCancelled: false,
   isFormDialogOpen: false,
   isUnfollowed: false,
   selectUser: "",
-}
+  follow: false,
+};
 
 const unfollowDialogSlice = createSlice({
   name: "unfollowDialog",
@@ -22,10 +24,12 @@ const unfollowDialogSlice = createSlice({
     },
     setIsUnfollowed(state, action) {
       state.isUnfollowed = action.payload;
-    }
-  }
-})
-
+    },
+    setFollow(state, action) {
+      state.follow = action.payload;
+    },
+  },
+});
 
 export const unfollowDialogActions = unfollowDialogSlice.actions;
 export default unfollowDialogSlice.reducer;

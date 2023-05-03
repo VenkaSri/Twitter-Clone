@@ -36,19 +36,8 @@ const UnfollowDialog = () => {
   };
 
   const handleUnfollow = () => {
-    axios
-      .delete(
-        process.env.REACT_APP_FOLLOW_ACCOUNT +
-          `?followerEmail=${userEmail}&followedUsername=${username}`
-      )
-      .then(() => {
-        dispatch(userInfoActions.setOneFollowingValidity(false));
-        dispatch(unfollowDialogActions.cancelDialog(false));
-        dispatch(unfollowDialogActions.setIsUnfollowed(true));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    dispatch(unfollowDialogActions.cancelDialog(false));
+    dispatch(unfollowDialogActions.setIsUnfollowed(true));
   };
 
   return (

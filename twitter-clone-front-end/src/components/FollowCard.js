@@ -4,32 +4,29 @@ import ProfilePicture from "./ProfilePicture";
 import DefaultAvatar from "../assets/images/avatars/default_avi.png";
 import UserProfileInfo from "./UserProfileInfo";
 import FollowButton from "./UI/button/FollowButton";
-import { useUserData } from "../hooks/user-data";
-import { useDispatch, useSelector } from "react-redux";
-import { userInfoActions } from "../state/user/userInfo-reducer";
-import { unfollowDialogActions } from "../state/dialog/dialogState-reducer";
-import { followActions } from "../state/follow/follow-reducer";
 
-const FollowCard = ({ user, onFollow }) => {
-  const [btnStyle, setBtnStyle] = useState(
-    "h-[2rem] w-[4.875rem] rounded-full bg-[#000] hover:bg-[#272c30] text-[#FFF] text-[0.938rem] font-cBold"
-  );
-
-  const [btnText, setBtnText] = useState("Follow");
-
+const FollowCard = ({ user, onFollow, btnStyle, text }) => {
+  const [btnText, setBtnText] = useState(text);
+  const [style, setBtnStyle] = useState(btnStyle);
   const handleClick = () => {
-    if (user.isFollowing === true) {
-      setBtnText("Follow");
+    onFollow();
+  };
+  const mouseOverHandler = () => {
+    if (user.isFollowing) {
+      setBtnText("Unfollow");
       setBtnStyle(
-        "h-[2rem] w-[4.875rem] rounded-full bg-[#000] hover:bg-[#272c30] text-[#FFF] text-[0.938rem] font-cBold"
+        "h-[2rem] w-[6.188rem] rounded-full text-[0.938rem] font-cBold bg-[#efdbdd] text-[#f4222e] border border-[#fbcbcf]"
       );
-    } else {
+    }
+  };
+
+  const mouseLeaveHandler = () => {
+    if (user.isFollowing) {
       setBtnText("Following");
       setBtnStyle(
         "h-[2rem] w-[6.188rem] rounded-full text-[0.938rem] font-cBold border border-[#cfd9de]"
       );
     }
-    onFollow();
   };
 
   return (
@@ -39,8 +36,10 @@ const FollowCard = ({ user, onFollow }) => {
       <div className="ml-auto">
         <FollowButton
           onClick={handleClick}
-          btnText={btnText}
+          btnText={text}
           btnStyle={btnStyle}
+          // mouseOverHandler={mouseOverHandler}
+          // mouseLeaveHandler={mouseLeaveHandler}
         />
       </div>
     </div>

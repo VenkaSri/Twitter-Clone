@@ -6,7 +6,6 @@ import SVG from "../app/SVG";
 import { LOGO } from "../../../utils/ButtonLinkObjects";
 import UserInfo from "../../UserInfo";
 
-
 const Header = ({ headerButtonContent }) => {
   const currStep = useSelector(
     (state) => state.rootReducer.signUp.steps.currentStep
@@ -35,8 +34,6 @@ const Header = ({ headerButtonContent }) => {
         <div className="items-end w-[259px] mb-4">
           <UserInfo />
         </div>
-
-        
       </div>
     </div>
   );
