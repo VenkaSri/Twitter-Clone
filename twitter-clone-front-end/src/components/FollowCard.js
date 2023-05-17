@@ -5,28 +5,26 @@ import DefaultAvatar from "../assets/images/avatars/default_avi.png";
 import UserProfileInfo from "./UserProfileInfo";
 import FollowButton from "./UI/button/FollowButton";
 
-const FollowCard = ({ user, onFollow, btnStyle, text }) => {
+const FollowCard = ({
+  user,
+  onFollow,
+  btnStyle,
+  text,
+  mouseOverHandler,
+  mouseLeaveHandler,
+}) => {
   const [btnText, setBtnText] = useState(text);
   const [style, setBtnStyle] = useState(btnStyle);
   const handleClick = () => {
     onFollow();
   };
-  const mouseOverHandler = () => {
-    if (user.isFollowing) {
-      setBtnText("Unfollow");
-      setBtnStyle(
-        "h-[2rem] w-[6.188rem] rounded-full text-[0.938rem] font-cBold bg-[#efdbdd] text-[#f4222e] border border-[#fbcbcf]"
-      );
-    }
+  const handleMouseOver = () => {
+    mouseOverHandler();
+    console.log(user);
   };
 
-  const mouseLeaveHandler = () => {
-    if (user.isFollowing) {
-      setBtnText("Following");
-      setBtnStyle(
-        "h-[2rem] w-[6.188rem] rounded-full text-[0.938rem] font-cBold border border-[#cfd9de]"
-      );
-    }
+  const handleMouseLeave = () => {
+    mouseLeaveHandler(false);
   };
 
   return (
@@ -38,8 +36,8 @@ const FollowCard = ({ user, onFollow, btnStyle, text }) => {
           onClick={handleClick}
           btnText={text}
           btnStyle={btnStyle}
-          // mouseOverHandler={mouseOverHandler}
-          // mouseLeaveHandler={mouseLeaveHandler}
+          mouseOverHandler={handleMouseOver}
+          mouseLeaveHandler={handleMouseLeave}
         />
       </div>
     </div>

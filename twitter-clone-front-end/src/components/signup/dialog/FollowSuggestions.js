@@ -13,7 +13,7 @@ import { unfollowDialogActions } from "../../../state/dialog/dialogState-reducer
 const FollowSuggestions = () => {
   const dispatch = useDispatch();
   const [btnText, setBtnText] = useState("Follow");
-  const [style, setBtnStyle] = useState("");
+  const [isHovered, setIsHovered] = useState(false);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
   const allAccounts = useSelector(
@@ -28,6 +28,14 @@ const FollowSuggestions = () => {
   const { userEmail } = useUserData();
 
   useEffect(() => {
+    if (userInfo.followingCount === 0) {
+      dispatch(userInfoActions.setOneFollowingValidity(false));
+    } else {
+      dispatch(userInfoActions.setOneFollowingValidity(true));
+    }
+  }, [userInfo.followingCount]);
+
+  useEffect(() => {
     const usersToFollow = allAccounts.filter(
       (user) => !userInfo.followers.includes(user.username)
     );
@@ -36,11 +44,10 @@ const FollowSuggestions = () => {
 
   const handleFollow = (usr) => {
     if (!usr.isFollowing) {
+      dispatch(userInfoActions.setFollowingCount(userInfo.followingCount + 1));
       const fetchData = async () => {
         const response = await follow(userEmail, usr.username);
-        if (response === 200)
-          dispatch(userInfoActions.setOneFollowingValidity(true));
-        dispatch(unfollowDialogActions.setFollow(true));
+        if (response === 200) dispatch(unfollowDialogActions.setFollow(true));
         const updatedFollowCards = followCards.map((user) =>
           user.username === usr.username ? { ...user, isFollowing: true } : user
         );
@@ -56,11 +63,10 @@ const FollowSuggestions = () => {
   };
 
   if (isUnfollowed) {
+    dispatch(userInfoActions.setFollowingCount(userInfo.followingCount - 1));
     const fetchData = async () => {
       const response = await unfollow(userEmail, user.username);
-      if (response === 200)
-        dispatch(userInfoActions.setOneFollowingValidity(true));
-      dispatch(unfollowDialogActions.setFollow(true));
+      if (response === 200) dispatch(unfollowDialogActions.setFollow(true));
       const updatedFollowCards = followCards.map((usr) =>
         usr.username === user.username ? { ...usr, isFollowing: false } : usr
       );
@@ -71,18 +77,31 @@ const FollowSuggestions = () => {
   }
 
   const mouseOverHandler = (user) => {
-    if (user.isFollowing) {
-      setBtnText("Unfollow");
-      setBtnStyle(
-        "h-[2rem] w-[6.188rem] rounded-full text-[0.938rem] font-cBold bg-[#efdbdd] text-[#f4222e] border border-[#fbcbcf]"
+    setFollowCards((prevFollowCards) => {
+      return prevFollowCards.map((prevUser) =>
+        prevUser.username === user.username
+          ? { ...prevUser, isHovered: true }
+          : prevUser
       );
-    }
+    });
+  };
+
+  const mouseLeaveHandler = (user) => {
+    setFollowCards((prevFollowCards) => {
+      return prevFollowCards.map((prevUser) =>
+        prevUser.username === user.username
+          ? { ...prevUser, isHovered: false }
+          : prevUser
+      );
+    });
   };
 
   const followBtnStyle =
     "h-[2rem] w-[4.875rem] rounded-full bg-[#000] hover:bg-[#272c30] text-[#FFF] text-[0.938rem] font-cBold";
   const followingBtnStyle =
     "h-[2rem] w-[6.188rem] rounded-full text-[0.938rem] font-cBold border border-[#cfd9de]";
+  const unfollowBtnStyle =
+    "h-[2rem] w-[6.188rem] rounded-full text-[0.938rem] font-cBold bg-[#efdbdd] text-[#f4222e] border border-[#fbcbcf]";
   return (
     <>
       {loading ? (
@@ -95,9 +114,23 @@ const FollowSuggestions = () => {
               key={user.username}
               user={user}
               onFollow={() => handleFollow(user)}
-              text={user.isFollowing ? "Following" : "Follow"}
-              btnStyle={user.isFollowing ? followingBtnStyle : followBtnStyle}
+              hoverText={user.isFollowing ? "Unfollow" : "Follow"}
+              text={
+                user.isHovered && user.isFollowing
+                  ? "Unfollow"
+                  : !user.isHovered && user.isFollowing
+                  ? "Following"
+                  : "Follow"
+              }
+              btnStyle={
+                user.isHovered && user.isFollowing
+                  ? unfollowBtnStyle
+                  : !isHovered && user.isFollowing
+                  ? followingBtnStyle
+                  : followBtnStyle
+              }
               mouseOverHandler={() => mouseOverHandler(user)}
+              mouseLeaveHandler={() => mouseLeaveHandler(user)}
             />
           ))}
         </>

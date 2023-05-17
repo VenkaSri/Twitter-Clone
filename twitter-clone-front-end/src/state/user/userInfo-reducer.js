@@ -10,6 +10,8 @@ const initialState = {
   followers: [],
   following: [],
   tweets: [],
+  followingCount: 0,
+  followersCount: 0,
   userId: 269,
 };
 
@@ -37,6 +39,12 @@ const userInfoSlice = createSlice({
     },
     setUserId(state, action) {
       state.userId = action.payload;
+    },
+    setFollowingCount(state, action) {
+      state.followingCount = action.payload;
+    },
+    setFollowersCount(state, action) {
+      state.followersCount = action.payload;
     },
   },
 });
