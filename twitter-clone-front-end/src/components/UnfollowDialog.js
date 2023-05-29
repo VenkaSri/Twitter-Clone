@@ -36,6 +36,7 @@ const UnfollowDialog = () => {
   };
 
   const handleUnfollow = () => {
+    console.log("unfollow");
     dispatch(unfollowDialogActions.cancelDialog(false));
     dispatch(unfollowDialogActions.setIsUnfollowed(true));
   };

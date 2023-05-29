@@ -24,16 +24,10 @@ const FollowSuggestions = () => {
     (state) => state.rootReducer.dialogState.isUnfollowed
   );
 
+  console.log(isUnfollowed);
+
   const [followCards, setFollowCards] = useState([]);
   const { userEmail } = useUserData();
-
-  useEffect(() => {
-    if (userInfo.followingCount === 0) {
-      dispatch(userInfoActions.setOneFollowingValidity(false));
-    } else {
-      dispatch(userInfoActions.setOneFollowingValidity(true));
-    }
-  }, [userInfo.followingCount]);
 
   useEffect(() => {
     const usersToFollow = allAccounts.filter(
@@ -63,10 +57,9 @@ const FollowSuggestions = () => {
   };
 
   if (isUnfollowed) {
-    dispatch(userInfoActions.setFollowingCount(userInfo.followingCount - 1));
     const fetchData = async () => {
       const response = await unfollow(userEmail, user.username);
-      if (response === 200) dispatch(unfollowDialogActions.setFollow(true));
+      if (response === 200) dispatch(unfollowDialogActions.setFollow(false));
       const updatedFollowCards = followCards.map((usr) =>
         usr.username === user.username ? { ...usr, isFollowing: false } : usr
       );
