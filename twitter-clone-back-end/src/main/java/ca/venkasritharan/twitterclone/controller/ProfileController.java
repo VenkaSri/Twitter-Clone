@@ -1,6 +1,7 @@
 package ca.venkasritharan.twitterclone.controller;
 
 
+import ca.venkasritharan.twitterclone.service.UserService;
 import ca.venkasritharan.twitterclone.service.UsernameService;
 import ca.venkasritharan.twitterclone.util.response.Response;
 import org.slf4j.Logger;
@@ -15,9 +16,11 @@ import java.util.Map;
 public class ProfileController {
 
   private UsernameService usernameService;
+  private UserService userService;
 
-  public ProfileController(UsernameService usernameService) {
+  public ProfileController(UsernameService usernameService, UserService userService) {
     this.usernameService = usernameService;
+    this.userService = userService;
   }
 
   @GetMapping("/username/{email}")
@@ -33,6 +36,11 @@ public class ProfileController {
   @PostMapping("/{username}/{email}")
   public Response<String> updateUsername(@PathVariable(name = "email") String emailOrPhone, @PathVariable String username) {
     return usernameService.updateUsername(username, emailOrPhone);
+  }
+
+  @GetMapping("/{usernameOrEmail}/followingCount")
+  public Response<String> getFollowingCount(@PathVariable String usernameOrEmail) {
+    return userService.getFollowingCount(usernameOrEmail);
   }
 
 

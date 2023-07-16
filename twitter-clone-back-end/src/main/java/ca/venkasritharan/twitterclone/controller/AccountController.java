@@ -33,6 +33,4 @@ public class AccountController {
     return accountService.unfollow(followerEmail, followedUsername);
   }
 
-
-
 }
