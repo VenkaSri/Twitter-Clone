@@ -49,4 +49,22 @@ const unfollow = async (email, username) => {
   }
 };
 
-export { fetchAllAccounts, fetchFollowers, follow, unfollow };
+const getFollowingCount = async (email) => {
+  console.log(process.env.REACT_APP_GET_FOLLOWING_COUNT);
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_GET_FOLLOWING_COUNT + `${email}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export {
+  fetchAllAccounts,
+  fetchFollowers,
+  follow,
+  unfollow,
+  getFollowingCount,
+};

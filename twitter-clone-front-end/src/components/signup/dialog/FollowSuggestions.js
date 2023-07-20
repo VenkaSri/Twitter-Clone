@@ -4,7 +4,7 @@ import FollowCard from "../../FollowCard";
 import axios from "axios";
 import { Skeleton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { follow, unfollow } from "../../user/api";
+import { follow, unfollow, getFollowingCount } from "../../user/api";
 import { useUserData } from "../../../hooks/user-data";
 import { userInfoActions } from "../../../state/user/userInfo-reducer";
 import { followActions } from "../../../state/follow/follow-reducer";
@@ -24,8 +24,6 @@ const FollowSuggestions = () => {
     (state) => state.rootReducer.dialogState.isUnfollowed
   );
 
-  console.log(isUnfollowed);
-
   const [followCards, setFollowCards] = useState([]);
   const { userEmail } = useUserData();
 
@@ -36,9 +34,21 @@ const FollowSuggestions = () => {
     setFollowCards(usersToFollow);
   }, [allAccounts, userInfo.followers]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getFollowingCount(userEmail);
+      if (response.data > 0) {
+        dispatch(userInfoActions.setOneFollowingValidity(true));
+      } else {
+        dispatch(userInfoActions.setOneFollowingValidity(false));
+      }
+      console.log(response.data);
+    };
+    fetchData();
+  }, [followCards]);
+
   const handleFollow = (usr) => {
     if (!usr.isFollowing) {
-      dispatch(userInfoActions.setFollowingCount(userInfo.followingCount + 1));
       const fetchData = async () => {
         const response = await follow(userEmail, usr.username);
         if (response === 200) dispatch(unfollowDialogActions.setFollow(true));
