@@ -38,7 +38,7 @@ public class ProfileController {
     return usernameService.updateUsername(username, emailOrPhone);
   }
 
-  @GetMapping("/{usernameOrEmail}/followingCount")
+  @GetMapping("/followingCount/{usernameOrEmail}")
   public Response<String> getFollowingCount(@PathVariable String usernameOrEmail) {
     return userService.getFollowingCount(usernameOrEmail);
   }
