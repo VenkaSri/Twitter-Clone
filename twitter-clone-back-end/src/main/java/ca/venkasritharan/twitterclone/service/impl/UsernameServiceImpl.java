@@ -34,13 +34,13 @@ public class UsernameServiceImpl implements UsernameService {
 
   @Override
   public void assignUsername(String email) {
-    System.out.println(email);
     Optional<User> user = userRepository.findByEmail(email);
     checkNameLength(user.get().getName(), email);
   }
 
   @Override
   public Response<String> checkUsername(String username, String email) {
+
     Optional<User> user = userRepository.findByUsername(username);
     User userByEmail = userRepository.findByEmail(email).get();
     if (!user.isPresent()) {
@@ -76,9 +76,14 @@ public class UsernameServiceImpl implements UsernameService {
         checkNameLength(generateRandomUsername(halvedName, 15 - halvedName.length()), email);
     } else {
       Optional<User> user = userRepository.findByEmail(email);
-      user.get().setUsername(name);
+      user.get().setUsername(nameToUsername(name));
       userRepository.save(user.get());
     }
+  }
+
+  private String nameToUsername(String name) {
+    String username = name.replaceAll("\\s+","").toLowerCase();
+    return username;
   }
 
   private String generateRandomUsername(String name, int size) {

@@ -11,6 +11,8 @@ const UsernameStepFooter = () => {
   const currentStep = useSelector(
     (state) => state.rootReducer.signUp.steps.currentStep
   );
+  const currUsername = username.enteredUsername;
+
   const dispatch = useDispatch();
 
   const updateUsername = () => {
@@ -26,27 +28,29 @@ const UsernameStepFooter = () => {
         console.log(error);
       });
   };
+  console.log(username.enteredUsername);
 
   const buttonInfo = {
     height: 52,
     width: 440,
     text: username.isNewUsernameEntered ? "Next" : "Skip for now",
     ...(username.isNewUsernameEntered
-      ? isUsernameSet
+      ? currUsername === username.enteredUsername
         ? {
+            text: "Skip for now",
+            bgColor: "#000",
+            disabled: false,
+            txtColor: "#FFF",
+            hoverBgColor: "#272c30",
+          }
+        : {
+            text: "Next",
             bgColor: "#000",
             disabled: !isUsernameSet,
             txtColor: "#FFF",
             hoverBgColor: "#272c30",
           }
-        : { bgColor: "#86888b", txtColor: "#FFF", disabled: !isUsernameSet }
-      : {
-          bgColor: "#FFF",
-          brdColor: "#e5eaf0",
-          txtColor: "#000",
-          disabled: !isUsernameSet,
-          hoverBgColor: "#e7e7e7",
-        }),
+      : null),
   };
 
   const handledNext = () => {

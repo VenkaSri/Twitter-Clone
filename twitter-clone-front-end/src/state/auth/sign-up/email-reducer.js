@@ -2,16 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 import { resetActions } from "./reset-reducer";
 
 const emailInitialState = {
-  enteredEmail: "test@gmail.com",
+  enteredEmail: "",
   isValid: false,
   isAvailable: false,
   hasOnlySpaces: true,
   hasEnteredInput: false,
-  shouldAutoFocus: false
-}
+  shouldAutoFocus: false,
+};
 
 const emailSlice = createSlice({
-  name:"email",
+  name: "email",
   initialState: emailInitialState,
   reducers: {
     setEmail(state, action) {
@@ -31,11 +31,11 @@ const emailSlice = createSlice({
     },
     setAutoFocus(state, action) {
       state.shouldAutoFocus = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(resetActions.resetAll, () => emailInitialState);
-  }
+  },
 });
 
 export const emailActions = emailSlice.actions;

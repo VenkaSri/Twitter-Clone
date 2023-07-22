@@ -31,7 +31,10 @@ const EmailTextField = () => {
         return setIsUnavailable(false);
       }
       axios
-        .get(process.env.REACT_APP_EMAIL_PHONE + `?emailOrPhone=${email.enteredEmail.trim()}` )
+        .get(
+          process.env.REACT_APP_EMAIL_PHONE +
+            `?emailOrPhone=${email.enteredEmail.trim()}`
+        )
         .then((response) => {
           if (response.data.status === 409) {
             dispatch(stepOneActions.setEmailEntered(false));
@@ -44,7 +47,7 @@ const EmailTextField = () => {
 
     return () => {
       setIsInvalid(false);
-      dispatch(stepOneActions.setEmailEntered(false)); 
+      dispatch(stepOneActions.setEmailEntered(false));
       setIsUnavailable(false);
       clearTimeout(identifier);
     };
