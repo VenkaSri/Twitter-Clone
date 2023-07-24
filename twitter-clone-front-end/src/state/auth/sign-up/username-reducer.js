@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  enteredUsername: "Test",
+  enteredUsername: "",
   isNewUsernameEntered: false,
   isUsernameValid: false,
-}
+};
 
 const usernameSlice = createSlice({
   name: "username",
@@ -17,11 +17,10 @@ const usernameSlice = createSlice({
       state.isNewUsernameEntered = action.payload;
     },
     setUsernameValid(state, action) {
-      state.isUsernameValid = (action.payload);
-    }
-  }
-})
-
+      state.isUsernameValid = action.payload;
+    },
+  },
+});
 
 export const usernameActions = usernameSlice.actions;
 export default usernameSlice.reducer;

@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../../UI/button/Button";
 import axios from "axios";
 import { useUserData } from "../../../hooks/user-data";
 import { useDispatch, useSelector } from "react-redux";
 import { stepsActions } from "../../../state/auth/form/steps-reducer";
 import { userInfoActions } from "../../../state/user/userInfo-reducer";
+import { useUserInfo } from "../../../hooks/user-info";
 
 const UsernameStepFooter = () => {
   const { email, username, isUsernameSet } = useUserData();
+  const { currentUsername } = useUserInfo();
   const currentStep = useSelector(
     (state) => state.rootReducer.signUp.steps.currentStep
   );
-  const currUsername = username.enteredUsername;
 
   const dispatch = useDispatch();
 
@@ -28,33 +29,45 @@ const UsernameStepFooter = () => {
         console.log(error);
       });
   };
-  console.log(username.enteredUsername);
 
   const buttonInfo = {
     height: 52,
     width: 440,
-    text: username.isNewUsernameEntered ? "Next" : "Skip for now",
-    ...(username.isNewUsernameEntered
-      ? currUsername === username.enteredUsername
-        ? {
-            text: "Skip for now",
-            bgColor: "#000",
-            disabled: false,
-            txtColor: "#FFF",
-            hoverBgColor: "#272c30",
-          }
-        : {
-            text: "Next",
-            bgColor: "#000",
-            disabled: !isUsernameSet,
-            txtColor: "#FFF",
-            hoverBgColor: "#272c30",
-          }
-      : null),
+    bgColor: "#FFF",
+    txtColor: "#000",
+    text: "",
   };
 
+  if (username.isNewUsernameEntered) {
+    if (isUsernameSet) {
+      if (username.enteredUsername === currentUsername) {
+        buttonInfo.bgColor = "#FFF";
+        buttonInfo.brdColor = "#e5eaf0";
+        buttonInfo.hoverBgColor = "#e7e7e7";
+        buttonInfo.text = "Skip for now";
+      } else {
+        buttonInfo.bgColor = "#000";
+        buttonInfo.txtColor = "#FFF";
+        buttonInfo.hoverBgColor = "#272c30";
+        buttonInfo.text = "Next";
+      }
+    } else {
+      buttonInfo.bgColor = "#86888b";
+      buttonInfo.txtColor = "#FFF";
+      buttonInfo.text = "Next";
+    }
+  } else {
+    buttonInfo.bgColor = "#FFF";
+    buttonInfo.brdColor = "#e5eaf0";
+    buttonInfo.hoverBgColor = "#e7e7e7";
+    buttonInfo.text = "Skip for now";
+  }
+
   const handledNext = () => {
-    updateUsername();
+    if (username.enteredUsername !== currentUsername) {
+      updateUsername();
+      dispatch(userInfoActions.setUsername(username.enteredUsername));
+    }
     dispatch(stepsActions.setCurrentStep(currentStep + 1));
   };
 
