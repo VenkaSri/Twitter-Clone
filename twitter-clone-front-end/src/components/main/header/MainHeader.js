@@ -1,28 +1,26 @@
 import React from "react";
 
-import CircleButton from "../../UI/CircleButton";
-import { Setting } from "../../../utils/ButtonLinkObjects";
-import Search from "./Search";
-import ExploreButtonsList from "./ExploreButtonsList";
+import TabButton from "../../UI/button/TabButton";
 import TweetsFeed from "../body/TweetsFeed";
-import { createBrowserRouter, Route, RouterProvider, Routes } from "react-router-dom";
-
-
-
+import ComposeTweet from "../../user/ComposeTweet";
+import { ForYou, Following } from "../../../utils/explore/NavObjects";
+import { Route, Routes } from "react-router-dom";
 
 const MainHeader = () => {
   return (
-    <div className="flex flex-col bg-white/[.90] sticky top-0 backdrop-blur-[4.7px] border-r border-r-slate-100">
-      <div className="w-[37.375rem] h-[3.313rem] flex justify-around items-center">
-        <Search />
-        <CircleButton buttonInfo={Setting} />
+    <div className="flex flex-col bg-white/[.90] sticky top-0 backdrop-blur-[4.7px] border-r border-r-[#f7f9f9]">
+      <div className="w-[37.375rem] h-[3.313rem] flex">
+        <span className="font-cBold self-center pl-[20px] text-[20px]">
+          Home
+        </span>
       </div>
-      <div>
-        <ExploreButtonsList />
+      <div className="flex">
+        <TabButton buttonObject={ForYou} />
+        <TabButton buttonObject={Following} />
       </div>
-      <Routes>
-        <Route path="/explore/tabs/for-you" element={<TweetsFeed />}/>
-      </Routes>
+      <div className="">
+        <ComposeTweet />
+      </div>
     </div>
   );
 };

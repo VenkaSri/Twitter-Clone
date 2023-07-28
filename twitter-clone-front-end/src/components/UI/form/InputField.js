@@ -10,23 +10,25 @@ import { dobActions } from "../../../state/auth/sign-up/dob-reducer";
 
 const InputField = (props) => {
   const dispatch = useDispatch();
-  const currentStep = useSelector((state) => state.rootReducer.signUp.steps.currentStep)
+  const currentStep = useSelector(
+    (state) => state.rootReducer.signUp.steps.currentStep
+  );
   const editFieldHandler = () => {
     dispatch(stepsActions.setCurrentStep(currentStep - 1));
-    switch(props.label) {
-      case "Name": 
+    switch (props.label) {
+      case "Name":
         dispatch(nameActions.setAutoFocus(true));
         break;
-      case "Email": 
+      case "Email":
         dispatch(emailActions.setAutoFocus(true));
         break;
-      case "Date of Birth": 
+      case "Date of Birth":
         dispatch(dobActions.setAutoFocus(true));
         break;
-      default: 
+      default:
         break;
     }
-  }
+  };
 
   return (
     <div className="flex flex-col grow">
