@@ -25,3 +25,22 @@ yarn-debug.log*
 yarn-error.log*
 
 .vscode
+
+# Cache
+caches/
+
+# Fingerprint records
+fingerprints/
+
+# Working directories
+workspace/
+
+# Secret files
+secrets/
+secret.*
+*.enc
+*.key
+users/
+
+# State files
+*.state
