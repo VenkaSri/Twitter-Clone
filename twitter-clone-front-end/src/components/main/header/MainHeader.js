@@ -5,6 +5,7 @@ import TweetsFeed from "../body/TweetsFeed";
 import ComposeTweet from "../../user/ComposeTweet";
 import { ForYou, Following } from "../../../utils/explore/NavObjects";
 import { Route, Routes } from "react-router-dom";
+import TweetSection from "../body/TweetSection";
 
 const MainHeader = () => {
   return (
@@ -18,9 +19,7 @@ const MainHeader = () => {
         <TabButton buttonObject={ForYou} />
         <TabButton buttonObject={Following} />
       </div>
-      <div className="">
-        <ComposeTweet />
-      </div>
+      <TweetSection />
     </div>
   );
 };
