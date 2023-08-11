@@ -3,6 +3,7 @@ import ProfilePicture from "../../ProfilePicture";
 import DefaultAvatar from "../../../assets/images/avatars/default_avi.png";
 import TweetField from "../../UI/form/tweet/TweetField";
 import Button from "../../UI/button/Button";
+import TweetOptions from "./TweetOptions";
 
 const TweetSection = () => {
   const buttonObject = {
@@ -13,6 +14,7 @@ const TweetSection = () => {
     hoverBgColor: "#e8f5fe",
     brdColor: "#e0e6ea",
     text: "Everyone",
+    display: "none",
   };
 
   const button2Object = {
@@ -25,25 +27,19 @@ const TweetSection = () => {
     text: "Every can reply",
   };
 
-  const [tweetFieldHeight, setTweetFieldHeight] = useState(56);
-
-  const handleTweetFieldResize = (newHeight) => {
-    setTweetFieldHeight(newHeight);
-  };
-
   return (
     <>
-      <div className="border border-[red] flex">
+      <div className=" flex">
         <div className="pt-[15px] pl-[15px]">
           <ProfilePicture source={DefaultAvatar} size={40} />
         </div>
-        <div className="text-[14px] flex flex-col gap-[10px]">
+        <div className="ml-[15px] text-[14px] flex flex-col gap-[10px] w-full mt-[12px]">
           <Button buttonProps={buttonObject} />
-          <div
-            className="ml-[15px] w-full flex border border-[red]"
-            style={{ height: tweetFieldHeight }}
-          >
-            <TweetField onResize={handleTweetFieldResize} />
+          <div className="  flex ">
+            <TweetField />
+          </div>
+          <div className="border border-[red]">
+            <TweetOptions />
           </div>
         </div>
       </div>
