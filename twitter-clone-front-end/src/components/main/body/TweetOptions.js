@@ -1,26 +1,21 @@
 import Button from "../../UI/button/Button";
+import IconButton from "../../UI/button/IconButton";
 import getIcon from "../../UI/icons/iconsutil";
 
 const TweetOptions = () => {
-  const buttonObject = {
-    height: 24,
-    width: 108,
-    bgColor: "#FFFFFF",
-    txtColor: "#1D9BF0",
-    hoverBgColor: "#e8f5fe",
-    brdColor: "#e0e6ea",
-    text: "Everyone",
+  const handleMedia = () => {
+    console.log("Clicked");
   };
 
   return (
-    <>
-      <div
-        className="w-[34px] h-[34px] flex justify-center items-center cursor-pointer rounded-full "
-        title="Media"
-      >
-        {getIcon("media", { fill: "#1d9bf0" })}
-      </div>
-    </>
+    <div className="flex">
+      <IconButton type={"Media"} onClick={handleMedia} />
+      <IconButton type={"GIF"} onClick={handleMedia} />
+      <IconButton type={"Poll"} onClick={handleMedia} />
+      <IconButton type={"Emoji"} onClick={handleMedia} />
+      <IconButton type={"Schedule"} onClick={handleMedia} />
+      <IconButton type={"Tag Location"} onClick={handleMedia} />
+    </div>
   );
 };
 

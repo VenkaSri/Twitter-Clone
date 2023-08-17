@@ -29,7 +29,7 @@ const TweetSection = () => {
 
   return (
     <>
-      <div className=" flex">
+      <div className="flex">
         <div className="pt-[15px] pl-[15px]">
           <ProfilePicture source={DefaultAvatar} size={40} />
         </div>
@@ -38,7 +38,7 @@ const TweetSection = () => {
           <div className="  flex ">
             <TweetField />
           </div>
-          <div className="border border-[red]">
+          <div className="">
             <TweetOptions />
           </div>
         </div>
