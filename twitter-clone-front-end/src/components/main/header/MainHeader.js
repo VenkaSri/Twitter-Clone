@@ -15,7 +15,7 @@ const MainHeader = () => {
           Home
         </span>
       </div>
-      <div className="flex">
+      <div className="flex border-b border-b-[#eff3f4]">
         <TabButton buttonObject={ForYou} />
         <TabButton buttonObject={Following} />
       </div>

@@ -1,4 +1,6 @@
 import React from "react";
+import IconButton from "./IconButton";
+import getIcon from "../icons/iconsutil";
 
 const Button = ({ onClick, buttonProps }) => {
   const handleMouseEnter = (event) => {
@@ -11,12 +13,11 @@ const Button = ({ onClick, buttonProps }) => {
   return (
     <button
       style={{
-        height: `${buttonProps.height}px`,
-        width: `${buttonProps.width}px`,
         backgroundColor: buttonProps.bgColor,
-        display: buttonProps.display,
+        fontSize: "14px",
+        display: buttonProps.display || "inline-flex",
         color: buttonProps.txtColor,
-        border: `1px solid ${buttonProps.brdColor}`,
+        border: `1px solid ${buttonProps.brdColor}` || "none",
         "&:hover": {
           backgroundColor: buttonProps.hoverBgColor,
         },
@@ -27,7 +28,23 @@ const Button = ({ onClick, buttonProps }) => {
       onMouseLeave={handleMouseLeave}
       disabled={buttonProps.disabled}
     >
-      {buttonProps.text}
+      <div
+        className={`px-[${buttonProps.paddingX}]  flex items-center rounded-full`}
+      >
+        {buttonProps.iconPosition === "start" &&
+          buttonProps.icon &&
+          getIcon(buttonProps.type, {
+            fill: "#1d9bf0",
+            margin: buttonProps.margin,
+          })}
+        {buttonProps.text}
+        {(buttonProps.iconPosition === "end" || !buttonProps.iconPosition) &&
+          buttonProps.icon &&
+          getIcon(buttonProps.type, {
+            fill: "#1d9bf0",
+            margin: buttonProps.margin,
+          })}
+      </div>
     </button>
   );
 };

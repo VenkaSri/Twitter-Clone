@@ -5,6 +5,7 @@ import userInfoReducer from "./user/userInfo-reducer";
 import dialogStateReducer from "./dialog/dialogState-reducer";
 import followReducer from "./follow/follow-reducer";
 import globalReducer from "./app/global-reducer";
+import tweetReducer from "./app/home/tweet-reducer";
 
 const rootReducer = combineReducers({
   signUp: signUpReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   dialogState: dialogStateReducer,
   followState: followReducer,
   globalState: globalReducer,
+  tweetState: tweetReducer,
 });
 
 export default rootReducer;

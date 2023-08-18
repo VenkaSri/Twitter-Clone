@@ -9,7 +9,9 @@ const getIcon = (iconName, options = {}) => {
     console.warn(`Icon "${iconName}" not found.`);
     return null;
   }
-  return React.cloneElement(icon, { style: { fill: options.fill } });
+  return React.cloneElement(icon, {
+    style: { fill: options.fill, margin: options.margin },
+  });
 };
 
 export default getIcon;
