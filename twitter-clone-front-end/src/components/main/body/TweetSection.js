@@ -44,14 +44,18 @@ const TweetSection = () => {
         </div>
         <div className="ml-[15px] text-[14px] flex flex-col gap-[10px] items-start mt-[12px]">
           {isVisible && <Button buttonProps={buttonObject} />}
-          <div className="flex flex-col">
+          <div className="flex flex-col ">
             <TweetField />
           </div>
-          <div className="-ml-3">
+          <div className="-ml-3 py-2">
             {isVisible && <Button buttonProps={whoCanReplyButton} />}
           </div>
 
-          <div className="-ml-2 -mt-2">
+          <div
+            className={`-ml-2 mt-1 ${
+              isVisible && "border-t border-t-[#eff3f4]"
+            } w-[514px] h-[48px] flex items-center`}
+          >
             <TweetOptions />
           </div>
         </div>
