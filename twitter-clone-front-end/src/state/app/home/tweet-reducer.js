@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isPostFieldClicked: false,
-  showButtons: false,
+  isFieldEmpty: false,
+  currentNumberOfCharacters: 0,
 };
 
 const tweetSlice = createSlice({
@@ -12,8 +13,11 @@ const tweetSlice = createSlice({
     isPostFieldClicked(state, action) {
       state.isPostFieldClicked = action.payload;
     },
-    showButtons(state, action) {
-      state.showButtons = action.payload;
+    updateFieldState(state, action) {
+      state.isFieldEmpty = action.payload;
+    },
+    setNumOfChars(state, action) {
+      state.currentNumberOfCharacters = action.payload;
     },
   },
 });

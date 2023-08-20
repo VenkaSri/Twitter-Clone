@@ -2,15 +2,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { tweetActions } from "../../../../state/app/home/tweet-reducer";
+import rootReducer from "../../../../state/rootReducer";
 
 const TweetField = ({ onResize }) => {
   const dispatch = useDispatch();
+  let currentNumberOfCharacters = useSelector(
+    (state) => state.rootReducer.tweetState.currentNumberOfCharacters
+  );
   const MAX_HEIGHT = "724px";
   const [textAreaHeight, setTextAreaHeight] = useState("52px");
   const textAreaRef = useRef(null);
 
-  const handleTextChange = (event) => {
+  const handleTextChange = (e) => {
     const textAreaNode = textAreaRef.current;
+    dispatch(tweetActions.setNumOfChars(currentNumberOfCharacters + 1));
     setTextAreaHeight("auto"); // Reset height to auto to get the actual scroll height
     if (textAreaNode.scrollHeight > parseInt(MAX_HEIGHT)) {
       setTextAreaHeight(MAX_HEIGHT);

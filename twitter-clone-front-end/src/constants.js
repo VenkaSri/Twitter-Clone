@@ -1,0 +1,3 @@
+const CHARACTER_LIMIT = 240;
+
+export { CHARACTER_LIMIT };

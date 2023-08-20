@@ -5,7 +5,7 @@ import DefaultAvatar from "../../../assets/images/avatars/default_avi.png";
 import TweetField from "../../UI/form/tweet/TweetField";
 import Button from "../../UI/button/Button";
 import TweetOptions from "./TweetOptions";
-import { tweetActions } from "../../../state/app/home/tweet-reducer";
+import CharactersProgress from "./post/CharactersProgress";
 
 const TweetSection = () => {
   const isVisible = useSelector(
@@ -54,9 +54,12 @@ const TweetSection = () => {
           <div
             className={`-ml-2 mt-1 ${
               isVisible && "border-t border-t-[#eff3f4]"
-            } w-[514px] h-[48px] flex items-center`}
+            } w-[514px] h-[48px] flex items-center justify-between `}
           >
             <TweetOptions />
+            <div className="h-[36px]">
+              <CharactersProgress />
+            </div>
           </div>
         </div>
       </div>
