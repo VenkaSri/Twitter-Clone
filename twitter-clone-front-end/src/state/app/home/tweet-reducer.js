@@ -4,6 +4,7 @@ const initialState = {
   isPostFieldClicked: false,
   isFieldEmpty: false,
   currentNumberOfCharacters: 0,
+  hasUserTyped: false,
 };
 
 const tweetSlice = createSlice({
@@ -18,6 +19,9 @@ const tweetSlice = createSlice({
     },
     setNumOfChars(state, action) {
       state.currentNumberOfCharacters = action.payload;
+    },
+    setTypedState(state, action) {
+      state.hasUserTyped = action.payload;
     },
   },
 });

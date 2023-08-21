@@ -11,6 +11,10 @@ const TweetSection = () => {
   const isVisible = useSelector(
     (state) => state.rootReducer.tweetState.isPostFieldClicked
   );
+  const hasUserTyped = useSelector(
+    (state) => state.rootReducer.tweetState.hasUserTyped
+  );
+
   const buttonObject = {
     bgColor: "#FFFFFF",
     txtColor: "#1D9BF0",
@@ -36,34 +40,53 @@ const TweetSection = () => {
     iconPosition: "start",
   };
 
+  const postButton = {
+    bgColor: "#FFFFFF",
+    txtColor: "#1D9BF0",
+    hoverBgColor: "#e8f5fe",
+    text: "Post",
+    icon: false,
+    margin: "0 4px 0 0px",
+    paddingX: "12px",
+    type: "Globe",
+    iconPosition: "start",
+  };
+
   return (
-    <>
-      <div className="flex border-b border-b-[#eff3f4] pb-3">
-        <div className="pt-[15px] pl-[15px]">
-          <ProfilePicture source={DefaultAvatar} size={40} />
-        </div>
-        <div className="ml-[15px] text-[14px] flex flex-col gap-[10px] items-start mt-[12px]">
-          {isVisible && <Button buttonProps={buttonObject} />}
-          <div className="flex flex-col ">
-            <TweetField />
-          </div>
-          <div className="-ml-3 py-2">
-            {isVisible && <Button buttonProps={whoCanReplyButton} />}
+    <div className="flex border-b border-b-[#eff3f4] px-[16px] pt-[4px]">
+      <div className="pt-[12px] mr-[12px]">
+        <ProfilePicture source={DefaultAvatar} size={40} />
+      </div>
+      <div className="pt-[4x]">
+        <div>
+          <div className="pb-[12px]">
+            {isVisible && <Button buttonProps={buttonObject} />}
           </div>
 
-          <div
-            className={`-ml-2 mt-1 ${
-              isVisible && "border-t border-t-[#eff3f4]"
-            } w-[514px] h-[48px] flex items-center justify-between `}
-          >
-            <TweetOptions />
-            <div className="h-[36px]">
-              <CharactersProgress />
-            </div>
+          <div className="flex">
+            <TweetField />
+          </div>
+        </div>
+
+        <div className="-ml-3 py-2">
+          {isVisible && <Button buttonProps={whoCanReplyButton} />}
+        </div>
+
+        <div
+          className={`-ml-2 mt-1 ${
+            isVisible && "border-t border-t-[#eff3f4]"
+          } w-[514px] h-[48px] flex items-center justify-between `}
+        >
+          <TweetOptions />
+          <div className="h-[36px] flex border border-[red] gap-[10px] items-center">
+            {hasUserTyped && <CharactersProgress />}
+
+            <div></div>
+            <Button buttonProps={postButton}></Button>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

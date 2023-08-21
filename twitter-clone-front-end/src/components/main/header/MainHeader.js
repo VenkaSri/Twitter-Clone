@@ -9,7 +9,7 @@ import TweetSection from "../body/TweetSection";
 
 const MainHeader = () => {
   return (
-    <div className="flex flex-col bg-white/[.90] sticky top-0 backdrop-blur-[4.7px] border-r border-r-[#f7f9f9]">
+    <div className="flex flex-col bg-white/[.90] sticky top-0 backdrop-blur-[4.7px] border-r border-r-[#eff3f4]">
       <div className="w-[37.375rem] h-[3.313rem] flex">
         <span className="font-cBold self-center pl-[20px] text-[20px]">
           Home

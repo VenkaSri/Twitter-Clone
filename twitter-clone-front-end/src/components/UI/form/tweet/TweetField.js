@@ -15,7 +15,17 @@ const TweetField = ({ onResize }) => {
 
   const handleTextChange = (e) => {
     const textAreaNode = textAreaRef.current;
-    dispatch(tweetActions.setNumOfChars(currentNumberOfCharacters + 1));
+    const currTextLength = textAreaNode.value.length;
+
+    dispatch(tweetActions.setNumOfChars(currTextLength));
+
+    if (currTextLength > 0) {
+      dispatch(tweetActions.setTypedState(true));
+    } else {
+      dispatch(tweetActions.setTypedState(false)); // handle case when textarea is emptied
+    }
+
+    console.log(textAreaHeight);
     setTextAreaHeight("auto"); // Reset height to auto to get the actual scroll height
     if (textAreaNode.scrollHeight > parseInt(MAX_HEIGHT)) {
       setTextAreaHeight(MAX_HEIGHT);
@@ -39,7 +49,7 @@ const TweetField = ({ onResize }) => {
       onClick={handleClick}
       style={{ height: textAreaHeight }}
       placeholder="What is happening?!"
-      className="font-cReg text-[20px] resize-none placeholder:text-[#536471] text-[#0f1419] !outline-none leading-[24px] pt-2 pb-2 w-[514px]"
+      className="font-cReg flex-grow text-[20px] resize-none placeholder:text-[#536471] text-[#0f1419] !outline-none leading-[24px] pt-2 pb-2 align-baseline"
     />
   );
 };
