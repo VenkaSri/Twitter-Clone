@@ -15,7 +15,7 @@ const TweetSection = () => {
     (state) => state.rootReducer.tweetState.hasUserTyped
   );
 
-  const buttonObject = {
+  const everyoneButton = {
     bgColor: "#FFFFFF",
     txtColor: "#1D9BF0",
     hoverBgColor: "#e8f5fe",
@@ -58,9 +58,9 @@ const TweetSection = () => {
         <ProfilePicture source={DefaultAvatar} size={40} />
       </div>
       <div className="pt-[4x]">
-        <div>
+        <div className="pt-[4px]">
           <div className="pb-[12px]">
-            {isVisible && <Button buttonProps={buttonObject} />}
+            {isVisible && <Button buttonProps={everyoneButton} />}
           </div>
 
           <div className="flex">
