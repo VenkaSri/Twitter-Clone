@@ -36,7 +36,7 @@ const StepOneFooter = () => {
   };
 
   return (
-    <div className="w-full h-[6.25rem] max:h-[6.25rem] flex justify-center items-center border border-[red]">
+    <div className="w-full h-[6.25rem] max:h-[6.25rem] flex justify-center items-center">
       <Button buttonProps={buttonInfo} onClick={handledNext} />
     </div>
   );
