@@ -9,7 +9,9 @@ import { stepsActions } from "../../../state/auth/form/steps-reducer";
 
 const StepOneFooter = () => {
   const { isEmailEntered, isDOBEntered, isNameEntered } = useUserData();
-  const currentStep = useSelector((state) => state.rootReducer.signUp.steps.currentStep);
+  const currentStep = useSelector(
+    (state) => state.rootReducer.signUp.steps.currentStep
+  );
   const dispatch = useDispatch();
 
   const buttonInfo = {
@@ -28,14 +30,14 @@ const StepOneFooter = () => {
 
   const handledNext = () => {
     dispatch(nameActions.setAutoFocus(false));
-        dispatch(dobActions.setAutoFocus(false));
-        dispatch(emailActions.setAutoFocus(false));
-        dispatch(stepsActions.setCurrentStep(currentStep + 1));
-  }
+    dispatch(dobActions.setAutoFocus(false));
+    dispatch(emailActions.setAutoFocus(false));
+    dispatch(stepsActions.setCurrentStep(currentStep + 1));
+  };
 
   return (
-    <div className="w-full h-[6.25rem] max:h-[6.25rem] flex justify-center items-center">
-      <Button buttonProps={buttonInfo} onClick={handledNext}/>
+    <div className="w-full h-[6.25rem] max:h-[6.25rem] flex justify-center items-center border border-[red]">
+      <Button buttonProps={buttonInfo} onClick={handledNext} />
     </div>
   );
 };

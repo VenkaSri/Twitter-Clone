@@ -13,6 +13,8 @@ const Button = ({ onClick, buttonProps }) => {
   return (
     <button
       style={{
+        width: buttonProps.width,
+        height: buttonProps.height,
         backgroundColor: buttonProps.bgColor,
         fontSize: "14px",
         display: buttonProps.display || "inline-flex",

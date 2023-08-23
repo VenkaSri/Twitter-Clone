@@ -35,7 +35,6 @@ const UsernameStepFooter = () => {
     width: 440,
     bgColor: "#FFF",
     txtColor: "#000",
-    text: "",
   };
 
   if (username.isNewUsernameEntered) {
