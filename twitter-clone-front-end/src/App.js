@@ -11,6 +11,7 @@ import MainContainer from "./components/UI/main/MainContainer";
 import { fetchAllAccounts, fetchFollowers } from "./components/user/api";
 import { globalInfoActions } from "./state/app/global-reducer";
 import { userInfoActions } from "./state/user/userInfo-reducer";
+import LandingPage from "./pages/LandingPage";
 
 ReactGA.initialize("UA-255822850-1");
 
@@ -34,7 +35,8 @@ function App() {
   return (
     <div className="flex flex-col grow">
       <Routes>
-        <Route
+        <Route path="/" Component={LandingPage} />
+        {/* <Route
           path="*"
           element={
             <>
@@ -47,7 +49,7 @@ function App() {
               </div>
             </>
           }
-        />
+        /> */}
       </Routes>
     </div>
   );

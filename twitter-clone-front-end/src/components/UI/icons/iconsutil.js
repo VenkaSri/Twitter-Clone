@@ -10,7 +10,13 @@ const getIcon = (iconName, options = {}) => {
     return null;
   }
   return React.cloneElement(icon, {
-    style: { fill: options.fill, margin: options.margin },
+    style: {
+      fill: options.fill,
+      margin: options.margin,
+      padding: options.padding,
+      height: options.height,
+      width: options.width,
+    },
   });
 };
 
