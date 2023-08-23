@@ -18,7 +18,8 @@ const FinalStepFooter = () => {
     text: "Next",
     txtColor: "#FFF",
     disabled: !hasOneFollowing,
-    bgColor: "#86888b",
+    bgColor: hasOneFollowing ? "#000" : "#86888b",
+    hoverBgColor: hasOneFollowing ? "#272c30" : null,
   };
 
   const handledNext = () => {
@@ -28,7 +29,6 @@ const FinalStepFooter = () => {
   return (
     <div className="w-full h-[6.25rem] max:h-[6.25rem] flex justify-center items-center">
       <Button buttonProps={buttonInfo} onClick={handledNext} />
-      {/* <button className={buttonClass} disabled={!hasOneFollowing}> */}
     </div>
   );
 };
