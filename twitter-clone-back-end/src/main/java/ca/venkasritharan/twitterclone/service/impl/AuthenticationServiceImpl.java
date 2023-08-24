@@ -2,22 +2,19 @@ package ca.venkasritharan.twitterclone.service.impl;
 
 import ca.venkasritharan.twitterclone.dto.LoginDTO;
 import ca.venkasritharan.twitterclone.dto.RegisterDTO;
-import ca.venkasritharan.twitterclone.dto.ValidateEmailOrPhoneDTO;
 import ca.venkasritharan.twitterclone.entity.authentication.Role;
 import ca.venkasritharan.twitterclone.entity.authentication.User;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
+import ca.venkasritharan.twitterclone.security.jwt.JwtTokenProvider;
 import ca.venkasritharan.twitterclone.service.AuthenticationService;
 import ca.venkasritharan.twitterclone.util.response.Response;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,12 +26,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   private UserRepository userRepository;
   private ModelMapper mapper;
   private PasswordEncoder passwordEncoder;
+  private JwtTokenProvider jwtTokenProvider;
 
 
-  public AuthenticationServiceImpl(AuthenticationManager authenticationManager, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+  public AuthenticationServiceImpl(AuthenticationManager authenticationManager, UserRepository userRepository, PasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider) {
     this.authenticationManager = authenticationManager;
     this.userRepository = userRepository;
     this.passwordEncoder = passwordEncoder;
+    this.jwtTokenProvider = jwtTokenProvider;
   }
 
   @Override
@@ -42,7 +41,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsernameOrEmailOrPhonenumber(),
                     loginDTO.getPassword()));
     SecurityContextHolder.getContext().setAuthentication(authentication);
-    return "Successfully logged in!";
+    String token = jwtTokenProvider.createToken(authentication);
+
+    return token;
   }
 
   @Override

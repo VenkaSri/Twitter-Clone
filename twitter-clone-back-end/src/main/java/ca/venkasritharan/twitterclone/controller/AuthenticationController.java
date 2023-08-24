@@ -1,5 +1,6 @@
 package ca.venkasritharan.twitterclone.controller;
 
+import ca.venkasritharan.twitterclone.dto.JwtResponse;
 import ca.venkasritharan.twitterclone.dto.LoginDTO;
 import ca.venkasritharan.twitterclone.dto.RegisterDTO;
 import ca.venkasritharan.twitterclone.dto.ValidateEmailOrPhoneDTO;
@@ -24,9 +25,13 @@ public class AuthenticationController {
   }
 
   @PostMapping(value = {"/login", "/sign-in"})
-  public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
-    String response = authenticationService.login(loginDTO);
-    return new ResponseEntity<>(response, HttpStatus.OK);
+  public ResponseEntity<JwtResponse> login(@RequestBody LoginDTO loginDTO) {
+    String token = authenticationService.login(loginDTO);
+
+    JwtResponse jwtResponse = new JwtResponse();
+    jwtResponse.setAccessToken(token);
+
+    return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
   }
 
   @PostMapping(value = {"/register", "/signup"})
