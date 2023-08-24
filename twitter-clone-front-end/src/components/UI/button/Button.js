@@ -16,10 +16,12 @@ const Button = ({ onClick, buttonProps }) => {
         width: buttonProps.width,
         height: buttonProps.height,
         backgroundColor: buttonProps.bgColor,
-        fontSize: "14px",
+        fontSize: buttonProps.fontSize || "14px",
         display: buttonProps.display || "inline-flex",
         color: buttonProps.txtColor,
-        border: `1px solid ${buttonProps.brdColor}` || "none",
+        border: buttonProps.brdColor
+          ? `1px solid ${buttonProps.brdColor}`
+          : "none",
         "&:hover": {
           backgroundColor: buttonProps.hoverBgColor,
         },
@@ -31,12 +33,12 @@ const Button = ({ onClick, buttonProps }) => {
       disabled={buttonProps.disabled}
     >
       <div
-        className={`px-[${buttonProps.paddingX}]  flex items-center rounded-full`}
+        className={`px-[${buttonProps.paddingX}]  flex items-center rounded-full gap-[${buttonProps.gap}]`}
       >
         {buttonProps.iconPosition === "start" &&
           buttonProps.icon &&
           getIcon(buttonProps.type, {
-            fill: "#1d9bf0",
+            fill: `${buttonProps.fill}`,
             margin: buttonProps.margin,
           })}
         {buttonProps.text}
