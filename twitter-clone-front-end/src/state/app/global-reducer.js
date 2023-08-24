@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   allAccounts: [],
+  isDarkMode: false,
 };
 
 const globalInfoSlice = createSlice({
@@ -10,6 +11,9 @@ const globalInfoSlice = createSlice({
   reducers: {
     setAllAccounts(state, action) {
       state.allAccounts = action.payload;
+    },
+    setIsDarkMode(state, action) {
+      state.isDarkMode = action.payload;
     },
   },
 });
