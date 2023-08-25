@@ -12,6 +12,7 @@ import { fetchAllAccounts, fetchFollowers } from "./components/user/api";
 import { globalInfoActions } from "./state/app/global-reducer";
 import { userInfoActions } from "./state/user/userInfo-reducer";
 import LandingPage from "./pages/LandingPage";
+import { AppInitializer } from "./AppInitializer";
 
 ReactGA.initialize("UA-255822850-1");
 
@@ -34,22 +35,9 @@ function App() {
 
   return (
     <div className="flex flex-col grow">
+      <AppInitializer />
       <Routes>
         <Route path="/" Component={LandingPage} />
-        {/* <Route
-          path="*"
-          element={
-            <>
-              <div className="flex grow">
-                {isUserAuthenticated ? <LoggedInHeader /> : <LoggedOutHeader />}
-                {isUserAuthenticated ? <MainContainer /> : <Main />}
-              </div>
-              <div className="w-screen flex">
-                <Layer />
-              </div>
-            </>
-          }
-        /> */}
       </Routes>
     </div>
   );
