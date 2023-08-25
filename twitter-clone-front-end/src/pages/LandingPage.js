@@ -40,16 +40,15 @@ export const LandingPage = () => {
             <CustomText
               fontSize="64px"
               lineHeight="84px"
-              fontWeight="Heavy"
               color={fillColor}
               text="Happening now"
-              additionalClasses="my-12"
+              additionalClasses="my-12 font-cHeavy"
             />
             <div className="mb-8">
               <span
                 className={`font-cHeavy text-[31px] leading-[36px] text-[${fillColor}]`}
               >
-                Joing today.
+                Join today.
               </span>
             </div>
             <SignUpForm />
