@@ -42,6 +42,7 @@ export const LandingPage = () => {
               lineHeight="84px"
               color={fillColor}
               text="Happening now"
+              fontWeight="bold"
               additionalClasses="my-12 font-cHeavy"
             />
             <div className="mb-8">
@@ -63,7 +64,9 @@ export const LandingPage = () => {
           </div>
         </div>
       </div>
-      <LandingFooter />
+      <div className="p-6">
+        <LandingFooter />
+      </div>
     </div>
   );
 };

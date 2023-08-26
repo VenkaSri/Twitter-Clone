@@ -53,4 +53,5 @@ export const signInButton = {
   text: "Sign in",
   bgColor: "transparent",
   txtColor: "#1D9BF0",
+  icon: false,
 };

@@ -1,5 +1,3 @@
-import React from "react";
-
 export const CustomText = ({
   fontSize,
   lineHeight,
@@ -8,6 +6,15 @@ export const CustomText = ({
   text,
   additionalClasses,
 }) => {
-  const style = `font-cHeavy text-[${fontSize}] leading-[${lineHeight}] font-${fontWeight} text-[${color}] ${additionalClasses}`;
-  return <span className={style}>{text}</span>;
+  const style = {
+    fontSize,
+    lineHeight,
+    fontWeight,
+    color,
+  };
+  return (
+    <span style={style} className={additionalClasses}>
+      {text}
+    </span>
+  );
 };

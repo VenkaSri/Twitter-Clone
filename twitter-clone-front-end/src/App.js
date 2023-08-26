@@ -17,22 +17,6 @@ import { AppInitializer } from "./AppInitializer";
 ReactGA.initialize("UA-255822850-1");
 
 function App() {
-  const dispatch = useDispatch();
-  const isUserAuthenticated = useSelector(
-    (state) => state.rootReducer.userInfo.isAuthenticated
-  );
-
-  const userInfo = useSelector((state) => state.rootReducer.userInfo);
-  useEffect(() => {
-    const fetchData = async () => {
-      const allAccounts = await fetchAllAccounts(userInfo.email);
-      const followers = await fetchFollowers(userInfo.userId);
-      dispatch(globalInfoActions.setAllAccounts(allAccounts));
-      dispatch(userInfoActions.setFollowers(followers));
-    };
-    fetchData();
-  }, []);
-
   return (
     <div className="flex flex-col grow">
       <AppInitializer />

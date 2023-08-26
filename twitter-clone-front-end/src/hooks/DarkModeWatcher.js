@@ -6,7 +6,6 @@ const DarkModeWatcher = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("running");
     // Initialize
     const isDarkMode = window.matchMedia(
       "(prefers-color-scheme: dark)"
