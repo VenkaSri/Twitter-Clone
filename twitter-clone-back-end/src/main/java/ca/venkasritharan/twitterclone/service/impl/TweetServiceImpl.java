@@ -9,6 +9,8 @@ import ca.venkasritharan.twitterclone.service.TweetService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,6 +26,7 @@ public class TweetServiceImpl implements TweetService {
 
   @Override
   public TweetDTO postTweet(TweetDTO tweetDTO) {
+    tweetDTO.setCreatedAt(LocalDateTime.now());
     Tweet tweet = mapToEntity(tweetDTO);
     Tweet newTweet = tweetsRepository.save(tweet);
     TweetDTO tweetResponse = mapToDTO(newTweet);

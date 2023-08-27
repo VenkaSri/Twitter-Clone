@@ -46,6 +46,11 @@ module.exports = {
         med: "1000px",
         xs: "380px",
       },
+      utilities: {
+        ".flex-col-container": {
+          "@apply flex flex-col": {},
+        },
+      },
     },
   },
   plugins: [],
