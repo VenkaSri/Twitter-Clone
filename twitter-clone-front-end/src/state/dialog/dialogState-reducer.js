@@ -7,6 +7,9 @@ const initialState = {
   isUnfollowed: false,
   selectUser: "",
   follow: false,
+  isDialogOpen: false,
+  manualNavigation: false,
+  trigger: "",
 };
 
 const unfollowDialogSlice = createSlice({
@@ -27,6 +30,15 @@ const unfollowDialogSlice = createSlice({
     },
     setFollow(state, action) {
       state.follow = action.payload;
+    },
+    setDialogState(state, action) {
+      state.isDialogOpen = action.payload;
+    },
+    setManualNavigation(state, action) {
+      state.manualNavigation = action.payload;
+    },
+    setTrigger(state, action) {
+      state.trigger = action.payload;
     },
   },
 });

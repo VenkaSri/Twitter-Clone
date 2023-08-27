@@ -6,12 +6,34 @@ import {
   createAccountButton,
   createDemoAccountButton,
 } from "../../constants/buttonConstants";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../UI/button/Button";
+import { useDispatch } from "react-redux";
+import { unfollowDialogActions } from "../../state/dialog/dialogState-reducer";
+
+import { createBrowserHistory } from "history";
 
 export const SignUpForm = () => {
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  const dispatch = useDispatch();
   const dark = useSelector((state) => state.rootReducer.globalState.isDarkMode);
   const fillColor = dark ? "#fff" : "#000";
   const borderColor = dark ? "#2F3336" : "#f7f9f9";
+  const dialogState = useSelector(
+    (state) => state.rootReducer.dialogState.isDialogOpen
+  );
+
+  const handleCreateAccount = () => {
+    dispatch(unfollowDialogActions.setDialogState(true));
+    window.history.replaceState(
+      null,
+      "Sign up for Twitter / X",
+      "/i/flow/signup"
+    );
+  };
+
   return (
     <div className="flex flex-col w-[300px]">
       <div className="flex flex-col gap-3">
@@ -26,7 +48,10 @@ export const SignUpForm = () => {
         <div className={`flex-grow border-b border-[${borderColor}]`}></div>
       </div>
       <div className="flex flex-col gap-3 mb-2">
-        <Button buttonProps={createAccountButton} />
+        <Button
+          buttonProps={createAccountButton}
+          onClick={handleCreateAccount}
+        />
         <Button buttonProps={createDemoAccountButton} />
       </div>
       <div>
@@ -48,3 +73,12 @@ export const SignUpForm = () => {
     </div>
   );
 };
+
+// const dialogState = useSelector(
+//   (state) => state.rootReducer.dialogState.isDialogOpen
+// );
+// const dispatch = useDispatch();
+
+// const manualNavigation = useSelector(
+//   (state) => state.rootReducer.dialogState.manualNavigation
+// );
