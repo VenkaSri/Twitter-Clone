@@ -1,6 +1,6 @@
 import React from "react";
 
-import DOBSelectField from "../UI/auth/sign-up/DOBSelectField"
+import DOBSelectField from "../UI/auth/sign-up/DOBSelectField";
 import moment from "moment";
 import { MenuItem } from "@mui/material";
 
@@ -36,7 +36,7 @@ const years = yearArr.map((year) => (
 
 const DOBInput = () => {
   return (
-    <div className="flex mt-6">
+    <div className="flex my-4">
       <DOBSelectField
         field={months}
         style={{ flexGrow: 2, width: "13.063rem", marginRight: "0.75rem" }}

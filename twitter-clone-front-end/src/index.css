@@ -1,3 +1,5 @@
+@import "./assets/stylesheets/custom-utilities.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,7 +20,6 @@
   font-family: "Custom-2";
   src: url("./font/chirp_light.otf");
 }
-
 
 @font-face {
   font-family: "Chrip Regular";
@@ -44,5 +45,3 @@
   font-family: "Chirp Thin";
   src: url("./font/chirp_thin.otf");
 }
-
-

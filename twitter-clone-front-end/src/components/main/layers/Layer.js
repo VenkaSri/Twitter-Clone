@@ -15,13 +15,6 @@
 // import UnfollowDialog from "../../UnfollowDialog";
 // import Dialog from "../../UI/dialog/Dialog";
 
-// const stepsContent = [
-//   <StepOne />,
-//   <StepTwo />,
-//   <PasswordStep />,
-//   <Username />,
-//   <FinalStep />,
-// ];
 // //<ProfilePicture />
 
 // const Layer = () => {
@@ -65,3 +58,32 @@
 // };
 
 // export default Layer;
+
+<div class="css-1dbjc4n r-1isdzm1">
+  <div class="css-1dbjc4n">
+    <div class="css-1dbjc4n">
+      <div class="css-1dbjc4n r-pw2am6">
+        <div
+          aria-disabled="true"
+          role="button"
+          tabindex="-1"
+          class="css-1dbjc4n r-sdzlij r-1phboty r-rs99b7 r-19yznuf r-64el8z r-icoktb r-1ny4l3l r-1dye5f7 r-o7ynqc r-6416eg r-lrvibr"
+          style="background-color: rgb(15, 20, 25); border-color: rgba(0, 0, 0, 0);"
+          data-testid="ocfSignupNextLink"
+        >
+          <div
+            dir="ltr"
+            class="css-901oao r-1awozwy r-6koalj r-18u37iz r-16y2uox r-37j5jr r-a023e6 r-b88u0q r-1777fci r-rjixqe r-bcqeeo r-q4m81j r-qvutc0"
+            style="color: rgb(255, 255, 255);"
+          >
+            <span class="css-901oao css-16my406 css-1hf3ou5 r-poiln3 r-1inkyih r-rjixqe r-bcqeeo r-qvutc0">
+              <span class="css-901oao css-16my406 r-poiln3 r-bcqeeo r-qvutc0">
+                Next
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>;

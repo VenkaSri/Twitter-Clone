@@ -8,7 +8,7 @@ const onlySpaces = (text) => !/[^\s\\]/.test(text);
 
 const NameInputField = () => {
   const dispatch = useDispatch();
-  const name = useSelector(state => state.rootReducer.signUp.name);
+  const name = useSelector((state) => state.rootReducer.signUp.name);
   const [isNameValid, setIsNameValid] = useState(false);
   const nameInputClassess = `border border-[${
     isNameValid ? "#ff0000" : "#CFD9DE"
@@ -49,16 +49,20 @@ const NameInputField = () => {
           },
         }}
         InputLabelProps={{
-          sx: { color: isNameValid ? "#ff0000" : ""}
+          sx: { color: isNameValid ? "#ff0000" : "" },
         }}
         onChange={handleChange}
         autoFocus={name.shouldAutoFocus}
       />
-      {isNameValid && (
-        <p className="font-cReg text-[14px] ml-2 text-[#ff0000]">
-          What is your name?
-        </p>
-      )}
+      <div className="px-2 flex">
+        <div className="pt-0.5 pr-5 flex flex-col">
+          {isNameValid && (
+            <span className="font-cReg text-[14px] text-[#ff0000]">
+              What is your name?
+            </span>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

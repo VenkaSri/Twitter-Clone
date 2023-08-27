@@ -13,12 +13,17 @@ const SignUpStep = ({ header, content, footer }) => {
   return (
     <>
       <DialogTitle style={{ padding: 0 }}>{header}</DialogTitle>
-      <DialogContent style={{ padding: 0, marginTop: 10 }}>
+      <DialogContent
+        className="w-full max-w-[600px] mx-[51px] mx-auto p-0 flex-col-container relative"
+        sx={{
+          "&.MuiDialogContent-root": {
+            padding: 0,
+          },
+        }}
+      >
         {content}
       </DialogContent>
-      <DialogActions style={{ padding: 0 }}>
-        {footer}
-      </DialogActions>
+      {/* <DialogActions style={{ padding: 0 }}>{footer}</DialogActions> */}
     </>
   );
 };

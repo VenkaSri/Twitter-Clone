@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.flex-col-container {
+  @apply flex flex-col;
+}
+
+.primary-text-style {
+  @apply text-[15px] font-cReg leading-5;
+}
