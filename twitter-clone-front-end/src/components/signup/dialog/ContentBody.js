@@ -2,6 +2,7 @@ import React from "react";
 import NameInputField from "../stepone/NameInputField";
 import { InfoLabel } from "../../InfoLabel";
 import DOBInput from "../DOBInput";
+import EmailTextField from "../stepone/EmailTextField";
 
 export const ContentBody = () => {
   return (
@@ -10,7 +11,7 @@ export const ContentBody = () => {
         <NameInputField />
       </div>
       <div className="flex-col-container py-3">
-        <NameInputField />
+        <EmailTextField />
       </div>
       <div className="text-[#1d9bf0] text-right font-normal text-[15px] font-cReg leading-5 ">
         <span className="hover:underline cursor-pointer">

@@ -20,7 +20,12 @@ const FormDialog = (props) => {
     ? {}
     : {
         sx: {
-          borderRadius: "20px",
+          borderRadius: "16px",
+          height: "650px",
+          maxHeight: "90vh",
+          minHeight: "400px",
+          maxWidth: "80vw",
+          minWidth: "600px",
           display: "flex",
           boxShadow: "none",
           overflow: "hidden",
@@ -42,24 +47,3 @@ const FormDialog = (props) => {
 };
 
 export default FormDialog;
-
-{
-  /* <Dialog
-fullScreen={fullScreen}
-transitionDuration={0}
-open={dialogState}
-PaperProps={{
-  sx: {
-    width: "600px",
-    height: "650px",
-    borderRadius: "20px",
-    display: "flex",
-    boxShadow: "none",
-    overflow: "hidden",
-    backgroundColor: "red",
-  },
-}}
->
-{props.content}
-</Dialog> */
-}

@@ -8,6 +8,7 @@ import { DialogTitle } from "@mui/material";
 import { unfollowDialogActions } from "../../../state/dialog/dialogState-reducer";
 import IconButton from "../../UI/button/IconButton";
 import getIcon from "../../UI/icons/iconsutil";
+import { useMediaQuery } from "@mui/material";
 import {
   LOGO,
   FORM_BACK_BUTTON,
@@ -16,6 +17,7 @@ import {
 import { Link } from "react-router-dom";
 
 const DialogHeader = () => {
+  const fullScreen = useMediaQuery("(max-width:702px)");
   const loading = useSelector((state) => state.rootReducer.signUp.api.loading);
   const dispatch = useDispatch();
   const currentStep = useSelector(
@@ -35,9 +37,13 @@ const DialogHeader = () => {
   };
   return (
     <div className="h-[53px] flex">
-      <div className="flex items-center sticky top-0 bg-[#fff] mx-[51px] px-[16px] w-full justify-center align-center">
+      <div
+        className={`flex items-center sticky top-0 bg-[#fff] ${
+          fullScreen ? "mx-[51px]" : "mx-0"
+        } px-[16px] w-full justify-center align-center`}
+      >
         <div className="min-w-[56px] min-h-[32px] self-stretch flex items-start justify-center flex-col">
-          <div className="min-w-[36px] min-h-[36px] rounded-full flex flex-col cursor-pointer items-center justify-center">
+          <div className="min-w-[36px] min-h-[36px] rounded-full flex flex-col cursor-pointer items-center justify-center -ml-2">
             <IconButton
               type={"Close"}
               options={{

@@ -13,6 +13,7 @@ const Button = ({ onClick, buttonProps }) => {
   return (
     <button
       style={{
+        ...(!buttonProps.width && { flexGrow: 1 }),
         width: buttonProps.width,
         height: buttonProps.height,
         backgroundColor: buttonProps.bgColor,

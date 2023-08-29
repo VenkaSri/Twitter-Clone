@@ -9,9 +9,11 @@ import { ContentHeading } from "../dialog/ContentHeading";
 import { ContentBody } from "../dialog/ContentBody";
 import { ContentFooter } from "../dialog/ContentFooter";
 import { useWindowWidth } from "../../../hooks/useWindowWidth";
+import { useMediaQuery } from "@mui/material";
 
 const StepOne = () => {
   const width = useWindowWidth();
+  const fullScreen = useMediaQuery("(max-width:702px)");
   const [authType, setAuthType] = useState(false);
   const dispatch = useDispatch();
   const nextStepHandler = () => {
@@ -24,11 +26,16 @@ const StepOne = () => {
   const handleAuthTypeTrue = () => {
     setAuthType(true);
   };
+
   return (
     <>
-      <div className="overflow-auto flex flex-col items-stretch basis-full flex-grow border border-[red]">
+      <div className="overflow-auto flex flex-col items-stretch basis-full flex-grow ">
         <div className="flex flex-col h-full">
-          <div className="px-8 shrink-0 flex flex-col">
+          <div
+            className={`${
+              fullScreen ? " px-8" : " px-20"
+            } shrink-0 flex flex-col`}
+          >
             <ContentHeading />
             <ContentBody />
           </div>

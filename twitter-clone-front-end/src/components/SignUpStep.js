@@ -23,7 +23,6 @@ const SignUpStep = ({ header, content, footer }) => {
       >
         {content}
       </DialogContent>
-      {/* <DialogActions style={{ padding: 0 }}>{footer}</DialogActions> */}
     </>
   );
 };
