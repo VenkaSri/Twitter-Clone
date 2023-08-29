@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import DOBInput from "../DOBInput";
-import NameInputField from "./NameInputField";
-import EmailTextField from "./EmailTextField";
+import DOBInput from "../inputs/DOBInput";
+import NameInputField from "../inputs/NameInputField";
+import EmailTextField from "../inputs/EmailTextField";
 import { stepsActions } from "../../../state/auth/form/steps-reducer";
 import { ContentHeading } from "../dialog/ContentHeading";
 import { ContentBody } from "../dialog/ContentBody";

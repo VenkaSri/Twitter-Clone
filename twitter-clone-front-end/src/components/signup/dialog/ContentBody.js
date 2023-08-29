@@ -1,8 +1,8 @@
 import React from "react";
-import NameInputField from "../stepone/NameInputField";
+import NameInputField from "../inputs/NameInputField";
 import { InfoLabel } from "../../InfoLabel";
-import DOBInput from "../DOBInput";
-import EmailTextField from "../stepone/EmailTextField";
+import DOBInput from "../inputs/DOBInput";
+import EmailTextField from "../inputs/EmailTextField";
 
 export const ContentBody = () => {
   return (

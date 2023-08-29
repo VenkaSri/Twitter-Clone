@@ -1,6 +1,6 @@
 import React from "react";
 
-import DOBSelectField from "../UI/auth/sign-up/DOBSelectField";
+import DOBSelectField from "./DOBSelectField";
 import moment from "moment";
 import { MenuItem } from "@mui/material";
 
