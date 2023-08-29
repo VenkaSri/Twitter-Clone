@@ -1,3 +1,0 @@
-ls
-docker ps
-exit
