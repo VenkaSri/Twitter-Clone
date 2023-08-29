@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.834f4e4c.css",
+    "main.js": "/static/js/main.5d2a2be8.js",
+    "static/media/soccer.jpg": "/static/media/soccer.ff565ed09c71d56c469f.jpg",
+    "static/media/chirp_heavy.otf": "/static/media/chirp_heavy.01f8a830c36a0d59af0c.otf",
+    "static/media/chirp_bold.otf": "/static/media/chirp_bold.89e2883e967adaf3d2be.otf",
+    "static/media/chirp_medium.otf": "/static/media/chirp_medium.1d26ec010f3f9068c001.otf",
+    "static/media/chirp_thin.otf": "/static/media/chirp_thin.ba06e58ccef7efdd8574.otf",
+    "static/media/chirp_light.otf": "/static/media/chirp_light.0d7aa5f35e2e2f424e26.otf",
+    "static/media/chirp_regular.otf": "/static/media/chirp_regular.350702a3791df2afa07e.otf",
+    "index.html": "/index.html",
+    "main.834f4e4c.css.map": "/static/css/main.834f4e4c.css.map",
+    "main.5d2a2be8.js.map": "/static/js/main.5d2a2be8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.834f4e4c.css",
+    "static/js/main.5d2a2be8.js"
+  ]
+}
