@@ -14,6 +14,10 @@ module.exports = {
       cThin: ["Chirp Thin", "sans-serif"],
     },
     extend: {
+      boxShadow: {
+        "custom-shadow":
+          "rgba(101, 119, 134, 0.2) 0px 0px 7px, rgba(101, 119, 134, 0.15) 0px 1px 3px 1px",
+      },
       spacing: {
         130: "37.375rem",
         120: "31.25rem",

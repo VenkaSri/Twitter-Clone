@@ -31,38 +31,40 @@ const InputField = (props) => {
   };
 
   return (
-    <div className="flex flex-col grow">
-      <TextField
-        name={props.label}
-        type="text"
-        id="outlined-basic"
-        label={props.label}
-        variant="filled"
-        InputLabelProps={{
-          shrink: true,
-        }}
-        value={props.inputValue}
-        InputProps={{
-          className:
-            "border border-[#CFD9DE] h-[3.688rem] rounded-[4px] max-h-[3.688rem] !bg-[#ffffff]",
-          disableUnderline: true,
-          endAdornment: (
-            <InputAdornment position="end">
-              <div className={props.svg.style}>
-                <SVG svgPath={props.svg.path} />
-              </div>
-            </InputAdornment>
-          ),
-        }}
-        sx={{
-          "& label": {
-            "&.Mui-focused": {
-              color: "#1d9bf0",
+    <div className="py-3">
+      <div className="flex flex-col grow">
+        <TextField
+          name={props.label}
+          type="text"
+          id="outlined-basic"
+          label={props.label}
+          variant="filled"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          value={props.inputValue}
+          InputProps={{
+            className:
+              "border border-[#CFD9DE] h-[3.688rem] rounded-[4px] max-h-[3.688rem] !bg-[#ffffff]",
+            disableUnderline: true,
+            endAdornment: (
+              <InputAdornment position="end">
+                <div className={props.svg.style}>
+                  <SVG svgPath={props.svg.path} />
+                </div>
+              </InputAdornment>
+            ),
+          }}
+          sx={{
+            "& label": {
+              "&.Mui-focused": {
+                color: "#1d9bf0",
+              },
             },
-          },
-        }}
-        onClick={currentStep === 2 ? editFieldHandler : null}
-      />
+          }}
+          onClick={currentStep === 2 ? editFieldHandler : null}
+        />
+      </div>
     </div>
   );
 };

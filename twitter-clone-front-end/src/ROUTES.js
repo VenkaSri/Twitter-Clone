@@ -12,6 +12,7 @@ import { createBrowserHistory } from "history";
 import DialogHeader from "./components/signup/dialog/DialogHeader";
 import StepOne from "./components/signup/stepone/StepOne";
 import DialogFooter from "./components/UI/dialog/DialogFooter";
+import StepTwo from "./components/dialog/signup/steps/2/StepTwoBody";
 const history = createBrowserHistory();
 
 const stepsContent = [<StepOne />];
@@ -37,7 +38,7 @@ const Routes = () => {
           content={
             <SignUpStep
               header={<DialogHeader />}
-              content={stepsContent[currentStep - 1]}
+              content={<StepOne />}
               footer={<DialogFooter currentStep={currentStep} />}
             />
           }
