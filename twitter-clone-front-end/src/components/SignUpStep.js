@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import { DialogContent, DialogTitle } from "@mui/material";
 import PropTypes from "prop-types";
 
 const propTypes = {
@@ -9,7 +9,7 @@ const propTypes = {
   footer: PropTypes.node.isRequired,
 };
 
-const SignUpStep = ({ header, content, footer }) => {
+const SignUpStep = ({ header, content }) => {
   return (
     <>
       <DialogTitle style={{ padding: 0 }}>{header}</DialogTitle>

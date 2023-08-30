@@ -36,6 +36,7 @@ const FormDialog = (props) => {
   return (
     <Dialog
       sx={{ display: "flex", flexDirection: "column" }}
+      transitionDuration={0}
       fullScreen={fullScreen}
       open={dialogState}
       aria-labelledby="responsive-dialog-title"

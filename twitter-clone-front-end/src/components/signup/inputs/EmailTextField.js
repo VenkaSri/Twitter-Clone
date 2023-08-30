@@ -79,13 +79,6 @@ const EmailTextField = () => {
         }
         autoFocus={email.shouldAutoFocus}
       />
-      {(isInvalid || isUnavailable) && (
-        <p className="font-cReg text-[14px] ml-2 text-[#ff0000]">
-          {isInvalid
-            ? "Please enter a valid email."
-            : "Email has already been taken."}
-        </p>
-      )}
       <div className="px-2 flex">
         <div className="pt-0.5 pr-5 flex flex-col">
           {(isInvalid || isUnavailable) && (
