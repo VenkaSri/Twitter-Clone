@@ -1,15 +1,15 @@
 import React from "react";
-import Button from "../../UI/button/Button";
-import axios from "axios";
-import { useUserData } from "../../../hooks/user-data";
 import { useDispatch, useSelector } from "react-redux";
-import { stepsActions } from "../../../state/auth/form/steps-reducer";
-import { apiActions } from "../../../state/auth/form/api-reducer";
+import { useUserData } from "../../../../../hooks/user-data";
+import Button from "../../../../UI/button/Button";
+import { stepsActions } from "../../../../../state/auth/form/steps-reducer";
+import { apiActions } from "../../../../../state/auth/form/api-reducer";
 import moment from "moment";
-import { userInfoActions } from "../../../state/user/userInfo-reducer";
-import { usernameActions } from "../../../state/auth/sign-up/username-reducer";
+import axios from "axios";
+import { userInfoActions } from "../../../../../state/user/userInfo-reducer";
+import { usernameActions } from "../../../../../state/auth/sign-up/username-reducer";
 
-const StepThreeFooter = () => {
+export const StepThreeFooter = () => {
   const { password, name, email, dob } = useUserData();
   const currentStep = useSelector(
     (state) => state.rootReducer.signUp.steps.currentStep
@@ -77,12 +77,11 @@ const StepThreeFooter = () => {
     register();
     dispatch(stepsActions.setCurrentStep(currentStep + 1));
   };
-
   return (
-    <div className="w-full h-[6.25rem] max:h-[6.25rem] flex justify-center items-center">
-      <Button buttonProps={buttonInfo} onClick={handledNext} />
-    </div>
+    <>
+      <div className="my-[24px]">
+        <Button buttonProps={buttonInfo} onClick={handledNext} />
+      </div>
+    </>
   );
 };
-
-export default StepThreeFooter;

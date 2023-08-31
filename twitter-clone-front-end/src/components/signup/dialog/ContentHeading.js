@@ -16,16 +16,18 @@ export const ContentHeading = ({ currentStep }) => {
   };
 
   return (
-    <div className="flex-col-container">
+    <div className="flex-col-container ">
       <div className="flex-col-container my-5">
         <h1 className="text-[26px] leading-8 font-cMed font-bold break-words inline">
           <span>{currentHeader()}</span>
-          {currentStep === PASSWORD_STEP && (
-            <div className="text-[15px] leading-8 font-cReg break-words ">
-              <span>Make sure it's 8 characters or more</span>
-            </div>
-          )}
         </h1>
+        {currentStep === PASSWORD_STEP && (
+          <div className="flex-col-container mt-2">
+            <div className="text-[15px] leading-5 font-cThin break-words text-[#536471]">
+              <span>Make sure it's 8 characters or more.</span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

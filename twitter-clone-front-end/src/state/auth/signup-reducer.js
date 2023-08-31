@@ -17,7 +17,7 @@ const signUpReducer = combineReducers({
   steps: stepsReducer,
   password: passwordReducer,
   api: apiReducer,
-  username: usernameReducer
+  username: usernameReducer,
 });
 
 export default signUpReducer;

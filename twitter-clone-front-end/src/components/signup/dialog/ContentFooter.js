@@ -3,6 +3,7 @@ import React from "react";
 import { useMediaQuery } from "@mui/material";
 import { StepOneFooter } from "../../dialog/signup/steps/1/StepOneFooter";
 import { StepTwoFooter } from "../../dialog/signup/steps/2/StepTwoFooter";
+import { StepThreeFooter } from "../../dialog/signup/steps/3/StepThreeFooter";
 
 export const ContentFooter = ({ currentStep, isOverflowing }) => {
   const fullScreen = useMediaQuery("(max-width:702px)");
@@ -12,6 +13,8 @@ export const ContentFooter = ({ currentStep, isOverflowing }) => {
         return <StepOneFooter />;
       case 2:
         return <StepTwoFooter />;
+      case 3:
+        return <StepThreeFooter />;
       default:
         break;
     }
