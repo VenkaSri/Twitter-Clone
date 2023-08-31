@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useDispatch, useSelector } from "react-redux";
-import { dobActions } from "../../../state/auth/sign-up/dob-reducer";
-import { stepOneActions } from "../../../state/auth/sign-up/stepone-reducer";
+import { dobActions } from "../../../../state/auth/sign-up/dob-reducer";
+import { stepOneActions } from "../../../../state/auth/sign-up/stepone-reducer";
 
 const DOBSelectField = (props) => {
   const dispatch = useDispatch();

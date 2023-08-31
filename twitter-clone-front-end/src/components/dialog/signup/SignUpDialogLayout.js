@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 
-import { ContentHeading } from "../dialog/ContentHeading";
-import { ContentBody } from "../dialog/ContentBody";
-import { ContentFooter } from "../dialog/ContentFooter";
+import { ContentHeading } from "../../signup/dialog/ContentHeading";
+import { ContentBody } from "../../signup/dialog/ContentBody";
+import { ContentFooter } from "../../signup/dialog/ContentFooter";
 import { useWindowWidth } from "../../../hooks/useWindowWidth";
 import { useMediaQuery } from "@mui/material";
 import { useCurrentStep } from "../../../hooks/signup/ useCurrentStep";
 
-const DialogLayout = () => {
+const SignUpDialogLayout = () => {
   const width = useWindowWidth();
   const fullScreen = useMediaQuery("(max-width:702px)");
   const currentStep = useCurrentStep();
@@ -43,8 +43,8 @@ const DialogLayout = () => {
               fullScreen ? " px-8" : " px-20"
             } shrink-0 flex flex-col`}
           >
-            <ContentHeading />
-            <ContentBody currentStep={currentStep} is />
+            <ContentHeading currentStep={currentStep} />
+            <ContentBody currentStep={currentStep} />
           </div>
         </div>
       </div>
@@ -67,4 +67,4 @@ const DialogLayout = () => {
   );
 };
 
-export default DialogLayout;
+export default SignUpDialogLayout;

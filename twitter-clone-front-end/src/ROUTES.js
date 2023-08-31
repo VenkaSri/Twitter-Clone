@@ -10,12 +10,10 @@ import { useNavigate } from "react-router-dom";
 import SignUpStep from "./components/SignUpStep";
 import { createBrowserHistory } from "history";
 import DialogHeader from "./components/signup/dialog/DialogHeader";
-import StepOne from "./components/signup/stepone/StepOne";
 import DialogFooter from "./components/UI/dialog/DialogFooter";
-import StepTwo from "./components/dialog/signup/steps/2/StepTwoBody";
-const history = createBrowserHistory();
+import SignUpDialogLayout from "./components/dialog/signup/SignUpDialogLayout";
 
-const stepsContent = [<StepOne />];
+const history = createBrowserHistory();
 
 const Routes = () => {
   const location = useLocation();
@@ -38,7 +36,7 @@ const Routes = () => {
           content={
             <SignUpStep
               header={<DialogHeader />}
-              content={<StepOne />}
+              content={<SignUpDialogLayout />}
               footer={<DialogFooter currentStep={currentStep} />}
             />
           }
@@ -49,4 +47,3 @@ const Routes = () => {
 };
 
 export default Routes;
-// content={<SignUpStep header={<DialogHeader />} />}

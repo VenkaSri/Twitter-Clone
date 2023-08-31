@@ -1,8 +1,8 @@
 import React from "react";
-import NameInputField from "../../../../signup/inputs/NameInputField";
-import EmailTextField from "../../../../signup/inputs/EmailTextField";
+import NameInputField from "../../inputs/NameInputField";
+import EmailTextField from "../../inputs/EmailTextField";
 import { InfoLabel } from "../../../../InfoLabel";
-import DOBInput from "../../../../signup/inputs/DOBInput";
+import DOBInput from "../../inputs/DOBInput";
 
 export const StepOneBody = () => {
   return (

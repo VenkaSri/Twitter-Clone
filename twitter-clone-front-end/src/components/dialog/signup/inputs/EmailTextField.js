@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { emailActions } from "../../../state/auth/sign-up/email-reducer";
-import { stepOneActions } from "../../../state/auth/sign-up/stepone-reducer";
+import { emailActions } from "../../../../state/auth/sign-up/email-reducer";
+import { stepOneActions } from "../../../../state/auth/sign-up/stepone-reducer";
 import axios from "axios";
 import { TextField } from "@mui/material";
-
-const BASE_URL = "http://localhost:8080/api/auth/emailOrPhone";
 
 const handleEmailValidation = (text) =>
   /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(text);
