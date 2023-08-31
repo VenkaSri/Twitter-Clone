@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import Button from "../components/UI/button/Button";
-import { signInButton } from "../constants/buttonConstants";
+import Button from "../../components/UI/button/Button";
+import { signInButton } from "../../constants/buttonConstants";
 import { useSelector } from "react-redux";
-import { LandingFooter } from "../components/landing/LandingFooter";
-import { SignUpForm } from "../components/landing/SignUpForm";
-import { useWindowWidth } from "../hooks/useWindowWidth";
-import { CustomText } from "../components/CustomText";
-import { Icon } from "../components/icon";
+import { LandingFooter } from "../../components/landing/LandingFooter";
+import { SignUpForm } from "../../components/landing/SignUpForm";
+import { useWindowWidth } from "../../hooks/useWindowWidth";
+import { CustomText } from "../../components/CustomText";
+import { Icon } from "../../components/icon";
 
 export const LandingPage = () => {
   const dark = useSelector((state) => state.rootReducer.globalState.isDarkMode);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes as RouterRoutes } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
+import LandingPage from "./pages/public/LandingPage";
 import FormDialog from "./components/UI/home/FormDialog";
 import { SignupDialog } from "./App";
 import { useSelector, useDispatch } from "react-redux";
@@ -24,6 +24,9 @@ const Routes = () => {
   );
   const currentStep = useSelector(
     (state) => state.rootReducer.signUp.steps.currentStep
+  );
+  const isAuthenticated = useSelector(
+    (state) => state.rootReducer.userInfo.isAuthenticated
   );
 
   return (

@@ -2,7 +2,7 @@ import React from "react";
 
 import getIcon from "../icons/iconsutil";
 
-const IconButton = ({ type, onClick, options }) => {
+const IconButton = ({ type, onClick, options = {} }) => {
   return (
     <div
       onClick={onClick}
