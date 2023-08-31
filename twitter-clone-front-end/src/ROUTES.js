@@ -12,6 +12,7 @@ import { createBrowserHistory } from "history";
 import DialogHeader from "./components/signup/dialog/DialogHeader";
 import DialogFooter from "./components/UI/dialog/DialogFooter";
 import SignUpDialogLayout from "./components/dialog/signup/SignUpDialogLayout";
+import { DialogLoading } from "./components/dialog/DialogLoading";
 
 const history = createBrowserHistory();
 
@@ -25,8 +26,8 @@ const Routes = () => {
   const currentStep = useSelector(
     (state) => state.rootReducer.signUp.steps.currentStep
   );
-  const isAuthenticated = useSelector(
-    (state) => state.rootReducer.userInfo.isAuthenticated
+  const isLoading = useSelector(
+    (state) => state.rootReducer.loadingState.isLoading
   );
 
   return (
@@ -37,11 +38,15 @@ const Routes = () => {
       {dialogState && (
         <FormDialog
           content={
-            <SignUpStep
-              header={<DialogHeader />}
-              content={<SignUpDialogLayout />}
-              footer={<DialogFooter currentStep={currentStep} />}
-            />
+            isLoading ? (
+              <DialogLoading />
+            ) : (
+              <SignUpStep
+                header={<DialogHeader />}
+                content={<SignUpDialogLayout />}
+                footer={<DialogFooter currentStep={currentStep} />}
+              />
+            )
           }
         />
       )}

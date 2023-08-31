@@ -13,7 +13,6 @@ const handlePasswordStrengthValidation = (text) => /^(.)\1*$/.test(text);
 
 const StepThreeBody = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const loading = useSelector((state) => state.rootReducer.signUp.api.loading);
   const [isInValid, setIsInValid] = useState(false);
   const password = useSelector((state) => state.rootReducer.signUp.password);
 

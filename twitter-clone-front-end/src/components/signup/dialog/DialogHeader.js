@@ -15,7 +15,6 @@ import {
 
 const DialogHeader = () => {
   const fullScreen = useMediaQuery("(max-width:702px)");
-  const loading = useSelector((state) => state.rootReducer.signUp.api.loading);
   const dispatch = useDispatch();
   const currentStep = useCurrentStep();
   const dialogState = useSelector(
