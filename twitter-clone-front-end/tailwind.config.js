@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   mode: "jit",
-  // darkMode: "class",
+  darkMode: "class",
   content: ["public/**", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     fontFamily: {
@@ -16,7 +16,7 @@ module.exports = {
     extend: {
       boxShadow: {
         "custom-shadow":
-          "rgba(101, 119, 134, 0.2) 0px 0px 7px, rgba(101, 119, 134, 0.15) 0px 1px 3px 1px",
+          "rgba(101, 119, 134, 0.30) 0px 0px 12px, rgba(101, 119, 134, 0.50) 0px 1px 3px 1px",
       },
       spacing: {
         130: "37.375rem",

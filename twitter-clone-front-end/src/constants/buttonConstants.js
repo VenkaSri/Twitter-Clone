@@ -4,7 +4,6 @@ const baseOAuthButton = {
   height: "40px",
   width: "300px",
   txtColor: "#000",
-  bgColor: "#fff",
   icon: true,
   margin: "0 0 0 4px",
   iconPosition: "start",
@@ -17,10 +16,11 @@ const baseAuthButton = {
   height: "40px",
   width: "300px",
   txtColor: "#fff",
-  bgColor: "#1d9bf0",
   margin: "0 0 0 4px",
   gap: "10px",
   fontSize: "15px",
+  className:
+    "hover:bg-[#1A8CD8] dark:bg-[#1d9bf0] dark:hover:bg-[#1A8CD8] bg-[#1d9bf0]",
 };
 
 export const googleOAuthButton = {
@@ -28,6 +28,7 @@ export const googleOAuthButton = {
   margin: "0",
   type: "Google",
   text: "Sign up with Google",
+  className: "hover:bg-[#E6E6E6] dark:bg-white dark:hover:bg-[#E6E6E6]",
 };
 
 export const appleOAuthButton = {
@@ -36,7 +37,10 @@ export const appleOAuthButton = {
   type: "Apple",
   text: "Sign up with Apple",
   fill: "#000",
+  className: "hover:bg-[#E6E6E6] dark:bg-white dark:hover:bg-[#E6E6E6]",
 };
+
+// bgColor: "#1d9bf0",
 
 export const createAccountButton = {
   ...baseAuthButton,
@@ -51,7 +55,11 @@ export const createDemoAccountButton = {
 export const signInButton = {
   ...baseOAuthButton,
   text: "Sign in",
-  bgColor: "transparent",
   txtColor: "#1D9BF0",
   icon: false,
+  className:
+    "border border-[#cfd9de] dark:border dark:border-[#293238] bg-transparent  hover:bg-[#E8F5FE] dark:hover:bg-[#030f18]",
 };
+
+delete signInButton.brdColor;
+delete signInButton.bgColor;

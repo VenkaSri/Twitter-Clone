@@ -15,14 +15,15 @@ export const StepOneFooter = () => {
   );
 
   const buttonInfo = {
-    txtColor: "#FFF",
+    txtColor: "text-white dark:text-black",
     text: "Next",
-    hoverBgColor: "#272c30",
     disabled: !(isEmailEntered && isDOBEntered && isNameEntered),
-    bgColorEnabled: "#000",
-    bgColorDisabled: "#86888b",
+    fontSize: "17px",
     ...(isEmailEntered && isDOBEntered && isNameEntered
-      ? { bgColor: "#000" }
+      ? {
+          className:
+            "bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30]",
+        }
       : { bgColor: "#86888b" }),
   };
 

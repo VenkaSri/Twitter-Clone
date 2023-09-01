@@ -5,14 +5,10 @@ import { useSelector } from "react-redux";
 import { LandingFooter } from "../../components/landing/LandingFooter";
 import { SignUpForm } from "../../components/landing/SignUpForm";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
-import { CustomText } from "../../components/CustomText";
 import { Icon } from "../../components/icon";
 
 export const LandingPage = () => {
-  const dark = useSelector((state) => state.rootReducer.globalState.isDarkMode);
   const windowWidth = useWindowWidth();
-
-  const fillColor = dark ? "#fff" : "#000";
 
   return (
     <div className="h-screen w-screen flex flex-col overflow-x-hidden dark:bg-black">
@@ -26,7 +22,11 @@ export const LandingPage = () => {
         >
           <Icon
             name="X_LOGO"
-            props={{ fill: fillColor, padding: "32px", maxHeight: "380px" }}
+            props={{
+              padding: "32px",
+              maxHeight: "380px",
+              className: "dark:fill-white",
+            }}
           />
         </div>
         <div className="flex-1  xs:p-4 flex flex-col justify-center">
@@ -34,20 +34,19 @@ export const LandingPage = () => {
             <div className="flex-1 flex items-center block med:hidden h-[48px]">
               <Icon
                 name="X_LOGO"
-                props={{ fill: fillColor, maxHeight: "48px" }}
+                props={{
+                  maxHeight: "48px",
+                  className: "dark:fill-white",
+                }}
               />
             </div>
-            <CustomText
-              fontSize="64px"
-              lineHeight="84px"
-              color={fillColor}
-              text="Happening now"
-              fontWeight="bold"
-              additionalClasses="my-12 font-cHeavy"
-            />
+            <div className="my-12 flex  font-cHeavy leading-[84px] text-[64px] font-bold dark:text-[#fff] ">
+              <span className="m-0 p-0">Happening now</span>
+            </div>
+
             <div className="mb-8">
               <span
-                className={`font-cHeavy text-[31px] leading-[36px] text-[${fillColor}]`}
+                className={`font-cHeavy text-[31px] leading-[36px]  dark:text-[#fff]`}
               >
                 Join today.
               </span>
@@ -55,7 +54,7 @@ export const LandingPage = () => {
             <SignUpForm />
             <div className="flex flex-col mt-10 gap-4">
               <span
-                className={`font-cMed text-[17px] leading-[20px] font-bold text-[${fillColor}]`}
+                className={`font-cMed text-[17px] leading-[20px] font-bold dark:text-[#fff]`}
               >
                 Already have an account?
               </span>

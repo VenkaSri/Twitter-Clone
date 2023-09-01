@@ -29,7 +29,6 @@ const FormDialog = (props) => {
           display: "flex",
           boxShadow: "none",
           overflow: "hidden",
-          backgroundColor: bgColor,
         },
       };
 

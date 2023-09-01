@@ -18,9 +18,6 @@ export const SignUpForm = () => {
 
   const location = useLocation();
   const dispatch = useDispatch();
-  const dark = useSelector((state) => state.rootReducer.globalState.isDarkMode);
-  const fillColor = dark ? "#fff" : "#000";
-  const borderColor = dark ? "#2F3336" : "#f7f9f9";
   const dialogState = useSelector(
     (state) => state.rootReducer.dialogState.isDialogOpen
   );
@@ -41,11 +38,13 @@ export const SignUpForm = () => {
         <Button buttonProps={appleOAuthButton} />
       </div>
       <div className="flex items-center justify-center my-1">
-        <div className={`flex-grow border-b border-[${borderColor}]`}></div>
-        <div className={`px-2 font-cThin text-[15px] text-[${fillColor}]`}>
-          or
-        </div>
-        <div className={`flex-grow border-b border-[${borderColor}]`}></div>
+        <div
+          className={`flex-grow  dark:border-b dark:border-[#3c3e42] border-b border-[#e2e9ec]`}
+        ></div>
+        <div className={`px-2 font-cThin text-[15px] dark:text-[#fff]`}>or</div>
+        <div
+          className={`flex-grow dark:border-b dark:border-[#3c3e42] border-b border-[#e2e9ec]`}
+        ></div>
       </div>
       <div className="flex flex-col gap-3 mb-2">
         <Button

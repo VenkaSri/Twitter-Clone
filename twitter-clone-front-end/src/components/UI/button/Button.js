@@ -19,22 +19,19 @@ const Button = ({ onClick, buttonProps }) => {
         backgroundColor: buttonProps.bgColor,
         fontSize: buttonProps.fontSize || "14px",
         display: buttonProps.display || "inline-flex",
-        color: buttonProps.txtColor,
-        border: buttonProps.brdColor
-          ? `1px solid ${buttonProps.brdColor}`
-          : "none",
+        border: buttonProps.brdColor ? `1px solid ${buttonProps.brdColor}` : "",
         "&:hover": {
           backgroundColor: buttonProps.hoverBgColor,
         },
       }}
-      className={`flex justify-center items-center font-cBold rounded-full`}
+      className={`flex justify-center items-center font-cBold rounded-full ${buttonProps.className} ${buttonProps.txtColor}`}
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       disabled={buttonProps.disabled}
     >
       <div
-        className={`px-[${buttonProps.paddingX}]  flex items-center rounded-full gap-[${buttonProps.gap}]`}
+        className={`px-[${buttonProps.paddingX}]  flex items-center rounded-full gap-[${buttonProps.gap}] }`}
       >
         {buttonProps.iconPosition === "start" &&
           buttonProps.icon &&

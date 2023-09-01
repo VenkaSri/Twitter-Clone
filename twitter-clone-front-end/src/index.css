@@ -1,4 +1,5 @@
 @import "./assets/stylesheets/custom-utilities.css";
+@import "./assets//stylesheets//darkmode.css";
 
 @tailwind base;
 @tailwind components;
@@ -44,4 +45,9 @@
 @font-face {
   font-family: "Chirp Thin";
   src: url("./font/chirp_thin.otf");
+}
+
+/* styles.css */
+.my-custom-label {
+  @apply text-red-500; /* Apply Tailwind CSS classes using @apply */
 }

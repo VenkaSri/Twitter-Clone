@@ -6,13 +6,26 @@ import { ContentFooter } from "../../signup/dialog/ContentFooter";
 import { useWindowWidth } from "../../../hooks/useWindowWidth";
 import { useMediaQuery } from "@mui/material";
 import { useCurrentStep } from "../../../hooks/signup/ useCurrentStep";
+import { useDispatch } from "react-redux";
+import { globalInfoActions } from "../../../state/app/global-reducer";
 
 const SignUpDialogLayout = () => {
   const width = useWindowWidth();
   const fullScreen = useMediaQuery("(max-width:702px)");
   const currentStep = useCurrentStep();
+  const dispatch = useDispatch();
 
   const containerRef = useRef(null);
+
+  const toggleTheme = () => {
+    dispatch(globalInfoActions.setIsDarkMode(true));
+    document.documentElement.classList.add("dark");
+  };
+
+  const toggleDefaultTheme = () => {
+    dispatch(globalInfoActions.setIsDarkMode(false));
+    document.documentElement.classList.remove("dark");
+  };
 
   // s/o chat-gpt, dynamically adding box shadow
   const [isOverflowing, setIsOverflowing] = useState(false);
@@ -35,7 +48,7 @@ const SignUpDialogLayout = () => {
     <>
       <div
         ref={containerRef}
-        className="overflow-auto flex flex-col items-stretch basis-full flex-grow "
+        className="overflow-auto flex flex-col items-stretch basis-full flex-grow dark:bg-[#000]"
       >
         <div className="flex flex-col">
           <div
@@ -47,6 +60,12 @@ const SignUpDialogLayout = () => {
             <ContentBody currentStep={currentStep} />
           </div>
         </div>
+        <button onClick={toggleTheme} className="bg-[red]">
+          dark
+        </button>
+        <button onClick={toggleDefaultTheme} className="bg-[red]">
+          light
+        </button>
       </div>
 
       {width < 702 && (

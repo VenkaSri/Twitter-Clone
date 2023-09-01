@@ -5,10 +5,15 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useDispatch, useSelector } from "react-redux";
 import { dobActions } from "../../../../state/auth/sign-up/dob-reducer";
 import { stepOneActions } from "../../../../state/auth/sign-up/stepone-reducer";
+import useDarkModeWatcher from "../../../../hooks/DarkModeWatcher";
 
 const DOBSelectField = (props) => {
   const dispatch = useDispatch();
   const dob = useSelector((state) => state.rootReducer.signUp.dob);
+  const darkMode = useSelector(
+    (state) => state.rootReducer.globalState.isDarkMode
+  );
+
   const selectedValueHandler = (event) => {
     switch (props.label) {
       case "Month":
@@ -52,10 +57,6 @@ const DOBSelectField = (props) => {
     <FormControl
       variant="filled"
       sx={{
-        bgcolor: "#fff",
-        "&.Mui-focused": {
-          bgcolor: "white",
-        },
         height: "58px",
         borderRadius: "4px",
         flexGrow: props.style.flexGrow,
@@ -63,7 +64,11 @@ const DOBSelectField = (props) => {
         marginRight: props.style.marginRight || 0,
       }}
     >
-      <InputLabel htmlFor="demo-simple-select-filled" shrink={true}>
+      <InputLabel
+        htmlFor="demo-simple-select-filled"
+        shrink={true}
+        style={darkMode ? { color: "#71767b" } : {}}
+      >
         {props.label}
       </InputLabel>
       <Select
@@ -71,16 +76,16 @@ const DOBSelectField = (props) => {
         id="demo-simple-select-filled"
         label={props.label}
         sx={{
-          backgroundColor: "#fff",
-          border: "1px solid #cfd9de",
+          background: "none",
+          border: darkMode ? "1px solid #191b1c" : "1px solid #cfd9de",
           borderRadius: "4px",
           "&.Mui-focused": {
             border: "2px solid #1d9bf0",
-            bgcolor: "white",
+            bgcolor: darkMode ? "black" : "white",
           },
-          "&:hover": {
-            bgcolor: "white",
-          },
+          // "&:hover": {
+          //   bgcolor: "white",
+          // },
         }}
         defaultValue=""
         value={currentValueHandler()}

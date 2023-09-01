@@ -22,7 +22,7 @@ export const ContentFooter = ({ currentStep, isOverflowing }) => {
   const overflowClass = isOverflowing ? "shadow-custom-shadow" : "";
   return (
     <div
-      className={`flex-col-container ${
+      className={`flex-col-container dark:bg-[#000] ${
         fullScreen ? "px-8" : "px-20"
       } ${overflowClass}`}
     >
@@ -30,7 +30,7 @@ export const ContentFooter = ({ currentStep, isOverflowing }) => {
         <div
           className={`flex-col-container min-h-[52px] min-w-[52px] rounded-full `}
         >
-          <div className="my-6 flex-col-container flex-grow  ">
+          <div className="my-6 flex-col-container flex-grow ">
             <div className="flex-col-container min-h-[52px] min-w-[52px]">
               {currentFooter()}
             </div>

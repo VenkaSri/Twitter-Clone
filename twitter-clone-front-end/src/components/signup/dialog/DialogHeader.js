@@ -27,10 +27,9 @@ const DialogHeader = () => {
           onClick={handleReset}
           type={"Close"}
           options={{
-            fillColor: "#0f1419",
+            className: "dark:fill-white dark:hover:bg-[#191919] ",
             width: 20,
             height: 20,
-            hovBgColor: "#e7e7e8",
           }}
         />
       );
@@ -40,10 +39,9 @@ const DialogHeader = () => {
           onClick={handleBack}
           type={"Back"}
           options={{
-            fillColor: "#0f1419",
             width: 20,
             height: 20,
-            hovBgColor: "#e7e7e8",
+            className: "dark:fill-white dark:hover:bg-[#191919] ",
           }}
         />
       );
@@ -52,7 +50,7 @@ const DialogHeader = () => {
 
   const handleReset = () => {
     dispatch(resetActions.resetAll());
-    // dispatch(unfollowDialogActions.setDialogState(false));
+    dispatch(unfollowDialogActions.setDialogState(false));
     // window.history.replaceState(null, null, "/");
   };
 
@@ -60,9 +58,9 @@ const DialogHeader = () => {
     dispatch(stepsActions.setCurrentStep(currentStep - 1));
   };
   return (
-    <div className="h-[53px] flex">
+    <div className="h-[53px] flex bg-[#fff] dark:bg-[#000]">
       <div
-        className={`flex items-center sticky top-0 bg-[#fff] ${
+        className={`flex items-center sticky top-0  ${
           fullScreen ? "mx-[51px]" : "mx-0"
         } px-[16px] w-full justify-center align-center`}
       >
@@ -76,7 +74,7 @@ const DialogHeader = () => {
 
         <div className="flex flex-grow h-full justify-center items-stretch flex-col">
           <div className="flex flex-col items-start shrink-0 ">
-            <h2 className="py-0.5 text-xl leading-6 font-cMed font-bold">
+            <h2 className="py-0.5 text-xl leading-6 font-cMed font-bold dark:text-[#fff]">
               <span>
                 Step {currentStep} of {NUM_OF_SIGNUP_STEPS}
               </span>

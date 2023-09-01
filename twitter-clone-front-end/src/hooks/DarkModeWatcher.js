@@ -1,34 +1,23 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { globalInfoActions } from "../state/app/global-reducer";
 
-const DarkModeWatcher = () => {
+const useDarkModeWatcher = () => {
   const dispatch = useDispatch();
+  const darkMode = useSelector(
+    (state) => state.rootReducer.globalState.isDarkMode
+  );
+  const rootElement = document.documentElement;
 
   useEffect(() => {
-    // Initialize
-    const isDarkMode = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    dispatch(globalInfoActions.setIsDarkMode(isDarkMode));
+    const isDarkMode = rootElement.classList.contains("dark");
+    console.log(isDarkMode);
+    // if (isDarkMode !== darkMode) {
+    //   dispatch(globalInfoActions.setIsDarkMode(isDarkMode));
+    // }
+  }, [dispatch, darkMode, rootElement]);
 
-    // Watch for changes
-    const darkModeMediaQuery = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    );
-    const handleChange = (event) => {
-      dispatch(globalInfoActions.setIsDarkMode(event.matches));
-    };
-
-    darkModeMediaQuery.addEventListener("change", handleChange);
-
-    // Cleanup
-    return () => {
-      darkModeMediaQuery.removeEventListener("change", handleChange);
-    };
-  }, [dispatch]);
-
-  return null;
+  return darkMode;
 };
 
-export default DarkModeWatcher;
+export default useDarkModeWatcher;

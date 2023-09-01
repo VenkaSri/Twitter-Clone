@@ -9,12 +9,14 @@ import Routes from "./ROUTES";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { unfollowDialogActions } from "./state/dialog/dialogState-reducer";
+import ThemeManager from "./utils/ThemeManager";
 
 ReactGA.initialize("UA-255822850-1");
 
 function App() {
   return (
     <div className="flex flex-col grow">
+      {/* <ThemeManager /> */}
       <AppInitializer />
       <Routes />
     </div>

@@ -7,13 +7,11 @@ const IconButton = ({ type, onClick, options = {} }) => {
     <div
       onClick={onClick}
       role="button"
-      className={`w-[34px] h-[34px] flex justify-center items-center cursor-pointer rounded-full hover:bg-[${
-        options.hovBgColor || "#e8f5fe"
-      }]`}
+      className={`w-[34px] h-[34px] flex justify-center items-center cursor-pointer rounded-full ${options.className}`}
       title={type}
     >
       {getIcon(type, {
-        fill: options.fillColor || "#1d9bf0",
+        fill: options.fillColor || options.className,
         width: options.width,
         height: options.height,
       })}
