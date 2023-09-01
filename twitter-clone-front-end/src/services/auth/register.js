@@ -11,7 +11,8 @@ export const register = async (
   enteredPassword,
   enteredEmail,
   dob,
-  dispatch
+  dispatch,
+  reg
 ) => {
   const userDob = `${dob.year}-${dob.month}-${dob.day}`;
 
@@ -35,7 +36,6 @@ export const register = async (
   try {
     await axios(config);
     await getUserName(enteredEmail, dispatch);
-    dispatch(reducerInfoActions.setRegistrationComplete(true));
   } catch (error) {
     console.log(error);
   }

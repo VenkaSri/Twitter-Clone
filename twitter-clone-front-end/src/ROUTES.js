@@ -13,6 +13,7 @@ import DialogHeader from "./components/signup/dialog/DialogHeader";
 import DialogFooter from "./components/UI/dialog/DialogFooter";
 import SignUpDialogLayout from "./components/dialog/signup/SignUpDialogLayout";
 import { DialogLoading } from "./components/dialog/DialogLoading";
+import { reducerInfoActions } from "./state/app/loading/dialog/signup/reducer";
 
 const history = createBrowserHistory();
 
@@ -29,27 +30,34 @@ const Routes = () => {
   const isLoading = useSelector(
     (state) => state.rootReducer.loadingState.isLoading
   );
+  const loginState = useSelector(
+    (state) => state.rootReducer.loginState.isLoggedIn
+  );
+  const reg = useSelector(
+    (state) => state.rootReducer.loadingState.isRegistrationComplete
+  );
+
+  useEffect(() => {
+    if (reg && loginState) {
+      dispatch(reducerInfoActions.setLoading(false));
+    }
+  }, [reg, loginState, dispatch]);
+  const dialogContent = isLoading ? (
+    <DialogLoading />
+  ) : (
+    <SignUpStep
+      header={<DialogHeader />}
+      content={<SignUpDialogLayout />}
+      footer={<DialogFooter currentStep={currentStep} />}
+    />
+  );
 
   return (
     <>
       <RouterRoutes>
         <Route path="/" element={<LandingPage />} />
       </RouterRoutes>
-      {dialogState && (
-        <FormDialog
-          content={
-            isLoading ? (
-              <DialogLoading />
-            ) : (
-              <SignUpStep
-                header={<DialogHeader />}
-                content={<SignUpDialogLayout />}
-                footer={<DialogFooter currentStep={currentStep} />}
-              />
-            )
-          }
-        />
-      )}
+      {dialogState && <FormDialog content={dialogContent} />}
     </>
   );
 };

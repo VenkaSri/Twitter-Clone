@@ -5,6 +5,7 @@ import Button from "../../../../UI/button/Button";
 import { register } from "../../../../../services/auth/register";
 import { login } from "../../../../../services/auth/loginFunction";
 import { reducerInfoActions } from "../../../../../state/app/loading/dialog/signup/reducer";
+import { loginReducerInfoActions } from "../../../../../state/app/home/loginReducer";
 
 export const StepThreeFooter = () => {
   const { password, name, email, dob } = useUserData();
@@ -15,13 +16,15 @@ export const StepThreeFooter = () => {
   const reg = useSelector(
     (state) => state.rootReducer.loadingState.isRegistrationComplete
   );
+
   const loginState = useSelector(
     (state) => state.rootReducer.loginState.isLoggedIn
   );
 
   useEffect(() => {
-    console.log(isLoading);
+    console.log("useEffect triggered. reg:", reg, "loginState:", loginState);
     if (reg && loginState) {
+      console.log("Setting isLoading to false.");
       dispatch(reducerInfoActions.setLoading(false));
     }
   }, [reg, loginState, dispatch]);
@@ -48,9 +51,12 @@ export const StepThreeFooter = () => {
         password.enteredPassword,
         email.enteredEmail,
         dob,
-        dispatch
+        dispatch,
+        reg
       );
+      dispatch(reducerInfoActions.setRegistrationComplete(true));
       login(email.enteredEmail, password.enteredPassword, dispatch);
+      dispatch(loginReducerInfoActions.setLoggedIn(true));
     } catch (error) {
       console.log("An error occurred:", error);
     }
