@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useDispatch, useSelector } from "react-redux";
 import { dobActions } from "../../../../state/auth/sign-up/dob-reducer";
 import { stepOneActions } from "../../../../state/auth/sign-up/stepone-reducer";
-import useDarkModeWatcher from "../../../../hooks/DarkModeWatcher";
 
 const DOBSelectField = (props) => {
   const dispatch = useDispatch();
   const dob = useSelector((state) => state.rootReducer.signUp.dob);
+  const [isFocused, setIsFocused] = useState(false);
   const darkMode = useSelector(
     (state) => state.rootReducer.globalState.isDarkMode
   );
@@ -67,7 +67,7 @@ const DOBSelectField = (props) => {
       <InputLabel
         htmlFor="demo-simple-select-filled"
         shrink={true}
-        style={darkMode ? { color: "#71767b" } : {}}
+        style={isFocused ? { color: "#1d9bf0" } : { color: "#71767b" }}
       >
         {props.label}
       </InputLabel>
@@ -83,15 +83,26 @@ const DOBSelectField = (props) => {
             border: "2px solid #1d9bf0",
             bgcolor: darkMode ? "black" : "white",
           },
-          // "&:hover": {
-          //   bgcolor: "white",
-          // },
+          color: darkMode ? "white" : "black",
+          "&:hover": {
+            bgcolor: darkMode ? "black" : "white",
+          },
+        }}
+        MenuProps={{
+          PaperProps: {
+            sx: {
+              bgcolor: darkMode ? "black" : "white",
+              color: darkMode ? "white" : "black",
+            },
+          },
         }}
         defaultValue=""
         value={currentValueHandler()}
         disableUnderline
         IconComponent={KeyboardArrowDownIcon}
         onChange={selectedValueHandler}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
         autoFocus={autoFocusHandler()}
       >
         <MenuItem value="" disabled></MenuItem>

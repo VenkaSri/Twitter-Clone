@@ -5,7 +5,7 @@ import moment from "moment";
 import { MenuItem } from "@mui/material";
 
 const months = moment.months().map((month) => (
-  <MenuItem value={month} key={month} className="text-red-500">
+  <MenuItem value={month} key={month}>
     {month}
   </MenuItem>
 ));

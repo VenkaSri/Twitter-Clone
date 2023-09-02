@@ -55,7 +55,7 @@ const EmailTextField = () => {
   const inputBorderColor =
     isInvalid || isUnavailable
       ? "dark:focus-within:border-[#f1202d] focus-within:border-[#f1202d] "
-      : "dark:focus-within:border-[#1d9bf0]";
+      : "dark:focus-within:border-[#1d9bf0] focus-within:border-[#1d9bf0]";
 
   const errorBorderColor =
     isInvalid || isUnavailable

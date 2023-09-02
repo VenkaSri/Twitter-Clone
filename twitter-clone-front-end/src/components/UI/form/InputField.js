@@ -30,22 +30,34 @@ const InputField = (props) => {
     }
   };
 
+  const inputLabelColor = ` 
+   dark:text-[#71767b] text-[#71767b]
+  }`;
+
   return (
     <div className="py-3">
       <div className="flex flex-col grow">
         <TextField
+          style={{ background: "none" }}
           name={props.label}
           type="text"
           id="outlined-basic"
-          label={props.label}
+          label={
+            <span
+              className={`${inputLabelColor}  font-cReg text-[17px] leading-6`}
+            >
+              {props.label}
+            </span>
+          }
           variant="filled"
           InputLabelProps={{
             shrink: true,
           }}
           value={props.inputValue}
           InputProps={{
+            style: { background: "none" },
             className:
-              "border border-[#CFD9DE] h-[3.688rem] rounded-[4px] max-h-[3.688rem] !bg-[#ffffff]",
+              "border border-[#CFD9DE] dark:border-[#333639] h-[3.688rem] rounded-[4px] max-h-[3.688rem] text-black dark:text-white",
             disableUnderline: true,
             endAdornment: (
               <InputAdornment position="end">

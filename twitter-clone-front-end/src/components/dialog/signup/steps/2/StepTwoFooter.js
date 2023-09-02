@@ -15,9 +15,10 @@ export const StepTwoFooter = () => {
     height: 52,
     width: 440,
     text: "Sign Up",
-    txtColor: "#FFF",
+    txtColor: "text-white",
     hoverBgColor: "#1D9BF0",
     bgColor: "#1D9BF0",
+    fontSize: "17px",
   };
 
   const handledNext = () => {

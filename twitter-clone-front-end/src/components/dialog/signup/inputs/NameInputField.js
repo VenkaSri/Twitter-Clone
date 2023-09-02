@@ -26,7 +26,7 @@ const NameInputField = () => {
 
   const inputBorderColor = isNameValid
     ? "dark:focus-within:border-[#f1202d] focus-within:border-[#f1202d] "
-    : "dark:focus-within:border-[#1d9bf0]";
+    : "dark:focus-within:border-[#1d9bf0] focus-within:border-[#1d9bf0] ";
 
   const errorBorderColor = isNameValid
     ? "dark:border-[#f1202d] border-[#f1202d]"
