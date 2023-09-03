@@ -27,29 +27,24 @@ export const register = async (
     method: "post",
     maxBodyLength: Infinity,
     url: process.env.REACT_APP_BASE_URL,
-    headers: {
-      "Content-Type": "application/json",
-    },
     data: data,
+    withCredentials: true,
+    headers: {
+      "Content-Type": "application/json", // Make sure this is set correctly
+    },
   };
 
   try {
     await axios(config);
-    await getUserName(enteredEmail, dispatch);
+    dispatch(userInfoActions.setAuthentication(true));
   } catch (error) {
-    console.log(error);
-  }
-};
-
-const getUserName = async (enteredEmail, dispatch) => {
-  try {
-    const response = await axios.get(
-      process.env.REACT_APP_GET_USERNAME_URL + `${enteredEmail}`
-    );
-    dispatch(userInfoActions.setUsername(response.data.data.username));
-    dispatch(usernameActions.setUsername(response.data.data.username));
-    dispatch(userInfoActions.setName(response.data.data.name));
-  } catch (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      if (error.response.status === 409) {
+        console.log("Conflict: ", error.response.data);
+      }
+    }
     console.log(error);
   }
 };

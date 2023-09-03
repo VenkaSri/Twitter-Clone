@@ -2,6 +2,7 @@ package ca.venkasritharan.twitterclone.service.impl;
 
 import ca.venkasritharan.twitterclone.dto.LoginDTO;
 import ca.venkasritharan.twitterclone.dto.RegisterDTO;
+import ca.venkasritharan.twitterclone.dto.RegistrationResponse;
 import ca.venkasritharan.twitterclone.entity.authentication.Role;
 import ca.venkasritharan.twitterclone.entity.authentication.User;
 import ca.venkasritharan.twitterclone.exception.UserAlreadyExistsException;
@@ -58,34 +59,60 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   }
 
   @Override
-  public Response<String>  register(RegisterDTO registerDTO) {
-    if (userRepository.existsByEmail(registerDTO.getEmail())) {
-      throw new UserAlreadyExistsException("User with the given email or username already exists.");
+  public Response<RegistrationResponse>  register(RegisterDTO registerDTO) {
+
+    try {
+
+      validateEmailOrPhone(registerDTO.getEmail());
+      User user = mapper.map(registerDTO, User.class);
+      Set<ConstraintViolation<User>> violations = validator.validate(user);
+      if (!violations.isEmpty()) {
+        throw new ConstraintViolationException(violations);
+      }
+      user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+      userRepository.save(user);
+      usernameService.assignUsername(user);
+      String token = generateAuthToken(user);
+      RegistrationResponse registrationResponse = new RegistrationResponse();
+      registrationResponse.setMessage("Validation successful");
+      registrationResponse.setToken(token);
+      return createResponse(200, "Validation successful", token);
+    } catch (UserAlreadyExistsException e) {
+      return createResponse(400, e.getMessage(), null);
+    } catch (ConstraintViolationException e) {
+      return createResponse(400, "Constraint violation: " + e.getMessage(), null);
+    } catch (Exception e) {
+      return createResponse(500, "Constraint violation: " + e.getMessage(), null);
     }
 
-    User user = mapper.map(registerDTO, User.class);
-    Set<ConstraintViolation<User>> violations = validator.validate(user);
-    if (!violations.isEmpty()) {
-      throw new ConstraintViolationException(violations);
-    }
-    user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
-
-
-    userRepository.save(user);
-    return new Response<>(200, "Validation successful");
   }
+
+
+
+
+  private Response<RegistrationResponse> createResponse(int statusCode, String message, String token) {
+    RegistrationResponse registrationResponse = new RegistrationResponse();
+    registrationResponse.setMessage(message);
+    registrationResponse.setToken(token);
+    return new Response<>(statusCode, registrationResponse);
+  }
+
+//  @Override
+//  public Response<String> validateEmailOrPhone(String emailOrPhone) {
+//    if (userRepository.existsByEmail(emailOrPhone)) {
+//      return new Response<>(409, "User with the given email or phone already exists.");
+//    }
+//    return new Response<>(200, "Email or phone is available.");
+//  }
 
   @Override
-  public Response<String> validateEmailOrPhone(String emailOrPhone) {
-    try {
-      if (userRepository.existsByEmail(emailOrPhone)) {
-        return new Response<>(409, "An account with that phone number already exists");
-      }
-      return new Response<>(200, "Email is available.");
-    } catch (Exception e) {
-      return new Response<>(500, "An error occurred while validating email or phone number");
+  public void validateEmailOrPhone(String emailOrPhone) {
+    if (userRepository.existsByEmail(emailOrPhone)) {
+      throw new UserAlreadyExistsException("User with the given email or phone already exists.");
     }
   }
+
+
 
 
   private Response<String> checkIfAccountExistsWith(String phoneNumber, String email) {
@@ -103,43 +130,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
   }
 
-//  private User mapNewUserEntity(RegisterDTO registerDTO) {
-//    User user = new User();
-//    user.setEmail(registerDTO.getEmail());
-//    user.setName(registerDTO.getName());
-//    user.setPhoneNumber(registerDTO.getPhoneNumber());
-//    String rawPassword = registerDTO.getPassword();
-//    Set<ConstraintViolation<User>> violations = validator.validateValue(User.class, "password", rawPassword);
-//    System.out.println("Violations: " + violations);
-//    if (!violations.isEmpty()) {
-//      throw new ConstraintViolationException(violations);
-//    }
-//    user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
-//    return userRepository.save(user);
-//  }
-
-//  private User mapNewUserEntity(RegisterDTO registerDTO) {
-//    User user = mapper.map(registerDTO, User.class);
-//    Set<ConstraintViolation<User>> violations = validator.validate(user);
-//    System.out.println("Violations: " + violations);
-//    if (!violations.isEmpty()) {
-//      throw new ConstraintViolationException(violations);
-//    }
-//    user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
-//    return userRepository.save(user);
-//  }
-
-
-
-  
-
-
-
-  private void mapNewUserRoleEntity(User user) {
-    Set<Role> roles = new HashSet<>();
-    Role userRole = new Role();
-    userRole.setName("ROLE_USER");
-    roles.add(userRole);
-    user.setRoles(roles);
+  private String generateAuthToken(User user) {
+   Authentication authentication = new UsernamePasswordAuthenticationToken(
+            user.getUsername(), user.getPassword()); // You may not need to include the password here
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+    return jwtTokenProvider.createToken(authentication);
   }
+
+
 }

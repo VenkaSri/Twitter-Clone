@@ -26,7 +26,6 @@ export const StepTwoFooter = () => {
     // dispatch(dobActions.setAutoFocus(false));
     // dispatch(emailActions.setAutoFocus(false));
     dispatch(stepsActions.setCurrentStep(currentStep + 1));
-    console.log("hi");
   };
   return (
     <>

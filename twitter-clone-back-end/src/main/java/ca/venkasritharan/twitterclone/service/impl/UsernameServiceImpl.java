@@ -33,9 +33,8 @@ public class UsernameServiceImpl implements UsernameService {
   }
 
   @Override
-  public void assignUsername(String email) {
-    Optional<User> user = userRepository.findByEmail(email);
-    checkNameLength(user.get().getName(), email);
+  public void assignUsername(User user) {
+    checkNameLength(user.getName(), user.getEmail());
   }
 
   @Override

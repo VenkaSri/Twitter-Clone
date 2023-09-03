@@ -14,7 +14,10 @@ import DialogFooter from "./components/UI/dialog/DialogFooter";
 import SignUpDialogLayout from "./components/dialog/signup/SignUpDialogLayout";
 import { DialogLoading } from "./components/dialog/DialogLoading";
 import { reducerInfoActions } from "./state/app/loading/dialog/signup/reducer";
-
+import LoggedInHeader from "./components/header/LoggedInHeader";
+import MainContainer from "./components/UI/main/MainContainer";
+import axios from "axios";
+import { userInfoActions } from "./state/user/userInfo-reducer";
 const history = createBrowserHistory();
 
 const Routes = () => {
@@ -37,6 +40,22 @@ const Routes = () => {
     (state) => state.rootReducer.loadingState.isRegistrationComplete
   );
 
+  const isAuthenticated = useSelector(
+    (state) => state.rootReducer.userInfo.isAuthenticated
+  );
+
+  useEffect(() => {
+    // Make an authenticated request to your server to get authentication status
+    axios
+      .get("http://localhost:8080/api/auth/status", { withCredentials: true })
+      .then((response) => {
+        dispatch(userInfoActions.setAuthentication(true));
+      })
+      .catch((error) => {
+        dispatch(userInfoActions.setAuthentication(false));
+      });
+  }, []);
+
   useEffect(() => {
     if (reg && loginState) {
       dispatch(reducerInfoActions.setLoading(false));
@@ -55,7 +74,21 @@ const Routes = () => {
   return (
     <>
       <RouterRoutes>
-        <Route path="/" element={<LandingPage />} />
+        <Route
+          path="/"
+          element={
+            isAuthenticated ? (
+              <>
+                <div className="flex grow">
+                  <LoggedInHeader />
+                  <MainContainer />
+                </div>
+              </>
+            ) : (
+              <LandingPage />
+            )
+          }
+        />
       </RouterRoutes>
       {dialogState && <FormDialog content={dialogContent} />}
     </>

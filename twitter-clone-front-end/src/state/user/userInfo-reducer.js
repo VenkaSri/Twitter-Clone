@@ -4,7 +4,7 @@ const initialState = {
   name: "",
   username: "",
   email: "",
-  isAuthenticated: true,
+  isAuthenticated: false,
   isUsernameSet: true,
   hasOneFollowing: false,
   followers: [],
@@ -26,6 +26,7 @@ const userInfoSlice = createSlice({
       state.username = action.payload;
     },
     setAuthentication(state, action) {
+      console.log("callse");
       state.isAuthenticated = action.payload;
     },
     setUsernameValidity(state, action) {

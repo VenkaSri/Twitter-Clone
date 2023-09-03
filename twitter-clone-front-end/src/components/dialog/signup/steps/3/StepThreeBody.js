@@ -6,15 +6,18 @@ import { FormControl, Input, InputAdornment, InputLabel } from "@mui/material";
 import { passwordActions } from "../../../../../state/auth/sign-up/password-reducer";
 import IconButton from "../../../../UI/button/IconButton";
 import getIcon from "../../../../UI/icons/iconsutil";
+import useDarkModeWatcher from "../../../../../hooks/DarkModeWatcher";
 
 const handlePasswordLengthValidation = (text) => /^.{8,}$/.test(text);
 
 const handlePasswordStrengthValidation = (text) => /^(.)\1*$/.test(text);
 
 const StepThreeBody = () => {
+  const [isFocused, setIsFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isInValid, setIsInValid] = useState(false);
   const password = useSelector((state) => state.rootReducer.signUp.password);
+  const darkMode = useDarkModeWatcher();
 
   const [hasAnyValue, setHasAnyValue] = useState(false);
   const [isNotStrong, setIsNotStrong] = useState(false);
@@ -45,9 +48,25 @@ const StepThreeBody = () => {
   }, [password.enteredPassword, hasAnyValue, dispatch]);
   const inputIcon = showPassword ? "Hide" : "Reveal";
 
+  const errorColor =
+    isInValid || isNotStrong
+      ? "dark:text-[#f1202d] text-[#f1202d]"
+      : "dark:text-[#1d9bf0] text-[#1e9bf0]";
+  const inputLabelColor = ` ${
+    isFocused
+      ? errorColor
+      : isInValid || isNotStrong
+      ? "dark:text-[#f1202d] text-[#f1202d]"
+      : "dark:text-[#71767b] "
+  }`;
+
   return (
     <>
-      <div className="mt-4">
+      <div
+        className="mt-4 "
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+      >
         <FormControl
           sx={{
             width: "100%",
@@ -56,7 +75,12 @@ const StepThreeBody = () => {
             paddingTop: "8px",
             borderStyle: "solid",
             borderWidth: 1,
-            borderColor: isInValid || isNotStrong ? "#FF0000" : "#CFD9DE",
+            borderColor:
+              isInValid || isNotStrong
+                ? "#FF0000"
+                : darkMode
+                ? "#71767b"
+                : "#CFD9DE",
             "&:focus-within": {
               borderStyle: "solid",
               borderWidth: 2,
@@ -70,6 +94,7 @@ const StepThreeBody = () => {
             htmlFor="standard-adornment-password"
             className="ml-[6px] mt-[4px] "
             sx={{
+              color: isInValid || isNotStrong ? "#FF0000" : "#71767b",
               fontSize: "17px",
               "&.Mui-focused": {
                 color: isInValid || isNotStrong ? "#FF0000" : "#1d9bf0",
@@ -80,6 +105,8 @@ const StepThreeBody = () => {
           </InputLabel>
           <Input
             disableUnderline
+            inputProps={{ maxLength: 120 }}
+            style={{ color: darkMode ? "white" : "black" }}
             id="standard-adornment-password"
             type={showPassword ? "text" : "password"}
             endAdornment={
@@ -90,7 +117,7 @@ const StepThreeBody = () => {
                   onClick={togglePasswordVisibility}
                   onMouseDown={(e) => e.preventDefault()}
                 >
-                  {getIcon(inputIcon)}
+                  {getIcon(inputIcon, { fill: "#71767b" })}
                 </div>
               </InputAdornment>
             }

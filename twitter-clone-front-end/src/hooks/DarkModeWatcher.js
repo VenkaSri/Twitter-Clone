@@ -11,7 +11,7 @@ const useDarkModeWatcher = () => {
 
   useEffect(() => {
     const isDarkMode = rootElement.classList.contains("dark");
-    console.log(isDarkMode);
+
     // if (isDarkMode !== darkMode) {
     //   dispatch(globalInfoActions.setIsDarkMode(isDarkMode));
     // }

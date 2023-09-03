@@ -15,12 +15,11 @@ const baseOAuthButton = {
 const baseAuthButton = {
   height: "40px",
   width: "300px",
-  txtColor: "#fff",
   margin: "0 0 0 4px",
   gap: "10px",
   fontSize: "15px",
   className:
-    "hover:bg-[#1A8CD8] dark:bg-[#1d9bf0] dark:hover:bg-[#1A8CD8] bg-[#1d9bf0]",
+    "hover:bg-[#1A8CD8] dark:bg-[#1d9bf0] dark:hover:bg-[#1A8CD8] bg-[#1d9bf0] text-white",
 };
 
 export const googleOAuthButton = {

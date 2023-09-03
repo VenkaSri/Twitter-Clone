@@ -13,7 +13,6 @@ const reducerInfo = createSlice({
       state.isLoading = action.payload;
     },
     setRegistrationComplete(state, action) {
-      console.log("yes");
       state.isRegistrationComplete = action.payload;
     },
   },

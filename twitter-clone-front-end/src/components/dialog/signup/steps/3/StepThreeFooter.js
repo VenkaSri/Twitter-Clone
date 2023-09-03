@@ -6,10 +6,15 @@ import { register } from "../../../../../services/auth/register";
 import { login } from "../../../../../services/auth/loginFunction";
 import { reducerInfoActions } from "../../../../../state/app/loading/dialog/signup/reducer";
 import { loginReducerInfoActions } from "../../../../../state/app/home/loginReducer";
+import { stepsActions } from "../../../../../state/auth/form/steps-reducer";
+import { unfollowDialogActions } from "../../../../../state/dialog/dialogState-reducer";
 
 export const StepThreeFooter = () => {
   const { password, name, email, dob } = useUserData();
   const dispatch = useDispatch();
+  const currentStep = useSelector(
+    (state) => state.rootReducer.signUp.steps.currentStep
+  );
   const isLoading = useSelector(
     (state) => state.rootReducer.loadingState.isLoading
   );
@@ -22,7 +27,6 @@ export const StepThreeFooter = () => {
   );
 
   useEffect(() => {
-    console.log("useEffect triggered. reg:", reg, "loginState:", loginState);
     if (reg && loginState) {
       console.log("Setting isLoading to false.");
       dispatch(reducerInfoActions.setLoading(false));
@@ -33,13 +37,13 @@ export const StepThreeFooter = () => {
     height: 52,
     width: 440,
     text: "Next",
-    txtColor: "#FFF",
-    hoverBgColor: "#272c30",
+    txtColor: "text-white dark:text-black",
     disabled: !password.isPasswordValid,
-    bgColorEnabled: "#000",
-    bgColorDisabled: "#86888b",
     ...(password.isPasswordValid
-      ? { bgColor: "#000" }
+      ? {
+          className:
+            "bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30]",
+        }
       : { bgColor: "#86888b" }),
   };
 
@@ -55,8 +59,10 @@ export const StepThreeFooter = () => {
         reg
       );
       dispatch(reducerInfoActions.setRegistrationComplete(true));
-      login(email.enteredEmail, password.enteredPassword, dispatch);
+      // login(email.enteredEmail, password.enteredPassword, dispatch);
       dispatch(loginReducerInfoActions.setLoggedIn(true));
+      dispatch(unfollowDialogActions.setDialogState(false));
+      window.history.replaceState(null, "", "/");
     } catch (error) {
       console.log("An error occurred:", error);
     }
