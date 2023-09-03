@@ -2,6 +2,8 @@ package ca.venkasritharan.twitterclone.entity.authentication;
 
 import ca.venkasritharan.twitterclone.entity.Follower;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,12 +24,18 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-  @Column(unique = true)
-  @Size(min = 4, max = 15)
   private String username;
+  @Size(min = 8, max = 120)
+  @NotBlank(message = "Password must not be blank")
   private String password;
+  @NotBlank(message = "Name must not be blank")
+  @Size(min = 1, max = 50)
   private String name;
+  @Email
+  @Column(unique = true)
   private String email;
+  @Column(unique = true)
+  @Size(min = 10, max = 15)
   private String phoneNumber;
   private Long tweetCount = 0L;
   private Long followerCount = 0L;

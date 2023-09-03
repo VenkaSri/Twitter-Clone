@@ -4,10 +4,13 @@ import ca.venkasritharan.twitterclone.dto.LoginDTO;
 import ca.venkasritharan.twitterclone.dto.RegisterDTO;
 import ca.venkasritharan.twitterclone.entity.authentication.Role;
 import ca.venkasritharan.twitterclone.entity.authentication.User;
+import ca.venkasritharan.twitterclone.exception.UserAlreadyExistsException;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import ca.venkasritharan.twitterclone.security.jwt.JwtTokenProvider;
 import ca.venkasritharan.twitterclone.service.AuthenticationService;
+import ca.venkasritharan.twitterclone.service.UsernameService;
 import ca.venkasritharan.twitterclone.util.response.Response;
+import jakarta.validation.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -27,13 +31,20 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   private ModelMapper mapper;
   private PasswordEncoder passwordEncoder;
   private JwtTokenProvider jwtTokenProvider;
+  private UsernameService usernameService;
 
 
-  public AuthenticationServiceImpl(AuthenticationManager authenticationManager, UserRepository userRepository, PasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider) {
+  ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+  Validator validator = factory.getValidator();
+
+
+  public AuthenticationServiceImpl(AuthenticationManager authenticationManager, UserRepository userRepository, PasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider, ModelMapper mapper,  UsernameService usernameService) {
     this.authenticationManager = authenticationManager;
     this.userRepository = userRepository;
     this.passwordEncoder = passwordEncoder;
     this.jwtTokenProvider = jwtTokenProvider;
+    this.mapper = mapper;
+    this.usernameService = usernameService;
   }
 
   @Override
@@ -48,11 +59,19 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
   @Override
   public Response<String>  register(RegisterDTO registerDTO) {
-    checkIfAccountExistsWith(registerDTO.getPhoneNumber(), registerDTO.getEmail());
-    User user = mapNewUserEntity(registerDTO);
-    mapNewUserRoleEntity(user);
-    userRepository.save(user);
+    if (userRepository.existsByEmail(registerDTO.getEmail())) {
+      throw new UserAlreadyExistsException("User with the given email or username already exists.");
+    }
 
+    User user = mapper.map(registerDTO, User.class);
+    Set<ConstraintViolation<User>> violations = validator.validate(user);
+    if (!violations.isEmpty()) {
+      throw new ConstraintViolationException(violations);
+    }
+    user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+
+
+    userRepository.save(user);
     return new Response<>(200, "Validation successful");
   }
 
@@ -84,15 +103,33 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
   }
 
-  private User mapNewUserEntity(RegisterDTO registerDTO) {
-    User user = new User();
-    user.setEmail(registerDTO.getEmail());
-    user.setName(registerDTO.getName());
-    user.setPhoneNumber(registerDTO.getPhoneNumber());
-    user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
-//    user.setUsername(registerDTO.getUsername());
-    return userRepository.save(user);
-  }
+//  private User mapNewUserEntity(RegisterDTO registerDTO) {
+//    User user = new User();
+//    user.setEmail(registerDTO.getEmail());
+//    user.setName(registerDTO.getName());
+//    user.setPhoneNumber(registerDTO.getPhoneNumber());
+//    String rawPassword = registerDTO.getPassword();
+//    Set<ConstraintViolation<User>> violations = validator.validateValue(User.class, "password", rawPassword);
+//    System.out.println("Violations: " + violations);
+//    if (!violations.isEmpty()) {
+//      throw new ConstraintViolationException(violations);
+//    }
+//    user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+//    return userRepository.save(user);
+//  }
+
+//  private User mapNewUserEntity(RegisterDTO registerDTO) {
+//    User user = mapper.map(registerDTO, User.class);
+//    Set<ConstraintViolation<User>> violations = validator.validate(user);
+//    System.out.println("Violations: " + violations);
+//    if (!violations.isEmpty()) {
+//      throw new ConstraintViolationException(violations);
+//    }
+//    user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+//    return userRepository.save(user);
+//  }
+
+
 
   
 
