@@ -61,8 +61,7 @@ export const StepThreeFooter = () => {
       dispatch(reducerInfoActions.setRegistrationComplete(true));
       // login(email.enteredEmail, password.enteredPassword, dispatch);
       dispatch(loginReducerInfoActions.setLoggedIn(true));
-      dispatch(unfollowDialogActions.setDialogState(false));
-      window.history.replaceState(null, "", "/");
+      dispatch(stepsActions.setCurrentStep(currentStep + 1));
     } catch (error) {
       console.log("An error occurred:", error);
     }

@@ -18,6 +18,7 @@ const getIcon = (iconName, options = {}) => {
       height: options.height,
       width: options.width,
       maxHeight: options.maxHeight,
+      maxWidth: options.maxWidth,
     },
   });
 };

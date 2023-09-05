@@ -3,6 +3,8 @@ import React from "react";
 import { StepOneBody } from "../../dialog/signup/steps/1/StepOneBody";
 import StepTwoBody from "../../dialog/signup/steps/2/StepTwoBody";
 import StepThreeBody from "../../dialog/signup/steps/3/StepThreeBody";
+import { UploadProfilePicture } from "../../dialog/afterSignup/UploadProfilePicture";
+import { CropProfilePicture } from "../../dialog/afterSignup/CropProfilePicture";
 
 export const ContentBody = ({ currentStep }) => {
   const currentBody = () => {
@@ -13,6 +15,10 @@ export const ContentBody = ({ currentStep }) => {
         return <StepTwoBody />;
       case 3:
         return <StepThreeBody />;
+      case 4:
+        return <UploadProfilePicture />;
+      case 4.5:
+        return <CropProfilePicture />;
       default:
         break;
     }

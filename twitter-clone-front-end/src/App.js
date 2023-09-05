@@ -16,7 +16,6 @@ ReactGA.initialize("UA-255822850-1");
 function App() {
   return (
     <div className="flex flex-col grow">
-      {/* <ThemeManager /> */}
       <AppInitializer />
       <Routes />
     </div>

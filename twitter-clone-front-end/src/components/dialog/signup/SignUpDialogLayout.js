@@ -48,40 +48,47 @@ const SignUpDialogLayout = () => {
     <>
       <div
         ref={containerRef}
-        className="overflow-auto flex flex-col items-stretch basis-full flex-grow dark:bg-[#000]"
+        className={`${
+          currentStep === 4.5 ? "overflow-hidden" : "overflow-auto"
+        } flex flex-col items-stretch basis-full flex-grow dark:bg-[#000]`}
       >
-        <div className="flex flex-col">
-          <div
-            className={`${
-              fullScreen ? " px-8" : " px-20"
-            } shrink-0 flex flex-col`}
-          >
-            <ContentHeading currentStep={currentStep} />
+        {currentStep === 4.5 ? (
+          <div className="flex flex-col">
             <ContentBody currentStep={currentStep} />
           </div>
-        </div>
-        <button onClick={toggleTheme} className="bg-[red]">
-          dark
-        </button>
-        <button onClick={toggleDefaultTheme} className="bg-[red]">
-          light
-        </button>
+        ) : (
+          <div className="flex flex-col">
+            <div
+              className={`${
+                fullScreen ? " px-8" : " px-20"
+              } shrink-0 flex flex-col`}
+            >
+              <ContentHeading currentStep={currentStep} />
+              <ContentBody currentStep={currentStep} />
+            </div>
+          </div>
+        )}
       </div>
-
-      {width < 702 && (
-        <div className="flex-col-container  fixed bottom-0 left-0 right-0">
-          <ContentFooter
-            currentStep={currentStep}
-            isOverflowing={isOverflowing}
-          />
-        </div>
+      {currentStep === 4.5 ? (
+        <div className="flex-col-container min-h-[20px] overflow-none"></div>
+      ) : (
+        <>
+          {width < 702 && (
+            <div className="flex-col-container  fixed bottom-0 left-0 right-0">
+              <ContentFooter
+                currentStep={currentStep}
+                isOverflowing={isOverflowing}
+              />
+            </div>
+          )}
+          <div className="flex-col-container">
+            <ContentFooter
+              currentStep={currentStep}
+              isOverflowing={isOverflowing}
+            />
+          </div>
+        </>
       )}
-      <div className="flex-col-container">
-        <ContentFooter
-          currentStep={currentStep}
-          isOverflowing={isOverflowing}
-        />
-      </div>
     </>
   );
 };

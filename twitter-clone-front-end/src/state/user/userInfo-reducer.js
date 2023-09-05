@@ -13,6 +13,7 @@ const initialState = {
   followingCount: 0,
   followersCount: 0,
   userId: 269,
+  currentProfilePicture: null,
 };
 
 const userInfoSlice = createSlice({
@@ -46,6 +47,9 @@ const userInfoSlice = createSlice({
     },
     setFollowersCount(state, action) {
       state.followersCount = action.payload;
+    },
+    setCurrentProfilePicture(state, action) {
+      state.currentProfilePicture = action.payload;
     },
   },
 });

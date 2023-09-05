@@ -34,7 +34,7 @@ const FormDialog = (props) => {
 
   return (
     <Dialog
-      sx={{ display: "flex", flexDirection: "column" }}
+      sx={{ display: "flex", flexDirection: "column", overflow: "hidden" }}
       transitionDuration={0}
       fullScreen={fullScreen}
       open={dialogState}
