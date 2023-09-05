@@ -1,14 +1,24 @@
 import React, { useEffect } from "react";
 import Button from "../../components/UI/button/Button";
 import { signInButton } from "../../constants/buttonConstants";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { LandingFooter } from "../../components/landing/LandingFooter";
 import { SignUpForm } from "../../components/landing/SignUpForm";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
 import { Icon } from "../../components/icon";
+import { unfollowDialogActions } from "../../state/dialog/dialogState-reducer";
 
 export const LandingPage = () => {
   const windowWidth = useWindowWidth();
+  const dispatch = useDispatch();
+  const handleUserLogin = () => {
+    dispatch(unfollowDialogActions.setDialogState(true));
+    window.history.replaceState(
+      null,
+      "Sign up for Twitter / X",
+      "/i/flow/login"
+    );
+  };
 
   return (
     <div className="h-screen w-screen flex flex-col overflow-x-hidden dark:bg-black">
@@ -58,7 +68,7 @@ export const LandingPage = () => {
               >
                 Already have an account?
               </span>
-              <Button buttonProps={signInButton} />
+              <Button buttonProps={signInButton} onClick={handleUserLogin} />
             </div>
           </div>
         </div>
