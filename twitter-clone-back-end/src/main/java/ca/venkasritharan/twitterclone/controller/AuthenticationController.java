@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -46,7 +48,7 @@ public class AuthenticationController {
   public ResponseEntity<RegistrationResponse> register(@Valid @RequestBody RegisterDTO registerDTO,
                                                        HttpServletResponse response) throws IOException {
     Response<RegistrationResponse> registrationResponse = authenticationService.register(registerDTO);
-    System.out.println(registrationResponse.getStatus() );
+    System.out.println(registrationResponse.getStatus());
     if (registrationResponse.getStatus() == 200) {
       String authToken = registrationResponse.getData().getToken();
       addHttpOnlyCookie(response, "authToken", authToken);
@@ -76,35 +78,39 @@ public class AuthenticationController {
 
 
   @GetMapping("/status")
-  public ResponseEntity<Object> getAuthStatus(HttpServletRequest request) {
-    // Retrieve the cookies from the request
-    Cookie[] cookies = request.getCookies();
+  public ResponseEntity<Map<String, Boolean>> getAuthStatus(HttpServletRequest request) {
+    try {
+      // Retrieve the cookies from the request
+      Cookie[] cookies = request.getCookies();
 
-    if (cookies != null) {
-      // Find the HttpOnly cookie named "authToken"
-      Cookie authTokenCookie = Arrays.stream(cookies)
-              .filter(cookie -> "authToken".equals(cookie.getName()))
-              .findFirst()
-              .orElse(null);
+      if (cookies != null) {
+        // Find the HttpOnly cookie named "authToken"
+        Cookie authTokenCookie = Arrays.stream(cookies)
+                .filter(cookie -> "authToken".equals(cookie.getName()))
+                .findFirst()
+                .orElse(null);
 
-      if (authTokenCookie != null) {
-        // Get the token value from the cookie
-        String token = authTokenCookie.getValue();
+        if (authTokenCookie != null) {
+          // Get the token value from the cookie
+          String token = authTokenCookie.getValue();
 
-        // TODO: Implement token validation logic
-        boolean isAuthenticated = jwtTokenProvider.validateToken(token);
+          // Token validation logic can be in a separate service
+          boolean isAuthenticated = jwtTokenProvider.validateToken(token);
 
-        if (isAuthenticated) {
-          return ResponseEntity.ok().body("Authenticated");
+          if (isAuthenticated) {
+            return ResponseEntity.ok(Collections.singletonMap("isAuthenticated", true));
+          }
         }
       }
+    } catch (Exception e) {
+      // Log the exception and consider returning a 500 Internal Server Error
     }
 
-    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not Authenticated");
+    return ResponseEntity.ok(Collections.singletonMap("isAuthenticated", false));
+
+    // Placeholder method for token validation
+
   }
-
-  // Placeholder method for token validation
-
 }
 
 

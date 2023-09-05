@@ -37,6 +37,7 @@ public class User {
   @Column(unique = true)
   @Size(min = 10, max = 15)
   private String phoneNumber;
+  private String profilePictureUrl;
   private Long tweetCount = 0L;
   private Long followerCount = 0L;
   private Long followingCount = 0L;
