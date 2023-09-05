@@ -20,6 +20,7 @@ import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 import java.io.InputStream;
+import java.security.Principal;
 import java.util.Map;
 import java.util.Optional;
 
@@ -61,10 +62,11 @@ public class ProfileController {
   }
 
   @PostMapping("/profile-picture")
-  public String uploadProfilePicture(@RequestParam("file") MultipartFile file, @RequestParam("email") String email) {
+  public String uploadProfilePicture(@RequestParam("file") MultipartFile file, Principal principal) {
     String bucketName = "tc-profile-pictures";
     String key = "profile-pictures/" + file.getOriginalFilename();
-
+    String username = principal.getName();
+    System.out.println(username);
 
     try {
       InputStream inputStream = file.getInputStream();
@@ -80,7 +82,7 @@ public class ProfileController {
       String fileUrl = "https://" + bucketName + ".s3.amazonaws.com/" + key;
 
       // Update the user record in the database
-      Optional<User> optionalUser = userRepository.findByEmail(email);
+      Optional<User> optionalUser = userRepository.findByUsername(username);
       if (optionalUser.isPresent()) {
         User user = optionalUser.get();
         user.setProfilePictureUrl(fileUrl);
