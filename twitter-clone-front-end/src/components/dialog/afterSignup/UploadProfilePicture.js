@@ -16,15 +16,36 @@ export const UploadProfilePicture = () => {
     (state) => state.rootReducer.userInfo.currentProfilePicture
   );
   const dispatch = useDispatch();
-  const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
+  const onChange = async (imageList, addUpdateIndex) => {
+    const file = imageList[0].file;
+    const blobURL = URL.createObjectURL(file);
+    const formData = new FormData();
 
-    setAvaURL(imageList[0].data_url);
+    formData.append("file", file);
+    formData.append("email", "test22@gmail.com");
+    const response = await fetch(
+      "http://localhost:8080/api/user/profile-picture",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    if (response.ok) {
+      // Handle successful upload
+      console.log("ok");
+    } else {
+      // Handle error
+    }
+
+    console.log(file);
+    setAvaURL(blobURL);
+    console.log(blobURL);
     setImages(imageList);
     dispatch(userInfoActions.setCurrentProfilePicture(imageList[0].data_url));
-    if (imageList.length > 0) {
-      dispatch(stepsActions.setCurrentStep(currentStep + 0.5));
-    }
+    // if (imageList.length > 0) {
+    //   dispatch(stepsActions.setCurrentStep(currentStep + 0.5));
+    // }
   };
   return (
     <div className="flex-col-container ">
@@ -37,6 +58,7 @@ export const UploadProfilePicture = () => {
             maxNumber={69}
             dataURLKey="data_url"
             acceptType={["jpg", "png"]}
+            cd
           >
             {({
               imageList,
