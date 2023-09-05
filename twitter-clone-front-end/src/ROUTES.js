@@ -20,6 +20,8 @@ import axios from "axios";
 import { userInfoActions } from "./state/user/userInfo-reducer";
 import { LogoProgress } from "./components/layer/LogoProgress";
 import { loadingReducerInfoActions } from "./state/app/loading/loading-reducer";
+import LoginHome from "./components/dialog/login/LoginHome";
+import LoginHeader from "./components/dialog/login/LoginHeader";
 const history = createBrowserHistory();
 
 const Routes = () => {
@@ -50,6 +52,10 @@ const Routes = () => {
     (state) => state.rootReducer.appLoading.isPageLoaded
   );
 
+  const authType = useSelector(
+    (state) => state.rootReducer.dialogState.authType
+  );
+
   useEffect(() => {
     // Make an authenticated request to your server to get authentication status
     axios
@@ -74,10 +80,16 @@ const Routes = () => {
   }, [reg, loginState, dispatch]);
   const dialogContent = isLoading ? (
     <DialogLoading />
-  ) : (
+  ) : authType === "SIGN_UP" ? (
     <SignUpStep
       header={<DialogHeader />}
       content={<SignUpDialogLayout />}
+      footer={<DialogFooter currentStep={currentStep} />}
+    />
+  ) : (
+    <SignUpStep
+      header={<LoginHeader />}
+      content={<LoginHome />}
       footer={<DialogFooter currentStep={currentStep} />}
     />
   );

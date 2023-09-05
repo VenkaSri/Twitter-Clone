@@ -39,8 +39,6 @@ export const appleOAuthButton = {
   className: "hover:bg-[#E6E6E6] dark:bg-white dark:hover:bg-[#E6E6E6]",
 };
 
-// bgColor: "#1d9bf0",
-
 export const createAccountButton = {
   ...baseAuthButton,
   text: "Create Account",
@@ -60,5 +58,26 @@ export const signInButton = {
     "border border-[#cfd9de] dark:border dark:border-[#293238] bg-transparent  hover:bg-[#E8F5FE] dark:hover:bg-[#030f18]",
 };
 
+// login
+
+export const loginInNextButton = {
+  ...baseOAuthButton,
+  icon: false,
+  height: "34px",
+  margin: "0",
+  text: "Next",
+  className:
+    "hover:bg-[#272830] dark:bg-white dark:hover:bg-[#E6E6E6] bg-black text-white dark:text-black",
+};
+
+export const forgotPasswordButton = {
+  ...baseOAuthButton,
+  height: "34px",
+  text: "Forgot password?",
+  className:
+    "dark:text-white  dark:hover:bg-[#eff3f41a] text-black dark: border dark:border-[#536471] hover:bg-[#0f14191a]",
+};
+
 delete signInButton.brdColor;
 delete signInButton.bgColor;
+delete forgotPasswordButton.brdColor;

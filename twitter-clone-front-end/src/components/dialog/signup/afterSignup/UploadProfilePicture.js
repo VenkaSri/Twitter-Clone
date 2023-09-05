@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import ImageUploading from "react-images-uploading";
-import DEFAULT_PROFILE_PICTURE from "../../../assets/images/avatars/default_avi.png";
-import getIcon from "../../UI/icons/iconsutil";
+import getIcon from "../../../UI/icons/iconsutil";
 import { useDispatch, useSelector } from "react-redux";
-import { stepsActions } from "../../../state/auth/form/steps-reducer";
-import { userInfoActions } from "../../../state/user/userInfo-reducer";
+import { stepsActions } from "../../../../state/auth/form/steps-reducer";
+import { userInfoActions } from "../../../../state/user/userInfo-reducer";
 export const UploadProfilePicture = () => {
   const [images, setImages] = React.useState([]);
   const [avaURL, setAvaURL] = useState(null);

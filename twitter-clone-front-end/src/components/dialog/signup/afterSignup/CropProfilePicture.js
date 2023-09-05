@@ -2,8 +2,6 @@ import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import Draggable from "react-draggable";
 
-import { CustomSlider } from "../../UI/slider/Slider";
-
 export const CropProfilePicture = () => {
   const [scale, setScale] = useState(1);
   const currentProfilePicture = useSelector(

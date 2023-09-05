@@ -3,8 +3,8 @@ import React from "react";
 import { StepOneBody } from "../../dialog/signup/steps/1/StepOneBody";
 import StepTwoBody from "../../dialog/signup/steps/2/StepTwoBody";
 import StepThreeBody from "../../dialog/signup/steps/3/StepThreeBody";
-import { UploadProfilePicture } from "../../dialog/afterSignup/UploadProfilePicture";
-import { CropProfilePicture } from "../../dialog/afterSignup/CropProfilePicture";
+import { UploadProfilePicture } from "../../dialog/signup/afterSignup/UploadProfilePicture";
+import { CropProfilePicture } from "../../dialog/signup/afterSignup/CropProfilePicture";
 
 export const ContentBody = ({ currentStep }) => {
   const currentBody = () => {

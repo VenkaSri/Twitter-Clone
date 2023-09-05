@@ -13,6 +13,7 @@ export const LandingPage = () => {
   const dispatch = useDispatch();
   const handleUserLogin = () => {
     dispatch(unfollowDialogActions.setDialogState(true));
+    dispatch(unfollowDialogActions.setAuthType("LOGIN"));
     window.history.replaceState(
       null,
       "Sign up for Twitter / X",

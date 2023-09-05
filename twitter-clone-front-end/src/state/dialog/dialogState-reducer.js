@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { act } from "react-test-renderer";
 
 const initialState = {
+  authType: null,
   isCancelled: false,
   isFormDialogOpen: false,
   isUnfollowed: false,
@@ -39,6 +39,9 @@ const unfollowDialogSlice = createSlice({
     },
     setTrigger(state, action) {
       state.trigger = action.payload;
+    },
+    setAuthType(state, action) {
+      state.authType = action.payload;
     },
   },
 });

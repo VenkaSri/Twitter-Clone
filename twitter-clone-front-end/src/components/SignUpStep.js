@@ -1,13 +1,6 @@
 import React from "react";
 
 import { DialogContent, DialogTitle } from "@mui/material";
-import PropTypes from "prop-types";
-
-// const propTypes = {
-//   header: PropTypes.node.isRequired,
-//   content: PropTypes.node.isRequired,
-//   footer: PropTypes.node.isRequired,
-// };
 
 const SignUpStep = ({ header, content }) => {
   return (
@@ -27,5 +20,4 @@ const SignUpStep = ({ header, content }) => {
   );
 };
 
-// SignUpStep.propTypes = propTypes;
 export default SignUpStep;

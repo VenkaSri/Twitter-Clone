@@ -24,6 +24,7 @@ export const SignUpForm = () => {
 
   const handleCreateAccount = () => {
     dispatch(unfollowDialogActions.setDialogState(true));
+    dispatch(unfollowDialogActions.setAuthType("SIGN_UP"));
     window.history.replaceState(
       null,
       "Sign up for Twitter / X",

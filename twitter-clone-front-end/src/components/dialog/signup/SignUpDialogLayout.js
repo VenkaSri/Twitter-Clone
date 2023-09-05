@@ -17,16 +17,6 @@ const SignUpDialogLayout = () => {
 
   const containerRef = useRef(null);
 
-  const toggleTheme = () => {
-    dispatch(globalInfoActions.setIsDarkMode(true));
-    document.documentElement.classList.add("dark");
-  };
-
-  const toggleDefaultTheme = () => {
-    dispatch(globalInfoActions.setIsDarkMode(false));
-    document.documentElement.classList.remove("dark");
-  };
-
   // s/o chat-gpt, dynamically adding box shadow
   const [isOverflowing, setIsOverflowing] = useState(false);
   useEffect(() => {
