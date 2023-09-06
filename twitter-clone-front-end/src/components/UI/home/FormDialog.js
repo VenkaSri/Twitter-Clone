@@ -17,7 +17,11 @@ const FormDialog = (props) => {
   const bgColor = dark ? "#000" : "#fff";
 
   const paperProps = fullScreen
-    ? {}
+    ? {
+        sx: {
+          backgroundColor: bgColor,
+        },
+      }
     : {
         sx: {
           borderRadius: "16px",
@@ -34,7 +38,11 @@ const FormDialog = (props) => {
 
   return (
     <Dialog
-      sx={{ display: "flex", flexDirection: "column", overflow: "hidden" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        overflow: "hidden",
+      }}
       transitionDuration={0}
       fullScreen={fullScreen}
       open={dialogState}

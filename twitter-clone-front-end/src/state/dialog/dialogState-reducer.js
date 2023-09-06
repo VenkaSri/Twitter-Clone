@@ -10,6 +10,7 @@ const initialState = {
   isDialogOpen: false,
   manualNavigation: false,
   trigger: "",
+  error: false,
 };
 
 const unfollowDialogSlice = createSlice({
@@ -42,6 +43,9 @@ const unfollowDialogSlice = createSlice({
     },
     setAuthType(state, action) {
       state.authType = action.payload;
+    },
+    setError(state, action) {
+      state.error = action.payload;
     },
   },
 });

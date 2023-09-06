@@ -55,6 +55,10 @@ module.exports = {
           "@apply flex flex-col": {},
         },
       },
+      colors: {
+        "primary-color": "var(--primary-color)",
+        "secondary-color": "var(--secondary-color)",
+      },
     },
   },
   plugins: [],

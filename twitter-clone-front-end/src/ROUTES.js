@@ -22,6 +22,8 @@ import { LogoProgress } from "./components/layer/LogoProgress";
 import { loadingReducerInfoActions } from "./state/app/loading/loading-reducer";
 import LoginHome from "./components/dialog/login/LoginHome";
 import LoginHeader from "./components/dialog/login/LoginHeader";
+import { PopupErrorMessage } from "./components/PopupErrorMessage";
+import { CustomDialog } from "./components/Dialog";
 const history = createBrowserHistory();
 
 const Routes = () => {
@@ -31,6 +33,7 @@ const Routes = () => {
   const dialogState = useSelector(
     (state) => state.rootReducer.dialogState.isDialogOpen
   );
+  const error = useSelector((state) => state.rootReducer.dialogState.error);
   const currentStep = useSelector(
     (state) => state.rootReducer.signUp.steps.currentStep
   );
@@ -56,6 +59,10 @@ const Routes = () => {
     (state) => state.rootReducer.dialogState.authType
   );
 
+  const checkingIndentifier = useSelector(
+    (state) => state.rootReducer.rootLoading.loginLoading.userExists
+  );
+
   useEffect(() => {
     // Make an authenticated request to your server to get authentication status
     axios
@@ -70,29 +77,27 @@ const Routes = () => {
         dispatch(loadingReducerInfoActions.setIsPageLoaded(true));
       });
   }, []);
-
-  console.log(isAuthenticated);
-
   useEffect(() => {
     if (reg && loginState) {
       dispatch(reducerInfoActions.setLoading(false));
     }
   }, [reg, loginState, dispatch]);
-  const dialogContent = isLoading ? (
-    <DialogLoading />
-  ) : authType === "SIGN_UP" ? (
-    <SignUpStep
-      header={<DialogHeader />}
-      content={<SignUpDialogLayout />}
-      footer={<DialogFooter currentStep={currentStep} />}
-    />
-  ) : (
-    <SignUpStep
-      header={<LoginHeader />}
-      content={<LoginHome />}
-      footer={<DialogFooter currentStep={currentStep} />}
-    />
-  );
+  const dialogContent =
+    isLoading || checkingIndentifier ? (
+      <DialogLoading />
+    ) : authType === "SIGN_UP" ? (
+      <SignUpStep
+        header={<DialogHeader />}
+        content={<SignUpDialogLayout />}
+        footer={<DialogFooter currentStep={currentStep} />}
+      />
+    ) : (
+      <SignUpStep
+        header={<LoginHeader />}
+        content={<LoginHome />}
+        footer={<DialogFooter currentStep={currentStep} />}
+      />
+    );
 
   return (
     <>
@@ -118,6 +123,23 @@ const Routes = () => {
         />
       </RouterRoutes>
       {dialogState && <FormDialog content={dialogContent} />}
+      {error && (
+        <CustomDialog
+          content={
+            <PopupErrorMessage
+              message={"Sorry, we could not find your account."}
+            />
+          }
+          CustomPaperProps={{
+            sx: {
+              boxShadow: "none",
+              position: "absolute",
+              bottom: "1%",
+              transition: "none",
+            },
+          }}
+        />
+      )}
     </>
   );
 };

@@ -7,18 +7,25 @@ import {
   loginInNextButton,
   forgotPasswordButton,
 } from "../../../constants/buttonConstants";
-import { useWindowWidth } from "../../../hooks/useWindowWidth";
-import { TextField, useMediaQuery } from "@mui/material";
-import { useCurrentStep } from "../../../hooks/signup/ useCurrentStep";
-import { useDispatch } from "react-redux";
+import { postData } from "../../../services/postData";
+import { useDispatch, useSelector } from "react-redux";
 import { globalInfoActions } from "../../../state/app/global-reducer";
 import { CustomTextField } from "../../UI/inputs/CustomTextField";
+import { authLoadingActions } from "../../../state/app/loading/dialog/signup/auth/authLoadingSlice";
+import { unfollowDialogActions } from "../../../state/dialog/dialogState-reducer";
 
 const LoginHome = () => {
-  const width = useWindowWidth();
-  const fullScreen = useMediaQuery("(max-width:702px)");
-  const currentStep = useCurrentStep();
   const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useState("");
+
+  const isLoading = useSelector(
+    (state) => state.rootReducer.rootLoading.loginLoading.userExists
+  );
+
+  const handleInputChange = (value) => {
+    setInputValue(value);
+    console.log(value);
+  };
 
   const toggleTheme = () => {
     dispatch(globalInfoActions.setIsDarkMode(true));
@@ -30,8 +37,23 @@ const LoginHome = () => {
     document.documentElement.classList.remove("dark");
   };
 
-  googleOAuthButton.height = "34px";
-  appleOAuthButton.height = "34px";
+  const handleIdentifier = async () => {
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
+
+    try {
+      dispatch(authLoadingActions.setUserExist(true));
+      const result = await postData(`${BASE_URL}/exists`, {
+        identifier: inputValue,
+      });
+      if (result.status === 409) dispatch(unfollowDialogActions.setError(true));
+      dispatch(authLoadingActions.setUserExist(false));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  googleOAuthButton.height = "36px";
+  appleOAuthButton.height = "36px";
   return (
     <>
       <div
@@ -64,10 +86,17 @@ const LoginHome = () => {
             ></div>
           </div>
           <div className="py-3 flex-col-container">
-            <CustomTextField label="Phone, email or username" />
+            <CustomTextField
+              label="Phone, email or username"
+              inputValue={inputValue}
+              onInputChange={handleInputChange}
+            />
           </div>
           <div className="my-3">
-            <Button buttonProps={loginInNextButton} />
+            <Button
+              buttonProps={loginInNextButton}
+              onClick={handleIdentifier}
+            />
           </div>
           <div className="my-3">
             <Button buttonProps={forgotPasswordButton} />

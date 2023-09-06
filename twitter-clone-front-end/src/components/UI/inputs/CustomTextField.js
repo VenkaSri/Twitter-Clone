@@ -3,11 +3,15 @@ import React, { useState } from "react";
 import { TextField } from "@mui/material";
 import { useSelector } from "react-redux";
 
-export const CustomTextField = ({ label }) => {
+export const CustomTextField = ({ label, inputValue, onInputChange }) => {
   const darkMode = useSelector(
     (state) => state.rootReducer.globalState.isDarkMode
   );
   const [isFocused, setIsFocused] = useState(false);
+
+  const handleInput = (e) => {
+    onInputChange(e.target.value);
+  };
 
   const inputLabelColor = ` ${
     isFocused ? "dark:text-[#1d9bf0] text-[#1d9bf0]" : "dark:text-[#71767b] "
@@ -22,10 +26,10 @@ export const CustomTextField = ({ label }) => {
   }`;
 
   const inputPropClassName = ` border ${borderColor} focus-within:ring-2 " +
-  "focus-within:ring-[rgb(29,155,240)] rounded-[4px]  ${inputBorderColor} text-black dark:text-white`;
+  "focus-within:ring-[rgb(29,155,240)] rounded-[4px]  ${inputBorderColor} text-black dark:text-white `;
 
   return (
-    <div className="flex-col-container">
+    <div className="flex-col-container custom-text-field">
       <TextField
         id="filled-basic"
         label={
@@ -48,6 +52,8 @@ export const CustomTextField = ({ label }) => {
           className: inputPropClassName,
           disableUnderline: true,
         }}
+        value={inputValue}
+        onChange={handleInput}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
       />

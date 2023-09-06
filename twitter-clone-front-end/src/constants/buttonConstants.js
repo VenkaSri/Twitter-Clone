@@ -16,6 +16,7 @@ const baseAuthButton = {
   height: "40px",
   width: "300px",
   margin: "0 0 0 4px",
+  icon: false,
   gap: "10px",
   fontSize: "15px",
   className:
@@ -63,7 +64,7 @@ export const signInButton = {
 export const loginInNextButton = {
   ...baseOAuthButton,
   icon: false,
-  height: "34px",
+  height: "36px",
   margin: "0",
   text: "Next",
   className:
@@ -72,7 +73,8 @@ export const loginInNextButton = {
 
 export const forgotPasswordButton = {
   ...baseOAuthButton,
-  height: "34px",
+  icon: false,
+  height: "36px",
   text: "Forgot password?",
   className:
     "dark:text-white  dark:hover:bg-[#eff3f41a] text-black dark: border dark:border-[#536471] hover:bg-[#0f14191a]",
