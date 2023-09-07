@@ -1,9 +1,7 @@
 package ca.venkasritharan.twitterclone.service;
 
-import ca.venkasritharan.twitterclone.entity.authentication.User;
-import ca.venkasritharan.twitterclone.util.response.Response;
+import ca.venkasritharan.twitterclone.response.Response;
 
-import java.util.List;
 import java.util.Map;
 
 public interface AccountService {

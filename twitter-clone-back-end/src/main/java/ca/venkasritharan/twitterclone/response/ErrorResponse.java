@@ -1,4 +1,4 @@
-package ca.venkasritharan.twitterclone.exception;
+package ca.venkasritharan.twitterclone.response;
 
 import lombok.Getter;
 import lombok.Setter;

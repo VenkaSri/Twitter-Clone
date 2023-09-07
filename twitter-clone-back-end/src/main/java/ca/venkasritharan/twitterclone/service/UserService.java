@@ -1,6 +1,6 @@
 package ca.venkasritharan.twitterclone.service;
 
-import ca.venkasritharan.twitterclone.util.response.Response;
+import ca.venkasritharan.twitterclone.response.Response;
 
 public interface UserService {
 

@@ -1,4 +1,4 @@
-package ca.venkasritharan.twitterclone.dto;
+package ca.venkasritharan.twitterclone.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
