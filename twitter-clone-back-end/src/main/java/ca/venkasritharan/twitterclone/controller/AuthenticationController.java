@@ -3,22 +3,23 @@ package ca.venkasritharan.twitterclone.controller;
 import ca.venkasritharan.twitterclone.dto.*;
 import ca.venkasritharan.twitterclone.exception.UserAlreadyExistsException;
 import ca.venkasritharan.twitterclone.response.AuthStatusResponse;
+import ca.venkasritharan.twitterclone.response.ErrorResponse;
 import ca.venkasritharan.twitterclone.response.JwtResponse;
 import ca.venkasritharan.twitterclone.security.jwt.JwtTokenProvider;
 import ca.venkasritharan.twitterclone.service.AuthenticationService;
 import ca.venkasritharan.twitterclone.service.RegistrationService;
 import ca.venkasritharan.twitterclone.service.UsernameService;
 import ca.venkasritharan.twitterclone.response.Response;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
+import java.security.SignatureException;
+import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -77,21 +78,43 @@ public class AuthenticationController {
 //  }
 
   @GetMapping("/status")
-  public Response<AuthStatusResponse> getAuthStatus(HttpServletRequest request) {
+  public ResponseEntity<Response<AuthStatusResponse>> getAuthStatus(HttpServletRequest request) {
     try {
       Optional<Cookie> optionalAuthTokenCookie = findAuthTokenCookie(request);
       if (optionalAuthTokenCookie.isPresent()) {
         String token = optionalAuthTokenCookie.get().getValue();
-        boolean isTokenValid = jwtTokenProvider.validateToken(token);
-        if (isTokenValid) {
-          return createAuthenticatedResponse();
+        System.out.println(optionalAuthTokenCookie.get().getValue());
+        try {
+          boolean isTokenValid = jwtTokenProvider.validateToken(token);
+          if (isTokenValid) {
+            return new ResponseEntity<>(createAuthenticatedResponse(), HttpStatus.OK);
+          } else {
+            return new ResponseEntity<>(createUnauthenticatedResponse("Invalid Token"), HttpStatus.UNAUTHORIZED);
+          }
+        } catch (ExpiredJwtException e) {
+          return new ResponseEntity<>(createErrorResponse("Token has expired"), HttpStatus.UNAUTHORIZED);
+        } catch (MalformedJwtException e) {
+          return new ResponseEntity<>(createErrorResponse("Malformed token"), HttpStatus.UNAUTHORIZED);
+        } catch (Exception e) {
+          // Other token-related errors
+          return new ResponseEntity<>(createErrorResponse("Invalid token"), HttpStatus.UNAUTHORIZED);
         }
+      } else {
+        return new ResponseEntity<>(createUnauthenticatedResponse("Token not found"), HttpStatus.UNAUTHORIZED);
       }
     } catch (Exception e) {
-      // Log the exception and consider returning a 500 Internal Server Error
+      // Log the exception
+      // Consider returning a 500 Internal Server Error
+      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    return createUnauthenticatedResponse();
+  }
 
+  private Response<AuthStatusResponse> createErrorResponse(String errorMessage) {
+    System.out.println(errorMessage);
+    List<ErrorResponse> errors = new ArrayList<>();
+    errors.add(new ErrorResponse(401, errorMessage));
+
+    return new Response<>(401, "Not Authenticated", new AuthStatusResponse(false), errors);
   }
 
 
@@ -111,8 +134,10 @@ public class AuthenticationController {
     return new Response<>(200, "Authenticated", new AuthStatusResponse(true), null);
   }
 
-  private Response<AuthStatusResponse> createUnauthenticatedResponse() {
-    return new Response<>(401, "Not Authenticated", new AuthStatusResponse(false), null);
+  private Response<AuthStatusResponse> createUnauthenticatedResponse(String errorMessage) {
+    List<ErrorResponse> errors = new ArrayList<>();
+    errors.add(new ErrorResponse(401, errorMessage));
+    return new Response<>(401, "Not Authenticated", new AuthStatusResponse(false), errors);
   }
 }
 

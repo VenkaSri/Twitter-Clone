@@ -24,7 +24,7 @@ public class RegistrationController {
   }
 
   @PostMapping(value = {"/register", "/signup"})
-  public ResponseEntity<RegistrationResponse> register(@Valid @RequestBody RegisterDTO registerDTO,
+  public Response<RegistrationResponse> register(@Valid @RequestBody RegisterDTO registerDTO,
                                                        HttpServletResponse response) throws IOException {
     Response<RegistrationResponse> registrationResponse = registrationService.register(registerDTO);
     return RegistrationResponseBuilder.build(registrationResponse, response);
