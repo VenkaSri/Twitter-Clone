@@ -11,7 +11,6 @@ import SignUpStep from "./components/SignUpStep";
 import { createBrowserHistory } from "history";
 import DialogHeader from "./components/dialog/DialogHeader";
 import DialogFooter from "./components/UI/dialog/DialogFooter";
-import SignUpDialogLayout from "./components/dialog/signup/SignUpDialogLayout";
 import { DialogLoading } from "./components/dialog/DialogLoading";
 import { reducerInfoActions } from "./state/app/loading/dialog/signup/reducer";
 import LoggedInHeader from "./components/header/LoggedInHeader";
@@ -24,6 +23,8 @@ import LoginHome from "./components/dialog/login/LoginHome";
 import LoginHeader from "./components/dialog/login/LoginHeader";
 import { PopupErrorMessage } from "./components/PopupErrorMessage";
 import { CustomDialog } from "./components/Dialog";
+import { LoginPasswordInput } from "./components/dialog/login/LoginPasswordInput";
+import DialogFormLayout from "./components/dialog/signup/DialogFormLayout";
 const history = createBrowserHistory();
 
 const Routes = () => {
@@ -63,6 +64,10 @@ const Routes = () => {
     (state) => state.rootReducer.rootLoading.loginLoading.userExists
   );
 
+  const doesUserExist = useSelector(
+    (state) => state.rootReducer.loginState.doesUserExist
+  );
+
   useEffect(() => {
     // Make an authenticated request to your server to get authentication status
     axios
@@ -88,13 +93,13 @@ const Routes = () => {
     ) : authType === "SIGN_UP" ? (
       <SignUpStep
         header={<DialogHeader />}
-        content={<SignUpDialogLayout />}
+        content={<DialogFormLayout />}
         footer={<DialogFooter currentStep={currentStep} />}
       />
     ) : (
       <SignUpStep
         header={<LoginHeader />}
-        content={<LoginHome />}
+        content={doesUserExist ? <DialogFormLayout /> : <LoginHome />}
         footer={<DialogFooter currentStep={currentStep} />}
       />
     );
@@ -122,8 +127,8 @@ const Routes = () => {
           }
         />
       </RouterRoutes>
-      {dialogState && <FormDialog content={dialogContent} />}
-      {error && (
+      {/* {dialogState && <FormDialog content={dialogContent} />} */}
+      {/* {error && (
         <CustomDialog
           content={
             <PopupErrorMessage
@@ -139,7 +144,7 @@ const Routes = () => {
             },
           }}
         />
-      )}
+      )} */}
     </>
   );
 };

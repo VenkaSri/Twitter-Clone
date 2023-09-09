@@ -9,7 +9,7 @@ import { useCurrentStep } from "../../../hooks/signup/ useCurrentStep";
 import { useDispatch } from "react-redux";
 import { globalInfoActions } from "../../../state/app/global-reducer";
 
-const SignUpDialogLayout = () => {
+const DialogFormLayout = ({}) => {
   const width = useWindowWidth();
   const fullScreen = useMediaQuery("(max-width:702px)");
   const currentStep = useCurrentStep();
@@ -83,4 +83,4 @@ const SignUpDialogLayout = () => {
   );
 };
 
-export default SignUpDialogLayout;
+export default DialogFormLayout;

@@ -13,6 +13,7 @@ import { globalInfoActions } from "../../../state/app/global-reducer";
 import { CustomTextField } from "../../UI/inputs/CustomTextField";
 import { authLoadingActions } from "../../../state/app/loading/dialog/signup/auth/authLoadingSlice";
 import { unfollowDialogActions } from "../../../state/dialog/dialogState-reducer";
+import { loginReducerInfoActions } from "../../../state/app/home/loginReducer";
 
 const LoginHome = () => {
   const dispatch = useDispatch();
@@ -45,7 +46,11 @@ const LoginHome = () => {
       const result = await postData(`${BASE_URL}/exists`, {
         identifier: inputValue,
       });
-      if (result.status === 409) dispatch(unfollowDialogActions.setError(true));
+      if (result.status === 409) {
+        dispatch(unfollowDialogActions.setError(true));
+      } else {
+        dispatch(loginReducerInfoActions.setDoesUserExist(true));
+      }
       dispatch(authLoadingActions.setUserExist(false));
     } catch (error) {
       console.log(error);
