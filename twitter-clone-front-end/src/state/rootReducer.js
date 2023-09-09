@@ -8,7 +8,7 @@ import globalReducer from "./app/global-reducer";
 import loadingReducer from "./app/loading/dialog/signup/reducer";
 import tweetReducer from "./app/home/tweet-reducer";
 import appLoadingReducer from "./app/loading/loading-reducer";
-import loginReducer from "./app/home/loginReducer";
+import loginReducer from "./app/home/loginSlice";
 import rootLoadingSlice from "./app/loading/rootLoadingSlice";
 
 const rootReducer = combineReducers({

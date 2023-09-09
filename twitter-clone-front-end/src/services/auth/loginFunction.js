@@ -1,5 +1,5 @@
 import axios from "axios";
-import { loginReducerInfoActions } from "../../state/app/home/loginReducer";
+import { loginSliceActions } from "../../state/app/home/loginSlice";
 
 export const login = (usernameOrEmailOrPhonenumber, password, dispatch) => {
   axios
@@ -17,7 +17,7 @@ export const login = (usernameOrEmailOrPhonenumber, password, dispatch) => {
     )
     .then(function (response) {
       console.log(response);
-      dispatch(loginReducerInfoActions.setLoggedIn(true));
+      dispatch(loginSliceActions.setLoggedIn(true));
     })
     .catch(function (error) {
       console.log(error);

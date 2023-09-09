@@ -1,24 +1,48 @@
-import React from "react";
-import DarkModeWatcher from "./hooks/DarkModeWatcher";
-import { CustomDialog } from "./components/Dialog";
-import { DialogContent } from "./components/DialogContent";
+import React, { useEffect } from "react";
+
 import { Dialog } from "./components/Dialog";
-import SignUpStep from "./components/SignUpStep";
 import { DialogLayout } from "./components/DialogLayout";
 import DialogHeader from "./components/dialog/DialogHeader";
-import { StepOneBody } from "./components/dialog/signup/steps/1/StepOneBody";
-import { ContentBody } from "./components/signup/dialog/ContentBody";
+import { DialogBody } from "./components/dialog/DialogBody";
+import { useSelector } from "react-redux";
+import { PopupErrorMessage } from "./components/PopupErrorMessage";
+import StepOneFooter from "./components/signup/dialog/StepOneFooter";
+import { DialogFooter } from "./components/dialog/DialogFooter";
 
 export const TwitterClone = () => {
+  const doesUserExist = useSelector(
+    (state) => state.rootReducer.loginState.doesUserExist
+  );
+  const error = useSelector((state) => state.rootReducer.dialogState.error);
+
   return (
-    <Dialog
-      type={"LOGIN"}
-      content={
-        <DialogLayout
-          header={<DialogHeader type="LOGIN" />}
-          body={<ContentBody currentStep={2} />}
+    <>
+      <Dialog
+        type={"LOGIN"}
+        content={
+          <DialogLayout
+            header={<DialogHeader type="LOGIN" />}
+            body={
+              <DialogBody
+                type={doesUserExist ? "LOGIN_PASSWORD_INPUT" : "LOGIN_HOME"}
+              />
+            }
+            footer={<DialogFooter type="LOGIN_PASSWORD_INPUT" />}
+          />
+        }
+      />
+      {error && (
+        <Dialog
+          type="ERROR"
+          content={
+            <DialogLayout
+              body={
+                <PopupErrorMessage message="Sorry, we're not able to find your account." />
+              }
+            />
+          }
         />
-      }
-    />
+      )}
+    </>
   );
 };

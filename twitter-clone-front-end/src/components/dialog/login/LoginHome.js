@@ -13,19 +13,16 @@ import { globalInfoActions } from "../../../state/app/global-reducer";
 import { CustomTextField } from "../../UI/inputs/CustomTextField";
 import { authLoadingActions } from "../../../state/app/loading/dialog/signup/auth/authLoadingSlice";
 import { unfollowDialogActions } from "../../../state/dialog/dialogState-reducer";
-import { loginReducerInfoActions } from "../../../state/app/home/loginReducer";
+import { loginReducerInfoActions } from "../../../state/app/home/loginSlice";
+import { useHandleIdentifier } from "../../../hooks/useHandleIdentifier";
 
 const LoginHome = () => {
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState("");
-
-  const isLoading = useSelector(
-    (state) => state.rootReducer.rootLoading.loginLoading.userExists
-  );
+  const handleIdentifier = useHandleIdentifier();
 
   const handleInputChange = (value) => {
     setInputValue(value);
-    console.log(value);
   };
 
   const toggleTheme = () => {
@@ -38,27 +35,6 @@ const LoginHome = () => {
     document.documentElement.classList.remove("dark");
   };
 
-  const handleIdentifier = async () => {
-    const BASE_URL = process.env.REACT_APP_BASE_URL;
-
-    try {
-      dispatch(authLoadingActions.setUserExist(true));
-      const result = await postData(`${BASE_URL}/exists`, {
-        identifier: inputValue,
-      });
-      if (result.status === 409) {
-        dispatch(unfollowDialogActions.setError(true));
-      } else {
-        dispatch(loginReducerInfoActions.setDoesUserExist(true));
-      }
-      dispatch(authLoadingActions.setUserExist(false));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  googleOAuthButton.height = "36px";
-  appleOAuthButton.height = "36px";
   return (
     <>
       <div
@@ -100,7 +76,7 @@ const LoginHome = () => {
           <div className="my-3">
             <Button
               buttonProps={loginInNextButton}
-              onClick={handleIdentifier}
+              onClick={() => handleIdentifier(inputValue)}
             />
           </div>
           <div className="my-3">

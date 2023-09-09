@@ -2,13 +2,18 @@ import React from "react";
 
 import { Dialog as MUIDialog, useMediaQuery } from "@mui/material";
 import { getDialogStyles } from "../utils/getDialogStyles";
-import DialogHeader from "./dialog/DialogHeader";
 
 export const Dialog = ({ type, content }) => {
   const isMobile = useMediaQuery("(max-width:702px)");
-  const dialogStyles = getDialogStyles(type, isMobile);
+  const dialogStyles = getDialogStyles(type);
   return (
-    <MUIDialog open={true} PaperProps={dialogStyles} fullScreen={isMobile}>
+    <MUIDialog
+      sx={dialogStyles.styles}
+      open={true}
+      PaperProps={dialogStyles}
+      fullScreen={isMobile}
+      transitionDuration={0}
+    >
       {content}
     </MUIDialog>
   );

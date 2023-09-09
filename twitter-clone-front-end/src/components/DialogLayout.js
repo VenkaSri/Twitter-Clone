@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DialogTitle, DialogContent } from "@mui/material";
+import { DialogTitle, DialogContent, DialogActions } from "@mui/material";
 
 export const DialogLayout = ({ header, body, footer }) => {
   return (
@@ -16,6 +16,7 @@ export const DialogLayout = ({ header, body, footer }) => {
       >
         {body}
       </DialogContent>
+      {footer}
     </>
   );
 };

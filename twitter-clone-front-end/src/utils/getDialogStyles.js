@@ -11,6 +11,12 @@ export const getDialogStyles = (type, isMobile) => {
     overflow: "hidden",
   };
 
+  let errorStyle = {
+    boxShadow: "none",
+    position: "absolute",
+    bottom: "1%",
+  };
+
   if (isMobile) {
     sxStyles = {};
   }
@@ -19,8 +25,19 @@ export const getDialogStyles = (type, isMobile) => {
     case "LOGIN":
       return {
         sx: sxStyles,
-        fullScreen: isMobile,
+        style: {},
       };
+    case "ERROR": {
+      return {
+        sx: errorStyle,
+        styles: {
+          "&.MuiDialog-root": {
+            pointerEvents: "none",
+            "& .MuiBackdrop-root": { background: "none" },
+          },
+        },
+      };
+    }
     default:
       return {}; // Default styles or empty object
   }

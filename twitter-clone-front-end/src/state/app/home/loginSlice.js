@@ -5,7 +5,7 @@ const initialState = {
   doesUserExist: false,
 };
 
-const loginReducerInfo = createSlice({
+const loginSlice = createSlice({
   name: "reducerInfo",
   initialState,
   reducers: {
@@ -18,5 +18,5 @@ const loginReducerInfo = createSlice({
   },
 });
 
-export const loginReducerInfoActions = loginReducerInfo.actions;
-export default loginReducerInfo.reducer;
+export const loginSliceActions = loginSlice.actions;
+export default loginSlice.reducer;

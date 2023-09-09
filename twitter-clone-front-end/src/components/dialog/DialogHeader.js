@@ -24,9 +24,6 @@ const DialogHeader = ({ type }) => {
         } w-full justify-center align-center`}
       >
         {header}
-        {/* <div className="flex-col-container h-full justify-center">
-          {getIcon("X_LOGO", { height: "2rem", maxWidth: "100%" })}
-        </div> */}
       </div>
     </div>
   );

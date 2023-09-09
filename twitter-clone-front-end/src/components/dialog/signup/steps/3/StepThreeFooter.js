@@ -5,7 +5,7 @@ import Button from "../../../../UI/button/Button";
 import { register } from "../../../../../services/auth/register";
 import { login } from "../../../../../services/auth/loginFunction";
 import { reducerInfoActions } from "../../../../../state/app/loading/dialog/signup/reducer";
-import { loginReducerInfoActions } from "../../../../../state/app/home/loginReducer";
+import { loginSliceActions } from "../../../../../state/app/home/loginSlice";
 import { stepsActions } from "../../../../../state/auth/form/steps-reducer";
 import { unfollowDialogActions } from "../../../../../state/dialog/dialogState-reducer";
 
@@ -60,7 +60,7 @@ export const StepThreeFooter = () => {
       );
       dispatch(reducerInfoActions.setRegistrationComplete(true));
       // login(email.enteredEmail, password.enteredPassword, dispatch);
-      dispatch(loginReducerInfoActions.setLoggedIn(true));
+      dispatch(loginSliceActions.setLoggedIn(true));
       dispatch(unfollowDialogActions.setDialogState(false));
       // dispatch(stepsActions.setCurrentStep(currentStep + 1));
     } catch (error) {
