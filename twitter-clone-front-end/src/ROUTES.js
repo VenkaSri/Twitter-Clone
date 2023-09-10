@@ -34,9 +34,7 @@ const Routes = () => {
     (state) => state.rootReducer.dialogState.isDialogOpen
   );
   const error = useSelector((state) => state.rootReducer.dialogState.error);
-  const currentStep = useSelector(
-    (state) => state.rootReducer.signUp.steps.currentStep
-  );
+
   const isLoading = useSelector(
     (state) => state.rootReducer.loadingState.isLoading
   );
@@ -86,17 +84,17 @@ const Routes = () => {
       dispatch(reducerInfoActions.setLoading(false));
     }
   }, [reg, loginState, dispatch]);
-  const dialogContent =
-    isLoading || checkingIndentifier ? (
-      <DialogLoading />
-    ) : authType === "SIGN_UP" ? (
-      <SignUpStep header={<DialogHeader />} content={<DialogFormLayout />} />
-    ) : (
-      <SignUpStep
-        header={<LoginHeader />}
-        content={doesUserExist ? <DialogFormLayout /> : <LoginHome />}
-      />
-    );
+  // const dialogContent =
+  //   isLoading || checkingIndentifier ? (
+  //     <DialogLoading />
+  //   ) : authType === "SIGN_UP" ? (
+  //     <SignUpStep header={<DialogHeader />} content={<DialogFormLayout />} />
+  //   ) : (
+  //     <SignUpStep
+  //       header={<LoginHeader />}
+  //       content={doesUserExist ? <DialogFormLayout /> : <LoginHome />}
+  //     />
+  //   );
 
   return (
     <>

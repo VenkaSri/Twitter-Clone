@@ -25,7 +25,7 @@ const SignUpHeader = () => {
 
   return (
     <>
-      <div className="min-h-[32px] self-stretch flex items-start justify-center flex-col">
+      <div className="min-w-[56px] min-h-[32px] self-stretch flex items-start justify-center flex-col">
         <div className="min-w-[36px] min-h-[36px] rounded-full flex flex-col cursor-pointer items-center justify-center -ml-2">
           <IconButton
             onClick={handleReset}

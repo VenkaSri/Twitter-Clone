@@ -1,7 +1,7 @@
 import React from "react";
 
 import LoginHome from "./login/LoginHome";
-import { LoginPasswordInput } from "./login/LoginPasswordInput";
+import SignUpHome from "./signup/SignUpHome";
 
 export const DialogBody = ({ type }) => {
   let body = null;
@@ -10,8 +10,8 @@ export const DialogBody = ({ type }) => {
     case "LOGIN_HOME":
       body = <LoginHome />;
       break;
-    case "LOGIN_PASSWORD_INPUT":
-      body = <LoginPasswordInput />;
+    case "SIGNUP_HOME":
+      body = <SignUpHome />;
       break;
     default:
       break;
