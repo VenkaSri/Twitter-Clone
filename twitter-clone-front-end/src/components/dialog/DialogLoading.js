@@ -9,7 +9,6 @@ export const DialogLoading = () => {
           height={30}
           width={30}
           color="#1d9bf0"
-          wrapperStyle={{}}
           wrapperClass=""
           visible={true}
           ariaLabel="oval-loading"

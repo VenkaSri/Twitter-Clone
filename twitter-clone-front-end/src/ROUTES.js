@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 import SignUpStep from "./components/SignUpStep";
 import { createBrowserHistory } from "history";
 import DialogHeader from "./components/dialog/DialogHeader";
-import DialogFooter from "./components/UI/dialog/DialogFooter";
 import { DialogLoading } from "./components/dialog/DialogLoading";
 import { reducerInfoActions } from "./state/app/loading/dialog/signup/reducer";
 import LoggedInHeader from "./components/header/LoggedInHeader";
@@ -91,16 +90,11 @@ const Routes = () => {
     isLoading || checkingIndentifier ? (
       <DialogLoading />
     ) : authType === "SIGN_UP" ? (
-      <SignUpStep
-        header={<DialogHeader />}
-        content={<DialogFormLayout />}
-        footer={<DialogFooter currentStep={currentStep} />}
-      />
+      <SignUpStep header={<DialogHeader />} content={<DialogFormLayout />} />
     ) : (
       <SignUpStep
         header={<LoginHeader />}
         content={doesUserExist ? <DialogFormLayout /> : <LoginHome />}
-        footer={<DialogFooter currentStep={currentStep} />}
       />
     );
 

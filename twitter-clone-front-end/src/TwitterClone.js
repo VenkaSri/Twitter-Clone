@@ -6,7 +6,6 @@ import DialogHeader from "./components/dialog/DialogHeader";
 import { DialogBody } from "./components/dialog/DialogBody";
 import { useSelector } from "react-redux";
 import { PopupErrorMessage } from "./components/PopupErrorMessage";
-import StepOneFooter from "./components/signup/dialog/StepOneFooter";
 import { DialogFooter } from "./components/dialog/DialogFooter";
 
 export const TwitterClone = () => {
@@ -21,13 +20,15 @@ export const TwitterClone = () => {
         type={"LOGIN"}
         content={
           <DialogLayout
-            header={<DialogHeader type="LOGIN" />}
+            header={<DialogHeader type="SIGNUP" />}
             body={
               <DialogBody
                 type={doesUserExist ? "LOGIN_PASSWORD_INPUT" : "LOGIN_HOME"}
               />
             }
-            footer={<DialogFooter type="LOGIN_PASSWORD_INPUT" />}
+            footer={
+              doesUserExist && <DialogFooter type="LOGIN_PASSWORD_INPUT" />
+            }
           />
         }
       />

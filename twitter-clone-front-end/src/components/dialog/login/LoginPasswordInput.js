@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { ContentBody } from "../../signup/dialog/ContentBody";
-import { CustomTextField } from "../../UI/inputs/CustomTextField";
+import { CustomTextField } from "../../CustomTextField";
 import { useMediaQuery } from "@mui/material";
 import { DialogContentHeading } from "../../DialogContentHeading";
 import { TextField } from "@mui/material";

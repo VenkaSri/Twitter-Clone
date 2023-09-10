@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { TextField, InputAdornment } from "@mui/material";
 import { useSelector } from "react-redux";
-import getIcon from "../icons/iconsutil";
+import getIcon from "./UI/icons/iconsutil";
 
 export const CustomTextField = ({
   label,

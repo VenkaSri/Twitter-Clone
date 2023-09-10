@@ -10,7 +10,7 @@ import {
 import { postData } from "../../../services/postData";
 import { useDispatch, useSelector } from "react-redux";
 import { globalInfoActions } from "../../../state/app/global-reducer";
-import { CustomTextField } from "../../UI/inputs/CustomTextField";
+import { CustomTextField } from "../../CustomTextField";
 import { authLoadingActions } from "../../../state/app/loading/dialog/signup/auth/authLoadingSlice";
 import { unfollowDialogActions } from "../../../state/dialog/dialogState-reducer";
 import { loginReducerInfoActions } from "../../../state/app/home/loginSlice";

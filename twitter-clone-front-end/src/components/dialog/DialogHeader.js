@@ -3,6 +3,7 @@ import React from "react";
 import { useMediaQuery } from "@mui/material";
 import getIcon from "../UI/icons/iconsutil";
 import LoginHeader from "./login/LoginHeader";
+import SignUpHeader from "./signup/SignUpHeader";
 
 const DialogHeader = ({ type }) => {
   const fullScreen = useMediaQuery("(max-width:702px)");
@@ -11,6 +12,9 @@ const DialogHeader = ({ type }) => {
   switch (type) {
     case "LOGIN":
       header = <LoginHeader />;
+      break;
+    case "SIGNUP":
+      header = <SignUpHeader />;
       break;
     default:
       break;

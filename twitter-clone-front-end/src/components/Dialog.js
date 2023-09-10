@@ -5,7 +5,7 @@ import { getDialogStyles } from "../utils/getDialogStyles";
 
 export const Dialog = ({ type, content }) => {
   const isMobile = useMediaQuery("(max-width:702px)");
-  const dialogStyles = getDialogStyles(type);
+  const dialogStyles = getDialogStyles(type, isMobile);
   return (
     <MUIDialog
       sx={dialogStyles.styles}

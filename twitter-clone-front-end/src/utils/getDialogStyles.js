@@ -25,7 +25,6 @@ export const getDialogStyles = (type, isMobile) => {
     case "LOGIN":
       return {
         sx: sxStyles,
-        style: {},
       };
     case "ERROR": {
       return {
