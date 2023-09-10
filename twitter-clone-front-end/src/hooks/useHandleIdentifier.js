@@ -9,7 +9,6 @@ export const useHandleIdentifier = () => {
 
   const handleIdentifier = async (inputValue) => {
     const BASE_URL = process.env.REACT_APP_BASE_URL;
-    console.log(inputValue);
 
     try {
       dispatch(authLoadingActions.setUserExist(true));

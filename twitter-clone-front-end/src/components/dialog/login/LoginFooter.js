@@ -11,6 +11,8 @@ export const LoginFooter = () => {
       "bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30]",
   };
 
-  const handledNext = () => {};
+  const handledNext = () => {
+    console.log("hi");
+  };
   return <Button buttonProps={buttonInfo} onClick={handledNext} />;
 };

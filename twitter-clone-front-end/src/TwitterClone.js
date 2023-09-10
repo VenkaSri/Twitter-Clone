@@ -22,9 +22,7 @@ export const TwitterClone = () => {
           <DialogLayout
             header={<DialogHeader type="SIGNUP" />}
             body={<DialogBody type={"SIGNUP_HOME"} />}
-            footer={
-              doesUserExist && <DialogFooter type="LOGIN_PASSWORD_INPUT" />
-            }
+            footer={<DialogFooter type="SIGNUP" />}
           />
         }
       />

@@ -1,5 +1,6 @@
 import React from "react";
 import { LoginFooter } from "./login/LoginFooter";
+import { SignupFooter } from "./signup/SignupFooter";
 
 export const DialogFooter = ({ type }) => {
   let footer = null;
@@ -7,6 +8,9 @@ export const DialogFooter = ({ type }) => {
   switch (type) {
     case "LOGIN_PASSWORD_INPUT":
       footer = <LoginFooter />;
+      break;
+    case "SIGNUP":
+      footer = <SignupFooter />;
       break;
     default:
       break;

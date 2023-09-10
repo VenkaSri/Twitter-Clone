@@ -1,27 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TextField } from "@mui/material";
-import { nameActions } from "../../../../state/auth/sign-up/name-reducer";
-import { stepOneActions } from "../../../../state/auth/sign-up/stepone-reducer";
-
-const onlySpaces = (text) => !/[^\s\\]/.test(text);
-
+import { useNameInputState } from "../../../../hooks/signup/useNameInputState";
 const NameInputField = () => {
-  const dispatch = useDispatch();
-  const name = useSelector((state) => state.rootReducer.signUp.name);
-  const [isFocused, setIsFocused] = useState(false);
-  const [isNameValid, setIsNameValid] = useState(false);
-
-  useEffect(() => {
-    if (name.hasEnteredInput) {
-      dispatch(stepOneActions.setNameEntered(!onlySpaces(name.name)));
-      setIsNameValid(onlySpaces(name.name));
-    }
-  }, [name.name, name.hasEnteredInput, dispatch]);
+  const {
+    name,
+    setName,
+    setHasEnteredInput,
+    isFocused,
+    setIsFocused,
+    isNameValid,
+  } = useNameInputState();
 
   const handleChange = (event) => {
-    dispatch(nameActions.setHasEnteredInput(true));
-    dispatch(nameActions.setName(event.target.value));
+    setHasEnteredInput(true);
+    setName(event.target.value);
   };
 
   const inputBorderColor = isNameValid
@@ -60,7 +53,7 @@ const NameInputField = () => {
       <TextField
         name="name"
         type="text"
-        value={name.name}
+        value={name}
         id="outlined-basic"
         label={
           <span
@@ -78,7 +71,7 @@ const NameInputField = () => {
         onChange={handleChange}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        autoFocus={name.shouldAutoFocus}
+        // autoFocus={name.shouldAutoFocus}
       />
       <div className="px-2 flex">
         <div className="pt-0.5 pr-5 flex flex-col">

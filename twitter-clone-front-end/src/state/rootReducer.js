@@ -10,6 +10,7 @@ import tweetReducer from "./app/home/tweet-reducer";
 import appLoadingReducer from "./app/loading/loading-reducer";
 import loginReducer from "./app/home/loginSlice";
 import rootLoadingSlice from "./app/loading/rootLoadingSlice";
+import signupReducer from "./app/home/signupSlice";
 
 const rootReducer = combineReducers({
   signUp: signUpReducer,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   tweetState: tweetReducer,
   loadingState: loadingReducer,
   loginState: loginReducer,
+  signUpState: signupReducer,
   appLoading: appLoadingReducer,
   rootLoading: rootLoadingSlice,
 });
