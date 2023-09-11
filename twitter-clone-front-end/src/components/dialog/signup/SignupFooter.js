@@ -2,8 +2,10 @@ import React from "react";
 
 import Button from "../../UI/button/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { useNameInputState } from "../../../hooks/signup/useNameInputState";
-import { signupSliceActions } from "../../../state/app/home/signupSlice";
+import {
+  enabledFooterButton,
+  disabledFooterButton,
+} from "../../../constants/buttonConstants";
 
 export const SignupFooter = () => {
   const dispatch = useDispatch();
@@ -15,15 +17,7 @@ export const SignupFooter = () => {
     (state) => state.rootReducer.signUpState.stepOneInfo.name
   );
 
-  const buttonInfo = {
-    txtColor: "text-white dark:text-black",
-    text: "Next",
-    fontSize: "17px",
-    className:
-      "bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30]",
-  };
-
-  let nextFunction = null;
+  let buttonInfo = name === "" ? disabledFooterButton : disabledFooterButton;
 
   switch (currentStep) {
     case 1:

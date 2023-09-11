@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import LoginHome from "./login/LoginHome";
 import SignUpHome from "./signup/SignUpHome";
@@ -17,5 +17,5 @@ export const DialogBody = ({ type }) => {
       break;
   }
 
-  return <div className="flex-col-container">{body}</div>;
+  return <div className="flex-col-container ">{body}</div>;
 };

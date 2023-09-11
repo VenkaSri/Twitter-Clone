@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useMediaQuery } from "@mui/material";
+import { unfollowDialogActions } from "../state/dialog/dialogState-reducer";
 
 export const DialogBodyContainer = (props) => {
   const fullScreen = useMediaQuery("(max-width:702px)");
+
   return (
     <div
       className={`overflow-auto

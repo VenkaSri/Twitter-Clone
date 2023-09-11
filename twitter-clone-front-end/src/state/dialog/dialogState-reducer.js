@@ -11,6 +11,7 @@ const initialState = {
   manualNavigation: false,
   trigger: "",
   error: false,
+  dialogBodyOverFlowing: false,
 };
 
 const unfollowDialogSlice = createSlice({
@@ -46,6 +47,9 @@ const unfollowDialogSlice = createSlice({
     },
     setError(state, action) {
       state.error = action.payload;
+    },
+    setDialogBodyOverFlowing(state, action) {
+      state.dialogBodyOverFlowing = action.payload;
     },
   },
 });

@@ -18,13 +18,6 @@ import axios from "axios";
 import { userInfoActions } from "./state/user/userInfo-reducer";
 import { LogoProgress } from "./components/layer/LogoProgress";
 import { loadingReducerInfoActions } from "./state/app/loading/loading-reducer";
-import LoginHome from "./components/dialog/login/LoginHome";
-import LoginHeader from "./components/dialog/login/LoginHeader";
-import { PopupErrorMessage } from "./components/PopupErrorMessage";
-import { CustomDialog } from "./components/Dialog";
-import { LoginPasswordInput } from "./components/dialog/login/LoginPasswordInput";
-import DialogFormLayout from "./components/dialog/signup/DialogFormLayout";
-const history = createBrowserHistory();
 
 const Routes = () => {
   const location = useLocation();

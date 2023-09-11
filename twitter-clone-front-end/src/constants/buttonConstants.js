@@ -80,6 +80,25 @@ export const forgotPasswordButton = {
     "dark:text-white  dark:hover:bg-[#eff3f41a] text-black dark: border dark:border-[#536471] hover:bg-[#0f14191a]",
 };
 
+// dialog footer buttons
+
+export const enabledFooterButton = {
+  txtColor: "text-white dark:text-black",
+  text: "Next",
+  fontSize: "17px",
+  className:
+    "bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30]",
+};
+
+export const disabledFooterButton = {
+  txtColor: "text-white dark:text-black",
+  disabled: true,
+  text: "Next",
+  fontSize: "17px",
+  className:
+    "bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30]",
+};
+
 delete signInButton.brdColor;
 delete signInButton.bgColor;
 delete forgotPasswordButton.brdColor;
