@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signupSliceActions } from "../../state/app/home/signupSlice";
 import { postData } from "../../services/postData";
 
@@ -13,6 +13,9 @@ export function useEmailInputState() {
   const [isUnavailable, setIsUnavailable] = useState(false);
   const [email, setEmail] = useState("");
   const BASE_URL = process.env.REACT_APP_BASE_URL;
+  const userEmail = useSelector(
+    (state) => state.rootReducer.signUpState.stepOneInfo.email
+  );
 
   useEffect(() => {
     const identifier = setTimeout(() => {
@@ -20,9 +23,11 @@ export function useEmailInputState() {
         if (handleEmailValidation(email)) {
           checkEmailInDatabase(email.trim);
         } else {
-          console.log(email);
           setisEmailInValid(true);
+          dispatch(signupSliceActions.setEmail(""));
         }
+      } else {
+        dispatch(signupSliceActions.setEmail(""));
       }
     }, 500);
 
@@ -40,9 +45,9 @@ export function useEmailInputState() {
       });
       if (result.status === 200) {
         setIsUnavailable(true);
-        dispatch(signupSliceActions.setEmail(email.trim()));
       } else {
         setIsUnavailable(false);
+        dispatch(signupSliceActions.setEmail(email.trim()));
       }
     } catch (error) {
       console.log(error);

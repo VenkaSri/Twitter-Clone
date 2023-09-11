@@ -12,6 +12,10 @@ const NameInputField = () => {
     isNameValid,
   } = useNameInputState();
 
+  const userName = useSelector(
+    (state) => state.rootReducer.signUpState.stepOneInfo.name
+  );
+
   const handleChange = (event) => {
     setHasEnteredInput(true);
     setName(event.target.value);
@@ -51,9 +55,10 @@ const NameInputField = () => {
   return (
     <div className="flex flex-col grow">
       <TextField
+        defaultValue={userName}
         name="name"
         type="text"
-        value={name}
+        // value={name}
         id="outlined-basic"
         label={
           <span

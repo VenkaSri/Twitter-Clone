@@ -6,6 +6,7 @@ const initialState = {
     email: "",
     dob: "",
   },
+  currentStep: 1,
   doesUserExist: false,
 };
 
@@ -18,6 +19,12 @@ const signupSlice = createSlice({
     },
     setEmail(state, action) {
       state.stepOneInfo.email = action.payload;
+    },
+    setDOB(state, action) {
+      state.stepOneInfo.dob = action.payload;
+    },
+    setCurrentStep(state, action) {
+      state.currentStep = action.payload;
     },
   },
 });

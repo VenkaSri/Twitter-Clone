@@ -7,14 +7,15 @@ import { stepsActions } from "../../../state/auth/form/steps-reducer";
 import { nameActions } from "../../../state/auth/sign-up/name-reducer";
 import { emailActions } from "../../../state/auth/sign-up/email-reducer";
 import { dobActions } from "../../../state/auth/sign-up/dob-reducer";
+import { signupSliceActions } from "../../../state/app/home/signupSlice";
 
 const InputField = (props) => {
   const dispatch = useDispatch();
   const currentStep = useSelector(
-    (state) => state.rootReducer.signUp.steps.currentStep
+    (state) => state.rootReducer.signUpState.currentStep
   );
   const editFieldHandler = () => {
-    dispatch(stepsActions.setCurrentStep(currentStep - 1));
+    dispatch(signupSliceActions.setCurrentStep(currentStep - 1));
     switch (props.label) {
       case "Name":
         dispatch(nameActions.setAutoFocus(true));

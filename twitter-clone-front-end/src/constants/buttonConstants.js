@@ -88,6 +88,7 @@ export const enabledFooterButton = {
   fontSize: "17px",
   className:
     "bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30]",
+  disabled: false,
 };
 
 export const disabledFooterButton = {
@@ -95,8 +96,7 @@ export const disabledFooterButton = {
   disabled: true,
   text: "Next",
   fontSize: "17px",
-  className:
-    "bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30]",
+  className: "bg-[#86888b]",
 };
 
 delete signInButton.brdColor;

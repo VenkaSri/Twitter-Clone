@@ -5,53 +5,18 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useDispatch, useSelector } from "react-redux";
 import { dobActions } from "../../../../state/auth/sign-up/dob-reducer";
 import { stepOneActions } from "../../../../state/auth/sign-up/stepone-reducer";
+import { useDOBInputState } from "../../../../hooks/signup/useDOBInputState";
 
 const DOBSelectField = (props) => {
   const dispatch = useDispatch();
-  const dob = useSelector((state) => state.rootReducer.signUp.dob);
   const [isFocused, setIsFocused] = useState(false);
   const darkMode = useSelector(
     (state) => state.rootReducer.globalState.isDarkMode
   );
 
-  const selectedValueHandler = (event) => {
-    switch (props.label) {
-      case "Month":
-        dispatch(dobActions.setMonth(event.target.value));
-        break;
-      case "Day":
-        dispatch(dobActions.setDay(event.target.value));
-        break;
-      case "Year":
-        dispatch(dobActions.setYear(event.target.value));
-        break;
-      default:
-        break;
-    }
-  };
-
-  const currentValueHandler = () => {
-    switch (props.label) {
-      case "Month":
-        return dob.month;
-      case "Day":
-        return dob.day;
-      case "Year":
-        return dob.year;
-      default:
-        break;
-    }
-  };
-
   const autoFocusHandler = () => {
-    if (props.label === "Month") return dob.shouldAutoFocus;
+    if (props.label === "Month") return;
   };
-
-  useEffect(() => {
-    if (dob.month !== "" && dob.day !== "" && dob.year !== "") {
-      dispatch(stepOneActions.setDOBEntered(true));
-    }
-  }, [dob.month, dob.year, dob.day, dispatch]);
 
   return (
     <FormControl
@@ -97,10 +62,10 @@ const DOBSelectField = (props) => {
           },
         }}
         defaultValue=""
-        value={currentValueHandler()}
+        // value={currentValueHandler()}
         disableUnderline
         IconComponent={KeyboardArrowDownIcon}
-        onChange={selectedValueHandler}
+        onChange={props.onChange}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         autoFocus={autoFocusHandler()}
