@@ -36,7 +36,7 @@ export function useEmailInputState() {
       } else {
         dispatch(signupSliceActions.setEmail(""));
       }
-    }, 500);
+    }, 1000);
 
     return () => {
       setisEmailInValid(false);

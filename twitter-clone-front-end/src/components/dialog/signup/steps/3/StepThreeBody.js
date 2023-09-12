@@ -6,7 +6,8 @@ import { usePasswordInputState } from "../../../../../hooks/signup/usePasswordIn
 
 export const StepThreeBody = () => {
   const fullScreen = useMediaQuery("(max-width:702px)");
-  const { password, setHasAnyValue, inputHandler } = usePasswordInputState();
+  const { password, setHasAnyValue, inputHandler, isInValid } =
+    usePasswordInputState();
   const [showPassword, setShowPassword] = useState(false);
 
   const inputIcon = showPassword ? "Hide" : "Reveal";
@@ -31,6 +32,7 @@ export const StepThreeBody = () => {
           icon={true}
           inputValue={password}
           onInputChange={handleInputChange}
+          error={isInValid}
         />
       </div>
     </>

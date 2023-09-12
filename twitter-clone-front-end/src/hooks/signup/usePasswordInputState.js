@@ -22,13 +22,28 @@ export function usePasswordInputState() {
   };
 
   useEffect(() => {
-    if (hasAnyValue) {
-      if (!handlePasswordLengthValidation(password)) {
-        setIsInValid(true);
+    const identifier = setTimeout(() => {
+      if (hasAnyValue) {
+        if (!handlePasswordLengthValidation(password)) {
+          setIsInValid(true);
+        } else {
+          setIsInValid(false);
+        }
       }
-      console.log(handlePasswordLengthValidation(password));
-    }
+    }, 1000);
+
+    return () => {
+      clearTimeout(identifier);
+    };
   }, [password, hasAnyValue, dispatch]);
 
-  return { password, setInputValue, inputHandler, setHasAnyValue, isInValid };
+  return {
+    password,
+    setInputValue,
+    inputHandler,
+    setHasAnyValue,
+    isInValid,
+    isFocused,
+    setIsFocused,
+  };
 }
