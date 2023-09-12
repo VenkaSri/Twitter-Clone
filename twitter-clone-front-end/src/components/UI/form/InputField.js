@@ -3,10 +3,6 @@ import React from "react";
 import { InputAdornment, TextField } from "@mui/material";
 import SVG from "../app/SVG";
 import { useDispatch, useSelector } from "react-redux";
-import { stepsActions } from "../../../state/auth/form/steps-reducer";
-import { nameActions } from "../../../state/auth/sign-up/name-reducer";
-import { emailActions } from "../../../state/auth/sign-up/email-reducer";
-import { dobActions } from "../../../state/auth/sign-up/dob-reducer";
 import { signupSliceActions } from "../../../state/app/home/signupSlice";
 
 const InputField = (props) => {
@@ -16,19 +12,7 @@ const InputField = (props) => {
   );
   const editFieldHandler = () => {
     dispatch(signupSliceActions.setCurrentStep(currentStep - 1));
-    switch (props.label) {
-      case "Name":
-        dispatch(nameActions.setAutoFocus(true));
-        break;
-      case "Email":
-        dispatch(emailActions.setAutoFocus(true));
-        break;
-      case "Date of Birth":
-        dispatch(dobActions.setAutoFocus(true));
-        break;
-      default:
-        break;
-    }
+    dispatch(signupSliceActions.setShouldAutoFocus(props.label));
   };
 
   const inputLabelColor = ` 

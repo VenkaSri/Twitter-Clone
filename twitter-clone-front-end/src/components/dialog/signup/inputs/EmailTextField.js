@@ -5,12 +5,13 @@ import { useEmailInputState } from "../../../../hooks/signup/useEmailInputState"
 
 const EmailTextField = () => {
   const {
-    email,
-    setEmail,
     isFocused,
     setIsFocused,
     isEmailInValid,
     isUnavailable,
+    userEmail,
+    autoFocus,
+    inputHandler,
   } = useEmailInputState();
 
   const inputBorderColor =
@@ -53,7 +54,7 @@ const EmailTextField = () => {
         name="email"
         type="text"
         id="outlined-basic"
-        value={email}
+        defaultValue={userEmail}
         label={
           <span
             className={`${inputLabelColor}  font-cReg text-[17px] leading-6`}
@@ -67,10 +68,10 @@ const EmailTextField = () => {
           disableUnderline: true,
           style: { background: "none" },
         }}
-        onChange={(event) => setEmail(event.target.value)}
+        onChange={inputHandler}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        autoFocus={email.shouldAutoFocus}
+        autoFocus={autoFocus === "Email"}
       />
       <div className="px-2 flex">
         <div className="pt-0.5 pr-5 flex flex-col">

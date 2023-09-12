@@ -36,7 +36,8 @@ const years = yearArr.map((year) => (
 ));
 
 const DOBInput = () => {
-  const { monthHandler, dayHandler, yearHandler } = useDOBInputState();
+  const { monthHandler, dayHandler, yearHandler, userDOB, autoFocus } =
+    useDOBInputState();
 
   return (
     <div className="flex my-4">
@@ -45,6 +46,8 @@ const DOBInput = () => {
         style={{ flexGrow: 2, width: "13.063rem", marginRight: "0.75rem" }}
         label="Month"
         onChange={monthHandler}
+        defaultValue={userDOB.month}
+        autoFocus={autoFocus}
       />
       <div className="h-[58px] flex grow">
         <DOBSelectField
@@ -52,12 +55,14 @@ const DOBInput = () => {
           style={{ width: "5.735rem", marginRight: "0.75rem" }}
           label="Day"
           onChange={dayHandler}
+          defaultValue={userDOB.day}
         />
         <DOBSelectField
           field={years}
           style={{ width: "7.178rem" }}
           label="Year"
           onChange={yearHandler}
+          defaultValue={userDOB.year}
         />
       </div>
     </div>

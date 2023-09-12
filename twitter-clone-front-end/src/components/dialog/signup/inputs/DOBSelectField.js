@@ -1,22 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useDispatch, useSelector } from "react-redux";
-import { dobActions } from "../../../../state/auth/sign-up/dob-reducer";
-import { stepOneActions } from "../../../../state/auth/sign-up/stepone-reducer";
-import { useDOBInputState } from "../../../../hooks/signup/useDOBInputState";
 
 const DOBSelectField = (props) => {
-  const dispatch = useDispatch();
   const [isFocused, setIsFocused] = useState(false);
   const darkMode = useSelector(
     (state) => state.rootReducer.globalState.isDarkMode
   );
-
-  const autoFocusHandler = () => {
-    if (props.label === "Month") return;
-  };
 
   return (
     <FormControl
@@ -61,14 +53,14 @@ const DOBSelectField = (props) => {
             },
           },
         }}
-        defaultValue=""
-        // value={currentValueHandler()}
+        defaultValue={props.defaultValue}
+        value={props.defaultValue}
         disableUnderline
         IconComponent={KeyboardArrowDownIcon}
         onChange={props.onChange}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        autoFocus={autoFocusHandler()}
+        autoFocus={props.autoFocus === "Date of Birth"}
       >
         <MenuItem value="" disabled></MenuItem>
         {props.field}

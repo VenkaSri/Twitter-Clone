@@ -16,12 +16,19 @@ export function useEmailInputState() {
   const userEmail = useSelector(
     (state) => state.rootReducer.signUpState.stepOneInfo.email
   );
+  const autoFocus = useSelector(
+    (state) => state.rootReducer.signUpState.shouldAutoFocus
+  );
+
+  const inputHandler = (event) => {
+    dispatch(signupSliceActions.setEmail(event.target.value));
+  };
 
   useEffect(() => {
     const identifier = setTimeout(() => {
-      if (email !== "" && !onlySpaces(email)) {
-        if (handleEmailValidation(email)) {
-          checkEmailInDatabase(email.trim);
+      if (userEmail !== "" && !onlySpaces(userEmail)) {
+        if (handleEmailValidation(userEmail)) {
+          checkEmailInDatabase(userEmail.trim);
         } else {
           setisEmailInValid(true);
           dispatch(signupSliceActions.setEmail(""));
@@ -36,18 +43,18 @@ export function useEmailInputState() {
       setIsUnavailable(false);
       clearTimeout(identifier);
     };
-  }, [email]);
+  }, [userEmail]);
 
   const checkEmailInDatabase = async () => {
     try {
       const result = await postData(`${BASE_URL}/exists`, {
-        identifier: email,
+        identifier: userEmail,
       });
       if (result.status === 200) {
         setIsUnavailable(true);
       } else {
         setIsUnavailable(false);
-        dispatch(signupSliceActions.setEmail(email.trim()));
+        dispatch(signupSliceActions.setEmail(userEmail.trim()));
       }
     } catch (error) {
       console.log(error);
@@ -61,5 +68,8 @@ export function useEmailInputState() {
     setIsFocused,
     isEmailInValid,
     isUnavailable,
+    userEmail,
+    autoFocus,
+    inputHandler,
   };
 }

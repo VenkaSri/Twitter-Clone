@@ -4,10 +4,16 @@ const initialState = {
   stepOneInfo: {
     name: "",
     email: "",
-    dob: "",
+    dob: {
+      year: "",
+      month: "",
+      day: "",
+    },
   },
-  currentStep: 1,
+  password: "",
+  currentStep: 3,
   doesUserExist: false,
+  shouldAutoFocus: "",
 };
 
 const signupSlice = createSlice({
@@ -20,11 +26,23 @@ const signupSlice = createSlice({
     setEmail(state, action) {
       state.stepOneInfo.email = action.payload;
     },
-    setDOB(state, action) {
-      state.stepOneInfo.dob = action.payload;
+    setMonth(state, action) {
+      state.stepOneInfo.dob.month = action.payload;
+    },
+    setDay(state, action) {
+      state.stepOneInfo.dob.day = action.payload;
+    },
+    setYear(state, action) {
+      state.stepOneInfo.dob.year = action.payload;
     },
     setCurrentStep(state, action) {
       state.currentStep = action.payload;
+    },
+    setShouldAutoFocus(state, action) {
+      state.shouldAutoFocus = action.payload;
+    },
+    setPassword(state, action) {
+      state.password = action.payload;
     },
   },
 });

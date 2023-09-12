@@ -1,42 +1,28 @@
 import React from "react";
 
-import Button from "../../UI/button/Button";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  enabledFooterButton,
-  disabledFooterButton,
-} from "../../../constants/buttonConstants";
-import { signupSliceActions } from "../../../state/app/home/signupSlice";
+import { StepTwoFooter } from "./steps/2/StepTwoFooter";
+import { StepOneFooter } from "./steps/1/StepOneFooter";
+import { StepThreeFooter } from "./steps/3/StepThreeFooter";
+import { useCurrentStep } from "../../../hooks/signup/ useCurrentStep";
 
 export const SignupFooter = () => {
-  const dispatch = useDispatch();
-  const currentStep = useSelector(
-    (state) => state.rootReducer.signUpState.currentStep
-  );
+  const currentStep = useCurrentStep();
 
-  const stepOneInfo = useSelector(
-    (state) => state.rootReducer.signUpState.stepOneInfo
-  );
-
-  let buttonInfo =
-    stepOneInfo.name !== "" &&
-    stepOneInfo.email !== "" &&
-    stepOneInfo.dob !== ""
-      ? enabledFooterButton
-      : disabledFooterButton;
+  let content = null;
 
   switch (currentStep) {
+    case 1:
+      content = <StepOneFooter />;
+      break;
     case 2:
+      content = <StepTwoFooter />;
+      break;
+    case 3:
+      content = <StepThreeFooter />;
       break;
     default:
       break;
   }
 
-  console.log(currentStep);
-
-  const handledNext = () => {
-    // nextFunction();
-    dispatch(signupSliceActions.setCurrentStep(currentStep + 1));
-  };
-  return <Button buttonProps={buttonInfo} onClick={handledNext} />;
+  return <div className="flex-col-container">{content}</div>;
 };

@@ -1,31 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useUserData } from "../../../../../hooks/user-data";
-import Button from "../../../../UI/button/Button";
-import { stepsActions } from "../../../../../state/auth/form/steps-reducer";
+import { DialogFooterButton } from "../../../../DialogFooterButton";
+import { signupSliceActions } from "../../../../../state/app/home/signupSlice";
+import { useCurrentStep } from "../../../../../hooks/signup/ useCurrentStep";
 
 export const StepTwoFooter = () => {
-  const { isEmailEntered, isDOBEntered, isNameEntered } = useUserData();
   const dispatch = useDispatch();
-  const currentStep = useSelector(
-    (state) => state.rootReducer.signUp.steps.currentStep
-  );
+  const currentStep = useCurrentStep();
 
-  const buttonInfo = {
-    height: 52,
-    width: 440,
-    text: "Sign Up",
-    txtColor: "text-white",
-    hoverBgColor: "#1D9BF0",
-    bgColor: "#1D9BF0",
-    fontSize: "17px",
-  };
-
-  const handledNext = () => {
-    // dispatch(nameActions.setAutoFocus(false));
-    // dispatch(dobActions.setAutoFocus(false));
-    // dispatch(emailActions.setAutoFocus(false));
-    dispatch(stepsActions.setCurrentStep(currentStep + 1));
+  const nextStepHandler = () => {
+    dispatch(signupSliceActions.setCurrentStep(currentStep + 1));
   };
   return (
     <>
@@ -43,9 +27,13 @@ export const StepTwoFooter = () => {
           choose otherwise <span className="text-[#1D9BF0]">here</span>.
         </span>
       </div>
-      <div className="my-[24px]">
-        <Button buttonProps={buttonInfo} onClick={handledNext} />
-      </div>
+      <DialogFooterButton
+        onClick={nextStepHandler}
+        text={"Sign up"}
+        className={
+          "bg-primary-color   hover:bg-[#1A8CD8] grow text-white font-cBold text-white"
+        }
+      />
     </>
   );
 };

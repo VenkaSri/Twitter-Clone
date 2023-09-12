@@ -4,30 +4,31 @@ import { useSelector } from "react-redux";
 import InputField from "../../../../UI/form/InputField";
 import { CONFIRMED_CHECKMARK } from "../../../../../utils/ButtonLinkObjects";
 import moment from "moment";
+import { DialogContentHeading } from "../../../../DialogContentHeading";
 
 const StepTwoBody = () => {
-  const stepOneUserInfo = useSelector(
+  const stepOneInfo = useSelector(
     (state) => state.rootReducer.signUpState.stepOneInfo
   );
+  const userDob = `${stepOneInfo.dob.month}-${stepOneInfo.dob.day}-${stepOneInfo.dob.year}`;
 
   return (
     <>
+      <DialogContentHeading text="Create your account" />
       <InputField
         label="Name"
-        inputValue={stepOneUserInfo.name}
+        inputValue={stepOneInfo.name}
         svg={{ path: CONFIRMED_CHECKMARK, style: "w-5 fill-[#00BA7C] mt-4" }}
       />
 
       <InputField
         label="Email"
-        inputValue={stepOneUserInfo.email}
+        inputValue={stepOneInfo.email}
         svg={{ path: CONFIRMED_CHECKMARK, style: "w-5 fill-[#00BA7C] mt-4" }}
       />
       <InputField
         label="Date of Birth"
-        inputValue={moment(stepOneUserInfo.dob, "YYYY-MM-DD").format(
-          "MMM DD, YYYY"
-        )}
+        inputValue={moment(userDob, "MMMM DD, YYYY").format("MMM DD, YYYY")}
         svg={{ path: CONFIRMED_CHECKMARK, style: "w-5 fill-[#00BA7C] mt-4" }}
       />
     </>

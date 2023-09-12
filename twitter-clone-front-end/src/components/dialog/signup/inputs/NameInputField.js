@@ -16,6 +16,10 @@ const NameInputField = () => {
     (state) => state.rootReducer.signUpState.stepOneInfo.name
   );
 
+  const focus = useSelector(
+    (state) => state.rootReducer.signUpState.shouldAutoFocus
+  );
+
   const handleChange = (event) => {
     setHasEnteredInput(true);
     setName(event.target.value);
@@ -76,7 +80,7 @@ const NameInputField = () => {
         onChange={handleChange}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        // autoFocus={name.shouldAutoFocus}
+        autoFocus={focus === "Name"}
       />
       <div className="px-2 flex">
         <div className="pt-0.5 pr-5 flex flex-col">

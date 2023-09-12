@@ -23,20 +23,10 @@ export const DialogFooter = ({ type }) => {
   const overflowClass = dialogBodyOverFlowing ? "shadow-custom-shadow" : "";
   return (
     <div
-      className={`flex-col-container dark:bg-[#000] px-20 ${overflowClass}
+      className={`flex-col-container dark:bg-[#000] px-20 ${overflowClass} max-w-[600px]
       `}
     >
-      <div className="flex-col-container ">
-        <div
-          className={`flex-col-container min-h-[52px] min-w-[52px] rounded-full `}
-        >
-          <div className="my-6 flex-col-container flex-grow ">
-            <div className="flex-col-container min-h-[52px] min-w-[52px]">
-              {footer}
-            </div>
-          </div>
-        </div>
-      </div>
+      <div className="flex-col-container  ">{footer}</div>
     </div>
   );
 };
