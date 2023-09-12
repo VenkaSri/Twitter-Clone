@@ -1,49 +1,64 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signupSliceActions } from "../../state/app/home/signupSlice";
+import { VALIDATION_DELAY } from "../../constants";
+
+const validatePasswordLength = (text) => /^.{8,}$/.test(text);
+const validatePasswordStrength = (text) => /^(.)\1*$/.test(text);
 
 export function usePasswordInputState() {
   const dispatch = useDispatch();
-  const handlePasswordLengthValidation = (text) => /^.{8,}$/.test(text);
 
-  const handlePasswordStrengthValidation = (text) => /^(.)\1*$/.test(text);
-  const [inputValue, setInputValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [isInValid, setIsInValid] = useState(false);
-  const [hasAnyValue, setHasAnyValue] = useState(false);
-  const [isNotStrong, setIsNotStrong] = useState(false);
-  const password = useSelector(
-    (state) => state.rootReducer.signUpState.password
-  );
+  const [isPasswordLengthValidState, setIsPasswordLengthValidState] =
+    useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [hasUserEnteredValue, setHasUserEnteredValue] = useState(false);
+  const [userEnteredPassword, setUserEnteredPassword] = useState("");
+  const [isPasswordStrengthValidState, setIsPasswordStrengthValidState] =
+    useState(false);
 
-  const inputHandler = (value) => {
-    dispatch(signupSliceActions.setPassword(value));
+  const handlePasswordInputChange = (value) => {
+    setUserEnteredPassword(value);
   };
 
   useEffect(() => {
     const identifier = setTimeout(() => {
-      if (hasAnyValue) {
-        if (!handlePasswordLengthValidation(password)) {
-          setIsInValid(true);
+      if (hasUserEnteredValue) {
+        if (!validatePasswordLength(userEnteredPassword)) {
+          setIsPasswordLengthValidState(true);
+          setIsPasswordStrengthValidState(false);
+          dispatch(signupSliceActions.setPassword(""));
+          setErrorMessage(true);
+        } else if (validatePasswordStrength(userEnteredPassword)) {
+          setIsPasswordStrengthValidState(true);
+          setErrorMessage(true);
+          dispatch(signupSliceActions.setPassword(""));
         } else {
-          setIsInValid(false);
+          setIsPasswordStrengthValidState(false);
+          setErrorMessage(false);
+          setIsPasswordLengthValidState(false);
+          dispatch(signupSliceActions.setPassword(userEnteredPassword));
         }
       }
-    }, 1000);
+    }, VALIDATION_DELAY);
 
     return () => {
+      setErrorMessage(false);
       clearTimeout(identifier);
     };
-  }, [password, hasAnyValue, dispatch]);
+  }, [userEnteredPassword, hasUserEnteredValue, dispatch]);
 
   return {
-    password,
-    setInputValue,
-    inputHandler,
-    setHasAnyValue,
-    isInValid,
+    userEnteredPassword,
+    handlePasswordInputChange,
+    setHasUserEnteredValue,
+    isPasswordLengthValidState,
     isFocused,
     setIsFocused,
+    errorMessage,
+    setIsPasswordStrengthValidState,
+    isPasswordStrengthValidState,
+    setUserEnteredPassword,
   };
 }

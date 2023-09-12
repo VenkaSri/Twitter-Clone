@@ -1,4 +1,6 @@
-export const getDialogStyles = (type, isMobile) => {
+export const getDialogStyles = (type, isMobile, darkMode) => {
+  const bgColog = darkMode ? "#000" : "fff";
+
   let sxStyles = {
     borderRadius: "16px",
     height: "650px",
@@ -18,7 +20,9 @@ export const getDialogStyles = (type, isMobile) => {
   };
 
   if (isMobile) {
-    sxStyles = {};
+    sxStyles = {
+      background: bgColog,
+    };
   }
 
   switch (type) {

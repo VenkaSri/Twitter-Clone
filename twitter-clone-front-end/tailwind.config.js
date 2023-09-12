@@ -47,8 +47,8 @@ module.exports = {
         },
       }),
       screens: {
-        med: "1000px",
         xs: "380px",
+        med: "1000px",
       },
       utilities: {
         ".flex-col-container": {
@@ -57,7 +57,7 @@ module.exports = {
       },
       colors: {
         "primary-color": "var(--primary-color)",
-        "secondary-color": "var(--secondary-color)",
+        error: "var(--primary-error-color)",
       },
     },
   },

@@ -7,7 +7,6 @@ import { useCurrentStep } from "../../../hooks/signup/ useCurrentStep";
 
 export const SignupFooter = () => {
   const currentStep = useCurrentStep();
-
   let content = null;
 
   switch (currentStep) {

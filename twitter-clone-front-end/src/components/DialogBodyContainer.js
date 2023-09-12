@@ -7,7 +7,7 @@ export const DialogBodyContainer = (props) => {
   return (
     <div
       className={`overflow-auto
-        flex flex-col items-stretch basis-full flex-grow dark:bg-[#000]`}
+        flex flex-col items-stretch basis-full flex-grow bg-[#fff] dark:bg-[#000]`}
     >
       <div
         className={`${

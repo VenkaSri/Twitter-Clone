@@ -2,10 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { LoginFooter } from "./login/LoginFooter";
 import { SignupFooter } from "./signup/SignupFooter";
+import { useMediaQuery } from "@mui/material";
 
 export const DialogFooter = ({ type }) => {
   let footer = null;
-
+  const fullScreen = useMediaQuery("(max-width:702px)");
   const dialogBodyOverFlowing = useSelector(
     (state) => state.rootReducer.dialogState.dialogBodyOverFlowing
   );
@@ -23,10 +24,12 @@ export const DialogFooter = ({ type }) => {
   const overflowClass = dialogBodyOverFlowing ? "shadow-custom-shadow" : "";
   return (
     <div
-      className={`flex-col-container dark:bg-[#000] px-20 ${overflowClass} max-w-[600px]
+      className={`flex-col-container dark:bg-[#000] ${
+        fullScreen ? "px-8" : "px-20"
+      } ${overflowClass} 
       `}
     >
-      <div className="flex-col-container  ">{footer}</div>
+      <div className="flex-col-container">{footer}</div>
     </div>
   );
 };

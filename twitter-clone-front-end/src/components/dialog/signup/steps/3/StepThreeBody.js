@@ -6,18 +6,18 @@ import { usePasswordInputState } from "../../../../../hooks/signup/usePasswordIn
 
 export const StepThreeBody = () => {
   const fullScreen = useMediaQuery("(max-width:702px)");
-  const { password, setHasAnyValue, inputHandler, isInValid } =
-    usePasswordInputState();
-  const [showPassword, setShowPassword] = useState(false);
+  const {
+    userEnteredPassword,
+    setHasUserEnteredValue,
+    handlePasswordInputChange,
+    errorMessage,
+    isPasswordStrengthValidState,
+    isPasswordLengthValidState,
+  } = usePasswordInputState();
 
-  const inputIcon = showPassword ? "Hide" : "Reveal";
-
-  const togglePasswordVisibility = () => {
-    setShowPassword((show) => !show);
-  };
   const handleInputChange = (value) => {
-    inputHandler(value);
-    setHasAnyValue(true);
+    handlePasswordInputChange(value);
+    setHasUserEnteredValue(true);
   };
 
   return (
@@ -30,10 +30,21 @@ export const StepThreeBody = () => {
         <CustomTextField
           label="Password"
           icon={true}
-          inputValue={password}
+          inputValue={userEnteredPassword}
           onInputChange={handleInputChange}
-          error={isInValid}
+          error={isPasswordLengthValidState || isPasswordStrengthValidState}
         />
+        <div className="flex">
+          <div className="pt-0.5 pr-5 flex flex-col">
+            {errorMessage && (
+              <p className="font-cReg text-[14px] ml-2 text-[#f1202d]">
+                {isPasswordStrengthValidState
+                  ? "Please enter a stronger password."
+                  : "Your password needs to be at least 8 characters. Please enter a longer one"}
+              </p>
+            )}
+          </div>
+        </div>
       </div>
     </>
   );

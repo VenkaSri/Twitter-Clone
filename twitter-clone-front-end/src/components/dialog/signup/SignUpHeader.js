@@ -11,7 +11,7 @@ import { useDarkMode } from "../../../hooks/useDarkMode";
 import { NUM_OF_SIGNUP_STEPS } from "../../../constants";
 
 const SignUpHeader = () => {
-  const fullScreen = useMediaQuery("(max-width:702px)");
+  const smallScreen = useMediaQuery("(max-width:498px)");
   const dispatch = useDispatch();
   const darkMode = useDarkMode();
 
@@ -25,7 +25,7 @@ const SignUpHeader = () => {
 
   return (
     <>
-      <div className="min-w-[56px] min-h-[32px] self-stretch flex items-start justify-center flex-col">
+      <div className="min-w-[56px] min-h-[32px] self-stretch flex items-start justify-center flex-col ">
         <div className="min-w-[36px] min-h-[36px] rounded-full flex flex-col cursor-pointer items-center justify-center -ml-2">
           <IconButton
             onClick={handleReset}
@@ -41,7 +41,11 @@ const SignUpHeader = () => {
       </div>
       <div className="flex flex-grow h-full justify-center items-stretch flex-col">
         <div className="flex flex-col items-start shrink-0 ">
-          <h2 className="py-0.5 text-xl leading-6 font-cMed font-bold dark:text-[#fff]">
+          <h2
+            className={`py-0.5 leading-6 font-cMed font-bold dark:text-[#fff] ${
+              smallScreen ? "text-[17px]" : "text-[20px]"
+            }`}
+          >
             <span>
               Step {currentStep} of {NUM_OF_SIGNUP_STEPS}
             </span>
