@@ -11,7 +11,7 @@ const initialState = {
     },
   },
   password: "",
-  currentStep: 3,
+  currentStep: 1,
   doesUserExist: false,
   shouldAutoFocus: "",
 };

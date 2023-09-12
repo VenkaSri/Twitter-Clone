@@ -9,13 +9,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { unfollowDialogActions } from "../../../state/dialog/dialogState-reducer";
 import { useDarkMode } from "../../../hooks/useDarkMode";
 import { NUM_OF_SIGNUP_STEPS } from "../../../constants";
+import { useCurrentStep } from "../../../hooks/signup/ useCurrentStep";
 
 const SignUpHeader = () => {
   const smallScreen = useMediaQuery("(max-width:498px)");
   const dispatch = useDispatch();
   const darkMode = useDarkMode();
 
-  const currentStep = 1;
+  const currentStep = useCurrentStep();
 
   const handleReset = () => {
     dispatch(resetActions.resetAll());
@@ -25,20 +26,7 @@ const SignUpHeader = () => {
 
   return (
     <>
-      <div className="min-w-[56px] min-h-[32px] self-stretch flex items-start justify-center flex-col ">
-        <div className="min-w-[36px] min-h-[36px] rounded-full flex flex-col cursor-pointer items-center justify-center -ml-2">
-          <IconButton
-            onClick={handleReset}
-            type={"Close"}
-            options={{
-              className:
-                "dark:fill-white dark:hover:bg-[#191919] hover:bg-[#E6E7E7] ",
-              width: 20,
-              height: 20,
-            }}
-          />
-        </div>
-      </div>
+      <HeaderIcon />
       <div className="flex flex-grow h-full justify-center items-stretch flex-col">
         <div className="flex flex-col items-start shrink-0 ">
           <h2
