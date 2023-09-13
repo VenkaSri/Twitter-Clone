@@ -9,36 +9,22 @@ import { unfollowDialogActions } from "../state/dialog/dialogState-reducer";
 export const DialogLayout = ({ header, body, footer }) => {
   // s/o chat-gpt, dynamically adding box shadow
   const dispatch = useDispatch();
-  const containerRef = useRef(null);
-  useEffect(() => {
-    const checkOverflow = () => {
-      const element = containerRef.current;
-      if (element) {
-        const isOver = element.scrollHeight > element.clientHeight;
-        dispatch(unfollowDialogActions.setDialogBodyOverFlowing(isOver));
-      }
-    };
-    checkOverflow();
-    window.addEventListener("resize", checkOverflow);
-    return () => {
-      window.removeEventListener("resize", checkOverflow);
-    };
-  }, []);
+
   return (
     <>
       <DialogTitle style={{ padding: 0 }}>{header}</DialogTitle>
       <DialogContent
-        ref={containerRef}
-        className="w-full max-w-[600px]  mx-auto p-0 flex-col-container relative dark:bg-black"
+        className="w-full max-w-[600px] mx-auto  flex-col-container relative dark:bg-black overflow-none"
         sx={{
           "&.MuiDialogContent-root": {
             padding: 0,
+            overflow: "hidden",
           },
         }}
       >
         {body}
+        {footer}
       </DialogContent>
-      {footer}
     </>
   );
 };

@@ -17,5 +17,5 @@ export const DialogBody = ({ type }) => {
       break;
   }
 
-  return <div className="flex-col-container ">{body}</div>;
+  return <>{body}</>;
 };

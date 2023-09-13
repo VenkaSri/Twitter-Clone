@@ -12,9 +12,12 @@ export const StepOneFooter = () => {
     (state) => state.rootReducer.signUpState.stepOneInfo
   );
 
+  const handleEmailValidation = (text) =>
+    /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(text);
+
   const styles =
     stepOneInfo.name !== "" &&
-    stepOneInfo.email !== "" &&
+    handleEmailValidation(stepOneInfo.email) &&
     stepOneInfo.dob.month &&
     stepOneInfo.dob.day &&
     stepOneInfo.dob.year !== ""
@@ -32,7 +35,7 @@ export const StepOneFooter = () => {
       disabled={
         !(
           stepOneInfo.name !== "" &&
-          stepOneInfo.email !== "" &&
+          handleEmailValidation(stepOneInfo.email) &&
           stepOneInfo.dob.month &&
           stepOneInfo.dob.day &&
           stepOneInfo.dob.year !== ""

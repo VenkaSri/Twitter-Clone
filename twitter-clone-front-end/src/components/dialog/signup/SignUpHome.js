@@ -1,17 +1,39 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { StepOneBody } from "./steps/1/StepOneBody";
-import { DialogBodyContainer } from "../../DialogBodyContainer";
 import StepTwoBody from "./steps/2/StepTwoBody";
 import { StepThreeBody } from "./steps/3/StepThreeBody";
+import { useMediaQuery } from "@mui/material";
+import { unfollowDialogActions } from "../../../state/dialog/dialogState-reducer";
 
 const SignUpHome = () => {
+  const dispatch = useDispatch();
+
   const currentStep = useSelector(
     (state) => state.rootReducer.signUpState.currentStep
   );
 
+  const fullScreen = useMediaQuery("(max-width:702px)");
+
   let currentBody = null;
+
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const checkOverflow = () => {
+      const element = containerRef.current;
+      if (element) {
+        const isOver = element.scrollHeight > element.clientHeight;
+        dispatch(unfollowDialogActions.setDialogBodyOverFlowing(isOver));
+      }
+    };
+    checkOverflow();
+    window.addEventListener("resize", checkOverflow);
+    return () => {
+      window.removeEventListener("resize", checkOverflow);
+    };
+  }, []);
 
   switch (currentStep) {
     case 1:
@@ -32,7 +54,19 @@ const SignUpHome = () => {
 
   return (
     <>
-      <DialogBodyContainer>{currentBody}</DialogBodyContainer>
+      <div
+        ref={containerRef}
+        className={`overflow-auto
+        flex flex-col items-stretch basis-full flex-grow bg-[#fff] dark:bg-[#000]`}
+      >
+        <div
+          className={`${
+            fullScreen ? " px-8" : " px-20"
+          } shrink-0 flex flex-col mb-2`}
+        >
+          {currentBody}
+        </div>
+      </div>
     </>
   );
 };
