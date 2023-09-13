@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signupSliceActions } from "../../state/app/home/signupSlice";
 import { postData } from "../../services/postData";
+import { VALIDATION_DELAY } from "../../constants";
 
 export function useEmailInputState() {
   const onlySpaces = (text) => !/[^\s\\]/.test(text);
@@ -31,12 +32,9 @@ export function useEmailInputState() {
           checkEmailInDatabase(userEmail.trim);
         } else {
           setisEmailInValid(true);
-          dispatch(signupSliceActions.setEmail(""));
         }
-      } else {
-        dispatch(signupSliceActions.setEmail(""));
       }
-    }, 1000);
+    }, VALIDATION_DELAY);
 
     return () => {
       setisEmailInValid(false);
@@ -44,6 +42,8 @@ export function useEmailInputState() {
       clearTimeout(identifier);
     };
   }, [userEmail]);
+
+  console.log(userEmail);
 
   const checkEmailInDatabase = async () => {
     try {

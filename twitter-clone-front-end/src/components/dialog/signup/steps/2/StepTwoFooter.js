@@ -13,7 +13,7 @@ export const StepTwoFooter = () => {
   };
   return (
     <>
-      <div className="mt-4 leading-4 text-[13px] font-cLight text-[#536471] ">
+      <div className="mt-4 leading-4 text-[13px] font-cLight text-[#536471] flex-col-container">
         <span className="break-words">
           By signing up, you agree to the{" "}
           <span className="text-[#1D9BF0]">Terms of Service</span> and{" "}

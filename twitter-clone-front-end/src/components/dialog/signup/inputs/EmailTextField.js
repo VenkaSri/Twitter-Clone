@@ -73,7 +73,7 @@ const EmailTextField = () => {
         onBlur={() => setIsFocused(false)}
         autoFocus={autoFocus === "Email"}
       />
-      <div className="px-2 flex">
+      <div className="flex">
         <div className="pt-0.5 pr-5 flex flex-col">
           {(isEmailInValid || isUnavailable) && (
             <p className="font-cReg text-[14px] ml-2 text-[#f1202d]">
