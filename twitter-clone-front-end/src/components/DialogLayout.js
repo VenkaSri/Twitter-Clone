@@ -14,11 +14,11 @@ export const DialogLayout = ({ header, body, footer }) => {
     <>
       <DialogTitle style={{ padding: 0 }}>{header}</DialogTitle>
       <DialogContent
-        className="w-full max-w-[600px] mx-auto  flex-col-container relative dark:bg-black overflow-none"
+        className="w-full max-w-[600px] mx-auto  flex-col-container relative dark:bg-black"
         sx={{
           "&.MuiDialogContent-root": {
             padding: 0,
-            overflow: "hidden",
+            overflow: "",
           },
         }}
       >

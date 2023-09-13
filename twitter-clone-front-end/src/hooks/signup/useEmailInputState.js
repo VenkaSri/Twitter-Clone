@@ -43,8 +43,6 @@ export function useEmailInputState() {
     };
   }, [userEmail]);
 
-  console.log(userEmail);
-
   const checkEmailInDatabase = async () => {
     try {
       const result = await postData(`${BASE_URL}/exists`, {

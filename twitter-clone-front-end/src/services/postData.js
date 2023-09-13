@@ -1,5 +1,5 @@
 export const postData = async (url = "", data = {}) => {
-  const respone = await fetch("http://localhost:8080/api/auth/exists", {
+  const respone = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -7,7 +7,7 @@ import { usePasswordInputState } from "../../../../../hooks/signup/usePasswordIn
 export const StepThreeBody = () => {
   const fullScreen = useMediaQuery("(max-width:702px)");
   const {
-    userEnteredPassword,
+    password,
     setHasUserEnteredValue,
     handlePasswordInputChange,
     errorMessage,
@@ -30,7 +30,7 @@ export const StepThreeBody = () => {
         <CustomTextField
           label="Password"
           icon={true}
-          inputValue={userEnteredPassword}
+          inputValue={password}
           onInputChange={handleInputChange}
           error={isPasswordLengthValidState || isPasswordStrengthValidState}
         />

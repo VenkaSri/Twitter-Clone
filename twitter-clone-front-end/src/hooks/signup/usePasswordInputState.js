@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signupSliceActions } from "../../state/app/home/signupSlice";
 import { VALIDATION_DELAY } from "../../constants";
 
@@ -19,26 +19,28 @@ export function usePasswordInputState() {
     useState(false);
 
   const handlePasswordInputChange = (value) => {
-    setUserEnteredPassword(value);
+    dispatch(signupSliceActions.setPassword(value));
   };
+
+  const password = useSelector(
+    (state) => state.rootReducer.signUpState.password
+  );
 
   useEffect(() => {
     const identifier = setTimeout(() => {
       if (hasUserEnteredValue) {
-        if (!validatePasswordLength(userEnteredPassword)) {
+        if (!validatePasswordLength(password)) {
           setIsPasswordLengthValidState(true);
           setIsPasswordStrengthValidState(false);
-          dispatch(signupSliceActions.setPassword(""));
           setErrorMessage(true);
-        } else if (validatePasswordStrength(userEnteredPassword)) {
+        } else if (validatePasswordStrength(password)) {
           setIsPasswordStrengthValidState(true);
           setErrorMessage(true);
-          dispatch(signupSliceActions.setPassword(""));
         } else {
           setIsPasswordStrengthValidState(false);
           setErrorMessage(false);
           setIsPasswordLengthValidState(false);
-          dispatch(signupSliceActions.setPassword(userEnteredPassword));
+          dispatch(signupSliceActions.setPassword(password));
         }
       }
     }, VALIDATION_DELAY);
@@ -47,10 +49,10 @@ export function usePasswordInputState() {
       setErrorMessage(false);
       clearTimeout(identifier);
     };
-  }, [userEnteredPassword, hasUserEnteredValue, dispatch]);
+  }, [password, hasUserEnteredValue, dispatch]);
 
   return {
-    userEnteredPassword,
+    password,
     handlePasswordInputChange,
     setHasUserEnteredValue,
     isPasswordLengthValidState,
