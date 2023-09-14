@@ -6,8 +6,13 @@ import ComposeTweet from "../../user/ComposeTweet";
 import { ForYou, Following } from "../../../utils/explore/NavObjects";
 import { Route, Routes } from "react-router-dom";
 import TweetSection from "../body/TweetSection";
+import { getData } from "../../../services/auth/getData";
 
 const MainHeader = () => {
+  const handleClick = async () => {
+    const userInfo = await getData("/user_info");
+    console.log(userInfo);
+  };
   return (
     <div className="flex flex-col bg-white/[.90] sticky top-0 backdrop-blur-[4.7px] border-r border-r-[#eff3f4]">
       <div className="w-[37.375rem] h-[3.313rem] flex">
@@ -20,6 +25,7 @@ const MainHeader = () => {
         <TabButton buttonObject={Following} />
       </div>
       <TweetSection />
+      <button onClick={handleClick}>Hello</button>
     </div>
   );
 };

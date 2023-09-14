@@ -13,8 +13,6 @@ import ThemeManager from "./utils/ThemeManager";
 import { PopupErrorMessage } from "./components/PopupErrorMessage";
 import { TwitterClone } from "./TwitterClone";
 
-ReactGA.initialize("UA-255822850-1");
-
 function App() {
   return (
     <div className="flex flex-col grow">

@@ -45,7 +45,7 @@ export function useEmailInputState() {
 
   const checkEmailInDatabase = async () => {
     try {
-      const result = await postData(`${BASE_URL}/exists`, {
+      const result = await postData(`/exists`, {
         identifier: userEmail,
       });
       if (result.status === 200) {

@@ -10,6 +10,7 @@ export const Dialog = ({ type, content }) => {
     (state) => state.rootReducer.globalState.isDarkMode
   );
   const dialogStyles = getDialogStyles(type, isMobile, darkMode);
+
   return (
     <MUIDialog
       sx={dialogStyles.styles}
