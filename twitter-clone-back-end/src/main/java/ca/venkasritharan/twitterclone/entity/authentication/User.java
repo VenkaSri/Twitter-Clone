@@ -1,6 +1,5 @@
 package ca.venkasritharan.twitterclone.entity.authentication;
 
-import ca.venkasritharan.twitterclone.entity.Follower;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -10,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
+
 import java.util.Set;
 
 @Getter
@@ -24,7 +23,6 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-  @Column(unique = true)
   private String username;
   @Size(min = 8, max = 120)
   @NotBlank(message = "Password must not be blank")

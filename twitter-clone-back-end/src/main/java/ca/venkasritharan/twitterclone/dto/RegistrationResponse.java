@@ -1,4 +1,4 @@
-package ca.venkasritharan.twitterclone.response;
+package ca.venkasritharan.twitterclone.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserInfo {
-  private String name;
-  private String username;
-  private String email;
-  private long id;
+public class RegistrationResponse {
+  private String message;
+  private String token;
 }
