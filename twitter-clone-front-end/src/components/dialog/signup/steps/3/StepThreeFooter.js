@@ -41,7 +41,7 @@ export const StepThreeFooter = () => {
     let data = JSON.stringify({
       name: "fasdfd",
       dob: "1232-12-23",
-      email: "tesfet1@gmail.com",
+      email: "tesfffeffsfasddt1@gmail.com",
       password: "fasdfdsfdf",
     });
 
@@ -59,16 +59,12 @@ export const StepThreeFooter = () => {
     };
 
     try {
-      await axios(config);
+      const response = await axios(config);
+      if (response.status === 200) {
+        const hello = await getData("/api/hello");
+        console.log(hello);
+      }
       dispatch(userInfoActions.setAuthentication(true));
-      axios
-        .get("http://localhost:8080/api/hello", { withCredentials: true })
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
     } catch (error) {
       if (error.response) {
         // The request was made and the server responded with a status code
