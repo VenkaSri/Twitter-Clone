@@ -30,6 +30,7 @@ public class RegistrationResponseBuilder {
   private static void handleSuccessfulRegistration(HttpServletResponse httpResponse, String authToken) throws IOException {
     Cookie cookie = new Cookie("authToken", authToken);
     cookie.setHttpOnly(true);
+    cookie.setMaxAge(604800); // 7 days
     cookie.setPath("/");
     httpResponse.addCookie(cookie);
   }
