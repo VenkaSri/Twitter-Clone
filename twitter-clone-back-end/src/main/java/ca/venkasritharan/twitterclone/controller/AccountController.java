@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-@CrossOrigin(origins = {"*"})
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api")
 public class AccountController {
@@ -16,6 +16,11 @@ public class AccountController {
 
   public AccountController(AccountService accountService) {
     this.accountService = accountService;
+  }
+
+  @GetMapping("/hello")
+  public String hello() {
+    return  "Hello";
   }
 
   @GetMapping("/allAccounts")
@@ -32,5 +37,7 @@ public class AccountController {
   public Response<String> unFollowUser(@RequestParam String followerEmail, @RequestParam String followedUsername) {
     return accountService.unfollow(followerEmail, followedUsername);
   }
+
+
 
 }

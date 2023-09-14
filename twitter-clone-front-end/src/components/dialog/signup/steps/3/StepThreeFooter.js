@@ -6,6 +6,11 @@ import { useCurrentStep } from "../../../../../hooks/signup/ useCurrentStep";
 import { postData } from "../../../../../services/postData";
 import moment from "moment";
 import { getData } from "../../../../../services/auth/getData";
+import { reducerInfoActions } from "../../../../../state/app/loading/dialog/signup/reducer";
+import { unfollowDialogActions } from "../../../../../state/dialog/dialogState-reducer";
+import { userInfoActions } from "../../../../../state/user/userInfo-reducer";
+import { register } from "../../../../../services/auth/register";
+import axios from "axios";
 
 export const StepThreeFooter = () => {
   const dispatch = useDispatch();
@@ -33,19 +38,46 @@ export const StepThreeFooter = () => {
       : "bg-[#86888b]";
 
   const handledNext = async () => {
-    if (num === 1) {
-      const result = await postData(`/register`, {
-        name: "hello",
-        dob: "1992-12-23",
-        email: "teffffasfdfafasdfdsddfasdfdst@gmail.com",
-        password: "safdfasdf",
-      });
+    let data = JSON.stringify({
+      name: "fasdfd",
+      dob: "1232-12-23",
+      email: "tesfet1@gmail.com",
+      password: "fasdfdsfdf",
+    });
 
-      console.log(result);
-      num++;
-    } else {
-      const result = await getData("/hello");
-      console.log(result);
+    console.log(data);
+
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: process.env.REACT_APP_BASE_URL + "/api/auth/register",
+      data: data,
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json", // Make sure this is set correctly
+      },
+    };
+
+    try {
+      await axios(config);
+      dispatch(userInfoActions.setAuthentication(true));
+      axios
+        .get("http://localhost:8080/api/hello", { withCredentials: true })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        if (error.response.status === 409) {
+          console.log("Conflict: ", error.response.data);
+        }
+      }
+      console.log(error);
     }
   };
 

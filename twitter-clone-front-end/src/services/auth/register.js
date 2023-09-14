@@ -6,27 +6,18 @@ import { usernameActions } from "../../state/auth/sign-up/username-reducer";
 import { userInfoActions } from "../../state/user/userInfo-reducer";
 import { reducerInfoActions } from "../../state/app/loading/dialog/signup/reducer";
 
-export const register = async (
-  name,
-  enteredPassword,
-  enteredEmail,
-  dob,
-  dispatch,
-  reg
-) => {
-  const userDob = `${dob.year}-${dob.month}-${dob.day}`;
-
+export const register = async (dispatch) => {
   let data = JSON.stringify({
-    name: name.name,
-    dob: moment(userDob, "YYYY-MMMM-DD").format("YYYY-MM-DD"),
-    password: enteredPassword,
-    email: enteredEmail,
+    name: "fasdfd",
+    dob: "1232-23-23",
+    password: "fasdfdsfdf",
+    email: "vsdfad@gmail.com",
   });
 
   let config = {
     method: "post",
     maxBodyLength: Infinity,
-    url: process.env.REACT_APP_BASE_URL,
+    url: process.env.REACT_APP_BASE_URL + "/api/auth/register",
     data: data,
     withCredentials: true,
     headers: {

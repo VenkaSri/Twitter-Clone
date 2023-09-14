@@ -63,6 +63,7 @@ const Routes = () => {
     axios
       .get("http://localhost:8080/api/auth/status", { withCredentials: true })
       .then((response) => {
+        console.log(response.data);
         dispatch(
           userInfoActions.setAuthentication(response.data.isAuthenticated)
         );
@@ -72,11 +73,7 @@ const Routes = () => {
         dispatch(loadingReducerInfoActions.setIsPageLoaded(true));
       });
   }, []);
-  useEffect(() => {
-    if (reg && loginState) {
-      dispatch(reducerInfoActions.setLoading(false));
-    }
-  }, [reg, loginState, dispatch]);
+
   // const dialogContent =
   //   isLoading || checkingIndentifier ? (
   //     <DialogLoading />
