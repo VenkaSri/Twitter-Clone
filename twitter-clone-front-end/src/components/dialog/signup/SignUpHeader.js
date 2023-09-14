@@ -24,21 +24,40 @@ const SignUpHeader = () => {
     // window.history.replaceState(null, null, "/");
   };
 
+  const postRegisterStep = useSelector(
+    (state) => state.rootReducer.signUpState.postRegisterSteps
+  );
+
+  if (postRegisterStep === 1) {
+  }
+
   return (
     <>
       <HeaderIcon />
       <div className="flex flex-grow h-full justify-center items-stretch flex-col">
-        <div className="flex flex-col items-start shrink-0 ">
-          <h2
-            className={`py-0.5 leading-6 font-cMed font-bold dark:text-[#fff] ${
-              smallScreen ? "text-[17px]" : "text-[20px]"
-            }`}
-          >
-            <span>
-              Step {currentStep} of {NUM_OF_SIGNUP_STEPS}
-            </span>
-          </h2>
-        </div>
+        {postRegisterStep === 1 ? (
+          <div className="flex h-full justify-center items-stretch flex-col">
+            <div className="flex flex-col items-center shrink-0 ">
+              {getIcon("X_LOGO", {
+                height: "2rem",
+                maxWidth: "100%",
+                fill: darkMode ? "white" : "black",
+              })}
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col items-start shrink-0 ">
+            <h2
+              className={`py-0.5 leading-6 font-cMed font-bold dark:text-[#fff] ${
+                smallScreen ? "text-[17px]" : "text-[20px]"
+              }`}
+            >
+              <span>
+                Step {currentStep} of {NUM_OF_SIGNUP_STEPS}
+              </span>
+            </h2>
+          </div>
+        )}
       </div>
     </>
   );

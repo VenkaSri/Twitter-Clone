@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getData } from "../../services/auth/getData";
 
 const initialState = {
   name: "",
@@ -28,3 +29,11 @@ const userSlice = createSlice({
 
 export const userSliceActions = userSlice.actions;
 export default userSlice.reducer;
+
+export const fetchUserDetails = () => async (dispatch) => {
+  const response = await getData("/api/user_details");
+  dispatch(userSliceActions.setEmail(response.email));
+  dispatch(userSliceActions.setName(response.name));
+  dispatch(userSliceActions.setUserId(response.id));
+  dispatch(userSliceActions.setUsername(response.username));
+};

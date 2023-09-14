@@ -3,7 +3,7 @@ import { Oval } from "react-loader-spinner";
 
 export const DialogLoading = () => {
   return (
-    <div className="flex-col-container grow">
+    <div className="flex-col-container grow dark:bg-black">
       <div className="grow flex-col-container items-center justify-center">
         <Oval
           height={30}

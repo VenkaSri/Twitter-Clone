@@ -12,6 +12,7 @@ import loginReducer from "./app/home/loginSlice";
 import rootLoadingSlice from "./app/loading/rootLoadingSlice";
 import signupReducer from "./app/home/signupSlice";
 import userSlice from "./user/userSlice";
+import loadingSlice from "./app/loading/loadingSlice";
 
 const rootReducer = combineReducers({
   signUp: signUpReducer,
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   appLoading: appLoadingReducer,
   rootLoading: rootLoadingSlice,
   userSession: userSlice,
+  loadingSlice: loadingSlice,
 });
 
 export default rootReducer;

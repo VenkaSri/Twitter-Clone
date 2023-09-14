@@ -7,25 +7,30 @@ import { DialogBody } from "./components/dialog/DialogBody";
 import { useSelector } from "react-redux";
 import { PopupErrorMessage } from "./components/PopupErrorMessage";
 import { DialogFooter } from "./components/dialog/DialogFooter";
+import { DialogLoading } from "./components/dialog/DialogLoading";
 
 export const TwitterClone = () => {
   const doesUserExist = useSelector(
     (state) => state.rootReducer.loginState.doesUserExist
   );
   const error = useSelector((state) => state.rootReducer.dialogState.error);
+  const isDialogLoading = useSelector(
+    (state) => state.rootReducer.loadingSlice.isDialogLoading
+  );
+
+  const content = isDialogLoading ? (
+    <DialogLoading />
+  ) : (
+    <DialogLayout
+      header={<DialogHeader type="SIGNUP" />}
+      body={<DialogBody type={"SIGNUP_HOME"} />}
+      footer={<DialogFooter type="SIGNUP" />}
+    />
+  );
 
   return (
     <>
-      <Dialog
-        type={"LOGIN"}
-        content={
-          <DialogLayout
-            header={<DialogHeader type="SIGNUP" />}
-            body={<DialogBody type={"SIGNUP_HOME"} />}
-            footer={<DialogFooter type="SIGNUP" />}
-          />
-        }
-      />
+      <Dialog type={"LOGIN"} content={content} />
       {error && (
         <Dialog
           type="ERROR"

@@ -11,14 +11,23 @@ import { unfollowDialogActions } from "../../../../../state/dialog/dialogState-r
 import { userInfoActions } from "../../../../../state/user/userInfo-reducer";
 import { register } from "../../../../../services/auth/register";
 import axios from "axios";
+import { useSession } from "../../../../../hooks/useSession";
+import { fetchUserDetails } from "../../../../../state/user/userSlice";
+import { loadingSliceActions } from "../../../../../state/app/loading/loadingSlice";
 
 export const StepThreeFooter = () => {
   const dispatch = useDispatch();
   const currentStep = useCurrentStep();
+  const { getUserDetails } = useSession();
+  const postRegisterStep = useSelector(
+    (state) => state.rootReducer.signUpState.postRegisterSteps
+  );
 
-  let num = 1;
   const password = useSelector(
     (state) => state.rootReducer.signUpState.password
+  );
+  const username = useSelector(
+    (state) => state.rootReducer.userSession.username
   );
   const { name, email, dob } = useSelector(
     (state) => state.rootReducer.signUpState.stepOneInfo
@@ -38,37 +47,22 @@ export const StepThreeFooter = () => {
       : "bg-[#86888b]";
 
   const handledNext = async () => {
-    let data = JSON.stringify({
-      name: "fasdfd",
-      dob: "1232-12-23",
-      email: "tesfffeffsfasddt1@gmail.com",
-      password: "fasdfdsfdf",
-    });
-
-    console.log(data);
-
-    let config = {
-      method: "post",
-      maxBodyLength: Infinity,
-      url: process.env.REACT_APP_BASE_URL + "/api/auth/register",
-      data: data,
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json", // Make sure this is set correctly
-      },
-    };
-
     try {
-      const response = await axios(config);
+      dispatch(loadingSliceActions.setIsDialogLoading(true));
+      const response = await postData("/register", {
+        name,
+        userDob,
+        email,
+        password,
+      });
       if (response.status === 200) {
-        const hello = await getData("/api/hello");
-        console.log(hello);
+        dispatch(fetchUserDetails());
+        dispatch(loadingSliceActions.setIsDialogLoading(false));
+        dispatch(signupSliceActions.setPostRegisterSteps(postRegisterStep + 1));
       }
       dispatch(userInfoActions.setAuthentication(true));
     } catch (error) {
       if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
         if (error.response.status === 409) {
           console.log("Conflict: ", error.response.data);
         }
@@ -83,7 +77,10 @@ export const StepThreeFooter = () => {
       className={`${styles} grow text-white font-cBold dark:text-black`}
       onClick={handledNext}
       disabled={
-        !validatePasswordLength(password) && validatePasswordStrength(password)
+        !(
+          validatePasswordLength(password) === true &&
+          validatePasswordStrength(password) === false
+        )
       }
     />
   );

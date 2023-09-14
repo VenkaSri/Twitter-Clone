@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import ImageUploading from "react-images-uploading";
-import getIcon from "../../../UI/icons/iconsutil";
+import getIcon from "../../../../UI/icons/iconsutil";
 import { useDispatch, useSelector } from "react-redux";
-import { stepsActions } from "../../../../state/auth/form/steps-reducer";
-import { userInfoActions } from "../../../../state/user/userInfo-reducer";
-import { DialogContentHeading } from "../../../DialogContentHeading";
-export const UploadProfilePicture = () => {
+import { stepsActions } from "../../../../../state/auth/form/steps-reducer";
+import { userInfoActions } from "../../../../../state/user/userInfo-reducer";
+import { DialogContentHeading } from "../../../../DialogContentHeading";
+import { UploadPicture } from "./UploadPicture";
+export const UploadProfilePictureStep = () => {
   const [images, setImages] = React.useState([]);
   const [avaURL, setAvaURL] = useState(null);
   const currentStep = useSelector(
@@ -54,32 +55,7 @@ export const UploadProfilePicture = () => {
         subtext="Have a favourite selfie? Upload it now."
       />
       <div className="flex-col-container border border-[red] grow justify-center items-center">
-        <div className=" w-[184px] h-[184px] rounded-full bg-[#8F969B] ">
-          <ImageUploading
-            multiple
-            value={images}
-            onChange={onChange}
-            maxNumber={69}
-            dataURLKey="data_url"
-            acceptType={["jpg", "png"]}
-            cd
-          >
-            {({
-              imageList,
-              onImageUpload,
-              onImageRemoveAll,
-              onImageUpdate,
-              onImageRemove,
-              isDragging,
-              dragProps,
-            }) => (
-              // write your building UI
-              <div>
-                <div onClick={onImageUpload}></div>
-              </div>
-            )}
-          </ImageUploading>
-        </div>
+        <UploadPicture />
       </div>
     </>
   );

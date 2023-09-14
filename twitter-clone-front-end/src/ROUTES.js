@@ -18,6 +18,7 @@ import axios from "axios";
 import { userInfoActions } from "./state/user/userInfo-reducer";
 import { LogoProgress } from "./components/layer/LogoProgress";
 import { loadingReducerInfoActions } from "./state/app/loading/loading-reducer";
+import { getData } from "./services/auth/getData";
 
 const Routes = () => {
   const location = useLocation();
@@ -60,31 +61,27 @@ const Routes = () => {
 
   useEffect(() => {
     // Make an authenticated request to your server to get authentication status
-    axios
-      .get("http://localhost:8080/api/auth/status", { withCredentials: true })
-      .then((response) => {
-        console.log(response.data);
-        dispatch(
-          userInfoActions.setAuthentication(response.data.isAuthenticated)
-        );
-        dispatch(loadingReducerInfoActions.setIsPageLoaded(true));
-      })
-      .catch((error) => {
-        dispatch(loadingReducerInfoActions.setIsPageLoaded(true));
-      });
+    const checkStatus = async () => {
+      const hello = await getData("/api/auth/status");
+      console.log(hello);
+      if (hello.status === 200) {
+        dispatch(userInfoActions.setAuthentication(true));
+      }
+    };
+
+    checkStatus();
+    // axios
+    //   .get("http://localhost:8080/api/auth/status", { withCredentials: true })
+    //   .then((response) => {
+
+    //     dispatch(loadingReducerInfoActions.setIsPageLoaded(true));
+    //   })
+    //   .catch((error) => {
+    //     dispatch(loadingReducerInfoActions.setIsPageLoaded(true));
+    //   });
   }, []);
 
-  // const dialogContent =
-  //   isLoading || checkingIndentifier ? (
-  //     <DialogLoading />
-  //   ) : authType === "SIGN_UP" ? (
-  //     <SignUpStep header={<DialogHeader />} content={<DialogFormLayout />} />
-  //   ) : (
-  //     <SignUpStep
-  //       header={<LoginHeader />}
-  //       content={doesUserExist ? <DialogFormLayout /> : <LoginHome />}
-  //     />
-  //   );
+  console.log(isAuthenticated);
 
   return (
     <>
@@ -92,19 +89,15 @@ const Routes = () => {
         <Route
           path="/"
           element={
-            isLoaded ? (
-              isAuthenticated ? (
-                <>
-                  <div className="flex grow">
-                    <LoggedInHeader />
-                    <MainContainer />
-                  </div>
-                </>
-              ) : (
-                <LandingPage />
-              )
+            isAuthenticated ? (
+              <>
+                <div className="flex grow">
+                  <LoggedInHeader />
+                  <MainContainer />
+                </div>
+              </>
             ) : (
-              <LogoProgress />
+              <LandingPage />
             )
           }
         />
