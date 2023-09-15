@@ -17,6 +17,7 @@ module.exports = {
       boxShadow: {
         "custom-shadow":
           "rgba(101, 119, 134, 0.30) 0px 0px 12px, rgba(101, 119, 134, 0.50) 0px 1px 3px 1px",
+        "edit-media-shadow": "rgba(230, 236, 240, 0.7) 0px 0px 0px 9999px",
       },
       spacing: {
         130: "37.375rem",

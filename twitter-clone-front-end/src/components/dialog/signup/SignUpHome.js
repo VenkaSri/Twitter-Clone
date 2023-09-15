@@ -6,9 +6,9 @@ import StepTwoBody from "./steps/2/StepTwoBody";
 import { StepThreeBody } from "./steps/3/StepThreeBody";
 import { useMediaQuery } from "@mui/material";
 import { unfollowDialogActions } from "../../../state/dialog/dialogState-reducer";
-import { UsernameStep } from "./steps/UsernameStep";
-import { UploadProfilePicture } from "./afterSignup/UploadProfilePicture";
+
 import { UploadProfilePictureStep } from "./steps/profile_picture/UploadProfilePictureStep";
+import { EditMedia } from "./steps/profile_picture/EditMedia";
 
 const SignUpHome = () => {
   const dispatch = useDispatch();
@@ -62,23 +62,35 @@ const SignUpHome = () => {
 
   if (postRegisterStep === 1) {
     currentBody = <UploadProfilePictureStep />;
+  } else if (postRegisterStep === "Edit Media") {
+    currentBody = <EditMedia />;
   }
 
+  console.log(!(postRegisterStep === "Edit Media"));
   return (
     <>
-      <div
-        ref={containerRef}
-        className={`overflow-auto
-        flex flex-col items-stretch basis-full flex-grow bg-[#fff] dark:bg-[#000]`}
-      >
+      {!(postRegisterStep === "Edit Media") ? (
         <div
-          className={`${
-            fullScreen ? " px-8" : " px-20"
-          } shrink-0 flex flex-col mb-2 grow`}
+          ref={containerRef}
+          className={`overflow-auto
+        flex flex-col items-stretch basis-full flex-grow bg-[#fff] dark:bg-[#000]`}
+        >
+          <div
+            className={`${
+              fullScreen ? " px-8" : " px-20"
+            } shrink-0 flex flex-col mb-2 grow`}
+          >
+            {currentBody}
+          </div>
+        </div>
+      ) : (
+        <div
+          className={`overflow-hidden
+        flex flex-col items-stretch basis-full flex-grow bg-[#fff] dark:bg-[#000]`}
         >
           {currentBody}
         </div>
-      </div>
+      )}
     </>
   );
 };

@@ -6,6 +6,7 @@ const initialState = {
   username: "",
   email: "",
   userId: "",
+  profilePicture: "",
 };
 
 const userSlice = createSlice({
@@ -23,6 +24,9 @@ const userSlice = createSlice({
     },
     setUserId(state, action) {
       state.userId = action.payload;
+    },
+    setProfilePicture(state, action) {
+      state.profilePicture = action.payload;
     },
   },
 });

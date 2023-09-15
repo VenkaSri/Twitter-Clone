@@ -24,12 +24,12 @@ export const DialogFooter = ({ type }) => {
   const overflowClass = dialogBodyOverFlowing ? "shadow-custom-shadow" : "";
   return (
     <div
-      className={`flex-col-container dark:bg-[#000] ${
+      className={`flex-col-container dark:bg-[#000] justify-center items-center ${
         fullScreen ? "px-8" : "px-20"
       } ${overflowClass} 
       `}
     >
-      <div className="flex-col-container">{footer}</div>
+      <div className="flex-col-container grow w-full">{footer}</div>
     </div>
   );
 };

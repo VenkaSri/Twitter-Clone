@@ -62,10 +62,14 @@ const Routes = () => {
   useEffect(() => {
     // Make an authenticated request to your server to get authentication status
     const checkStatus = async () => {
-      const hello = await getData("/api/auth/status");
-      console.log(hello);
-      if (hello.status === 200) {
-        dispatch(userInfoActions.setAuthentication(true));
+      try {
+        const hello = await getData("/api/auth/status");
+        console.log(hello);
+        if (hello.status === 200) {
+          dispatch(userInfoActions.setAuthentication(true));
+        }
+      } catch (e) {
+        console.log(e);
       }
     };
 
