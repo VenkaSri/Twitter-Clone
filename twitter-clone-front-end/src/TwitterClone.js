@@ -28,13 +28,21 @@ export const TwitterClone = () => {
     (state) => state.rootReducer.dialogSlice.dialogBodyContent
   );
 
+  const dialogFooterContent = useSelector(
+    (state) => state.rootReducer.dialogSlice.dialogFooterContent
+  );
+
+  const isACutomBody = useSelector(
+    (state) => state.rootReducer.dialogSlice.isACutomBody
+  );
+
   const content = isDialogLoading ? (
     <DialogLoading />
   ) : (
     <DialogLayout
       header={<DialogHeader content={dialogHeaderContent} />}
       body={<DialogBody content={dialogBodyContent} />}
-      footer={<DialogFooter type="SIGNUP" />}
+      footer={<DialogFooter content={dialogFooterContent} />}
     />
   );
 

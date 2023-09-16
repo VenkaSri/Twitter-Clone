@@ -3,7 +3,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import IconButton from "../../UI/button/IconButton";
 import { signupSliceActions } from "../../../state/app/home/signupSlice";
-import { dialogSliceActions } from "../../../state/dialog/dialogSlice";
+import {
+  dialogSliceActions,
+  setDialogContent,
+} from "../../../state/dialog/dialogSlice";
 import { DialogHeaderContent } from "./DialogHeaderContent";
 import { DialogHeaderLogo } from "./DialogHeaderLogo";
 import { UploadProfilePictureStep } from "../signup/steps/profile_picture/UploadProfilePictureStep";
@@ -15,14 +18,7 @@ export const DialogHeaderIcon = ({ step }) => {
   let actionFunction = null;
 
   const back = () => {
-    dispatch(
-      dialogSliceActions.setDialogHeaderContent(
-        <DialogHeaderContent content={<DialogHeaderLogo />} />
-      )
-    );
-    dispatch(
-      dialogSliceActions.setDialogBodyContent(<UploadProfilePictureStep />)
-    );
+    dispatch(setDialogContent("upload_profile_picture"));
   };
   const close = () => {
     dispatch(dialogSliceActions.setIsDialogOpen(false));
