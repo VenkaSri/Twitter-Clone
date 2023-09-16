@@ -11,5 +11,5 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthStatusResponse {
-  private boolean isAuthenticated;
+  private boolean isValidToken;
 }

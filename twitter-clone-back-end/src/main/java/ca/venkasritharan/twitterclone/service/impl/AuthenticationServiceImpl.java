@@ -3,14 +3,22 @@ package ca.venkasritharan.twitterclone.service.impl;
 import ca.venkasritharan.twitterclone.dto.LoginDTO;
 import ca.venkasritharan.twitterclone.exception.UserAlreadyExistsException;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
+import ca.venkasritharan.twitterclone.response.AuthStatusResponse;
 import ca.venkasritharan.twitterclone.security.jwt.JwtTokenProvider;
 import ca.venkasritharan.twitterclone.service.AuthenticationService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.Optional;
 
 
 @Service
@@ -42,5 +50,43 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     if (userRepository.existsByEmail(emailOrPhone)) {
       throw new UserAlreadyExistsException("User with the given email or phone already exists.");
     }
+  }
+
+  @Override
+  public ResponseEntity<AuthStatusResponse> getAuthStatus(HttpServletRequest httpServletRequest) {
+    try {
+      Optional<Cookie> optionalAuthTokenCookie = findAuthTokenCookie(httpServletRequest);
+      if (optionalAuthTokenCookie.isPresent()) {
+        String token = optionalAuthTokenCookie.get().getValue();
+        try {
+          boolean isTokenValid = jwtTokenProvider.validateToken(token);
+          AuthStatusResponse response = new AuthStatusResponse(isTokenValid);
+          return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+          // Log the exception
+          // Consider returning a 500 Internal Server Error
+          return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+      } else {
+        // Handle missing token
+        AuthStatusResponse response = new AuthStatusResponse(false);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+      }
+    } catch (Exception e) {
+      // Log the exception
+      // Consider returning a 500 Internal Server Error
+      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+
+  private Optional<Cookie> findAuthTokenCookie(HttpServletRequest request) {
+    Cookie[] cookies = request.getCookies();
+    if (cookies == null) {
+      return Optional.empty();
+    }
+    return Arrays.stream(cookies)
+            .filter(cookie -> "authToken".equals(cookie.getName()))
+            .findFirst();
   }
 }
