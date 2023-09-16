@@ -12,6 +12,7 @@ const initialState = {
   },
   password: "",
   currentStep: 1,
+  signUpStep: 0,
   postRegisterSteps: 1,
   doesUserExist: false,
   shouldAutoFocus: "",
@@ -38,6 +39,9 @@ const signupSlice = createSlice({
     },
     setCurrentStep(state, action) {
       state.currentStep = action.payload;
+    },
+    setSignUpStep(state, action) {
+      state.signUpStep = action.payload;
     },
     setPostRegisterSteps(state, action) {
       state.postRegisterSteps = action.payload;

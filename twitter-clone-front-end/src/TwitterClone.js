@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import { PopupErrorMessage } from "./components/PopupErrorMessage";
 import { DialogFooter } from "./components/dialog/DialogFooter";
 import { DialogLoading } from "./components/dialog/DialogLoading";
+import { UploadPicture } from "./components/dialog/signup/steps/profile_picture/UploadPicture";
+import { UploadProfilePictureStep } from "./components/dialog/signup/steps/profile_picture/UploadProfilePictureStep";
 
 export const TwitterClone = () => {
   const doesUserExist = useSelector(
@@ -18,12 +20,20 @@ export const TwitterClone = () => {
     (state) => state.rootReducer.loadingSlice.isDialogLoading
   );
 
+  const dialogHeaderContent = useSelector(
+    (state) => state.rootReducer.dialogSlice.dialogHeaderContent
+  );
+
+  const dialogBodyContent = useSelector(
+    (state) => state.rootReducer.dialogSlice.dialogBodyContent
+  );
+
   const content = isDialogLoading ? (
     <DialogLoading />
   ) : (
     <DialogLayout
-      header={<DialogHeader type="SIGNUP" />}
-      body={<DialogBody type={"SIGNUP_HOME"} />}
+      header={<DialogHeader content={dialogHeaderContent} />}
+      body={<DialogBody content={dialogBodyContent} />}
       footer={<DialogFooter type="SIGNUP" />}
     />
   );

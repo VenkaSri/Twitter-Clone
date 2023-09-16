@@ -13,9 +13,6 @@ export const UploadProfilePictureStep = () => {
     (state) => state.rootReducer.signUp.steps.currentStep
   );
 
-  const currentProfilePicture = useSelector(
-    (state) => state.rootReducer.userInfo.currentProfilePicture
-  );
   const dispatch = useDispatch();
   const onChange = async (imageList, addUpdateIndex) => {
     const file = imageList[0].file;
@@ -54,7 +51,7 @@ export const UploadProfilePictureStep = () => {
         text="Pick a profile picture"
         subtext="Have a favourite selfie? Upload it now."
       />
-      <div className="flex-col-container border border-[red] grow justify-center items-center">
+      <div className="flex-col-container grow justify-center items-center">
         <UploadPicture />
       </div>
     </>
