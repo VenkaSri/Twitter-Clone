@@ -6,6 +6,7 @@ import { stepsActions } from "../../../../../state/auth/form/steps-reducer";
 import { userInfoActions } from "../../../../../state/user/userInfo-reducer";
 import { DialogContentHeading } from "../../../../DialogContentHeading";
 import { UploadPicture } from "./UploadPicture";
+import { DialogBodyContainer } from "../../../DialogBodyContainer";
 export const UploadProfilePictureStep = () => {
   const [images, setImages] = React.useState([]);
   const [avaURL, setAvaURL] = useState(null);
@@ -46,7 +47,7 @@ export const UploadProfilePictureStep = () => {
     // }
   };
   return (
-    <>
+    <DialogBodyContainer>
       <DialogContentHeading
         text="Pick a profile picture"
         subtext="Have a favourite selfie? Upload it now."
@@ -54,6 +55,6 @@ export const UploadProfilePictureStep = () => {
       <div className="flex-col-container grow justify-center items-center">
         <UploadPicture />
       </div>
-    </>
+    </DialogBodyContainer>
   );
 };

@@ -4,7 +4,7 @@ import { LoginFooter } from "./login/LoginFooter";
 import { SignupFooter } from "./signup/SignupFooter";
 import { useMediaQuery } from "@mui/material";
 
-export const DialogFooter = ({ type }) => {
+export const DialogFooter = ({ type, content }) => {
   let footer = null;
   const fullScreen = useMediaQuery("(max-width:702px)");
   const dialogBodyOverFlowing = useSelector(
@@ -29,7 +29,7 @@ export const DialogFooter = ({ type }) => {
       } ${overflowClass} 
       `}
     >
-      <div className="flex-col-container grow w-full">{footer}</div>
+      <div className="flex-col-container grow w-full">{content}</div>
     </div>
   );
 };

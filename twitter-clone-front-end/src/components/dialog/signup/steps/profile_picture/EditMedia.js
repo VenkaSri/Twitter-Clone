@@ -9,7 +9,7 @@ export const EditMedia = () => {
   );
 
   return (
-    <div className="flex-col-container grow  relative overflow-hidden">
+    <div className="flex-col-container grow  relative overflow-hidden ">
       <div
         className="flex-col-container grow  my-[25px]   h-full w-full justify-center items-center"
         style={{ transform: "translate3d(0px, 0px, 0px)" }}

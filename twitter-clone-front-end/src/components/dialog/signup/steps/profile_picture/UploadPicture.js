@@ -13,10 +13,14 @@ import { DialogBody } from "../../../DialogBody";
 import { DialogFooter } from "../../../DialogFooter";
 import { HeaderIcon } from "../../../HeaderIcon";
 import { DialogLoading } from "../../../DialogLoading";
-import { dialogSliceActions } from "../../../../../state/dialog/dialogSlice";
+import {
+  dialogSliceActions,
+  setDialogContent,
+} from "../../../../../state/dialog/dialogSlice";
 import { DialogHeaderContent } from "../../../header/DialogHeaderContent";
 import { DialogHeaderLogo } from "../../../header/DialogHeaderLogo";
 import { EditMedia } from "./EditMedia";
+import { ScaleImage } from "./ScaleImage";
 
 export const UploadPicture = ({ source }) => {
   console.log("UP rendered!");
@@ -32,13 +36,7 @@ export const UploadPicture = ({ source }) => {
     setImages(imageList);
     setProfilePicture(imageList[0].data_url);
     dispatch(userSliceActions.setProfilePicture(imageList[0].data_url));
-    dispatch(
-      dialogSliceActions.setDialogHeaderContent(
-        <DialogHeaderContent icon={true} step={1} />
-      )
-    );
-
-    dispatch(dialogSliceActions.setDialogBodyContent(<EditMedia />));
+    dispatch(setDialogContent("edit_media"));
   };
   const handleClick = () => {
     console.log("Clicked");
