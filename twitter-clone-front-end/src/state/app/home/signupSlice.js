@@ -16,6 +16,7 @@ const initialState = {
   postRegisterSteps: 1,
   doesUserExist: false,
   shouldAutoFocus: "",
+  didUserAddProfilePicture: false,
 };
 
 const signupSlice = createSlice({
@@ -51,6 +52,9 @@ const signupSlice = createSlice({
     },
     setPassword(state, action) {
       state.password = action.payload;
+    },
+    setDidUserAddProfilePicture(state, action) {
+      state.didUserAddProfilePicture = action.payload;
     },
   },
 });
