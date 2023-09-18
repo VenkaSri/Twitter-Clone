@@ -4,6 +4,7 @@ import ca.venkasritharan.twitterclone.dto.LoginDTO;
 import ca.venkasritharan.twitterclone.exception.UserAlreadyExistsException;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import ca.venkasritharan.twitterclone.response.AuthStatusResponse;
+import ca.venkasritharan.twitterclone.response.EmailAvailabilityResponse;
 import ca.venkasritharan.twitterclone.security.jwt.JwtTokenProvider;
 import ca.venkasritharan.twitterclone.service.AuthenticationService;
 import jakarta.servlet.http.Cookie;
@@ -88,5 +89,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     return Arrays.stream(cookies)
             .filter(cookie -> "authToken".equals(cookie.getName()))
             .findFirst();
+  }
+
+  @Override
+  public EmailAvailabilityResponse checkIfEmailIsAvailable(String email) {
+    boolean isEmailAvailable = userRepository.existsByEmail(email);
+    String message = "Email is available";
+    if (isEmailAvailable) {
+      message = "An user with this email already exists.";
+    }
+    return new EmailAvailabilityResponse(message, !isEmailAvailable);
   }
 }
