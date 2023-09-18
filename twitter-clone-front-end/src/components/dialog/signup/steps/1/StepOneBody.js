@@ -3,11 +3,12 @@ import NameInputField from "../../inputs/NameInputField";
 import EmailTextField from "../../inputs/EmailTextField";
 import { InfoLabel } from "../../../../InfoLabel";
 import DOBInput from "../../inputs/DOBInput";
+import { DialogBodyContainer } from "../../../DialogBodyContainer";
 import { DialogContentHeading } from "../../../../DialogContentHeading";
 
 export const StepOneBody = () => {
   return (
-    <>
+    <DialogBodyContainer>
       <DialogContentHeading text="Create your account" />
       <div className="flex-col-container py-3">
         <NameInputField />
@@ -49,6 +50,6 @@ export const StepOneBody = () => {
           <DOBInput />
         </div>
       </div>
-    </>
+    </DialogBodyContainer>
   );
 };

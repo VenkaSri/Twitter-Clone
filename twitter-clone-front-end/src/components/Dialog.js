@@ -9,12 +9,15 @@ export const Dialog = ({ type, content }) => {
   const darkMode = useSelector(
     (state) => state.rootReducer.globalState.isDarkMode
   );
+  const open = useSelector(
+    (state) => state.rootReducer.dialogSlice.isDialogOpen
+  );
   const dialogStyles = getDialogStyles(type, isMobile, darkMode);
 
   return (
     <MUIDialog
       sx={dialogStyles.styles}
-      open={true}
+      open={open}
       PaperProps={dialogStyles}
       fullScreen={isMobile}
       transitionDuration={0}

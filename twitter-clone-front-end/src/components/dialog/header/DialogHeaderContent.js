@@ -15,7 +15,7 @@ export const DialogHeaderContent = ({ content, icon, button }) => {
   };
   return (
     <>
-      {icon && <DialogHeaderIcon />}
+      {icon && <DialogHeaderIcon step={0} />}
       <div className="flex flex-grow h-full justify-center items-stretch flex-col">
         {content}
       </div>

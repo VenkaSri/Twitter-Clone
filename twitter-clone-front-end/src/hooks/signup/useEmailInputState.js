@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signupSliceActions } from "../../state/app/home/signupSlice";
 import { postData } from "../../services/postData";
+import { getData } from "../../services/auth/getData";
+
 import { VALIDATION_DELAY } from "../../constants";
+import { get } from "react-hook-form";
 
 export function useEmailInputState() {
   const onlySpaces = (text) => !/[^\s\\]/.test(text);
@@ -45,13 +48,16 @@ export function useEmailInputState() {
 
   const checkEmailInDatabase = async () => {
     try {
-      const result = await postData(`/exists`, {
-        identifier: userEmail,
-      });
-      if (result.status === 200) {
-        setIsUnavailable(true);
-      } else {
+      const result = await getData(
+        `/api/auth/email_available?email=${userEmail}`
+      );
+
+      console.log(result);
+
+      if (result.emailAvailable) {
         setIsUnavailable(false);
+      } else {
+        setIsUnavailable(true);
         dispatch(signupSliceActions.setEmail(userEmail.trim()));
       }
     } catch (error) {

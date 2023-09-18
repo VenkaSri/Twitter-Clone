@@ -4,12 +4,20 @@ import { StepThreeFooter } from "../../components/dialog/signup/steps/3/StepThre
 import dialogConfig from "../../config/dialogConfig";
 import { DialogFooterContent } from "../../components/dialog/footer/DialogFooterContent";
 import { UsernameStep } from "../../components/dialog/signup/steps/username/UsernameStep";
+import { DialogHeaderContent } from "../../components/dialog/header/DialogHeaderContent";
+import { StepOneBody } from "../../components/dialog/signup/steps/1/StepOneBody";
+import { DialogHeaderHeading } from "../../components/dialog/header/DialogHeaderHeading";
 
 const initialState = {
-  dialogHeaderContent: null,
-  dialogBodyContent: <UsernameStep />,
-  dialogFooterContent: <DialogFooterContent text="Skip for now" />,
-  isDialogOpen: false,
+  dialogHeaderContent: (
+    <DialogHeaderContent
+      icon={true}
+      content={<DialogHeaderHeading heading="Step" />}
+    />
+  ),
+  dialogBodyContent: <StepOneBody />,
+  dialogFooterContent: <DialogFooterContent text="Next" />,
+  isDialogOpen: true,
   isACutomBody: false,
 };
 

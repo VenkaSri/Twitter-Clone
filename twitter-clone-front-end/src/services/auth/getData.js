@@ -9,5 +9,5 @@ export const getData = async (url = "") => {
     credentials: "include",
   });
 
-  return respone;
+  return respone.json();
 };

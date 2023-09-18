@@ -8,8 +8,19 @@ import { UploadProfilePictureStep } from "../components/dialog/signup/steps/prof
 import { DialogFooterButton } from "../components/DialogFooterButton";
 import { DialogFooterContent } from "../components/dialog/footer/DialogFooterContent";
 import { UsernameStep } from "../components/dialog/signup/steps//username/UsernameStep";
+import { StepOneBody } from "../components/dialog/signup/steps/1/StepOneBody";
 
 const dialogConfig = {
+  sign_up_step_1: {
+    header: (
+      <DialogHeaderContent
+        icon={true}
+        content={<DialogHeaderHeading heading="Step" />}
+      />
+    ),
+    body: <StepOneBody />,
+    footer: <DialogFooterContent text={"Next"} />,
+  },
   edit_media: {
     header: (
       <DialogHeaderContent

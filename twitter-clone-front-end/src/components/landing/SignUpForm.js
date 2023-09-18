@@ -12,6 +12,10 @@ import { useDispatch } from "react-redux";
 import { unfollowDialogActions } from "../../state/dialog/dialogState-reducer";
 
 import { createBrowserHistory } from "history";
+import dialogSlice, {
+  dialogSliceActions,
+  setDialogContent,
+} from "../../state/dialog/dialogSlice";
 
 export const SignUpForm = () => {
   const navigate = useNavigate();
@@ -23,7 +27,8 @@ export const SignUpForm = () => {
   );
 
   const handleCreateAccount = () => {
-    dispatch(unfollowDialogActions.setDialogState(true));
+    dispatch(dialogSliceActions.setIsDialogOpen(true));
+    dispatch(setDialogContent("sign_up_step_1"));
     dispatch(unfollowDialogActions.setAuthType("SIGN_UP"));
     window.history.replaceState(
       null,

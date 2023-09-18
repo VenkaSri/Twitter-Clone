@@ -13,26 +13,39 @@ export const DialogFooterContent = ({ text }) => {
     (state) => state.rootReducer.signUpState.didUserAddProfilePicture
   );
 
+  const stepOneInfo = useSelector(
+    (state) => state.rootReducer.signUpState.stepOneInfo
+  );
+
+  const styles =
+    stepOneInfo.name !== "" &&
+    stepOneInfo.email !== "" &&
+    stepOneInfo.dob.month &&
+    stepOneInfo.dob.day &&
+    stepOneInfo.dob.year !== ""
+      ? "button--footer-filled"
+      : "button--footer-disabled";
+
   const username = useSelector(
     (state) => state.rootReducer.signUpState.username
   );
 
   const { handleActions } = useNextActions();
-  console.log(isProfilePictureSet);
-  let styles = "";
+  // console.log(isProfilePictureSet);
+  // let styles = "";
 
-  if (isProfilePictureSet) {
-    text = "Next";
-    styles = "button--footer-filled";
-  } else {
-    text = "Skip for now";
-    styles = "button--footer-outline";
-  }
+  // if (isProfilePictureSet) {
+  //   text = "Next";
+  //   styles = "button--footer-filled";
+  // } else {
+  //   text = "Skip for now";
+  //   styles = "button--footer-outline";
+  // }
 
-  if (username === "") {
-    text = "Skip for now";
-    styles = "button--footer-outline";
-  }
+  // if (username === "") {
+  //   text = "Skip for now";
+  //   styles = "button--footer-outline";
+  // }
 
   return (
     <DialogFooterButton
