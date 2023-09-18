@@ -3,10 +3,11 @@ import { UploadProfilePictureStep } from "../../components/dialog/signup/steps/p
 import { StepThreeFooter } from "../../components/dialog/signup/steps/3/StepThreeFooter";
 import dialogConfig from "../../config/dialogConfig";
 import { DialogFooterContent } from "../../components/dialog/footer/DialogFooterContent";
+import { UsernameStep } from "../../components/dialog/signup/steps/username/UsernameStep";
 
 const initialState = {
   dialogHeaderContent: null,
-  dialogBodyContent: <UploadProfilePictureStep />,
+  dialogBodyContent: <UsernameStep />,
   dialogFooterContent: <DialogFooterContent text="Skip for now" />,
   isDialogOpen: false,
   isACutomBody: false,

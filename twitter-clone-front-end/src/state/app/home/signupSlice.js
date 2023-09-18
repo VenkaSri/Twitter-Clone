@@ -16,6 +16,7 @@ const initialState = {
   postRegisterSteps: 1,
   doesUserExist: false,
   shouldAutoFocus: "",
+  username: "",
   didUserAddProfilePicture: false,
 };
 
@@ -37,6 +38,9 @@ const signupSlice = createSlice({
     },
     setYear(state, action) {
       state.stepOneInfo.dob.year = action.payload;
+    },
+    setUsername(state, action) {
+      state.username = action.payload;
     },
     setCurrentStep(state, action) {
       state.currentStep = action.payload;

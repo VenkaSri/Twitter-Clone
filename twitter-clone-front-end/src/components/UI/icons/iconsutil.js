@@ -5,7 +5,6 @@ import Icons from "./icons"; // Adjust the import path accordingly
 
 const getIcon = (iconName, options = {}) => {
   const icon = Icons[iconName];
-  console.log(iconName);
   if (!icon) {
     console.warn(`Icon "${iconName}" not found.`);
     return null;

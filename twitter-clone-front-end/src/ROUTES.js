@@ -64,7 +64,6 @@ const Routes = () => {
     const checkStatus = async () => {
       try {
         const hello = await getData("/api/auth/status");
-        console.log(hello);
         if (hello.status === 200) {
           dispatch(userInfoActions.setAuthentication(true));
         }

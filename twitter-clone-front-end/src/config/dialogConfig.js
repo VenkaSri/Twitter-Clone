@@ -7,6 +7,7 @@ import { DialogHeaderLogo } from "../components/dialog/header/DialogHeaderLogo";
 import { UploadProfilePictureStep } from "../components/dialog/signup/steps/profile_picture/UploadProfilePictureStep";
 import { DialogFooterButton } from "../components/DialogFooterButton";
 import { DialogFooterContent } from "../components/dialog/footer/DialogFooterContent";
+import { UsernameStep } from "../components/dialog/signup/steps//username/UsernameStep";
 
 const dialogConfig = {
   edit_media: {
@@ -23,6 +24,11 @@ const dialogConfig = {
   upload_profile_picture: {
     header: <DialogHeaderContent content={<DialogHeaderLogo />} />,
     body: <UploadProfilePictureStep />,
+    footer: <DialogFooterContent />,
+  },
+  update_username: {
+    header: <DialogHeaderContent content={<DialogHeaderLogo />} />,
+    body: <UsernameStep />,
     footer: <DialogFooterContent />,
   },
   // Add more steps or variations as needed

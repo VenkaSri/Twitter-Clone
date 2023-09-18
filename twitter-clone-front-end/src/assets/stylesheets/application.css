@@ -1,0 +1,9 @@
+/* Entry point for your PostCSS build */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "./buttons.css";
+@import "./custom-utilities.css";
+@import "./darkmode.css";
+@import "./colors.css";

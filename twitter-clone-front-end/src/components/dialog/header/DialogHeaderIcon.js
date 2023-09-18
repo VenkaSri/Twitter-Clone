@@ -18,6 +18,7 @@ export const DialogHeaderIcon = ({ step }) => {
   let actionFunction = null;
 
   const back = () => {
+    dispatch(signupSliceActions.setDidUserAddProfilePicture(true));
     dispatch(setDialogContent("upload_profile_picture"));
   };
   const close = () => {

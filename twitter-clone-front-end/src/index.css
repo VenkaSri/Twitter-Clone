@@ -1,10 +1,11 @@
-@import "./assets/stylesheets/custom-utilities.css";
-@import "./assets/stylesheets/darkmode.css";
-@import "./assets/stylesheets/colors.css";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import "./assets/stylesheets/buttons.css";
+@import "./assets/stylesheets/colors.css";
+@import "./assets/stylesheets/custom-utilities.css";
+@import "./assets/stylesheets/darkmode.css";
 
 @use "@material/floating-label/mdc-floating-label";
 @use "@material/line-ripple/mdc-line-ripple";

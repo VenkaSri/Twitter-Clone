@@ -1,7 +1,6 @@
 import React from "react";
 
 import { useMediaQuery } from "@mui/material";
-import getIcon from "../UI/icons/iconsutil";
 import LoginHeader from "./login/LoginHeader";
 import SignUpHeader from "./signup/SignUpHeader";
 

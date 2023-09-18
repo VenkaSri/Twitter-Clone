@@ -11,7 +11,10 @@ export const CustomTextField = ({
   disabled,
   icon,
   error,
+  autoFocus,
 }) => {
+  const [hasTwoIcons, setHadTwoIcons] = useState(false);
+  const [iconPath, setIconPath] = useState(null);
   const darkMode = useSelector(
     (state) => state.rootReducer.globalState.isDarkMode
   );
@@ -47,10 +50,40 @@ export const CustomTextField = ({
   const inputPropClassName = ` border ${borderColor}  " +
   "rounded-[4px] text-black dark:text-white rounded-[4px] ${inputBorderColor}`;
 
+  const startIconColor = ` ${
+    isFocused
+      ? error
+        ? "text-[#f1202d]"
+        : "text-primary-color"
+      : error
+      ? "text-[#f1202d]"
+      : ""
+  }`;
+
+  const endIconFillColor = ` ${
+    isFocused ? (error ? "#f1202d" : "#00BA7C") : error ? "#f1202d" : "#00BA7C"
+  }`;
+
   const [showPassword, setShowPassword] = useState(
     label === "Password" ? true : false
   );
-  const inputIcon = showPassword ? "Reveal" : "Hide";
+
+  // let inputIcon = showPassword ? setIconPath("Reveal") : setIconPath("Hide");
+  const propertyCount = Object.keys(icon).length;
+
+  useEffect(() => {
+    if (propertyCount > 1) {
+      setHadTwoIcons(true);
+      setIconPath(icon.end);
+      if (error) {
+        setIconPath("Error Exclamation");
+      }
+    } else {
+      setHadTwoIcons(false);
+      setIconPath(icon.end);
+    }
+  }, [icon, propertyCount, error]);
+
   const togglePasswordVisibility = () => {
     if (icon) {
       setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -88,7 +121,17 @@ export const CustomTextField = ({
                 onClick={togglePasswordVisibility}
                 onMouseDown={(e) => e.preventDefault()}
               >
-                {getIcon(inputIcon, { fill: darkMode ? "#fff" : "#000" })}
+                {getIcon(iconPath, { fill: endIconFillColor })}
+              </div>
+            </InputAdornment>
+          ) : null,
+          startAdornment: hasTwoIcons ? (
+            <InputAdornment position="start">
+              <div
+                className="w-[22px] -mr-[10px] h-[22px]  cursor-pointer "
+                onMouseDown={(e) => e.preventDefault()}
+              >
+                <span className={startIconColor}>@</span>
               </div>
             </InputAdornment>
           ) : null,
@@ -105,6 +148,7 @@ export const CustomTextField = ({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         disabled={disabled}
+        autoFocus={autoFocus}
       />
     </div>
   );

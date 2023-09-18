@@ -23,7 +23,6 @@ import { EditMedia } from "./EditMedia";
 import { ScaleImage } from "./ScaleImage";
 
 export const UploadPicture = ({ source }) => {
-  console.log("UP rendered!");
   const [images, setImages] = useState([]);
   const [profilePicture, setProfilePicture] = useState(null);
   const dispatch = useDispatch();
@@ -32,7 +31,6 @@ export const UploadPicture = ({ source }) => {
   );
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
-    console.log(imageList, addUpdateIndex);
     setImages(imageList);
     setProfilePicture(imageList[0].data_url);
     dispatch(userSliceActions.setProfilePicture(imageList[0].data_url));
@@ -50,7 +48,6 @@ export const UploadPicture = ({ source }) => {
     );
   }, []);
 
-  console.log("src " + source);
   return (
     <div className="w-[210px] h-[210px] rounded-full flex-col-container relative justify-center items-center bg-white dark:bg-black">
       <div

@@ -26,6 +26,7 @@ const InputField = (props) => {
           style={{ background: "none" }}
           name={props.label}
           type="text"
+          autoFocus={props.autoFocus}
           id="outlined-basic"
           label={
             <span

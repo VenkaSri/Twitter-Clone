@@ -3,7 +3,7 @@ import { getData } from "../../services/auth/getData";
 
 const initialState = {
   name: "",
-  username: "",
+  username: "test1",
   email: "",
   userId: "",
   profilePicture: "",
