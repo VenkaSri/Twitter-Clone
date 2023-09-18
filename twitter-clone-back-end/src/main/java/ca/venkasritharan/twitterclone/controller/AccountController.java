@@ -3,8 +3,11 @@ package ca.venkasritharan.twitterclone.controller;
 import ca.venkasritharan.twitterclone.entity.authentication.User;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
+import ca.venkasritharan.twitterclone.response.UsernameAvailabilityResponse;
 import ca.venkasritharan.twitterclone.service.AccountService;
 import ca.venkasritharan.twitterclone.response.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -32,6 +35,12 @@ public class AccountController {
   @GetMapping("/user_details")
   public UserDetailsResponse getUserDetails(Principal principal) {
     return accountService.getUserDetails(principal);
+  }
+
+  @GetMapping("/username_available")
+  public UsernameAvailabilityResponse isUsernameAvailable(@RequestParam String username) {
+
+    return accountService.checkIfUsernameIsAvailable(username);
   }
 //
 //  @GetMapping("/allAccounts")

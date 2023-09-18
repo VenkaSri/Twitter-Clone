@@ -17,6 +17,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
   Boolean existsByUsername(String name);
 
+
   @Query("SELECT u.username FROM User u")
   Set<String> findAllUsernames();
 

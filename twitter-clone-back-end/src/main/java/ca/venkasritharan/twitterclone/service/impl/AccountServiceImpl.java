@@ -4,7 +4,9 @@ import ca.venkasritharan.twitterclone.entity.authentication.User;
 import ca.venkasritharan.twitterclone.exception.UserNotFoundException;
 import ca.venkasritharan.twitterclone.repository.FollowerRepository;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
+import ca.venkasritharan.twitterclone.response.Response;
 import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
+import ca.venkasritharan.twitterclone.response.UsernameAvailabilityResponse;
 import ca.venkasritharan.twitterclone.service.AccountService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -33,5 +35,19 @@ public class AccountServiceImpl implements AccountService {
     } else {
       throw new UserNotFoundException("User not found");
     }
+  }
+
+
+  @Override
+  public UsernameAvailabilityResponse checkIfUsernameIsAvailable(String username) {
+    boolean isUsernameAvailable = userRepository.existsByUsername(username);
+    String message = "";
+
+    if (isUsernameAvailable) {
+      message = "Username is taken.";
+    } else {
+      message = "Username is available.";
+    }
+    return new UsernameAvailabilityResponse(message, !isUsernameAvailable);
   }
 }
