@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userSliceActions } from "../../../../../state/user/userSlice";
 import { dialogSliceActions } from "../../../../../state/dialog/dialogSlice";
 import { profileSliceActions } from "../../../../../state/profile/profileSlice";
+import { RemovePhoto } from "../../../../RemovePhoto";
 
 export const UploadPicture = ({ source }) => {
   const [images, setImages] = useState([]);
@@ -14,6 +15,9 @@ export const UploadPicture = ({ source }) => {
   const dispatch = useDispatch();
   const selectedProfilePic = useSelector(
     (state) => state.rootReducer.userSession.profilePicture
+  );
+  const isProfilePictureSet = useSelector(
+    (state) => state.rootReducer.profileSlice.didUserAddProfilePicture
   );
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
@@ -23,9 +27,11 @@ export const UploadPicture = ({ source }) => {
     dispatch(dialogSliceActions.setDialogContent("edit_media"));
     dispatch(profileSliceActions.setDidUserAddProfilePicture(true));
   };
-  const handleClick = () => {
-    console.log("Clicked");
+  const handleRemovePhoto = () => {
+    dispatch(profileSliceActions.setDidUserAddProfilePicture(false));
   };
+
+  console.log(selectedProfilePic);
 
   return (
     <div className="w-[210px] h-[210px] rounded-full flex-col-container relative justify-center items-center bg-white dark:bg-black">
@@ -33,7 +39,7 @@ export const UploadPicture = ({ source }) => {
         className=" w-[184px] h-[184px] relative rounded-full"
         style={{ clipPath: "circle(50% at 50% 50%)" }}
       >
-        {!selectedProfilePic ? (
+        {!isProfilePictureSet ? (
           <div className="w-[184px] h-[184px] rounded-full bg-[#8F969B] relative flex-col-container justify-center items-center">
             <div className="flex-col-container w-[160px] absolute top-2 ">
               {getIcon("Default_Avi_Head", { fill: "#47535E" })}
@@ -75,6 +81,10 @@ export const UploadPicture = ({ source }) => {
               alt="profile"
               className="w-full h-full object-cover rounded-full"
             />
+            <div className="absolute flex">
+              <AddPhoto />
+              <RemovePhoto onClick={handleRemovePhoto} />
+            </div>
           </div>
         )}
       </div>
