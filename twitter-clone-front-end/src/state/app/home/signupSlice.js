@@ -10,6 +10,8 @@ const initialState = {
       day: "",
     },
   },
+  validEmailSet: false,
+  isValidPasswordSet: false,
   password: "",
   currentStep: 1,
   signUpStep: 0,
@@ -51,6 +53,12 @@ const signupSlice = createSlice({
     setPostRegisterSteps(state, action) {
       state.postRegisterSteps = action.payload;
     },
+    setIsValidEmailSet(state, action) {
+      state.validEmailSet = action.payload;
+    },
+    setIsValidPasswordSet(state, action) {
+      state.isValidPasswordSet = action.payload;
+    },
     setShouldAutoFocus(state, action) {
       state.shouldAutoFocus = action.payload;
     },
@@ -59,6 +67,9 @@ const signupSlice = createSlice({
     },
     setDidUserAddProfilePicture(state, action) {
       state.didUserAddProfilePicture = action.payload;
+    },
+    resetState() {
+      return initialState;
     },
   },
 });

@@ -1,57 +1,18 @@
 import React from "react";
 
 import { DialogFooterButton } from "../../DialogFooterButton";
-import { useSelector } from "react-redux";
-import {
-  DISABLED_FOOTER_BUTTON,
-  SKIPPABLE_FOOTER_BUTTON,
-} from "../../../utils/constants/dialog/dialogConstants";
-import { useNextActions } from "../../../hooks/signup/useNextActions";
+import { useFooterButtonConfig } from "../../../hooks/signup/useFooterButtonConfig";
 
-export const DialogFooterContent = ({ text }) => {
-  const isProfilePictureSet = useSelector(
-    (state) => state.rootReducer.signUpState.didUserAddProfilePicture
-  );
-
-  const stepOneInfo = useSelector(
-    (state) => state.rootReducer.signUpState.stepOneInfo
-  );
-
-  const styles =
-    stepOneInfo.name !== "" &&
-    stepOneInfo.email !== "" &&
-    stepOneInfo.dob.month &&
-    stepOneInfo.dob.day &&
-    stepOneInfo.dob.year !== ""
-      ? "button--footer-filled"
-      : "button--footer-disabled";
-
-  const username = useSelector(
-    (state) => state.rootReducer.signUpState.username
-  );
-
-  const { handleActions } = useNextActions();
-  // console.log(isProfilePictureSet);
-  // let styles = "";
-
-  // if (isProfilePictureSet) {
-  //   text = "Next";
-  //   styles = "button--footer-filled";
-  // } else {
-  //   text = "Skip for now";
-  //   styles = "button--footer-outline";
-  // }
-
-  // if (username === "") {
-  //   text = "Skip for now";
-  //   styles = "button--footer-outline";
-  // }
+export const DialogFooterContent = ({ text, step, profileStep }) => {
+  const { buttonText, buttonClassName, isButtonDisabled, buttonAction } =
+    useFooterButtonConfig(step, profileStep);
 
   return (
     <DialogFooterButton
-      text={text}
-      className={styles}
-      onClick={handleActions}
+      text={buttonText}
+      className={buttonClassName}
+      onClick={buttonAction}
+      disabled={isButtonDisabled}
     />
   );
 };

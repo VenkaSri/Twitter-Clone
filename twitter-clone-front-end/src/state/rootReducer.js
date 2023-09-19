@@ -14,6 +14,7 @@ import signupReducer from "./app/home/signupSlice";
 import userSlice from "./user/userSlice";
 import loadingSlice from "./app/loading/loadingSlice";
 import dialogSlice from "./dialog/dialogSlice";
+import profileSlice from "./profile/profileSlice";
 
 const rootReducer = combineReducers({
   signUp: signUpReducer,
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   userSession: userSlice,
   loadingSlice: loadingSlice,
   dialogSlice: dialogSlice,
+  profileSlice: profileSlice,
 });
 
 export default rootReducer;

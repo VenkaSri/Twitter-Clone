@@ -19,6 +19,7 @@ import { userInfoActions } from "./state/user/userInfo-reducer";
 import { LogoProgress } from "./components/layer/LogoProgress";
 import { loadingReducerInfoActions } from "./state/app/loading/loading-reducer";
 import { getData } from "./services/auth/getData";
+import { Dialog } from "./components/Dialog";
 
 const Routes = () => {
   const location = useLocation();
@@ -58,14 +59,21 @@ const Routes = () => {
   const doesUserExist = useSelector(
     (state) => state.rootReducer.loginState.doesUserExist
   );
+  console.log(isAuthenticated);
 
   useEffect(() => {
     // Make an authenticated request to your server to get authentication status
     const checkStatus = async () => {
       try {
-        const hello = await getData("/api/auth/status");
-        if (hello.status === 200) {
-          dispatch(userInfoActions.setAuthentication(true));
+        const result = await getData("/api/auth/auth_status");
+        const response = await result.json();
+
+        if (result.status === 200) {
+          if (response.validToken) {
+            dispatch(userInfoActions.setAuthentication(true));
+          } else {
+            dispatch(userInfoActions.setAuthentication(false));
+          }
         }
       } catch (e) {
         console.log(e);
@@ -83,8 +91,6 @@ const Routes = () => {
     //     dispatch(loadingReducerInfoActions.setIsPageLoaded(true));
     //   });
   }, []);
-
-  console.log(isAuthenticated);
 
   return (
     <>
@@ -104,7 +110,7 @@ const Routes = () => {
             )
           }
         />
-        {/* <Route path="/i/flow/signup" element={} /> */}
+        <Route path="/i/flow/signup" element={<Dialog />} />
       </RouterRoutes>
       {/* {dialogState && <FormDialog content={dialogContent} />} */}
       {/* {error && (

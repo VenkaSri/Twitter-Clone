@@ -4,23 +4,9 @@ import ImageUploading from "react-images-uploading";
 import getIcon from "../../../../UI/icons/iconsutil";
 import { AddPhoto } from "../../../../AddPhoto";
 import { useDispatch, useSelector } from "react-redux";
-import { signupSliceActions } from "../../../../../state/app/home/signupSlice";
 import { userSliceActions } from "../../../../../state/user/userSlice";
-import { Dialog } from "../../../../Dialog";
-import { DialogLayout } from "../../../../DialogLayout";
-import DialogHeader from "../../../DialogHeader";
-import { DialogBody } from "../../../DialogBody";
-import { DialogFooter } from "../../../DialogFooter";
-import { HeaderIcon } from "../../../HeaderIcon";
-import { DialogLoading } from "../../../DialogLoading";
-import {
-  dialogSliceActions,
-  setDialogContent,
-} from "../../../../../state/dialog/dialogSlice";
-import { DialogHeaderContent } from "../../../header/DialogHeaderContent";
-import { DialogHeaderLogo } from "../../../header/DialogHeaderLogo";
-import { EditMedia } from "./EditMedia";
-import { ScaleImage } from "./ScaleImage";
+import { dialogSliceActions } from "../../../../../state/dialog/dialogSlice";
+import { profileSliceActions } from "../../../../../state/profile/profileSlice";
 
 export const UploadPicture = ({ source }) => {
   const [images, setImages] = useState([]);
@@ -34,19 +20,12 @@ export const UploadPicture = ({ source }) => {
     setImages(imageList);
     setProfilePicture(imageList[0].data_url);
     dispatch(userSliceActions.setProfilePicture(imageList[0].data_url));
-    dispatch(setDialogContent("edit_media"));
+    dispatch(dialogSliceActions.setDialogContent("edit_media"));
+    dispatch(profileSliceActions.setDidUserAddProfilePicture(true));
   };
   const handleClick = () => {
     console.log("Clicked");
   };
-
-  useEffect(() => {
-    dispatch(
-      dialogSliceActions.setDialogHeaderContent(
-        <DialogHeaderContent content={<DialogHeaderLogo />} />
-      )
-    );
-  }, []);
 
   return (
     <div className="w-[210px] h-[210px] rounded-full flex-col-container relative justify-center items-center bg-white dark:bg-black">

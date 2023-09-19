@@ -28,13 +28,13 @@ export const SignUpForm = () => {
 
   const handleCreateAccount = () => {
     dispatch(dialogSliceActions.setIsDialogOpen(true));
-    dispatch(setDialogContent("sign_up_step_1"));
+    dispatch(dialogSliceActions.setDialogContent("sign_up_step_1"));
     dispatch(unfollowDialogActions.setAuthType("SIGN_UP"));
-    window.history.replaceState(
-      null,
-      "Sign up for Twitter / X",
-      "/i/flow/signup"
-    );
+    // window.history.replaceState(
+    //   null,
+    //   "Sign up for Twitter / X",
+    //   "/i/flow/signup"
+    // );
   };
 
   return (

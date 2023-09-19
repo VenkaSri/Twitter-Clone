@@ -4,14 +4,15 @@ import { InputAdornment, TextField } from "@mui/material";
 import SVG from "../app/SVG";
 import { useDispatch, useSelector } from "react-redux";
 import { signupSliceActions } from "../../../state/app/home/signupSlice";
+import { dialogSliceActions } from "../../../state/dialog/dialogSlice";
+import { useCurrentStep } from "../../../hooks/signup/ useCurrentStep";
 
 const InputField = (props) => {
   const dispatch = useDispatch();
-  const currentStep = useSelector(
-    (state) => state.rootReducer.signUpState.currentStep
-  );
+  const currentStep = useCurrentStep();
   const editFieldHandler = () => {
-    dispatch(signupSliceActions.setCurrentStep(currentStep - 1));
+    dispatch(dialogSliceActions.setDialogContent("sign_up_step_1"));
+    dispatch(signupSliceActions.setSignUpStep(currentStep - 1));
     dispatch(signupSliceActions.setShouldAutoFocus(props.label));
   };
 
@@ -60,7 +61,7 @@ const InputField = (props) => {
               },
             },
           }}
-          onClick={currentStep === 2 ? editFieldHandler : null}
+          onClick={editFieldHandler}
         />
       </div>
     </div>

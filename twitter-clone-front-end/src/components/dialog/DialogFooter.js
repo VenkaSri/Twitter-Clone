@@ -8,8 +8,10 @@ export const DialogFooter = ({ type, content }) => {
   let footer = null;
   const fullScreen = useMediaQuery("(max-width:702px)");
   const dialogBodyOverFlowing = useSelector(
-    (state) => state.rootReducer.dialogState.dialogBodyOverFlowing
+    (state) => state.rootReducer.dialogSlice.dialogBodyOverFlowing
   );
+
+  console.log(dialogBodyOverFlowing);
 
   switch (type) {
     case "LOGIN_PASSWORD_INPUT":

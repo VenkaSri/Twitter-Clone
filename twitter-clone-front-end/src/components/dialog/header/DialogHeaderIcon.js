@@ -10,24 +10,30 @@ import {
 import { DialogHeaderContent } from "./DialogHeaderContent";
 import { DialogHeaderLogo } from "./DialogHeaderLogo";
 import { UploadProfilePictureStep } from "../signup/steps/profile_picture/UploadProfilePictureStep";
+import { useCurrentStep } from "../../../hooks/signup/ useCurrentStep";
 const STEP_ZERO = 0;
 
 export const DialogHeaderIcon = ({ step }) => {
   const dispatch = useDispatch();
+  const currentStep = useCurrentStep();
   let iconInfo = "";
   let actionFunction = null;
 
   const back = () => {
-    dispatch(signupSliceActions.setDidUserAddProfilePicture(true));
-    dispatch(setDialogContent("upload_profile_picture"));
+    dispatch(dialogSliceActions.setDialogContent("sign_up_step_1"));
+    dispatch(signupSliceActions.setSignUpStep(currentStep - 1));
   };
   const close = () => {
     dispatch(dialogSliceActions.setIsDialogOpen(false));
+    dispatch(signupSliceActions.resetState());
   };
 
   if (step === STEP_ZERO) {
     iconInfo = "Close";
     actionFunction = close;
+  } else if (step === 2) {
+    iconInfo = "Back";
+    actionFunction = back;
   } else {
     iconInfo = "Back";
     actionFunction = back;

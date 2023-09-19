@@ -5,15 +5,17 @@ import InputField from "../../../../UI/form/InputField";
 import { CONFIRMED_CHECKMARK } from "../../../../../utils/ButtonLinkObjects";
 import moment from "moment";
 import { DialogContentHeading } from "../../../../DialogContentHeading";
+import { DialogBodyContainer } from "../../../DialogBodyContainer";
 
 const StepTwoBody = () => {
   const stepOneInfo = useSelector(
     (state) => state.rootReducer.signUpState.stepOneInfo
   );
+  console.log(stepOneInfo.email);
   const userDob = `${stepOneInfo.dob.month}-${stepOneInfo.dob.day}-${stepOneInfo.dob.year}`;
 
   return (
-    <>
+    <DialogBodyContainer>
       <DialogContentHeading text="Create your account" />
       <InputField
         label="Name"
@@ -31,7 +33,7 @@ const StepTwoBody = () => {
         inputValue={moment(userDob, "MMMM DD, YYYY").format("MMM DD, YYYY")}
         svg={{ path: CONFIRMED_CHECKMARK, style: "w-5 fill-[#00BA7C] mt-4" }}
       />
-    </>
+    </DialogBodyContainer>
   );
 };
 

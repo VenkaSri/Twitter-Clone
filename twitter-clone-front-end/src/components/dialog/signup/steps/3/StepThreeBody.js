@@ -3,6 +3,7 @@ import { useMediaQuery } from "@mui/material";
 import { DialogContentHeading } from "../../../../DialogContentHeading";
 import { CustomTextField } from "../../../../CustomTextField";
 import { usePasswordInputState } from "../../../../../hooks/signup/usePasswordInputState";
+import { DialogBodyContainer } from "../../../DialogBodyContainer";
 
 export const StepThreeBody = () => {
   const fullScreen = useMediaQuery("(max-width:702px)");
@@ -21,7 +22,7 @@ export const StepThreeBody = () => {
   };
 
   return (
-    <>
+    <DialogBodyContainer>
       <DialogContentHeading
         text="You'll need a password"
         subtext={"Make sure it's 8 characters or more."}
@@ -29,7 +30,7 @@ export const StepThreeBody = () => {
       <div className="flex-col-container pt-3">
         <CustomTextField
           label="Password"
-          icon={true}
+          icon={{ end: "Reveal" }}
           inputValue={password}
           onInputChange={handleInputChange}
           error={isPasswordLengthValidState || isPasswordStrengthValidState}
@@ -46,6 +47,6 @@ export const StepThreeBody = () => {
           </div>
         </div>
       </div>
-    </>
+    </DialogBodyContainer>
   );
 };

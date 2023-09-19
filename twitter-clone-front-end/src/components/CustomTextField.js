@@ -80,13 +80,24 @@ export const CustomTextField = ({
       }
     } else {
       setHadTwoIcons(false);
-      setIconPath(icon.end);
+      setIconPath("Reveal");
     }
   }, [icon, propertyCount, error]);
 
   const togglePasswordVisibility = () => {
-    if (icon) {
+    if (!hasTwoIcons) {
       setShowPassword((prevShowPassword) => !prevShowPassword);
+      setIconPath((prevIconPath) => {
+        // Check if prevIconPath is "Reveal" and change to "Hide," or vice versa
+        if (prevIconPath === "Reveal") {
+          return "Hide";
+        } else if (prevIconPath === "Hide") {
+          return "Reveal";
+        } else {
+          // Handle other cases or default value if needed
+          return prevIconPath;
+        }
+      });
     }
   };
 
@@ -121,7 +132,9 @@ export const CustomTextField = ({
                 onClick={togglePasswordVisibility}
                 onMouseDown={(e) => e.preventDefault()}
               >
-                {getIcon(iconPath, { fill: endIconFillColor })}
+                {hasTwoIcons
+                  ? getIcon(iconPath, { fill: endIconFillColor })
+                  : getIcon(iconPath)}
               </div>
             </InputAdornment>
           ) : null,

@@ -3,19 +3,24 @@ import React from "react";
 import { HeaderIcon } from "../HeaderIcon";
 import { DialogHeaderIcon } from "./DialogHeaderIcon";
 import { useDispatch } from "react-redux";
-import { setDialogContent } from "../../../state/dialog/dialogSlice";
+import {
+  dialogSliceActions,
+  setDialogContent,
+} from "../../../state/dialog/dialogSlice";
 import { signupSliceActions } from "../../../state/app/home/signupSlice";
+import { useCurrentStep } from "../../../hooks/signup/ useCurrentStep";
+import { profileSliceActions } from "../../../state/profile/profileSlice";
 
 export const DialogHeaderContent = ({ content, icon, button }) => {
+  const currentStep = useCurrentStep();
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(signupSliceActions.setDidUserAddProfilePicture(true));
-    dispatch(setDialogContent("upload_profile_picture"));
+    dispatch(dialogSliceActions.setDialogContent("upload_profile_picture"));
   };
   return (
     <>
-      {icon && <DialogHeaderIcon step={0} />}
+      {icon && <DialogHeaderIcon step={currentStep} />}
       <div className="flex flex-grow h-full justify-center items-stretch flex-col">
         {content}
       </div>

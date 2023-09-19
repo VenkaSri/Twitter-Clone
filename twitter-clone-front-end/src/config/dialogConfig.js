@@ -8,34 +8,37 @@ import { UploadProfilePictureStep } from "../components/dialog/signup/steps/prof
 import { DialogFooterButton } from "../components/DialogFooterButton";
 import { DialogFooterContent } from "../components/dialog/footer/DialogFooterContent";
 import { UsernameStep } from "../components/dialog/signup/steps//username/UsernameStep";
+import { StepHeader } from "../components/dialog/signup/steps/StepHeader";
 import { StepOneBody } from "../components/dialog/signup/steps/1/StepOneBody";
+import { useSelector } from "react-redux";
+import StepTwoBody from "../components/dialog/signup/steps/2/StepTwoBody";
+import { StepThreeBody } from "../components/dialog/signup/steps/3/StepThreeBody";
 
-const dialogConfig = {
+export const dialogStepsConfig = {
   sign_up_step_1: {
-    header: (
-      <DialogHeaderContent
-        icon={true}
-        content={<DialogHeaderHeading heading="Step" />}
-      />
-    ),
+    header: <StepHeader heading="Step 1 of 3" withIcon />,
     body: <StepOneBody />,
-    footer: <DialogFooterContent text={"Next"} />,
+    footer: <DialogFooterContent step={1} />,
   },
-  edit_media: {
-    header: (
-      <DialogHeaderContent
-        icon={true}
-        button={true}
-        content={<DialogHeaderHeading heading="Edit Media" />}
-      />
-    ),
-    body: <EditMedia />,
-    footer: <ScaleImage />,
+  sign_up_step_2: {
+    header: <StepHeader heading="Step 2 of 3" withIcon />,
+    body: <StepTwoBody />,
+    footer: <DialogFooterContent step={2} />,
+  },
+  sign_up_step_3: {
+    header: <StepHeader heading="Step 3 of 3" />,
+    body: <StepThreeBody />,
+    footer: <DialogFooterContent step={3} />,
   },
   upload_profile_picture: {
     header: <DialogHeaderContent content={<DialogHeaderLogo />} />,
     body: <UploadProfilePictureStep />,
-    footer: <DialogFooterContent />,
+    footer: <DialogFooterContent profileStep={1} />,
+  },
+  edit_media: {
+    header: <StepHeader heading="Edit Media" withIcon withButton />,
+    body: <EditMedia />,
+    footer: <ScaleImage />,
   },
   update_username: {
     header: <DialogHeaderContent content={<DialogHeaderLogo />} />,
@@ -44,5 +47,3 @@ const dialogConfig = {
   },
   // Add more steps or variations as needed
 };
-
-export default dialogConfig;

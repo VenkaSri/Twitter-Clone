@@ -8,12 +8,12 @@ export const useNextActions = () => {
   );
 
   const goToSignUpStepTwo = () => {
-    dispatch(setDialogContent("update_username"));
+    // dispatch(setDialogContent("update_username"));
   };
 
   let handleActions = null;
   const setupUsername = () => {
-    dispatch(setDialogContent("update_username"));
+    // dispatch(setDialogContent("update_username"));
   };
 
   if (isProfilePictureSet) {

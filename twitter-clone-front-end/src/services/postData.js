@@ -10,5 +10,5 @@ export const postData = async (url = "", data = {}) => {
     body: JSON.stringify(data),
   });
 
-  return respone.json();
+  return respone;
 };

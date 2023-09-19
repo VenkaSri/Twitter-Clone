@@ -26,19 +26,26 @@ export function usePasswordInputState() {
     (state) => state.rootReducer.signUpState.password
   );
 
+  const isValidPasswordSet = useSelector(
+    (state) => state.rootReducer.signUpState.isValidPasswordSet
+  );
+
   useEffect(() => {
     const identifier = setTimeout(() => {
       if (hasUserEnteredValue) {
         if (!validatePasswordLength(password)) {
           setIsPasswordLengthValidState(true);
           setIsPasswordStrengthValidState(false);
+          dispatch(signupSliceActions.setIsValidPasswordSet(false));
           setErrorMessage(true);
         } else if (validatePasswordStrength(password)) {
           setIsPasswordStrengthValidState(true);
+          dispatch(signupSliceActions.setIsValidPasswordSet(false));
           setErrorMessage(true);
         } else {
           setIsPasswordStrengthValidState(false);
           setErrorMessage(false);
+          dispatch(signupSliceActions.setIsValidPasswordSet(true));
           setIsPasswordLengthValidState(false);
           dispatch(signupSliceActions.setPassword(password));
         }
@@ -47,6 +54,7 @@ export function usePasswordInputState() {
 
     return () => {
       setErrorMessage(false);
+      dispatch(signupSliceActions.setIsValidPasswordSet(false));
       clearTimeout(identifier);
     };
   }, [password, hasUserEnteredValue, dispatch]);
