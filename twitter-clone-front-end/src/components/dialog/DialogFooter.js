@@ -28,7 +28,7 @@ export const DialogFooter = ({ type, content }) => {
     <div
       className={`flex-col-container dark:bg-[#000] justify-center items-center ${
         fullScreen ? "px-8" : "px-20"
-      } ${overflowClass} 
+      } ${overflowClass}  z-20
       `}
     >
       <div className="flex-col-container grow w-full">{content}</div>

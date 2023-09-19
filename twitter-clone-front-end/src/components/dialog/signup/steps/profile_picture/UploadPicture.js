@@ -34,9 +34,9 @@ export const UploadPicture = ({ source }) => {
   console.log(selectedProfilePic);
 
   return (
-    <div className="w-[210px] h-[210px] rounded-full flex-col-container relative justify-center items-center bg-white dark:bg-black">
+    <div className="w-[210px] h-[210px] rounded-full flex-col-container relative justify-center items-center bg-white dark:bg-black ">
       <div
-        className=" w-[184px] h-[184px] relative rounded-full"
+        className=" w-[184px] h-[184px] relative rounded-full "
         style={{ clipPath: "circle(50% at 50% 50%)" }}
       >
         {!isProfilePictureSet ? (
