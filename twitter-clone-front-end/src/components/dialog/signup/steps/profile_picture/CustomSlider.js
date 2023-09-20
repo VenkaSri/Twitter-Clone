@@ -18,6 +18,7 @@ export const CustomSlider = ({ onScaleChange }) => {
       </div>
 
       <Slider
+        disabled
         aria-label="Scale"
         value={value}
         onChange={handleChange}
@@ -42,7 +43,7 @@ export const CustomSlider = ({ onScaleChange }) => {
         }}
       />
       <div className="ml-3">
-        {getIcon("Zoom Out", { fill: "#47535E", width: "18px" })}
+        {getIcon("Zoom In", { fill: "#47535E", width: "18px" })}
       </div>
     </div>
   );

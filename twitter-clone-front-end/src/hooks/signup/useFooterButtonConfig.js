@@ -6,6 +6,7 @@ import { loadingSliceActions } from "../../state/app/loading/loadingSlice";
 import { postData } from "../../services/postData";
 import { fetchUserDetails } from "../../state/user/userSlice";
 import { userInfoActions } from "../../state/user/userInfo-reducer";
+import { UPDATE_USERNAME_STEP } from "../../utils/constants/dialog/dialogConstants";
 
 import moment from "moment";
 
@@ -84,6 +85,11 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
     }
   };
 
+  const goToUpdateUsernameStep = () => {
+    dispatch(dialogSliceActions.setDialogContent("update_username"));
+    // dispatch(signupSliceActions.setPostRegisterSteps(UPDATE_USERNAME_STEP));
+  };
+
   // Define the default button text and className
 
   // Customize button configuration based on the step
@@ -114,6 +120,7 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
     }
   } else if (profileSetupStep === 1) {
     isButtonDisabled = false;
+    buttonAction = goToUpdateUsernameStep;
     if (isProfilePictureSet) {
       buttonText = "Next";
       buttonClassName = "button--footer-filled";

@@ -8,6 +8,7 @@ import { userSliceActions } from "../../../../../state/user/userSlice";
 import { dialogSliceActions } from "../../../../../state/dialog/dialogSlice";
 import { profileSliceActions } from "../../../../../state/profile/profileSlice";
 import { RemovePhoto } from "../../../../RemovePhoto";
+import { signupSliceActions } from "../../../../../state/app/home/signupSlice";
 
 export const UploadPicture = ({ source }) => {
   const [images, setImages] = useState([]);
@@ -19,11 +20,17 @@ export const UploadPicture = ({ source }) => {
   const isProfilePictureSet = useSelector(
     (state) => state.rootReducer.profileSlice.didUserAddProfilePicture
   );
+  const postSignUpStep = useSelector(
+    (state) => state.rootReducer.signUpState.postRegisterSteps
+  );
+  console.log(postSignUpStep);
+
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
     setImages(imageList);
     setProfilePicture(imageList[0].data_url);
     dispatch(userSliceActions.setProfilePicture(imageList[0].data_url));
+    dispatch(signupSliceActions.setPostRegisterSteps(postSignUpStep + 1));
     dispatch(dialogSliceActions.setDialogContent("edit_media"));
     dispatch(profileSliceActions.setDidUserAddProfilePicture(true));
   };

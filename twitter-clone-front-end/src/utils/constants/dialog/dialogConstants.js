@@ -1,6 +1,8 @@
-const DISABLED_FOOTER_BUTTON = "bg-[#86888b]";
+// sign up steps
 
-const SKIPPABLE_FOOTER_BUTTON =
-  "font-cBold border border-[#cfd9de] text-black hover:text-black bg-transparent hover:bg-[#e7e7e8]";
+// post registration steps
+const RESET_POST_REG_STEP = 0;
 
-export { DISABLED_FOOTER_BUTTON, SKIPPABLE_FOOTER_BUTTON };
+const UPDATE_USERNAME_STEP = 2;
+
+export { RESET_POST_REG_STEP, UPDATE_USERNAME_STEP };

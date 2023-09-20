@@ -15,7 +15,7 @@ const initialState = {
   password: "",
   currentStep: 1,
   signUpStep: 0,
-  postRegisterSteps: 1,
+  postRegisterSteps: 0,
   doesUserExist: false,
   shouldAutoFocus: "",
   username: "",

@@ -3,30 +3,43 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import IconButton from "../../UI/button/IconButton";
 import { signupSliceActions } from "../../../state/app/home/signupSlice";
-import {
-  dialogSliceActions,
-  setDialogContent,
-} from "../../../state/dialog/dialogSlice";
-import { DialogHeaderContent } from "./DialogHeaderContent";
-import { DialogHeaderLogo } from "./DialogHeaderLogo";
-import { UploadProfilePictureStep } from "../signup/steps/profile_picture/UploadProfilePictureStep";
+import { dialogSliceActions } from "../../../state/dialog/dialogSlice";
 import { useCurrentStep } from "../../../hooks/signup/ useCurrentStep";
+import { RESET_POST_REG_STEP } from "../../../utils/constants/dialog/dialogConstants";
 const STEP_ZERO = 0;
 
-export const DialogHeaderIcon = ({ step }) => {
+export const DialogHeaderIcon = ({ step, type }) => {
   const dispatch = useDispatch();
-  const currentStep = useCurrentStep();
   let iconInfo = "";
   let actionFunction = null;
+  console.log(step);
+  const postSignUpStep = useSelector(
+    (state) => state.rootReducer.signUpState.postRegisterSteps
+  );
 
-  const back = () => {
-    dispatch(dialogSliceActions.setDialogContent("sign_up_step_1"));
-    dispatch(signupSliceActions.setSignUpStep(currentStep - 1));
-  };
   const close = () => {
     dispatch(dialogSliceActions.setIsDialogOpen(false));
     dispatch(signupSliceActions.resetState());
   };
+
+  let contentValue = "";
+
+  const back = () => {
+    console.log(contentValue);
+    console.log(step);
+    dispatch(dialogSliceActions.setDialogContent(contentValue));
+    if (type === "postRegister") {
+      dispatch(signupSliceActions.setPostRegisterSteps(RESET_POST_REG_STEP));
+    }
+  };
+
+  if (type === "postRegister") {
+    if (step === 1) {
+      iconInfo = "Back";
+      contentValue = "upload_profile_picture";
+      actionFunction = back;
+    }
+  }
 
   if (step === STEP_ZERO) {
     iconInfo = "Close";
