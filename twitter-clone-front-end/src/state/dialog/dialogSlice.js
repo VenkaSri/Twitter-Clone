@@ -7,16 +7,16 @@ import { UsernameStep } from "../../components/dialog/signup/steps/username/User
 import { DialogHeaderContent } from "../../components/dialog/header/DialogHeaderContent";
 import { StepOneBody } from "../../components/dialog/signup/steps/1/StepOneBody";
 import { DialogHeaderLogo } from "../../components/dialog/header/DialogHeaderLogo";
-
+import FinalStep from "../../components/signup/FinalStep";
 import { DialogHeaderHeading } from "../../components/dialog/header/DialogHeaderHeading";
 
 const initialState = {
-  dialogHeaderContent: null,
-  dialogBodyContent: null,
-  dialogFooterContent: null,
-  // dialogHeaderContent: <DialogHeaderContent content={<DialogHeaderLogo />} />,
-  // dialogBodyContent: <UsernameStep />,
-  // dialogFooterContent: <DialogFooterContent profileStep={2} />,
+  // dialogHeaderContent: null,
+  // dialogBodyContent: null,
+  // dialogFooterContent: null,
+  dialogHeaderContent: <DialogHeaderContent content={<DialogHeaderLogo />} />,
+  dialogBodyContent: <FinalStep />,
+  dialogFooterContent: <DialogFooterContent profileStep={3} />,
   isDialogOpen: false,
   isACutomBody: false,
   dialogBodyOverFlowing: false,

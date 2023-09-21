@@ -28,17 +28,12 @@ const FollowCard = ({
   };
 
   return (
-    <div className="h-[4.5rem] flex items-center">
-      <ProfilePicture source={DefaultAvatar} size={48} />
-      <UserProfileInfo name={user.name} username={user.username} />
-      <div className="ml-auto">
-        <FollowButton
-          onClick={handleClick}
-          btnText={text}
-          btnStyle={btnStyle}
-          mouseOverHandler={handleMouseOver}
-          mouseLeaveHandler={handleMouseLeave}
-        />
+    <div className="card--follow">
+      <div className="mr-3   flex self-stretch">
+        <ProfilePicture source={DefaultAvatar} size={44} />
+      </div>
+      <div className="flex grow ">
+        <UserProfileInfo name="test" username={"test1"} withDescription />
       </div>
     </div>
   );
