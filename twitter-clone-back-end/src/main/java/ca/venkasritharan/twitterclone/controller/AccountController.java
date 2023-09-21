@@ -6,10 +6,13 @@ import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
 import ca.venkasritharan.twitterclone.response.UsernameAvailabilityResponse;
 import ca.venkasritharan.twitterclone.service.AccountService;
 import ca.venkasritharan.twitterclone.response.Response;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.Map;
 import java.util.Optional;
@@ -41,6 +44,12 @@ public class AccountController {
   public UsernameAvailabilityResponse isUsernameAvailable(@RequestParam String username) {
 
     return accountService.checkIfUsernameIsAvailable(username);
+  }
+
+  @PostMapping("/user/update_username")
+  public ResponseEntity<String> updateUsername(@Valid @RequestBody String username, Principal principal, HttpServletResponse response) throws IOException {
+
+    return accountService.updateUsername(principal, username, response);
   }
 //
 //  @GetMapping("/allAccounts")
