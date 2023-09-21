@@ -1,5 +1,6 @@
 package ca.venkasritharan.twitterclone.controller;
 
+import ca.venkasritharan.twitterclone.dto.UpdateUsernameDTO;
 import ca.venkasritharan.twitterclone.entity.authentication.User;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
@@ -22,8 +23,8 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class AccountController {
 
-  AccountService accountService;
-  UserRepository userRepository;
+  private final AccountService accountService;
+  private final UserRepository userRepository;
 
   public AccountController(AccountService accountService, UserRepository userRepository) {
     this.accountService = accountService;
@@ -47,9 +48,10 @@ public class AccountController {
   }
 
   @PostMapping("/user/update_username")
-  public ResponseEntity<String> updateUsername(@Valid @RequestBody String username, Principal principal, HttpServletResponse response) throws IOException {
-
-    return accountService.updateUsername(principal, username, response);
+  public ResponseEntity<String> updateUsername(@Valid @RequestBody UpdateUsernameDTO updateUsernameDTO, Principal principal, HttpServletResponse response) throws IOException {
+    String updatedUsername = updateUsernameDTO.getUpdatedUsername();
+    System.out.println(updatedUsername);
+    return accountService.updateUsername(principal, updatedUsername, response);
   }
 //
 //  @GetMapping("/allAccounts")
