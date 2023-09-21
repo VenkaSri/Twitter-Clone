@@ -11,8 +11,6 @@ export const DialogFooter = ({ type, content }) => {
     (state) => state.rootReducer.dialogSlice.dialogBodyOverFlowing
   );
 
-  console.log(dialogBodyOverFlowing);
-
   switch (type) {
     case "LOGIN_PASSWORD_INPUT":
       footer = <LoginFooter />;

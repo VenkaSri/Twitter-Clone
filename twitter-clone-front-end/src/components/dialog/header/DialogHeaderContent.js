@@ -29,7 +29,6 @@ export const DialogHeaderContent = ({ content, icon, button }) => {
     dispatch(signupSliceActions.setPostRegisterSteps(RESET_POST_REG_STEP));
   };
 
-  console.log(step);
   return (
     <>
       {icon && <DialogHeaderIcon step={step} type="postRegister" />}

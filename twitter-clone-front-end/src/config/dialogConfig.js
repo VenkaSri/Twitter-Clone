@@ -47,7 +47,7 @@ export const dialogStepsConfig = {
   update_username: {
     header: <DialogHeaderContent content={<DialogHeaderLogo />} />,
     body: <UsernameStep />,
-    footer: <DialogFooterContent />,
+    footer: <DialogFooterContent profileStep={2} />,
   },
   final_step: {
     header: <DialogHeaderContent content={<DialogHeaderLogo />} />,

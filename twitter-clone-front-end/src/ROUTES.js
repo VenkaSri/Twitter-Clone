@@ -22,44 +22,11 @@ import { getData } from "./services/auth/getData";
 import { Dialog } from "./components/Dialog";
 
 const Routes = () => {
-  const location = useLocation();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const dialogState = useSelector(
-    (state) => state.rootReducer.dialogState.isDialogOpen
-  );
-  const error = useSelector((state) => state.rootReducer.dialogState.error);
-
-  const isLoading = useSelector(
-    (state) => state.rootReducer.loadingState.isLoading
-  );
-  const loginState = useSelector(
-    (state) => state.rootReducer.loginState.isLoggedIn
-  );
-  const reg = useSelector(
-    (state) => state.rootReducer.loadingState.isRegistrationComplete
-  );
 
   const isAuthenticated = useSelector(
     (state) => state.rootReducer.userInfo.isAuthenticated
   );
-
-  const isLoaded = useSelector(
-    (state) => state.rootReducer.appLoading.isPageLoaded
-  );
-
-  const authType = useSelector(
-    (state) => state.rootReducer.dialogState.authType
-  );
-
-  const checkingIndentifier = useSelector(
-    (state) => state.rootReducer.rootLoading.loginLoading.userExists
-  );
-
-  const doesUserExist = useSelector(
-    (state) => state.rootReducer.loginState.doesUserExist
-  );
-  console.log(isAuthenticated);
 
   useEffect(() => {
     // Make an authenticated request to your server to get authentication status

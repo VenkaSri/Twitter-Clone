@@ -89,7 +89,6 @@ export function useUsernameInputState() {
           `/api/username_available?username=${currentUsername}`
         );
         const response = await result.json();
-        console.log(response);
         if (!response.usernameAvailable) {
           return true;
         } else {

@@ -4,7 +4,7 @@ import { signupSliceActions } from "../../state/app/home/signupSlice";
 import { useCurrentStep } from "./ useCurrentStep";
 import { loadingSliceActions } from "../../state/app/loading/loadingSlice";
 import { postData } from "../../services/postData";
-import { fetchUserDetails } from "../../state/user/userSlice";
+import { fetchUserDetails, userSliceActions } from "../../state/user/userSlice";
 import { userInfoActions } from "../../state/user/userInfo-reducer";
 import { UPDATE_USERNAME_STEP } from "../../utils/constants/dialog/dialogConstants";
 
@@ -74,13 +74,13 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
   const goToAddProfilePicStep = async () => {
     try {
       dispatch(loadingSliceActions.setIsDialogLoading(true));
-      const response = await postData("/register", {
+      const response = await postData("/api/auth/register", {
         name,
         userDob,
         email,
         password,
       });
-      console.log(response);
+
       if (response.status === 200) {
         dispatch(fetchUserDetails());
         dispatch(loadingSliceActions.setIsDialogLoading(false));
@@ -99,17 +99,35 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
 
   const goToUpdateUsernameStep = () => {
     dispatch(dialogSliceActions.setDialogContent("update_username"));
-    // dispatch(signupSliceActions.setPostRegisterSteps(UPDATE_USERNAME_STEP));
   };
 
-  const updateUsername = async () => {};
+  const updateUsername = async () => {
+    try {
+      const response = await postData("/api/user/update_username", {
+        updatedUsername: currentUsername,
+      });
+
+      if (response.status === 200) {
+        dispatch(userSliceActions.setUsername(currentUsername));
+      }
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status === 409) {
+          console.log("Conflict: ", error.response.data);
+        }
+      }
+      console.log(error);
+    }
+  };
 
   const goToFinalStep = () => {
-    dispatch(dialogSliceActions.setDialogContent("final_step"));
-    // dispatch(signupSliceActions.setPostRegisterSteps(UPDATE_USERNAME_STEP));
+    if (!(currentUsername === username)) {
+      updateUsername();
+      dispatch(dialogSliceActions.setDialogContent("final_step"));
+    } else {
+      dispatch(dialogSliceActions.setDialogContent("final_step"));
+    }
   };
-
-  // Define the default button text and className
 
   // Customize button configuration based on the step
   if (step === 1) {
@@ -122,8 +140,6 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
       buttonClassName = "button--footer-disabled";
     }
   } else if (step === 2) {
-    // Customize button configuration for step 2, if needed
-    // Example logic:
     buttonText = "Sign up";
     buttonClassName = "button--footer-signup ";
     buttonAction = goToStepThree;
@@ -149,7 +165,7 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
     }
   } else if (profileSetupStep === 2) {
     if (currentUsername === username) {
-      buttonText = "Skipf for now";
+      buttonText = "Skip for now";
       buttonClassName = "button--footer-outline ";
       isButtonDisabled = false;
       buttonAction = goToFinalStep;
@@ -170,8 +186,6 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
     buttonAction = goToStepThree;
     isButtonDisabled = false;
   }
-
-  // Add any other step-specific logic here
 
   return {
     buttonText,

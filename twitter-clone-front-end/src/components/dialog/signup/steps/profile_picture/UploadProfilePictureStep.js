@@ -14,6 +14,12 @@ export const UploadProfilePictureStep = () => {
     (state) => state.rootReducer.signUp.steps.currentStep
   );
 
+  const username = useSelector(
+    (state) => state.rootReducer.userSession.username
+  );
+
+  console.log(username);
+
   const dispatch = useDispatch();
   const onChange = async (imageList, addUpdateIndex) => {
     const file = imageList[0].file;

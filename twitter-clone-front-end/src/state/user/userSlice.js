@@ -3,7 +3,7 @@ import { getData } from "../../services/auth/getData";
 
 const initialState = {
   name: "",
-  username: "test1",
+  username: "",
   email: "",
   userId: "",
   profilePicture: "",
@@ -35,7 +35,8 @@ export const userSliceActions = userSlice.actions;
 export default userSlice.reducer;
 
 export const fetchUserDetails = () => async (dispatch) => {
-  const response = await getData("/api/user_details");
+  const result = await getData("/api/user_details");
+  const response = await result.json();
   dispatch(userSliceActions.setEmail(response.email));
   dispatch(userSliceActions.setName(response.name));
   dispatch(userSliceActions.setUserId(response.id));

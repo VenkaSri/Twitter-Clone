@@ -60,7 +60,6 @@ export function useEmailInputState() {
 
       if (result.status === 200) {
         if (response.emailAvailable) {
-          console.log("valid");
           setIsUnavailable(false);
           dispatch(signupSliceActions.setEmail(eml.trim()));
           dispatch(signupSliceActions.setIsValidEmailSet(true));

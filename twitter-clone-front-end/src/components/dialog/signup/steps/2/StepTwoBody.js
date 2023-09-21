@@ -11,7 +11,6 @@ const StepTwoBody = () => {
   const stepOneInfo = useSelector(
     (state) => state.rootReducer.signUpState.stepOneInfo
   );
-  console.log(stepOneInfo.email);
   const userDob = `${stepOneInfo.dob.month}-${stepOneInfo.dob.day}-${stepOneInfo.dob.year}`;
 
   return (

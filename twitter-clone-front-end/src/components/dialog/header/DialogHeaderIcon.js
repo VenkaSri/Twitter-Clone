@@ -12,7 +12,6 @@ export const DialogHeaderIcon = ({ step, type }) => {
   const dispatch = useDispatch();
   let iconInfo = "";
   let actionFunction = null;
-  console.log(step);
   const postSignUpStep = useSelector(
     (state) => state.rootReducer.signUpState.postRegisterSteps
   );

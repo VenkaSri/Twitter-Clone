@@ -17,7 +17,7 @@ export const Dialog = ({ type, content }) => {
   return (
     <MUIDialog
       sx={dialogStyles.styles}
-      open={true}
+      open={open}
       PaperProps={dialogStyles}
       fullScreen={isMobile}
       transitionDuration={0}

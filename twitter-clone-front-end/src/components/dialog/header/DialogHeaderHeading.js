@@ -1,7 +1,6 @@
 import React from "react";
 
 export const DialogHeaderHeading = ({ heading }) => {
-  console.log(heading);
   return (
     <>
       <div className="flex flex-grow h-full justify-center items-stretch flex-col">
