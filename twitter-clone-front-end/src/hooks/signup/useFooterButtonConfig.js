@@ -17,6 +17,18 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
     (state) => state.rootReducer.profileSlice.didUserAddProfilePicture
   );
 
+  const isUsernameValid = useSelector(
+    (state) => state.rootReducer.signUpState.isValidUsernameSet
+  );
+
+  const username = useSelector(
+    (state) => state.rootReducer.userSession.username
+  );
+
+  const currentUsername = useSelector(
+    (state) => state.rootReducer.signUpState.username
+  );
+
   const { name, email, dob } = useSelector(
     (state) => state.rootReducer.signUpState.stepOneInfo
   );
@@ -90,6 +102,13 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
     // dispatch(signupSliceActions.setPostRegisterSteps(UPDATE_USERNAME_STEP));
   };
 
+  const updateUsername = async () => {};
+
+  const goToFinalStep = () => {
+    dispatch(dialogSliceActions.setDialogContent("final_step"));
+    // dispatch(signupSliceActions.setPostRegisterSteps(UPDATE_USERNAME_STEP));
+  };
+
   // Define the default button text and className
 
   // Customize button configuration based on the step
@@ -128,9 +147,29 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
       buttonText = "Skip for now";
       buttonClassName = "button--footer-outline ";
     }
+  } else if (profileSetupStep === 2) {
+    if (currentUsername === username) {
+      buttonText = "Skipf for now";
+      buttonClassName = "button--footer-outline ";
+      isButtonDisabled = false;
+      buttonAction = goToFinalStep;
+    } else {
+      buttonText = "Next";
+      if (isUsernameValid) {
+        buttonClassName = "button--footer-filled";
+        isButtonDisabled = false;
+        buttonAction = goToFinalStep;
+      } else {
+        buttonClassName = "button--footer-disabled";
+        isButtonDisabled = true;
+      }
+    }
+  } else if (profileSetupStep === 3) {
+    buttonText = "Sign up";
+    buttonClassName = "button--footer-signup ";
+    buttonAction = goToStepThree;
+    isButtonDisabled = false;
   }
-
-  console.log(profileSetupStep);
 
   // Add any other step-specific logic here
 

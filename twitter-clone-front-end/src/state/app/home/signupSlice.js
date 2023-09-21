@@ -12,6 +12,7 @@ const initialState = {
   },
   validEmailSet: false,
   isValidPasswordSet: false,
+  isValidUsernameSet: false,
   password: "",
   currentStep: 1,
   signUpStep: 0,
@@ -58,6 +59,9 @@ const signupSlice = createSlice({
     },
     setIsValidPasswordSet(state, action) {
       state.isValidPasswordSet = action.payload;
+    },
+    setIsValidUsernameSet(state, action) {
+      state.isValidUsernameSet = action.payload;
     },
     setShouldAutoFocus(state, action) {
       state.shouldAutoFocus = action.payload;

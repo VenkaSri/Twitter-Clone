@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DialogBodyContainer } from "../../../DialogBodyContainer";
 import { DialogContentHeading } from "../../../../DialogContentHeading";
-import InputField from "../../../../UI/form/InputField";
-import { CONFIRMED_CHECKMARK } from "../../../../../utils/ButtonLinkObjects";
-import { CustomUsernameField } from "./CustomUsernameField";
-import { usePasswordInputState } from "../../../../../hooks/signup/usePasswordInputState";
 import { CustomTextField } from "../../../../CustomTextField";
 import { useUsernameInputState } from "../../../../../hooks/signup/useUsernameSetup";
+import { signupSliceActions } from "../../../../../state/app/home/signupSlice";
+import { useDispatch } from "react-redux";
 export const UsernameStep = () => {
+  const dispatch = useDispatch();
   const {
     password,
     setHasUserEnteredValue,
@@ -25,6 +24,11 @@ export const UsernameStep = () => {
     handlePasswordInputChange(value);
     setHasUserEnteredValue(true);
   };
+  // console.log(errorMessage);
+
+  useEffect(() => {
+    dispatch(signupSliceActions.setUsername(username));
+  }, []);
 
   return (
     <DialogBodyContainer>

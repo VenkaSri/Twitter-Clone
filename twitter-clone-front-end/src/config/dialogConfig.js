@@ -13,6 +13,7 @@ import { StepOneBody } from "../components/dialog/signup/steps/1/StepOneBody";
 import { useSelector } from "react-redux";
 import StepTwoBody from "../components/dialog/signup/steps/2/StepTwoBody";
 import { StepThreeBody } from "../components/dialog/signup/steps/3/StepThreeBody";
+import FinalStep from "../components/signup/FinalStep";
 
 export const dialogStepsConfig = {
   sign_up_step_1: {
@@ -30,6 +31,9 @@ export const dialogStepsConfig = {
     body: <StepThreeBody />,
     footer: <DialogFooterContent step={3} />,
   },
+
+  // steps below happen after authentication
+
   upload_profile_picture: {
     header: <DialogHeaderContent content={<DialogHeaderLogo />} />,
     body: <UploadProfilePictureStep />,
@@ -45,5 +49,9 @@ export const dialogStepsConfig = {
     body: <UsernameStep />,
     footer: <DialogFooterContent />,
   },
-  // Add more steps or variations as needed
+  final_step: {
+    header: <DialogHeaderContent content={<DialogHeaderLogo />} />,
+    body: <FinalStep />,
+    footer: <DialogFooterContent profileStep={3} />,
+  },
 };

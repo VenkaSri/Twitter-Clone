@@ -12,8 +12,8 @@ import { DialogHeaderHeading } from "../../components/dialog/header/DialogHeader
 
 const initialState = {
   dialogHeaderContent: <DialogHeaderContent content={<DialogHeaderLogo />} />,
-  dialogBodyContent: <UploadProfilePictureStep />,
-  dialogFooterContent: <DialogFooterContent profileStep={1} />,
+  dialogBodyContent: <UsernameStep />,
+  dialogFooterContent: <DialogFooterContent profileStep={2} />,
   isDialogOpen: false,
   isACutomBody: false,
   dialogBodyOverFlowing: false,

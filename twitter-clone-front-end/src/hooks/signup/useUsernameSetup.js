@@ -7,7 +7,8 @@ import { getData } from "../../services/auth/getData";
 const validatePasswordLength = (text) => /^.{8,}$/.test(text);
 const validatePasswordStrength = (text) => /^(.)\1*$/.test(text);
 
-const validateUsernameLength = (text) => /^.{5,}$/.test(text);
+const validateUsernameMinLength = (text) => /^.{5,}$/.test(text);
+const validateUsernameMaxLength = (text) => /^.{16}$/.test(text);
 const validateUsername = (text) => /^[a-zA-Z0-9_]+$/.test(text);
 
 export function useUsernameInputState() {
@@ -40,26 +41,35 @@ export function useUsernameInputState() {
   );
 
   useEffect(() => {
-    const identifier = setTimeout(() => {
-      if (!validateUsernameLength(currentUsername)) {
+    const identifier = setTimeout(async () => {
+      if (currentUsername.length > 15) {
+        setIsUsernameLengthValidState(true);
+        setIsUsernameValidState(false);
+        setErrorMessage("Your username must be shorter than 15 characters.");
+        dispatch(signupSliceActions.setIsValidUsernameSet(false));
+        setInputError(true);
+      } else if (currentUsername.length < 5) {
         setIsUsernameLengthValidState(true);
         setIsUsernameValidState(false);
         setErrorMessage("Your username must be longer than 4 characters.");
+        dispatch(signupSliceActions.setIsValidUsernameSet(false));
         setInputError(true);
       } else if (!validateUsername(currentUsername)) {
         setIsUsernameValidState(true);
+        dispatch(signupSliceActions.setIsValidUsernameSet(false));
         setErrorMessage(
           "Your username can only contain letters, numbers and '_'"
         );
         setInputError(true);
-      } else if (!checkUsernameAvailablity) {
-        setIsUsernameAvailable(false);
+      } else if (await checkUsernameAvailablity()) {
         setErrorMessage("That username has been taken. Please choose another.");
         setInputError(true);
+        setIsUsernameAvailable(true);
       } else {
         setIsUsernameLengthValidState(false);
         setIsUsernameValidState(false);
         setInputError(false);
+        dispatch(signupSliceActions.setIsValidUsernameSet(true));
         setIsUsernameAvailable(false);
       }
     }, VALIDATION_DELAY);
@@ -71,22 +81,25 @@ export function useUsernameInputState() {
   }, [currentUsername, dispatch]);
 
   const checkUsernameAvailablity = async () => {
-    if (currentUsername === "venkk") {
-      return true;
-    } else {
+    try {
+      if (currentUsername === username) {
+        return;
+      } else {
+        const result = await getData(
+          `/api/username_available?username=${currentUsername}`
+        );
+        const response = await result.json();
+        console.log(response);
+        if (!response.usernameAvailable) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    } catch (error) {
+      console.log(error);
       return false;
     }
-    // try {
-    //   const result = await getData(
-    //     `/api/username_available?username=${currentUsername}`,
-    //     {}
-    //   );
-    //   return true;
-    //   console.log(result.status);
-    // } catch (error) {
-    //   console.log(error);
-    //   return false;
-    // }
   };
 
   return {

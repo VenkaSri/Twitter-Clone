@@ -1,20 +1,16 @@
 import React from "react";
 
-import DialogContentHeading from "../UI/dialog/DialogContentHeading";
-import DialogContentBody from "../UI/dialog/DialogContenBody";
-import DialogFooter from "../UI/dialog/DialogFooter";
-import DialogFooterContent from "../UI/dialog/DialogFooterContent";
+import { DialogContentHeading } from "../DialogContentHeading";
+import { DialogBodyContainer } from "../dialog/DialogBodyContainer";
 
 export const FinalStep = () => {
   return (
-    <>
+    <DialogBodyContainer>
       <DialogContentHeading
-        title="Don't miss out"
-        subheading="When you follow someone, you'll see thier Tweets in your Timeline. You'll ask get more relevant recommendations."
+        text="What should be call you?"
+        subtext="Your @username is unique. You can always change it later."
       />
-      <DialogContentBody />
-      
-    </>
+    </DialogBodyContainer>
   );
 };
 
