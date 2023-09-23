@@ -3,7 +3,12 @@ import React from "react";
 import { useSelector } from "react-redux";
 import FollowButton from "./UI/button/FollowButton";
 
-const UserProfileInfo = ({ name, username, withDescription }) => {
+const FollowCardContent = ({
+  name,
+  username,
+  withDescription,
+  handleClick,
+}) => {
   const followBtnStyle =
     "h-[2rem] w-[4.875rem] rounded-full bg-[#000] hover:bg-[#272c30] text-[#FFF] text-[0.938rem] font-cBold";
   const user = useSelector((state) => state.rootReducer.userInfo);
@@ -19,7 +24,7 @@ const UserProfileInfo = ({ name, username, withDescription }) => {
 
         <div className="ml-auto mt-flex inline">
           <FollowButton
-            // onClick={handleClick}
+            onClick={handleClick}
             btnText={"Follow"}
             btnStyle={followBtnStyle}
             // mouseOverHandler={handleMouseOver}
@@ -38,4 +43,4 @@ const UserProfileInfo = ({ name, username, withDescription }) => {
   );
 };
 
-export default UserProfileInfo;
+export default FollowCardContent;

@@ -20,6 +20,7 @@ const initialState = {
   isDialogOpen: false,
   isACutomBody: false,
   dialogBodyOverFlowing: false,
+  isDialogContentLoaded: false,
 };
 
 const dialogSlice = createSlice({
@@ -37,6 +38,9 @@ const dialogSlice = createSlice({
     },
     setDialogBodyOverFlowing(state, action) {
       state.dialogBodyOverFlowing = action.payload;
+    },
+    setIsDialogContentLoaded(state, action) {
+      state.isDialogContentLoaded = action.payload;
     },
   },
 });
