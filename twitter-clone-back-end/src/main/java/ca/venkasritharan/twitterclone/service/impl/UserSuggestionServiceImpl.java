@@ -5,8 +5,13 @@ import ca.venkasritharan.twitterclone.entity.authentication.User;
 import ca.venkasritharan.twitterclone.repository.FollowerRepository;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
+import ca.venkasritharan.twitterclone.response.UsersSuggestionResponse;
 import ca.venkasritharan.twitterclone.service.UserSuggestionService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -26,14 +31,48 @@ public class UserSuggestionServiceImpl implements UserSuggestionService {
     this.followerRepository = followerRepository;
     this.mapper = mapper;
   }
+
   @Override
-  public List<UserDetailsResponse> suggestUsers() {
+  public UsersSuggestionResponse suggestUsers(int page, int pageSize) {
     String principalUsername = getPrincipalUsername();
-    List<User> allUsers = userRepository.findAll();
+    System.out.println(principalUsername);
     List<Follower> followedUsers = followerRepository.findByFollowerUsername(principalUsername);
 
-    return filterUsersNotFollowedByCurrentUser(allUsers, followedUsers);
+    Pageable pageable = PageRequest.of(page, pageSize); // Create a pageable object for pagination
+    Page<User> usersPage = userRepository.findAll(pageable);
+
+    List<UserDetailsResponse> userDetailsResponses = new ArrayList<>();
+
+    for (User user : usersPage.getContent()) {
+      if (isNotCurrentUser(user, principalUsername) && isNotFollowed(user, followedUsers)) {
+        UserDetailsResponse userDetailsResponse = mapper.map(user, UserDetailsResponse.class);
+        userDetailsResponses.add(userDetailsResponse);
+      }
+    }
+
+
+
+    return createResponse(userDetailsResponses, page, pageSize,usersPage.getNumberOfElements() );
   }
+
+  private UsersSuggestionResponse createResponse(List<UserDetailsResponse> userDetailsResponseList, int page, int pageSize, long totalElements) {
+    UsersSuggestionResponse usersSuggestionResponse = new UsersSuggestionResponse();
+    usersSuggestionResponse.setContent(userDetailsResponseList);
+    usersSuggestionResponse.setPageNo(page);
+    usersSuggestionResponse.setTotalElements(totalElements);
+    usersSuggestionResponse.setPageSize(pageSize);
+    return usersSuggestionResponse;
+  }
+
+//  @Override
+//  public Page<UserDetailsResponse> suggestUsers(int page, int pageSize) {
+//    String principalUsername = getPrincipalUsername();
+//    Pageable pageable = PageRequest.of(page, pageSize);
+//    Page<User> userPage = userRepository.findAll(pageable);
+//    List<Follower> followedUsers = followerRepository.findByFollowerUsername(principalUsername);
+//
+//    return filterUsersNotFollowedByCurrentUser(allUsers, followedUsers);
+//  }
 
   private String getPrincipalUsername() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
