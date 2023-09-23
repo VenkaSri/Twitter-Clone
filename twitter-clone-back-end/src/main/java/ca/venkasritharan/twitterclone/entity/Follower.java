@@ -15,7 +15,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "follower")
+@Table(name = "follower", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"follower_user_id", "followed_user_id"})
+})
 public class Follower {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
