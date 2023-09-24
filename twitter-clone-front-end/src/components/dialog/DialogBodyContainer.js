@@ -3,7 +3,7 @@ import { useMediaQuery } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { dialogSliceActions } from "../../state/dialog/dialogSlice";
 
-export const DialogBodyContainer = React.forwardRef((props, ref) => {
+export const DialogBodyContainer = (props) => {
   const fullScreen = useMediaQuery("(max-width:702px)");
   const containerRef = useRef(null);
   const isDialogContentLoaded = useSelector(
@@ -74,7 +74,8 @@ export const DialogBodyContainer = React.forwardRef((props, ref) => {
   return (
     <>
       <div
-        ref={ref}
+        id="scrollableDiv"
+        ref={containerRef}
         className={`overflow-auto
 flex flex-col items-stretch basis-full flex-grow bg-[#fff] dark:bg-[#000] `}
       >
@@ -88,4 +89,4 @@ flex flex-col items-stretch basis-full flex-grow bg-[#fff] dark:bg-[#000] `}
       </div>
     </>
   );
-});
+};
