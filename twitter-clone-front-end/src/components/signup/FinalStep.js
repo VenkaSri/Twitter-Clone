@@ -1,23 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { DialogContentHeading } from "../DialogContentHeading";
 import { DialogBodyContainer } from "../dialog/DialogBodyContainer";
 import { SuggestFriends } from "../SuggestFriends";
-
+import InfiniteScroll from "react-infinite-scroll-component";
+const style = {
+  height: 30,
+  border: "1px solid green",
+  margin: 6,
+  padding: 8,
+};
 export const FinalStep = () => {
+  const [items, setItems] = useState(Array.from({ length: 20 }));
+  const [hasMore, setHasMore] = useState(true);
+
+  const fetchMoreData = () => {
+    if (items.length >= 500) {
+      setHasMore(false);
+      return;
+    }
+    // Simulate a fake async API call that sends
+    // 20 more records in 1.5 seconds
+    setTimeout(() => {
+      setItems([...items, ...Array.from({ length: 20 })]);
+    }, 1500);
+  };
   return (
-    <DialogBodyContainer>
-      <DialogContentHeading
-        text="Don't miss out"
-        subtext="When you follow someone, you'll see their Tweets in your Timeline. You'll also get more relevant recommendations."
-      />
-      <span
-        className={`font-cHeavy text-[20px] leading-[20px]  dark:text-[#fff]  py-3 px-4`}
+    <>
+      <InfiniteScroll
+        className="border border-[red]"
+        dataLength={items.length}
+        next={fetchMoreData}
+        height={497}
+        hasMore={hasMore}
+        loader={<h4>Loading...</h4>}
       >
-        Follow 1 or more accounts
-      </span>
-      <SuggestFriends />
-    </DialogBodyContainer>
+        <div>Hello</div>
+        {items.map((_, index) => (
+          <div style={style} key={index}>
+            div - #{index}
+          </div>
+        ))}
+      </InfiniteScroll>
+    </>
   );
 };
 

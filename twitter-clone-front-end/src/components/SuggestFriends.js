@@ -7,19 +7,37 @@ import { Oval } from "react-loader-spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { dialogSliceActions } from "../state/dialog/dialogSlice";
 import { useDispatch } from "react-redux";
-
+const style = {
+  height: 30,
+  border: "1px solid green",
+  margin: 6,
+  padding: 8,
+};
 export const SuggestFriends = () => {
   const [suggestedUsers, setSuggestedUsers] = useState([]);
   const dispatch = useDispatch();
   const [contentNotLoaded, setContentNotLoaded] = useState(true);
   const [page, setPage] = useState(0); // Track the current page
-  const [hasMore, setHasMore] = useState(true); // Track whether there's more data to load
+  const [items, setItems] = useState(Array.from({ length: 40 }));
+  const [hasMore, setHasMore] = useState(true);
+
+  const fetchMoreData = () => {
+    if (items.length >= 500) {
+      setHasMore(false);
+      return;
+    }
+    // Simulate a fake async API call that sends
+    // 20 more records in 1.5 seconds
+    setTimeout(() => {
+      setItems([...items, ...Array.from({ length: 20 })]);
+    }, 1500);
+  };
 
   useEffect(() => {
     const fetchSuggestedUsers = async () => {
       try {
         const result = await getData(
-          `/v1/api/users/suggestions?page=0&pageSize=4`
+          `/v1/api/users/suggestions?page=0&pageSize=2`
         );
         const response = await result.json();
         setSuggestedUsers(response.content);
@@ -40,22 +58,22 @@ export const SuggestFriends = () => {
 
   return (
     <>
-      <div className="min-h-[500px]">
-        {contentNotLoaded ? (
-          <Oval
-            height={30}
-            width={30}
-            color="#1d9bf0"
-            wrapperClass=""
-            visible={true}
-            ariaLabel="oval-loading"
-            secondaryColor="#1d9bf0"
-            strokeWidth={5}
-            strokeWidthSecondary={2}
-          />
-        ) : (
-          users
-        )}
+      <div className="flex-col-container grow">
+        <h1>demo: react-infinite-scroll-component</h1>
+        <hr />
+        <InfiniteScroll
+          dataLength={items.length}
+          next={fetchMoreData}
+          hasMore={hasMore}
+          height={400}
+          loader={<h4>Loading...</h4>}
+        >
+          {items.map((_, index) => (
+            <div style={style} key={index}>
+              div - #{index}
+            </div>
+          ))}
+        </InfiniteScroll>
       </div>
     </>
   );
