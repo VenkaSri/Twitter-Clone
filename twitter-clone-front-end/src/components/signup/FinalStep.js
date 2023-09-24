@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { DialogContentHeading } from "../DialogContentHeading";
 import { DialogBodyContainer } from "../dialog/DialogBodyContainer";
 import { SuggestFriends } from "../SuggestFriends";
+import { useMediaQuery } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroll-component";
 const style = {
   height: 30,
@@ -11,8 +12,9 @@ const style = {
   padding: 8,
 };
 export const FinalStep = () => {
-  const [items, setItems] = useState(Array.from({ length: 20 }));
+  const [items, setItems] = useState(Array.from({ length: 5 }));
   const [hasMore, setHasMore] = useState(true);
+  const fullScreen = useMediaQuery("(max-width:702px)");
 
   const fetchMoreData = () => {
     if (items.length >= 500) {
@@ -26,23 +28,24 @@ export const FinalStep = () => {
     }, 1500);
   };
   return (
-    <>
+    <DialogBodyContainer>
       <InfiniteScroll
-        className="border border-[red]"
         dataLength={items.length}
         next={fetchMoreData}
-        height={497}
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
       >
-        <div>Hello</div>
+        <DialogContentHeading
+          text="Don't miss out"
+          subtext="When you follow someone, you'll see their Posts in your Timeline. You'll also get more relevant recommendations."
+        />
         {items.map((_, index) => (
           <div style={style} key={index}>
             div - #{index}
           </div>
         ))}
       </InfiniteScroll>
-    </>
+    </DialogBodyContainer>
   );
 };
 
