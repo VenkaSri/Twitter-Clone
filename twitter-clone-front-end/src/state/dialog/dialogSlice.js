@@ -21,6 +21,7 @@ const initialState = {
   isACutomBody: false,
   dialogBodyOverFlowing: false,
   isDialogContentLoaded: false,
+  endOfScroll: false,
 };
 
 const dialogSlice = createSlice({
@@ -41,6 +42,9 @@ const dialogSlice = createSlice({
     },
     setIsDialogContentLoaded(state, action) {
       state.isDialogContentLoaded = action.payload;
+    },
+    setEndOfScroll(state, action) {
+      state.endOfScroll = action.payload;
     },
   },
 });
