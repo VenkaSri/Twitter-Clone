@@ -6,49 +6,9 @@ import { dialogSliceActions } from "../../state/dialog/dialogSlice";
 export const DialogBodyContainer = (props) => {
   const fullScreen = useMediaQuery("(max-width:702px)");
   const containerRef = useRef(null);
-  const isDialogContentLoaded = useSelector(
-    (state) => state.rootReducer.dialogSlice.isDialogContentLoaded
-  );
-
   const dispatch = useDispatch();
 
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  // Function to handle scroll events
-  const handleScroll = () => {
-    const container = containerRef.current;
-    if (container) {
-      const scrollTop = container.scrollTop;
-      const scrollHeight = container.scrollHeight;
-      const clientHeight = container.clientHeight;
-
-      // Calculate the scroll position from the bottom
-      const scrollPositionFromBottom =
-        scrollHeight - (scrollTop + clientHeight);
-
-      setScrollPosition(scrollTop);
-
-      // Check if we have reached the bottom
-      if (scrollPositionFromBottom === 0) {
-        dispatch(dialogSliceActions.setEndOfScroll(true));
-      } else {
-        dispatch(dialogSliceActions.setEndOfScroll(false));
-      }
-    }
-  };
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener("scroll", handleScroll);
-      return () => {
-        container.removeEventListener("scroll", handleScroll);
-      };
-    }
-  }, []);
-
   // s/o chat-gpt, dynamically adding box shadow
-
   useEffect(() => {
     const checkOverflow = () => {
       const element = containerRef.current;
@@ -63,13 +23,13 @@ export const DialogBodyContainer = (props) => {
       }
     };
 
-    checkOverflow(); // Run initially if isDialogContentLoaded is true
+    checkOverflow();
     window.addEventListener("resize", checkOverflow);
 
     return () => {
       window.removeEventListener("resize", checkOverflow);
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

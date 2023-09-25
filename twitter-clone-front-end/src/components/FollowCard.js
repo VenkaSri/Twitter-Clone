@@ -13,8 +13,10 @@ const FollowCard = ({
   mouseOverHandler,
   mouseLeaveHandler,
   followAction,
+  isFollowed,
 }) => {
   const [btnText, setBtnText] = useState(text);
+
   const [style, setBtnStyle] = useState(btnStyle);
   const handleClick = () => {
     onFollow();
@@ -28,18 +30,17 @@ const FollowCard = ({
     mouseLeaveHandler(false);
   };
 
+  const handleFollow = () => {
+    followAction(user.id);
+  };
+
   return (
     <div className="card--follow">
       <div className="mr-3   flex self-stretch">
         <ProfilePicture source={DefaultAvatar} size={44} />
       </div>
       <div className="flex grow ">
-        <FollowCardContent
-          name={user.name}
-          username={user.username}
-          withDescription
-          handleClick={followAction}
-        />
+        <FollowCardContent user={user} withDescription />
       </div>
     </div>
   );
