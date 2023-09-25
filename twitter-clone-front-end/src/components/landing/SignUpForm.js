@@ -1,40 +1,23 @@
 import React from "react";
-import { useSelector } from "react-redux/es/hooks/useSelector";
+
 import {
   appleOAuthButton,
   googleOAuthButton,
   createAccountButton,
   createDemoAccountButton,
 } from "../../constants/buttonConstants";
-import { useLocation, useNavigate } from "react-router-dom";
+
 import Button from "../UI/button/Button";
 import { useDispatch } from "react-redux";
-import { unfollowDialogActions } from "../../state/dialog/dialogState-reducer";
 
-import { createBrowserHistory } from "history";
-import dialogSlice, {
-  dialogSliceActions,
-  setDialogContent,
-} from "../../state/dialog/dialogSlice";
+import { dialogSliceActions } from "../../state/dialog/dialogSlice";
 
 export const SignUpForm = () => {
-  const navigate = useNavigate();
-
-  const location = useLocation();
   const dispatch = useDispatch();
-  const dialogState = useSelector(
-    (state) => state.rootReducer.dialogState.isDialogOpen
-  );
 
   const handleCreateAccount = () => {
     dispatch(dialogSliceActions.setIsDialogOpen(true));
     dispatch(dialogSliceActions.setDialogContent("sign_up_step_1"));
-    dispatch(unfollowDialogActions.setAuthType("SIGN_UP"));
-    // window.history.replaceState(
-    //   null,
-    //   "Sign up for Twitter / X",
-    //   "/i/flow/signup"
-    // );
   };
 
   return (
@@ -78,12 +61,3 @@ export const SignUpForm = () => {
     </div>
   );
 };
-
-// const dialogState = useSelector(
-//   (state) => state.rootReducer.dialogState.isDialogOpen
-// );
-// const dispatch = useDispatch();
-
-// const manualNavigation = useSelector(
-//   (state) => state.rootReducer.dialogState.manualNavigation
-// );

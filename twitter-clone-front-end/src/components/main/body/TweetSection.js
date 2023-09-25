@@ -8,12 +8,12 @@ import TweetOptions from "./TweetOptions";
 import CharactersProgress from "./post/CharactersProgress";
 
 const TweetSection = () => {
-  const isVisible = useSelector(
-    (state) => state.rootReducer.tweetState.isPostFieldClicked
-  );
-  const hasUserTyped = useSelector(
-    (state) => state.rootReducer.tweetState.hasUserTyped
-  );
+  // const isVisible = useSelector(
+  //   (state) => state.rootReducer.tweetState.isPostFieldClicked
+  // );
+  // const hasUserTyped = useSelector(
+  //   (state) => state.rootReducer.tweetState.hasUserTyped
+  // );
 
   const everyoneButton = {
     bgColor: "#FFFFFF",
@@ -59,20 +59,20 @@ const TweetSection = () => {
       </div>
       <div className="pt-[4x]">
         <div className="pt-[4px]">
-          <div className="pb-[12px]">
+          {/* <div className="pb-[12px]">
             {isVisible && <Button buttonProps={everyoneButton} />}
-          </div>
+          </div> */}
 
           <div className="flex">
             <TweetField />
           </div>
         </div>
 
-        <div className="-ml-3 py-2">
+        {/* <div className="-ml-3 py-2">
           {isVisible && <Button buttonProps={whoCanReplyButton} />}
-        </div>
+        </div> */}
 
-        <div
+        {/* <div
           className={`-ml-2 mt-1 ${
             isVisible && "border-t border-t-[#eff3f4]"
           } w-[514px] h-[48px] flex items-center justify-between `}
@@ -84,7 +84,7 @@ const TweetSection = () => {
             <div></div>
             <Button buttonProps={postButton}></Button>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

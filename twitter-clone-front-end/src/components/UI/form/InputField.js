@@ -3,7 +3,7 @@ import React from "react";
 import { InputAdornment, TextField } from "@mui/material";
 import SVG from "../app/SVG";
 import { useDispatch, useSelector } from "react-redux";
-import { signupSliceActions } from "../../../state/app/home/signupSlice";
+import { signupSliceActions } from "../../../state/auth/signupSlice";
 import { dialogSliceActions } from "../../../state/dialog/dialogSlice";
 import { useCurrentStep } from "../../../hooks/signup/ useCurrentStep";
 

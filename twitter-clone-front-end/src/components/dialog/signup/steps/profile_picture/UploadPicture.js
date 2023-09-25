@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 
 import ImageUploading from "react-images-uploading";
-import getIcon from "../../../../UI/icons/iconsutil";
+import getIcon from "../../../../../utils/icons/iconsutil";
 import { AddPhoto } from "../../../../AddPhoto";
 import { useDispatch, useSelector } from "react-redux";
 import { userSliceActions } from "../../../../../state/user/userSlice";
 import { dialogSliceActions } from "../../../../../state/dialog/dialogSlice";
 import { profileSliceActions } from "../../../../../state/profile/profileSlice";
 import { RemovePhoto } from "../../../../RemovePhoto";
-import { signupSliceActions } from "../../../../../state/app/home/signupSlice";
+import { signupSliceActions } from "../../../../../state/auth/signupSlice";
 
 export const UploadPicture = ({ source }) => {
   const [images, setImages] = useState([]);

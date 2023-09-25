@@ -3,12 +3,11 @@ import React, { useState } from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useDispatch, useSelector } from "react-redux";
+import { useTheme } from "../../../../hooks/useTheme";
 
 const DOBSelectField = (props) => {
   const [isFocused, setIsFocused] = useState(false);
-  const darkMode = useSelector(
-    (state) => state.rootReducer.globalState.isDarkMode
-  );
+  const darkMode = useTheme();
 
   return (
     <FormControl

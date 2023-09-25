@@ -24,7 +24,6 @@ const MainHeader = () => {
         <TabButton buttonObject={ForYou} />
         <TabButton buttonObject={Following} />
       </div>
-      <TweetSection />
       <button onClick={handleClick}>Hello</button>
     </div>
   );

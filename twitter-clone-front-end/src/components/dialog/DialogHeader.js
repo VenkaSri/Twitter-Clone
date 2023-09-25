@@ -1,23 +1,9 @@
 import React from "react";
 
 import { useMediaQuery } from "@mui/material";
-import LoginHeader from "./login/LoginHeader";
-import SignUpHeader from "./signup/SignUpHeader";
 
-const DialogHeader = ({ type, content, button }) => {
+const DialogHeader = ({ content }) => {
   const fullScreen = useMediaQuery("(max-width:702px)");
-  let header = null;
-
-  switch (type) {
-    case "LOGIN":
-      header = <LoginHeader />;
-      break;
-    case "SIGNUP":
-      header = <SignUpHeader />;
-      break;
-    default:
-      break;
-  }
 
   return (
     <div className="h-[53px] flex bg-[#fff] dark:bg-[#000] px-[16px] ">

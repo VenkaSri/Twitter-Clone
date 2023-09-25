@@ -1,6 +1,6 @@
 import React from "react";
 import IconButton from "./IconButton";
-import getIcon from "../icons/iconsutil";
+import getIcon from "../../../utils/icons/iconsutil";
 
 const Button = ({ onClick, buttonProps }) => {
   const handleMouseEnter = (event) => {

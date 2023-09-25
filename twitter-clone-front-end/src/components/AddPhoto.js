@@ -1,6 +1,5 @@
 import React from "react";
-import getIcon from "./UI/icons/iconsutil";
-import { type } from "@testing-library/user-event/dist/type";
+import getIcon from "../utils/icons/iconsutil";
 export const AddPhoto = ({ onClick, className }) => {
   return (
     <div
@@ -8,7 +7,7 @@ export const AddPhoto = ({ onClick, className }) => {
       onClick={onClick}
     >
       <div className="h-5 w-5  flex">
-        {getIcon((type = "Add Photo"), { fill: "#fff" })}
+        {getIcon("Add Photo", { fill: "#fff" })}
       </div>
     </div>
   );

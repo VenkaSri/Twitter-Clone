@@ -1,6 +1,6 @@
 import React from "react";
 
-import getIcon from "../icons/iconsutil";
+import getIcon from "../../../utils/icons/iconsutil";
 
 const IconButton = ({ type, onClick, options = {} }) => {
   return (

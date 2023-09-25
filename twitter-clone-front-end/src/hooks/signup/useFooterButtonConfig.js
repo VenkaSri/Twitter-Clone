@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { dialogSliceActions } from "../../state/dialog/dialogSlice";
-import { signupSliceActions } from "../../state/app/home/signupSlice";
+
 import { useCurrentStep } from "./ useCurrentStep";
-import { loadingSliceActions } from "../../state/app/loading/loadingSlice";
 import { postData } from "../../services/postData";
 import { fetchUserDetails, userSliceActions } from "../../state/user/userSlice";
 import { userInfoActions } from "../../state/user/userInfo-reducer";
 import { UPDATE_USERNAME_STEP } from "../../utils/constants/dialog/dialogConstants";
 
 import moment from "moment";
+import { signupSliceActions } from "../../state/auth/signupSlice";
 
 export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
   const dispatch = useDispatch();
@@ -77,7 +77,6 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
 
   const goToAddProfilePicStep = async () => {
     try {
-      dispatch(loadingSliceActions.setIsDialogLoading(true));
       const response = await postData("/api/auth/register", {
         name,
         userDob,
@@ -87,10 +86,8 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
 
       if (response.status === 200) {
         dispatch(fetchUserDetails());
-        dispatch(loadingSliceActions.setIsDialogLoading(false));
         dispatch(dialogSliceActions.setDialogContent("upload_profile_picture"));
       }
-      dispatch(userInfoActions.setAuthentication(true));
     } catch (error) {
       if (error.response) {
         if (error.response.status === 409) {

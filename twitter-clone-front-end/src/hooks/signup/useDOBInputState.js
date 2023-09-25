@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { signupSliceActions } from "../../state/app/home/signupSlice";
+import { signupSliceActions } from "../../state/auth/signupSlice";
 
 export function useDOBInputState() {
   const dispatch = useDispatch();

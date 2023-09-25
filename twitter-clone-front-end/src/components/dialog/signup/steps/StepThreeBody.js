@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useMediaQuery } from "@mui/material";
-import { DialogContentHeading } from "../../../../DialogContentHeading";
-import { CustomTextField } from "../../../../CustomTextField";
-import { usePasswordInputState } from "../../../../../hooks/signup/usePasswordInputState";
-import { DialogBodyContainer } from "../../../DialogBodyContainer";
+import { DialogContentHeading } from "../../../DialogContentHeading";
+import { CustomTextField } from "../../../CustomTextField";
+import { usePasswordInputState } from "../../../../hooks/signup/usePasswordInputState";
+import { DialogBodyContainer } from "../../DialogBodyContainer";
 
 export const StepThreeBody = () => {
   const fullScreen = useMediaQuery("(max-width:702px)");

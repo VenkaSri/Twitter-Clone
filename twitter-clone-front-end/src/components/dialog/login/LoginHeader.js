@@ -2,7 +2,6 @@ import React from "react";
 
 import { useMediaQuery } from "@mui/material";
 import getIcon from "../../UI/icons/iconsutil";
-import { HeaderIcon } from "../HeaderIcon";
 import IconButton from "../../UI/button/IconButton";
 import { resetActions } from "../../../state/auth/sign-up/reset-reducer";
 import { useDispatch, useSelector } from "react-redux";

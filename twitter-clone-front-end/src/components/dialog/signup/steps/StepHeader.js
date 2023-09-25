@@ -1,6 +1,6 @@
 import React from "react";
-import { DialogHeaderContent } from "../../header/DialogHeaderContent";
-import { DialogHeaderHeading } from "../../header/DialogHeaderHeading";
+import { DialogHeaderContent } from "../header/DialogHeaderContent";
+import { DialogHeaderHeading } from "../header/DialogHeaderHeading";
 
 export const StepHeader = ({ heading, withIcon, withButton }) => (
   <DialogHeaderContent

@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signupSliceActions } from "../../state/app/home/signupSlice";
+
 import { VALIDATION_DELAY } from "../../constants";
 import { getData } from "../../services/auth/getData";
+import { signupSliceActions } from "../../state/auth/signupSlice";
 
 const validatePasswordLength = (text) => /^.{8,}$/.test(text);
 const validatePasswordStrength = (text) => /^(.)\1*$/.test(text);

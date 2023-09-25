@@ -1,26 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import FollowButton from "./UI/button/FollowButton";
-import { postData } from "../services/postData";
-import { getData } from "../services/auth/getData";
-import { signupSliceActions } from "../state/app/home/signupSlice";
 import FollowContext from "../context/FollowContext";
 
-const FollowCardContent = ({ user, withDescription, handleFollowAction }) => {
+const FollowCardContent = ({ user, withDescription }) => {
   const [isFollowed, setIsFollowed] = useState(false);
   const [btnText, setBtnText] = useState("Follow");
-  const dispatch = useDispatch();
-  // const [followedUserIds, setFollowedUserIds] = useState([]);
-
-  // const user = useSelector((state) => state.rootReducer.userInfo);
-  const isFollowingOneAccount = useSelector(
-    (state) => state.rootReducer.signUpState.isFollowingOneAccount
-  );
-
-  const ifFollowed = () => {
-    console.log("followed");
-  };
 
   const ctxData = useContext(FollowContext);
   const handleFollow = () => {
@@ -32,7 +18,7 @@ const FollowCardContent = ({ user, withDescription, handleFollowAction }) => {
       setIsFollowed(true);
     }
   };
-  const btnTExt = isFollowed ? "Following" : "Follow";
+
   const btnStyle = isFollowed ? "follow--button-unfollow" : "";
 
   const handleMouseOver = () => {

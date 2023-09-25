@@ -6,18 +6,18 @@ import { useSelector } from "react-redux";
 
 export const Dialog = ({ type, content }) => {
   const isMobile = useMediaQuery("(max-width:702px)");
-  const darkMode = useSelector(
-    (state) => state.rootReducer.globalState.isDarkMode
-  );
+  // const darkMode = useSelector(
+  //   (state) => state.rootReducer.globalState.isDarkMode
+  // );
   const open = useSelector(
     (state) => state.rootReducer.dialogSlice.isDialogOpen
   );
-  const dialogStyles = getDialogStyles(type, isMobile, darkMode);
+  const dialogStyles = getDialogStyles(type, isMobile);
 
   return (
     <MUIDialog
       sx={dialogStyles.styles}
-      open={true}
+      open={open}
       PaperProps={dialogStyles}
       fullScreen={isMobile}
       transitionDuration={0}

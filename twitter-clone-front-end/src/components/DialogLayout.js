@@ -1,10 +1,7 @@
 import React from "react";
 
-import { DialogTitle, DialogContent, DialogActions } from "@mui/material";
+import { DialogTitle, DialogContent } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { useRef } from "react";
-import { useEffect } from "react";
-import { unfollowDialogActions } from "../state/dialog/dialogState-reducer";
 
 export const DialogLayout = ({ header, body, footer }) => {
   // s/o chat-gpt, dynamically adding box shadow

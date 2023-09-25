@@ -1,18 +1,18 @@
 import React from "react";
-import { DialogHeaderContent } from "../components/dialog/header/DialogHeaderContent";
+import { DialogHeaderContent } from "../components/dialog/signup/header/DialogHeaderContent";
 import { EditMedia } from "../components/dialog/signup/steps/profile_picture/EditMedia";
 import { ScaleImage } from "../components/dialog/signup/steps/profile_picture/ScaleImage";
-import { DialogHeaderHeading } from "../components/dialog/header/DialogHeaderHeading";
-import { DialogHeaderLogo } from "../components/dialog/header/DialogHeaderLogo";
+import { DialogHeaderHeading } from "../components/dialog/signup/header/DialogHeaderHeading";
+import { DialogHeaderLogo } from "../components/dialog/signup/header/DialogHeaderLogo";
 import { UploadProfilePictureStep } from "../components/dialog/signup/steps/profile_picture/UploadProfilePictureStep";
 import { DialogFooterButton } from "../components/DialogFooterButton";
-import { DialogFooterContent } from "../components/dialog/footer/DialogFooterContent";
+import { DialogFooterContent } from "../components/dialog/DialogFooterContent";
 import { UsernameStep } from "../components/dialog/signup/steps//username/UsernameStep";
 import { StepHeader } from "../components/dialog/signup/steps/StepHeader";
-import { StepOneBody } from "../components/dialog/signup/steps/1/StepOneBody";
+import { StepOneBody } from "../components/dialog/signup/steps/StepOneBody";
 import { useSelector } from "react-redux";
-import StepTwoBody from "../components/dialog/signup/steps/2/StepTwoBody";
-import { StepThreeBody } from "../components/dialog/signup/steps/3/StepThreeBody";
+import StepTwoBody from "../components/dialog/signup/steps/StepTwoBody";
+import { StepThreeBody } from "../components/dialog/signup/steps/StepThreeBody";
 import FinalStep from "../components/signup/FinalStep";
 
 export const dialogStepsConfig = {

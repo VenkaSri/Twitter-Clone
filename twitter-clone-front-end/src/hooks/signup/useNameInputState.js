@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { signupSliceActions } from "../../state/app/home/signupSlice";
+import { signupSliceActions } from "../../state/auth/signupSlice";
 
 export function useNameInputState() {
   const onlySpaces = (text) => !/[^\s\\]/.test(text);

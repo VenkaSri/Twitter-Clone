@@ -1,15 +1,11 @@
 import React from "react";
 
-import { HeaderIcon } from "../HeaderIcon";
 import { DialogHeaderIcon } from "./DialogHeaderIcon";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  dialogSliceActions,
-  setDialogContent,
-} from "../../../state/dialog/dialogSlice";
-import { signupSliceActions } from "../../../state/app/home/signupSlice";
-import { useCurrentStep } from "../../../hooks/signup/ useCurrentStep";
-import { RESET_POST_REG_STEP } from "../../../utils/constants/dialog/dialogConstants";
+import { dialogSliceActions } from "../../../../state/dialog/dialogSlice";
+import { signupSliceActions } from "../../../../state/auth/signupSlice";
+import { useCurrentStep } from "../../../../hooks/signup/ useCurrentStep";
+import { RESET_POST_REG_STEP } from "../../../../utils/constants/dialog/dialogConstants";
 
 export const DialogHeaderContent = ({ content, icon, button }) => {
   const currentStep = useCurrentStep();

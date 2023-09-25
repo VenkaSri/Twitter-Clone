@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 
-export const useDarkMode = () => {
+export const useTheme = () => {
   const darkMode = useSelector(
-    (state) => state.rootReducer.globalState.isDarkMode
+    (state) => state.rootReducer.themeSlice.darkMode
   );
   return darkMode;
 };

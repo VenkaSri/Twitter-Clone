@@ -3,8 +3,8 @@ import { DialogBodyContainer } from "../../../DialogBodyContainer";
 import { DialogContentHeading } from "../../../../DialogContentHeading";
 import { CustomTextField } from "../../../../CustomTextField";
 import { useUsernameInputState } from "../../../../../hooks/signup/useUsernameSetup";
-import { signupSliceActions } from "../../../../../state/app/home/signupSlice";
 import { useDispatch } from "react-redux";
+import { signupSliceActions } from "../../../../../state/auth/signupSlice";
 export const UsernameStep = () => {
   const dispatch = useDispatch();
   const {

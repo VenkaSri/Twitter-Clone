@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { TextField, InputAdornment } from "@mui/material";
 import { useSelector } from "react-redux";
-import getIcon from "./UI/icons/iconsutil";
+import getIcon from "../utils/icons/iconsutil";
+import { useTheme } from "../hooks/useTheme";
 
 export const CustomTextField = ({
   label,
@@ -15,9 +16,7 @@ export const CustomTextField = ({
 }) => {
   const [hasTwoIcons, setHadTwoIcons] = useState(false);
   const [iconPath, setIconPath] = useState(icon.end);
-  const darkMode = useSelector(
-    (state) => state.rootReducer.globalState.isDarkMode
-  );
+  const darkMode = useTheme();
   const [isFocused, setIsFocused] = useState(false);
   const handleInput = (e) => {
     onInputChange(e.target.value);

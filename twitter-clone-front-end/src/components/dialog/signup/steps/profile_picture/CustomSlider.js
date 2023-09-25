@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { Slider } from "@mui/material";
 import { Stack } from "@mui/system";
-import getIcon from "../../../../UI/icons/iconsutil";
+import getIcon from "../../../../../utils/icons/iconsutil";
 //https://codesandbox.io/s/942p9w?file=/Demo.tsx
 export const CustomSlider = ({ onScaleChange }) => {
   const [value, setValue] = useState(0);

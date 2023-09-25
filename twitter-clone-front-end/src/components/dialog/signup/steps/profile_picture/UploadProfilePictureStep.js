@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import ImageUploading from "react-images-uploading";
-import getIcon from "../../../../UI/icons/iconsutil";
+import getIcon from "../../../../../utils/icons/iconsutil";
 import { useDispatch, useSelector } from "react-redux";
-import { stepsActions } from "../../../../../state/auth/form/steps-reducer";
 import { userInfoActions } from "../../../../../state/user/userInfo-reducer";
 import { DialogContentHeading } from "../../../../DialogContentHeading";
 import { UploadPicture } from "./UploadPicture";
@@ -10,9 +9,6 @@ import { DialogBodyContainer } from "../../../DialogBodyContainer";
 export const UploadProfilePictureStep = () => {
   const [images, setImages] = React.useState([]);
   const [avaURL, setAvaURL] = useState(null);
-  const currentStep = useSelector(
-    (state) => state.rootReducer.signUp.steps.currentStep
-  );
 
   const username = useSelector(
     (state) => state.rootReducer.userSession.username

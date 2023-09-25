@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { LoginFooter } from "./login/LoginFooter";
-import { SignupFooter } from "./signup/SignupFooter";
+
 import { useMediaQuery } from "@mui/material";
 
 export const DialogFooter = ({ type, content }) => {
@@ -11,16 +10,6 @@ export const DialogFooter = ({ type, content }) => {
     (state) => state.rootReducer.dialogSlice.dialogBodyOverFlowing
   );
 
-  switch (type) {
-    case "LOGIN_PASSWORD_INPUT":
-      footer = <LoginFooter />;
-      break;
-    case "SIGNUP":
-      footer = <SignupFooter />;
-      break;
-    default:
-      break;
-  }
   const overflowClass = dialogBodyOverFlowing ? "shadow-custom-shadow" : "";
   return (
     <div

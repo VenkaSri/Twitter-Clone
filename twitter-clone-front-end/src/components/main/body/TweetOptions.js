@@ -1,6 +1,4 @@
-import Button from "../../UI/button/Button";
 import IconButton from "../../UI/button/IconButton";
-import getIcon from "../../UI/icons/iconsutil";
 
 const TweetOptions = () => {
   const handleMedia = () => {

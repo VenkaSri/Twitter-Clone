@@ -1,7 +1,16 @@
 import React from "react";
 
 import Header from "../UI/header/Header";
-import { EXPLORE, HOME, BELL, MESSAGE, BOOKMARK, TWITTER_BLUE, PROFILE, USER_MORE } from "../../utils/ButtonLinkObjects";
+import {
+  EXPLORE,
+  HOME,
+  BELL,
+  MESSAGE,
+  BOOKMARK,
+  TWITTER_BLUE,
+  PROFILE,
+  USER_MORE,
+} from "../../utils/ButtonLinkObjects";
 
 const LoggedInHeader = () => {
   const headerButtonContent = [
@@ -14,9 +23,7 @@ const LoggedInHeader = () => {
     { href: "/user", svgPath: PROFILE, text: "Profile" },
     { href: "/", svgPath: USER_MORE, text: "More" },
   ];
-  return (
-    <Header headerButtonContent={headerButtonContent} />
-  );
+  return <Header headerButtonContent={headerButtonContent} />;
 };
 
 export default LoggedInHeader;

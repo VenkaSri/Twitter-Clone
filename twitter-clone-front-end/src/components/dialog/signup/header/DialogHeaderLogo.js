@@ -1,10 +1,10 @@
 import React from "react";
 
-import getIcon from "../../UI/icons/iconsutil";
-import { useDarkMode } from "../../../hooks/useDarkMode";
+import getIcon from "../../../../utils/icons/iconsutil";
+import { useTheme } from "../../../../hooks/useTheme";
 
 export const DialogHeaderLogo = () => {
-  const darkMode = useDarkMode();
+  const darkMode = useTheme();
   const fillColor = darkMode ? "white" : "black";
   return (
     <>
@@ -20,5 +20,3 @@ export const DialogHeaderLogo = () => {
     </>
   );
 };
-
-// darkMode ? "white" :

@@ -1,29 +1,19 @@
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  useContext,
-  createContext,
-} from "react";
+import React, { useEffect, useState } from "react";
 import { followUser, unfollowUser } from "../services/user/followAPI";
 import FollowCard from "./FollowCard";
-import { getData } from "../services/auth/getData";
-import { Oval } from "react-loader-spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { dialogSliceActions } from "../state/dialog/dialogSlice";
 import { useDispatch } from "react-redux";
 import { CustomSpinner } from "./CustomSpinner";
 import { fetchSuggestedUsers } from "../services/fetchSuggestedUsers";
 import FollowContext from "../context/FollowContext";
-import { signupSliceActions } from "../state/app/home/signupSlice";
+import signupSliceActions from "../state/auth/signupSlice";
 
 export const SuggestFriends = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
   const [items, setItems] = useState([]);
   const [hasMore, setHasMore] = useState(true);
-  const [isFollowed, setIsFollowed] = useState(false);
-  const useW = "jello";
 
   const [followedUserIds, setFollowedUserIds] = useState([]);
 

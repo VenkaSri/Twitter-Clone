@@ -1,5 +1,5 @@
 import React from "react";
-import getIcon from "./UI/icons/iconsutil";
+import getIcon from "../utils/icons/iconsutil";
 import { type } from "@testing-library/user-event/dist/type";
 export const RemovePhoto = ({ onClick, className }) => {
   return (

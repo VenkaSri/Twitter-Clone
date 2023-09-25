@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signupSliceActions } from "../../state/app/home/signupSlice";
+
 import { postData } from "../../services/postData";
 import { getData } from "../../services/auth/getData";
 
 import { VALIDATION_DELAY } from "../../constants";
 import { get } from "react-hook-form";
+import { signupSliceActions } from "../../state/auth/signupSlice";
 
 export function useEmailInputState() {
   const onlySpaces = (text) => !/[^\s\\]/.test(text);

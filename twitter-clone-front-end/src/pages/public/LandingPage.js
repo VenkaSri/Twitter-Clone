@@ -6,14 +6,11 @@ import { LandingFooter } from "../../components/landing/LandingFooter";
 import { SignUpForm } from "../../components/landing/SignUpForm";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
 import { Icon } from "../../components/icon";
-import { unfollowDialogActions } from "../../state/dialog/dialogState-reducer";
 
 export const LandingPage = () => {
   const windowWidth = useWindowWidth();
   const dispatch = useDispatch();
   const handleUserLogin = () => {
-    dispatch(unfollowDialogActions.setDialogState(true));
-    dispatch(unfollowDialogActions.setAuthType("LOGIN"));
     window.history.replaceState(
       null,
       "Sign up for Twitter / X",
