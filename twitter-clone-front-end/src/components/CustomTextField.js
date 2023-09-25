@@ -14,7 +14,7 @@ export const CustomTextField = ({
   autoFocus,
 }) => {
   const [hasTwoIcons, setHadTwoIcons] = useState(false);
-  const [iconPath, setIconPath] = useState(null);
+  const [iconPath, setIconPath] = useState(icon.end);
   const darkMode = useSelector(
     (state) => state.rootReducer.globalState.isDarkMode
   );
@@ -69,9 +69,9 @@ export const CustomTextField = ({
   );
 
   // let inputIcon = showPassword ? setIconPath("Reveal") : setIconPath("Hide");
-  const propertyCount = Object.keys(icon).length;
 
   useEffect(() => {
+    const propertyCount = Object.keys(icon).length;
     if (propertyCount > 1) {
       setHadTwoIcons(true);
       setIconPath(icon.end);
@@ -82,7 +82,7 @@ export const CustomTextField = ({
       setHadTwoIcons(false);
       setIconPath("Reveal");
     }
-  }, [icon, propertyCount, error]);
+  }, [icon, error]);
 
   const togglePasswordVisibility = () => {
     if (!hasTwoIcons) {

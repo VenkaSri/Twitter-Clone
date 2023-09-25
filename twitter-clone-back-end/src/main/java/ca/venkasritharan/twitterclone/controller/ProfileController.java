@@ -15,6 +15,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.sync.RequestBody;
@@ -50,10 +51,10 @@ public class ProfileController {
     return userProfileService.getAllProfiles();
   }
 
-//  @GetMapping("/followingCount/{usernameOrEmail}")
-//  public Response<String> getFollowingCount(@PathVariable String usernameOrEmail) {
-//    return userService.getFollowingCount(usernameOrEmail);
-//  }
+  @GetMapping("/following_count")
+  public ResponseEntity<Long> getFollowingCount(Principal principal) {
+    return userProfileService.getFollowingCount(principal);
+  }
 
   @PostMapping("/profile-picture")
   public String uploadProfilePicture(@RequestParam("file") MultipartFile file, Principal principal) {

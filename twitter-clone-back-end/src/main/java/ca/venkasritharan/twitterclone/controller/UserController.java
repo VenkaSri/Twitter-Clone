@@ -2,7 +2,10 @@ package ca.venkasritharan.twitterclone.controller;
 
 
 import ca.venkasritharan.twitterclone.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 
 @CrossOrigin(origins = {"*"})
@@ -21,7 +24,10 @@ public class UserController {
     userService.followUser(userId);
   }
 
-
+  @PostMapping("/{userId}/unfollow")
+  public void unfollow(@PathVariable long userId) {
+    userService.unfollowUser(userId);
+  }
 
 
 

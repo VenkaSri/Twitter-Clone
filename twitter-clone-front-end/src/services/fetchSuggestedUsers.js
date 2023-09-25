@@ -6,6 +6,7 @@ export const fetchSuggestedUsers = async (page, pageSize) => {
       `/v1/api/users/suggestions?page=${page}&pageSize=${pageSize}`
     );
     const response = await result.json();
+    console.log(response);
     return response.content;
   } catch (error) {
     throw new Error("Error fetching suggested users: " + error.message);

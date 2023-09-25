@@ -52,7 +52,7 @@ public class UserSuggestionServiceImpl implements UserSuggestionService {
 
 
 
-    return createResponse(userDetailsResponses, page, pageSize,usersPage.getNumberOfElements() );
+    return createResponse(userDetailsResponses, page, pageSize,usersPage.getTotalElements() );
   }
 
   private UsersSuggestionResponse createResponse(List<UserDetailsResponse> userDetailsResponseList, int page, int pageSize, long totalElements) {

@@ -9,4 +9,6 @@ import java.util.List;
 public interface UserProfileService {
   List<UserDetailsResponse> getAllProfiles();
   List<UserDetailsResponse> allUnfollowedProfiles(Principal principal);
+
+  ResponseEntity<Long> getFollowingCount(Principal principal);
 }

@@ -33,15 +33,29 @@ public class UserServiceImpl implements UserService {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
     Optional<User> followerUser = userRepository.findByUsername(authentication.getName());
-    if (followerUser.isPresent()) {
-      System.out.println(followerUser.get().getId());
-    }
     Optional<User> followedUser = userRepository.findById(userId);
+
     Follower follower = new Follower();
+
     if (followerUser.isPresent() && followedUser.isPresent() && followerUser.get().getId() != followedUser.get().getId()) {
       follower.setFollower(followerUser.get());
       follower.setFollowed(followedUser.get());
       followerRepository.save(follower);
+    }
+  }
+
+  @Override
+  public void unfollowUser(long userId) {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    Optional<User> followerUser = userRepository.findByUsername(authentication.getName());
+    Optional<User> followedUser = userRepository.findById(userId);
+
+    if (followerUser.isPresent() && followedUser.isPresent() && followerUser.get().getId() != followedUser.get().getId()) {
+      Optional<Follower> existingRelationship = followerRepository.findByFollowerAndFollowed(followerUser.get(), followedUser.get());
+      if (existingRelationship.isPresent()) {
+        followerRepository.delete(existingRelationship.get());
+      }
     }
   }
 

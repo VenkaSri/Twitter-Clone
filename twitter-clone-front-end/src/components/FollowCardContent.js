@@ -1,27 +1,63 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FollowButton from "./UI/button/FollowButton";
+import { postData } from "../services/postData";
+import { getData } from "../services/auth/getData";
+import { signupSliceActions } from "../state/app/home/signupSlice";
+import FollowContext from "../context/FollowContext";
 
-const FollowCardContent = ({ user, withDescription }) => {
+const FollowCardContent = ({ user, withDescription, handleFollowAction }) => {
   const [isFollowed, setIsFollowed] = useState(false);
-  const followBtnStyle =
-    "h-[2rem] w-[4.875rem] rounded-full bg-[#000] hover:bg-[#272c30] text-[#FFF] text-[0.938rem] font-cBold";
-  // const user = useSelector((state) => state.rootReducer.userInfo);
+  const [btnText, setBtnText] = useState("Follow");
+  const dispatch = useDispatch();
+  // const [followedUserIds, setFollowedUserIds] = useState([]);
 
-  const handleFollow = () => {
-    setIsFollowed(true);
-    console.log(user.id);
+  // const user = useSelector((state) => state.rootReducer.userInfo);
+  const isFollowingOneAccount = useSelector(
+    (state) => state.rootReducer.signUpState.isFollowingOneAccount
+  );
+
+  const ifFollowed = () => {
+    console.log("followed");
   };
 
-  const btnTExt = isFollowed ? "Unfollow" : "Follow";
+  const ctxData = useContext(FollowContext);
+  const handleFollow = () => {
+    if (ctxData.checkIfUserIsAlreadyFollowed(user.id)) {
+      ctxData.handleUnfollow(user.id);
+      setIsFollowed(false);
+    } else {
+      ctxData.handleFollow(user.id);
+      setIsFollowed(true);
+    }
+  };
+  const btnTExt = isFollowed ? "Following" : "Follow";
+  const btnStyle = isFollowed ? "follow--button-unfollow" : "";
 
+  const handleMouseOver = () => {
+    if (isFollowed) {
+      setBtnText("Unfollow");
+    } else {
+      setBtnText("Follow");
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (isFollowed) {
+      setBtnText("Following");
+    } else {
+      setBtnText("Follow");
+    }
+  };
   return (
     <div className="flex-col-container grow leading-[20px]">
       <div className="flex items-center grow ">
         <div className="flex-col-container">
-          <span className="inline-block font-cBold">{user.name}</span>
-          <span className="text-[#536471] font-cReg text-[15px]">
+          <span className="inline-block font-cBold dark:text-white">
+            {user.name}
+          </span>
+          <span className="text-[#71767B] font-cReg text-[15px]">
             @{user.username}
           </span>
         </div>
@@ -29,16 +65,16 @@ const FollowCardContent = ({ user, withDescription }) => {
         <div className="ml-auto mt-flex inline">
           <FollowButton
             onClick={handleFollow}
-            btnText={btnTExt}
-            btnStyle={followBtnStyle}
-            // mouseOverHandler={handleMouseOver}
-            // mouseLeaveHandler={handleMouseLeave}
+            btnText={btnText}
+            btnStyle={`${btnStyle} follow--button `}
+            mouseOverHandler={handleMouseOver}
+            mouseLeaveHandler={handleMouseLeave}
           />
         </div>
       </div>
       <div className="flex grow pt-1">
         {withDescription && (
-          <span className="text-[#0F1419] leading-5 font-cReg text-[15px]">
+          <span className="text-[#0F1419] leading-5 font-cReg text-[15px] dark:text-white">
             Amidst the bustling city, a sense of tranquility prevails.
           </span>
         )}

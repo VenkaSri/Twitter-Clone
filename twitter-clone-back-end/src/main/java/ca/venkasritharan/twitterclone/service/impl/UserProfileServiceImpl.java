@@ -8,6 +8,10 @@ import ca.venkasritharan.twitterclone.service.UserProfileService;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
@@ -45,7 +49,6 @@ public class UserProfileServiceImpl implements UserProfileService {
     if (optionalUser.isPresent()) {
 
     }
-
     return null;
 
   }
@@ -54,8 +57,20 @@ public class UserProfileServiceImpl implements UserProfileService {
 
 
 
+  @Override
+  public ResponseEntity<Long> getFollowingCount(Principal principal) {
 
-//  @Override
+    long followingCount = followerRepository.countFollowersByFollower_Username(principal.getName());
+    return ResponseEntity.ok(followingCount);
+  }
+
+  private String getPrincipalUsername() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    return authentication.getName();
+  }
+
+
+  //  @Override
 //  public List<UserDetailsResponse> getAllProfiles() {
 //    List<User> users = userRepository.findAll();
 //    List<UserDetailsResponse> userDetailsResponses = new ArrayList<>();

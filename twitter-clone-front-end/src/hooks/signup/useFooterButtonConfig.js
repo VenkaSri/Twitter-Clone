@@ -21,6 +21,10 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
     (state) => state.rootReducer.signUpState.isValidUsernameSet
   );
 
+  const isFollowingOneAccount = useSelector(
+    (state) => state.rootReducer.signUpState.isFollowingOneAccount
+  );
+
   const username = useSelector(
     (state) => state.rootReducer.userSession.username
   );
@@ -129,6 +133,10 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
     }
   };
 
+  const completeSignup = () => {
+    dispatch(dialogSliceActions.setIsDialogOpen(false));
+  };
+
   // Customize button configuration based on the step
   if (step === 1) {
     buttonText = "Next";
@@ -181,10 +189,15 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
       }
     }
   } else if (profileSetupStep === 3) {
-    buttonText = "Sign up";
-    buttonClassName = "button--footer-signup ";
-    buttonAction = goToStepThree;
-    isButtonDisabled = false;
+    buttonAction = completeSignup;
+    buttonText = "Next";
+    if (isFollowingOneAccount) {
+      buttonClassName = "button--footer-filled";
+      isButtonDisabled = false;
+    } else {
+      buttonClassName = "button--footer-disabled";
+      isButtonDisabled = true;
+    }
   }
 
   return {

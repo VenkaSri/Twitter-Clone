@@ -21,6 +21,7 @@ const initialState = {
   shouldAutoFocus: "",
   username: "",
   didUserAddProfilePicture: false,
+  isFollowingOneAccount: false,
 };
 
 const signupSlice = createSlice({
@@ -71,6 +72,9 @@ const signupSlice = createSlice({
     },
     setDidUserAddProfilePicture(state, action) {
       state.didUserAddProfilePicture = action.payload;
+    },
+    setIsFollowingOneAccount(state, action) {
+      state.isFollowingOneAccount = action.payload;
     },
     resetState() {
       return initialState;

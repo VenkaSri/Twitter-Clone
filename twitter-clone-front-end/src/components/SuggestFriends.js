@@ -1,6 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
-import { DialogBodyContainer } from "./dialog/DialogBodyContainer";
-import { InfoLabel } from "./InfoLabel";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useContext,
+  createContext,
+} from "react";
+import { followUser, unfollowUser } from "../services/user/followAPI";
 import FollowCard from "./FollowCard";
 import { getData } from "../services/auth/getData";
 import { Oval } from "react-loader-spinner";
@@ -9,6 +14,8 @@ import { dialogSliceActions } from "../state/dialog/dialogSlice";
 import { useDispatch } from "react-redux";
 import { CustomSpinner } from "./CustomSpinner";
 import { fetchSuggestedUsers } from "../services/fetchSuggestedUsers";
+import FollowContext from "../context/FollowContext";
+import { signupSliceActions } from "../state/app/home/signupSlice";
 
 export const SuggestFriends = () => {
   const dispatch = useDispatch();
@@ -16,11 +23,16 @@ export const SuggestFriends = () => {
   const [items, setItems] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [isFollowed, setIsFollowed] = useState(false);
+  const useW = "jello";
+
+  const [followedUserIds, setFollowedUserIds] = useState([]);
 
   const loadSuggestedUsers = async () => {
     try {
       const suggestedUsers = await fetchSuggestedUsers(page, 5);
-      if (suggestedUsers.length === 1) setHasMore(false);
+      console.log(suggestedUsers);
+      if (suggestedUsers.length === 0) setHasMore(false);
+      console.log(suggestedUsers.length);
       setItems((prevItems) => [...prevItems, ...suggestedUsers]);
       dispatch(dialogSliceActions.setIsDialogContentLoaded(true));
       setPage(page + 1);
@@ -33,13 +45,47 @@ export const SuggestFriends = () => {
     loadSuggestedUsers();
   }, []);
 
-  const handleFollow = (userId) => {
-    console.log(userId);
-    setIsFollowed(true);
+  const handleFollow = (id) => {
+    const newItem = id;
+    if (!followedUserIds.includes(newItem)) {
+      followUser(id);
+      setFollowedUserIds((prevIds) => {
+        return [...prevIds, newItem];
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (followedUserIds.length > 0) {
+      dispatch(signupSliceActions.setIsFollowingOneAccount(true));
+    } else {
+      dispatch(signupSliceActions.setIsFollowingOneAccount(false));
+    }
+  }, [followedUserIds.length, dispatch]);
+
+  const handleUnfollow = (idToRemove) => {
+    unfollowUser(idToRemove);
+    setFollowedUserIds(() => {
+      const updatedFollowedUserIds = followedUserIds.filter(
+        (id) => id !== idToRemove
+      );
+      return updatedFollowedUserIds;
+    });
+  };
+
+  const checkIfUserIsAlreadyFollowed = (id) => {
+    const isFollowed = followedUserIds.includes(id);
+    return isFollowed;
+  };
+
+  const contextValue = {
+    handleFollow,
+    checkIfUserIsAlreadyFollowed,
+    handleUnfollow,
   };
 
   return (
-    <>
+    <FollowContext.Provider value={contextValue}>
       <InfiniteScroll
         dataLength={items.length}
         next={loadSuggestedUsers}
@@ -51,6 +97,6 @@ export const SuggestFriends = () => {
           <FollowCard key={user.id} user={user} />
         ))}
       </InfiniteScroll>
-    </>
+    </FollowContext.Provider>
   );
 };

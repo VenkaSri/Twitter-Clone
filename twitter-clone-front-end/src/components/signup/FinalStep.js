@@ -13,7 +13,7 @@ export const FinalStep = () => {
 t recommendations."
       />
       <div className="px-3 py-4 min-h-[497px]">
-        <span className="text-[20px] leading-5 font-cBold ">
+        <span className="text-[20px] leading-5 font-cBold dark:text-white">
           Follow 1 or more accounts
         </span>
         <SuggestFriends />

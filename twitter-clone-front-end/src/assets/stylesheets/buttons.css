@@ -1,3 +1,6 @@
+:root {
+}
+
 .button--footer-outline {
   @apply border border-[#cfd9de] text-black hover:text-black  hover:bg-[#e7e7e8];
 }
@@ -7,7 +10,7 @@
 }
 
 .button--footer-filled {
-  @apply bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30] text-white;
+  @apply bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30] text-white dark:text-black;
 }
 
 .button--footer-disabled {
@@ -15,5 +18,19 @@
 }
 
 .button--footer-signup {
-  @apply bg-[#1e9bf0] hover:bg-[#1A8CD8];
+  @apply bg-[#1e9bf0] hover:bg-[#1A8CD8] text-white;
+}
+
+.follow--button {
+  @apply rounded-full text-[14px] font-cBold min-w-[78px] cursor-pointer 
+  hover:bg-[#272c30] text-white  dark:hover:bg-[#D7DBDC]
+  bg-black dark:bg-white
+  dark:text-black;
+}
+
+.follow--button-unfollow {
+  @apply bg-transparent hover:bg-[#F9D7DA] dark:hover:bg-[#200A0B] dark:bg-transparent
+  text-black hover:text-[#F54550] dark:text-white
+  border border-[#d4dde1] dark:border-[#2f3336] hover:border-[#fdc9ce]
+  dark:hover:border-[#67070f] dark:hover:bg-[#200A0B] dark:hover:text-[#F54550];
 }
