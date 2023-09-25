@@ -5,7 +5,10 @@ import IconButton from "../../../UI/button/IconButton";
 import { signupSliceActions } from "../../../../state/auth/signupSlice";
 import { dialogSliceActions } from "../../../../state/dialog/dialogSlice";
 import { useCurrentStep } from "../../../../hooks/signup/ useCurrentStep";
-import { RESET_POST_REG_STEP } from "../../../../utils/constants/dialog/dialogConstants";
+import {
+  RESET_POST_REG_STEP,
+  RESET_REG_STEP,
+} from "../../../../utils/constants/dialog/dialogConstants";
 const STEP_ZERO = 0;
 
 export const DialogHeaderIcon = ({ step, type }) => {
@@ -21,6 +24,8 @@ export const DialogHeaderIcon = ({ step, type }) => {
     dispatch(signupSliceActions.resetState());
   };
 
+  console.log(step);
+
   let contentValue = "";
 
   const back = () => {
@@ -29,6 +34,8 @@ export const DialogHeaderIcon = ({ step, type }) => {
     dispatch(dialogSliceActions.setDialogContent(contentValue));
     if (type === "postRegister") {
       dispatch(signupSliceActions.setPostRegisterSteps(RESET_POST_REG_STEP));
+    } else {
+      dispatch(signupSliceActions.setSignUpStep(RESET_REG_STEP));
     }
   };
 
@@ -43,8 +50,9 @@ export const DialogHeaderIcon = ({ step, type }) => {
   if (step === STEP_ZERO) {
     iconInfo = "Close";
     actionFunction = close;
-  } else if (step === 2) {
+  } else if (step === 1) {
     iconInfo = "Back";
+    contentValue = "sign_up_step_1";
     actionFunction = back;
   } else {
     iconInfo = "Back";

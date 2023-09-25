@@ -49,7 +49,7 @@ const Routes = () => {
             isAuthenticated ? (
               <>
                 <div className="flex grow">
-                  {/* <LoggedInHeader /> */}
+                  <LoggedInHeader />
                   <MainContainer />
                 </div>
               </>

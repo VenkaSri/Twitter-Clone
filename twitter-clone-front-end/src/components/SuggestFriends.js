@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { CustomSpinner } from "./CustomSpinner";
 import { fetchSuggestedUsers } from "../services/fetchSuggestedUsers";
 import FollowContext from "../context/FollowContext";
-import signupSliceActions from "../state/auth/signupSlice";
+import { signupSliceActions } from "../state/auth/signupSlice";
 
 export const SuggestFriends = () => {
   const dispatch = useDispatch();

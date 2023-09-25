@@ -10,6 +10,7 @@ import { RESET_POST_REG_STEP } from "../../../../utils/constants/dialog/dialogCo
 export const DialogHeaderContent = ({ content, icon, button }) => {
   const currentStep = useCurrentStep();
   const dispatch = useDispatch();
+  let type = "";
   const postSignUpStep = useSelector(
     (state) => state.rootReducer.signUpState.postRegisterSteps
   );
@@ -18,6 +19,7 @@ export const DialogHeaderContent = ({ content, icon, button }) => {
 
   if (postSignUpStep > 0) {
     step = postSignUpStep;
+    type = "postRegister";
   }
 
   const handleClick = () => {
@@ -27,7 +29,7 @@ export const DialogHeaderContent = ({ content, icon, button }) => {
 
   return (
     <>
-      {icon && <DialogHeaderIcon step={step} type="postRegister" />}
+      {icon && <DialogHeaderIcon step={step} type={type} />}
       <div className="flex flex-grow h-full justify-center items-stretch flex-col">
         {content}
       </div>
