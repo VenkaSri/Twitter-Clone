@@ -12,6 +12,7 @@ export const Dialog = ({ type, content }) => {
   const open = useSelector(
     (state) => state.rootReducer.dialogSlice.isDialogOpen
   );
+
   const dialogStyles = getDialogStyles(type, isMobile);
 
   return (

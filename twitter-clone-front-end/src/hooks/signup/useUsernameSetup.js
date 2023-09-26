@@ -5,24 +5,15 @@ import { VALIDATION_DELAY } from "../../constants";
 import { getData } from "../../services/auth/getData";
 import { signupSliceActions } from "../../state/auth/signupSlice";
 
-const validatePasswordLength = (text) => /^.{8,}$/.test(text);
-const validatePasswordStrength = (text) => /^(.)\1*$/.test(text);
-
-const validateUsernameMinLength = (text) => /^.{5,}$/.test(text);
-const validateUsernameMaxLength = (text) => /^.{16}$/.test(text);
 const validateUsername = (text) => /^[a-zA-Z0-9_]+$/.test(text);
 
 export function useUsernameInputState() {
   const dispatch = useDispatch();
-
-  const [isFocused, setIsFocused] = useState(false);
   const [isUsernameLengthValidState, setIsUsernameLengthValidState] =
     useState(false);
   const [isUsernameAvailable, setIsUsernameAvailable] = useState(false);
   const [inputError, setInputError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [hasUserEnteredValue, setHasUserEnteredValue] = useState(false);
-  const [userEnteredPassword, setUserEnteredPassword] = useState("");
   const [isUsernameValidState, setIsUsernameValidState] = useState(false);
 
   const handlePasswordInputChange = (value) => {
@@ -77,6 +68,7 @@ export function useUsernameInputState() {
 
     return () => {
       setInputError(false);
+      dispatch(signupSliceActions.setIsValidUsernameSet(false));
       clearTimeout(identifier);
     };
   }, [currentUsername, dispatch]);
@@ -105,11 +97,9 @@ export function useUsernameInputState() {
   return {
     password,
     handlePasswordInputChange,
-    setHasUserEnteredValue,
     isUsernameLengthValidState,
     errorMessage,
     isUsernameValidState,
-    setUserEnteredPassword,
     currentUsername,
     inputError,
     isUsernameAvailable,

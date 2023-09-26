@@ -10,6 +10,8 @@ import { userInfoActions } from "./state/user/userInfo-reducer";
 
 import { getData } from "./services/auth/getData";
 import { Dialog } from "./components/Dialog";
+import { SignupDialog } from "./pages/modal/SignupDialog";
+import { TwitterClone } from "./TwitterClone";
 
 const Routes = () => {
   const dispatch = useDispatch();
@@ -43,6 +45,7 @@ const Routes = () => {
   return (
     <>
       <RouterRoutes>
+        {/* <Route path="/i/flow/signup" element={<SignupDialog isOpen />} /> */}
         <Route
           path="/"
           element={
@@ -58,7 +61,7 @@ const Routes = () => {
             )
           }
         />
-        <Route path="/i/flow/signup" element={<Dialog />} />
+        <Route path="/i/flow/signup" element={<SignupDialog />} />
       </RouterRoutes>
     </>
   );

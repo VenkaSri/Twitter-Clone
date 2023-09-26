@@ -4,7 +4,7 @@ import EmailTextField from "../inputs/EmailTextField";
 import { InfoLabel } from "../../../InfoLabel";
 import DOBInput from "../inputs/DOBInput";
 import { DialogBodyContainer } from "../../DialogBodyContainer";
-import { DialogContentHeading } from "../../../DialogContentHeading";
+import { DialogContentHeading } from "../DialogContentHeading";
 
 export const StepOneBody = () => {
   return (

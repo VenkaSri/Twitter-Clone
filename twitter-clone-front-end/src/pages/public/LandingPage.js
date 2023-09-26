@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Button from "../../components/UI/button/Button";
 import { signInButton } from "../../constants/buttonConstants";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { LandingFooter } from "../../components/landing/LandingFooter";
 import { SignUpForm } from "../../components/landing/SignUpForm";
@@ -9,6 +10,7 @@ import { Icon } from "../../components/icon";
 
 export const LandingPage = () => {
   const windowWidth = useWindowWidth();
+
   const dispatch = useDispatch();
   const handleUserLogin = () => {
     window.history.replaceState(

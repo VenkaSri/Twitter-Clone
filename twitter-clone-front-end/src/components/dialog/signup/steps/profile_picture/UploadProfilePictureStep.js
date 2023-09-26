@@ -3,7 +3,7 @@ import ImageUploading from "react-images-uploading";
 import getIcon from "../../../../../utils/icons/iconsutil";
 import { useDispatch, useSelector } from "react-redux";
 import { userInfoActions } from "../../../../../state/user/userInfo-reducer";
-import { DialogContentHeading } from "../../../../DialogContentHeading";
+import { DialogContentHeading } from "../../DialogContentHeading";
 import { UploadPicture } from "./UploadPicture";
 import { DialogBodyContainer } from "../../../DialogBodyContainer";
 export const UploadProfilePictureStep = () => {

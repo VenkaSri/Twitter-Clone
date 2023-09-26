@@ -1,40 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Dialog } from "./components/Dialog";
-import { DialogLayout } from "./components/DialogLayout";
-import DialogHeader from "./components/dialog/DialogHeader";
-import { DialogBody } from "./components/dialog/DialogBody";
+import { Router, Route } from "react-router-dom";
+import { SignupDialog } from "./pages/modal/SignupDialog";
 import { useSelector } from "react-redux";
-import { DialogFooter } from "./components/dialog/DialogFooter";
 
 export const TwitterClone = () => {
-  const dialogHeaderContent = useSelector(
-    (state) => state.rootReducer.dialogSlice.dialogHeaderContent
+  const [currentDialog, setCurrentDialog] = useState(null);
+  const currentUrl = useSelector(
+    (state) => state.rootReducer.urlSlice.currentUrl
   );
 
-  const dialogBodyContent = useSelector(
-    (state) => state.rootReducer.dialogSlice.dialogBodyContent
-  );
+  console.log(currentUrl);
 
-  const dialogFooterContent = useSelector(
-    (state) => state.rootReducer.dialogSlice.dialogFooterContent
-  );
+  useEffect(() => {
+    if (currentUrl === "http://localhost:3000/i/flow/signup") {
+      setCurrentDialog(<SignupDialog fromStepOne />);
+    }
+  }, [currentUrl]);
 
-  const isACutomBody = useSelector(
-    (state) => state.rootReducer.dialogSlice.isACutomBody
-  );
-
-  const content = (
-    <DialogLayout
-      header={<DialogHeader content={dialogHeaderContent} />}
-      body={<DialogBody content={dialogBodyContent} />}
-      footer={<DialogFooter content={dialogFooterContent} />}
-    />
-  );
-
-  return (
-    <>
-      <Dialog type={"LOGIN"} content={content} />
-    </>
-  );
+  return currentDialog;
 };

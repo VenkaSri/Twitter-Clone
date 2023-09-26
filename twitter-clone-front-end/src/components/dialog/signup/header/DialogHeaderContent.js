@@ -30,7 +30,7 @@ export const DialogHeaderContent = ({ content, icon, button }) => {
   return (
     <>
       {icon && <DialogHeaderIcon step={step} type={type} />}
-      <div className="flex flex-grow h-full justify-center items-stretch flex-col">
+      <div className="flex h-full justify-center items-stretch flex-col ">
         {content}
       </div>
       {button && (
@@ -43,6 +43,7 @@ export const DialogHeaderContent = ({ content, icon, button }) => {
           </div>
         </div>
       )}
+      <div className="flex flex-grow h-full justify-center items-stretch flex-col basis-3/6"></div>
     </>
   );
 };

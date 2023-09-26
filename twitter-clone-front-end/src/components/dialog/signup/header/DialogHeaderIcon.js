@@ -1,30 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import IconButton from "../../../UI/button/IconButton";
 import { signupSliceActions } from "../../../../state/auth/signupSlice";
 import { dialogSliceActions } from "../../../../state/dialog/dialogSlice";
 import { useCurrentStep } from "../../../../hooks/signup/ useCurrentStep";
+import { urlSliceActions } from "../../../../state/url/urlSlice";
 import {
   RESET_POST_REG_STEP,
   RESET_REG_STEP,
 } from "../../../../utils/constants/dialog/dialogConstants";
+import { useNavigate } from "react-router-dom";
 const STEP_ZERO = 0;
 
 export const DialogHeaderIcon = ({ step, type }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [iconHeaderStyles, setIconHeaderStyles] = useState("");
   let iconInfo = "";
   let actionFunction = null;
   const postSignUpStep = useSelector(
     (state) => state.rootReducer.signUpState.postRegisterSteps
   );
 
+  const dialogBodyContent = useSelector(
+    (state) => state.rootReducer.dialogSlice.dialogBodyContent
+  );
+
+  useState(() => {
+    if (dialogBodyContent.type.name === "AuthHome")
+      setIconHeaderStyles("grow basis-3/6");
+  }, []);
+
   const close = () => {
     dispatch(dialogSliceActions.setIsDialogOpen(false));
+    console.log("closed");
+    dispatch(urlSliceActions.setCurrentUrl(""));
+    navigate("/");
     dispatch(signupSliceActions.resetState());
   };
-
-  console.log(step);
 
   let contentValue = "";
 
@@ -47,6 +61,8 @@ export const DialogHeaderIcon = ({ step, type }) => {
     }
   }
 
+  console.log(step);
+
   if (step === STEP_ZERO) {
     iconInfo = "Close";
     actionFunction = close;
@@ -61,7 +77,9 @@ export const DialogHeaderIcon = ({ step, type }) => {
 
   return (
     <>
-      <div className="min-w-[56px] min-h-[32px] self-stretch flex items-start justify-center flex-col">
+      <div
+        className={`min-w-[56px] min-h-[32px] self-stretch flex items-start justify-center flex-col ${iconHeaderStyles}`}
+      >
         <div className="min-w-[36px] min-h-[36px] rounded-full flex flex-col cursor-pointer items-center justify-center -ml-2">
           <IconButton
             onClick={actionFunction}

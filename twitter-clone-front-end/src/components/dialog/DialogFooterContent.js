@@ -1,7 +1,7 @@
 import React from "react";
 
-import { DialogFooterButton } from "../DialogFooterButton";
 import { useFooterButtonConfig } from "../../hooks/signup/useFooterButtonConfig";
+import { DialogFooterButton } from "./signup/DialogFooterButton";
 
 export const DialogFooterContent = ({ text, step, profileStep }) => {
   const { buttonText, buttonClassName, isButtonDisabled, buttonAction } =

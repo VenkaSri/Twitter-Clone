@@ -8,7 +8,7 @@ export const DialogHeaderLogo = () => {
   const fillColor = darkMode ? "white" : "black";
   return (
     <>
-      <div className="flex h-full justify-center items-stretch flex-col">
+      <div className="flex h-full justify-center  flex-col ">
         <div className="flex flex-col items-center shrink-0 ">
           {getIcon("X_LOGO", {
             height: "2rem",

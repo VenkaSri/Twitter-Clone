@@ -1,18 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { dialogStepsConfig } from "../../config/dialogConfig";
+import { UsernameStep } from "../../components/dialog/signup/steps/username/UsernameStep";
+import { DialogFooterContent } from "../../components/dialog/DialogFooterContent";
+import { DialogHeaderContent } from "../../components/dialog/signup/header/DialogHeaderContent";
+import { DialogHeaderLogo } from "../../components/dialog/signup/header/DialogHeaderLogo";
 
 const initialState = {
   // dialogHeaderContent: null,
   // dialogBodyContent: null,
   // dialogFooterContent: null,
-  // dialogHeaderContent: <StepHeader heading="Step 2 of 3" withIcon />,
-  // dialogBodyContent: <StepThreeBody />,
-  // dialogFooterContent: <DialogFooterContent step={3} />,
-  isDialogOpen: false,
-  isACutomBody: false,
+  // dialogHeaderContent: <DialogHeaderContent content={<DialogHeaderLogo />} />,
+  // dialogBodyContent: <UsernameStep />,
+  // dialogFooterContent: <DialogFooterContent profileStep={2} />,
+  // isDialogOpen: false,
+  // isACutomBody: false,
   dialogBodyOverFlowing: false,
   isDialogContentLoaded: false,
   endOfScroll: false,
+  isDialogOpen: false,
 };
 
 const dialogSlice = createSlice({

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DialogContentHeading } from "../DialogContentHeading";
+import { DialogContentHeading } from "../dialog/signup/DialogContentHeading";
 import { DialogBodyContainer } from "../dialog/DialogBodyContainer";
 import { SuggestFriends } from "../SuggestFriends";
 

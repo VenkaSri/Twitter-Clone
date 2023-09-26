@@ -11,13 +11,24 @@ import Button from "../UI/button/Button";
 import { useDispatch } from "react-redux";
 
 import { dialogSliceActions } from "../../state/dialog/dialogSlice";
+import { useNavigate } from "react-router-dom";
+import { urlSliceActions } from "../../state/url/urlSlice";
 
 export const SignUpForm = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const handleCreateAccount = () => {
     dispatch(dialogSliceActions.setIsDialogOpen(true));
     dispatch(dialogSliceActions.setDialogContent("sign_up_step_1"));
+    // navigate("/i/flow/signup");
+    window.history.replaceState(
+      null,
+      "Sign up for Twitter / X",
+      "/i/flow/signup"
+    );
+    dispatch(
+      urlSliceActions.setCurrentUrl("http://localhost:3000/i/flow/signup")
+    );
   };
 
   return (

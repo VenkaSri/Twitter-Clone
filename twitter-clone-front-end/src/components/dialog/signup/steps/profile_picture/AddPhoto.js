@@ -1,5 +1,5 @@
 import React from "react";
-import getIcon from "../utils/icons/iconsutil";
+import getIcon from "../../../../../utils/icons/iconsutil";
 export const AddPhoto = ({ onClick, className }) => {
   return (
     <div
