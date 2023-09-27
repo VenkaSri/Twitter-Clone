@@ -64,7 +64,7 @@ public class RegistrationServiceImpl implements RegistrationService {
   }
 
   private void validateRegistration(RegisterDTO registerDTO) {
-    validateEmailOrPhone(registerDTO.getEmail());
+    validateEmail(registerDTO.getEmail());
     validateUserConstraints(registerDTO);
   }
 
@@ -136,9 +136,9 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
   }
 
-  public void validateEmailOrPhone(String emailOrPhone) {
-    if (profileRepository.existsByEmail(emailOrPhone)) {
-      throw new UserAlreadyExistsException("User with the given email or phone already exists.");
+  public void validateEmail(String email) {
+    if (profileRepository.existsByEmail(email)) {
+      throw new UserAlreadyExistsException("User with the given email already exists.");
     }
   }
 

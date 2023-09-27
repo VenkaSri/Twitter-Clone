@@ -1,4 +1,4 @@
-package ca.venkasritharan.twitterclone.service;
+package ca.venkasritharan.twitterclone.service.user;
 
 import ca.venkasritharan.twitterclone.response.UsersSuggestionResponse;
 

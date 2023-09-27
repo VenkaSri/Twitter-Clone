@@ -24,8 +24,6 @@ public class Profile {
   @Email
   @Column(unique = true)
   private String email;
-  @Column(unique = true)
-  private String phoneNumber;
   private LocalDate dob;
   private String profile_image_url;
 
