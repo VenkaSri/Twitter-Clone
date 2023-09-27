@@ -1,6 +1,6 @@
 package ca.venkasritharan.twitterclone.service.impl;
 
-import ca.venkasritharan.twitterclone.entity.authentication.User;
+import ca.venkasritharan.twitterclone.entity.user.User;
 import ca.venkasritharan.twitterclone.exception.UserNotFoundException;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import ca.venkasritharan.twitterclone.response.UserDetailsResponse;

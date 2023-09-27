@@ -1,8 +1,11 @@
 package ca.venkasritharan.twitterclone.service.impl;
 
 import ca.venkasritharan.twitterclone.dto.RegisterDTO;
+import ca.venkasritharan.twitterclone.entity.user.Profile;
+import ca.venkasritharan.twitterclone.entity.user.ProfileCount;
+import ca.venkasritharan.twitterclone.repository.user.ProfileRepository;
 import ca.venkasritharan.twitterclone.response.RegistrationResponse;
-import ca.venkasritharan.twitterclone.entity.authentication.User;
+import ca.venkasritharan.twitterclone.entity.user.User;
 import ca.venkasritharan.twitterclone.exception.UserAlreadyExistsException;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import ca.venkasritharan.twitterclone.security.jwt.JwtTokenProvider;
@@ -17,12 +20,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
   private final AuthenticationManager authenticationManager;
+  private final ProfileRepository profileRepository;
   private final UserRepository userRepository;
   private final ModelMapper mapper;
   private final PasswordEncoder passwordEncoder;
@@ -31,11 +36,12 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 
   public RegistrationServiceImpl(AuthenticationManager authenticationManager,
-                                 UserRepository userRepository,
+                                 ProfileRepository profileRepository, UserRepository userRepository,
                                  ModelMapper mapper,
                                  PasswordEncoder passwordEncoder,
                                  JwtTokenProvider jwtTokenProvider, Validator validator) {
     this.authenticationManager = authenticationManager;
+    this.profileRepository = profileRepository;
     this.userRepository = userRepository;
     this.mapper = mapper;
     this.passwordEncoder = passwordEncoder;
@@ -63,11 +69,31 @@ public class RegistrationServiceImpl implements RegistrationService {
   }
 
   private User createUser(RegisterDTO registerDTO) {
-    User user = mapDtoToUser(registerDTO);
+    User user = new User();
+    ProfileCount profileCount = new ProfileCount();
+    Profile profile = mapper.map(registerDTO, Profile.class);
+    profile.setProfileCount(profileCount);
     user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
-    setUniqueUsername(user);
+    user.setUsername(generateUniqueUsername(registerDTO.getName()));
+    user.setProfile(profile);
     return user;
   }
+
+//  private User createUser(RegisterDTO registerDTO) {
+//    User user = new User();
+//    user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+//    user.setUsername(generateUniqueUsername(registerDTO.getName()));
+//
+//    Profile profile = mapper.map(registerDTO, Profile.class);
+//
+//    // Set any other profile properties as needed
+//
+//    user.setProfile(profile);
+//    profile.setUser(user);
+//
+//    return userRepository.save(user);
+//  }
+
 
   private void saveUser(User user) {
     userRepository.save(user);
@@ -82,10 +108,10 @@ public class RegistrationServiceImpl implements RegistrationService {
     return createResponse(statusCode, message, null);
   }
 
-  private void setUniqueUsername(User user) {
-    String uniqueUsername = generateUniqueUsername(user.getName());
-    user.setUsername(uniqueUsername);
-  }
+//  private void setUniqueUsername(User user) {
+//    String uniqueUsername = generateUniqueUsername(user.getName());
+//    user.setUsername(uniqueUsername);
+//  }
 
   private User mapDtoToUser(RegisterDTO registerDTO) {
     User user = mapper.map(registerDTO, User.class);
@@ -98,14 +124,20 @@ public class RegistrationServiceImpl implements RegistrationService {
 
   private void validateUserConstraints(RegisterDTO registerDTO) {
     User user = mapper.map(registerDTO, User.class);
-    Set<ConstraintViolation<User>> violations = validator.validate(user);
-    if (!violations.isEmpty()) {
-      throw new ConstraintViolationException(violations);
+    Profile profile = mapper.map(registerDTO, Profile.class);
+    Set<ConstraintViolation<User>> userViolations = validator.validate(user);
+    Set<ConstraintViolation<Profile>> profileViolations = validator.validate(profile);
+    if (!userViolations.isEmpty() || !profileViolations.isEmpty()) {
+      Set<ConstraintViolation<?>> allViolations = new HashSet<>();
+      allViolations.addAll(userViolations);
+      allViolations.addAll(profileViolations);
+
+      throw new ConstraintViolationException(allViolations);
     }
   }
 
   public void validateEmailOrPhone(String emailOrPhone) {
-    if (userRepository.existsByEmail(emailOrPhone)) {
+    if (profileRepository.existsByEmail(emailOrPhone)) {
       throw new UserAlreadyExistsException("User with the given email or phone already exists.");
     }
   }
@@ -124,8 +156,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 
   private String generateCandidateUsername(String name, int attempt) {
     String shortenedName = name.replaceAll("\\s+", "").substring(0, Math.min(name.length(), 12 - attempt));
-    if (shortenedName.length() == 2) {
-      String randomDigits = generateRandomDigits(15 - 2);
+    System.out.println(shortenedName);
+    if (shortenedName.length() < 5) {
+      String randomDigits = generateRandomDigits(15 - shortenedName.length());
       return shortenedName + randomDigits;
     } else {
       return shortenedName;

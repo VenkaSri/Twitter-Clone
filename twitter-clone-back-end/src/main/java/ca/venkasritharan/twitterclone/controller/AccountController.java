@@ -1,22 +1,17 @@
 package ca.venkasritharan.twitterclone.controller;
 
 import ca.venkasritharan.twitterclone.dto.UpdateUsernameDTO;
-import ca.venkasritharan.twitterclone.entity.authentication.User;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
 import ca.venkasritharan.twitterclone.response.UsernameAvailabilityResponse;
 import ca.venkasritharan.twitterclone.service.AccountService;
-import ca.venkasritharan.twitterclone.response.Response;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.Map;
-import java.util.Optional;
 
 @CrossOrigin(origins = {"*"})
 @RestController

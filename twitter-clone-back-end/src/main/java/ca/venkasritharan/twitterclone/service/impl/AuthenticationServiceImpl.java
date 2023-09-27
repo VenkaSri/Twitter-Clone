@@ -36,22 +36,22 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     this.jwtTokenProvider = jwtTokenProvider;
   }
 
-  @Override
-  public String login(LoginDTO loginDTO) {
-    Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsernameOrEmailOrPhonenumber(),
-                    loginDTO.getPassword()));
-    SecurityContextHolder.getContext().setAuthentication(authentication);
-    String token = jwtTokenProvider.createToken(authentication);
-    return token;
-  }
-
-
-  @Override
-  public void validateEmailOrPhone(String emailOrPhone) {
-    if (userRepository.existsByEmail(emailOrPhone)) {
-      throw new UserAlreadyExistsException("User with the given email or phone already exists.");
-    }
-  }
+//  @Override
+//  public String login(LoginDTO loginDTO) {
+//    Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsernameOrEmailOrPhonenumber(),
+//                    loginDTO.getPassword()));
+//    SecurityContextHolder.getContext().setAuthentication(authentication);
+//    String token = jwtTokenProvider.createToken(authentication);
+//    return token;
+//  }
+//
+//
+//  @Override
+//  public void validateEmailOrPhone(String emailOrPhone) {
+//    if (userRepository.existsByEmail(emailOrPhone)) {
+//      throw new UserAlreadyExistsException("User with the given email or phone already exists.");
+//    }
+//  }
 
   @Override
   public ResponseEntity<AuthStatusResponse> getAuthStatus(HttpServletRequest httpServletRequest) {
@@ -91,13 +91,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             .findFirst();
   }
 
-  @Override
-  public EmailAvailabilityResponse checkIfEmailIsAvailable(String email) {
-    boolean isEmailAvailable = userRepository.existsByEmail(email);
-    String message = "Email is available";
-    if (isEmailAvailable) {
-      message = "An user with this email already exists.";
-    }
-    return new EmailAvailabilityResponse(message, !isEmailAvailable);
-  }
+//  @Override
+//  public EmailAvailabilityResponse checkIfEmailIsAvailable(String email) {
+//    boolean isEmailAvailable = userRepository.existsByEmail(email);
+//    String message = "Email is available";
+//    if (isEmailAvailable) {
+//      message = "An user with this email already exists.";
+//    }
+//    return new EmailAvailabilityResponse(message, !isEmailAvailable);
+//  }
 }

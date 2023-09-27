@@ -8,9 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 
 public interface AuthenticationService {
-  String login(LoginDTO loginDTO);
-  void validateEmailOrPhone(String emailOrPhone);
+//  String login(LoginDTO loginDTO);
+//  void validateEmailOrPhone(String emailOrPhone);
   ResponseEntity<AuthStatusResponse> getAuthStatus(HttpServletRequest httpServletRequest);
-  EmailAvailabilityResponse checkIfEmailIsAvailable(String email);
+//  EmailAvailabilityResponse checkIfEmailIsAvailable(String email);
 
 }

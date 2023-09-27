@@ -1,8 +1,8 @@
-package ca.venkasritharan.twitterclone.entity.authentication;
+package ca.venkasritharan.twitterclone.entity.user;
 
-import ca.venkasritharan.twitterclone.entity.Follower;
+
+import ca.venkasritharan.twitterclone.entity.authentication.Role;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -25,23 +25,20 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
   @Column(unique = true)
+  @Size(min = 5, max = 15)
   private String username;
   @Size(min = 8, max = 120)
   @NotBlank(message = "Password must not be blank")
   private String password;
-  @NotBlank(message = "Name must not be blank")
-  @Size(min = 1, max = 50)
-  private String name;
-  @Email
-  @Column(unique = true)
-  private String email;
-  @Column(unique = true)
-  @Size(min = 10, max = 15)
-  private String phoneNumber;
-  private String profilePictureUrl;
-  private Long tweetCount = 0L;
-  private Long followerCount = 0L;
-  private Long followingCount = 0L;
+
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "profile_id", referencedColumnName = "id")
+  private Profile profile;
+
+
+//  @OneToOne(cascade = CascadeType.ALL)
+//  @JoinColumn(name = "user_count_id", referencedColumnName = "id")
+//  private UserCount UserCount;
 
   @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinTable(name = "users_roles",
