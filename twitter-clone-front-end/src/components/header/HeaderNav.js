@@ -1,22 +1,45 @@
 import React from "react";
 import getIcon from "../../utils/icons/iconsutil";
+import { HeaderButton } from "./HeaderButton";
+import RoundedButton from "../RoundedButton";
+import useWindowHeight from "../../hooks/useWindowHeight";
 
 export const HeaderNav = () => {
+  const links = [
+    "Home",
+    "Explore",
+    "Notifications",
+    "Messages",
+    "Lists",
+    "Bookmarks",
+    "Communities",
+    "Premium",
+    "Profile",
+    "More",
+  ];
+
+  const headerButtons = links.map((link) => (
+    <HeaderButton type={link} text={link} />
+  ));
+
+  const windowHeight = useWindowHeight();
+
+  if (windowHeight === 900) {
+    console.log("900");
+  }
+
   return (
     <>
-      <div className=" w-full h-full flex mt-0.5 mb-1">
-        <nav className="flex-col-container grow">
-          <a className="w-full  flex-col-container items-start">
-            <div className="flex  items-center justify-center p-3 max-w-full rounded-full hover:bg-[#E6E7E7] cursor-pointer">
-              <div>
-                {getIcon("Home", { width: 26.25, height: 26.25, fill: "#000" })}
-              </div>
-              <div className="leading-6 mr-4 ml-5 text-[20px] font-cReg">
-                <span>Home</span>
-              </div>
-            </div>
-          </a>
-        </nav>
+      <div className=" ">
+        <nav className="">{headerButtons}</nav>
+        <div className="w-[90%]  my-1">
+          <RoundedButton
+            style={
+              "min-w-[52px] min-h-[52px] px-8 bg-[var(--primary-color)] text-white text-[17px]"
+            }
+            btnText="Post"
+          />
+        </div>
       </div>
     </>
   );

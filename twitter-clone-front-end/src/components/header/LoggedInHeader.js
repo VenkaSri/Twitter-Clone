@@ -1,6 +1,6 @@
 import React from "react";
 
-import Header from "./Header";
+import Header from "./Sidebar";
 import {
   EXPLORE,
   HOME,
@@ -24,7 +24,7 @@ const LoggedInHeader = () => {
     { href: "/", svgPath: USER_MORE, text: "More" },
   ];
   return (
-    <div className="grow flex justify-end ">
+    <div className="grow flex justify-end dark:bg-black">
       <Header headerButtonContent={headerButtonContent} />
     </div>
   );

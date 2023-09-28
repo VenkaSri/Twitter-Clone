@@ -12,6 +12,7 @@ import { getData } from "./services/auth/getData";
 import { Dialog } from "./components/Dialog";
 import { SignupDialog } from "./pages/modal/SignupDialog";
 import { TwitterClone } from "./TwitterClone";
+import { Home } from "./pages/Home";
 
 const Routes = () => {
   const dispatch = useDispatch();
@@ -48,18 +49,7 @@ const Routes = () => {
         {/* <Route path="/i/flow/signup" element={<SignupDialog isOpen />} /> */}
         <Route
           path="/"
-          element={
-            isAuthenticated ? (
-              <>
-                <div className="flex grow">
-                  <LoggedInHeader />
-                  <MainContainer />
-                </div>
-              </>
-            ) : (
-              <LandingPage />
-            )
-          }
+          element={isAuthenticated ? <Home /> : <LandingPage />}
         />
         <Route path="/i/flow/signup" element={<SignupDialog />} />
       </RouterRoutes>

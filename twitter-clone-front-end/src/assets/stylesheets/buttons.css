@@ -34,3 +34,7 @@
   border border-[#d4dde1] dark:border-[#2f3336] hover:border-[#fdc9ce]
   dark:hover:border-[#67070f] dark:hover:bg-[#200A0B] dark:hover:text-[#F54550];
 }
+
+.button--rounded {
+  @apply rounded-full flex flex-col justify-center items-center font-cBold leading-5 hover:bg-[#1A8CD8] cursor-pointer;
+}
