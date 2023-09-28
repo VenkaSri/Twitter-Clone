@@ -4,7 +4,7 @@ const initialState = {
   name: "",
   username: "",
   email: "",
-  isAuthenticated: false,
+  isAuthenticated: true,
   isUsernameSet: true,
   hasOneFollowing: false,
   followers: [],
