@@ -16,7 +16,7 @@ const Sidebar = ({ headerButtonContent }) => {
   const darkMode = useTheme();
 
   return (
-    <div className="w-[275px] overflow-auto  flex-col-container  justify-between px-2">
+    <div className="w-[275px] overflow-y-auto  flex-col-container  justify-between px-2 h-full">
       <div className="">
         <div className="header--logo">
           {getIcon("X_LOGO", {

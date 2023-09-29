@@ -14,17 +14,17 @@ const MainHeader = () => {
     console.log(userInfo);
   };
   return (
-    <div className="flex flex-col bg-white/[.90] sticky top-0 backdrop-blur-[4.7px] border-r border-r-[#eff3f4]">
-      <div className="w-[37.375rem] h-[3.313rem] flex">
+    <div className="main--mainColumn">
+      {/* <div className="w-[37.375rem] h-[3.313rem] flex">
         <span className="font-cBold self-center pl-[20px] text-[20px]">
           Home
         </span>
       </div>
-      <div className="flex border-b border-b-[#eff3f4]">
+      <div className="flex border-b border-b-[#eff3f4] border-x border-x-[red]">
         <TabButton buttonObject={ForYou} />
         <TabButton buttonObject={Following} />
       </div>
-      <button onClick={handleClick}>Hello</button>
+      <button onClick={handleClick}>Hello</button> */}
     </div>
   );
 };

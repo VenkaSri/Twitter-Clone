@@ -1,23 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import LoggedInHeader from "../components/header/LoggedInHeader";
 import MainContainer from "../components/UI/main/MainContainer";
 import Sidebar from "../components/header/Sidebar";
 import { MainLayout } from "../components/layout/MainLayout";
+import useWindowHeight from "../hooks/useWindowHeight";
 
 export const Home = () => {
+  const [showHeader, setShowHeader] = useState("");
+  const windowHeight = useWindowHeight();
+
+  useEffect(() => {
+    if (windowHeight < 500) {
+      setShowHeader("hidden");
+    } else {
+      setShowHeader("block");
+    }
+  }, [windowHeight]);
   return (
     <MainLayout>
-      {/* <div className="flex grow  bg-black border border-[red]">
-        <div className="grow flex justify-end dark:bg-black">
-          <Header />
+      <header className={` bg-[black] flex-col-container grow items-end  `}>
+        <div className="flex-col-container w-[275px] ">
+          <div className="h-full fixed top-0 flex-col-container">
+            <Sidebar />
+          </div>
         </div>
-        <MainContainer />
-      </div> */}
-      <header className=" h-full  w-full basis-3/6 bg-[black] flex justify-end">
-        <Sidebar />
       </header>
-      <main className="h-full w-full "></main>
+      <main className="flex-col-container grow shrink-1 items-start">
+        <div className="flex-col-container grow w-[990px] ">
+          <MainContainer />
+        </div>
+      </main>
     </MainLayout>
   );
 };
