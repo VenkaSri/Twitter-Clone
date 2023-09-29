@@ -25,7 +25,7 @@ const Sidebar = ({ headerButtonContent }) => {
             fill: darkMode ? "white" : "black",
           })}
         </div>
-        <div className="mt-0.5 mb-1 border border-[red]">
+        <div className="mt-0.5 mb-1">
           <HeaderNav />
         </div>
       </div>

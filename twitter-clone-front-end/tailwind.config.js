@@ -4,6 +4,10 @@ module.exports = {
   darkMode: "class",
   content: ["public/**", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    screens: {
+      mobile: "500px",
+      tablet: "640px",
+    },
     fontFamily: {
       custom1: ["Custom-1", "sans-serif"],
       custom2: ["Custom-2", "sans-serif"],
@@ -47,10 +51,6 @@ module.exports = {
           },
         },
       }),
-      screens: {
-        xs: "380px",
-        med: "1000px",
-      },
       utilities: {
         ".flex-col-container": {
           "@apply flex flex-col": {},

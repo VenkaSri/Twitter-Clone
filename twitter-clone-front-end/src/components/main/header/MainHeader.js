@@ -10,21 +10,37 @@ import { getData } from "../../../services/auth/getData";
 
 const MainHeader = () => {
   const handleClick = async () => {
-    const userInfo = await getData("/user_info");
-    console.log(userInfo);
+    localStorage.setItem("timelineContent", "For you");
   };
+
+  console.log();
   return (
-    <div className="main--mainColumn">
-      {/* <div className="w-[37.375rem] h-[3.313rem] flex">
-        <span className="font-cBold self-center pl-[20px] text-[20px]">
-          Home
-        </span>
+    <div className="main--mainColumn  ">
+      <div className="sticky -top-[0.5px] ">
+        <div className="dark:bg-black/[0.60] backdrop-blur-md z-0">
+          <div className="h-[53px] flex-col-container px-4 mx-auto z-[2]">
+            <span className="text-white">Home</span>
+          </div>
+          <div className="flex-col-container mx-auto border-b border-b-[var(--primary-dark-border-color)] z-[3]">
+            <nav className="w-full h-14 flex">
+              <a
+                className="text-white w-full  flex-col-container justify-center items-center cursor-pointer hover:bg-[var(--primary-dark-border-color)]"
+                onClick={handleClick}
+              >
+                <div className=" flex-col-container grow">
+                  <div className="flex grow justify-center items-center">
+                    For you
+                  </div>
+                  <div className="bg-[var(--primary-color)]  h-1 rounded-full"></div>
+                </div>
+              </a>
+              <a className="text-white w-full  flex justify-center items-center cursor-pointer hover:bg-[var(--primary-dark-border-color)]">
+                Following
+              </a>
+            </nav>
+          </div>
+        </div>
       </div>
-      <div className="flex border-b border-b-[#eff3f4] border-x border-x-[red]">
-        <TabButton buttonObject={ForYou} />
-        <TabButton buttonObject={Following} />
-      </div>
-      <button onClick={handleClick}>Hello</button> */}
     </div>
   );
 };

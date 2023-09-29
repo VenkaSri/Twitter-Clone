@@ -67,11 +67,10 @@ const TweetSection = () => {
             <TweetField />
           </div>
         </div>
-
-        {/* <div className="-ml-3 py-2">
-          {isVisible && <Button buttonProps={whoCanReplyButton} />}
-        </div> */}
-
+        <div className="-ml-3 py-2">
+          {/* {isVisible && <Button buttonProps={whoCanReplyButton} />} */}
+        </div>{" "}
+        *
         {/* <div
           className={`-ml-2 mt-1 ${
             isVisible && "border-t border-t-[#eff3f4]"

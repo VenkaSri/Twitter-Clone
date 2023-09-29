@@ -27,7 +27,7 @@ export const Home = () => {
   return (
     <MainLayout>
       <header
-        className={` bg-[black] flex-col-container grow items-end  ${showHeader}`}
+        className={` bg-[black]  flex-col grow items-end  mobile:flex hidden`}
       >
         <div className="flex-col-container w-[275px] ">
           <div className="h-full fixed top-0 flex-col-container">
@@ -35,7 +35,7 @@ export const Home = () => {
           </div>
         </div>
       </header>
-      <main className="flex-col-container grow shrink-1 items-start">
+      <main className="flex-col-container grow shrink-1 items-start overflow-auto">
         {/* <div className="flex-col-container grow w-[990px] ">
           <MainContainer />
         </div> */}

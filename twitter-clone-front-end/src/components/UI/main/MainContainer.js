@@ -14,11 +14,9 @@ const MainContainer = () => {
     }
   }, [windowHeight]);
   return (
-    <div
-      className={`flex w-[990px] min-h-full justify-between grow   ${styles}`}
-    >
+    <div className={`flex w-[990px] justify-between   ${styles} `}>
       <MainHeader />
-      <div className="overflow-hidden w-[350px] border border-[red] mr-[10px]"></div>
+      <div className="overflow-hidden w-[350px] mr-[10px]"></div>
     </div>
   );
 };
