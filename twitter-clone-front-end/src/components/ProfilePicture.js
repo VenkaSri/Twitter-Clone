@@ -7,8 +7,8 @@ const ProfilePicture = ({ source, size }) => {
   };
 
   const imgStyle = {
-    width: `calc(${size}px - 4px)`, // Subtract 4px from the specified size for the img tag
-    height: `calc(${size}px - 4px)`, // Subtract 4px from the specified size for the img tag
+    width: `calc(${size}px - 4px)`,
+    height: `calc(${size}px - 4px)`,
   };
 
   return (
@@ -17,7 +17,7 @@ const ProfilePicture = ({ source, size }) => {
         src={source}
         alt="user avatar"
         className="rounded-full"
-        style={imgStyle} // Apply the imgStyle to the img tag
+        style={imgStyle}
       />
     </div>
   );

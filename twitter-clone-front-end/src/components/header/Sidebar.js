@@ -11,6 +11,9 @@ import { HeaderButton } from "./HeaderButton";
 import { HeaderNav } from "./HeaderNav";
 import { useTheme } from "../../hooks/useTheme";
 import useWindowHeight from "../../hooks/useWindowHeight";
+import ProfilePicture from "../ProfilePicture";
+import defaultAVI from "../../assets/images/avatars/default_avi.png";
+import { UserProfile } from "../UserProfile";
 
 const Sidebar = ({ headerButtonContent }) => {
   const darkMode = useTheme();
@@ -29,7 +32,15 @@ const Sidebar = ({ headerButtonContent }) => {
           <HeaderNav />
         </div>
       </div>
-      <div className="border border-[pink] my-3"></div>
+      <div className="my-3 flex-col-container border border-[green]">
+        <div className="rounded-full flex p-3 border border-[blue]">
+          <ProfilePicture size={40} source={defaultAVI} />
+          <UserProfile />
+          {/* <div className="border bor">
+            <UserProfile />
+          </div> */}
+        </div>
+      </div>
     </div>
   );
 };
