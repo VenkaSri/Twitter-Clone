@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     screens: {
       mobile: "500px",
-      tablet: "640px",
+      tablet: "1265px",
     },
     fontFamily: {
       custom1: ["Custom-1", "sans-serif"],

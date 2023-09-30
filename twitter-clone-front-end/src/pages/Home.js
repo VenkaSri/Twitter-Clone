@@ -26,16 +26,14 @@ export const Home = () => {
   }, [windowHeight]);
   return (
     <MainLayout>
-      <header
-        className={` bg-[black]  flex-col grow items-end  mobile:flex hidden`}
-      >
-        <div className="flex-col-container w-[275px] ">
-          <div className="h-full fixed top-0 flex-col-container">
+      <header className={` dark:bg-black bg-white grow flex justify-end`}>
+        <div className="flex-col-container w-[275px] tablet:w-[275px] w-[88px] ">
+          <div className="h-full fixed top-0 flex-col-container ">
             <Sidebar />
           </div>
         </div>
       </header>
-      <main className="flex-col-container grow shrink-1 items-start overflow-auto">
+      <main className="flex-col-container grow items-start overflow-auto grow-2">
         {/* <div className="flex-col-container grow w-[990px] ">
           <MainContainer />
         </div> */}

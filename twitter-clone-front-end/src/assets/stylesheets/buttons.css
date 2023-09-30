@@ -36,5 +36,5 @@
 }
 
 .button--rounded {
-  @apply rounded-full flex flex-col justify-center items-center font-cBold leading-5 hover:bg-[#1A8CD8] cursor-pointer;
+  @apply rounded-full flex flex-col justify-center items-center font-cBold leading-5 hover:bg-[#1A8CD8] cursor-pointer min-w-[52px] min-h-[52px];
 }

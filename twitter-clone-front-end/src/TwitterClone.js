@@ -10,8 +10,6 @@ export const TwitterClone = () => {
     (state) => state.rootReducer.urlSlice.currentUrl
   );
 
-  console.log(currentUrl);
-
   useEffect(() => {
     if (currentUrl === "http://localhost:3000/i/flow/signup") {
       setCurrentDialog(<SignupDialog fromStepOne />);

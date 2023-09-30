@@ -1,16 +1,7 @@
 import React from "react";
 
-const RoundedButton = ({
-  style,
-  mouseOverHandler,
-  btnText,
-  mouseLeaveHandler,
-}) => {
-  return (
-    <a className={`${style} button--rounded`}>
-      <span>{btnText}</span>
-    </a>
-  );
+const RoundedButton = ({ styles, btnContent }) => {
+  return <a className={`${styles} button--rounded`}>{btnContent}</a>;
 };
 
 export default RoundedButton;

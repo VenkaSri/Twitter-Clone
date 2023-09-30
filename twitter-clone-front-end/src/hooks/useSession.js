@@ -1,9 +1,12 @@
 import { getData } from "../services/auth/getData";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userSliceActions } from "../state/user/userSlice";
 
 export const useSession = () => {
   const dispatch = useDispatch();
+  const photoSRC = useSelector(
+    (state) => state.rootReducer.userSession.profilePicture
+  );
 
   const getUserDetails = async () => {
     try {
@@ -23,5 +26,6 @@ export const useSession = () => {
 
   return {
     getUserDetails,
+    photoSRC,
   };
 };

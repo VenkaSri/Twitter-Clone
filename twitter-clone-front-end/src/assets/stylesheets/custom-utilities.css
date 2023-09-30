@@ -6,6 +6,14 @@
   @apply flex flex-col;
 }
 
+.centered-column-container {
+  @apply flex flex-col items-center justify-center;
+}
+
+.br {
+  @apply border border-[red];
+}
+
 .primary-text-style {
   @apply text-[15px] font-cReg leading-5;
 }

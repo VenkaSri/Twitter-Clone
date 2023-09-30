@@ -4,11 +4,24 @@
 
 .header--logo {
   @apply flex w-[50px] h-[50px]  rounded-full fill-[#1D9BF0]  items-center justify-center py-[2px] cursor-pointer
-  hover:bg-[#E6E7E7] dark:hover:bg-[var(--primary-dark-hov-bg-color)];
+  hover:bg-[#E6E7E7] dark:hover:bg-[var(--primary-dark-hov-bg-color)]
+  tablet:self-start self-center;
+}
+
+.header--siderbar {
+  @apply tablet:w-[275px] w-[88px] overflow-y-auto  flex flex-col justify-between px-2 h-full;
 }
 
 .header--link {
-  @apply flex  items-center justify-center p-3 max-w-full rounded-full cursor-pointer tracking-[1px]
+  @apply flex  p-3  rounded-full cursor-pointer tracking-[1px]
   hover:bg-[#E6E7E7] dark:hover:bg-[var(--primary-dark-hov-bg-color)]
   text-black dark:text-white;
+}
+
+.header--button-wrapper {
+  @apply w-[90%]  tablet:self-start self-center;
+}
+
+.header--newPostButton {
+  @apply bg-[var(--primary-color)] text-white text-[17px];
 }

@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
-import getIcon from "../../utils/icons/iconsutil";
+import React from "react";
+
 import { HeaderButton } from "./HeaderButton";
-import RoundedButton from "../RoundedButton";
-import useWindowHeight from "../../hooks/useWindowHeight";
+import { useMediaQuery } from "@mui/material";
 
 export const HeaderNav = () => {
-  const [newPostButtonMargin, setNewPostButtonMargin] = useState("");
-  const [linkVisibility, setLinkVisibility] = useState("");
-  const windowHeight = useWindowHeight();
+  const hide = useMediaQuery("(max-height:751px)");
   const links = [
     "Home",
     "Explore",
@@ -22,15 +19,15 @@ export const HeaderNav = () => {
   ];
 
   const headerButtons = links.map((link) => {
-    let visibility = linkVisibility; // Set the default visibility
+    let visibility = "";
 
-    if (link === "Bookmarks" && windowHeight < 750) {
-      visibility = "hidden"; // Change visibility for "Bookmarks" when windowHeight is less than 750
+    if (link === "Bookmarks" && hide) {
+      visibility = "hidden";
     }
 
     return (
       <HeaderButton
-        key={link} // Add a unique key to each HeaderButton
+        key={link}
         type={link}
         text={link}
         visibility={visibility}
@@ -38,27 +35,9 @@ export const HeaderNav = () => {
     );
   });
 
-  useEffect(() => {
-    if (windowHeight < 900) {
-      setNewPostButtonMargin("my-1");
-    } else {
-      setNewPostButtonMargin("my-4");
-    }
-  }, [windowHeight]);
-
   return (
     <>
-      <div className=" ">
-        <nav className="">{headerButtons}</nav>
-        <div className={`w-[90%]  ${newPostButtonMargin}`}>
-          <RoundedButton
-            style={
-              "min-w-[52px] min-h-[52px] px-8 bg-[var(--primary-color)] text-white text-[17px]"
-            }
-            btnText="Post"
-          />
-        </div>
-      </div>
+      <nav className="tablet:self-start self-center">{headerButtons}</nav>
     </>
   );
 };
