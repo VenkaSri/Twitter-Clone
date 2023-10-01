@@ -14,6 +14,18 @@
   @apply border border-[red];
 }
 
+.bg {
+  @apply border border-[#76ff31];
+}
+
+.bb {
+  @apply border border-[#563737];
+}
+
+.bt {
+  @apply border border-[#9be4ff];
+}
+
 .primary-text-style {
   @apply text-[15px] font-cReg leading-5;
 }

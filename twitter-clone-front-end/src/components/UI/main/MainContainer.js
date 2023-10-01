@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import MainHeader from "../../main/header/MainHeader";
 import useWindowHeight from "../../../hooks/useWindowHeight";
+import { MainColumn } from "./MainColumn";
+import { SideColumn } from "./SideColumn";
 
 const MainContainer = () => {
   const [styles, setStyles] = useState("");
@@ -14,9 +15,11 @@ const MainContainer = () => {
     }
   }, [windowHeight]);
   return (
-    <div className={`flex w-[990px] justify-between   ${styles} `}>
-      <MainHeader />
-      <div className="overflow-hidden w-[350px] mr-[10px]"></div>
+    <div
+      className={`flex w-[990px] max-[1092px]:w-[920px] justify-between  ${styles} grow max-[980px]:w-[600px] max-[680px]:w-full`}
+    >
+      <MainColumn />
+      <SideColumn />
     </div>
   );
 };

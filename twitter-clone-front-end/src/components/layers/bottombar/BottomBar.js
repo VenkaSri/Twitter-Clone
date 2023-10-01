@@ -22,7 +22,7 @@ export const BottomBar = () => {
   const barLinks = links.map((link) => <BottomBarLink type={link} />);
   return (
     <div
-      className={`absolute w-full bottom-0 bg-white dark:bg-black border-t border-t-[var(--primary-dark-border-color)] mobile:hidden block`}
+      className={`absolute w-full bottom-0 bg-white dark:bg-black border-t dark:border-t-[var(--primary-dark-border-color)] border-t-[#eff3f4] mobile:hidden block`}
     >
       <div className="max-w-[1000px] mx-auto">
         <nav className="w-full h-14 flex">{barLinks}</nav>
