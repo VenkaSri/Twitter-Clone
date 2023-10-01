@@ -4,14 +4,12 @@ import LandingPage from "./pages/public/LandingPage";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import LoggedInHeader from "./components/header/LoggedInHeader";
-import MainContainer from "./components/UI/main/MainContainer";
 import { userInfoActions } from "./state/user/userInfo-reducer";
 
 import { getData } from "./services/auth/getData";
 import { Dialog } from "./components/Dialog";
 import { SignupDialog } from "./pages/modal/SignupDialog";
-import { TwitterClone } from "./TwitterClone";
+
 import { Home } from "./pages/Home";
 
 const Routes = () => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import LoggedInHeader from "../components/header/LoggedInHeader";
-import MainContainer from "../components/UI/main/MainContainer";
+import MainContainer from "../components/main/MainContainer";
 import Sidebar from "../components/header/Sidebar";
 import { MainLayout } from "../components/layout/MainLayout";
 import useWindowHeight from "../hooks/useWindowHeight";

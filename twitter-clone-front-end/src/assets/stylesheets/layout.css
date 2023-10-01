@@ -2,3 +2,19 @@
   @apply flex flex-col grow max-w-[600px]
   border-x dark:border-x-[#2f3336] border-x-[#eff3f4];
 }
+
+.mainColumn--topNav-heading {
+  @apply h-[53px] flex flex-col px-4 mx-auto z-[2] text-[20px] leading-6 font-cBold  justify-center
+  text-black dark:text-white;
+}
+
+.mainColumn--topNav-links {
+  @apply flex flex-col mx-auto z-[3]
+  border-b border-b-[#eff3f4] dark:border-b-[var(--primary-dark-border-color)];
+}
+
+.mainColumn--topNav-link {
+  @apply w-full  flex flex-col justify-center items-center cursor-pointer
+  hover:bg-[var(--primary-hov-bg-color)] dark:hover:bg-[var(--primary-dark-border-color)]
+  text-black dark:text-white text-[15px] leading-5;
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import useWindowHeight from "../../../hooks/useWindowHeight";
+import useWindowHeight from "../../hooks/useWindowHeight";
 import { MainColumn } from "./MainColumn";
 import { SideColumn } from "./SideColumn";
 
