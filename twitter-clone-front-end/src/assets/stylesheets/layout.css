@@ -4,8 +4,9 @@
 }
 
 .mainColumn--topNav-heading {
-  @apply h-[53px] flex flex-col px-4 mx-auto z-[2] text-[20px] leading-6 font-cBold  justify-center
-  text-black dark:text-white;
+  @apply h-[53px] flex flex-col  mx-auto z-[2] text-[20px] leading-6 font-cBold  justify-center
+  text-black dark:text-white
+  mobile:px-4;
 }
 
 .mainColumn--topNav-links {

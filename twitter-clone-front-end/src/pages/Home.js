@@ -26,7 +26,9 @@ export const Home = () => {
   }, [windowHeight]);
   return (
     <MainLayout>
-      <header className={` dark:bg-black bg-white grow flex justify-end `}>
+      <header
+        className={` dark:bg-black bg-white grow flex justify-end mobile:block hidden`}
+      >
         <div className="flex-col-container w-[275px] tablet:w-[275px] w-[88px] ">
           <div className="h-full fixed top-0 flex-col-container ">
             <Sidebar />

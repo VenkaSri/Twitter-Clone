@@ -7,12 +7,15 @@ const TweetSectionContext = createContext();
 const TweetSectionProvider = ({ children }) => {
   const [numOfChars, setNumOfChars] = useState(0);
   const [hasUserTyped, setHasUserTyped] = useState(false);
+  const [isInputActive, setIsInputActive] = useState(false);
 
   const contextValue = {
     numOfChars,
     setNumOfChars,
     hasUserTyped,
     setHasUserTyped,
+    isInputActive,
+    setIsInputActive,
   };
 
   return (

@@ -1,5 +1,5 @@
 import { Skeleton } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 
 const ProfilePicture = ({ size }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -56,4 +56,4 @@ const ProfilePicture = ({ size }) => {
   );
 };
 
-export default ProfilePicture;
+export default memo(ProfilePicture);

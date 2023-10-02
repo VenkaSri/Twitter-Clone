@@ -29,3 +29,11 @@
 .primary-text-style {
   @apply text-[15px] font-cReg leading-5;
 }
+
+/* https://codepen.io/flesler/pen/kdJmbw */
+
+.placeholder:after {
+  content: "What is happening?!";
+  color: #a9a9a9;
+  font-family: Arial;
+}

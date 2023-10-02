@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import ProfilePicture from "../../ProfilePicture";
 import DefaultAvatar from "../../../assets/images/avatars/default_avi.png";
@@ -11,62 +11,128 @@ import RoundedButton from "../../RoundedButton";
 import TweetSectionContext, {
   useTweetSectionContext,
 } from "../../../context/TweetSectionCtx";
+import { CHARACTER_LIMIT, POST_BUTTON_VALUE } from "../../../constants";
+import Field from "./Field";
+import getIcon from "../../../utils/icons/iconsutil";
+import clsx from "clsx";
+import { DialogHeaderLogo } from "../../dialog/signup/header/DialogHeaderLogo";
 
 const TweetSection = () => {
-  const isVisible = false;
-  // const hasUserTyped = useSelector(
-  //   (state) => state.rootReducer.tweetState.hasUserTyped
-  // );
+  const { hasUserTyped, isInputActive } = useTweetSectionContext();
   const { photoSRC } = useSession();
+  const parentRef = useRef(null);
+  const fieldRef = useRef(null);
 
-  const { setNumOfChars } = useTweetSectionContext();
-
-  const handleChange = (e) => {
-    const newValue = e.target.value;
-    setNumOfChars(newValue.length);
+  const handleTextAreaRef = (ref) => {
+    fieldRef.current = ref;
   };
+  console.log(fieldRef.current && fieldRef.current.clientHeight);
+  const textAreaHeight = fieldRef.current && fieldRef.current.clientHeight;
+  useEffect(() => {
+    const adjustParentHeight = () => {
+      if (parentRef.current && fieldRef.current) {
+        const fieldHeight = fieldRef.current.clientHeight;
+        parentRef.current.style.height = `${fieldHeight}px`;
+      }
+    };
+
+    adjustParentHeight();
+  }, [textAreaHeight]);
+
   return (
-    <div className="flex border-b border-b-[#eff3f4] px-[16px] pt-[4px]">
-      <div className="pt-[12px] mr-[12px]">
-        <ProfilePicture source={photoSRC} size={40} />
-      </div>
-      <div className="pt-[4x]">
-        <div className="pt-[4px]">
-          <div className="pb-[12px]">
-            {/* {isVisible && <Button buttonProps={everyoneButton} />} */}
-          </div>
-
-          <div className="flex ">
-            <TextareaAutosize
-              placeholder="What is happening?!"
-              className="w-full outline-none leading-6 text-[20px]"
-              onChange={handleChange}
-            />
-          </div>
+    <div className="mobile:flex hidden border-b border-b-[#eff3f4] px-[16px]  dark:bg-black w-full relative ">
+      <div className="flex grow relative">
+        <div className="pt-[12px] mr-[12px] flex">
+          <ProfilePicture source={photoSRC} size={44} />
         </div>
+        <div className="pt-1 flex flex-col  w-full ">
+          <div className="pt-1 flex flex-col   relative ">
+            <div className="pb-3 flex relative">
+              {isInputActive && (
+                <RoundedButton
+                  styles="button--rounded-audience border border-[#cfd9de] dark:border-[#536471]"
+                  btnContent={{
+                    text: (
+                      <span className="text-[14px] leading-4 font-cBold">
+                        Everyone
+                      </span>
+                    ),
 
-        <div className="-ml-3 py-2">
-          {/* {isVisible && <Button buttonProps={whoCanReplyButton} />} */}
-        </div>
-        <div
-          className={`-ml-2 mt-1 ${
-            isVisible && "border-t border-t-[#eff3f4]"
-          } w-[514px] h-[48px] flex items-center justify-between `}
-        >
-          <TweetOptions />
-          <div
-            className={`-ml-2 mt-1 ${
-              isVisible && "border-t border-t-[#eff3f4]"
-            } w-[514px] h-[48px] flex items-center justify-between `}
-          >
-            <div className="h-[36px] flex  gap-[10px] items-center br">
-              {true && <CharactersProgress />}
+                    icon: {
+                      icon: getIcon("Down_Arrow", {
+                        width: 16,
+                        fill: "var(--primary-color)",
+                      }),
+                      iconPosition: "end",
+                    },
+                  }}
+                />
+              )}
+            </div>
 
-              <div></div>
-              <RoundedButton
-                styles={"min-w-[36px] min-h-[36px] px-8 header--newPostButton"}
-                btnContent="Post"
-              />
+            <div
+              className="flex grow relative  min-h-[50.25px] h-auto"
+              ref={parentRef}
+            >
+              <Field setParentRef={handleTextAreaRef} />
+            </div>
+          </div>
+          <div className="flex flex-col relative">
+            <div className="-ml-3 ">
+              <div
+                className={clsx("flex pb-3", {
+                  "border-b border-b-[#eff3f4] dark:border-b-[var(--primary-dark-border-color)]":
+                    isInputActive,
+                })}
+              >
+                {isInputActive && (
+                  <RoundedButton
+                    styles="button--rounded-audience"
+                    btnContent={{
+                      text: (
+                        <span className="text-[14px] leading-4 font-cBold">
+                          Everyone can reply
+                        </span>
+                      ),
+
+                      icon: {
+                        icon: getIcon("Globe", {
+                          width: 16,
+                          fill: "var(--primary-color)",
+                        }),
+                        iconPosition: "start",
+                      },
+                    }}
+                  />
+                )}
+              </div>
+            </div>
+            <div
+              className={`-ml-2 mt-1 h-[48px] flex items-center justify-between`}
+            >
+              <TweetOptions />
+              <div className="h-[36px] flex   items-center ">
+                {hasUserTyped && (
+                  <>
+                    <CharactersProgress />
+                    <div className=" mr-3 ml-[10px] h-[31px]  w-[1px] bg-[#b9cad3]"></div>
+                    <div className="border border-[#cfd9de] min-h-[24px] min-w-[24px] rounded-full centered-column-container">
+                      {getIcon("Add", {
+                        width: 16,
+                        fill: "var(--primary-color)",
+                      })}
+                    </div>
+                  </>
+                )}
+
+                <RoundedButton
+                  styles={
+                    "ml-3 min-w-[36px] min-h-[36px] px-4 header--newPostButton"
+                  }
+                  btnContent={POST_BUTTON_VALUE}
+                  isDisabled={!hasUserTyped}
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -1,14 +1,32 @@
 import React from "react";
+import { useSession } from "../../../hooks/useSession";
+import ProfilePicture from "../../ProfilePicture";
+import { DialogHeaderLogo } from "../../dialog/signup/header/DialogHeaderLogo";
+import getIcon from "../../../utils/icons/iconsutil";
 
 export const TopNav = () => {
   const handleClick = () => {
     console.log("click");
   };
+  const { photoSRC } = useSession();
   return (
     <div className="sticky -top-[0.5px] ">
       <div className="dark:bg-black/[0.60] backdrop-blur-md z-0">
         <div className="mainColumn--topNav-heading">
-          <span>Home</span>
+          <div className="flex relative px-4">
+            <div className="mobile:hidden block">
+              <ProfilePicture source={photoSRC} size={40} />
+            </div>
+            <div className="absolute inset-0 flex justify-center items-center mobile:hidden">
+              {getIcon("X_LOGO", {
+                height: "2rem",
+                maxWidth: "100%",
+                fill: "black",
+              })}
+            </div>
+
+            <span className="self-center hidden mobile:block">Home</span>
+          </div>
         </div>
         <div className="mainColumn--topNav-links">
           <nav className="w-full h-14 flex">

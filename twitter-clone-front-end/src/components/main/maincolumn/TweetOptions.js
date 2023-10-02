@@ -1,19 +1,37 @@
 import IconButton from "../../UI/button/IconButton";
+import getIcon from "../../../utils/icons/iconsutil";
+import clsx from "clsx";
 
 const TweetOptions = () => {
+  const attachmentList = [
+    "Media",
+    "GIF",
+    "Poll",
+    "Emoji",
+    "Schedule",
+    "Tag Location",
+  ];
   const handleMedia = () => {
     console.log("Clicked");
   };
 
+  const attachments = attachmentList.map((item) => {
+    return (
+      <div
+        role="button"
+        className={clsx("button--icon-rounded", {
+          "max-[688px]:hidden": item === "Poll" || item === "Schedule",
+        })}
+      >
+        {getIcon(item, { width: 20, fill: "var(--primary-color)" })}
+      </div>
+    );
+  });
+
   return (
-    <div className="flex">
-      <IconButton type={"Media"} onClick={handleMedia} />
-      <IconButton type={"GIF"} onClick={handleMedia} />
-      <IconButton type={"Poll"} onClick={handleMedia} />
-      <IconButton type={"Emoji"} onClick={handleMedia} />
-      <IconButton type={"Schedule"} onClick={handleMedia} />
-      <IconButton type={"Tag Location"} onClick={handleMedia} />
-    </div>
+    <>
+      <div className="flex">{attachments}</div>
+    </>
   );
 };
 
