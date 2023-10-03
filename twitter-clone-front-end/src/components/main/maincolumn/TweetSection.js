@@ -46,9 +46,9 @@ const TweetSection = () => {
           <ProfilePicture source={photoSRC} size={44} />
         </div>
         <div className="pt-1 flex flex-col  w-full ">
-          <div className="pt-1 flex flex-col   relative ">
-            <div className="pb-3 flex relative">
-              {isInputActive && (
+          <div className="pt-1 flex flex-col   relative br">
+            {isInputActive && (
+              <div className="pb-3 flex relative br">
                 <RoundedButton
                   styles="button--rounded-audience border border-[#cfd9de] dark:border-[#536471]"
                   btnContent={{
@@ -67,13 +67,10 @@ const TweetSection = () => {
                     },
                   }}
                 />
-              )}
-            </div>
+              </div>
+            )}
 
-            <div
-              className="flex grow relative  min-h-[50.25px] h-auto"
-              ref={parentRef}
-            >
+            <div className="flex grow relative  br " ref={parentRef}>
               <Field setParentRef={handleTextAreaRef} />
             </div>
           </div>

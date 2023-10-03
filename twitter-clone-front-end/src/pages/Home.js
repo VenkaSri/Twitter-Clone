@@ -27,7 +27,7 @@ export const Home = () => {
   return (
     <MainLayout>
       <header
-        className={` dark:bg-black bg-white grow flex justify-end mobile:block hidden`}
+        className={` dark:bg-black bg-white grow  justify-end mobile:flex hidden`}
       >
         <div className="flex-col-container w-[275px] tablet:w-[275px] w-[88px] ">
           <div className="h-full fixed top-0 flex-col-container ">

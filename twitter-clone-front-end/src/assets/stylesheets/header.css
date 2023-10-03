@@ -25,3 +25,10 @@
 .header--newPostButton {
   @apply bg-[var(--primary-color)] text-white text-[17px];
 }
+
+.DraftEditor-editorContainer {
+  width: 500px;
+  border: 1px solid #ddd; /* just to visualize the editor's boundaries */
+  padding: 10px;
+  border-radius: 4px;
+}
