@@ -14,16 +14,7 @@ import { BottomBar } from "../components/layers/bottombar/BottomBar";
 export const Home = () => {
   const [showHeader, setShowHeader] = useState("");
   const darkMode = useTheme();
-  const windowHeight = useWindowHeight();
-  // const fullScreen = useMediaQuery("(max-width:702px)");
 
-  useEffect(() => {
-    if (windowHeight < 500) {
-      setShowHeader("hidden");
-    } else {
-      setShowHeader("");
-    }
-  }, [windowHeight]);
   return (
     <MainLayout>
       <header
@@ -35,7 +26,7 @@ export const Home = () => {
           </div>
         </div>
       </header>
-      <main className="flex-col-container items-start grow max-[980px]:grow-[2] max-[680px]:w-full">
+      <main className="flex-col-container items-start grow max-[980px]:grow-[2] max-[680px]:w-full overflow-y-auto overflow-x-hidden">
         {/* <div className="flex-col-container grow w-[990px] ">
           <MainContainer />
         </div> */}

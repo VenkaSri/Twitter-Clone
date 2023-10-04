@@ -16,6 +16,10 @@
 
 @include textfield.core-styles;
 
+* {
+  box-sizing: border-box;
+}
+
 @font-face {
   font-family: "Custom-1";
   src: url("./font/chirp_regular.otf");

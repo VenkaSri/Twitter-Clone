@@ -1,11 +1,8 @@
-import { useState } from "react";
-import { Stack } from "@mui/system";
-import Button from "@mui/joy/Button";
-import Typography from "@mui/joy/Typography";
 import { CircularProgress } from "@mui/joy";
-import { useCountUp } from "use-count-up";
 import { CHARACTER_LIMIT } from "../../../constants";
 import { useTweetSectionContext } from "../../../context/TweetSectionCtx";
+import { useEffect, useState } from "react";
+import clsx from "clsx";
 
 export default function CharactersProgress() {
   const { numOfChars } = useTweetSectionContext();
@@ -18,9 +15,9 @@ export default function CharactersProgress() {
   const progressColor =
     numOfChars >= 280 ? "#f4212e" : isApproachingLimit ? "#FFD700" : "#1d9bf0";
   const isPastLimit = numOfChars >= 290;
+  const numberColor = numOfChars > 279;
 
-  // console.log(isApproachingLimit);
-  console.log(isPastLimit);
+  console.log(numberColor);
 
   return (
     <div className="min-h-[30px] min-w-[30px] centered-column-container ">
@@ -38,7 +35,14 @@ export default function CharactersProgress() {
           }}
         >
           {isApproachingLimit && (
-            <span className="text-[13px] leading-[10.4px] font-cReg text-[#f4212e]">
+            <span
+              className={clsx(
+                "text-[13px] leading-[10.4px] font-cReg dark:text-white",
+                {
+                  "text-[#f4212e]": numberColor,
+                }
+              )}
+            >
               {CHARACTER_LIMIT - numOfChars}
             </span>
           )}

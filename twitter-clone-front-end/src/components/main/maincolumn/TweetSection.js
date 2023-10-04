@@ -12,43 +12,34 @@ import TweetSectionContext, {
   useTweetSectionContext,
 } from "../../../context/TweetSectionCtx";
 import { CHARACTER_LIMIT, POST_BUTTON_VALUE } from "../../../constants";
-import Field from "./Field";
+import Field from "./PostEditor";
 import getIcon from "../../../utils/icons/iconsutil";
 import clsx from "clsx";
 import { DialogHeaderLogo } from "../../dialog/signup/header/DialogHeaderLogo";
+import PostEditor from "./PostEditor";
 
 const TweetSection = () => {
   const { hasUserTyped, isInputActive } = useTweetSectionContext();
   const { photoSRC } = useSession();
+  const [childHeight, setChildHeight] = useState(48);
   const parentRef = useRef(null);
-  const fieldRef = useRef(null);
 
-  const handleTextAreaRef = (ref) => {
-    fieldRef.current = ref;
-  };
-  console.log(fieldRef.current && fieldRef.current.clientHeight);
-  const textAreaHeight = fieldRef.current && fieldRef.current.clientHeight;
   useEffect(() => {
-    const adjustParentHeight = () => {
-      if (parentRef.current && fieldRef.current) {
-        const fieldHeight = fieldRef.current.clientHeight;
-        parentRef.current.style.height = `${fieldHeight}px`;
-      }
-    };
-
-    adjustParentHeight();
-  }, [textAreaHeight]);
+    if (parentRef.current && childHeight !== null) {
+      parentRef.current.style.height = `${childHeight}px`;
+    }
+  }, [childHeight]);
 
   return (
     <div className="mobile:flex hidden border-b border-b-[#eff3f4] px-[16px]  dark:bg-black w-full relative ">
-      <div className="flex grow relative">
-        <div className="pt-[12px] mr-[12px] flex">
+      <div className="flex max-w-full grow">
+        <div className="pt-[12px] mr-[12px] flex basis-auto">
           <ProfilePicture source={photoSRC} size={44} />
         </div>
-        <div className="pt-1 flex flex-col  w-full ">
-          <div className="pt-1 flex flex-col   relative br">
+        <div className="pt-1 flex flex-col  w-full max-w-full  basis-auto ">
+          <div className="pt-1 flex flex-col   relative ">
             {isInputActive && (
-              <div className="pb-3 flex relative br">
+              <div className="pb-3 flex relative">
                 <RoundedButton
                   styles="button--rounded-audience border border-[#cfd9de] dark:border-[#536471]"
                   btnContent={{
@@ -70,15 +61,15 @@ const TweetSection = () => {
               </div>
             )}
 
-            <div className="flex grow relative  br " ref={parentRef}>
-              <Field setParentRef={handleTextAreaRef} />
+            <div className="flex max-h-[700px] grow relative" ref={parentRef}>
+              <PostEditor onHeightChange={setChildHeight} />
             </div>
           </div>
-          <div className="flex flex-col relative">
-            <div className="-ml-3 ">
+          <div className="flex flex-col">
+            <div className="-ml-3">
               <div
-                className={clsx("flex pb-3", {
-                  "border-b border-b-[#eff3f4] dark:border-b-[var(--primary-dark-border-color)]":
+                className={clsx("flex pb-3 ", {
+                  "border-b border-b-[#eff3f4] dark:border-b-[var(--primary-dark-border-color)] mt-6":
                     isInputActive,
                 })}
               >
