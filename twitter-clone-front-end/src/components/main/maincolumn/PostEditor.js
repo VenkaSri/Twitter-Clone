@@ -4,9 +4,11 @@ import { useTweetSectionContext } from "../../../context/TweetSectionCtx";
 import { Editor, EditorState } from "draft-js";
 import { useHeightObserver } from "../../../hooks/useHeightObserber";
 import { useEditorState } from "../../../hooks/useEditorState";
+import { useTheme } from "../../../hooks/useTheme";
 
 const PostEditor = ({ onHeightChange }) => {
   const { setIsInputActive } = useTweetSectionContext();
+  const darkMode = useTheme();
   const fieldRef = useRef(null);
   const [editorState, handleEditorChange] = useEditorState(
     EditorState.createEmpty()
@@ -15,7 +17,7 @@ const PostEditor = ({ onHeightChange }) => {
 
   const styleMap = {
     HIGHLIGHT: {
-      backgroundColor: "#fb9fa8",
+      backgroundColor: darkMode ? "#8a0d20" : "#fb9fa8",
     },
   };
 

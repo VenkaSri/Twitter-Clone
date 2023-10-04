@@ -26,7 +26,7 @@ export const Home = () => {
           </div>
         </div>
       </header>
-      <main className="flex-col-container items-start grow max-[980px]:grow-[2] max-[680px]:w-full overflow-y-auto overflow-x-hidden">
+      <main className="flex-col-container items-start grow max-[980px]:grow-[2] max-[680px]:w-full overflow-y-auto overflow-x-hidden dark:bg-black">
         {/* <div className="flex-col-container grow w-[990px] ">
           <MainContainer />
         </div> */}

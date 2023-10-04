@@ -31,7 +31,7 @@ const TweetSection = () => {
   }, [childHeight]);
 
   return (
-    <div className="mobile:flex hidden border-b border-b-[#eff3f4] px-[16px]  dark:bg-black w-full relative ">
+    <div className="mobile:flex hidden border-b border-b-[#eff3f4] px-[16px] dark:border-b-[var(--primary-dark-border-color)] dark:bg-black w-full relative ">
       <div className="flex max-w-full grow">
         <div className="pt-[12px] mr-[12px] flex basis-auto">
           <ProfilePicture source={photoSRC} size={44} />
@@ -61,7 +61,10 @@ const TweetSection = () => {
               </div>
             )}
 
-            <div className="flex max-h-[700px] grow relative" ref={parentRef}>
+            <div
+              className="flex max-h-[700px] grow relative min-h-[56px]"
+              ref={parentRef}
+            >
               <PostEditor onHeightChange={setChildHeight} />
             </div>
           </div>

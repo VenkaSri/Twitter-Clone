@@ -39,7 +39,7 @@ export default function CharactersProgress() {
               className={clsx(
                 "text-[13px] leading-[10.4px] font-cReg dark:text-white",
                 {
-                  "text-[#f4212e]": numberColor,
+                  "text-[#f4212e] dark:text-[#f4212f]": numberColor,
                 }
               )}
             >
@@ -49,7 +49,7 @@ export default function CharactersProgress() {
         </CircularProgress>
       ) : (
         isApproachingLimit && (
-          <span className="text-[13px] leading-[10.4px] font-cReg text-[#f4212e]">
+          <span className="text-[13px] leading-[10.4px] font-cReg text-[#f4212e] dark:text-[red] tracking-widest">
             {(CHARACTER_LIMIT - numOfChars).toLocaleString()}
           </span>
         )

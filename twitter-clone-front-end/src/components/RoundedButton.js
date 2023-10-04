@@ -7,12 +7,12 @@ const RoundedButton = ({ styles, btnContent, isDisabled }) => {
   return (
     <a
       className={clsx(styles, "button--rounded", {
-        "pointer-events-none bg-[#8DCCF7]": isDisabled,
+        "pointer-events-none opacity-50": isDisabled,
       })}
       href="#f"
       role="button"
     >
-      <div className="flex ">
+      <div className="flex">
         {hasIcon && iconPosition === "start" && (
           <div className="mr-1 flex items-center justify-center ">
             {btnContent.icon.icon}
