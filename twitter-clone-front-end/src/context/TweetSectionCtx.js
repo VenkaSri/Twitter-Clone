@@ -8,6 +8,8 @@ const TweetSectionProvider = ({ children }) => {
   const [numOfChars, setNumOfChars] = useState(0);
   const [hasUserTyped, setHasUserTyped] = useState(false);
   const [isInputActive, setIsInputActive] = useState(false);
+  const [imgSrc, setImgSrc] = useState(null);
+  const [paths, setPaths] = useState([]);
 
   const contextValue = {
     numOfChars,
@@ -16,6 +18,10 @@ const TweetSectionProvider = ({ children }) => {
     setHasUserTyped,
     isInputActive,
     setIsInputActive,
+    setImgSrc,
+    imgSrc,
+    setPaths,
+    paths,
   };
 
   return (
