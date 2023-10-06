@@ -2,6 +2,7 @@ package ca.venkasritharan.twitterclone.entity.user;
 
 
 import ca.venkasritharan.twitterclone.entity.authentication.Role;
+import ca.venkasritharan.twitterclone.post.Post;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -34,6 +35,11 @@ public class User {
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "profile_id", referencedColumnName = "id")
   private Profile profile;
+
+
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private Set<Post> posts;
+
 
 
 
