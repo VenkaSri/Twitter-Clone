@@ -1,10 +1,11 @@
-const ATTACHMENTS = (open) => [
+const ATTACHMENTS = (open, len) => [
   {
     text: "Media",
     action: () => {
       console.log("Media");
       open();
     },
+    isDisabled: len === 4,
   },
   {
     text: "GIF",

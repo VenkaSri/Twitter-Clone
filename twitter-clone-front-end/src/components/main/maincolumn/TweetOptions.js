@@ -1,44 +1,47 @@
-import IconButton from "../../UI/button/IconButton";
 import getIcon from "../../../utils/icons/iconsutil";
 import clsx from "clsx";
 import ATTACHMENTS from "../../../constants/post/attachments";
 import { useMediaUpload } from "../../../hooks/useMediaUpload";
-import { useDropzone } from "react-dropzone";
-import { useEditorState } from "../../../hooks/useEditorState";
 import { useEffect } from "react";
 import { useTweetSectionContext } from "../../../context/TweetSectionCtx";
 
-const AttachmentButton = ({ text, action }) => {
+const AttachmentButton = ({ text, action, isDisabled }) => {
   return (
-    <div
-      role="button"
-      className={clsx("button--icon-rounded", {
-        "max-[688px]:hidden": text === "Poll" || text === "Schedule",
-      })}
+    <button
+      className={clsx(
+        isDisabled ? "button--icon-rounded-disabled " : "button--icon-rounded",
+        {
+          "max-[688px]:hidden": text === "Poll" || text === "Schedule",
+        }
+      )}
       onClick={action}
+      disabled={isDisabled}
     >
       {getIcon(text, { width: 20, fill: "var(--primary-color)" })}
-    </div>
+    </button>
   );
 };
 
 const TweetOptions = () => {
   const { open, getInputProps, acceptedFiles } = useMediaUpload();
-  const attachmentsList = ATTACHMENTS(open);
-  const { setImgSrc, setPaths, paths } = useTweetSectionContext();
+  const { setPaths, paths } = useTweetSectionContext();
+  const attachmentsList = ATTACHMENTS(open, paths.length);
 
   useEffect(() => {
     if (acceptedFiles.length > 0) {
       const fileURLs = acceptedFiles.map((file) => URL.createObjectURL(file));
-      setPaths(fileURLs);
+      setPaths((prevURLs) => [...prevURLs, ...fileURLs]);
     }
   }, [acceptedFiles, setPaths]);
-  console.log(paths);
   return (
     <div className="flex">
       <input {...getInputProps()} style={{ display: "none" }} />
       {attachmentsList.map((attachment) => (
-        <AttachmentButton key={attachment.text} {...attachment} />
+        <AttachmentButton
+          key={attachment.text}
+          {...attachment}
+          isDisabled={attachment.isDisabled}
+        />
       ))}
     </div>
   );

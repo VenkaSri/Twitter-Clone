@@ -19,6 +19,8 @@ import clsx from "clsx";
 import { DialogHeaderLogo } from "../../dialog/signup/header/DialogHeaderLogo";
 import PostEditor from "./PostEditor";
 import { useEditorState } from "../../../hooks/useEditorState";
+import { ImagesearchRollerRounded } from "@mui/icons-material";
+import { PostEditorMedia } from "../../post/compose/PostEditorMedia";
 
 const TweetSection = () => {
   const { hasUserTyped, isInputActive } = useTweetSectionContext();
@@ -27,20 +29,6 @@ const TweetSection = () => {
   const { imgSrc, paths } = useTweetSectionContext();
   const parentRef = useRef(null);
 
-  // const images = paths.map((path) => (
-  //   <div className=" rounded-[16px] overflow-hidden relative">
-  //     <img src={path} className="w-full" />
-  //   </div>
-  // ));
-
-  const images = [
-    "https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww&w=1000&q=80",
-    "https://www.thedesignwork.com/wp-content/uploads/2011/10/Random-Pictures-of-Conceptual-and-Creative-Ideas-01.jpg",
-    "https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww&w=1000&q=80",
-    "https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww&w=1000&q=80",
-    // ... add more images as needed
-  ];
-  console.log(paths);
   useEffect(() => {
     if (parentRef.current && childHeight !== null) {
       parentRef.current.style.height = `${childHeight}px`;
@@ -54,7 +42,7 @@ const TweetSection = () => {
           <ProfilePicture source={photoSRC} size={44} />
         </div>
         <div className="pt-1 flex flex-col  w-full max-w-full  basis-auto ">
-          <div className="pt-1 flex flex-col   relative ">
+          <div className="pt-1 flex flex-col  z-[1] relative ">
             {isInputActive && (
               <div className="pb-3 flex relative">
                 <RoundedButton
@@ -79,56 +67,14 @@ const TweetSection = () => {
             )}
 
             <div
-              className="flex max-h-[700px] grow relative min-h-[56px]"
+              className="flex max-h-[720px] grow relative min-h-[56px]"
               ref={parentRef}
             >
               <PostEditor onHeightChange={setChildHeight} />
             </div>
-            <span className="min-h-[4px] min-w-[4px]"></span>
-            <div className="grid grid-cols-2 gap-4">
-              {images.map((imgSrc, index) => (
-                <div key={index} className="image-cell relative pb-[60%]">
-                  {" "}
-                  {/* 1:1 aspect ratio */}
-                  <img
-                    src={imgSrc}
-                    alt={`Uploaded ${index}`}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-            {/* <div className="br flex-col-container">
-                <div className=" rounded-[16px] overflow-hidden">
-                  <img src="https://www.thedesignwork.com/wp-content/uploads/2011/10/Random-Pictures-of-Conceptual-and-Creative-Ideas-01.jpg" />
-                </div>
-
-                <div className=" rounded-[16px] overflow-hidden">
-                  <div className="w-full h-full br bg-cover bg-[url('https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww&w=1000&q=80')]"></div>
-                  <img
-                    src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww&w=1000&q=80"
-                    className="opacity-0"
-                  />
-                </div>
-              </div> */}
-
-            {/* <div className=" rounded-[16px] overflow-hidden">
-                <div className="w-full h-full br bg-cover bg-[url('https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww&w=1000&q=80')]"></div>
-                <img
-                  src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww&w=1000&q=80"
-                  className="opacity-0"
-                />
-              </div> */}
-
-            {/* <div className=" rounded-[16px] overflow-hidden">
-                <img src="https://www.thedesignwork.com/wp-content/uploads/2011/10/Random-Pictures-of-Conceptual-and-Creative-Ideas-01.jpg" />
-              </div>
-              <div className=" rounded-[16px] overflow-hidden">
-                <img src="https://www.thedesignwork.com/wp-content/uploads/2011/10/Random-Pictures-of-Conceptual-and-Creative-Ideas-01.jpg" />
-              </div> 
-              {images} */}
+            <PostEditorMedia uploadedImages={paths} />
           </div>
-          <div className="flex flex-col br sticky top-0 z-0">
+          <div className="flex flex-col  sticky bottom-0 z-[2] bg-white ">
             <div className="-ml-3">
               <div
                 className={clsx("flex pb-3 ", {

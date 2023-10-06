@@ -45,5 +45,13 @@
 }
 
 .button--icon-rounded {
-  @apply w-[34px] h-[34px] flex justify-center items-center cursor-pointer rounded-full hover:bg-[#E8F5FE] dark:hover:bg-[#1d9cf0]/10 font-bold;
+  @apply w-[34px] h-[34px] flex justify-center items-center rounded-full  font-bold hover:bg-[#E8F5FE] dark:hover:bg-[#1d9cf0]/10;
+}
+
+.button--icon-rounded-disabled {
+  @apply w-[34px] h-[34px] flex justify-center items-center rounded-full  font-bold opacity-50;
+}
+
+.button--media-action {
+  @apply absolute  cursor-pointer  rounded-full bg-[#0f1419]/75 flex justify-center items-center backdrop-blur-sm hover:bg-[#272c30]/75;
 }
