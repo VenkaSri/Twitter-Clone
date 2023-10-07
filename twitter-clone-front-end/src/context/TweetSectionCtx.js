@@ -52,17 +52,15 @@ const TweetSectionProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log(mediaFiles.length);
-    if (numOfChars === 0 && mediaFiles.length === 0) {
+    console.log(validPost);
+    if (numOfChars > 280) {
       setValidPost(false);
-    } else if (numOfChars > 0) {
-      setValidPost(true);
-    } else if (mediaFiles.length > 0) {
+    } else if (numOfChars > 0 || mediaFiles.length > 0) {
       setValidPost(true);
     } else {
       setValidPost(false);
     }
-  }, [numOfChars, mediaFiles.length]);
+  }, [numOfChars, mediaFiles.length, setValidPost, validPost]);
 
   return (
     <TweetSectionContext.Provider value={contextValue}>

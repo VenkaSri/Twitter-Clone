@@ -25,7 +25,6 @@ export const useEditorState = (initialState, placeholder) => {
 
     setPostText(plainText);
     let newContent = content;
-    console.log(plainText.length + " len");
     setNumOfChars(plainText.length);
     if (plainText.length > 0) {
       setHasUserTyped(true);

@@ -21,6 +21,7 @@ public class Post {
   @GeneratedValue(generator="my_seq")
   @SequenceGenerator(name="my_seq",sequenceName="tweets_tweet_id_seq", allocationSize=1)
   private Long postId;
+  @Column(length = 400)
   private String text;
   private LocalDateTime createdAt;
   private String photo1;

@@ -22,6 +22,7 @@ import { useEditorState } from "../../../hooks/useEditorState";
 import { ImagesearchRollerRounded } from "@mui/icons-material";
 import { PostEditorMedia } from "../../post/compose/PostEditorMedia";
 import { postData } from "../../../services/postData";
+import { LinearProgress } from "@mui/material";
 
 const TweetSection = () => {
   const {
@@ -44,11 +45,9 @@ const TweetSection = () => {
 
   useEffect(() => {
     if (parentRef.current && childHeight !== null) {
-      parentRef.current.style.height = `${childHeight}px`;
+      parentRef.current.style.height = `${childHeight + 15}px`;
     }
   }, [childHeight]);
-
-  console.log(postText);
 
   const post = async () => {
     setIsLoading(true);
@@ -69,122 +68,136 @@ const TweetSection = () => {
       // Handle error
     }
   };
+
   return (
-    <div className="mobile:flex hidden border-b border-b-[#eff3f4] px-[16px] dark:border-b-[var(--primary-dark-border-color)] dark:bg-black w-full relative ">
+    <>
       {isLoading && (
-        <div className="absolute br flex grow left-0 right-0 bottom-0 top-0 bg-white/40 z-[3]"></div>
-      )}
-      <div className="flex max-w-full grow">
-        <div className="pt-[12px] mr-[12px] flex basis-auto">
-          <ProfilePicture source={photoSRC} size={44} />
+        <div className="h-[3px]">
+          <LinearProgress
+            sx={{
+              "& .MuiLinearProgress-bar": {
+                backgroundColor: "var(--primary-color)", // Change this to your desired color
+              },
+            }}
+          />
         </div>
-        <div className="pt-1 flex flex-col  w-full max-w-full  basis-auto ">
-          <div className="pt-1 flex flex-col  z-[1] relative">
-            {isInputActive && (
-              <div
-                className={clsx("pb-3 flex relative", {
-                  "hidden :": isLoading,
-                })}
-              >
-                <RoundedButton
-                  styles="button--rounded-audience border border-[#cfd9de] dark:border-[#536471]"
-                  btnContent={{
-                    text: (
-                      <span className="text-[14px] leading-4 font-cBold">
-                        Everyone
-                      </span>
-                    ),
-
-                    icon: {
-                      icon: getIcon("Down_Arrow", {
-                        width: 16,
-                        fill: "var(--primary-color)",
-                      }),
-                      iconPosition: "end",
-                    },
-                  }}
-                />
-              </div>
-            )}
-
-            <div
-              className="flex max-h-[720px] grow relative min-h-[56px]"
-              ref={parentRef}
-            >
-              <PostEditor onHeightChange={setChildHeight} />
-            </div>
-            <div
-              className={clsx({ "mt-4": isInputActive && paths.length > 0 })}
-            >
-              <PostEditorMedia uploadedImages={paths} />
-            </div>
+      )}
+      <div className="mobile:flex hidden border-b border-b-[#eff3f4] px-[16px] dark:border-b-[var(--primary-dark-border-color)] dark:bg-black w-full relative ">
+        {isLoading && (
+          <div className="absolute flex grow left-0 right-0 bottom-0 top-0 bg-white/40 z-[3]"></div>
+        )}
+        <div className="flex max-w-full grow">
+          <div className="pt-[12px] mr-[12px] flex basis-auto">
+            <ProfilePicture source={photoSRC} size={44} />
           </div>
-          <div
-            className={clsx("flex, flex-col  sticky bottom-0 z-[2] bg-white", {
-              "mt-3": isInputActive,
-              hidden: isLoading,
-            })}
-          >
-            <div className="-ml-3">
-              <div
-                className={clsx("flex  pb-3", {
-                  "border-b border-b-[#eff3f4] dark:border-b-[var(--primary-dark-border-color)] ":
-                    isInputActive,
-                })}
-              >
-                {isInputActive && (
+          <div className="pt-1 flex flex-col  w-full max-w-full  basis-auto ">
+            <div className="pt-1 flex flex-col  z-[1] relative">
+              {isInputActive && (
+                <div
+                  className={clsx("pb-3 flex relative", {
+                    "hidden :": isLoading,
+                  })}
+                >
                   <RoundedButton
-                    styles="button--rounded-audience "
+                    styles="button--rounded-audience border border-[#cfd9de] dark:border-[#536471]"
                     btnContent={{
                       text: (
                         <span className="text-[14px] leading-4 font-cBold">
-                          Everyone can reply
+                          Everyone
                         </span>
                       ),
 
                       icon: {
-                        icon: getIcon("Globe", {
+                        icon: getIcon("Down_Arrow", {
                           width: 16,
                           fill: "var(--primary-color)",
                         }),
-                        iconPosition: "start",
+                        iconPosition: "end",
                       },
                     }}
                   />
-                )}
+                </div>
+              )}
+
+              <div
+                className="flex max-h-[720px] grow relative min-h-[48px]"
+                ref={parentRef}
+              >
+                <PostEditor onHeightChange={setChildHeight} />
+              </div>
+              <div
+                className={clsx({ "mt-4": isInputActive && paths.length > 0 })}
+              >
+                <PostEditorMedia uploadedImages={paths} />
               </div>
             </div>
             <div
-              className={`-ml-2 mt-1 h-[48px] flex items-center justify-between `}
+              className={clsx("flex flex-col  sticky bottom-0 z-[2] bg-white", {
+                "": isInputActive,
+                hidden: isLoading,
+              })}
             >
-              <TweetOptions />
-              <div className="h-[36px] flex   items-center ">
-                {hasUserTyped && (
-                  <>
-                    <CharactersProgress />
-                    <div className=" mr-3 ml-[10px] h-[31px]  w-[1px] bg-[#b9cad3]"></div>
-                    <div className="border border-[#cfd9de] min-h-[24px] min-w-[24px] rounded-full centered-column-container">
-                      {getIcon("Add", {
-                        width: 16,
-                        fill: "var(--primary-color)",
-                      })}
-                    </div>
-                  </>
-                )}
-                <RoundedButton
-                  onClick={post}
-                  styles={
-                    "ml-3 min-w-[36px] min-h-[36px] px-4 header--newPostButton"
-                  }
-                  btnContent={POST_BUTTON_VALUE}
-                  isDisabled={!validPost}
-                />
+              <div className="-ml-3">
+                <div
+                  className={clsx("flex", {
+                    "border-b border-b-[#eff3f4] dark:border-b-[var(--primary-dark-border-color)] pb-3 ":
+                      isInputActive,
+                  })}
+                >
+                  {isInputActive && (
+                    <RoundedButton
+                      styles="button--rounded-audience "
+                      btnContent={{
+                        text: (
+                          <span className="text-[14px] leading-4 font-cBold">
+                            Everyone can reply
+                          </span>
+                        ),
+
+                        icon: {
+                          icon: getIcon("Globe", {
+                            width: 16,
+                            fill: "var(--primary-color)",
+                          }),
+                          iconPosition: "start",
+                        },
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+              <div
+                className={`-ml-2 mt-1 h-[48px] flex items-center justify-between `}
+              >
+                <TweetOptions />
+                <div className="h-[36px] flex   items-center ">
+                  {hasUserTyped && (
+                    <>
+                      <CharactersProgress />
+                      <div className=" mr-3 ml-[10px] h-[31px]  w-[1px] bg-[#b9cad3]"></div>
+                      <div className="border border-[#cfd9de] min-h-[24px] min-w-[24px] rounded-full centered-column-container">
+                        {getIcon("Add", {
+                          width: 16,
+                          fill: "var(--primary-color)",
+                        })}
+                      </div>
+                    </>
+                  )}
+                  <RoundedButton
+                    onClick={post}
+                    styles={
+                      "ml-3 min-w-[36px] min-h-[36px] px-4 header--newPostButton"
+                    }
+                    btnContent={POST_BUTTON_VALUE}
+                    isDisabled={!validPost}
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
