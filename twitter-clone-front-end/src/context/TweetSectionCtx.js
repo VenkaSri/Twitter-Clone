@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const TweetSectionContext = createContext();
 
@@ -8,6 +8,7 @@ const TweetSectionProvider = ({ children }) => {
   const [isInputActive, setIsInputActive] = useState(false);
   const [imgSrc, setImgSrc] = useState(null);
   const [paths, setPaths] = useState([]);
+  const [validPost, setValidPost] = useState(false);
 
   const contextValue = {
     numOfChars,
@@ -20,7 +21,17 @@ const TweetSectionProvider = ({ children }) => {
     imgSrc,
     setPaths,
     paths,
+    setValidPost,
+    validPost,
   };
+
+  useEffect(() => {
+    if (paths.length > 0) {
+      setValidPost(true);
+    } else {
+      setValidPost(false);
+    }
+  }, [paths]);
 
   return (
     <TweetSectionContext.Provider value={contextValue}>

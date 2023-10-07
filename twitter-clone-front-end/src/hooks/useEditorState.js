@@ -12,7 +12,8 @@ import { useTweetSectionContext } from "../context/TweetSectionCtx";
 
 export const useEditorState = (initialState, placeholder) => {
   const [editorState, setEditorState] = useState(initialState);
-  const { setHasUserTyped, setNumOfChars } = useTweetSectionContext();
+  const { setHasUserTyped, setNumOfChars, setValidPost } =
+    useTweetSectionContext();
   const handleEditorChange = (newEditorState) => {
     const content = newEditorState.getCurrentContent();
     const plainText = content.getPlainText();
@@ -20,8 +21,10 @@ export const useEditorState = (initialState, placeholder) => {
     setNumOfChars(plainText.length);
     if (plainText.length > 0) {
       setHasUserTyped(true);
+      setValidPost(true);
     } else {
       setHasUserTyped(false);
+      setValidPost(false);
     }
 
     const selectAll = newEditorState.getSelection().merge({

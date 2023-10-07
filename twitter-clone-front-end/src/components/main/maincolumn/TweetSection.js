@@ -23,7 +23,7 @@ import { ImagesearchRollerRounded } from "@mui/icons-material";
 import { PostEditorMedia } from "../../post/compose/PostEditorMedia";
 
 const TweetSection = () => {
-  const { hasUserTyped, isInputActive } = useTweetSectionContext();
+  const { hasUserTyped, isInputActive, validPost } = useTweetSectionContext();
   const { photoSRC } = useSession();
   const [childHeight, setChildHeight] = useState(48);
   const { imgSrc, paths } = useTweetSectionContext();
@@ -127,7 +127,7 @@ const TweetSection = () => {
                     "ml-3 min-w-[36px] min-h-[36px] px-4 header--newPostButton"
                   }
                   btnContent={POST_BUTTON_VALUE}
-                  isDisabled={!hasUserTyped}
+                  isDisabled={!validPost}
                 />
               </div>
             </div>
