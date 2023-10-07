@@ -17,8 +17,6 @@ export default function CharactersProgress() {
   const isPastLimit = numOfChars >= 290;
   const numberColor = numOfChars > 279;
 
-  console.log(numberColor);
-
   return (
     <div className="min-h-[30px] min-w-[30px] centered-column-container ">
       {!isPastLimit ? (

@@ -22,9 +22,9 @@ public class PostController {
   }
 
   @PostMapping(value = "/posts", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-  public ResponseEntity<String> post(@RequestPart("text") String text,
+  public ResponseEntity<String> createPost(@RequestPart(value = "text", required = false) String text,
                                      @RequestPart(name = "photos", required = false) List<MultipartFile> photos,
                                      Principal principal) {
-    return postService.post(text,photos, principal);
+    return postService.createPost(text,photos, principal);
   }
 }

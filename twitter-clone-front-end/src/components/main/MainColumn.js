@@ -3,6 +3,7 @@ import { TopNav } from "./maincolumn/TopNav";
 import TweetOptions from "./maincolumn/TweetOptions";
 import TweetSection from "./maincolumn/TweetSection";
 import { TweetSectionProvider } from "../../context/TweetSectionCtx";
+import Tweet from "../../components/tweet/Tweet";
 
 export const MainColumn = () => {
   return (

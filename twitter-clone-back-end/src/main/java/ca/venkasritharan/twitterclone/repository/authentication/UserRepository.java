@@ -13,7 +13,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
   Optional<User> findByUsername(String username);
   Boolean existsByUsername(String name);
 
-
   @Query("SELECT u.username FROM User u")
   Set<String> findAllUsernames();
 

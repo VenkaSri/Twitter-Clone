@@ -11,6 +11,6 @@ public interface AuthenticationService {
 //  String login(LoginDTO loginDTO);
 //  void validateEmailOrPhone(String emailOrPhone);
   ResponseEntity<AuthStatusResponse> getAuthStatus(HttpServletRequest httpServletRequest);
-//  EmailAvailabilityResponse checkIfEmailIsAvailable(String email);
+  EmailAvailabilityResponse checkIfEmailIsAvailable(String email);
 
 }

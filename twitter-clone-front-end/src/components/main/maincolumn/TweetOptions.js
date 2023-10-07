@@ -24,8 +24,7 @@ const AttachmentButton = ({ text, action, isDisabled }) => {
 };
 
 const TweetOptions = () => {
-  const { open, getInputProps, acceptedFiles, error, setError } =
-    useMediaUpload();
+  const { open, getInputProps, mediaFiles, error, setError } = useMediaUpload();
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -34,14 +33,11 @@ const TweetOptions = () => {
   };
   const { setPaths, paths, setValidPost } = useTweetSectionContext();
   const attachmentsList = ATTACHMENTS(open, paths.length);
-  console.log(error);
+
   useEffect(() => {
-    console.log(acceptedFiles.length);
-    if (acceptedFiles.length > 0 && acceptedFiles.length < 5) {
-      const fileURLs = acceptedFiles.map((file) => URL.createObjectURL(file));
-      setPaths((prevURLs) => [...prevURLs, ...fileURLs]);
-    }
-  }, [acceptedFiles, setPaths]);
+    const fileURLs = mediaFiles.map((file) => URL.createObjectURL(file));
+    if (mediaFiles) setPaths(fileURLs);
+  }, [mediaFiles, setPaths]);
 
   return (
     <div className="flex">

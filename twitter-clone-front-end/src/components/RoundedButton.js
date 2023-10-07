@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React from "react";
 
-const RoundedButton = ({ styles, btnContent, isDisabled }) => {
+const RoundedButton = ({ styles, btnContent, isDisabled, onClick }) => {
   const hasIcon = btnContent.icon;
   const iconPosition = hasIcon ? btnContent.icon.iconPosition : null;
   return (
@@ -11,6 +11,7 @@ const RoundedButton = ({ styles, btnContent, isDisabled }) => {
       })}
       href="#f"
       role="button"
+      onClick={onClick}
     >
       <div className="flex">
         {hasIcon && iconPosition === "start" && (

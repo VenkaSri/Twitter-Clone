@@ -7,6 +7,9 @@ export const useSession = () => {
   const photoSRC = useSelector(
     (state) => state.rootReducer.userSession.profilePicture
   );
+  const { username, email, name } = useSelector(
+    (state) => state.rootReducer.userSession
+  );
 
   const getUserDetails = async () => {
     try {
@@ -27,5 +30,8 @@ export const useSession = () => {
   return {
     getUserDetails,
     photoSRC,
+    username,
+    email,
+    name,
   };
 };

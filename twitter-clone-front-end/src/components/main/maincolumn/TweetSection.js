@@ -21,12 +21,25 @@ import PostEditor from "./PostEditor";
 import { useEditorState } from "../../../hooks/useEditorState";
 import { ImagesearchRollerRounded } from "@mui/icons-material";
 import { PostEditorMedia } from "../../post/compose/PostEditorMedia";
+import { postData } from "../../../services/postData";
 
 const TweetSection = () => {
-  const { hasUserTyped, isInputActive, validPost } = useTweetSectionContext();
+  const {
+    hasUserTyped,
+    isInputActive,
+    validPost,
+    postText,
+    isLoading,
+    setIsLoading,
+    mediaFiles,
+    resetStates,
+    paths,
+    setPostCreated,
+  } = useTweetSectionContext();
   const { photoSRC } = useSession();
   const [childHeight, setChildHeight] = useState(48);
-  const { imgSrc, paths } = useTweetSectionContext();
+  // const { imgSrc, paths, mediaFiles, setHasUserTyped, resetStates } =
+  //   useTweetSectionContext();
   const parentRef = useRef(null);
 
   useEffect(() => {
@@ -35,16 +48,44 @@ const TweetSection = () => {
     }
   }, [childHeight]);
 
+  console.log(postText);
+
+  const post = async () => {
+    setIsLoading(true);
+    const formData = new FormData();
+    mediaFiles.forEach((file, index) => {
+      formData.append("photos", file);
+    });
+    formData.append("text", postText);
+    const response = await fetch("http://localhost:8080/v1/api/posts", {
+      method: "POST",
+      body: formData,
+      credentials: "include",
+    });
+    if (response.ok) {
+      setPostCreated(true);
+      resetStates();
+    } else {
+      // Handle error
+    }
+  };
   return (
     <div className="mobile:flex hidden border-b border-b-[#eff3f4] px-[16px] dark:border-b-[var(--primary-dark-border-color)] dark:bg-black w-full relative ">
+      {isLoading && (
+        <div className="absolute br flex grow left-0 right-0 bottom-0 top-0 bg-white/40 z-[3]"></div>
+      )}
       <div className="flex max-w-full grow">
         <div className="pt-[12px] mr-[12px] flex basis-auto">
           <ProfilePicture source={photoSRC} size={44} />
         </div>
         <div className="pt-1 flex flex-col  w-full max-w-full  basis-auto ">
-          <div className="pt-1 flex flex-col  z-[1] relative ">
+          <div className="pt-1 flex flex-col  z-[1] relative">
             {isInputActive && (
-              <div className="pb-3 flex relative">
+              <div
+                className={clsx("pb-3 flex relative", {
+                  "hidden :": isLoading,
+                })}
+              >
                 <RoundedButton
                   styles="button--rounded-audience border border-[#cfd9de] dark:border-[#536471]"
                   btnContent={{
@@ -72,19 +113,28 @@ const TweetSection = () => {
             >
               <PostEditor onHeightChange={setChildHeight} />
             </div>
-            <PostEditorMedia uploadedImages={paths} />
+            <div
+              className={clsx({ "mt-4": isInputActive && paths.length > 0 })}
+            >
+              <PostEditorMedia uploadedImages={paths} />
+            </div>
           </div>
-          <div className="flex flex-col  sticky bottom-0 z-[2] bg-white ">
+          <div
+            className={clsx("flex, flex-col  sticky bottom-0 z-[2] bg-white", {
+              "mt-3": isInputActive,
+              hidden: isLoading,
+            })}
+          >
             <div className="-ml-3">
               <div
-                className={clsx("flex pb-3 ", {
-                  "border-b border-b-[#eff3f4] dark:border-b-[var(--primary-dark-border-color)] mt-6":
+                className={clsx("flex  pb-3", {
+                  "border-b border-b-[#eff3f4] dark:border-b-[var(--primary-dark-border-color)] ":
                     isInputActive,
                 })}
               >
                 {isInputActive && (
                   <RoundedButton
-                    styles="button--rounded-audience"
+                    styles="button--rounded-audience "
                     btnContent={{
                       text: (
                         <span className="text-[14px] leading-4 font-cBold">
@@ -121,8 +171,8 @@ const TweetSection = () => {
                     </div>
                   </>
                 )}
-
                 <RoundedButton
+                  onClick={post}
                   styles={
                     "ml-3 min-w-[36px] min-h-[36px] px-4 header--newPostButton"
                   }

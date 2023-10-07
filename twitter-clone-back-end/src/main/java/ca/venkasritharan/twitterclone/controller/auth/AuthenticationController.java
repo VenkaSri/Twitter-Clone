@@ -50,10 +50,10 @@ public class AuthenticationController {
     return authenticationService.getAuthStatus(httpServletRequest);
   }
 
-//  @GetMapping("/email_available")
-//  public EmailAvailabilityResponse checkIfEmailIsAvailable(@RequestParam String email) {
-//    return authenticationService.checkIfEmailIsAvailable(email);
-//  }
+  @GetMapping("/email_available")
+  public EmailAvailabilityResponse checkIfEmailIsAvailable(@Valid @RequestParam String email) {
+    return authenticationService.checkIfEmailIsAvailable(email);
+  }
 
 }
 

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 import { useTweetSectionContext } from "../../../context/TweetSectionCtx";
 import { Editor, EditorState } from "draft-js";
@@ -7,12 +7,14 @@ import { useEditorState } from "../../../hooks/useEditorState";
 import { useTheme } from "../../../hooks/useTheme";
 
 const PostEditor = ({ onHeightChange }) => {
-  const { setIsInputActive } = useTweetSectionContext();
+  const { setIsInputActive, postCreated, setPostCreated } =
+    useTweetSectionContext();
   const darkMode = useTheme();
   const fieldRef = useRef(null);
-  const [editorState, handleEditorChange] = useEditorState(
+  const [editorState, handleEditorChange, resetEditorState] = useEditorState(
     EditorState.createEmpty()
   );
+
   useHeightObserver(fieldRef, onHeightChange);
 
   const styleMap = {
@@ -20,6 +22,14 @@ const PostEditor = ({ onHeightChange }) => {
       backgroundColor: darkMode ? "#8a0d20" : "#fb9fa8",
     },
   };
+
+  useEffect(() => {
+    if (postCreated) {
+      // Reset the editorState using the reset function
+      resetEditorState();
+      setPostCreated(false);
+    }
+  }, [postCreated, resetEditorState]);
 
   return (
     <div onClick={() => setIsInputActive(true)} className="w-full absolute">
@@ -36,7 +46,7 @@ const PostEditor = ({ onHeightChange }) => {
 
 export default PostEditor;
 
-/* -------- same functionlity without Draft.js lib; but has issues with the caret position when typing in between -------- */
+/* -------- same functionlity without Draft.js lib; but has issues with the caret position when typing in between text -------- */
 
 // const { setNumOfChars, setHasUserTyped, setIsInputActive } =
 //   useTweetSectionContext();

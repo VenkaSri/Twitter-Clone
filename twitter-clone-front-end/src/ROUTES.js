@@ -11,6 +11,7 @@ import { Dialog } from "./components/Dialog";
 import { SignupDialog } from "./pages/modal/SignupDialog";
 
 import { Home } from "./pages/Home";
+import { fetchUserDetails } from "./state/user/userSlice";
 
 const Routes = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const Routes = () => {
         if (result.status === 200) {
           if (response.validToken) {
             dispatch(userInfoActions.setAuthentication(true));
+            dispatch(fetchUserDetails());
           } else {
             dispatch(userInfoActions.setAuthentication(false));
           }

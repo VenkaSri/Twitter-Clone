@@ -37,9 +37,14 @@ public class AccountServiceImpl implements AccountService {
   @Override
   public UserDetailsResponse getUserDetails(Principal principal) {
     Optional<User> optionalUser = userRepository.findByUsername(principal.getName());
+    UserDetailsResponse userDetailsResponse = new UserDetailsResponse();
     if (optionalUser.isPresent()) {
       User user = optionalUser.get();
-      return mapper.map(user, UserDetailsResponse.class);
+      userDetailsResponse.setName(user.getProfile().getName());
+      userDetailsResponse.setEmail(user.getProfile().getEmail());
+      userDetailsResponse.setId(user.getId());
+      userDetailsResponse.setUsername(user.getUsername());
+      return userDetailsResponse;
     } else {
       throw new UserNotFoundException("User not found");
     }

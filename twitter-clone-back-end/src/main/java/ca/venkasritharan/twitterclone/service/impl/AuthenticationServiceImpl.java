@@ -1,8 +1,7 @@
 package ca.venkasritharan.twitterclone.service.impl;
 
-import ca.venkasritharan.twitterclone.dto.LoginDTO;
-import ca.venkasritharan.twitterclone.exception.UserAlreadyExistsException;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
+import ca.venkasritharan.twitterclone.repository.user.ProfileRepository;
 import ca.venkasritharan.twitterclone.response.AuthStatusResponse;
 import ca.venkasritharan.twitterclone.response.EmailAvailabilityResponse;
 import ca.venkasritharan.twitterclone.security.jwt.JwtTokenProvider;
@@ -12,9 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import org.springframework.stereotype.Service;
 
@@ -29,11 +25,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
   private UserRepository userRepository;
   private JwtTokenProvider jwtTokenProvider;
+  private final ProfileRepository profileRepository;
 
-  public AuthenticationServiceImpl(AuthenticationManager authenticationManager, UserRepository userRepository, JwtTokenProvider jwtTokenProvider) {
+  public AuthenticationServiceImpl(AuthenticationManager authenticationManager, UserRepository userRepository, JwtTokenProvider jwtTokenProvider, ProfileRepository profileRepository) {
     this.authenticationManager = authenticationManager;
     this.userRepository = userRepository;
     this.jwtTokenProvider = jwtTokenProvider;
+    this.profileRepository = profileRepository;
   }
 
 //  @Override
@@ -91,13 +89,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             .findFirst();
   }
 
-//  @Override
-//  public EmailAvailabilityResponse checkIfEmailIsAvailable(String email) {
-//    boolean isEmailAvailable = userRepository.existsByEmail(email);
-//    String message = "Email is available";
-//    if (isEmailAvailable) {
-//      message = "An user with this email already exists.";
-//    }
-//    return new EmailAvailabilityResponse(message, !isEmailAvailable);
-//  }
+  @Override
+  public EmailAvailabilityResponse checkIfEmailIsAvailable(String email) {
+    boolean isEmailAvailable = profileRepository.existsByEmail(email);
+    String message = "Email is available";
+    if (isEmailAvailable) {
+      message = "An user with this email already exists.";
+    }
+    return new EmailAvailabilityResponse(message, !isEmailAvailable);
+  }
 }

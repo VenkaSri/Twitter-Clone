@@ -12,19 +12,25 @@ import { useTweetSectionContext } from "../context/TweetSectionCtx";
 
 export const useEditorState = (initialState, placeholder) => {
   const [editorState, setEditorState] = useState(initialState);
-  const { setHasUserTyped, setNumOfChars, setValidPost } =
+  const { setHasUserTyped, setNumOfChars, setPostText, isLoading } =
     useTweetSectionContext();
+
+  const resetEditorState = () => {
+    setEditorState(EditorState.createEmpty());
+  };
   const handleEditorChange = (newEditorState) => {
     const content = newEditorState.getCurrentContent();
+
     const plainText = content.getPlainText();
+
+    setPostText(plainText);
     let newContent = content;
+    console.log(plainText.length + " len");
     setNumOfChars(plainText.length);
     if (plainText.length > 0) {
       setHasUserTyped(true);
-      setValidPost(true);
     } else {
       setHasUserTyped(false);
-      setValidPost(false);
     }
 
     const selectAll = newEditorState.getSelection().merge({
@@ -52,5 +58,5 @@ export const useEditorState = (initialState, placeholder) => {
     setEditorState(newState);
   };
 
-  return [editorState, handleEditorChange];
+  return [editorState, handleEditorChange, resetEditorState];
 };

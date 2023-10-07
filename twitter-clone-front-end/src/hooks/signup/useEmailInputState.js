@@ -57,7 +57,8 @@ export function useEmailInputState() {
   const checkEmailInDatabase = async () => {
     try {
       const result = await getData(`/api/auth/email_available?email=${eml}`);
-      const response = await result.json(); // Add "await" here
+      console.log(result);
+      const response = await result.json();
 
       if (result.status === 200) {
         if (response.emailAvailable) {

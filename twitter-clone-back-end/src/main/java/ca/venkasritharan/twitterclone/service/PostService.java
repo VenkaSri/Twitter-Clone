@@ -2,17 +2,14 @@ package ca.venkasritharan.twitterclone.service;
 
 import ca.venkasritharan.twitterclone.entity.user.User;
 import ca.venkasritharan.twitterclone.post.Post;
-import ca.venkasritharan.twitterclone.post.PostDTO;
 import ca.venkasritharan.twitterclone.post.PostRepository;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import org.apache.commons.io.IOUtils;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
@@ -23,15 +20,15 @@ import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class PostService {
 
+  @Value("${s3.bucket.name}")
+  private String s3BucketName;
   private final PostRepository postRepository;
   private final UserRepository userRepository;
   private S3Client s3Client;
@@ -44,7 +41,7 @@ public class PostService {
     this.mapper = mapper;
   }
 
-  public ResponseEntity<String> post(String text,
+  public ResponseEntity<String> createPost(String text,
                                      List<MultipartFile> photos,
                                      Principal principal) {
     try {
@@ -54,13 +51,15 @@ public class PostService {
       }
 
       Post newPost = new Post();
+      postRepository.save(newPost);
+
       newPost.setText(text);
       newPost.setCreatedAt(LocalDateTime.now());
       if (photos != null && !photos.isEmpty()) {
         List<String> uploadedUrls = photos.stream()
                 .map(photo -> {
                   try {
-                    return uploadToS3(photo);
+                    return uploadToS3(photo, optionalUser.get().getUsername());
                   } catch (IOException e) {
                     throw new UncheckedIOException(e); // Convert checked exception to unchecked
                   }
@@ -83,12 +82,21 @@ public class PostService {
     }
   }
 
-  private String uploadToS3(MultipartFile file) throws IOException {
+
+
+  private Post getPostById(Post post) {
+    Optional<Post> retrievedPost = postRepository.findById(post.getPostId());
+
+    return retrievedPost.orElse(null);
+
+  }
+
+  private String uploadToS3(MultipartFile file, String username) throws IOException {
 
 
     try {
-      String bucketName = "tc-profile-pictures";
-      String key = "post-photos/" + file.getOriginalFilename();
+      String bucketName = s3BucketName;
+      String key = "post-photos/" + username + "/" + file.getOriginalFilename();
       InputStream inputStream = file.getInputStream();
       byte[] contentBytes = IOUtils.toByteArray(inputStream);
       // Upload file to S3
@@ -108,28 +116,6 @@ public class PostService {
 
   }
 
-  private String uploadPhotosToAWS(MultipartFile file) {
-    String bucketName = "tc-profile-pictures";
-    String key = "post-photos/" + file.getOriginalFilename();
-    try {
-      InputStream inputStream = file.getInputStream();
-      byte[] contentBytes = IOUtils.toByteArray(inputStream);
-      // Upload file to S3
-      PutObjectRequest putObjectRequest = PutObjectRequest.builder()
-              .bucket(bucketName)
-              .key(key)
-              .build();
-      s3Client.putObject(putObjectRequest, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
-
-      // Get the URL of the uploaded file (you may need to adjust this based on your bucket setup)
-      String fileUrl = "https://" + bucketName + ".s3.amazonaws.com/" + key;
-      return fileUrl;
-    } catch (Exception e) {
-      System.out.println(e);
-    }
-
-    return "ok";
-  }
 
 
 

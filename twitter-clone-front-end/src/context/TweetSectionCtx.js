@@ -1,3 +1,4 @@
+import { flatMap } from "lodash";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const TweetSectionContext = createContext();
@@ -7,8 +8,24 @@ const TweetSectionProvider = ({ children }) => {
   const [hasUserTyped, setHasUserTyped] = useState(false);
   const [isInputActive, setIsInputActive] = useState(false);
   const [imgSrc, setImgSrc] = useState(null);
+  const [postText, setPostText] = useState("");
   const [paths, setPaths] = useState([]);
   const [validPost, setValidPost] = useState(false);
+  const [mediaFiles, setMediaFiles] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [postCreated, setPostCreated] = useState(false);
+
+  const resetStates = () => {
+    setNumOfChars(0);
+    setHasUserTyped(false);
+    setIsInputActive(false);
+    setImgSrc(null);
+    setPostText("");
+    setPaths([]);
+    setValidPost(false);
+    setMediaFiles([]);
+    setIsLoading(false);
+  };
 
   const contextValue = {
     numOfChars,
@@ -23,15 +40,29 @@ const TweetSectionProvider = ({ children }) => {
     paths,
     setValidPost,
     validPost,
+    setMediaFiles,
+    mediaFiles,
+    postText,
+    setPostText,
+    isLoading,
+    setIsLoading,
+    resetStates,
+    setPostCreated,
+    postCreated,
   };
 
   useEffect(() => {
-    if (paths.length > 0) {
+    console.log(mediaFiles.length);
+    if (numOfChars === 0 && mediaFiles.length === 0) {
+      setValidPost(false);
+    } else if (numOfChars > 0) {
+      setValidPost(true);
+    } else if (mediaFiles.length > 0) {
       setValidPost(true);
     } else {
       setValidPost(false);
     }
-  }, [paths]);
+  }, [numOfChars, mediaFiles.length]);
 
   return (
     <TweetSectionContext.Provider value={contextValue}>

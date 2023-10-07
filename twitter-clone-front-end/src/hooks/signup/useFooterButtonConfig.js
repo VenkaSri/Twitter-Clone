@@ -9,8 +9,13 @@ import { UPDATE_USERNAME_STEP } from "../../utils/constants/dialog/dialogConstan
 
 import moment from "moment";
 import { signupSliceActions } from "../../state/auth/signupSlice";
+import { useNavigate } from "react-router-dom";
 
 export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector(
+    (state) => state.rootReducer.userInfo.isAuthenticated
+  );
   const dispatch = useDispatch();
   const currentStep = useCurrentStep();
   const isProfilePictureSet = useSelector(
@@ -132,6 +137,7 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
 
   const completeSignup = () => {
     dispatch(dialogSliceActions.setIsDialogOpen(false));
+    navigate("/");
   };
 
   // Customize button configuration based on the step

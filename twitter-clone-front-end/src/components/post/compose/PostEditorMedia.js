@@ -3,10 +3,14 @@ import getIcon from "../../../utils/icons/iconsutil";
 import { useTweetSectionContext } from "../../../context/TweetSectionCtx";
 
 const ImageContainer = ({ src, isGridLayout }) => {
-  const { paths, setPaths } = useTweetSectionContext();
+  const { paths, setPaths, mediaFiles } = useTweetSectionContext();
 
   const handleRemoveFile = (src) => {
     const filesRemaining = paths.filter((file) => file !== src);
+    const indexToRemove = paths.indexOf(src);
+    if (indexToRemove !== -1) {
+      mediaFiles.splice(indexToRemove, 1);
+    }
     setPaths(filesRemaining);
   };
 
