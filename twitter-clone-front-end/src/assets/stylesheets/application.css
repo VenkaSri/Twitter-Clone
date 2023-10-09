@@ -1,9 +1,3 @@
-/* Entry point for your PostCSS build */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@import "./buttons.css";
-@import "./custom-utilities.css";
-@import "./darkmode.css";
-@import "./colors.css";
+* {
+  @apply box-border text-[#0f1419] dark:text-[#e7e9ea];
+}

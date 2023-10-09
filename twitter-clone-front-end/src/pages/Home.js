@@ -10,30 +10,24 @@ import { HeaderNav } from "../components/header/HeaderNav";
 import getIcon from "../utils/icons/iconsutil";
 import { useTheme } from "../hooks/useTheme";
 import { BottomBar } from "../components/layers/bottombar/BottomBar";
+import { TopNav } from "../components/main/maincolumn/TopNav";
+import { TweetSectionProvider } from "../context/TweetSectionCtx";
+import TweetSection from "../components/main/maincolumn/TweetSection";
 
 export const Home = () => {
   const [showHeader, setShowHeader] = useState("");
   const darkMode = useTheme();
 
   return (
-    <MainLayout>
-      <header
-        className={` dark:bg-black bg-white grow  justify-end mobile:flex hidden`}
-      >
-        <div className="flex-col-container w-[275px] tablet:w-[275px] w-[88px] ">
-          <div className="h-full fixed top-0 flex-col-container ">
-            <Sidebar />
-          </div>
-        </div>
-      </header>
-      <main className="flex-col-container items-start grow max-[980px]:grow-[2] max-[680px]:w-full overflow-y-auto overflow-x-hidden dark:bg-black">
-        {/* <div className="flex-col-container grow w-[990px] ">
-          <MainContainer />
-        </div> */}
-
-        <MainContainer />
-      </main>
-      <BottomBar />
-    </MainLayout>
+    <>
+      <div className="sticky -top-[0.5px] bg-white/[.85] dark:bg-black/[.65] dark:bg-black z-[2]  backdrop-blur-md">
+        <TopNav />
+      </div>
+      <div className="z-[1] ">
+        <TweetSectionProvider>
+          <TweetSection />
+        </TweetSectionProvider>
+      </div>
+    </>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ProfilePicture from "../../ProfilePicture";
 import DefaultAvatar from "../../../assets/images/avatars/default_avi.png";
 import Button from "../../UI/button/Button";
@@ -23,8 +23,21 @@ import { ImagesearchRollerRounded } from "@mui/icons-material";
 import { PostEditorMedia } from "../../post/compose/PostEditorMedia";
 import { postData } from "../../../services/postData";
 import { LinearProgress } from "@mui/material";
+import { Snackbar } from "../../modal/Snackbar";
+import { snackbarSliceActions } from "../../../state/modal/snackbarSlice";
+import { Link } from "react-router-dom";
+
+const SnackbarMessage = ({ username, postId }) => (
+  <div className="br flex w-full text-[17px] font-cReg grow ">
+    <span className="flex grow justify-center">Your post was sent.</span>
+    <Link className="flex " to={`${username}/status/${postId}`}>
+      snacks
+    </Link>
+  </div>
+);
 
 const TweetSection = () => {
+  const dispatch = useDispatch();
   const {
     hasUserTyped,
     isInputActive,
@@ -39,10 +52,8 @@ const TweetSection = () => {
   } = useTweetSectionContext();
   const { photoSRC } = useSession();
   const [childHeight, setChildHeight] = useState(48);
-  // const { imgSrc, paths, mediaFiles, setHasUserTyped, resetStates } =
-  //   useTweetSectionContext();
   const parentRef = useRef(null);
-
+  const { username } = useSession();
   useEffect(() => {
     if (parentRef.current && childHeight !== null) {
       parentRef.current.style.height = `${childHeight + 15}px`;
@@ -56,14 +67,24 @@ const TweetSection = () => {
       formData.append("photos", file);
     });
     formData.append("text", postText);
-    const response = await fetch("http://localhost:8080/v1/api/posts", {
+    const result = await fetch("http://localhost:8080/api/v1/posts", {
       method: "POST",
       body: formData,
       credentials: "include",
     });
-    if (response.ok) {
-      setPostCreated(true);
-      resetStates();
+    if (result.ok) {
+      const response = await result.json();
+      if (response.status === 200) {
+        console.log(response.postId);
+        setPostCreated(true);
+        resetStates();
+        dispatch(snackbarSliceActions.setIsError(true));
+        dispatch(
+          snackbarSliceActions.setMessage(
+            <SnackbarMessage username={username} postId={response.postId} />
+          )
+        );
+      }
     } else {
       // Handle error
     }
@@ -76,7 +97,7 @@ const TweetSection = () => {
           <LinearProgress
             sx={{
               "& .MuiLinearProgress-bar": {
-                backgroundColor: "var(--primary-color)", // Change this to your desired color
+                backgroundColor: "var(--primary-color)",
               },
             }}
           />

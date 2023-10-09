@@ -12,6 +12,8 @@ import { SignupDialog } from "./pages/modal/SignupDialog";
 
 import { Home } from "./pages/Home";
 import { fetchUserDetails } from "./state/user/userSlice";
+import { MainLayout } from "./components/layout/MainLayout";
+import { Status } from "./pages/Status";
 
 const Routes = () => {
   const dispatch = useDispatch();
@@ -46,11 +48,14 @@ const Routes = () => {
   return (
     <>
       <RouterRoutes>
-        {/* <Route path="/i/flow/signup" element={<SignupDialog isOpen />} /> */}
         <Route
           path="/"
-          element={isAuthenticated ? <Home /> : <LandingPage />}
-        />
+          element={isAuthenticated ? <MainLayout /> : <LandingPage />}
+        >
+          <Route path="home" element={<Home />} />
+          {isAuthenticated && <Route path="/" element={<Home />} />}
+          <Route path="/:username/status/:postId" element={<Status />} />
+        </Route>
         <Route path="/i/flow/signup" element={<SignupDialog />} />
       </RouterRoutes>
     </>

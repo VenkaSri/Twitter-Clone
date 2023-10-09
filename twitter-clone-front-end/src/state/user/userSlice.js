@@ -35,7 +35,6 @@ export const userSliceActions = userSlice.actions;
 export default userSlice.reducer;
 
 export const fetchUserDetails = () => async (dispatch) => {
-  console.log("called");
   const result = await getData("/api/user_details");
   const response = await result.json();
   dispatch(userSliceActions.setEmail(response.email));

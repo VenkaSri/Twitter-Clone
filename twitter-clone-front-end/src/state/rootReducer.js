@@ -9,6 +9,7 @@ import dialogSlice from "./dialog/dialogSlice";
 import profileSlice from "./profile/profileSlice";
 import themeSlice from "./theme/themeSlice";
 import urlSlice from "./url/urlSlice";
+import modalSlice from "./modal/modalSlice";
 
 const rootReducer = combineReducers({
   userInfo: userInfoReducer,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   profileSlice: profileSlice,
   themeSlice: themeSlice,
   urlSlice: urlSlice,
+  modalSlice: modalSlice,
 });
 
 export default rootReducer;

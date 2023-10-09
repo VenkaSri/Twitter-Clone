@@ -7,7 +7,7 @@ import Tweet from "../../components/tweet/Tweet";
 
 export const MainColumn = () => {
   return (
-    <div className="main--mainColumn">
+    <div className="main--mainColumn ">
       <div className="sticky -top-[0.5px] bg-white/[.85] dark:bg-black/[.65] dark:bg-black z-[2]  backdrop-blur-md">
         <TopNav />
       </div>

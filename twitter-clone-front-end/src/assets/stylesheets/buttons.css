@@ -55,3 +55,11 @@
 .button--media-action {
   @apply absolute  cursor-pointer  rounded-full bg-[#0f1419]/75 flex justify-center items-center backdrop-blur-sm hover:bg-[#272c30]/75;
 }
+
+.button--more {
+  @apply w-[34.75px] h-[34.75px] rounded-full flex items-center justify-center hover:bg-[#1e9bf0]/10 cursor-pointer;
+}
+
+.image-container {
+  height: 50vh; /* Adjust this value as needed */
+}

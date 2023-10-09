@@ -3,9 +3,6 @@ import { useSession } from "../hooks/useSession";
 
 export const UserProfile = () => {
   const { username, name, email } = useSession();
-  console.log(username);
-  console.log(name + " name");
-  console.log(email + " email");
   return (
     <div className="flex-col-container grow overflow-hidden mx-3">
       <div className="text-black dark:text-white break-words whitespace-nowrap text-ellipsis overflow-hidden font-cBold leading-5">

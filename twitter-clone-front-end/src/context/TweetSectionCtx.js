@@ -52,7 +52,6 @@ const TweetSectionProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log(validPost);
     if (numOfChars > 280) {
       setValidPost(false);
     } else if (numOfChars > 0 || mediaFiles.length > 0) {

@@ -8,7 +8,6 @@ export const useMediaUpload = () => {
   const maxFileLimit = 4;
 
   const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
-    // Disable click and keydown behavior
     noClick: true,
     noKeyboard: true,
     maxFiles: maxFileLimit,

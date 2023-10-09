@@ -7,7 +7,7 @@ import { NewPostButton } from "./NewPostButton";
 import { AccountMenu } from "./AccountMenu";
 
 const Sidebar = () => {
-  const darkMode = useTheme();
+  const { darkMode } = useTheme();
 
   return (
     <div className="header--siderbar">

@@ -1,8 +1,11 @@
 package ca.venkasritharan.twitterclone.service;
 
 import ca.venkasritharan.twitterclone.entity.user.User;
+import ca.venkasritharan.twitterclone.exception.ResourceNotFoundException;
 import ca.venkasritharan.twitterclone.post.Post;
+import ca.venkasritharan.twitterclone.post.PostDTO;
 import ca.venkasritharan.twitterclone.post.PostRepository;
+import ca.venkasritharan.twitterclone.post.PostResponse;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import org.apache.commons.io.IOUtils;
 import org.modelmapper.ModelMapper;
@@ -20,7 +23,9 @@ import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -41,18 +46,21 @@ public class PostService {
     this.mapper = mapper;
   }
 
-  public ResponseEntity<String> createPost(String text,
-                                     List<MultipartFile> photos,
-                                     Principal principal) {
+  public ResponseEntity<PostResponse> createPost(String text,
+                                                 List<MultipartFile> photos,
+                                                 Principal principal) {
     try {
       Optional<User> optionalUser = userRepository.findByUsername(principal.getName());
       if (!optionalUser.isPresent()) {
-        return ResponseEntity.badRequest().body("User not found");
+        PostResponse postResponse = new PostResponse();
+        postResponse.setMessage(HttpStatus.BAD_REQUEST.getReasonPhrase());
+        postResponse.setStatus(HttpStatus.BAD_REQUEST.value());
+        return new ResponseEntity<>(postResponse, HttpStatus.BAD_REQUEST);
       }
 
       Post newPost = new Post();
       postRepository.save(newPost);
-
+      System.out.println(newPost.getPostId());
       newPost.setText(text);
       newPost.setCreatedAt(LocalDateTime.now());
       if (photos != null && !photos.isEmpty()) {
@@ -76,19 +84,31 @@ public class PostService {
       newPost.setUser(user); // Assuming you have a setUser method in Post and a OneToMany relationship with User
 
       postRepository.save(newPost);
-      return ResponseEntity.ok("Success");
+      PostResponse postResponse = new PostResponse();
+      postResponse.setMessage("Successfully posted");
+      postResponse.setStatus(HttpStatus.OK.value());
+      postResponse.setPostId(newPost.getPostId());
+      return new ResponseEntity<>(postResponse, HttpStatus.OK);
     } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
+      PostResponse postResponse = new PostResponse();
+      postResponse.setMessage(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+      postResponse.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+      return new ResponseEntity<>(postResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
 
 
-  private Post getPostById(Post post) {
-    Optional<Post> retrievedPost = postRepository.findById(post.getPostId());
+  public ResponseEntity<?> getPostById(Long postId) {
+    Post post = postRepository.findPostByPostId(postId).orElseThrow(() -> new ResourceNotFoundException(postId));
+    PostDTO postDTO = mapper.map(post, PostDTO.class);
+    return ResponseEntity.status(201).body(postDTO);
+  }
 
-    return retrievedPost.orElse(null);
-
+  private Map<String, Object> postResponse(Post post) {
+    Map<String, Object> response = new HashMap<>();
+    response.put("post", post);
+    return response;
   }
 
   private String uploadToS3(MultipartFile file, String username) throws IOException {

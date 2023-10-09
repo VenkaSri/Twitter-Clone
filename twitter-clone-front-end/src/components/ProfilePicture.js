@@ -1,7 +1,7 @@
 import { Skeleton } from "@mui/material";
 import React, { memo, useEffect, useState } from "react";
 
-const ProfilePicture = ({ size }) => {
+const ProfilePicture = ({ size = 44 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [cachedImage, setCachedImage] = useState(null);
 

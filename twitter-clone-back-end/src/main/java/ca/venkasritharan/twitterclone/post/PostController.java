@@ -9,10 +9,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = {"*"})
 @RestController
-@RequestMapping("/v1/api")
+@RequestMapping("/api/v1/posts")
 public class PostController {
 
   private final PostService postService;
@@ -21,10 +22,15 @@ public class PostController {
     this.postService = postService;
   }
 
-  @PostMapping(value = "/posts", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-  public ResponseEntity<String> createPost(@RequestPart(value = "text", required = false) String text,
+  @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+  public ResponseEntity<PostResponse> createPost(@RequestPart(value = "text", required = false) String text,
                                      @RequestPart(name = "photos", required = false) List<MultipartFile> photos,
                                      Principal principal) {
     return postService.createPost(text,photos, principal);
+  }
+
+  @GetMapping("/{postId}")
+  public ResponseEntity<?> getPostById(@PathVariable Long postId) {
+    return postService.getPostById(postId);
   }
 }

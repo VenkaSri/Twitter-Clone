@@ -4,7 +4,7 @@ import { useTheme } from "../../hooks/useTheme";
 import { useMediaQuery } from "@mui/material";
 
 export const HeaderButton = ({ type, text, visibility }) => {
-  const darkMode = useTheme();
+  const { darkMode } = useTheme();
   const padding = useMediaQuery("(max-height:850px)");
 
   return (
