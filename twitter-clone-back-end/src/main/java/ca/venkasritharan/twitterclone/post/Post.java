@@ -23,7 +23,7 @@ public class Post {
   private Long postId;
   @Column(length = 400)
   private String text;
-  private LocalDateTime createdAt;
+  private String createdAt;
   private String photo1;
   private String photo2;
   private String photo3;

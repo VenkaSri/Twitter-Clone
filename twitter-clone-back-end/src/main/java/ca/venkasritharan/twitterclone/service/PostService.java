@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.security.Principal;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -62,7 +63,7 @@ public class PostService {
       postRepository.save(newPost);
       System.out.println(newPost.getPostId());
       newPost.setText(text);
-      newPost.setCreatedAt(LocalDateTime.now());
+      newPost.setCreatedAt(Instant.now().toString());
       if (photos != null && !photos.isEmpty()) {
         List<String> uploadedUrls = photos.stream()
                 .map(photo -> {

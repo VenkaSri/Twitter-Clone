@@ -13,7 +13,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostDTO {
+  private Long postId;
   private String text;
+  private String createdAt;
   private String photo1;
   private String photo2;
   private String photo3;
