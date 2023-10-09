@@ -7,6 +7,7 @@ import ca.venkasritharan.twitterclone.post.PostDTO;
 import ca.venkasritharan.twitterclone.post.PostRepository;
 import ca.venkasritharan.twitterclone.post.PostResponse;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
+import ca.venkasritharan.twitterclone.response.MessageAndCodeResponse;
 import org.apache.commons.io.IOUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,11 +25,9 @@ import java.io.UncheckedIOException;
 import java.security.Principal;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class PostService {
@@ -61,7 +60,6 @@ public class PostService {
 
       Post newPost = new Post();
       postRepository.save(newPost);
-      System.out.println(newPost.getPostId());
       newPost.setText(text);
       newPost.setCreatedAt(Instant.now().toString());
       if (photos != null && !photos.isEmpty()) {
@@ -102,14 +100,26 @@ public class PostService {
 
   public ResponseEntity<?> getPostById(Long postId) {
     Post post = postRepository.findPostByPostId(postId).orElseThrow(() -> new ResourceNotFoundException(postId));
-    PostDTO postDTO = mapper.map(post, PostDTO.class);
-    return ResponseEntity.status(201).body(postDTO);
+    return ResponseEntity.status(200).body(createResponse(post));
   }
 
-  private Map<String, Object> postResponse(Post post) {
-    Map<String, Object> response = new HashMap<>();
-    response.put("post", post);
-    return response;
+
+
+  private PostResponse createResponse(Post post) {
+    PostResponse postResponse = mapper.map(post, PostResponse.class);
+    postResponse.setStatus(200);
+    postResponse.setMessage("Post retrieved successfully.");
+    List<String> photos = Stream.of(
+                    post.getPhoto1(),
+                    post.getPhoto2(),
+                    post.getPhoto3(),
+                    post.getPhoto4()
+            )
+            .filter(Objects::nonNull)
+            .collect(Collectors.toList());
+
+    postResponse.setMedia(photos);
+    return postResponse;
   }
 
   private String uploadToS3(MultipartFile file, String username) throws IOException {

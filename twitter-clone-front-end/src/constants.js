@@ -8,6 +8,7 @@ const CHARACTER_LIMIT = 280;
 const VALIDATION_DELAY = 800;
 
 const POST_BUTTON_VALUE = { text: "Post" };
+const REPLY_BUTTON_VALUE = { text: "Reply" };
 
 const THEME_COLORS = [
   "#1e9bf0",
@@ -25,4 +26,5 @@ export {
   VALIDATION_DELAY,
   POST_BUTTON_VALUE,
   THEME_COLORS,
+  REPLY_BUTTON_VALUE,
 };

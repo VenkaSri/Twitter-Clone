@@ -1,7 +1,7 @@
 import React from "react";
 import getIcon from "../../utils/icons/iconsutil";
 
-export const MainColumnHeader = () => {
+export const MainColumnHeader = ({ onClick }) => {
   return (
     <>
       <div className="h-[53px] flex px-[16px] ">
@@ -11,7 +11,10 @@ export const MainColumnHeader = () => {
           <div
             className={`min-w-[56px] min-h-[32px] self-stretch flex items-start justify-center flex-col `}
           >
-            <div className="min-w-[36px] min-h-[36px] rounded-full flex flex-col cursor-pointer items-center justify-center -ml-2">
+            <div
+              onClick={onClick}
+              className="min-w-[36px] min-h-[36px] rounded-full flex flex-col cursor-pointer items-center justify-center -ml-2 dark:fill-white dark:hover:bg-[#191919] hover:bg-[#E6E7E7]"
+            >
               {getIcon("Back", { width: 20 })}
             </div>
           </div>

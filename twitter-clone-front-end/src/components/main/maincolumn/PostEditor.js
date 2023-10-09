@@ -6,7 +6,7 @@ import { useHeightObserver } from "../../../hooks/useHeightObserber";
 import { useEditorState } from "../../../hooks/useEditorState";
 import { useTheme } from "../../../hooks/useTheme";
 
-const PostEditor = ({ onHeightChange }) => {
+const PostEditor = ({ onHeightChange, placeholder }) => {
   const { setIsInputActive, postCreated, setPostCreated } =
     useTweetSectionContext();
   const darkMode = useTheme();
@@ -38,7 +38,7 @@ const PostEditor = ({ onHeightChange }) => {
         onChange={handleEditorChange}
         customStyleMap={styleMap}
         ref={fieldRef}
-        placeholder="What is happening?!"
+        placeholder={placeholder}
       />
     </div>
   );

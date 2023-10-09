@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,6 +17,7 @@ public class PostDTO {
   private Long postId;
   private String text;
   private String createdAt;
+  List<String> photos;
   private String photo1;
   private String photo2;
   private String photo3;

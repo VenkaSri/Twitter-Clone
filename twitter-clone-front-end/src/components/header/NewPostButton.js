@@ -8,10 +8,14 @@ export const NewPostButton = () => {
 
   return (
     <>
-      <div className={`header--button-wrapper ${btnYMargin ? "my-1" : "my-4"}`}>
+      <div
+        className={`header--button-wrapper shadow-nav-post-button-shadow overflow-hidden rounded-full ${
+          btnYMargin ? "my-1" : "my-4"
+        }`}
+      >
         <div className="tablet:block hidden">
           <RoundedButton
-            styles={"min-w-[52px] min-h-[52px] px-8 header--newPostButton"}
+            styles={"min-w-[52px] min-h-[52px] px-8 header--newPostButton "}
             btnContent="Post"
           />
         </div>

@@ -60,6 +60,7 @@
   @apply w-[34.75px] h-[34.75px] rounded-full flex items-center justify-center hover:bg-[#1e9bf0]/10 cursor-pointer;
 }
 
-.image-container {
-  height: 50vh; /* Adjust this value as needed */
+.button--post-engagement {
+  @apply flex flex-col grow  text-[#536471] text-[15px]
+  border-t border-t-[#eff3f4] dark:border-t-[var(--primary-dark-border-color)];
 }

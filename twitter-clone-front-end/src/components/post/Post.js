@@ -4,7 +4,26 @@ import { UserProfile } from "../UserProfile";
 import getIcon from "../../utils/icons/iconsutil";
 import { MoreButton } from "../MoreButton";
 import clsx from "clsx";
-import { PostEditorMedia } from "./compose/PostEditorMedia";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import { PostMedia } from "./post-media/PostMedia";
+import { TweetSectionProvider } from "../../context/TweetSectionCtx";
+import {
+  Analytics,
+  Bookmark,
+  Like,
+  Reply,
+  Repost,
+  Share,
+} from "../icons/icons";
+import RoundedButton from "../RoundedButton";
+import { RoundedIconButton } from "../RoundedIconButton";
+import TweetSection from "../main/maincolumn/TweetSection";
+import { PostReply } from "./PostReply";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const PostText = ({ text }) => {
   return (
@@ -21,108 +40,83 @@ const PostText = ({ text }) => {
     </div>
   );
 };
-//className="bg-[url('https://www.thisiscolossal.com/wp-content/uploads/2017/04/MatRandom_12.jpg')] bg-center bg-cover  mr-0.5 "
-const PostMedia = ({ text }) => {
-  const images = [
-    "https://www.thisiscolossal.com/wp-content/uploads/2017/04/MatRandom_12.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlTLFYefo90HjqgjcUkvQT_tOVPyiJ6tmYtg&usqp=CAU",
-    "https://www.thedesignwork.com/wp-content/uploads/2011/10/Random-Pictures-of-Conceptual-and-Creative-Ideas-01.jpg",
-    "https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww&w=1000&q=80",
-  ];
 
+const PostCreationInfo = ({ datetime }) => {
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  console.log(timeZone);
+  const localTime = dayjs.utc(datetime).tz(timeZone).format("h:mm A");
+  const localDate = dayjs.utc(datetime).tz(timeZone).format("MMM D, YYYY");
+  console.log(datetime);
   return (
-    <div className="mt-3 flex grow ">
-      <div className="flex-col-container w-full">
-        <div className="overflow-hidden  relative">
-          <div className="w-full aspect-video"></div>
-          <div className="h-full w-full absolute top-0 bottom-0 left-0">
-            <div className="h-full w-full flex-col-container">
-              <div className="flex relative basis-0 grow ">
-                <div className="overflow-hidden flex-col basis-0 grow flex mr-0.5 cursor-pointer relative">
-                  <div className="abolute top-0 bottom-0 right-0 left-0 flex-col-container ">
-                    <div className="h-full w-full max-w-full flex-col-container ">
-                      <div className="absolute top-0 left-0 w-full h-full bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlTLFYefo90HjqgjcUkvQT_tOVPyiJ6tmYtg&usqp=CAU')] bg-center bg-cover rounded-l-2xl">
-                        <img
-                          className="absolute top-0 left-0 w-full h-full opacity-0 inset-0 -z-[1]"
-                          alt={`Uploaded`}
-                          src={images[1]}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="overflow-hidden flex-col basis-0 grow flex mr-0.5 cursor-pointer relative">
-                  <div className="abolute top-0 bottom-0 right-0 left-0 flex-col-container ">
-                    <div className="h-full w-full max-w-full flex-col-container ">
-                      <div className="absolute top-0 left-0 w-full h-full bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlTLFYefo90HjqgjcUkvQT_tOVPyiJ6tmYtg&usqp=CAU')] bg-center bg-cover rounded-l-2xl">
-                        <img
-                          className="absolute top-0 left-0 w-full h-full opacity-0 inset-0 -z-[1]"
-                          alt={`Uploaded`}
-                          src={images[1]}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="flex relative basis-0 grow ">
-                <div className="overflow-hidden flex-col basis-0 grow flex mr-0.5 cursor-pointer relative">
-                  <div className="abolute top-0 bottom-0 right-0 left-0 flex-col-container ">
-                    <div className="h-full w-full max-w-full flex-col-container ">
-                      <div className="absolute top-0 left-0 w-full h-full bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlTLFYefo90HjqgjcUkvQT_tOVPyiJ6tmYtg&usqp=CAU')] bg-center bg-cover rounded-l-2xl">
-                        <img
-                          className="absolute top-0 left-0 w-full h-full opacity-0 inset-0 -z-[1]"
-                          alt={`Uploaded`}
-                          src={images[1]}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="overflow-hidden flex-col basis-0 grow flex mr-0.5 cursor-pointer relative">
-                  <div className="abolute top-0 bottom-0 right-0 left-0 flex-col-container ">
-                    <div className="h-full w-full max-w-full flex-col-container ">
-                      <div className="absolute top-0 left-0 w-full h-full bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlTLFYefo90HjqgjcUkvQT_tOVPyiJ6tmYtg&usqp=CAU')] bg-center bg-cover rounded-l-2xl">
-                        <img
-                          className="absolute top-0 left-0 w-full h-full opacity-0 inset-0 -z-[1]"
-                          alt={`Uploaded`}
-                          src={images[1]}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* <div className="flex grow br">
-        <div className="flex grow max-w-full relative mr-0.5">
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlTLFYefo90HjqgjcUkvQT_tOVPyiJ6tmYtg&usqp=CAU')] bg-center bg-cover rounded-l-2xl"></div>
-          <img
-            className="absolute top-0 left-0 w-full h-full opacity-0"
-            alt={`Uploaded`}
-            src={images[1]}
-          />
-        </div>
-        <div className="flex flex-col grow max-w-full relative">
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlTLFYefo90HjqgjcUkvQT_tOVPyiJ6tmYtg&usqp=CAU')] bg-center bg-cover rounded-r-2xl"></div>
-          <img
-            className="absolute top-0 left-0 w-full h-full opacity-0"
-            alt={`Uploaded`}
-            src={images[1]}
-          />
-        </div>
-      </div> */}
+    <div className="flex py-4 gap-1 text-[#536471] text-[15px]">
+      <span>{localTime}</span>&#183;<span>{localDate}</span>
+      &#183;<span>Views</span>
     </div>
   );
 };
 
-export const Post = ({ postText }) => {
+const PostActions = () => {
+  const icons = [
+    {
+      Component: Reply,
+      className: "hover:bg-[#1d9cf0]/[0.1] hover:fill-[var(--primary-color)]",
+    },
+    {
+      Component: Repost,
+      className: "hover:bg-[#00ba7c]/[0.1] hover:fill-[#00ba7c]",
+    },
+    {
+      Component: Like,
+      className: "hover:bg-[#f91881]/[0.1] hover:fill-[#f91881]",
+    },
+    {
+      Component: Bookmark,
+      className: "hover:bg-[#1d9cf0]/[0.1] hover:fill-[var(--primary-color)]",
+    },
+    {
+      Component: Share,
+      className: "hover:bg-[#1d9cf0]/[0.1] hover:fill-[var(--primary-color)]",
+      noFlex: true,
+    },
+  ];
+
   return (
-    <div>
+    <>
+      {icons.map(({ Component, className, noFlex }, index) => {
+        const btnSize = "w-[22.5px] h-[22.5px]";
+        return (
+          <div key={index} className={noFlex ? "" : "flex flex-1"}>
+            <RoundedIconButton
+              className={clsx(
+                "w-[38.5px] h-[38.5px] centered-column-container rounded-full " +
+                  className
+              )}
+              icon={<Component className={btnSize} />}
+            />
+          </div>
+        );
+      })}
+    </>
+  );
+};
+
+const PostEngagementButton = ({ postId, onClick }) => {
+  return (
+    <div
+      className="button--post-engagement hover:bg-black/[0.03]"
+      role="button"
+      onClick={onClick}
+    >
+      <div className="flex grow py-4">
+        <Analytics className="w-[22.75px] h-[18.75] pr-0.5 fill-[#536471]" />
+        <span>View post engagements</span>
+      </div>
+    </div>
+  );
+};
+export const Post = ({ postData }) => {
+  return (
+    <div className="border-b border-b-[#eff3f4] dark:border-b-[var(--primary-dark-border-color)]">
       <article className="flex-col-container px-4">
         <div className=" flex grow ">
           <div className=" max-w-full flex  grow items-center">
@@ -137,176 +131,19 @@ export const Post = ({ postText }) => {
             </div>
           </div>
         </div>
-        <PostText text={postText} />
-        <PostMedia />
+        <PostText text={postData.Text} />
+        <PostMedia media={postData.media} />
+        <PostCreationInfo datetime={postData.createdAt} />
+        <PostEngagementButton />
+        <div className="post-actions">
+          <div className="flex grow items-center">
+            <PostActions />
+          </div>
+        </div>
       </article>
-    </div>
-  );
-};
-
-const ImageLayout = ({ imgs }) => {
-  if (imgs.length === 4) {
-    return (
-      <div className="flex flex-col grow">
-        <div className="flex flex-1 gap-2 mr-2">
-          <ImageContainer src={imgs[0]} isGridLayout />
-          <ImageContainer src={imgs[1]} isGridLayout />
-        </div>
-        <div className="flex  flex-1 gap-2">
-          <ImageContainer src={imgs[3]} isGridLayout />
-          <ImageContainer src={imgs[2]} isGridLayout />
-        </div>
-      </div>
-    );
-  }
-
-  if (imgs.length === 3) {
-    return (
-      <div className="flex">
-        <div className="flex flex-col flex-1 gap-2 mr-2">
-          <ImageContainer src={imgs[0]} isGridLayout />
-        </div>
-        <div className="flex flex-col flex-1 gap-2">
-          <ImageContainer src={imgs[1]} isGridLayout />
-          <ImageContainer src={imgs[2]} isGridLayout />
-        </div>
-      </div>
-    );
-  }
-
-  if (imgs.length === 2) {
-    return (
-      <div className="flex">
-        <div className="flex flex-col flex-1 gap-2 mr-2">
-          <ImageContainer src={imgs[0]} />
-        </div>
-        <div className="flex flex-col flex-1 gap-2">
-          <ImageContainer src={imgs[1]} />
-        </div>
-      </div>
-    );
-  }
-
-  if (imgs.length === 1) {
-    return <ImageContainer src={imgs[0]} />;
-  }
-
-  return null;
-};
-
-const ImageContainer = ({ src, isGridLayout }) => {
-  // const { paths, setPaths, mediaFiles } = useTweetSectionContext();
-
-  // const handleRemoveFile = (src) => {
-  //   const filesRemaining = paths.filter((file) => file !== src);
-  //   const indexToRemove = paths.indexOf(src);
-  //   if (indexToRemove !== -1) {
-  //     mediaFiles.splice(indexToRemove, 1);
-  //   }
-  //   setPaths(filesRemaining);
-  // };
-
-  return (
-    <div
-      className={clsx("flex grow rounded-[16px] overflow-hidden relative ", {
-        "aspect-ratio": isGridLayout,
-      })}
-    >
-      <div className="z-[2] absolute w-full h-full">
-        <div className="button--media-action min-w-[30px] min-h-[30px] right-1 top-1 ">
-          {getIcon("Close", { fill: "white", width: 18 })}
-        </div>
-        <div className="button--media-action  min-w-[32px] min-h-[32px] right-1 bottom-1 px-4">
-          <span className="font-cBold text-white">Edit</span>
-        </div>
-      </div>
-
-      <div className="flex grow ">
-        <img className="object-cover" alt={`Uploaded`} src={src} />
+      <div className="">
+        <PostReply />
       </div>
     </div>
   );
 };
-
-//#0f1419
-//#e7e9ea
-// 4 images
-
-/* 
-
-        <div className="flex grow mb-0.5  max-w-full relative">
-          <div className=" relative flex grow">
-            <div className="absolute bottom-0  top-0 left-0 right-0 flex grow">
-              <div className="bg-[url('https://www.thisiscolossal.com/wp-content/uploads/2017/04/MatRandom_12.jpg')] bg-center bg-cover  mr-0.5 rounded-tl-2xl">
-                <img className=" opacity-0" alt={`Uploaded`} src={images[0]} />
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlTLFYefo90HjqgjcUkvQT_tOVPyiJ6tmYtg&usqp=CAU')] bg-center bg-cover rounded-tr-2xl">
-            <img className=" opacity-0" alt={`Uploaded`} src={images[1]} />
-          </div>
-        </div>
-        <div className="flex grow mb-0.5  max-w-full relative">
-          <div className="relative flex grow">
-            <div className="absolute bottom-0  top-0 left-0 right-0 flex grow ">
-              <div className="bg-[url('https://www.thisiscolossal.com/wp-content/uploads/2017/04/MatRandom_12.jpg')] bg-center bg-cover  mr-0.5 rounded-bl-2xl">
-                <img className=" opacity-0" alt={`Uploaded`} src={images[0]} />
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlTLFYefo90HjqgjcUkvQT_tOVPyiJ6tmYtg&usqp=CAU')] bg-center bg-cover rounded-br-2xl">
-            <img className=" opacity-0" alt={`Uploaded`} src={images[1]} />
-          </div>
-        </div>
-
-        */
-
-// 3
-//   <div className="flex grow  max-w-full relative mr-0.5">
-//   <div className="flex-grow bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlTLFYefo90HjqgjcUkvQT_tOVPyiJ6tmYtg&usqp=CAU')] bg-center bg-cover rounded-l-2xl">
-//     <img className=" opacity-0" alt={`Uploaded`} src={images[1]} />
-//   </div>
-// </div>
-// <div className="flex flex-col grow  max-w-full relative">
-//   <div className="mb-0.5 bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlTLFYefo90HjqgjcUkvQT_tOVPyiJ6tmYtg&usqp=CAU')] bg-center bg-cover rounded-tr-2xl">
-//     <img className=" opacity-0" alt={`Uploaded`} src={images[1]} />
-//   </div>
-//   <div className="bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlTLFYefo90HjqgjcUkvQT_tOVPyiJ6tmYtg&usqp=CAU')] bg-center bg-cover rounded-br-2xl">
-//     <img className=" opacity-0" alt={`Uploaded`} src={images[1]} />
-//   </div>
-// </div>
-
-//2
-
-{
-  /* <div className="h-full w-full flex relative">
-<div className="overflow-hidden flex-col basis-0 grow flex mr-0.5 cursor-pointer relative">
-  <div className="abolute top-0 bottom-0 right-0 left-0 flex-col-container ">
-    <div className="h-full w-full max-w-full flex-col-container ">
-      <div className="absolute top-0 left-0 w-full h-full bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlTLFYefo90HjqgjcUkvQT_tOVPyiJ6tmYtg&usqp=CAU')] bg-center bg-cover rounded-l-2xl">
-        <img
-          className="absolute top-0 left-0 w-full h-full opacity-0 inset-0 -z-[1]"
-          alt={`Uploaded`}
-          src={images[1]}
-        />
-      </div>
-    </div>
-  </div>
-</div>
-<div className="overflow-hidden flex-col basis-0 grow flex  cursor-pointer relative">
-  <div className="abolute top-0 bottom-0 right-0 left-0 flex-col-container ">
-    <div className="h-full w-full max-w-full flex-col-container ">
-      <div className="absolute top-0 left-0 w-full h-full bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlTLFYefo90HjqgjcUkvQT_tOVPyiJ6tmYtg&usqp=CAU')] bg-no-repeat bg-center bg-cover rounded-r-2xl">
-        <img
-          className="absolute top-0 left-0 w-full h-full opacity-0 inset-0 -z-[1]"
-          alt={`Uploaded`}
-          src={images[1]}
-        />
-      </div>
-    </div>
-  </div>
-</div>
-</div> */
-}
