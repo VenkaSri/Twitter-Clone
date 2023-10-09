@@ -83,7 +83,6 @@ const PostActions = () => {
   return (
     <>
       {icons.map(({ Component, className, noFlex }, index) => {
-        const btnSize = "w-[22.5px] h-[22.5px]";
         return (
           <div key={index} className={noFlex ? "" : "flex flex-1"}>
             <RoundedIconButton
@@ -91,7 +90,7 @@ const PostActions = () => {
                 "w-[38.5px] h-[38.5px] centered-column-container rounded-full " +
                   className
               )}
-              icon={<Component className={btnSize} />}
+              icon={<Component className={"w-[22.75px] h-[18.75px]"} />}
             />
           </div>
         );
@@ -107,8 +106,8 @@ const PostEngagementButton = ({ postId, onClick }) => {
       role="button"
       onClick={onClick}
     >
-      <div className="flex grow py-4">
-        <Analytics className="w-[22.75px] h-[18.75] pr-0.5 fill-[#536471]" />
+      <div className="flex grow py-4 font-cReg leading-5">
+        <Analytics className="w-[22.75px] h-[18.75px] pr-0.5 fill-[#536471] " />
         <span>View post engagements</span>
       </div>
     </div>

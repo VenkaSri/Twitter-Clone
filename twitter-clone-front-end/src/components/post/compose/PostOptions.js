@@ -38,7 +38,7 @@ export const PostOptions = () => {
         ></div>
       </div>
       <div className={`-ml-2 mt-1 h-[48px] flex items-center justify-between `}>
-        <TweetOptions />
+        <TweetOptions isReply />
         <div className="h-[36px] flex   items-center ">
           {hasUserTyped && (
             <>

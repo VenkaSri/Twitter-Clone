@@ -5,14 +5,16 @@ import { useMediaUpload } from "../../../hooks/useMediaUpload";
 import { useEffect, useState } from "react";
 import { useTweetSectionContext } from "../../../context/TweetSectionCtx";
 import { Fade, Snackbar, SnackbarContent } from "@mui/material";
+import { is } from "immutable";
 
-const AttachmentButton = ({ text, action, isDisabled }) => {
+const AttachmentButton = ({ text, action, isDisabled, isReply }) => {
   return (
     <button
       className={clsx(
         isDisabled ? "button--icon-rounded-disabled " : "button--icon-rounded",
         {
           "max-[688px]:hidden": text === "Poll" || text === "Schedule",
+          hidden: isReply && (text === "Poll" || text === "Schedule"),
         }
       )}
       onClick={action}
@@ -23,7 +25,7 @@ const AttachmentButton = ({ text, action, isDisabled }) => {
   );
 };
 
-const TweetOptions = () => {
+const TweetOptions = ({ isReply }) => {
   const { open, getInputProps, mediaFiles, error, setError } = useMediaUpload();
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -47,6 +49,7 @@ const TweetOptions = () => {
           key={attachment.text}
           {...attachment}
           isDisabled={attachment.isDisabled}
+          isReply={isReply}
         />
       ))}
       <Snackbar
