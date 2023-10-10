@@ -7,4 +7,5 @@ public interface UserService {
   Response<String> getFollowingCount(String usernameOrEmail);
   void followUser(long userId);
   void unfollowUser(long userId);
+
 }

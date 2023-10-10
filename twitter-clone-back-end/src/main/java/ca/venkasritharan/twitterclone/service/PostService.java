@@ -109,6 +109,7 @@ public class PostService {
     PostResponse postResponse = mapper.map(post, PostResponse.class);
     postResponse.setStatus(200);
     postResponse.setMessage("Post retrieved successfully.");
+    postResponse.setAuthorUsername(post.getUser().getUsername());
     List<String> photos = Stream.of(
                     post.getPhoto1(),
                     post.getPhoto2(),
