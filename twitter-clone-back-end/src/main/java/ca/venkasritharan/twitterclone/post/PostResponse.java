@@ -2,6 +2,7 @@ package ca.venkasritharan.twitterclone.post;
 
 
 import ca.venkasritharan.twitterclone.response.MessageAndCodeResponse;
+import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,5 +19,5 @@ public class PostResponse extends MessageAndCodeResponse {
   private String text;
   private String createdAt;
   private List<String> media;
-  private String authorUsername;
+  private UserDetailsResponse userDetails;
 }

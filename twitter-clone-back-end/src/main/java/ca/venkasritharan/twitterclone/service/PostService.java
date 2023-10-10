@@ -8,6 +8,7 @@ import ca.venkasritharan.twitterclone.post.PostRepository;
 import ca.venkasritharan.twitterclone.post.PostResponse;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import ca.venkasritharan.twitterclone.response.MessageAndCodeResponse;
+import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
 import org.apache.commons.io.IOUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -109,7 +110,13 @@ public class PostService {
     PostResponse postResponse = mapper.map(post, PostResponse.class);
     postResponse.setStatus(200);
     postResponse.setMessage("Post retrieved successfully.");
-    postResponse.setAuthorUsername(post.getUser().getUsername());
+    UserDetailsResponse userDetailsResponse = new UserDetailsResponse();
+      User user = post.getUser();
+      userDetailsResponse.setName(user.getProfile().getName());
+      userDetailsResponse.setEmail(user.getProfile().getEmail());
+      userDetailsResponse.setId(user.getId());
+      userDetailsResponse.setUsername(user.getUsername());
+      postResponse.setUserDetails(userDetailsResponse);
     List<String> photos = Stream.of(
                     post.getPhoto1(),
                     post.getPhoto2(),
@@ -148,43 +155,17 @@ public class PostService {
 
   }
 
+  public List<PostResponse> getAllPosts() {
+    List<Post> posts = postRepository.findAll();
+    List<PostResponse> postResponses = new ArrayList<>();
+    for (Post post: posts) {
+      postResponses.add(createResponse(post));
+    }
+
+    return postResponses;
+  }
 
 
-
-//    @PostMapping("/profile-picture")
-//public String uploadProfilePicture(@RequestParam("file") MultipartFile file, Principal principal) {
-//  String bucketName = "tc-profile-pictures";
-//  String key = "profile-pictures/" + file.getOriginalFilename();
-//  String username = principal.getName();
-//  System.out.println(username);
-//
-//  try {
-//    InputStream inputStream = file.getInputStream();
-//    byte[] contentBytes = IOUtils.toByteArray(inputStream);
-//    // Upload file to S3
-//    PutObjectRequest putObjectRequest = PutObjectRequest.builder()
-//            .bucket(bucketName)
-//            .key(key)
-//            .build();
-//    s3Client.putObject(putObjectRequest, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
-//
-//    // Get the URL of the uploaded file (you may need to adjust this based on your bucket setup)
-//    String fileUrl = "https://" + bucketName + ".s3.amazonaws.com/" + key;
-//
-//    // Update the user record in the database
-//    Optional<User> optionalUser = userRepository.findByUsername(username);
-//    if (optionalUser.isPresent()) {
-//      User user = optionalUser.get();
-//      user.setProfilePictureUrl(fileUrl);
-//      userRepository.save(user);
-//      return "Successfully uploaded and database updated.";
-//    } else {
-//      return "User not found";
-//    }
-//
-//  } catch (Exception e) {
-//    return "Upload failed: " + e.getMessage();
-//  }
 
 
 

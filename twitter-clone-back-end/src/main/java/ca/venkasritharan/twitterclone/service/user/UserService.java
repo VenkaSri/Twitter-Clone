@@ -8,4 +8,5 @@ public interface UserService {
   void followUser(long userId);
   void unfollowUser(long userId);
 
+
 }
