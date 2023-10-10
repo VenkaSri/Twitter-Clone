@@ -15,7 +15,9 @@ export const LandingPage = () => {
           <div className="xs:p-[20px] flex flex-col min-w-[437px] max-w-[760px]">
             <div className="flex-1 flex items-center block med:hidden h-[48px]"></div>
             <div className="my-12 flex  font-cHeavy leading-[84px] text-[64px] font-bold dark:text-[#fff] ">
-              <span className="m-0 p-0">Happening now</span>
+              <span className="m-0 p-0" data-testid="cypress-title">
+                Happening now
+              </span>
             </div>
 
             <div className="mb-8">
