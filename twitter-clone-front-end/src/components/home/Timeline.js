@@ -8,7 +8,7 @@ export const Timeline = () => {
 
   useEffect(() => {
     setTimelineNode(getUserTLPref === "For you" ? <ForYou /> : <Following />);
-  }, [getUserTLPref, timelineNode]);
+  }, [getUserTLPref]);
 
   return (
     <div className="br flex-col-container">
