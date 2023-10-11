@@ -13,6 +13,7 @@ import { BottomBar } from "../components/layers/bottombar/BottomBar";
 import { TopNav } from "../components/main/maincolumn/TopNav";
 import { TweetSectionProvider } from "../context/TweetSectionCtx";
 import TweetSection from "../components/main/maincolumn/TweetSection";
+import { Timeline } from "../components/home/Timeline";
 
 export const Home = () => {
   const [showHeader, setShowHeader] = useState("");
@@ -28,6 +29,7 @@ export const Home = () => {
           <TweetSection />
         </TweetSectionProvider>
       </div>
+      <Timeline />
     </>
   );
 };

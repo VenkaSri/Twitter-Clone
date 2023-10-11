@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSession } from "../../../hooks/useSession";
 import ProfilePicture from "../../ProfilePicture";
 import { DialogHeaderLogo } from "../../dialog/signup/header/DialogHeaderLogo";
 import getIcon from "../../../utils/icons/iconsutil";
 
 export const TopNav = () => {
-  const handleClick = () => {
-    console.log("click");
+  const [selectedTab, setSelectedTab] = useState("For you");
+  const getUserTLPref = localStorage.getItem("timelinePrefernce");
+  const handleClick = (event) => {
+    const tabType = event.currentTarget.getAttribute("data-tab-type");
+    localStorage.setItem("timelinePrefernce", tabType);
+    setSelectedTab(tabType);
   };
+
   const { photoSRC } = useSession();
+
   return (
     <>
       <div className="mainColumn--topNav-heading">
@@ -29,22 +35,34 @@ export const TopNav = () => {
       </div>
       <div className="mainColumn--topNav-links">
         <nav className="w-full h-14 flex">
-          <a className="mainColumn--topNav-link" onClick={handleClick}>
+          <div
+            className="mainColumn--topNav-link"
+            data-tab-type="For you"
+            onClick={handleClick}
+          >
             <div className=" flex-col-container grow">
               <div className="flex grow justify-center items-center font-cBold">
                 For you
               </div>
-              <div className="bg-[var(--primary-color)]  h-1 rounded-full"></div>
+              {selectedTab === "For you" && (
+                <div className="bg-[var(--primary-color)]  h-1 rounded-full"></div>
+              )}
             </div>
-          </a>
-          <a className="mainColumn--topNav-link">
+          </div>
+          <div
+            className="mainColumn--topNav-link"
+            data-tab-type="Following"
+            onClick={handleClick}
+          >
             <div className=" flex-col-container grow">
               <div className="flex grow justify-center items-center  font-medium font-cMed">
                 Following
               </div>
-              {/* <div className="bg-[var(--primary-color)]  h-1 rounded-full"></div> */}
+              {selectedTab === "Following" && (
+                <div className="bg-[var(--primary-color)]  h-1 rounded-full"></div>
+              )}
             </div>
-          </a>
+          </div>
         </nav>
       </div>
     </>

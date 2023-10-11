@@ -32,8 +32,7 @@ export const PostOptions = () => {
       <div className="-ml-3">
         <div
           className={clsx("flex", {
-            "border-b border-b-[#eff3f4] dark:border-b-[var(--primary-dark-border-color)] pb-3 ":
-              isInputActive,
+            "pb-3 ": isInputActive,
           })}
         ></div>
       </div>

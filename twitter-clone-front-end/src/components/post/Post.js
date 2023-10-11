@@ -141,7 +141,7 @@ export const Post = ({ postData }) => {
         </div>
       </article>
       <div className="">
-        <PostReply />
+        <PostReply postInfo={postData.authorUsername} />
       </div>
     </div>
   );
