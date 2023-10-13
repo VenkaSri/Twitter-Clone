@@ -17,7 +17,7 @@ export const UserProfile = ({ userData, isAuthUser }) => {
   }, []);
 
   return (
-    <div className="flex-col-container grow overflow-hidden mx-3">
+    <div className="flex-col-container grow overflow-hidden ">
       <div className="text-black dark:text-white break-words whitespace-nowrap text-ellipsis overflow-hidden font-cBold leading-5">
         <span>{userName}</span>
       </div>

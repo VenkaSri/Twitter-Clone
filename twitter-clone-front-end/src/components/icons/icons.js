@@ -3,6 +3,7 @@ import {
   ANALYTICS,
   COMMENT,
   LIKE,
+  LIKE_FILLED,
   REPOST,
   SHARE,
 } from "../../utils/constants/iconPaths";
@@ -19,6 +20,10 @@ export const Repost = ({ className }) => (
 );
 export const Like = ({ className }) => (
   <SVGIcon path={LIKE} className={className} />
+);
+
+export const LikeFilled = ({ className }) => (
+  <SVGIcon path={LIKE_FILLED} className={className} />
 );
 export const Bookmark = ({ className }) => (
   <SVGIcon path={BOOKMARK} className={className} />

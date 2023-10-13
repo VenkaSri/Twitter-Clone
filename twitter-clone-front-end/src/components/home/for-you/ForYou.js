@@ -12,6 +12,9 @@ import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import RelativeTime from "dayjs/plugin/relativeTime";
 import updateLocale from "dayjs/plugin/updateLocale";
+import { RoundedIconButton } from "../../RoundedIconButton";
+import { Reply } from "../../icons/icons";
+import clsx from "clsx";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -26,8 +29,8 @@ dayjs.updateLocale("en", {
     s: "%ds",
     m: "a minute",
     mm: "%dm",
-    h: "h",
-    hh: "h",
+    h: "%dh",
+    hh: "%dh",
     d: "a day",
     dd: "%d",
     M: "a month",
@@ -45,38 +48,41 @@ export const ForYou = () => {
   if (isSuccess) {
     divs = posts.map((post) => {
       return (
-        <div>
-          <div className="border-b border-b-[#eff3f4] dark:border-b-[var(--primary-dark-border-color)]">
+        <div key={post.id}>
+          <div className="cursor-pointer">
             <article className="flex-col-container px-4">
-              <div className=" flex grow ">
-                <div className=" max-w-full flex  grow ">
+              <div className="flex-col-container flex grow ">
+                <div className="flex grow pt-4"></div>
+                <div className="max-w-full flex  grow pb-3 ">
                   <div className="w-[40px] mr-4">
-                    <ProfilePicture />
+                    <ProfilePicture userId={post.userDetails.id} />
                   </div>
-                  <div className="flex-col-container grow justify-center">
-                    <div className="flex grow br">
-                      <div className="self-center">
+                  <div className="flex-col-container grow  ">
+                    <div className="flex">
+                      <div>
                         <TimelineUserInfo userData={post.userDetails} />
                       </div>
-                      <PostCreationInfo datetime={post.createdAt} />
-                      <div className="ml-auto  self-center">
-                        <MoreButton />
+                      <div>
+                        <PostCreationInfo datetime={post.createdAt} />
+                      </div>
+                      <div className="ml-auto">
+                        <div className="-m-[8px] self-end">
+                          <MoreButton />
+                        </div>
                       </div>
                     </div>
-                    <div className="-mt-2">
-                      <PostText text={post.text} />
-                    </div>
-
+                    <PostText text={post.text} />
                     <PostMedia media={post.media} />
-                    <div className="post-actions">
-                      <div className="flex grow items-center">
-                        <PostActions />
-                      </div>
+                    <div className="flex grow mt-3">
+                      <PostActions postId={post.postId} />
                     </div>
                   </div>
                 </div>
               </div>
             </article>
+          </div>
+          <div className="absolute w-full ">
+            <div className="border-b border-b-[#eff3f4]"></div>
           </div>
         </div>
       );
@@ -86,20 +92,7 @@ export const ForYou = () => {
   return <>{divs}</>;
 };
 
-// const PostCreationInfo = ({ datetime }) => {
-//   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-//   console.log(timeZone);
-//   const localTime = dayjs.utc(datetime).tz(timeZone).fromNow();
-
-//   return (
-//     <div className="inline-flex py-4 gap-1 text-[#536471] text-[15px] ">
-//       &#183;<span>{localTime}</span>
-//     </div>
-//   );
-// };
-
 const PostCreationInfo = ({ datetime }) => {
-  console.log(datetime);
   // const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const localDateTime = dayjs.utc(datetime);
   const now = dayjs();
@@ -112,15 +105,15 @@ const PostCreationInfo = ({ datetime }) => {
     displayTime = localDateTime.fromNow();
   } else {
     if (localDateTime.year() === currentYear) {
-      displayTime = localDateTime.format("MMM D"); // e.g., "Aug 23"
+      displayTime = localDateTime.format("MMM D");
     } else {
-      displayTime = localDateTime.format("MMM D, YYYY"); // e.g., "Aug 23, 2022"
+      displayTime = localDateTime.format("MMM D, YYYY");
     }
   }
 
   return (
-    <div className="inline-flex py-4 gap-1 text-[#536471] text-[15px] ">
-      &#183;<span>{displayTime}</span>
+    <div className="gap-1 text-[#536471] text-[15px] ">
+      &nbsp;&#183;&nbsp;<span>{displayTime}</span>
     </div>
   );
 };

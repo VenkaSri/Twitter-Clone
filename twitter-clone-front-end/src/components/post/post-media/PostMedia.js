@@ -48,9 +48,6 @@ const MediaWrapper = ({ children, isFlexCol }) => {
 
 export const PostMedia = ({ media }) => {
   const numberOfFiles = media.length;
-  console.log(numberOfFiles);
-  console.log();
-
   switch (numberOfFiles) {
     case 1:
       return <Single files={media} />;

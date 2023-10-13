@@ -11,7 +11,7 @@ export const Timeline = () => {
   }, [getUserTLPref]);
 
   return (
-    <div className="br flex-col-container">
+    <div className="flex-col-container">
       <div className="relative min-h-[500px]">{timelineNode}</div>
     </div>
   );
