@@ -1,4 +1,3 @@
 .post-actions {
-  @apply flex flex-col h-[48px] justify-center
-  border-y border-y-[#eff3f4] dark:border-y-[var(--primary-dark-border-color)];
+  @apply flex flex-col h-[48px] justify-center;
 }

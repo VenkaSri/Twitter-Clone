@@ -17,7 +17,7 @@ export const AccountMenu = () => {
             <ProfilePicture source={photoSRC} size={40} />
           </div>
           <div className="flex-col-container overflow-hidden shrink-1 tablet:block hidden">
-            <UserProfile />
+            <UserProfile isAuthUser />
           </div>
           <div className=" flex items-center tablet:block hidden">
             {getIcon("Ellipsis", {
