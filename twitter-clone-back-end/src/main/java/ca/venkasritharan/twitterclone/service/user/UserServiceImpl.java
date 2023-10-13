@@ -2,25 +2,35 @@ package ca.venkasritharan.twitterclone.service.user;
 
 import ca.venkasritharan.twitterclone.entity.user.Follower;
 import ca.venkasritharan.twitterclone.entity.user.User;
+import ca.venkasritharan.twitterclone.post.Post;
+import ca.venkasritharan.twitterclone.post.PostResponse;
 import ca.venkasritharan.twitterclone.repository.FollowerRepository;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
-import ca.venkasritharan.twitterclone.service.user.UserService;
+import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
 import ca.venkasritharan.twitterclone.response.Response;
+import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepository;
   private final FollowerRepository followerRepository;
+  private final ModelMapper mapper;
 
-  public UserServiceImpl(UserRepository userRepository, FollowerRepository followerRepository) {
+  public UserServiceImpl(UserRepository userRepository, FollowerRepository followerRepository, ModelMapper mapper) {
     this.userRepository = userRepository;
     this.followerRepository = followerRepository;
+    this.mapper = mapper;
   }
 
   @Override
@@ -59,11 +69,27 @@ public class UserServiceImpl implements UserService {
     }
   }
 
+  @Override
+  public ResponseEntity<?> getUserById(Long userId) {
+    Optional<User> optionalUser = userRepository.findById(userId);
+    User user = new User();
+    if (optionalUser.isPresent()) {
+      user = optionalUser.get();
+    }
+    System.out.println(user.getUsername());
+    return ResponseEntity.status(200).body(createResponse(user));
+  }
 
-
-
-
-
-
+  private UserDetailsResponse createResponse(User user) {
+    UserDetailsResponse userDetailsResponse = new UserDetailsResponse();
+    userDetailsResponse.setUsername(user.getUsername());
+    userDetailsResponse.setId(user.getId());
+    userDetailsResponse.setName(user.getProfile().getName());
+    userDetailsResponse.setProfile_image_url(user.getProfile().getProfile_image_url());
+    userDetailsResponse.setBio(user.getProfile().getBio());
+    userDetailsResponse.setFollowerCount(user.getProfile().getProfileCount().getFollowerCount());
+    userDetailsResponse.setFollowingCount(user.getProfile().getProfileCount().getFollowingCount());
+    return userDetailsResponse;
+  }
 
 }

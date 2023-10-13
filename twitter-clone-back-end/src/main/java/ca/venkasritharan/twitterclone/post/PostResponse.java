@@ -19,5 +19,7 @@ public class PostResponse extends MessageAndCodeResponse {
   private String text;
   private String createdAt;
   private List<String> media;
+  private Long likes;
   private UserDetailsResponse userDetails;
+
 }

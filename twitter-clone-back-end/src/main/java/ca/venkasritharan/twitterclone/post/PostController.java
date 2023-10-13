@@ -39,4 +39,9 @@ public class PostController {
     return postService.getAllPosts();
   }
 
+  @PostMapping("/like/{postId}")
+  public ResponseEntity<?> likePost(@PathVariable Long postId) {
+    return postService.likePost(postId);
+  }
+
 }

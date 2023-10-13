@@ -3,6 +3,7 @@ package ca.venkasritharan.twitterclone.entity.user;
 
 import ca.venkasritharan.twitterclone.entity.authentication.Role;
 import ca.venkasritharan.twitterclone.post.Post;
+import ca.venkasritharan.twitterclone.post.postinteractions.PostLike;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -39,6 +40,9 @@ public class User {
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private Set<Post> posts;
+
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private Set<PostLike> likedPosts = new HashSet<>();
 
 
 
