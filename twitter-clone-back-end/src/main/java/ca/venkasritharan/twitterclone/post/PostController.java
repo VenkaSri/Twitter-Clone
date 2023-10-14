@@ -44,4 +44,10 @@ public class PostController {
     return postService.likePost(postId);
   }
 
+
+  @PostMapping("/unlike/{postId}")
+  public ResponseEntity<?> unlikePost(@PathVariable Long postId) {
+    return postService.unlikePost(postId);
+  }
+
 }

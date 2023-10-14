@@ -12,5 +12,7 @@ public interface UserService {
 
   ResponseEntity<?> getUserById(Long userId);
 
+  UserDetailsResponse getUserDetails();
+
 
 }

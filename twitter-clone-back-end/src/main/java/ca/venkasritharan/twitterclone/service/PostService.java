@@ -5,6 +5,7 @@ import ca.venkasritharan.twitterclone.exception.ResourceNotFoundException;
 import ca.venkasritharan.twitterclone.post.Post;
 import ca.venkasritharan.twitterclone.post.PostRepository;
 import ca.venkasritharan.twitterclone.post.PostResponse;
+import ca.venkasritharan.twitterclone.post.postinteractions.LikedPostResponse;
 import ca.venkasritharan.twitterclone.post.postinteractions.PostLike;
 import ca.venkasritharan.twitterclone.post.postinteractions.PostLikesRepository;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
@@ -196,7 +197,43 @@ public class PostService {
     return ResponseEntity.ok("ok");
   }
 
+  @Transactional
+  public ResponseEntity<?> unlikePost(long postId) {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    Optional<User> user = userRepository.findByUsername(authentication.getName());
+    Post post = postRepository.findPostByPostId(postId).orElseThrow(() -> new ResourceNotFoundException(postId));
 
+
+    PostLike postLike = new PostLike();
+
+    if (user.isPresent()) {
+      postLike = postLikesRepository.findPostLikeByUser_Id(user.get().getId());
+      postLikesRepository.delete(postLike);
+    }
+
+    return ResponseEntity.ok("ok");
+  }
+
+
+  public ResponseEntity<?> getAllLikedPosts () {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    Optional<User> user = userRepository.findByUsername(authentication.getName());
+      List<PostLike> postLikes = new ArrayList<>();
+    if (user.isPresent()) {
+      postLikes = postLikesRepository.findByUser_Id(user.get().getId());
+    }
+
+    return ResponseEntity.ok(createP(postLikes));
+  }
+
+  public List<Long> createP(List<PostLike> postLikes) {
+    List<Long> likedPostResponse = new ArrayList<>();
+    for (PostLike post: postLikes) {
+      likedPostResponse.add(post.getPost().getPostId());
+    }
+
+    return likedPostResponse;
+  }
 
 
 

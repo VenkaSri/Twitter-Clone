@@ -2,8 +2,8 @@ package ca.venkasritharan.twitterclone.service.user;
 
 import ca.venkasritharan.twitterclone.entity.user.Follower;
 import ca.venkasritharan.twitterclone.entity.user.User;
-import ca.venkasritharan.twitterclone.post.Post;
-import ca.venkasritharan.twitterclone.post.PostResponse;
+import ca.venkasritharan.twitterclone.post.postinteractions.PostLike;
+import ca.venkasritharan.twitterclone.post.postinteractions.PostLikesRepository;
 import ca.venkasritharan.twitterclone.repository.FollowerRepository;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
@@ -14,22 +14,22 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepository;
   private final FollowerRepository followerRepository;
+  private final PostLikesRepository postLikesRepository;
   private final ModelMapper mapper;
 
-  public UserServiceImpl(UserRepository userRepository, FollowerRepository followerRepository, ModelMapper mapper) {
+  public UserServiceImpl(UserRepository userRepository, FollowerRepository followerRepository, PostLikesRepository postLikesRepository, ModelMapper mapper) {
     this.userRepository = userRepository;
     this.followerRepository = followerRepository;
+    this.postLikesRepository = postLikesRepository;
     this.mapper = mapper;
   }
 
@@ -82,6 +82,7 @@ public class UserServiceImpl implements UserService {
 
   private UserDetailsResponse createResponse(User user) {
     UserDetailsResponse userDetailsResponse = new UserDetailsResponse();
+    List<Long> postIds = new ArrayList<>();
     userDetailsResponse.setUsername(user.getUsername());
     userDetailsResponse.setId(user.getId());
     userDetailsResponse.setName(user.getProfile().getName());
@@ -89,7 +90,42 @@ public class UserServiceImpl implements UserService {
     userDetailsResponse.setBio(user.getProfile().getBio());
     userDetailsResponse.setFollowerCount(user.getProfile().getProfileCount().getFollowerCount());
     userDetailsResponse.setFollowingCount(user.getProfile().getProfileCount().getFollowingCount());
+    for (PostLike post: user.getLikedPosts()) {
+      postIds.add(post.getPost().getPostId());
+    }
+    userDetailsResponse.setLikedPostsIds(postIds);
     return userDetailsResponse;
   }
 
+  @Override
+  public UserDetailsResponse getUserDetails() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    Optional<User> user = userRepository.findByUsername(authentication.getName());
+    UserDetailsResponse userDetailsResponse = new UserDetailsResponse();
+    if (user.isPresent()) {
+      userDetailsResponse = createResponse(user.get());
+    }
+    return userDetailsResponse;
+  }
+
+  public ResponseEntity<?> getAllLikedPosts () {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    Optional<User> user = userRepository.findByUsername(authentication.getName());
+    List<PostLike> postLikes = new ArrayList<>();
+    if (user.isPresent()) {
+      postLikes = postLikesRepository.findByUser_Id(user.get().getId());
+    }
+
+    return ResponseEntity.ok(createP(postLikes));
+  }
+
+  public List<Long> createP(List<PostLike> postLikes) {
+    List<Long> likedPostResponse = new ArrayList<>();
+    for (PostLike post: postLikes) {
+      likedPostResponse.add(post.getPost().getPostId());
+    }
+
+    return likedPostResponse;
+  }
 }
