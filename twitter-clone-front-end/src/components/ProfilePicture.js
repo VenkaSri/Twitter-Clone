@@ -12,21 +12,20 @@ const ProfilePicture = ({ size = 44, isPrincipleUser, userId }) => {
   const {
     data: user,
     isLoading: userLoading,
-    isSuccess: userIsSuccess, // Alias the isSuccess property for the first query
+    isSuccess: userIsSuccess,
     isError: userError,
   } = useGetUserByIDQuery(userId);
 
   const {
     data: principleUserDetails,
     isLoading: principleUserDetailsLoading,
-    isSuccess: principleUserDetailsIsSuccess, // Alias the isSuccess property for the second query
+    isSuccess: principleUserDetailsIsSuccess,
   } = useGetPrincipleUserDetailsQuery();
 
   useEffect(() => {
     const fetchImage = async (url) => {
       try {
         const response = await fetch(url, {
-          // Specify empty headers to avoid adding any Cache-Control headers.
           headers: {},
         });
         if (response.ok) {
@@ -41,11 +40,15 @@ const ProfilePicture = ({ size = 44, isPrincipleUser, userId }) => {
 
     if (isPrincipleUser) {
       if (principleUserDetailsIsSuccess) {
-        console.log(principleUserDetails);
         fetchImage(principleUserDetails.profile_image_url);
       }
+    } else {
+      if (userIsSuccess) {
+        console.log(user);
+        fetchImage(user.profile_image_url);
+      }
     }
-  }, [principleUserDetailsIsSuccess]);
+  }, [principleUserDetailsIsSuccess, userIsSuccess]);
 
   const profilePicStyle = {
     width: size,

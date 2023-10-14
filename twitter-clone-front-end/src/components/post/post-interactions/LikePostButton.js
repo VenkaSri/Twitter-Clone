@@ -24,27 +24,29 @@ export const LikePostButton = ({ postId }) => {
 
   return (
     <>
-      <div
-        className={"flex  flex-1 group items-center"}
-        onClick={() => handleLikePost(postId)}
-      >
-        <RoundedIconButton
-          className={clsx(
-            "w-[34.5px] h-[34.5px] centered-column-container rounded-full hover:bg-[#f91881]/[0.1] hover:fill-[#f91881] -ml-[8px] group-hover:bg-[#f91881]/[0.1] group-hover:fill-[#f91881]",
-            { "fill-[#f91881]": isActive }
-          )}
-          icon={buttonIcon}
-        />
-        {likes && (
-          <span
+      <div className={"flex grow"}>
+        <div
+          className="flex group items-center"
+          onClick={() => handleLikePost(postId)}
+        >
+          <RoundedIconButton
             className={clsx(
-              "pl-0.5 text-[13px] font-cReg group-hover:text-[red]",
-              { "text-[#f91881]": isActive }
+              "w-[34.5px] h-[34.5px] centered-column-container rounded-full hover:bg-[#f91881]/[0.1] hover:fill-[#f91881] -ml-[8px] group-hover:bg-[#f91881]/[0.1] group-hover:fill-[#f91881]",
+              { "fill-[#f91881]": isActive }
             )}
-          >
-            {data.likes}
-          </span>
-        )}
+            icon={buttonIcon}
+          />
+          {likes && (
+            <span
+              className={clsx(
+                "pl-0.5 text-[13px] font-cReg group-hover:text-[red]",
+                { "text-[#f91881]": isActive }
+              )}
+            >
+              {data.likes}
+            </span>
+          )}
+        </div>
       </div>
     </>
   );

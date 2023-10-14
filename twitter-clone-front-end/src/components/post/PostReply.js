@@ -50,7 +50,7 @@ export const PostReply = ({ postInfo }) => {
         )}
         <div className="min-h-[12px] px-4 flex">
           <div className="pt-3 mr-3 flex-col-container basis-10">
-            <ProfilePicture />
+            <ProfilePicture isPrincipleUser />
           </div>
           <div className="flex-col-container grow pt-1">
             <div className="flex">

@@ -7,6 +7,8 @@ export const UserProfile = ({ userData, isAuthUser }) => {
   const [userName, setUserName] = useState("");
   const [userUsername, setUserUsername] = useState("");
 
+  console.log(userData);
+
   useEffect(() => {
     if (isAuthUser) {
       if (isSuccess) {

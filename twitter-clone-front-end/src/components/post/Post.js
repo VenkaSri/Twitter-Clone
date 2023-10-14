@@ -21,6 +21,8 @@ import RoundedButton from "../RoundedButton";
 import { RoundedIconButton } from "../RoundedIconButton";
 import TweetSection from "../main/maincolumn/TweetSection";
 import { PostReply } from "./PostReply";
+import { useParams } from "react-router-dom";
+import { useGetPostByIDQuery } from "../../services/post/postApi";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -29,13 +31,7 @@ const PostText = ({ text }) => {
   return (
     <div className="mt-3 flex grow">
       <div className="flex leading-6 text-[17px] font-cReg ">
-        <span>
-          orem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
-          Suspendisse lectus tortor, dignissim sit amet, adipiscing nec,
-          ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula
-          massa, varius a, semper congue, euismod non, mi.
-          adffasdfsadffddsafdfas
-        </span>
+        <span>{text}</span>
       </div>
     </div>
   );
@@ -120,17 +116,17 @@ export const Post = ({ postData }) => {
         <div className=" flex grow ">
           <div className=" max-w-full flex  grow items-center">
             <div className="w-[40px]">
-              <ProfilePicture />
+              <ProfilePicture userId={postData.userDetails.id} />
             </div>
             <div className="flex-col-container overflow-hidden shrink-1 tablet:block hidden">
-              <UserProfile />
+              <UserProfile userData={postData.userDetails} />
             </div>
             <div className="ml-auto self-start ">
               <MoreButton />
             </div>
           </div>
         </div>
-        <PostText text={postData.Text} />
+        <PostText text={postData.text} />
         <PostMedia media={postData.media} />
         <PostCreationInfo datetime={postData.createdAt} />
         <PostEngagementButton />

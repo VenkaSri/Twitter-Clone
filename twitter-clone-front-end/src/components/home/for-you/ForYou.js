@@ -1,24 +1,26 @@
-import React, { useEffect, useState } from "react";
 import ProfilePicture from "../../ProfilePicture";
-import { UserProfile } from "../../UserProfile";
+
 import { MoreButton } from "../../MoreButton";
 import { PostMedia } from "../../post/post-media/PostMedia";
 import { useGetAllPostsQuery } from "../../../services/post/postApi";
 import { PostText } from "../../post/PostText";
-import { PostActions } from "../../post/PostActions";
+
 import { TimelineUserInfo } from "../TimelineUserInfo";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import RelativeTime from "dayjs/plugin/relativeTime";
 import updateLocale from "dayjs/plugin/updateLocale";
-import { RoundedIconButton } from "../../RoundedIconButton";
-import { Reply } from "../../icons/icons";
-import clsx from "clsx";
+
 import { LikePostButton } from "../../post/post-interactions/LikePostButton";
-import { CustomSpinner } from "../../../components/CustomSpinner";
-import { Avatar, Skeleton, Typography } from "@mui/material";
+
 import { PostSkeleton } from "../PostSkeleton";
+import { ReplyPostButton } from "../../post/post-interactions/ReplyPostButton";
+import { RepostPostButton } from "../../post/post-interactions/RepostPostButton";
+import { BookmarkPostButton } from "../../post/post-interactions/BookmarkPostButton";
+import { AnalyticsPostButton } from "../../post/post-interactions/AnalyticsPostButton";
+import { SharePostButton } from "../../post/post-interactions/SharePostButton";
+import { Link, useNavigate } from "react-router-dom";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -31,9 +33,9 @@ dayjs.updateLocale("en", {
     future: "in %s",
     past: "%s ",
     s: "%ds",
-    m: "a minute",
+    m: "1m",
     mm: "%dm",
-    h: "%dh",
+    h: "1h",
     hh: "%dh",
     d: "a day",
     dd: "%d",
@@ -46,14 +48,19 @@ dayjs.updateLocale("en", {
 
 export const ForYou = () => {
   const { data: posts, isError, isSuccess, isLoading } = useGetAllPostsQuery();
-
+  const navigate = useNavigate();
   let divs = null;
 
   if (isSuccess) {
     divs = posts.map((post) => {
       return (
         <div key={post.id}>
-          <div className="cursor-pointer">
+          <div
+            onClick={() =>
+              navigate(`/${post.userDetails.username}/status/${post.postId}`)
+            }
+            className="cursor-pointer hover:bg-black/[0.03]"
+          >
             <article className="flex-col-container px-4">
               <div className="flex-col-container flex grow ">
                 <div className="flex grow pt-4"></div>
@@ -78,8 +85,12 @@ export const ForYou = () => {
                     <PostText text={post.text} />
                     <PostMedia media={post.media} />
                     <div className="flex grow mt-3">
-                      {/* <PostActions postId={post.postId} /> */}
+                      <ReplyPostButton postId={post.postId} />
+                      <RepostPostButton postId={post.postId} />
                       <LikePostButton postId={post.postId} />
+                      <BookmarkPostButton postId={post.postId} />
+                      <AnalyticsPostButton postId={post.postId} />
+                      <SharePostButton />
                     </div>
                   </div>
                 </div>

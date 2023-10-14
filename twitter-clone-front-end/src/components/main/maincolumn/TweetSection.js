@@ -109,7 +109,7 @@ const TweetSection = () => {
         )}
         <div className="flex max-w-full grow">
           <div className="pt-[12px] mr-[12px] flex basis-auto">
-            <ProfilePicture source={photoSRC} size={44} />
+            <ProfilePicture size={44} isPrincipleUser />
           </div>
           <div className="pt-1 flex flex-col  w-full max-w-full  basis-auto ">
             <div className="pt-1 flex flex-col  z-[1] relative">
