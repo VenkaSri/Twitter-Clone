@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import Sidebar from "../header/Sidebar";
-import { BottomBar } from "../layers/bottombar/BottomBar";
 import { Outlet } from "react-router-dom";
-import { SideColumn } from "../main/SideColumn";
+import { BottomBar } from "../layers/bottombar/BottomBar";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useGetAllPostsQuery } from "../../services/post/postApi";
 import { loadingSliceActions } from "../../state/loading/loadingSlice";
 import App from "../../App";
 import { AppProgess } from "../AppProgess";
 import { useGetPrincipleUserDetailsQuery } from "../../services/user/userApi";
+import { SideColumn } from "../main/sideColumn/SideColumn";
 export const MainLayout = (props) => {
   const { isLoading, data, isSuccess } = useGetPrincipleUserDetailsQuery();
   const dispatch = useDispatch();

@@ -4,6 +4,7 @@ import {
   COMMENT,
   LIKE,
   LIKE_FILLED,
+  MAGNIFY,
   REPOST,
   SHARE,
   X_LOGO,
@@ -35,4 +36,8 @@ export const Share = ({ className }) => (
 
 export const X = ({ className }) => (
   <SVGIcon path={X_LOGO} className={className} />
+);
+
+export const Search = ({ className }) => (
+  <SVGIcon path={MAGNIFY} className={className} />
 );
