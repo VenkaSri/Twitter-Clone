@@ -5,6 +5,8 @@ import { TwitterClone } from "./TwitterClone";
 import { Snackbar } from "./components/modal/Snackbar";
 import { useSelector } from "react-redux";
 import { TweetSectionProvider } from "./context/TweetSectionCtx";
+import { AppProgess } from "./components/AppProgess";
+import { AppInitializer } from "./AppInitializer";
 
 function App() {
   const { isError, errorMessage } = useSelector(
@@ -13,11 +15,7 @@ function App() {
 
   return (
     <>
-      <TweetSectionProvider>
-        {isError && <Snackbar message={errorMessage} />}
-        <TwitterClone />
-        <Routes />
-      </TweetSectionProvider>
+      <AppInitializer />
     </>
   );
 }

@@ -15,6 +15,10 @@ import updateLocale from "dayjs/plugin/updateLocale";
 import { RoundedIconButton } from "../../RoundedIconButton";
 import { Reply } from "../../icons/icons";
 import clsx from "clsx";
+import { LikePostButton } from "../../post/post-interactions/LikePostButton";
+import { CustomSpinner } from "../../../components/CustomSpinner";
+import { Avatar, Skeleton, Typography } from "@mui/material";
+import { PostSkeleton } from "../PostSkeleton";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -41,8 +45,8 @@ dayjs.updateLocale("en", {
 });
 
 export const ForYou = () => {
-  const { data: posts, isLoading, isError, isSuccess } = useGetAllPostsQuery();
-  const [allPosts, setAllPosts] = useState(null);
+  const { data: posts, isError, isSuccess, isLoading } = useGetAllPostsQuery();
+
   let divs = null;
 
   if (isSuccess) {
@@ -74,7 +78,8 @@ export const ForYou = () => {
                     <PostText text={post.text} />
                     <PostMedia media={post.media} />
                     <div className="flex grow mt-3">
-                      <PostActions postId={post.postId} />
+                      {/* <PostActions postId={post.postId} /> */}
+                      <LikePostButton postId={post.postId} />
                     </div>
                   </div>
                 </div>
@@ -87,6 +92,16 @@ export const ForYou = () => {
         </div>
       );
     });
+  }
+
+  if (isLoading) {
+    return (divs = (
+      <>
+        {Array.from({ length: 5 }, (_, index) => (
+          <PostSkeleton key={index} />
+        ))}
+      </>
+    ));
   }
 
   return <>{divs}</>;

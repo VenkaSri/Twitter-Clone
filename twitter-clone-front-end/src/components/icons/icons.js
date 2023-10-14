@@ -6,6 +6,7 @@ import {
   LIKE_FILLED,
   REPOST,
   SHARE,
+  X_LOGO,
 } from "../../utils/constants/iconPaths";
 import SVGIcon from "./SVGIcon";
 
@@ -30,4 +31,8 @@ export const Bookmark = ({ className }) => (
 );
 export const Share = ({ className }) => (
   <SVGIcon path={SHARE} className={className} />
+);
+
+export const X = ({ className }) => (
+  <SVGIcon path={X_LOGO} className={className} />
 );

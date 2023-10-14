@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useSession } from "../hooks/useSession";
+
+import { useGetPrincipleUserDetailsQuery } from "../services/user/userApi";
 
 export const UserProfile = ({ userData, isAuthUser }) => {
-  const { username, name, email } = useSession();
+  const { data, isSuccess } = useGetPrincipleUserDetailsQuery();
   const [userName, setUserName] = useState("");
   const [userUsername, setUserUsername] = useState("");
 
   useEffect(() => {
     if (isAuthUser) {
-      setUserName(name);
-      setUserUsername(username);
+      if (isSuccess) {
+        setUserName(data.name);
+        setUserUsername(data.username);
+      }
     } else {
       setUserName(userData.name);
       setUserUsername(userData.username);
     }
-  }, []);
+  }, [isSuccess]);
 
   return (
-    <div className="flex-col-container grow overflow-hidden ">
+    <div className="flex-col-container grow overflow-hidden  px-[15px]">
       <div className="text-black dark:text-white break-words whitespace-nowrap text-ellipsis overflow-hidden font-cBold leading-5">
         <span>{userName}</span>
       </div>

@@ -7,10 +7,13 @@ export const userApi = createApi({
     credentials: "include",
   }),
   endpoints: (builder) => ({
+    getPrincipleUserDetails: builder.query({
+      query: () => "",
+    }),
     getUserByID: builder.query({
       query: (id) => `${id}`,
     }),
   }),
 });
 
-export const { useGetUserByIDQuery } = userApi;
+export const { useGetUserByIDQuery, useGetPrincipleUserDetailsQuery } = userApi;

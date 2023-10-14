@@ -7,7 +7,7 @@ import { useTheme } from "../../../../hooks/useTheme";
 
 const DOBSelectField = (props) => {
   const [isFocused, setIsFocused] = useState(false);
-  const darkMode = useTheme();
+  const { darkMode } = useTheme();
 
   return (
     <FormControl
