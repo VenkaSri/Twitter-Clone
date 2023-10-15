@@ -13,6 +13,7 @@ import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
 import org.apache.commons.io.IOUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -162,7 +163,7 @@ public class PostService {
   }
 
   public List<PostResponse> getAllPosts() {
-    List<Post> posts = postRepository.findAll();
+    List<Post> posts = postRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
     List<PostResponse> postResponses = new ArrayList<>();
     for (Post post: posts) {
       postResponses.add(createResponse(post));
