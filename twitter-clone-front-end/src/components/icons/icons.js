@@ -5,6 +5,7 @@ import {
   LIKE,
   LIKE_FILLED,
   MAGNIFY,
+  QUILL,
   REPOST,
   SHARE,
   X_LOGO,
@@ -40,4 +41,8 @@ export const X = ({ className }) => (
 
 export const Search = ({ className }) => (
   <SVGIcon path={MAGNIFY} className={className} />
+);
+
+export const Quill = ({ className }) => (
+  <SVGIcon path={QUILL} className={className} />
 );

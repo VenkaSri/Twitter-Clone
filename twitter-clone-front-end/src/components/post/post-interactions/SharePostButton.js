@@ -12,14 +12,13 @@ export const SharePostButton = ({ postId }) => {
   const [buttonIcon, setButtonIcon] = useState(null);
 
   const [isActive, setIsActive] = useState(false);
-  const handleLikePost = (id) => {
-    console.log(id);
-    console.log("hi");
+  const handleLikePost = (id, e) => {
+    e.stopPropagation();
   };
 
   return (
     <>
-      <div className={"flex  "} onClick={() => handleLikePost(postId)}>
+      <div className={"flex  "} onClick={(e) => handleLikePost(postId, e)}>
         <RoundedIconButton
           className={clsx(
             "w-[34.5px] h-[34.5px] centered-column-container rounded-full hover:bg-[#1d9cf0]/[0.1] hover:fill-[var(--primary-color)] -ml-[8px] opacity-40"

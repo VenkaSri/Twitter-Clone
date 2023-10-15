@@ -27,7 +27,7 @@ export const LikePostButton = ({ postId }) => {
       <div className={"flex grow"}>
         <div
           className="flex group items-center"
-          onClick={() => handleLikePost(postId)}
+          onClick={(e) => handleLikePost(postId, e)}
         >
           <RoundedIconButton
             className={clsx(

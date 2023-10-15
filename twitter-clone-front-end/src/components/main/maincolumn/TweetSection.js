@@ -144,7 +144,10 @@ const TweetSection = () => {
                 className="flex max-h-[720px] grow relative min-h-[48px]"
                 ref={parentRef}
               >
-                <PostEditor onHeightChange={setChildHeight} />
+                <PostEditor
+                  onHeightChange={setChildHeight}
+                  placeholder={"What's happening?!"}
+                />
               </div>
               <div
                 className={clsx({ "mt-4": isInputActive && paths.length > 0 })}

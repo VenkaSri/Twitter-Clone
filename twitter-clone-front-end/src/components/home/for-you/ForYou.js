@@ -127,7 +127,7 @@ const PostCreationInfo = ({ datetime }) => {
 
   let displayTime;
 
-  if (differenceInDays <= 1) {
+  if (differenceInDays < 1) {
     displayTime = localDateTime.fromNow();
   } else {
     if (localDateTime.year() === currentYear) {

@@ -3,8 +3,8 @@ import { useSession } from "../../../hooks/useSession";
 import ProfilePicture from "../../ProfilePicture";
 import { DialogHeaderLogo } from "../../dialog/signup/header/DialogHeaderLogo";
 import getIcon from "../../../utils/icons/iconsutil";
-import { Tab, Tabs } from "@mui/material";
-import TwitterTabs from "../tabs/Tabs";
+
+import { TabButton } from "../../TabButton";
 
 export const TopNav = () => {
   const [selectedTab, setSelectedTab] = useState("For you");
@@ -37,7 +37,19 @@ export const TopNav = () => {
         </div>
       </div>
       <div className="mainColumn--topNav-links">
-        <TwitterTabs />
+        <nav className="w-full h-14 flex">
+          <TabButton
+            text={"For you"}
+            isSelected={selectedTab === "For you"}
+            onClick={handleClick}
+          />
+          <TabButton
+            text={"Following"}
+            isSelected={selectedTab === "Following"}
+            onClick={handleClick}
+            disabled
+          />
+        </nav>
       </div>
     </>
   );

@@ -12,7 +12,8 @@ export const usePostInteraction = (postId) => {
   const [buttonIcon, setButtonIcon] = useState(null);
 
   const [isActive, setIsActive] = useState(false);
-  const handleLikePost = (id) => {
+  const handleLikePost = (id, e) => {
+    e.stopPropagation();
     setIsActive(!isActive);
     likePost(id);
   };
