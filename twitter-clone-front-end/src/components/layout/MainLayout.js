@@ -18,15 +18,8 @@ export const MainLayout = (props) => {
   );
 
   useEffect(() => {
-    console.log("hello");
-    if (isSuccess) {
-      console.log("called");
-      console.log(data);
-    }
     dispatch(loadingSliceActions.setFetchedPrincipleUserDetails(true));
   }, [data, isSuccess]);
-
-  console.log(fetchedPrincipleUserDetails);
 
   return (
     <>

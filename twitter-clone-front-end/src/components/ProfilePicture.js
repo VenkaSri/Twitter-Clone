@@ -33,9 +33,7 @@ const ProfilePicture = ({ size = 44, isPrincipleUser, userId }) => {
           const imageUrl = URL.createObjectURL(blob);
           setCachedImage(imageUrl);
         }
-      } catch (error) {
-        console.error("Error fetching image:", error);
-      }
+      } catch (error) {}
     };
 
     if (isPrincipleUser) {
@@ -44,7 +42,6 @@ const ProfilePicture = ({ size = 44, isPrincipleUser, userId }) => {
       }
     } else {
       if (userIsSuccess) {
-        console.log(user);
         fetchImage(user.profile_image_url);
       }
     }
@@ -63,8 +60,6 @@ const ProfilePicture = ({ size = 44, isPrincipleUser, userId }) => {
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
-
-  console.log(cachedImage);
 
   return (
     <div style={profilePicStyle} className="place-items-center grid ">

@@ -13,15 +13,11 @@ export const usePostInteraction = (postId) => {
 
   const [isActive, setIsActive] = useState(false);
   const handleLikePost = (id) => {
-    console.log(id);
-    console.log("hi");
     setIsActive(!isActive);
     likePost(id);
   };
 
   useEffect(() => {
-    console.log(likedPosts);
-    console.log(postId);
     if (likedPosts.includes(postId)) {
       setIsActive(true);
     }

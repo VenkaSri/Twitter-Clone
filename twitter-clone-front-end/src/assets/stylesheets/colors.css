@@ -15,3 +15,15 @@
 #ff7b00
 #00ba7c
 */
+
+.indicator {
+  background-color: #1e9bf0;
+  height: 4px;
+  width: 40px;
+}
+/* 
+.indicator > span {
+  max-width: 40px;
+  width: 100%;
+  background-color: white;
+} */

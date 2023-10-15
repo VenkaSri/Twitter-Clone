@@ -3,6 +3,8 @@ import { useSession } from "../../../hooks/useSession";
 import ProfilePicture from "../../ProfilePicture";
 import { DialogHeaderLogo } from "../../dialog/signup/header/DialogHeaderLogo";
 import getIcon from "../../../utils/icons/iconsutil";
+import { Tab, Tabs } from "@mui/material";
+import TwitterTabs from "../tabs/Tabs";
 
 export const TopNav = () => {
   const [selectedTab, setSelectedTab] = useState("For you");
@@ -35,36 +37,7 @@ export const TopNav = () => {
         </div>
       </div>
       <div className="mainColumn--topNav-links">
-        <nav className="w-full h-14 flex">
-          <div
-            className="mainColumn--topNav-link"
-            data-tab-type="For you"
-            onClick={handleClick}
-          >
-            <div className=" flex-col-container grow">
-              <div className="flex grow justify-center items-center font-cBold">
-                For you
-              </div>
-              {selectedTab === "For you" && (
-                <div className="bg-[var(--primary-color)]  h-1 rounded-full"></div>
-              )}
-            </div>
-          </div>
-          <div
-            className="mainColumn--topNav-link"
-            data-tab-type="Following"
-            onClick={handleClick}
-          >
-            <div className=" flex-col-container grow">
-              <div className="flex grow justify-center items-center  font-medium font-cMed">
-                Following
-              </div>
-              {selectedTab === "Following" && (
-                <div className="bg-[var(--primary-color)]  h-1 rounded-full"></div>
-              )}
-            </div>
-          </div>
-        </nav>
+        <TwitterTabs />
       </div>
     </>
   );
