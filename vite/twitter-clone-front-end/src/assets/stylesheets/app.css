@@ -1,0 +1,18 @@
+@layer base {
+  html {
+    @apply text-15 font-chirp;
+  }
+
+  body {
+    @apply m-0 bg-white;
+  }
+
+  html,
+  body {
+    @apply h-full;
+  }
+}
+
+.textSpan {
+  @apply max-w-full overflow-hidden text-ellipsis whitespace-nowrap;
+}

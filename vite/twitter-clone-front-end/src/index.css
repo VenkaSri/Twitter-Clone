@@ -1,3 +1,68 @@
+@import "./assets/stylesheets/buttons.css";
+@import "./assets/stylesheets/app.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "chirp";
+  src: url("./assets/fonts/chirp_regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "chirpHeavy";
+  src: url("./assets/fonts/cheavy.woff2") format("opentype");
+}
+
+@font-face {
+  font-family: TwitterChirp;
+  src: url(https://abs.twimg.com/responsive-web/client-web/Chirp-Light.3a18e64a.woff2)
+      format("woff2"),
+    url(https://abs.twimg.com/responsive-web/client-web/Chirp-Light.7a5673aa.woff)
+      format("woff");
+  font-weight: 300;
+  font-style: "normal";
+  font-display: "swap";
+}
+@font-face {
+  font-family: TwitterChirp;
+  src: url(https://abs.twimg.com/responsive-web/client-web/Chirp-Regular.80fda27a.woff2)
+      format("woff2"),
+    url(https://abs.twimg.com/responsive-web/client-web/Chirp-Regular.60b215ba.woff)
+      format("woff");
+  font-weight: 400;
+  font-style: "normal";
+  font-display: "swap";
+}
+@font-face {
+  font-family: TwitterChirp;
+  src: url(https://abs.twimg.com/responsive-web/client-web/Chirp-Medium.f8e2739a.woff2)
+      format("woff2"),
+    url(https://abs.twimg.com/responsive-web/client-web/Chirp-Medium.20fc288a.woff)
+      format("woff");
+  font-weight: 500;
+  font-style: "normal";
+  font-display: "swap";
+}
+@font-face {
+  font-family: cBold;
+  src: url("./assets/fonts/cbold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: "normal";
+  font-display: "swap";
+}
+
+@font-face {
+  font-family: cHeavy;
+  src: url("./assets/fonts/cheavy.woff2") format("woff2");
+  font-weight: 800;
+  font-style: "normal";
+  font-display: "swap";
+}
+
+/* testing */
+
+.br {
+  @apply border border-[red];
+}

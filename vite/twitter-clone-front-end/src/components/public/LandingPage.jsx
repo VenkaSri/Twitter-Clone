@@ -1,4 +1,10 @@
+import { Analytics } from "@components/icons/Icons";
+import SignUpOptions from "./SignUpOptions";
+
 export const LandingPage = () => {
+  // const windowWidth = useWindowWidth();
+
+  // const dispatch = useDispatch();
   // const handleUserLogin = () => {
   //   window.history.replaceState(
   //     null,
@@ -8,16 +14,18 @@ export const LandingPage = () => {
   // };
 
   return (
-    <div className="h-screen w-screen flex flex-col overflow-x-hidden dark:bg-black text-[red]">
+    <div className="h-screen w-screen flex flex-col overflow-x-hidden dark:bg-black">
       <div className="flex-grow flex ">
-        <div className={``}></div>
+        <div>
+          <Analytics className="w-[380px]" />
+        </div>
         <div className="flex-1  xs:p-4 flex flex-col justify-center">
           <div className="xs:p-[20px] flex flex-col min-w-[437px] max-w-[760px]">
-            <div className="flex-1 flex items-center block med:hidden h-[48px]"></div>
+            <div className="flex-1 flex items-center block med:hidden h-[48px]">
+              <Analytics className="w-[380px]" />
+            </div>
             <div className="my-12 flex  font-cHeavy leading-[84px] text-[64px] font-bold dark:text-[#fff] ">
-              <span className="m-0 p-0" data-testid="cypress-title">
-                Happening now
-              </span>
+              <span className="m-0 p-0">Happening now</span>
             </div>
 
             <div className="mb-8">
@@ -27,18 +35,21 @@ export const LandingPage = () => {
                 Join today.
               </span>
             </div>
-
+            <SignUpOptions />
             <div className="flex flex-col mt-10 gap-4">
               <span
                 className={`font-cMed text-[17px] leading-[20px] font-bold dark:text-[#fff]`}
               >
                 Already have an account?
               </span>
+              {/* <Button buttonProps={signInButton} onClick={handleUserLogin} /> */}
             </div>
           </div>
         </div>
       </div>
-      <div className="p-6"></div>
+      <div className="p-6">{/* <LandingFooter /> */}</div>
     </div>
   );
 };
+
+export default LandingPage;
