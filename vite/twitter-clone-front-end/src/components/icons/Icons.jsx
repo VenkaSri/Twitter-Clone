@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import {
   ANALYTICS,
   APPLE,
+  BACK,
   BOOKMARK,
+  CLOSE,
   COMMENT,
   LIKE,
   LIKE_FILLED,
@@ -54,6 +56,14 @@ export const Apple = ({ className }) => (
   <SVG path={APPLE} className={className} />
 );
 
+export const Back = ({ className }) => (
+  <SVG path={BACK} className={className} />
+);
+
+export const Close = ({ className }) => (
+  <SVG path={CLOSE} className={className} />
+);
+
 const iconPropTypes = {
   className: PropTypes.string,
 };
@@ -69,3 +79,5 @@ Quill.propTypes = iconPropTypes;
 Search.propTypes = iconPropTypes;
 Logo.propTypes = iconPropTypes;
 Apple.propTypes = iconPropTypes;
+Close.propTypes = iconPropTypes;
+Back.propTypes = iconPropTypes;

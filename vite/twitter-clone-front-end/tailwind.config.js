@@ -9,6 +9,7 @@ export default {
       chirp: ["chirp", "sans-serif"],
       cHeavy: ["cHeavy", "sans-serif"],
       cBold: ["cBold", "sans-serif"],
+      cR: ["chripR", "sans-serif"],
     },
     extend: {
       fontSize: {

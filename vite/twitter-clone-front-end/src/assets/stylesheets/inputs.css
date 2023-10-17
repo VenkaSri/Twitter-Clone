@@ -1,0 +1,9 @@
+@layer components {
+  .textfield-default {
+    @apply rounded-[4px] border border-[#cfd9de] dark:border-[#536471] text-[17px] text-primary;
+  }
+
+  .button--roundedText {
+    @apply rounded-full flex flex-col border px-4 max-w-[380px] min-w-[36px] min-h-[36px];
+  }
+}

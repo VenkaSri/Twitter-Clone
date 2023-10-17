@@ -3,6 +3,14 @@
     @apply border-black/0 bg-primary text-white hover:bg-[#1a8cd8];
   }
 
+  .btn--dialog-footer {
+    @apply bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30] text-white dark:text-black;
+  }
+
+  .footer--button {
+    @apply flex flex-col min-h-[52px] my-6 min-w-[52px] rounded-full text-[17px] items-center justify-center font-cBold;
+  }
+
   .button--roundedText {
     @apply rounded-full flex flex-col border px-4 max-w-[380px] min-w-[36px] min-h-[36px];
   }
