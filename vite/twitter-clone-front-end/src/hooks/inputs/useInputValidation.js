@@ -5,11 +5,11 @@ import validator from "validator";
 export const useInputValidation = () => {
   const { name, setName, email, setEmail, setDob, dob, setStepOneCompleted } =
     useContext(RegisterContext);
-
+  const [emailChecking, setEmailChecking] = useState(false);
   const [hasTyped, setHasTyped] = useState(false);
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
-  const [emailErrorMessage, setEmailErroMessage] = useState();
+  const [emailErrorMessage, setEmailErroMessage] = useState("");
 
   useEffect(() => {
     if (!validator.isEmpty(name)) setHasTyped(true);
@@ -26,32 +26,23 @@ export const useInputValidation = () => {
   }, [hasTyped, name]);
   const hasOnlySpaceCharacters = (text) => !/[^\s\\]/.test(text);
   useEffect(() => {
-    console.log(email);
+    if (hasOnlySpaceCharacters(email)) {
+      console.log("has only space");
+      return;
+    }
     const identifier = setTimeout(() => {
-      if (!validator.isEmpty(email) && !hasOnlySpaceCharacters(email)) {
-        if (validator.isEmail(email.trim())) {
-          const checkEmail = async () => {
-            const result = await checkIfEmailIsAvailable(email.trim());
-            if (result) {
-              setEmailError(false);
-            } else {
-              setEmailError(true);
-              setEmailErroMessage("Email has already been taken.");
-            }
-          };
-
-          // Call the inner async function
-          checkEmail();
-        } else {
-          setEmailError(true);
-          setEmailErroMessage("Please enter a valid email.");
-        }
+      setEmailChecking(false);
+      if (validator.isEmail(email.trim())) {
+        checkEmail(email.trim());
       } else {
-        setEmailError(false);
+        console.log("not email");
+        setEmailError(true);
+        setEmailErroMessage("Please enter a valid email.");
       }
     }, 500);
 
     return () => {
+      setEmailChecking(false);
       setEmailError(false);
       clearTimeout(identifier);
     };
@@ -62,8 +53,8 @@ export const useInputValidation = () => {
       !validator.isEmpty(name) &&
       /[^\s\\]/.test(name) &&
       !validator.isEmpty(email) &&
-      validator.isEmail(email.trim()) &&
-      emailError === false &&
+      emailChecking &&
+      !emailError &&
       dob.day !== "" &&
       dob.month !== "" &&
       dob.year !== ""
@@ -72,27 +63,34 @@ export const useInputValidation = () => {
     } else {
       setStepOneCompleted(false);
     }
-  }, [name, email, emailError, dob]);
+  }, [name, email, emailError, dob, emailChecking, setStepOneCompleted]);
 
-  const checkIfEmailIsAvailable = async (email) => {
-    try {
-      const res = await fetch(
-        `http://localhost:8080/api/auth/email_available?email=${email}`,
-        {
-          method: "GET",
-          credentials: "omit",
+  const checkEmail = (enteredEmail) => {
+    setTimeout(async () => {
+      try {
+        const result = await fetch(
+          `http://localhost:8080/api/auth/email_available?email=${enteredEmail}`,
+          {
+            method: "GET",
+            credentials: "omit",
+          }
+        );
+
+        if (result.ok) {
+          const response = await result.json();
+          if (response.emailAvailable) {
+            setEmailError(false);
+          } else {
+            setEmailError(true);
+            setEmailErroMessage(response.message);
+          }
         }
-      );
-
-      const response = await res.json();
-      if (response.emailAvailable) {
-        return true;
-      } else {
-        return false;
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setEmailChecking(true);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    }, 500);
   };
 
   const monthHandler = (e) => {
