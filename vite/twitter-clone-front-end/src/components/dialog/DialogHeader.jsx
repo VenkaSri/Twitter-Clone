@@ -1,25 +1,31 @@
-import { Close } from "@components/icons/Icons";
+import { Back, Close } from "@components/icons/Icons";
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useSignupConfig } from "../auth/signup/signupConfig";
+import clsx from "clsx";
 
 const DialogHeader = ({ step }) => {
-  const [icon, setIcon] = useState(null);
+  const { headerAction, goBackAStep } = useSignupConfig();
 
-  useEffect(() => {
-    if (step === 0) {
-      setIcon(<Close className="w-5" />);
-    }
-  }, [step]);
+  const headerActionIcon = {
+    close: <Close className="w-5" />,
+    back: <Back className="w-5" />,
+  }[headerAction];
 
   return (
     <>
       <div className="h-[53px] flex bg-[#fff] dark:bg-[#000] px-[16px]">
-        {<DialogHeaderIcon iconType={icon} />}
+        {
+          <DialogHeaderIcon
+            iconType={headerActionIcon}
+            onClick={goBackAStep}
+            step={step}
+          />
+        }
         <div
           className={`flex items-center sticky top-0  w-full justify-center align-center `}
         >
           <div className="flex h-full justify-center items-stretch flex-col font-cBold ">
-            Steps
+            Steps {step + 1} of 3
           </div>
           <div className="flex flex-grow h-full justify-center items-stretch flex-col basis-3/6"></div>
         </div>
@@ -34,13 +40,20 @@ DialogHeader.propTypes = {
   step: PropTypes.number,
 };
 
-const DialogHeaderIcon = ({ iconType }) => {
+const DialogHeaderIcon = ({ iconType, onClick, step }) => {
   return (
     <>
       <div
-        className={`min-w-[56px] min-h-[32px] self-stretch flex items-start justify-center flex-col `}
+        className={clsx(
+          `min-w-[56px] min-h-[32px] self-stretch flex items-start justify-center flex-col`,
+          { hidden: step === 2 }
+        )}
       >
-        <div className="min-w-[36px] min-h-[36px] rounded-full flex flex-col cursor-pointer items-center justify-center -ml-2 dark:fill-white dark:hover:bg-[#191919] hover:bg-[#E6E7E7]">
+        <div
+          onClick={onClick}
+          className="min-w-[36px] min-h-[36px] rounded-full flex flex-col cursor-pointer items-center justify-center -ml-2 
+        dark:fill-white dark:hover:bg-[#191919] hover:bg-[#E6E7E7]"
+        >
           {iconType}
         </div>
       </div>
@@ -50,4 +63,5 @@ const DialogHeaderIcon = ({ iconType }) => {
 
 DialogHeaderIcon.propTypes = {
   iconType: PropTypes.node,
+  onClick: PropTypes.func.isRequired,
 };

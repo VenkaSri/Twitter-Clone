@@ -6,4 +6,8 @@
   .button--roundedText {
     @apply rounded-full flex flex-col border px-4 max-w-[380px] min-w-[36px] min-h-[36px];
   }
+
+  .custom-class {
+    color: red;
+  }
 }

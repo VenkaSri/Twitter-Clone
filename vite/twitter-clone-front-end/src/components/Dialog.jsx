@@ -4,11 +4,12 @@ import DialogContent from "@mui/material/DialogContent";
 import PropTypes from "prop-types";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-import { StepOne } from "@components/auth/signup/StepOne";
 import { RegisterContext } from "@context/auth/register-context";
 import DialogHeader from "@components/dialog/DialogHeader";
 import { useContext } from "react";
 import DialogFooter from "@components/dialog/DialogFooter";
+import { useSignupConfig } from "@components/auth/signup/signupConfig";
+import DialogBody from "./dialog/body/DialogBody";
 
 const MuiDialog = () => {
   const isMobile = useMediaQuery("(max-width:702px)");
@@ -26,6 +27,7 @@ const MuiDialog = () => {
   };
 
   const { step } = useContext(RegisterContext);
+  const { goToNextStep } = useSignupConfig();
 
   return (
     <Dialog
@@ -47,8 +49,8 @@ const MuiDialog = () => {
           },
         }}
       >
-        <StepOne />
-        <DialogFooter step={step} />
+        <DialogBody step={step} />
+        <DialogFooter step={step} onClick={goToNextStep} />
       </DialogContent>
     </Dialog>
   );

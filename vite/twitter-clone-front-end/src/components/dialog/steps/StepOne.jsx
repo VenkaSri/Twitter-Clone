@@ -1,16 +1,18 @@
-import DialogBodyContainer from "@components/dialog/DialogBodyContainer";
-import PropTypes from "prop-types";
 import CustomTextField from "@/components/CustomTextField";
+import { RegisterContext } from "@/context/auth/register-context";
 import { useInputValidation } from "@/hooks/inputs/useInputValidation";
 import ErrorField from "@components/auth/ErrorField";
-import DOBInput from "./dob/DOBInput";
+import DOBInput from "@components/auth/signup/dob/DOBInput";
+import DialogContentHeading from "@components/dialog/body/DialogBodyHeading";
+import { useContext } from "react";
 
-export const StepOne = () => {
+const StepOne = () => {
   const { setName, nameError, setEmail, emailError, emailErrorMessage } =
     useInputValidation();
+  const { name, email, autoFocusField } = useContext(RegisterContext);
 
   return (
-    <DialogBodyContainer>
+    <>
       <DialogContentHeading text="Create your account" />
       <div className="flex-col-container py-3">
         <div className="flex flex-col grow ">
@@ -19,6 +21,8 @@ export const StepOne = () => {
             maxLength={50}
             onChange={setName}
             hasError={nameError}
+            defaultValue={name}
+            autoFocus={autoFocusField === "name"}
           />
           {nameError && <ErrorField errorMessage="What’s your name?" />}
         </div>
@@ -29,6 +33,8 @@ export const StepOne = () => {
             label="Email"
             onChange={setEmail}
             hasError={emailError}
+            defaultValue={email}
+            autoFocus={autoFocusField === "email"}
           />
           {emailError && <ErrorField errorMessage={emailErrorMessage} />}
         </div>
@@ -52,30 +58,8 @@ export const StepOne = () => {
           <DOBInput />
         </div>
       </div>
-    </DialogBodyContainer>
+    </>
   );
 };
 
-const DialogContentHeading = ({ text, subtext }) => {
-  return (
-    <div className="flex-col-container ">
-      <div className="flex-col-container my-5">
-        <h1 className="text-[31px] leading-8 font-cBold break-words inline dark:text-[#fff]">
-          <span>{text}</span>
-        </h1>
-        {subtext && (
-          <div className="flex-col-container mt-2">
-            <div className="text-[15px] leading-5 font-cReg break-words text-[#536471] dark:text-[#536471] ">
-              <span>{subtext}</span>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
-
-DialogContentHeading.propTypes = {
-  text: PropTypes.string,
-  subtext: PropTypes.string,
-};
+export default StepOne;

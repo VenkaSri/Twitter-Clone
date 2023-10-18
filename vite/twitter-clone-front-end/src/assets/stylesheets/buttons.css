@@ -1,9 +1,9 @@
 @layer components {
-  .btn-primary {
+  .btn--primary {
     @apply border-black/0 bg-primary text-white hover:bg-[#1a8cd8];
   }
 
-  .btn--dialog-footer {
+  .btn--next {
     @apply bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30] text-white dark:text-black;
   }
 

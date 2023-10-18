@@ -6,13 +6,16 @@ const RegisterContext = createContext();
 const RegisterProvider = ({ children }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [step, setStep] = useState(0);
+  const [password, setPassword] = useState("");
+  const [step, setStep] = useState(2);
+  const [stepOneCompleted, setStepOneCompleted] = useState(false);
+  const [autoFocusField, setAutoFocusField] = useState("");
   const [dob, setDob] = useState({
     year: "",
     month: "",
     day: "",
   });
-  const [stepOneCompleted, setStepOneCompleted] = useState(false);
+  const steps = [0, 1, 2, 3];
 
   const value = {
     name,
@@ -25,6 +28,11 @@ const RegisterProvider = ({ children }) => {
     setStep,
     stepOneCompleted,
     setStepOneCompleted,
+    steps,
+    autoFocusField,
+    setAutoFocusField,
+    setPassword,
+    password,
   };
 
   return (

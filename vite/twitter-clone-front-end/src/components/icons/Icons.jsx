@@ -5,6 +5,7 @@ import {
   APPLE,
   BACK,
   BOOKMARK,
+  CHECKMARK,
   CLOSE,
   COMMENT,
   LIKE,
@@ -13,6 +14,8 @@ import {
   QUILL,
   REPOST,
   SHARE,
+  VISIBILITY,
+  VISIBILITY_OFF,
   X_LOGO,
 } from "@/constants/icons";
 import SVG from "@components/icons/SVG";
@@ -64,6 +67,18 @@ export const Close = ({ className }) => (
   <SVG path={CLOSE} className={className} />
 );
 
+export const Checkmark = ({ className }) => (
+  <SVG path={CHECKMARK} className={className} />
+);
+
+export const Visibility = ({ className = "w-5" }) => (
+  <SVG path={VISIBILITY} className={className} />
+);
+
+export const VisibilityOff = ({ className = "w-5" }) => (
+  <SVG path={VISIBILITY_OFF} className={className} />
+);
+
 const iconPropTypes = {
   className: PropTypes.string,
 };
@@ -81,3 +96,6 @@ Logo.propTypes = iconPropTypes;
 Apple.propTypes = iconPropTypes;
 Close.propTypes = iconPropTypes;
 Back.propTypes = iconPropTypes;
+Checkmark.propTypes = iconPropTypes;
+Visibility.propTypes = iconPropTypes;
+VisibilityOff.propTypes = iconPropTypes;

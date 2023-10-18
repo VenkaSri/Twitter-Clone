@@ -3,7 +3,14 @@ import TextField from "@mui/material/TextField";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-const CustomTextField = ({ label, maxLength, onChange, hasError }) => {
+const CustomTextField = ({
+  label,
+  maxLength,
+  onChange,
+  hasError,
+  defaultValue = "",
+  autoFocus,
+}) => {
   const [isFocused, setIsFocused] = useState(false);
   const { borderColor, labelColor } = useErrorStyles(isFocused, hasError);
 
@@ -15,6 +22,7 @@ const CustomTextField = ({ label, maxLength, onChange, hasError }) => {
           {label}
         </span>
       }
+      defaultValue={defaultValue}
       type="text"
       inputProps={{ maxLength: maxLength }}
       variant="filled"
@@ -24,7 +32,7 @@ const CustomTextField = ({ label, maxLength, onChange, hasError }) => {
             color: "white",
           },
           fontSize: "17px",
-          fontFamily: "TwitterChirp",
+          fontFamily: "chirpR",
         },
       }}
       InputProps={{
@@ -39,6 +47,7 @@ const CustomTextField = ({ label, maxLength, onChange, hasError }) => {
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
       onChange={(e) => onChange(e.target.value)}
+      autoFocus={autoFocus}
     />
   );
 };
@@ -50,4 +59,6 @@ CustomTextField.propTypes = {
   maxLength: PropTypes.number,
   onChange: PropTypes.func,
   hasError: PropTypes.bool,
+  defaultValue: PropTypes.string,
+  autoFocus: PropTypes.bool,
 };

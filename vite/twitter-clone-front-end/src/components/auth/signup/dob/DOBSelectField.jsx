@@ -60,7 +60,7 @@ const DOBSelectField = (props) => {
         onChange={props.onChange}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        autoFocus={props.autoFocus === "Date of Birth"}
+        autoFocus={props.autoFocus}
       >
         <MenuItem value="" disabled></MenuItem>
         {props.field}
@@ -81,7 +81,7 @@ DOBSelectField.propTypes = {
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   field: PropTypes.node.isRequired,
   onChange: PropTypes.func.isRequired,
-  autoFocus: PropTypes.string,
+  autoFocus: PropTypes.bool,
 };
 
 const KeyboardArrowDownIcon = () => {

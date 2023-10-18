@@ -27,7 +27,6 @@ export const useInputValidation = () => {
   const hasOnlySpaceCharacters = (text) => !/[^\s\\]/.test(text);
   useEffect(() => {
     if (hasOnlySpaceCharacters(email)) {
-      console.log("has only space");
       return;
     }
     const identifier = setTimeout(() => {
@@ -35,7 +34,6 @@ export const useInputValidation = () => {
       if (validator.isEmail(email.trim())) {
         checkEmail(email.trim());
       } else {
-        console.log("not email");
         setEmailError(true);
         setEmailErroMessage("Please enter a valid email.");
       }
@@ -128,6 +126,3 @@ export const useInputValidation = () => {
     dayHandler,
   };
 };
-
-// &&
-//           checkIfEmailIsAvailable(email.trim())

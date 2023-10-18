@@ -5,6 +5,8 @@ import localeData from "dayjs/plugin/localeData";
 
 dayjs.extend(localeData);
 import { useInputValidation } from "@/hooks/inputs/useInputValidation";
+import { useContext } from "react";
+import { RegisterContext } from "@/context/auth/register-context";
 
 const months = dayjs.months().map((month) => (
   <MenuItem value={month} key={month}>
@@ -37,8 +39,8 @@ const years = yearArr.map((year) => (
 ));
 
 const DOBInput = () => {
-  const { monthHandler, dayHandler, yearHandler, dob, autoFocus } =
-    useInputValidation();
+  const { monthHandler, dayHandler, yearHandler, dob } = useInputValidation();
+  const { autoFocusField } = useContext(RegisterContext);
 
   return (
     <div className="flex my-4">
@@ -48,7 +50,7 @@ const DOBInput = () => {
         label="Month"
         onChange={monthHandler}
         defaultValue={dob.month}
-        autoFocus={autoFocus}
+        autoFocus={autoFocusField === "dob"}
       />
       <div className="h-[58px] flex grow">
         <DOBSelectField
