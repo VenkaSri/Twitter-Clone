@@ -2,14 +2,8 @@ import { RegisterContext } from "@/context/auth/register-context";
 import { useContext } from "react";
 import DialogContentHeading from "@components/dialog/body/DialogBodyHeading";
 import PropTypes from "prop-types";
-import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-import {
-  FilledInput,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-} from "@mui/material";
+import { FilledInput, FormControl, InputLabel } from "@mui/material";
 import { Checkmark } from "@/components/icons/Icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -22,7 +16,7 @@ const StepTwo = () => {
   const { goBackAStep } = useSignupConfig();
 
   const userDob = `${dob.month} ${dob.day}, ${dob.year}`;
-  const formattedDob = dayjs(userDob, "MMMM DD, YYYY").format("MMM DD, YYYY");
+  const formattedDob = dayjs(userDob).format("MMMM DD, YYYY");
 
   const handleClick = (field) => {
     goBackAStep();

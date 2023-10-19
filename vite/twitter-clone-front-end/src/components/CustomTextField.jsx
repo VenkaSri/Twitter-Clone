@@ -1,7 +1,8 @@
 import { useErrorStyles } from "@/hooks/inputs/useErrorStyles";
 import TextField from "@mui/material/TextField";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { RegisterContext } from "@/context/auth/register-context";
 
 const CustomTextField = ({
   label,
@@ -10,9 +11,12 @@ const CustomTextField = ({
   hasError,
   defaultValue = "",
   autoFocus,
+  type = "text",
+  endAdornment,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const { borderColor, labelColor } = useErrorStyles(isFocused, hasError);
+  const { showPassword } = useContext(RegisterContext);
 
   return (
     <TextField
@@ -23,7 +27,7 @@ const CustomTextField = ({
         </span>
       }
       defaultValue={defaultValue}
-      type="text"
+      type={type === "password" && showPassword ? "text" : type}
       inputProps={{ maxLength: maxLength }}
       variant="filled"
       sx={{
@@ -43,6 +47,7 @@ const CustomTextField = ({
         },
         disableUnderline: true,
         style: { background: "none" },
+        endAdornment: endAdornment || null,
       }}
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
@@ -61,4 +66,6 @@ CustomTextField.propTypes = {
   hasError: PropTypes.bool,
   defaultValue: PropTypes.string,
   autoFocus: PropTypes.bool,
+  endAdornment: PropTypes.node,
+  type: PropTypes.string,
 };

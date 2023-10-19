@@ -5,13 +5,22 @@ export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:8080/api",
-    credentials: "include",
   }),
   endpoints: (builder) => ({
     checkEmailAvailable: builder.query({
       query: (email) => `auth/email_available?email=${email}`,
     }),
+    registerUser: builder.mutation({
+      query: (form) => ({
+        url: "/auth/register",
+        method: "POST",
+        body: form,
+        headers: {
+          "Content-type": "application/json",
+        },
+      }),
+    }),
   }),
 });
 
-export const { useCheckEmailAvailableQuery } = authApi;
+export const { useCheckEmailAvailableQuery, useRegisterUserMutation } = authApi;

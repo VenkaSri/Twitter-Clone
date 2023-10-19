@@ -8,7 +8,8 @@ import { useSignupConfig } from "../auth/signup/signupConfig";
 const DialogFooter = ({ step, onClick }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const { btnText, btnStyle } = useSignupConfig();
-  const { stepOneCompleted } = useContext(RegisterContext);
+  const { stepOneCompleted, validPasswordEntered } =
+    useContext(RegisterContext);
 
   useEffect(() => {
     if (step === 0) {
@@ -18,7 +19,15 @@ const DialogFooter = ({ step, onClick }) => {
         setIsDisabled(true);
       }
     }
-  }, [step, stepOneCompleted]);
+
+    if (step === 2) {
+      if (validPasswordEntered) {
+        setIsDisabled(false);
+      } else {
+        setIsDisabled(true);
+      }
+    }
+  }, [step, stepOneCompleted, validPasswordEntered]);
 
   return (
     <div

@@ -2,14 +2,27 @@ import { RegisterContext } from "@context/auth/register-context";
 import { useContext, useEffect, useState } from "react";
 import validator from "validator";
 
+const validatePasswordLength = (text) => /^.{8,}$/.test(text);
+const validatePasswordStrength = (text) => /^(.)\1*$/.test(text);
+
 export const useInputValidation = () => {
-  const { name, setName, email, setEmail, setDob, dob, setStepOneCompleted } =
-    useContext(RegisterContext);
+  const {
+    name,
+    email,
+    setEmail,
+    setDob,
+    dob,
+    setStepOneCompleted,
+    password,
+    setValidPasswordEntered,
+  } = useContext(RegisterContext);
   const [emailChecking, setEmailChecking] = useState(false);
   const [hasTyped, setHasTyped] = useState(false);
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
   const [emailErrorMessage, setEmailErroMessage] = useState("");
+  const [errorMessage, setErroMessage] = useState("");
 
   useEffect(() => {
     if (!validator.isEmpty(name)) setHasTyped(true);
@@ -91,6 +104,33 @@ export const useInputValidation = () => {
     }, 500);
   };
 
+  useEffect(() => {
+    const handlePasswordValidation = () => {
+      if (password.length === 0) return;
+      if (validatePasswordLength(password)) {
+        if (!validatePasswordStrength(password)) {
+          setPasswordError(false);
+          setValidPasswordEntered(true);
+        } else {
+          setPasswordError(true);
+          setErroMessage("Please enter a stronger password.");
+        }
+      } else {
+        setPasswordError(true);
+        setErroMessage(
+          "Your password needs to be at least 8 characters. Please enter a longer one"
+        );
+      }
+    };
+    const identifier = setTimeout(handlePasswordValidation, 500);
+
+    return () => {
+      setValidPasswordEntered(false);
+      setPasswordError(false);
+      clearTimeout(identifier);
+    };
+  }, [password]);
+
   const monthHandler = (e) => {
     setDob((prevState) => ({
       ...prevState,
@@ -113,7 +153,6 @@ export const useInputValidation = () => {
   };
 
   return {
-    setName,
     setHasTyped,
     nameError,
     setEmail,
@@ -124,5 +163,7 @@ export const useInputValidation = () => {
     monthHandler,
     yearHandler,
     dayHandler,
+    passwordError,
+    errorMessage,
   };
 };

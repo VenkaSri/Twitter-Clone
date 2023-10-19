@@ -1,18 +1,41 @@
 import CustomTextField from "@/components/CustomTextField";
-import CustomTextFieldWithIcon from "@/components/CustomTextFieldWithIcon";
 import { Visibility, VisibilityOff } from "@/components/icons/Icons";
 import { RegisterContext } from "@/context/auth/register-context";
 import { useInputValidation } from "@/hooks/inputs/useInputValidation";
 import ErrorField from "@components/auth/ErrorField";
 import DialogContentHeading from "@components/dialog/body/DialogBodyHeading";
+import { InputAdornment } from "@mui/material";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
+
+/* Password step */
 
 const StepThree = () => {
-  const { setName, nameError, setEmail, emailError, emailErrorMessage } =
-    useInputValidation();
-  const { setPassword, password } = useContext(RegisterContext);
-  console.log(password);
+  const { errorMessage, passwordError } = useInputValidation();
+  const { setPassword, showPassword, setShowPassword } =
+    useContext(RegisterContext);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const PasswordEndornment = () => {
+    return (
+      <div
+        role="button"
+        aria-label="toggle password visibility"
+        onClick={handleClickShowPassword}
+        onMouseDown={handleMouseDownPassword}
+      >
+        {showPassword ? <VisibilityOff /> : <Visibility />}
+      </div>
+    );
+  };
+
   return (
     <>
       <DialogContentHeading
@@ -23,11 +46,17 @@ const StepThree = () => {
         <div className="flex flex-col grow ">
           <CustomTextField
             label="Password"
+            type="password"
             maxLength={50}
             onChange={setPassword}
-            hasError={nameError}
+            hasError={passwordError}
+            endAdornment={
+              <InputAdornment position="end">
+                {<PasswordEndornment />}
+              </InputAdornment>
+            }
           />
-          {nameError && <ErrorField errorMessage="What’s your name?" />}
+          {passwordError && <ErrorField errorMessage={errorMessage} />}
         </div>
       </div>
     </>

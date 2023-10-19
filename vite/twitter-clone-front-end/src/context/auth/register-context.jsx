@@ -7,8 +7,10 @@ const RegisterProvider = ({ children }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [step, setStep] = useState(2);
+  const [showPassword, setShowPassword] = useState(false);
+  const [step, setStep] = useState(0);
   const [stepOneCompleted, setStepOneCompleted] = useState(false);
+  const [validPasswordEntered, setValidPasswordEntered] = useState(false);
   const [autoFocusField, setAutoFocusField] = useState("");
   const [dob, setDob] = useState({
     year: "",
@@ -33,6 +35,10 @@ const RegisterProvider = ({ children }) => {
     setAutoFocusField,
     setPassword,
     password,
+    setShowPassword,
+    showPassword,
+    setValidPasswordEntered,
+    validPasswordEntered,
   };
 
   return (

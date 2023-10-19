@@ -7,9 +7,9 @@ import DialogContentHeading from "@components/dialog/body/DialogBodyHeading";
 import { useContext } from "react";
 
 const StepOne = () => {
-  const { setName, nameError, setEmail, emailError, emailErrorMessage } =
-    useInputValidation();
-  const { name, email, autoFocusField } = useContext(RegisterContext);
+  const { nameError, emailError, emailErrorMessage } = useInputValidation();
+  const { name, email, autoFocusField, setEmail, setName } =
+    useContext(RegisterContext);
 
   return (
     <>
