@@ -32,13 +32,12 @@ export const PostOptions = () => {
       <div className="-ml-3">
         <div
           className={clsx("flex", {
-            "border-b border-b-[#eff3f4] dark:border-b-[var(--primary-dark-border-color)] pb-3 ":
-              isInputActive,
+            "pb-3 ": isInputActive,
           })}
         ></div>
       </div>
       <div className={`-ml-2 mt-1 h-[48px] flex items-center justify-between `}>
-        <TweetOptions />
+        <TweetOptions isReply />
         <div className="h-[36px] flex   items-center ">
           {hasUserTyped && (
             <>

@@ -23,7 +23,6 @@ export const UploadProfilePictureStep = () => {
     const formData = new FormData();
 
     formData.append("file", file);
-    formData.append("email", "test22@gmail.com");
     const response = await fetch(
       "http://localhost:8080/api/user/profile-picture",
       {

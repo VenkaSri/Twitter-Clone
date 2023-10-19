@@ -10,6 +10,7 @@ import { UPDATE_USERNAME_STEP } from "../../utils/constants/dialog/dialogConstan
 import moment from "moment";
 import { signupSliceActions } from "../../state/auth/signupSlice";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
   const navigate = useNavigate();
@@ -36,6 +37,10 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
 
   const currentUsername = useSelector(
     (state) => state.rootReducer.signUpState.username
+  );
+
+  const profilePictureFile = useSelector(
+    (state) => state.rootReducer.signUpState.profilePictureFile
   );
 
   const { name, email, dob } = useSelector(
@@ -104,7 +109,30 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
   };
 
   const goToUpdateUsernameStep = () => {
+    console.log("ok");
+    uploadProfilePicture(profilePictureFile);
     dispatch(dialogSliceActions.setDialogContent("update_username"));
+  };
+
+  const uploadProfilePicture = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch(
+      "http://localhost:8080/api/user/profile-picture",
+      {
+        method: "POST",
+        body: formData,
+        credentials: "include", // Include credentials (cookies) in the request
+      }
+    );
+
+    if (response.ok) {
+      // Handle successful upload
+      console.log("ok");
+    } else {
+      // Handle error
+    }
   };
 
   const updateUsername = async () => {
@@ -137,6 +165,7 @@ export const useFooterButtonConfig = (step = 0, profileSetupStep = 0) => {
 
   const completeSignup = () => {
     dispatch(dialogSliceActions.setIsDialogOpen(false));
+    dispatch(userInfoActions.setAuthentication(true));
     navigate("/");
   };
 

@@ -1,15 +1,33 @@
-import React from "react";
-import { useSession } from "../hooks/useSession";
+import React, { useEffect, useState } from "react";
 
-export const UserProfile = () => {
-  const { username, name, email } = useSession();
+import { useGetPrincipleUserDetailsQuery } from "../services/user/userApi";
+
+export const UserProfile = ({ userData, isAuthUser }) => {
+  const { data, isSuccess } = useGetPrincipleUserDetailsQuery();
+  const [userName, setUserName] = useState("");
+  const [userUsername, setUserUsername] = useState("");
+
+  console.log(userData);
+
+  useEffect(() => {
+    if (isAuthUser) {
+      if (isSuccess) {
+        setUserName(data.name);
+        setUserUsername(data.username);
+      }
+    } else {
+      setUserName(userData.name);
+      setUserUsername(userData.username);
+    }
+  }, [isSuccess]);
+
   return (
-    <div className="flex-col-container grow overflow-hidden mx-3">
+    <div className="flex-col-container grow overflow-hidden  px-[15px]">
       <div className="text-black dark:text-white break-words whitespace-nowrap text-ellipsis overflow-hidden font-cBold leading-5">
-        <span>{name}</span>
+        <span>{userName}</span>
       </div>
       <div className="text-[#71767B] break-words whitespace-nowrap text-ellipsis overflow-hidden font-cReg leading-5">
-        <span>@{username}</span>
+        <span>@{userUsername}</span>
       </div>
     </div>
   );

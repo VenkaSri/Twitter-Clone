@@ -10,6 +10,7 @@ import profileSlice from "./profile/profileSlice";
 import themeSlice from "./theme/themeSlice";
 import urlSlice from "./url/urlSlice";
 import modalSlice from "./modal/modalSlice";
+import loadingSlice from "./loading/loadingSlice";
 
 const rootReducer = combineReducers({
   userInfo: userInfoReducer,
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   themeSlice: themeSlice,
   urlSlice: urlSlice,
   modalSlice: modalSlice,
+  loadingSlice: loadingSlice,
 });
 
 export default rootReducer;

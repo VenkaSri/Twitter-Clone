@@ -2,6 +2,11 @@ import React from "react";
 import RoundedButton from "../RoundedButton";
 import getIcon from "../../utils/icons/iconsutil";
 import { useMediaQuery } from "@mui/material";
+import RoundedTextButton from "../RoundedTextButton";
+import { NEW_POST_SUBMIT_VALUE } from "../../constants";
+import { Quill } from "../icons/icons";
+import { RoundedIconButton } from "../RoundedIconButton";
+import clsx from "clsx";
 
 export const NewPostButton = () => {
   const btnYMargin = useMediaQuery("(max-height:900px)");
@@ -14,17 +19,17 @@ export const NewPostButton = () => {
         }`}
       >
         <div className="tablet:block hidden">
-          <RoundedButton
-            styles={"min-w-[52px] min-h-[52px] px-8 header--newPostButton "}
-            btnContent="Post"
+          <RoundedTextButton
+            text={NEW_POST_SUBMIT_VALUE}
+            className="header--newPostButton"
           />
         </div>
       </div>
       <div className={`centered-column-container header--button-wrapper`}>
         <div className="tablet:hidden block">
-          <RoundedButton
-            styles={"header--newPostButton "}
-            btnContent={getIcon("Quill", { width: 24, fill: "white" })}
+          <RoundedIconButton
+            className={clsx("header--newPostButton button--rounded")}
+            icon={<Quill className="w-6 fill-white" />}
           />
         </div>
       </div>

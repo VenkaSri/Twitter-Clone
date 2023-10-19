@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
 
-import LoggedInHeader from "../components/header/LoggedInHeader";
-import MainContainer from "../components/main/MainContainer";
-import Sidebar from "../components/header/Sidebar";
-import { MainLayout } from "../components/layout/MainLayout";
-import useWindowHeight from "../hooks/useWindowHeight";
-import { useMediaQuery } from "@mui/material";
-import { HeaderNav } from "../components/header/HeaderNav";
-import getIcon from "../utils/icons/iconsutil";
 import { useTheme } from "../hooks/useTheme";
 import { BottomBar } from "../components/layers/bottombar/BottomBar";
 import { TopNav } from "../components/main/maincolumn/TopNav";
 import { TweetSectionProvider } from "../context/TweetSectionCtx";
 import TweetSection from "../components/main/maincolumn/TweetSection";
+import { Timeline } from "../components/home/Timeline";
+
+import { useDispatch } from "react-redux";
+import { fetchUserDetails } from "../state/user/userSlice";
+import { useGetPrincipleUserDetailsQuery } from "../services/user/userApi";
+import { loadingSliceActions } from "../state/loading/loadingSlice";
 
 export const Home = () => {
   const [showHeader, setShowHeader] = useState("");
   const darkMode = useTheme();
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -28,6 +27,7 @@ export const Home = () => {
           <TweetSection />
         </TweetSectionProvider>
       </div>
+      <Timeline />
     </>
   );
 };

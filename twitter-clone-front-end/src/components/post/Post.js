@@ -21,6 +21,8 @@ import RoundedButton from "../RoundedButton";
 import { RoundedIconButton } from "../RoundedIconButton";
 import TweetSection from "../main/maincolumn/TweetSection";
 import { PostReply } from "./PostReply";
+import { useParams } from "react-router-dom";
+import { useGetPostByIDQuery } from "../../services/post/postApi";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -29,13 +31,7 @@ const PostText = ({ text }) => {
   return (
     <div className="mt-3 flex grow">
       <div className="flex leading-6 text-[17px] font-cReg ">
-        <span>
-          orem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
-          Suspendisse lectus tortor, dignissim sit amet, adipiscing nec,
-          ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula
-          massa, varius a, semper congue, euismod non, mi.
-          adffasdfsadffddsafdfas
-        </span>
+        <span>{text}</span>
       </div>
     </div>
   );
@@ -83,7 +79,6 @@ const PostActions = () => {
   return (
     <>
       {icons.map(({ Component, className, noFlex }, index) => {
-        const btnSize = "w-[22.5px] h-[22.5px]";
         return (
           <div key={index} className={noFlex ? "" : "flex flex-1"}>
             <RoundedIconButton
@@ -91,7 +86,7 @@ const PostActions = () => {
                 "w-[38.5px] h-[38.5px] centered-column-container rounded-full " +
                   className
               )}
-              icon={<Component className={btnSize} />}
+              icon={<Component className={"w-[22.75px] h-[18.75px]"} />}
             />
           </div>
         );
@@ -107,8 +102,8 @@ const PostEngagementButton = ({ postId, onClick }) => {
       role="button"
       onClick={onClick}
     >
-      <div className="flex grow py-4">
-        <Analytics className="w-[22.75px] h-[18.75] pr-0.5 fill-[#536471]" />
+      <div className="flex grow py-4 font-cReg leading-5">
+        <Analytics className="w-[22.75px] h-[18.75px] pr-0.5 fill-[#536471] " />
         <span>View post engagements</span>
       </div>
     </div>
@@ -121,17 +116,17 @@ export const Post = ({ postData }) => {
         <div className=" flex grow ">
           <div className=" max-w-full flex  grow items-center">
             <div className="w-[40px]">
-              <ProfilePicture />
+              <ProfilePicture userId={postData.userDetails.id} />
             </div>
             <div className="flex-col-container overflow-hidden shrink-1 tablet:block hidden">
-              <UserProfile />
+              <UserProfile userData={postData.userDetails} />
             </div>
             <div className="ml-auto self-start ">
               <MoreButton />
             </div>
           </div>
         </div>
-        <PostText text={postData.Text} />
+        <PostText text={postData.text} />
         <PostMedia media={postData.media} />
         <PostCreationInfo datetime={postData.createdAt} />
         <PostEngagementButton />
@@ -142,7 +137,7 @@ export const Post = ({ postData }) => {
         </div>
       </article>
       <div className="">
-        <PostReply />
+        <PostReply postInfo={postData.authorUsername} />
       </div>
     </div>
   );

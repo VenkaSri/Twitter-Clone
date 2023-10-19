@@ -11,7 +11,17 @@ export const postApi = createApi({
     getPostByID: builder.query({
       query: (id) => `${id}`,
     }),
+    getAllPosts: builder.query({
+      query: () => "", // This will fetch from the base URL
+    }),
+    likePost: builder.mutation({
+      query: (id) => ({
+        url: `/like/${id}`,
+        method: "POST",
+      }),
+    }),
   }),
 });
 
-export const { useGetPostByIDQuery } = postApi;
+export const { useGetPostByIDQuery, useGetAllPostsQuery, useLikePostMutation } =
+  postApi;

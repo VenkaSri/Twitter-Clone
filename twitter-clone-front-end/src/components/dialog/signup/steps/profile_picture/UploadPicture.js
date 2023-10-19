@@ -9,11 +9,13 @@ import { dialogSliceActions } from "../../../../../state/dialog/dialogSlice";
 import { profileSliceActions } from "../../../../../state/profile/profileSlice";
 import { RemovePhoto } from "./RemovePhoto";
 import { signupSliceActions } from "../../../../../state/auth/signupSlice";
+import { useFooterButtonConfig } from "../../../../../hooks/signup/useFooterButtonConfig";
 
 export const UploadPicture = ({ source }) => {
   const [images, setImages] = useState([]);
   const [profilePicture, setProfilePicture] = useState(null);
   const dispatch = useDispatch();
+
   const selectedProfilePic = useSelector(
     (state) => state.rootReducer.userSession.profilePicture
   );
@@ -27,6 +29,9 @@ export const UploadPicture = ({ source }) => {
 
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
+    const file = imageList[0].file;
+    dispatch(signupSliceActions.setProfilePictureFile(file));
+
     setImages(imageList);
     setProfilePicture(imageList[0].data_url);
     dispatch(userSliceActions.setProfilePicture(imageList[0].data_url));
@@ -36,9 +41,8 @@ export const UploadPicture = ({ source }) => {
   };
   const handleRemovePhoto = () => {
     dispatch(profileSliceActions.setDidUserAddProfilePicture(false));
+    dispatch(signupSliceActions.setProfilePictureFile(null));
   };
-
-  console.log(selectedProfilePic);
 
   return (
     <div className="w-[210px] h-[210px] rounded-full flex-col-container relative justify-center items-center bg-white dark:bg-black ">
@@ -73,7 +77,6 @@ export const UploadPicture = ({ source }) => {
                   isDragging,
                   dragProps,
                 }) => (
-                  // write your building UI
                   <>
                     <AddPhoto onClick={onImageUpload} />
                   </>

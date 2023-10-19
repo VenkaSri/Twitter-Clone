@@ -109,7 +109,7 @@ const TweetSection = () => {
         )}
         <div className="flex max-w-full grow">
           <div className="pt-[12px] mr-[12px] flex basis-auto">
-            <ProfilePicture source={photoSRC} size={44} />
+            <ProfilePicture size={44} isPrincipleUser />
           </div>
           <div className="pt-1 flex flex-col  w-full max-w-full  basis-auto ">
             <div className="pt-1 flex flex-col  z-[1] relative">
@@ -144,7 +144,10 @@ const TweetSection = () => {
                 className="flex max-h-[720px] grow relative min-h-[48px]"
                 ref={parentRef}
               >
-                <PostEditor onHeightChange={setChildHeight} />
+                <PostEditor
+                  onHeightChange={setChildHeight}
+                  placeholder={"What's happening?!"}
+                />
               </div>
               <div
                 className={clsx({ "mt-4": isInputActive && paths.length > 0 })}

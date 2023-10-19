@@ -11,19 +11,27 @@ import { Dialog } from "./components/Dialog";
 import { SignupDialog } from "./pages/modal/SignupDialog";
 
 import { Home } from "./pages/Home";
-import { fetchUserDetails } from "./state/user/userSlice";
+import { fetchUserDetails, userSliceActions } from "./state/user/userSlice";
 import { MainLayout } from "./components/layout/MainLayout";
 import { Status } from "./pages/Status";
+import { useGetPrincipleUserDetailsQuery } from "./services/user/userApi";
+import { loadingSliceActions } from "./state/loading/loadingSlice";
+import { AppProgess } from "./components/AppProgess";
 
 const Routes = () => {
   const dispatch = useDispatch();
+
+  const [rootElement, setRootElement] = useState(null);
 
   const isAuthenticated = useSelector(
     (state) => state.rootReducer.userInfo.isAuthenticated
   );
 
+  const initialAppLoaded = useSelector(
+    (state) => state.rootReducer.loadingSlice.initialAppLoaded
+  );
+
   useEffect(() => {
-    // Make an authenticated request to your server to get authentication status
     const checkStatus = async () => {
       try {
         const result = await getData("/api/auth/auth_status");
@@ -32,7 +40,6 @@ const Routes = () => {
         if (result.status === 200) {
           if (response.validToken) {
             dispatch(userInfoActions.setAuthentication(true));
-            dispatch(fetchUserDetails());
           } else {
             dispatch(userInfoActions.setAuthentication(false));
           }
@@ -40,18 +47,24 @@ const Routes = () => {
       } catch (e) {
         console.log(e);
       }
+      dispatch(loadingSliceActions.setInitialAppLoaded(true));
     };
 
     checkStatus();
   }, []);
 
+  useEffect(() => {
+    if (initialAppLoaded) {
+      setRootElement(isAuthenticated ? <MainLayout /> : <LandingPage />);
+    } else {
+      setRootElement(<AppProgess isOpen />);
+    }
+  }, [initialAppLoaded, isAuthenticated]);
+
   return (
     <>
       <RouterRoutes>
-        <Route
-          path="/"
-          element={isAuthenticated ? <MainLayout /> : <LandingPage />}
-        >
+        <Route path="/" element={rootElement}>
           <Route path="home" element={<Home />} />
           {isAuthenticated && <Route path="/" element={<Home />} />}
           <Route path="/:username/status/:postId" element={<Status />} />

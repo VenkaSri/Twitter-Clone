@@ -26,6 +26,8 @@ public class Profile {
   private String email;
   private LocalDate dob;
   private String profile_image_url;
+  @Size(max = 160)
+  private String bio;
 
   @OneToOne(mappedBy = "profile")
   private User user;

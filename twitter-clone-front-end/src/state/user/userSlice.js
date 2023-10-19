@@ -7,6 +7,7 @@ const initialState = {
   email: "",
   userId: "",
   profilePicture: "",
+  likedPosts: [],
 };
 
 const userSlice = createSlice({
@@ -28,6 +29,9 @@ const userSlice = createSlice({
     setProfilePicture(state, action) {
       state.profilePicture = action.payload;
     },
+    setLikedPosts(state, action) {
+      state.likedPosts = action.payload;
+    },
   },
 });
 
@@ -35,10 +39,12 @@ export const userSliceActions = userSlice.actions;
 export default userSlice.reducer;
 
 export const fetchUserDetails = () => async (dispatch) => {
-  const result = await getData("/api/user_details");
+  const result = await getData("/api/v1/users");
   const response = await result.json();
+  console.log(response);
   dispatch(userSliceActions.setEmail(response.email));
   dispatch(userSliceActions.setName(response.name));
   dispatch(userSliceActions.setUserId(response.id));
   dispatch(userSliceActions.setUsername(response.username));
+  dispatch(userSliceActions.setProfilePicture(response.profile_image_url));
 };

@@ -1,32 +1,51 @@
 import { Skeleton } from "@mui/material";
 import React, { memo, useEffect, useState } from "react";
 
-const ProfilePicture = ({ size = 44 }) => {
+import {
+  useGetPrincipleUserDetailsQuery,
+  useGetUserByIDQuery,
+} from "../services/user/userApi";
+
+const ProfilePicture = ({ size = 44, isPrincipleUser, userId }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [cachedImage, setCachedImage] = useState(null);
+  const {
+    data: user,
+    isLoading: userLoading,
+    isSuccess: userIsSuccess,
+    isError: userError,
+  } = useGetUserByIDQuery(userId);
+
+  const {
+    data: principleUserDetails,
+    isLoading: principleUserDetailsLoading,
+    isSuccess: principleUserDetailsIsSuccess,
+  } = useGetPrincipleUserDetailsQuery();
 
   useEffect(() => {
-    const fetchAndCacheImage = async () => {
+    const fetchImage = async (url) => {
       try {
-        const response = await fetch(
-          "https://tc-profile-pictures.s3.amazonaws.com/profile-pictures/Untitled.jpg",
-          {
-            // Specify empty headers to avoid adding any Cache-Control headers.
-            headers: {},
-          }
-        );
+        const response = await fetch(url, {
+          headers: {},
+        });
         if (response.ok) {
           const blob = await response.blob();
           const imageUrl = URL.createObjectURL(blob);
           setCachedImage(imageUrl);
         }
-      } catch (error) {
-        console.error("Error fetching image:", error);
-      }
+      } catch (error) {}
     };
 
-    fetchAndCacheImage();
-  }, []);
+    if (isPrincipleUser) {
+      if (principleUserDetailsIsSuccess) {
+        fetchImage(principleUserDetails.profile_image_url);
+      }
+    } else {
+      if (userIsSuccess) {
+        fetchImage(user.profile_image_url);
+      }
+    }
+  }, [principleUserDetailsIsSuccess, userIsSuccess]);
 
   const profilePicStyle = {
     width: size,

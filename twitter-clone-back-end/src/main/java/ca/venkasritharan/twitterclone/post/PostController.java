@@ -33,4 +33,21 @@ public class PostController {
   public ResponseEntity<?> getPostById(@PathVariable Long postId) {
     return postService.getPostById(postId);
   }
+
+  @GetMapping
+  public  List<PostResponse> getAllPosts() {
+    return postService.getAllPosts();
+  }
+
+  @PostMapping("/like/{postId}")
+  public ResponseEntity<?> likePost(@PathVariable Long postId) {
+    return postService.likePost(postId);
+  }
+
+
+  @PostMapping("/unlike/{postId}")
+  public ResponseEntity<?> unlikePost(@PathVariable Long postId) {
+    return postService.unlikePost(postId);
+  }
+
 }

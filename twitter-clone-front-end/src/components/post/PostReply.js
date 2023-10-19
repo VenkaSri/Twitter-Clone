@@ -8,8 +8,10 @@ import RoundedButton from "../RoundedButton";
 import { REPLY_BUTTON_VALUE } from "../../constants";
 import PostEditor from "../main/maincolumn/PostEditor";
 import { PostOptions } from "./compose/PostOptions";
+import clsx from "clsx";
+import { PostEditorMedia } from "./compose/PostEditorMedia";
 
-export const PostReply = () => {
+export const PostReply = ({ postInfo }) => {
   const parentRef = useRef(null);
   const [childHeight, setChildHeight] = useState(48);
   const {
@@ -37,10 +39,18 @@ export const PostReply = () => {
     <div className="z-[1]">
       <div></div>
       <div className="pt-1 pb-3 flex-col-container">
-        <div className="min-h-[12px] px-4 hidden"></div>
+        {isInputActive && (
+          <div className="min-h-[12px] px-4 flex">
+            <div className="flex basis-10 mr-3"></div>
+            <div className="flex grow text-[#536471]">
+              Replying to&nbsp;
+              <span className="text-[var(--primary-color)]">@{postInfo}</span>
+            </div>
+          </div>
+        )}
         <div className="min-h-[12px] px-4 flex">
           <div className="pt-3 mr-3 flex-col-container basis-10">
-            <ProfilePicture />
+            <ProfilePicture isPrincipleUser />
           </div>
           <div className="flex-col-container grow pt-1">
             <div className="flex">
@@ -65,6 +75,11 @@ export const PostReply = () => {
                   />
                 </div>
               )}
+            </div>
+            <div
+              className={clsx({ "mt-4": isInputActive && paths.length > 0 })}
+            >
+              <PostEditorMedia uploadedImages={paths} />
             </div>
             {isInputActive && <PostOptions />}
           </div>

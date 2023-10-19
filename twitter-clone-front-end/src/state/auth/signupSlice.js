@@ -22,6 +22,7 @@ const initialState = {
   username: "",
   didUserAddProfilePicture: false,
   isFollowingOneAccount: false,
+  profilePictureFile: null,
 };
 
 const signupSlice = createSlice({
@@ -75,6 +76,9 @@ const signupSlice = createSlice({
     },
     setIsFollowingOneAccount(state, action) {
       state.isFollowingOneAccount = action.payload;
+    },
+    setProfilePictureFile(state, action) {
+      state.profilePictureFile = action.payload;
     },
     resetState() {
       return initialState;
