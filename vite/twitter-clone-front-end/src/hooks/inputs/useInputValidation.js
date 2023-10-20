@@ -191,11 +191,20 @@ export const useUsernameValidation = () => {
   const { data, isSuccess } = useCheckIfUsernameIsAvailableQuery(
     updatedUsername,
     {
-      skip: updatedUsername.length < 4 || !validateUsername(updatedUsername),
+      skip:
+        updatedUsername.length < 4 ||
+        !validateUsername(updatedUsername) ||
+        username === updatedUsername,
     }
   );
 
+  console.log(updatedUsername + " updatedUsernmae");
+
   useEffect(() => {
+    if (username === updatedUsername) {
+      setIsUsernameValid(true);
+      return;
+    }
     const identifier = setTimeout(() => {
       if (updatedUsername.length < 4) {
         setUsernameError(true);

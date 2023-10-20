@@ -12,8 +12,6 @@ const DialogFooter = ({ step, onClick }) => {
   const { stepOneCompleted, validPasswordEntered, isUsernameValid } =
     useContext(RegisterContext);
 
-  console.log(isUsernameValid);
-
   useEffect(() => {
     if (step === 0) {
       if (stepOneCompleted) {

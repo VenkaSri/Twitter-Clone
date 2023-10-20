@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import default_profile_picture from "@assets/images/profile-pics/dialog_profile_picture.png";
 import { useSelector } from "react-redux";
@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 const RegisterContext = createContext();
 
 const RegisterProvider = ({ children }) => {
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(5);
   const [isLoading, setIsLoading] = useState(false);
 
   const [name, setName] = useState("");
@@ -28,10 +28,16 @@ const RegisterProvider = ({ children }) => {
   const [profilePicture, setProfilePicture] = useState(default_profile_picture);
 
   const username = useSelector((state) => state.userSlice.username);
-  const [updatedUsername, setUpdatedUsername] = useState(username);
+  const [updatedUsername, setUpdatedUsername] = useState("");
   const [isUsernameValid, setIsUsernameValid] = useState(true);
 
   const steps = [0, 1, 2, 3];
+
+  useEffect(() => {
+    if (username !== "") {
+      setUpdatedUsername(username);
+    }
+  }, [username]);
 
   const value = {
     name,

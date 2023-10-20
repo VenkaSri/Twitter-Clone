@@ -25,6 +25,16 @@ export const userApi = createApi({
         params: { username },
       }),
     }),
+    updateUsername: builder.mutation({
+      query: (username) => ({
+        url: "/update_username",
+        method: "POST",
+        body: username,
+        headers: {
+          "Content-type": "application/json",
+        },
+      }),
+    }),
   }),
 });
 
@@ -32,4 +42,5 @@ export const {
   useGetPrincipleUserQuery,
   useUploadProfilePictureMutation,
   useCheckIfUsernameIsAvailableQuery,
+  useUpdateUsernameMutation,
 } = userApi;

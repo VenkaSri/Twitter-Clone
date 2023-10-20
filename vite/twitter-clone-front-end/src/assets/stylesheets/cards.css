@@ -1,0 +1,3 @@
+.card--follow {
+  @apply flex items-center max-w-[598px] py-3 px-4 cursor-pointer hover:bg-[#F7F7F7]  dark:hover:bg-[#080808];
+}

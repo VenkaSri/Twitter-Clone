@@ -6,10 +6,12 @@ import { useContext } from "react";
 import { RegisterContext } from "@/context/auth/register-context";
 import { useUsernameValidation } from "@/hooks/inputs/useInputValidation";
 import ErrorField from "@/components/auth/ErrorField";
+import { useSelector } from "react-redux";
 
 const StepFive = () => {
-  const { updatedUsername, setUpdatedUsername } = useContext(RegisterContext);
+  const { setUpdatedUsername } = useContext(RegisterContext);
   const { usernameError, errorMessage } = useUsernameValidation();
+  const username = useSelector((state) => state.userSlice.username);
 
   return (
     <>
@@ -25,7 +27,7 @@ const StepFive = () => {
           }}
           type="text"
           maxLength={15}
-          defaultValue={updatedUsername}
+          defaultValue={username}
           onChange={setUpdatedUsername}
           startAdornment={(isFocused) => (
             <InputAdornment position="start">

@@ -8,6 +8,7 @@ import { json } from "react-router-dom";
 import default_profile_picture from "@assets/images/profile-pics/dialog_profile_picture.png";
 import {
   useGetPrincipleUserQuery,
+  useUpdateUsernameMutation,
   useUploadProfilePictureMutation,
 } from "@/components/user/userApi";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,6 +35,7 @@ export const useSignupConfig = () => {
   const [btnText, setBtnText] = useState("");
   const [btnStyle, setBtnStyle] = useState("");
   const username = useSelector((state) => state.userSlice.username);
+
   const [registerUser, { isSuccess: isRegistered, data: registeredUser }] =
     useRegisterUserMutation();
   const { isSuccess: isAuthStatusChecked } = useCheckAuthStatusQuery(
@@ -46,11 +48,14 @@ export const useSignupConfig = () => {
   const { data: userInfo, isSuccess: fetchedUser } = useGetPrincipleUserQuery(
     userId,
     {
-      skip: !isAuthStatusChecked,
+      skip: userId === null,
     }
   );
   const [uploadProfilePicture, { isSuccess: profilePicUploaded, isLoading }] =
     useUploadProfilePictureMutation();
+
+  const [updateUsername, { isSuccess: usernameUpdated, data: updatedRes }] =
+    useUpdateUsernameMutation();
 
   useEffect(() => {
     if (step === 0) {
@@ -89,6 +94,11 @@ export const useSignupConfig = () => {
         setBtnStyle("btn--skip");
       }
     }
+
+    if (step === 5) {
+      setBtnText("Next");
+      setBtnStyle("btn--next");
+    }
   }, [step, profilePicture, updatedUsername]);
 
   const handleRegistration = async () => {
@@ -104,18 +114,30 @@ export const useSignupConfig = () => {
     await registerUser(form);
   };
 
+  const updateUsernameHandler = async () => {
+    const data = JSON.stringify({ updatedUsername: updatedUsername });
+    try {
+      const respone = await updateUsername(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const handleProfilePictureUpload = async () => {
     const formData = new FormData();
     formData.append("file", profilePicture);
     try {
       const response = await uploadProfilePicture(formData);
-      if (response.status === 201) {
-        setStep(step + 1);
-      }
     } catch (error) {
       console.log("An error occurred", error);
     }
   };
+
+  useEffect(() => {
+    if (usernameUpdated) {
+      setStep(step + 1);
+    }
+  }, [usernameUpdated]);
 
   useEffect(() => {
     if (isLoading) {
@@ -129,10 +151,18 @@ export const useSignupConfig = () => {
   useEffect(() => {
     if (isAuthStatusChecked) {
       console.log(registeredUser);
+      console.log(registeredUser.id);
       setUserId(registeredUser.id);
       if (fetchedUser) {
-        const mappedUserInfo = mapUserInfoToUserSlice(userInfo);
-        dispatch(userSliceActions.setUserInfo(mappedUserInfo));
+        dispatch(
+          userSliceActions.setUserInfo({
+            name: userInfo.name,
+            username: userInfo.username,
+            userId: userInfo.id,
+            profilePicture: userInfo.profile_image_url || "", // Use default empty string if profile_image_url is null
+            likedPosts: userInfo.likedPostsIds || [],
+          })
+        );
         setIsLoading(false);
         setStep(step + 1);
       }
@@ -156,6 +186,12 @@ export const useSignupConfig = () => {
     } else if (step === 3) {
       if (profilePicture !== default_profile_picture) {
         await handleProfilePictureUpload();
+      } else {
+        setStep(step + 1);
+      }
+    } else if (step === 4) {
+      if (username !== updateUsername) {
+        await updateUsernameHandler();
       }
     } else {
       setStep(step + 1);
