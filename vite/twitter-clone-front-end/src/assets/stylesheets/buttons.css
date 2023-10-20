@@ -7,6 +7,10 @@
     @apply bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30] text-white dark:text-black;
   }
 
+  .btn--action {
+    @apply bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30] text-white dark:text-black;
+  }
+
   .btn--skip {
     @apply border border-[#cfd9de] text-black hover:text-black  hover:bg-[#e7e7e8];
   }
@@ -16,6 +20,6 @@
   }
 
   .button--roundedText {
-    @apply rounded-full flex flex-col border px-4 max-w-[380px] min-w-[36px] min-h-[36px];
+    @apply rounded-full flex flex-col border  max-w-[380px];
   }
 }

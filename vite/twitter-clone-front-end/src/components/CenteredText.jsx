@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const CenteredText = ({ text }) => {
   return (
     <div className="flex grow overflow-hidden break-words min-w-0 font-cBold text-center items-center justify-center">
-      <span className="textSpan break-words min-w-0 max-w-full">
+      <span className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap break-words min-w-0 ">
         <span>{text}</span>
       </span>
     </div>

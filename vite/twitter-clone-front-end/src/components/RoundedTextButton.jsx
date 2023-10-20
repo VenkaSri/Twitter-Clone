@@ -4,16 +4,18 @@ import CenteredText from "./CenteredText";
 
 const RoundedTextButton = ({ text, className, disabled, onClick }) => {
   return (
-    <a
-      className={clsx(className, "", {
-        "pointer-events-none opacity-50": disabled,
-      })}
-      role="button"
-      onClick={onClick}
-      aria-disabled={disabled}
-    >
-      <CenteredText text={text} />
-    </a>
+    <>
+      <a
+        className={clsx(className, "", {
+          "pointer-events-none opacity-50": disabled,
+        })}
+        role="button"
+        onClick={onClick}
+        aria-disabled={disabled}
+      >
+        <CenteredText text={text} />
+      </a>
+    </>
   );
 };
 

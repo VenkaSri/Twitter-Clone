@@ -65,3 +65,7 @@
 .br {
   @apply border border-[red];
 }
+
+.bg {
+  @apply border border-[#164204];
+}

@@ -11,6 +11,7 @@ import DialogFooter from "@components/dialog/DialogFooter";
 import { useSignupConfig } from "@components/auth/signup/signupConfig";
 import DialogBody from "./dialog/body/DialogBody";
 import { OverlayLoader } from "./dialog/OverlayLoader";
+import Head from "./head/Head";
 
 const MuiDialog = () => {
   const isMobile = useMediaQuery("(max-width:702px)");
@@ -41,6 +42,7 @@ const MuiDialog = () => {
         <OverlayLoader />
       ) : (
         <>
+          <Head title="Sign up for X" />
           <DialogTitle style={{ padding: 0 }}>
             <DialogHeader step={step} />
           </DialogTitle>
