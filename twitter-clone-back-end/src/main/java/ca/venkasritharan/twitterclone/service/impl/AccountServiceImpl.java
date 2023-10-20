@@ -3,6 +3,7 @@ package ca.venkasritharan.twitterclone.service.impl;
 import ca.venkasritharan.twitterclone.entity.user.User;
 import ca.venkasritharan.twitterclone.exception.UserNotFoundException;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
+import ca.venkasritharan.twitterclone.response.StandardResponse;
 import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
 import ca.venkasritharan.twitterclone.response.UsernameAvailabilityResponse;
 import ca.venkasritharan.twitterclone.security.jwt.JwtTokenProvider;
@@ -65,9 +66,10 @@ public class AccountServiceImpl implements AccountService {
   }
 
   @Override
-  public ResponseEntity<String> updateUsername(Principal principal, String username, HttpServletResponse response) throws IOException {
-    Optional<User> optionalUser = userRepository.findByUsername(principal.getName());
-
+  public ResponseEntity<StandardResponse> updateUsername(String username, HttpServletResponse response) throws IOException {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    String principleUsername = authentication.getName();
+    Optional<User> optionalUser = userRepository.findByUsername(principleUsername);
 
     if (optionalUser.isPresent()) {
       User user = optionalUser.get();
@@ -75,7 +77,7 @@ public class AccountServiceImpl implements AccountService {
       userRepository.save(user);
       String newToken = generateAuthToken(user);
       handleSuccessfulRegistration(response, newToken);
-      return ResponseEntity.ok("Success");
+      return ResponseEntity.ok(new StandardResponse("Successfully updated username", 200));
     } else {
       throw new UserNotFoundException("User not found");
     }

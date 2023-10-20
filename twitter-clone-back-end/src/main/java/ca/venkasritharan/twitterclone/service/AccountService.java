@@ -1,6 +1,7 @@
 package ca.venkasritharan.twitterclone.service;
 
 import ca.venkasritharan.twitterclone.response.Response;
+import ca.venkasritharan.twitterclone.response.StandardResponse;
 import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
 import ca.venkasritharan.twitterclone.response.UsernameAvailabilityResponse;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,6 +16,6 @@ public interface AccountService {
 
   UsernameAvailabilityResponse checkIfUsernameIsAvailable(String username);
 
-  ResponseEntity<String> updateUsername(Principal principal, String username, HttpServletResponse response) throws IOException;
+  ResponseEntity<StandardResponse> updateUsername(String username, HttpServletResponse response) throws IOException;
 
 }
