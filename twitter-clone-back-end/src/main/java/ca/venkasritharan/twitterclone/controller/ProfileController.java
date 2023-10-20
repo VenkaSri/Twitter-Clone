@@ -6,6 +6,7 @@ import ca.venkasritharan.twitterclone.entity.user.Profile;
 import ca.venkasritharan.twitterclone.entity.user.User;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import ca.venkasritharan.twitterclone.repository.user.ProfileRepository;
+import ca.venkasritharan.twitterclone.response.MessageAndCodeResponse;
 import ca.venkasritharan.twitterclone.service.UsernameService;
 
 import org.apache.commons.io.IOUtils;
@@ -14,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.sync.RequestBody;
@@ -26,7 +30,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = {"*"})
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/v1/users")
 public class ProfileController {
   @Value("${s3.bucket.name}")
   private String s3BucketName;
@@ -55,9 +59,9 @@ public class ProfileController {
 //    return userProfileService.getFollowingCount(principal);
 //  }
 
-  @PostMapping("/profile-picture")
-  public String uploadProfilePicture(@RequestParam("file") MultipartFile file, Principal principal) {
-
+  @PostMapping("/profile_picture")
+  public ResponseEntity<MessageAndCodeResponse> uploadProfilePicture(@RequestParam("file") MultipartFile file, Principal principal) {
+    System.out.println(file);
     String username = principal.getName();
     String bucketName = s3BucketName;
     String key = "profile-pictures/" + username + "/" + file.getOriginalFilename();
@@ -84,14 +88,17 @@ public class ProfileController {
 
         profileRepository.save(profile);
 
-
-        return "Successfully uploaded and database updated.";
+    MessageAndCodeResponse messageAndCodeResponse = new MessageAndCodeResponse();
+    messageAndCodeResponse.setMessage("Successfully uploaded");
+    messageAndCodeResponse.setStatus(201);
+        return ResponseEntity.status(HttpStatus.OK.value()).body(messageAndCodeResponse);
       } else {
-        return "User not found";
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND.value()).body(new MessageAndCodeResponse("User not found", HttpStatus.NOT_FOUND.value()));
       }
 
     } catch (Exception e) {
-      return "Upload failed: " + e.getMessage();
+      return ResponseEntity.status(HttpStatus.NOT_FOUND.value()).body(new MessageAndCodeResponse(e.getMessage(), HttpStatus.NOT_FOUND.value()));
     }
   }
   }

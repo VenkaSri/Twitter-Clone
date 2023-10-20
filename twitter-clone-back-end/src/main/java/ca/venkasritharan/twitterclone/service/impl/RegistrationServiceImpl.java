@@ -11,8 +11,12 @@ import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import ca.venkasritharan.twitterclone.security.jwt.JwtTokenProvider;
 import ca.venkasritharan.twitterclone.service.RegistrationService;
 import ca.venkasritharan.twitterclone.response.Response;
+import ca.venkasritharan.twitterclone.util.response.CookieUtils;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.*;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -50,16 +54,16 @@ public class RegistrationServiceImpl implements RegistrationService {
   }
 
   @Override
-  public Response<RegistrationResponse> register(RegisterDTO registerDTO) {
+  public ResponseEntity<RegistrationResponse> register(RegisterDTO registerDTO, HttpServletResponse response) {
     try {
       validateRegistration(registerDTO);
       User user = createUser(registerDTO);
       saveUser(user);
-      return generateSuccessfulRegistrationResponse(user);
+      return generateSuccessfulRegistrationResponse(user, response);
     } catch (UserAlreadyExistsException | ConstraintViolationException e) {
-      return createErrorResponse(400, e.getMessage());
+      return createErrorResponse(e.getMessage(), response);
     } catch (Exception e) {
-      return createErrorResponse(500, e.getMessage());
+      return createErrorResponse(e.getMessage(), response);
     }
   }
 
@@ -99,14 +103,28 @@ public class RegistrationServiceImpl implements RegistrationService {
     userRepository.save(user);
   }
 
-  private Response<RegistrationResponse> generateSuccessfulRegistrationResponse(User user) {
+  private ResponseEntity<RegistrationResponse> generateSuccessfulRegistrationResponse(User user, HttpServletResponse response) {
     String token = generateAuthToken(user);
-    return createResponse(200, "User successfully registered", token);
+    CookieUtils.addAuthTokenCookie(response, token);
+    RegistrationResponse registrationResponse = new RegistrationResponse();
+    registrationResponse.setToken(token);
+    registrationResponse.setId(user.getId());
+    registrationResponse.setUsername(user.getUsername());
+    registrationResponse.setMessage("User successfully registered.");
+    registrationResponse.setStatus(HttpStatus.CREATED.value());
+
+    return ResponseEntity.status(HttpStatus.CREATED).body(registrationResponse);
   }
 
-  private Response<RegistrationResponse> createErrorResponse(int statusCode, String message) {
-    return createResponse(statusCode, message, null);
+  private ResponseEntity<RegistrationResponse> createErrorResponse(String message, HttpServletResponse response) {
+    RegistrationResponse registrationResponse = new RegistrationResponse();
+    registrationResponse.setToken(null);
+    registrationResponse.setMessage(message);
+    registrationResponse.setStatus(HttpStatus.BAD_REQUEST.value());
+
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(registrationResponse);
   }
+
 
 //  private void setUniqueUsername(User user) {
 //    String uniqueUsername = generateUniqueUsername(user.getName());
@@ -179,11 +197,8 @@ public class RegistrationServiceImpl implements RegistrationService {
     return sb.toString();
   }
 
-  private Response<RegistrationResponse> createResponse(int statusCode, String message, String token) {
-    RegistrationResponse registrationResponse = new RegistrationResponse();
-    registrationResponse.setMessage(message);
-    registrationResponse.setToken(token);
-    return new Response<>(statusCode, registrationResponse.getMessage(), registrationResponse, null);
+  private ResponseEntity<RegistrationResponse>  createResponse(HttpServletResponse response, RegistrationResponse registrationResponse) {
+    return ResponseEntity.status(response.getStatus()).body(registrationResponse);
   }
 
   private String generateAuthToken(User user) {

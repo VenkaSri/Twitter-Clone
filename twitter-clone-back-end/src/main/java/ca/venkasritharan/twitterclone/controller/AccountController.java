@@ -15,7 +15,7 @@ import java.security.Principal;
 
 @CrossOrigin(origins = {"*"})
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1/users")
 public class AccountController {
 
   private final AccountService accountService;
@@ -38,7 +38,6 @@ public class AccountController {
 
   @GetMapping("/username_available")
   public UsernameAvailabilityResponse isUsernameAvailable(@RequestParam String username) {
-
     return accountService.checkIfUsernameIsAvailable(username);
   }
 

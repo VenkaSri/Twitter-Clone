@@ -4,7 +4,8 @@ import ca.venkasritharan.twitterclone.dto.*;
 import ca.venkasritharan.twitterclone.response.*;
 import ca.venkasritharan.twitterclone.service.AuthenticationService;
 import ca.venkasritharan.twitterclone.service.RegistrationService;
-import ca.venkasritharan.twitterclone.util.response.RegistrationResponseBuilder;
+//import ca.venkasritharan.twitterclone.util.response.RegistrationResponseBuilder;
+import ca.venkasritharan.twitterclone.util.response.CookieUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -28,10 +29,12 @@ public class AuthenticationController {
   }
 
   @PostMapping(value = {"/register", "/signup"})
-  public Response<RegistrationResponse> register(@Valid @RequestBody RegisterDTO registerDTO,
+  public ResponseEntity<RegistrationResponse> register(@Valid @RequestBody RegisterDTO registerDTO,
                                                  HttpServletResponse response) throws IOException {
-    Response<RegistrationResponse> registrationResponse = registrationService.register(registerDTO);
-    return RegistrationResponseBuilder.build(registrationResponse, response);
+    CookieUtils.clearAuthTokenCookie(response);
+    ResponseEntity<RegistrationResponse> registrationResponse = registrationService.register(registerDTO, response);
+//    return RegistrationResponseBuilder.build(registrationResponse, response);
+    return registrationResponse;
   }
 
 //  @PostMapping(value = {"/login", "/sign-in"})
