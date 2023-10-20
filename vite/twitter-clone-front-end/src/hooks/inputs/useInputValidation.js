@@ -1,9 +1,12 @@
+import { useCheckIfUsernameIsAvailableQuery } from "@/components/user/userApi";
 import { RegisterContext } from "@context/auth/register-context";
 import { useContext, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import validator from "validator";
 
 const validatePasswordLength = (text) => /^.{8,}$/.test(text);
 const validatePasswordStrength = (text) => /^(.)\1*$/.test(text);
+const validateUsername = (text) => /^[a-zA-Z0-9_]+$/.test(text);
 
 export const useInputValidation = () => {
   const {
@@ -15,6 +18,7 @@ export const useInputValidation = () => {
     setStepOneCompleted,
     password,
     setValidPasswordEntered,
+    updatedUsername,
   } = useContext(RegisterContext);
   const [emailChecking, setEmailChecking] = useState(false);
   const [hasTyped, setHasTyped] = useState(false);
@@ -164,6 +168,68 @@ export const useInputValidation = () => {
     yearHandler,
     dayHandler,
     passwordError,
+    errorMessage,
+    updatedUsername,
+  };
+};
+
+/* 
+
+username must be more than 4 characters long and can be up to 15 characters or less.
+
+username can contain only letters, numbers, and underscores — no spaces are allowed.
+
+
+*/
+
+export const useUsernameValidation = () => {
+  const { updatedUsername, setIsUsernameValid } = useContext(RegisterContext);
+  const username = useSelector((state) => state.userSlice.username);
+  const [usernameError, setUsernameError] = useState(false);
+  const [errorMessage, setErroMessage] = useState("");
+
+  const { data, isSuccess } = useCheckIfUsernameIsAvailableQuery(
+    updatedUsername,
+    {
+      skip: updatedUsername.length < 4 || !validateUsername(updatedUsername),
+    }
+  );
+
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      if (updatedUsername.length < 4) {
+        setUsernameError(true);
+        setErroMessage("Your username must be longer than 4 characters.");
+      } else if (!validateUsername(updatedUsername)) {
+        setUsernameError(true);
+        setErroMessage(
+          "Your username can only contain letters, numbers and '_'"
+        );
+      } else {
+        if (isSuccess) {
+          console.log(data.usernameAvailable);
+          if (data.usernameAvailable) {
+            setUsernameError(false);
+            setIsUsernameValid(true);
+          } else {
+            setUsernameError(true);
+            setErroMessage(
+              "That username has been taken. Please choose another."
+            );
+          }
+        }
+      }
+    }, 500);
+
+    return () => {
+      setIsUsernameValid(false);
+      setUsernameError(false);
+      clearTimeout(identifier);
+    };
+  }, [updatedUsername, setIsUsernameValid, isSuccess, data?.usernameAvailable]);
+
+  return {
+    usernameError,
     errorMessage,
   };
 };

@@ -4,12 +4,15 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import { useContext, useEffect, useState } from "react";
 import { useSignupConfig } from "../auth/signup/signupConfig";
+import RoundedTextButton from "../RoundedTextButton";
 
 const DialogFooter = ({ step, onClick }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const { btnText, btnStyle } = useSignupConfig();
-  const { stepOneCompleted, validPasswordEntered } =
+  const { stepOneCompleted, validPasswordEntered, isUsernameValid } =
     useContext(RegisterContext);
+
+  console.log(isUsernameValid);
 
   useEffect(() => {
     if (step === 0) {
@@ -27,7 +30,19 @@ const DialogFooter = ({ step, onClick }) => {
         setIsDisabled(true);
       }
     }
-  }, [step, stepOneCompleted, validPasswordEntered]);
+
+    if (step === 3) {
+      setIsDisabled(false);
+    }
+
+    if (step === 4) {
+      if (isUsernameValid) {
+        setIsDisabled(false);
+      } else {
+        setIsDisabled(true);
+      }
+    }
+  }, [step, stepOneCompleted, validPasswordEntered, isUsernameValid]);
 
   return (
     <div
@@ -39,9 +54,10 @@ const DialogFooter = ({ step, onClick }) => {
       onClick={onClick}
     >
       <div className="flex flex-col grow  w-full">
-        <div className={`footer--button ${btnStyle}`}>
-          <CenteredText text={btnText} />
-        </div>
+        <RoundedTextButton
+          text={btnText}
+          className={`footer--button ${btnStyle}`}
+        />
       </div>
     </div>
   );

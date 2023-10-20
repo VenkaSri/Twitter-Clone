@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import PropTypes from "prop-types";
-import StepOne from "@components/dialog/steps/StepOne";
-import StepTwo from "@components/dialog/steps/StepTwo";
-import StepThree from "@components/dialog/steps/StepThree";
+import steps from "@components/dialog/signup/steps/index";
 
 const DialogBody = ({ step }) => {
   const fullScreen = useMediaQuery("(max-width:702px)");
@@ -11,14 +9,9 @@ const DialogBody = ({ step }) => {
   const [body, setBody] = useState(null);
 
   useEffect(() => {
-    if (step === 0) {
-      setBody(<StepOne />);
-    }
-    if (step === 1) {
-      setBody(<StepTwo />);
-    }
-    if (step === 2) {
-      setBody(<StepThree />);
+    const StepComponent = steps[step]; // Use the step variable as an index
+    if (StepComponent) {
+      setBody(<StepComponent />); // Set the selected step component
     }
   }, [step]);
 

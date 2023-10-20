@@ -1,26 +1,36 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-// import { createApi } from '@reduxjs/toolkit/query'
 
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8080/api",
+    baseUrl: "http://localhost:8080/api/auth",
   }),
   endpoints: (builder) => ({
     checkEmailAvailable: builder.query({
-      query: (email) => `auth/email_available?email=${email}`,
+      query: (email) => `/email_available?email=${email}`,
     }),
     registerUser: builder.mutation({
       query: (form) => ({
-        url: "/auth/register",
+        url: "/register",
         method: "POST",
         body: form,
+        credentials: "include",
         headers: {
           "Content-type": "application/json",
         },
       }),
     }),
+    checkAuthStatus: builder.query({
+      query: () => ({
+        url: "/auth_status",
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
-export const { useCheckEmailAvailableQuery, useRegisterUserMutation } = authApi;
+export const {
+  useCheckEmailAvailableQuery,
+  useRegisterUserMutation,
+  useCheckAuthStatusQuery,
+} = authApi;

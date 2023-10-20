@@ -1,4 +1,4 @@
-import { Back, Close } from "@components/icons/Icons";
+import { Back, Close, Logo } from "@components/icons/Icons";
 import PropTypes from "prop-types";
 import { useSignupConfig } from "../auth/signup/signupConfig";
 import clsx from "clsx";
@@ -14,20 +14,21 @@ const DialogHeader = ({ step }) => {
   return (
     <>
       <div className="h-[53px] flex bg-[#fff] dark:bg-[#000] px-[16px]">
-        {
+        {/* {
           <DialogHeaderIcon
             iconType={headerActionIcon}
             onClick={goBackAStep}
             step={step}
           />
-        }
+        } */}
         <div
           className={`flex items-center sticky top-0  w-full justify-center align-center `}
         >
-          <div className="flex h-full justify-center items-stretch flex-col font-cBold ">
+          {/* <div className="flex h-full justify-center items-stretch flex-col font-cBold ">
             Steps {step + 1} of 3
           </div>
-          <div className="flex flex-grow h-full justify-center items-stretch flex-col basis-3/6"></div>
+          <div className="flex flex-grow h-full justify-center items-stretch flex-col basis-3/6"></div> */}
+          {step === 4 && <DialogHeaderLogo />}
         </div>
       </div>
     </>
@@ -55,6 +56,18 @@ const DialogHeaderIcon = ({ iconType, onClick, step }) => {
         dark:fill-white dark:hover:bg-[#191919] hover:bg-[#E6E7E7]"
         >
           {iconType}
+        </div>
+      </div>
+    </>
+  );
+};
+
+const DialogHeaderLogo = () => {
+  return (
+    <>
+      <div className="flex h-full justify-center  flex-col ">
+        <div className="flex flex-col items-center shrink-0 ">
+          <Logo className="w-10" />
         </div>
       </div>
     </>

@@ -8,19 +8,7 @@ import PropTypes from "prop-types";
 const SignUpOptions = () => {
   // const dispatch = useDispatch();
   // const navigate = useNavigate();
-  const handleCreateAccount = () => {
-    // dispatch(dialogSliceActions.setIsDialogOpen(true));
-    // dispatch(dialogSliceActions.setDialogContent("sign_up_step_1"));
-    // // navigate("/i/flow/signup");
-    // window.history.replaceState(
-    //   null,
-    //   "Sign up for Twitter / X",
-    //   "/i/flow/signup"
-    // );
-    // dispatch(
-    //   urlSliceActions.setCurrentUrl("http://localhost:3000/i/flow/signup")
-    // );
-  };
+  const handleCreateAccount = () => {};
 
   return (
     <div className="flex flex-col w-[300px] sm:self-start self-center">
@@ -54,12 +42,12 @@ const SignUpOptions = () => {
       <div className="flex flex-col gap-3 mb-2">
         <RoundedTextButton
           text="Create account"
-          className="h-[40px]  btn-primary"
+          className="h-[40px]  btn--primary"
           onClick={handleCreateAccount}
         />
         <RoundedTextButton
           text="Create demo account"
-          className="h-[40px]  btn-primary"
+          className="h-[40px]  btn--primary"
           onClick={handleCreateAccount}
         />
       </div>

@@ -10,6 +10,7 @@ import { useContext } from "react";
 import DialogFooter from "@components/dialog/DialogFooter";
 import { useSignupConfig } from "@components/auth/signup/signupConfig";
 import DialogBody from "./dialog/body/DialogBody";
+import { OverlayLoader } from "./dialog/OverlayLoader";
 
 const MuiDialog = () => {
   const isMobile = useMediaQuery("(max-width:702px)");
@@ -26,7 +27,7 @@ const MuiDialog = () => {
     overflow: "hidden",
   };
 
-  const { step } = useContext(RegisterContext);
+  const { step, isLoading } = useContext(RegisterContext);
   const { goToNextStep } = useSignupConfig();
 
   return (
@@ -36,22 +37,28 @@ const MuiDialog = () => {
       transitionDuration={0}
       fullScreen={isMobile}
     >
-      <DialogTitle style={{ padding: 0 }}>
-        <DialogHeader step={step} />
-      </DialogTitle>
+      {isLoading ? (
+        <OverlayLoader />
+      ) : (
+        <>
+          <DialogTitle style={{ padding: 0 }}>
+            <DialogHeader step={step} />
+          </DialogTitle>
 
-      <DialogContent
-        className="w-full max-w-[600px] mx-auto  flex flex-col relative dark:bg-black"
-        sx={{
-          "&.MuiDialogContent-root": {
-            padding: 0,
-            overflow: "",
-          },
-        }}
-      >
-        <DialogBody step={step} />
-        <DialogFooter step={step} onClick={goToNextStep} />
-      </DialogContent>
+          <DialogContent
+            className="w-full max-w-[600px] mx-auto  flex flex-col relative dark:bg-black"
+            sx={{
+              "&.MuiDialogContent-root": {
+                padding: 0,
+                overflow: "",
+              },
+            }}
+          >
+            <DialogBody step={step} />
+            <DialogFooter step={step} onClick={goToNextStep} />
+          </DialogContent>
+        </>
+      )}
     </Dialog>
   );
 };

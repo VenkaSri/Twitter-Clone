@@ -5,9 +5,11 @@ import {
   APPLE,
   BACK,
   BOOKMARK,
+  CAMERA,
   CHECKMARK,
   CLOSE,
   COMMENT,
+  EXCLAMATION,
   LIKE,
   LIKE_FILLED,
   MAGNIFY,
@@ -79,6 +81,14 @@ export const VisibilityOff = ({ className = "w-5" }) => (
   <SVG path={VISIBILITY_OFF} className={className} />
 );
 
+export const Camera = ({ className = "w-5" }) => (
+  <SVG path={CAMERA} className={className} />
+);
+
+export const Exclamation = ({ className = "w-5" }) => (
+  <SVG path={EXCLAMATION} className={className} />
+);
+
 const iconPropTypes = {
   className: PropTypes.string,
 };
@@ -99,3 +109,5 @@ Back.propTypes = iconPropTypes;
 Checkmark.propTypes = iconPropTypes;
 Visibility.propTypes = iconPropTypes;
 VisibilityOff.propTypes = iconPropTypes;
+Camera.propTypes = iconPropTypes;
+Exclamation.propTypes = iconPropTypes;

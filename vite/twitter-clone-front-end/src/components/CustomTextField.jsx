@@ -8,11 +8,13 @@ const CustomTextField = ({
   label,
   maxLength,
   onChange,
+  inputStyle,
   hasError,
   defaultValue = "",
   autoFocus,
   type = "text",
   endAdornment,
+  startAdornment,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const { borderColor, labelColor } = useErrorStyles(isFocused, hasError);
@@ -37,17 +39,19 @@ const CustomTextField = ({
           },
           fontSize: "17px",
           fontFamily: "chirpR",
+          ...inputStyle,
         },
       }}
       InputProps={{
         className: `textfield-default  ${borderColor}`,
 
-        classes: {
-          input: "input-field",
-        },
         disableUnderline: true,
         style: { background: "none" },
         endAdornment: endAdornment || null,
+        startAdornment:
+          typeof startAdornment === "function"
+            ? startAdornment(isFocused)
+            : startAdornment || null,
       }}
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
@@ -67,5 +71,7 @@ CustomTextField.propTypes = {
   defaultValue: PropTypes.string,
   autoFocus: PropTypes.bool,
   endAdornment: PropTypes.node,
+  startAdornment: PropTypes.func,
   type: PropTypes.string,
+  inputStyle: PropTypes.object,
 };

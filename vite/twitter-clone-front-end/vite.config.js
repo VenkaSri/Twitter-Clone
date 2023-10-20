@@ -37,6 +37,10 @@ export default defineConfig({
         find: "@constants",
         replacement: fileURLToPath(new URL("./src/constants", import.meta.url)),
       },
+      {
+        find: "@state",
+        replacement: fileURLToPath(new URL("./src/state", import.meta.url)),
+      },
     ],
   },
 });

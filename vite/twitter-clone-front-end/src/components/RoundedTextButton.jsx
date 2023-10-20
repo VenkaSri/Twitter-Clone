@@ -5,11 +5,12 @@ import CenteredText from "./CenteredText";
 const RoundedTextButton = ({ text, className, disabled, onClick }) => {
   return (
     <a
-      className={clsx(className, "button--roundedText w-[300px]", {
+      className={clsx(className, "", {
         "pointer-events-none opacity-50": disabled,
       })}
       role="button"
       onClick={onClick}
+      aria-disabled={disabled}
     >
       <CenteredText text={text} />
     </a>
@@ -22,5 +23,5 @@ RoundedTextButton.propTypes = {
   text: PropTypes.string.isRequired,
   className: PropTypes.string,
   disabled: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };

@@ -7,6 +7,10 @@
     @apply bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30] text-white dark:text-black;
   }
 
+  .btn--skip {
+    @apply border border-[#cfd9de] text-black hover:text-black  hover:bg-[#e7e7e8];
+  }
+
   .footer--button {
     @apply flex flex-col min-h-[52px] my-6 min-w-[52px] rounded-full text-[17px] items-center justify-center font-cBold;
   }
