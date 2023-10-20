@@ -1,16 +1,14 @@
 package ca.venkasritharan.twitterclone.controller.user;
 
 
+import ca.venkasritharan.twitterclone.response.Response;
 import ca.venkasritharan.twitterclone.response.UsersSuggestionResponse;
 import ca.venkasritharan.twitterclone.service.user.UserSuggestionService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = {"*"})
 @RestController
-@RequestMapping("/v1/api/users")
+@RequestMapping("/api/v1/users")
 public class UserSuggestionController {
 
   private final UserSuggestionService userSuggestionService;
@@ -20,7 +18,9 @@ public class UserSuggestionController {
   }
 
   @GetMapping("/suggestions")
-  public UsersSuggestionResponse suggestUsers(int page, int pageSize) {
+  public Response<UsersSuggestionResponse> suggestUsers(
+          @RequestParam(defaultValue = "0") int page,
+          @RequestParam(defaultValue = "5") int pageSize) {
     return userSuggestionService.suggestUsers(page, pageSize);
   }
 }

@@ -15,15 +15,15 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDetailsResponse {
-  private long id;
+  private Long id;
   private String name;
   private String username;
-  @JsonInclude(JsonInclude.Include.NON_NULL)
   private String email;
   private String profile_image_url;
   private String bio;
-  private long followerCount;
-  private long followingCount;
+  private Long followerCount;
+  private Long followingCount;
   private List<Long> likedPostsIds;
 }

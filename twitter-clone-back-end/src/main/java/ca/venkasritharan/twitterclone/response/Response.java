@@ -13,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response<T> {
-  @JsonIgnore
   private int status;
   private String message;
   private T data;
