@@ -15,6 +15,13 @@
     @apply border border-[#cfd9de] text-black hover:text-black  hover:bg-[#e7e7e8];
   }
 
+  .btn--unfollow {
+    @apply bg-transparent hover:bg-[#F9D7DA] dark:bg-transparent
+    text-black hover:text-[#F54550] dark:text-white
+    border border-[#d4dde1] dark:border-[#2f3336] hover:border-[#fdc9ce]
+    dark:hover:border-[#67070f] dark:hover:bg-[#200A0B] dark:hover:text-[#F54550];
+  }
+
   .footer--button {
     @apply flex flex-col min-h-[52px] my-6 min-w-[52px] rounded-full text-[17px] items-center justify-center font-cBold;
   }

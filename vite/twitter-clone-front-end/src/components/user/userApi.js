@@ -12,6 +12,9 @@ export const userApi = createApi({
         url: `${id}`,
       }),
     }),
+    getUserByID: builder.query({
+      query: (id) => `${id}`,
+    }),
     uploadProfilePicture: builder.mutation({
       query: (formData) => ({
         url: "/profile_picture",
@@ -35,6 +38,18 @@ export const userApi = createApi({
         },
       }),
     }),
+    followUser: builder.mutation({
+      query: (idToFollow) => ({
+        url: `/follow/${idToFollow}`,
+        method: "POST",
+      }),
+    }),
+    unfollowUser: builder.mutation({
+      query: (idToUnfollow) => ({
+        url: `/unfollow/${idToUnfollow}`,
+        method: "POST",
+      }),
+    }),
   }),
 });
 
@@ -43,4 +58,7 @@ export const {
   useUploadProfilePictureMutation,
   useCheckIfUsernameIsAvailableQuery,
   useUpdateUsernameMutation,
+  useGetUserByIDQuery,
+  useFollowUserMutation,
+  useUnfollowUserMutation,
 } = userApi;

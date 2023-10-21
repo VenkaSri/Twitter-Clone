@@ -1,14 +1,13 @@
 import ProfilePicture from "@components/ProfilePicture";
-import { Skeleton } from "@mui/material";
 import PropTypes from "prop-types";
 
 const UserInfoCell = ({ options, showBio, userData }) => {
   return (
-    <div className="flex grow max-w-full cursor-pointer hover:bg-[#F7F7F7]  dark:hover:bg-[#080808] p-3">
+    <div className="flex grow max-w-full cursor-pointer hover:bg-[#F7F7F7]  dark:hover:bg-[#080808] p-3 w-full">
       <div className="w-[40px] mr-3">
-        <ProfilePicture />
+        <ProfilePicture src={userData.profile_image_url} />
       </div>
-      <div className="flex flex-col overflow-hidden">
+      <div className="flex flex-col overflow-hidden grow">
         <div className="flex  overflow-hidden items-center justify-between">
           <div className="flex flex-col overflow-hidden">
             <UserNameAndUsername
@@ -18,19 +17,23 @@ const UserInfoCell = ({ options, showBio, userData }) => {
           </div>
           {options || null}
         </div>
-        {showBio && <UserBio />}
+        {showBio && <UserBio text={userData.bio} />}
       </div>
     </div>
   );
 };
 
-const UserBio = () => {
+const UserBio = ({ text }) => {
   return (
-    <div className="mt-2">
-      <span className="text-[#0F1419] leading-5 font-cR  dark:text-white ">
-        Amidst the bustling city, a sense of tranquility prevails.
-      </span>
-    </div>
+    <>
+      {text !== undefined && (
+        <div className="mt-2">
+          <span className="text-[#0F1419] leading-5 font-cR  dark:text-white ">
+            {text}
+          </span>
+        </div>
+      )}
+    </>
   );
 };
 
@@ -56,6 +59,10 @@ UserInfoCell.propTypes = {
 UserNameAndUsername.propTypes = {
   displayName: PropTypes.string,
   username: PropTypes.string,
+};
+
+UserBio.propTypes = {
+  text: PropTypes.string,
 };
 
 export default UserInfoCell;

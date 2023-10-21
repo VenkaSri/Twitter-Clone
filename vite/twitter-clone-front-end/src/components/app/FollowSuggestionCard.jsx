@@ -1,6 +1,6 @@
-import RoundedTextButton from "../RoundedTextButton";
 import UserCard from "./UserCard";
 import { useSuggestUsersQuery } from "../public/publicApi";
+import FollowToggleButton from "@/components/FollowToggleButton";
 import { useEffect, useState } from "react";
 import { OverlayLoader } from "../dialog/OverlayLoader";
 
@@ -39,33 +39,24 @@ const FollowSuggestionCard = () => {
 
   return (
     <>
-      <div>
-        {userCards.map((user) => (
-          <div
-            className="flex flex-col items-center justify-center mt-2"
-            key={user.id}
-          >
-            <UserCard showBio options={<FollowButton />} userData={user} />
-          </div>
-        ))}
-        {isFetching && (
-          <div className="flex justify-center items-center">
-            <OverlayLoader />
-          </div>
-        )}
-      </div>
+      {userCards.map((user) => (
+        <div
+          className="flex flex-col items-center justify-center mt-2 grow w-full "
+          key={user.id}
+        >
+          <UserCard
+            showBio
+            options={<FollowToggleButton id={user.id} />}
+            userData={user}
+          />
+        </div>
+      ))}
+      {isFetching && (
+        <div className="flex justify-center items-center">
+          <OverlayLoader />
+        </div>
+      )}
     </>
-  );
-};
-
-const FollowButton = () => {
-  return (
-    <div className="ml-3 self-start">
-      <RoundedTextButton
-        text="Follow"
-        className="btn--action flex min-h-[32px] min-w-[32px] rounded-full px-3"
-      />
-    </div>
   );
 };
 
