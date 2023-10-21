@@ -1,43 +1,59 @@
-import ProfilePicture from "@components/ProfilePicture";
 import RoundedTextButton from "../RoundedTextButton";
-import CenteredText from "../CenteredText";
-import { Close } from "../icons/Icons";
 import UserCard from "./UserCard";
 import { useSuggestUsersQuery } from "../public/publicApi";
 import { useEffect, useState } from "react";
+import { OverlayLoader } from "../dialog/OverlayLoader";
 
 const FollowSuggestionCard = () => {
-  const page = 0; // Set the desired page
-  const pageSize = 5; // Set the desired page size
-  const { data, isLoading, isSuccess, isError, error } = useSuggestUsersQuery();
-  const [cards, setCards] = useState(null);
+  const [page, setPage] = useState(0);
+  const { data, isFetching } = useSuggestUsersQuery(page);
+  const userCards = data?.data.content ?? [];
+  const totalPage = 5;
 
   useEffect(() => {
-    if (isSuccess) {
-      data.data.content.map((user) => console.log(user));
+    const scrollDiv = document.getElementById("scrollableDiv");
+    const handleScroll = () => {
+      const container = scrollDiv;
+      if (container) {
+        const bottom =
+          container.scrollHeight - container.scrollTop ===
+          container.clientHeight;
+        if (bottom && !isFetching) {
+          if (page === totalPage) return;
+          setPage((prevPage) => prevPage + 1);
+        }
+      }
+    };
+
+    const container = scrollDiv;
+    if (container) {
+      container.addEventListener("scroll", handleScroll);
     }
-  }, [data, isLoading, isSuccess, isError, error]);
+
+    return () => {
+      if (container) {
+        container.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [isFetching, page]);
 
   return (
     <>
-      {isSuccess &&
-        data.data.content.map((user) => (
-          <>
-            {" "}
-            <div className="flex flex-col items-center justify-center  mt-2">
-              <UserCard
-                showBio
-                options={<FollowButton />}
-                userData={user}
-                key={user.id}
-              />
-            </div>
-          </>
+      <div>
+        {userCards.map((user) => (
+          <div
+            className="flex flex-col items-center justify-center mt-2"
+            key={user.id}
+          >
+            <UserCard showBio options={<FollowButton />} userData={user} />
+          </div>
         ))}
-
-      {isLoading && (
-        <div className="flex items-center justify-center  mt-2">loaidng</div>
-      )}
+        {isFetching && (
+          <div className="flex justify-center items-center">
+            <OverlayLoader />
+          </div>
+        )}
+      </div>
     </>
   );
 };

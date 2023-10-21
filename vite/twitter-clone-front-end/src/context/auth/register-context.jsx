@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 const RegisterContext = createContext();
 
 const RegisterProvider = ({ children }) => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(5);
   const [isLoading, setIsLoading] = useState(false);
 
   const [name, setName] = useState("");

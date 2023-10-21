@@ -14,8 +14,8 @@ export const OverlayLoader = () => {
             color: currentColor,
             opacity: 0.3,
           }}
-          size={30}
-          thickness={4}
+          size={25}
+          thickness={5}
           value={100}
         />
         <CircularProgress
@@ -27,8 +27,8 @@ export const OverlayLoader = () => {
             position: "absolute",
             left: 0,
           }}
-          size={30}
-          thickness={4}
+          size={25}
+          thickness={5}
         />
       </Box>
     </div>

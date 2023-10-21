@@ -7,11 +7,19 @@ export const publicApi = createApi({
     credentials: "include",
   }),
   endpoints: (builder) => ({
+    // https://stackoverflow.com/a/74844699
+
     suggestUsers: builder.query({
-      query: (page = 0, pageSize = 5) => ({
-        url: `/suggestions`,
-        params: { page, pageSize },
-      }),
+      query: (page) => `suggestions?page=${page}&pageSize=3`,
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName;
+      },
+      merge: (currentCache, newItems) => {
+        currentCache.data.content.push(...newItems.data.content);
+      },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
     }),
   }),
 });
