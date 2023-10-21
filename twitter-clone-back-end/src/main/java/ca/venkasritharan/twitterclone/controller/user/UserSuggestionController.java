@@ -19,8 +19,9 @@ public class UserSuggestionController {
 
   @GetMapping("/suggestions")
   public Response<UsersSuggestionResponse> suggestUsers(
-          @RequestParam(defaultValue = "0") int page,
-          @RequestParam(defaultValue = "5") int pageSize) {
+          @RequestParam int page,
+          @RequestParam int pageSize) {
+
     return userSuggestionService.suggestUsers(page, pageSize);
   }
 }

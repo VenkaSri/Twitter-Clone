@@ -61,7 +61,10 @@ public class UserServiceImpl implements UserService {
     Optional<User> followerUser = userRepository.findByUsername(authentication.getName());
     Optional<User> followedUser = userRepository.findById(userId);
 
-    if (followerUser.isPresent() && followedUser.isPresent() && followerUser.get().getId() != followedUser.get().getId()) {
+    System.out.println(followedUser.get().getUsername());
+    System.out.println(followerUser.get().getUsername());
+
+    if (followerUser.isPresent() && followedUser.isPresent()) {
       Optional<Follower> existingRelationship = followerRepository.findByFollowerAndFollowed(followerUser.get(), followedUser.get());
       if (existingRelationship.isPresent()) {
         followerRepository.delete(existingRelationship.get());

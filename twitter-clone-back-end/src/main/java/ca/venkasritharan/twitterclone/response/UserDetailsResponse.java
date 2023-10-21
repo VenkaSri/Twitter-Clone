@@ -21,9 +21,11 @@ public class UserDetailsResponse {
   private String name;
   private String username;
   private String email;
-  private String profile_image_url;
   private String bio;
   private Long followerCount;
   private Long followingCount;
   private List<Long> likedPostsIds;
+
+  @JsonInclude(JsonInclude.Include.ALWAYS) // This field will always be included
+  private String profile_image_url;
 }

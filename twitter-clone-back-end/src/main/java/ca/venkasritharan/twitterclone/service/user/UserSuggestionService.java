@@ -1,6 +1,7 @@
 package ca.venkasritharan.twitterclone.service.user;
 
 import ca.venkasritharan.twitterclone.entity.user.User;
+import ca.venkasritharan.twitterclone.exception.UserNotFoundException;
 import ca.venkasritharan.twitterclone.repository.FollowerRepository;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import ca.venkasritharan.twitterclone.response.Response;
@@ -10,10 +11,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -31,26 +35,35 @@ public class UserSuggestionService {
 
 
   public Response<UsersSuggestionResponse> suggestUsers(int page, int pageSize) {
-        Pageable pageable = PageRequest.of(page, pageSize);
-    Page<User> usersPage = userRepository.findAll(pageable);
+
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    Pageable pageable = PageRequest.of(page, pageSize);
+
     List<UserDetailsResponse> userDetailsResponses = new ArrayList<>();
-    for (User user: usersPage.getContent()
-         ) {
-              UserDetailsResponse userDetailsResponse = mapper.map(user, UserDetailsResponse.class);
-        userDetailsResponse.setEmail(user.getProfile().getEmail());
+
+    Optional<User> principleUser = userRepository.findByUsername(authentication.getName());
+    if (principleUser.isPresent()) {
+      Page<User> usersPage = userRepository.findAllExceptPrincipalUser(pageable, principleUser.get().getId());
+      for (User user: usersPage.getContent()
+      ) {
+        UserDetailsResponse userDetailsResponse = new UserDetailsResponse();
+        userDetailsResponse.setId(user.getId());
+        userDetailsResponse.setUsername(user.getUsername());
+        userDetailsResponse.setBio(user.getProfile().getBio());
+        userDetailsResponse.setProfile_image_url(user.getProfile().getProfile_image_url());
         userDetailsResponse.setName(user.getProfile().getName());
         userDetailsResponses.add(userDetailsResponse);
+      }
+
+      UsersSuggestionResponse usersSuggestionResponse = new UsersSuggestionResponse();
+      usersSuggestionResponse.setContent(userDetailsResponses);
+      usersSuggestionResponse.setPageNo(page);
+      usersSuggestionResponse.setTotalElements(usersPage.getTotalElements());
+      usersSuggestionResponse.setPageSize(pageSize);
+      return createResponse(usersSuggestionResponse);
+    } else {
+        throw new UserNotFoundException("User not found");
     }
-
-    UsersSuggestionResponse usersSuggestionResponse = new UsersSuggestionResponse();
-    usersSuggestionResponse.setContent(userDetailsResponses);
-    usersSuggestionResponse.setPageNo(page);
-    usersSuggestionResponse.setTotalElements(usersPage.getTotalElements());
-    usersSuggestionResponse.setPageSize(pageSize);
-
-
-
-    return createResponse(usersSuggestionResponse);
 
   }
 

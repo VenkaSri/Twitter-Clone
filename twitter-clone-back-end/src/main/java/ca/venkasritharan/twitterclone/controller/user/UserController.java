@@ -19,13 +19,15 @@ public class UserController {
     this.postService = postService;
   }
 
-  @PostMapping("/{userId}/follow")
+  @PostMapping("/follow/{userId}")
   public void follow(@PathVariable long userId) {
+    System.out.println("called");
     userService.followUser(userId);
   }
 
-  @PostMapping("/{userId}/unfollow")
+  @PostMapping("/unfollow/{userId}")
   public void unfollow(@PathVariable long userId) {
+    System.out.println("called");
     userService.unfollowUser(userId);
   }
 
