@@ -41,6 +41,10 @@ export default defineConfig({
         find: "@state",
         replacement: fileURLToPath(new URL("./src/state", import.meta.url)),
       },
+      {
+        find: "@services",
+        replacement: fileURLToPath(new URL("./src/services", import.meta.url)),
+      },
     ],
   },
 });

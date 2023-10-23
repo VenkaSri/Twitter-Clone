@@ -9,8 +9,12 @@ import RoundedTextButton from "../RoundedTextButton";
 const DialogFooter = ({ step, onClick }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const { btnText, btnStyle } = useSignupConfig();
-  const { stepOneCompleted, validPasswordEntered, isUsernameValid } =
-    useContext(RegisterContext);
+  const {
+    stepOneCompleted,
+    validPasswordEntered,
+    isUsernameValid,
+    hasFollowedOneUser,
+  } = useContext(RegisterContext);
 
   useEffect(() => {
     if (step === 0) {
@@ -40,8 +44,22 @@ const DialogFooter = ({ step, onClick }) => {
         setIsDisabled(true);
       }
     }
-  }, [step, stepOneCompleted, validPasswordEntered, isUsernameValid]);
+    if (step === 5) {
+      if (hasFollowedOneUser) {
+        setIsDisabled(false);
+      } else {
+        setIsDisabled(true);
+      }
+    }
+  }, [
+    step,
+    stepOneCompleted,
+    validPasswordEntered,
+    isUsernameValid,
+    hasFollowedOneUser,
+  ]);
 
+  console.log(hasFollowedOneUser);
   return (
     <div
       role="button"

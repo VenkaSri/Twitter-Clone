@@ -1,4 +1,4 @@
-import { useCheckIfUsernameIsAvailableQuery } from "@/components/user/userApi";
+import { useCheckIfUsernameIsAvailableQuery } from "@/services/userApi";
 import { RegisterContext } from "@context/auth/register-context";
 import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";

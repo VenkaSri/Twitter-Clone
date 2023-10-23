@@ -1,48 +1,21 @@
 import RoundedTextButton from "@components/RoundedTextButton";
 import PropTypes from "prop-types";
-import { useFollowUserMutation, useUnfollowUserMutation } from "./user/userApi";
-import { useState } from "react";
+import { useFollowToggleButton } from "@/hooks/useFollowToggleButton";
 
-const FollowToggleButton = ({ id }) => {
-  const [followUser] = useFollowUserMutation();
-  const [unfollowUser] = useUnfollowUserMutation();
-  const [buttonText, setButtonText] = useState("Follow");
-  const [buttonStyle, setButtonStyle] = useState("btn--action ");
-  const [followedIDs, setFollowedIDs] = useState([]);
-
-  const removeId = (idToRemove) => {
-    setFollowedIDs(() => {
-      const updatedFollowedUserIds = followedIDs.filter(
-        (id) => id !== idToRemove
-      );
-      return updatedFollowedUserIds;
-    });
-  };
-
-  const onMouseEnter = () => {
-    console.log("hello");
-  };
-
-  const handleFollowUser = () => {
-    if (followedIDs.includes(id)) {
-      unfollowUser(id);
-      setButtonText("Follow");
-      setButtonStyle("btn--action");
-      removeId(id);
-    } else {
-      followUser(id);
-      setFollowedIDs((prevIds) => [...prevIds, id]);
-      setButtonText("Following");
-      setButtonStyle("btn--unfollow");
-    }
-  };
+const FollowToggleButton = ({ id, onClick }) => {
+  const { onMouseEnter, onMouseLeave, buttonStyle, buttonText } =
+    useFollowToggleButton(id);
 
   return (
-    <div className="ml-3 self-start" onMouseEnter={onMouseEnter}>
+    <div
+      className="ml-3 self-start"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <RoundedTextButton
         text={buttonText}
         className={`${buttonStyle} flex min-h-[32px] min-w-[32px] rounded-full px-3`}
-        onClick={handleFollowUser}
+        onClick={onClick}
       />
     </div>
   );
@@ -52,4 +25,5 @@ export default FollowToggleButton;
 
 FollowToggleButton.propTypes = {
   id: PropTypes.number,
+  onClick: PropTypes.func,
 };

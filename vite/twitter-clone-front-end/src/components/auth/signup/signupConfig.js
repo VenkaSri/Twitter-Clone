@@ -10,7 +10,7 @@ import {
   useGetPrincipleUserQuery,
   useUpdateUsernameMutation,
   useUploadProfilePictureMutation,
-} from "@/components/user/userApi";
+} from "@/services/userApi";
 import { useDispatch, useSelector } from "react-redux";
 import { userSliceActions } from "@/state/userSlice";
 
@@ -54,7 +54,7 @@ export const useSignupConfig = () => {
   const [uploadProfilePicture, { isSuccess: profilePicUploaded, isLoading }] =
     useUploadProfilePictureMutation();
 
-  const [updateUsername, { isSuccess: usernameUpdated, data: updatedRes }] =
+  const [updateUsername, { isSuccess: usernameUpdated }] =
     useUpdateUsernameMutation();
 
   useEffect(() => {

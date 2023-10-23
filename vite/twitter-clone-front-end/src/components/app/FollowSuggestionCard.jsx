@@ -3,12 +3,15 @@ import { useSuggestUsersQuery } from "../public/publicApi";
 import FollowToggleButton from "@/components/FollowToggleButton";
 import { useEffect, useState } from "react";
 import { OverlayLoader } from "../dialog/OverlayLoader";
+import { useFollowToggleButton } from "@/hooks/useFollowToggleButton";
 
 const FollowSuggestionCard = () => {
   const [page, setPage] = useState(0);
   const { data, isFetching } = useSuggestUsersQuery(page);
   const userCards = data?.data.content ?? [];
   const totalPage = 5;
+
+  const { handleFollowUser } = useFollowToggleButton();
 
   useEffect(() => {
     const scrollDiv = document.getElementById("scrollableDiv");
@@ -46,7 +49,12 @@ const FollowSuggestionCard = () => {
         >
           <UserCard
             showBio
-            options={<FollowToggleButton id={user.id} />}
+            options={
+              <FollowToggleButton
+                onClick={() => handleFollowUser(user.id)}
+                id={user.id}
+              />
+            }
             userData={user}
           />
         </div>

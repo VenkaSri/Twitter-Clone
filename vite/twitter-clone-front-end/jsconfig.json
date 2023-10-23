@@ -7,7 +7,8 @@
       "@hooks/*": ["./src/hooks/*"],
       "@context/*": ["./src/context/*"],
       "@constants/*": ["./src/constants/*"],
-      "@state/*": ["./src/state/*"]
+      "@state/*": ["./src/state/*"],
+      "@services/*": ["./src/services/*"]
     }
   }
 }

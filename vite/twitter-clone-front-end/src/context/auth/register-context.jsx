@@ -31,6 +31,8 @@ const RegisterProvider = ({ children }) => {
   const [updatedUsername, setUpdatedUsername] = useState("");
   const [isUsernameValid, setIsUsernameValid] = useState(true);
 
+  const [hasFollowedOneUser, setHasFollowedOneUser] = useState(false);
+
   const steps = [0, 1, 2, 3];
 
   useEffect(() => {
@@ -67,6 +69,8 @@ const RegisterProvider = ({ children }) => {
     setUpdatedUsername,
     isUsernameValid,
     setIsUsernameValid,
+    setHasFollowedOneUser,
+    hasFollowedOneUser,
   };
 
   return (
