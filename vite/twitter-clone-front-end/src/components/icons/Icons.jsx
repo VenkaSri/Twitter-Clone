@@ -73,11 +73,11 @@ export const Checkmark = ({ className }) => (
   <SVG path={CHECKMARK} className={className} />
 );
 
-export const Visibility = ({ className = "w-5" }) => (
+export const Visibility = ({ className = "w-5 dark:fill-white" }) => (
   <SVG path={VISIBILITY} className={className} />
 );
 
-export const VisibilityOff = ({ className = "w-5" }) => (
+export const VisibilityOff = ({ className = "w-5 dark:fill-white" }) => (
   <SVG path={VISIBILITY_OFF} className={className} />
 );
 

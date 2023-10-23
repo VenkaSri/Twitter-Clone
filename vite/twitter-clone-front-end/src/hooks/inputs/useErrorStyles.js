@@ -13,7 +13,7 @@ export const useErrorStyles = (isFocused, hasError) => {
     ? errorBorderColor
     : hasError
     ? `dark:border-[#f1202d] border-[#f4212e] border`
-    : "dark:border-[#191b1c] border";
+    : "dark:border-[#333639] border";
 
   const labelColor = isFocused
     ? errorLabelColor

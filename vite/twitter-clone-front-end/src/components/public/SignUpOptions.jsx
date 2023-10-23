@@ -1,14 +1,16 @@
 // import { useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import RoundedTextAndIconButton from "@components/RoundedTextAndIconButton";
-import RoundedTextButton from "@components/RoundedTextButton";
+import RoundedTextButton from "../RoundedTextButton";
 import { Apple } from "@components/icons/Icons";
 import PropTypes from "prop-types";
 
 const SignUpOptions = () => {
   // const dispatch = useDispatch();
-  // const navigate = useNavigate();
-  const handleCreateAccount = () => {};
+  const navigate = useNavigate();
+  const handleCreateAccount = () => {
+    navigate("/i/flow/signup");
+  };
 
   return (
     <div className="flex flex-col w-[300px] sm:self-start self-center">
@@ -42,12 +44,12 @@ const SignUpOptions = () => {
       <div className="flex flex-col gap-3 mb-2">
         <RoundedTextButton
           text="Create account"
-          className="h-[40px]  btn--primary"
+          className="h-[40px]  rounded-full btn--primary"
           onClick={handleCreateAccount}
         />
         <RoundedTextButton
           text="Create demo account"
-          className="h-[40px]  btn--primary"
+          className="h-[40px]  rounded-full btn--primary"
           onClick={handleCreateAccount}
         />
       </div>

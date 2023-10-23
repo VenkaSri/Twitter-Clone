@@ -1,5 +1,4 @@
 import { Suspense, lazy } from "react";
-
 import DialogBodyHeading from "@components/dialog/body/DialogBodyHeading";
 import { OverlayLoader } from "../../OverlayLoader";
 
@@ -24,8 +23,6 @@ t recommendations."
             <FollowSuggestionCard />
           </Suspense>
         </div>
-
-        {/* <SuggestFriends /> */}
       </div>
     </>
   );

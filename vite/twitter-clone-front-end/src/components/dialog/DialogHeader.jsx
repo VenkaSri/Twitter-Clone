@@ -14,21 +14,26 @@ const DialogHeader = ({ step }) => {
   return (
     <>
       <div className="h-[53px] flex bg-[#fff] dark:bg-[#000] px-[16px]">
-        {/* {
+        {step < 3 && (
           <DialogHeaderIcon
             iconType={headerActionIcon}
             onClick={goBackAStep}
             step={step}
           />
-        } */}
+        )}
         <div
           className={`flex items-center sticky top-0  w-full justify-center align-center `}
         >
-          {/* <div className="flex h-full justify-center items-stretch flex-col font-cBold ">
-            Steps {step + 1} of 3
-          </div>
-          <div className="flex flex-grow h-full justify-center items-stretch flex-col basis-3/6"></div> */}
-          {step === 4 && <DialogHeaderLogo />}
+          {step <= 2 && (
+            <>
+              <div className="flex h-full justify-center items-stretch flex-col font-cBold dark:text-white">
+                Steps {step + 1} of 3
+              </div>
+              <div className="flex flex-grow h-full justify-center items-stretch flex-col basis-3/6"></div>
+            </>
+          )}
+
+          {step >= 3 && <DialogHeaderLogo />}
         </div>
       </div>
     </>
@@ -67,7 +72,7 @@ const DialogHeaderLogo = () => {
     <>
       <div className="flex h-full justify-center  flex-col ">
         <div className="flex flex-col items-center shrink-0 ">
-          <Logo className="w-10" />
+          <Logo className="w-10 dark:fill-white" />
         </div>
       </div>
     </>
@@ -77,4 +82,5 @@ const DialogHeaderLogo = () => {
 DialogHeaderIcon.propTypes = {
   iconType: PropTypes.node,
   onClick: PropTypes.func.isRequired,
+  step: PropTypes.number,
 };

@@ -34,7 +34,7 @@ const DOBSelectField = (props) => {
         label={props.label}
         sx={{
           background: "none",
-          border: darkMode ? "1px solid #191b1c" : "1px solid #cfd9de",
+          border: darkMode ? "1px solid #333639" : "1px solid #cfd9de",
           borderRadius: "4px",
           "&.Mui-focused": {
             border: "2px solid #1d9bf0",

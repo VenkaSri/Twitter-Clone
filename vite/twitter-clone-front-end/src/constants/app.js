@@ -1,0 +1,3 @@
+const USERNAME_MIN_LENGTH = 5;
+
+export { USERNAME_MIN_LENGTH };

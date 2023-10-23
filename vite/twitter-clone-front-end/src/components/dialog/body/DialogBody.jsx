@@ -2,16 +2,18 @@ import { useEffect, useRef, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import PropTypes from "prop-types";
 import steps from "@components/dialog/signup/steps/index";
+import { useDynamicShadow } from "@/hooks/dialog/useDynamicShadow";
 
 const DialogBody = ({ step }) => {
   const fullScreen = useMediaQuery("(max-width:702px)");
   const containerRef = useRef(null);
   const [body, setBody] = useState(null);
+  useDynamicShadow(containerRef);
 
   useEffect(() => {
-    const StepComponent = steps[step]; // Use the step variable as an index
+    const StepComponent = steps[step];
     if (StepComponent) {
-      setBody(<StepComponent />); // Set the selected step component
+      setBody(<StepComponent />);
     }
   }, [step]);
 

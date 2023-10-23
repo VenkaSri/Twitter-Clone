@@ -1,13 +1,81 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" style="height: 100%; width: 100%; display: flex">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .dark-mode .svg-path {
+        fill: #0f1419;
+      }
+
+      /* Styles for light mode */
+      .light-mode .svg-path {
+        fill: black;
+      }
+    </style>
   </head>
-  <body>
-    <div id="root"></div>
+  <body
+    style="
+      display: flex;
+      flex-grow: 1;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    "
+  >
+    <div id="root" style="display: flex; flex-grow: 1"></div>
+    <div
+      style="
+        display: flex;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        flex-grow: 1;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+      "
+      id="pageload"
+    >
+      <div style="margin: auto">
+        <div style="width: 80px">
+          <svg viewBox="0 0 24 24">
+            <path
+              class="svg-path"
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <script>
+      const pageLoadDiv = document.getElementById("pageload");
+
+      const setTheme = () => {
+        const isDarkMode = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        pageLoadDiv.style.backgroundColor = isDarkMode ? "black" : "white";
+        pageLoadDiv.className = isDarkMode ? "dark-mode" : "light-mode";
+      };
+
+      // Set the initial theme
+      setTheme();
+
+      // Add an event listener to update the theme when the user's preference changes
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", setTheme);
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

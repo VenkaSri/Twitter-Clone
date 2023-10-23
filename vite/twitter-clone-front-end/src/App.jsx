@@ -1,28 +1,14 @@
-import MuiDialog from "@components/Dialog";
-import { Suspense, lazy } from "react";
-import { HelmetProvider } from "react-helmet-async";
-import { Provider } from "react-redux";
-import { store } from "./store";
-import { RegisterProvider } from "@context/auth/register-context";
-import { OverlayLoader } from "./components/dialog/OverlayLoader";
+import { Suspense } from "react";
+import AppProvider from "./providers/app";
+import AppRoutes from "./routes/routes";
+import AppProgess from "./components/AppLoader";
 
-const LandingPage = lazy(() => import("@components/public/LandingPage"));
-
-function App() {
+const App = () => {
   return (
-    <>
-      <HelmetProvider>
-        <Provider store={store}>
-          <Suspense fallback={<OverlayLoader />}>
-            <LandingPage />
-          </Suspense>
-          <RegisterProvider>
-            <MuiDialog />
-          </RegisterProvider>
-        </Provider>
-      </HelmetProvider>
-    </>
+    <AppProvider>
+      <AppRoutes />
+    </AppProvider>
   );
-}
+};
 
 export default App;

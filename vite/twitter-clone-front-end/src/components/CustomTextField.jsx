@@ -43,7 +43,7 @@ const CustomTextField = ({
         },
       }}
       InputProps={{
-        className: `textfield-default  ${borderColor}`,
+        className: `textfield-default  ${borderColor}  `,
 
         disableUnderline: true,
         style: { background: "none" },

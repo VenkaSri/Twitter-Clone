@@ -1,6 +1,6 @@
 @layer components {
   .btn--primary {
-    @apply border-black/0 bg-primary text-white hover:bg-[#1a8cd8];
+    @apply border-black/0 bg-primary text-white hover:bg-[#1a8cd8] flex flex-col;
   }
 
   .btn--next {
@@ -12,7 +12,8 @@
   }
 
   .btn--skip {
-    @apply border border-[#cfd9de] text-black hover:text-black  hover:bg-[#e7e7e8];
+    @apply border border-[#cfd9de] text-black  hover:bg-[#e7e7e8] dark:border-[#536471]
+    dark:hover:bg-[#eff3f4]/[0.1] dark:text-white;
   }
 
   .btn--unfollow {

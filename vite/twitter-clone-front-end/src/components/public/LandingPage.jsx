@@ -1,5 +1,5 @@
 import { Logo } from "@components/icons/Icons";
-import SignUpOptions from "./SignUpOptions";
+import SignUpOptions from "@components/public/SignUpOptions";
 import { LandingFooter } from "@components/public/LandingFooter";
 import RoundedTextButton from "@components/RoundedTextButton";
 import Head from "@components/head/Head";
@@ -32,7 +32,7 @@ export const LandingPage = () => {
                 </span>
               </div>
               <SignUpOptions />
-              <div className="flex flex-col mt-10 gap-4 ">
+              <div className="flex flex-col mt-10 gap-4 max-w-full">
                 <span
                   className={`font-cMed text-17 leading-[20px] font-bold mb-2`}
                 >
@@ -40,7 +40,7 @@ export const LandingPage = () => {
                 </span>
                 <RoundedTextButton
                   text="Sign in"
-                  className="h-[40px] text-primary mb-2 default-border-color hover:bg-primary/[0.1] sm:self-start self-center"
+                  className="button--roundedText h-[40px] text-primary mb-2 default-border-color hover:bg-primary/[0.1] sm:self-start self-center w-[300px]"
                   onClick={handleLogin}
                 />
               </div>

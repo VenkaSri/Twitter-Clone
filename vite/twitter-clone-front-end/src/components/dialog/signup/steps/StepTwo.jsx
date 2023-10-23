@@ -8,6 +8,7 @@ import { Checkmark } from "@/components/icons/Icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useSignupConfig } from "@/components/auth/signup/signupConfig";
+import { useTheme } from "@/hooks/useTheme";
 
 dayjs.extend(customParseFormat);
 
@@ -17,7 +18,7 @@ const StepTwo = () => {
 
   const userDob = `${dob.month} ${dob.day}, ${dob.year}`;
   const formattedDob = dayjs(userDob).format("MMMM DD, YYYY");
-
+  const { darkMode } = useTheme();
   const handleClick = (field) => {
     goBackAStep();
     setAutoFocusField(field);
@@ -50,7 +51,10 @@ export default StepTwo;
 const ReadOnlyTextField = ({ label, defaultValue, onClick }) => {
   return (
     <FormControl fullWidth sx={{ m: 1 }} variant="filled">
-      <InputLabel htmlFor="filled-adornment-amount" className="text-primary">
+      <InputLabel
+        htmlFor="filled-adornment-amount"
+        style={{ color: "#71767b", opacity: 1 }}
+      >
         {label}
       </InputLabel>
       <FilledInput
@@ -68,7 +72,7 @@ const ReadOnlyTextField = ({ label, defaultValue, onClick }) => {
             color: "white",
           },
           fontSize: "17px",
-          fontFamily: "TwitterChirp",
+          fontFamily: "chirpR",
         }}
         defaultValue={defaultValue}
         className="textfield-default"

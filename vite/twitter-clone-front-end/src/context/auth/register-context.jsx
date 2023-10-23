@@ -6,8 +6,10 @@ import { useSelector } from "react-redux";
 const RegisterContext = createContext();
 
 const RegisterProvider = ({ children }) => {
-  const [step, setStep] = useState(5);
+  const [step, setStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [isContentOverflowing, setIsContentOverflowing] = useState(false);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -71,6 +73,8 @@ const RegisterProvider = ({ children }) => {
     setIsUsernameValid,
     setHasFollowedOneUser,
     hasFollowedOneUser,
+    isContentOverflowing,
+    setIsContentOverflowing,
   };
 
   return (

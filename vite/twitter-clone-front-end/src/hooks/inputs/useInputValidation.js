@@ -1,3 +1,4 @@
+import { USERNAME_MIN_LENGTH } from "@/constants/app";
 import { useCheckIfUsernameIsAvailableQuery } from "@/services/userApi";
 import { RegisterContext } from "@context/auth/register-context";
 import { useContext, useEffect, useState } from "react";
@@ -192,7 +193,7 @@ export const useUsernameValidation = () => {
     updatedUsername,
     {
       skip:
-        updatedUsername.length < 4 ||
+        updatedUsername.length < USERNAME_MIN_LENGTH ||
         !validateUsername(updatedUsername) ||
         username === updatedUsername,
     }
@@ -206,7 +207,7 @@ export const useUsernameValidation = () => {
       return;
     }
     const identifier = setTimeout(() => {
-      if (updatedUsername.length < 4) {
+      if (updatedUsername.length < USERNAME_MIN_LENGTH) {
         setUsernameError(true);
         setErroMessage("Your username must be longer than 4 characters.");
       } else if (!validateUsername(updatedUsername)) {

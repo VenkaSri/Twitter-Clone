@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authApi } from "@components/auth/authApi";
+import { authApi } from "@/services/authApi";
 import themeSlice from "@state/themeSlice";
 import userSlice from "@state/userSlice";
+import authSlice from "./state/authSlice";
 import { userApi } from "./services/userApi";
 import { publicApi } from "./components/public/publicApi";
 
@@ -12,6 +13,7 @@ export const store = configureStore({
     [publicApi.reducerPath]: publicApi.reducer,
     themeSlice,
     userSlice,
+    authSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
