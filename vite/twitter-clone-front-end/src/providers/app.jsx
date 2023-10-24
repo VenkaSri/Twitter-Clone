@@ -13,17 +13,17 @@ import { BrowserRouter } from "react-router-dom";
 
 const AppProvider = ({ children }) => {
   const dispatch = useDispatch();
-  const { data, error, isLoading } = useCheckAuthStatusQuery();
+  // const { data, error, isLoading } = useCheckAuthStatusQuery();
 
-  useEffect(() => {
-    if (data) {
-      // Handle successful authentication check (e.g., update Redux store)
-      dispatch(authSliceActions.setIsAuthenticated(data.validToken));
-    } else if (error) {
-      // Handle error in authentication check (e.g., clear user data from store)
-      dispatch(/* your action to clear user data from the store */);
-    }
-  }, [data, error, isLoading, dispatch]);
+  // useEffect(() => {
+  //   if (data) {
+  //     // Handle successful authentication check (e.g., update Redux store)
+  //     dispatch(authSliceActions.setIsAuthenticated(data.validToken));
+  //   } else if (error) {
+  //     // Handle error in authentication check (e.g., clear user data from store)
+  //     dispatch(/* your action to clear user data from the store */);
+  //   }
+  // }, [data, error, isLoading, dispatch]);
 
   return (
     <Suspense fallback={<AppProgess />}>

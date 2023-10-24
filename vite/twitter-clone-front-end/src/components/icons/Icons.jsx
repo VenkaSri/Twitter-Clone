@@ -5,14 +5,24 @@ import {
   APPLE,
   BACK,
   BOOKMARK,
+  BOOKMARKS,
   CAMERA,
   CHECKMARK,
   CLOSE,
   COMMENT,
+  COMMUNITIES,
   EXCLAMATION,
+  EXPLORE,
+  HOME,
   LIKE,
   LIKE_FILLED,
+  LISTS,
   MAGNIFY,
+  MESSSAGES,
+  MORE,
+  NOTIFICATION,
+  PREMIUM,
+  PROFILE,
   QUILL,
   REPOST,
   SHARE,
@@ -89,6 +99,50 @@ export const Exclamation = ({ className = "w-5" }) => (
   <SVG path={EXCLAMATION} className={className} />
 );
 
+export const Ellipsis = ({ className = "w-5" }) => (
+  <SVG path={EXCLAMATION} className={className} />
+);
+
+export const HomeOutlined = ({ className = "w-5 dark:fill-white" }) => (
+  <SVG path={HOME} className={className} />
+);
+
+export const MessagesOutlined = ({ className = "w-5" }) => (
+  <SVG path={MESSSAGES} className={className} />
+);
+
+export const CommunitiesOutlined = ({ className = "w-5" }) => (
+  <SVG path={COMMUNITIES} className={className} />
+);
+
+export const ExploreOutlined = ({ className = "w-5" }) => (
+  <SVG path={EXPLORE} className={className} />
+);
+
+export const NotificationsOutlined = ({
+  className = "w-5 dark:fill-white",
+}) => <SVG path={NOTIFICATION} className={className} />;
+
+export const BookmarksOutlined = ({ className = "w-5" }) => (
+  <SVG path={BOOKMARKS} className={className} />
+);
+
+export const MoreOutlined = ({ className = "w-5" }) => (
+  <SVG path={MORE} className={className} />
+);
+
+export const ProfileOutlined = ({ className = "w-5" }) => (
+  <SVG path={PROFILE} className={className} />
+);
+
+export const ListsOutlined = ({ className = "w-5" }) => (
+  <SVG path={LISTS} className={className} />
+);
+
+export const PremiumOutlined = ({ className = "w-5" }) => (
+  <SVG path={PREMIUM} className={className} />
+);
+
 const iconPropTypes = {
   className: PropTypes.string,
 };
@@ -111,3 +165,14 @@ Visibility.propTypes = iconPropTypes;
 VisibilityOff.propTypes = iconPropTypes;
 Camera.propTypes = iconPropTypes;
 Exclamation.propTypes = iconPropTypes;
+Ellipsis.propTypes = iconPropTypes;
+HomeOutlined.propTypes = iconPropTypes;
+NotificationsOutlined.propTypes = iconPropTypes;
+ProfileOutlined.propTypes = iconPropTypes;
+MoreOutlined.propTypes = iconPropTypes;
+BookmarksOutlined.propTypes = iconPropTypes;
+ListsOutlined.propTypes = iconPropTypes;
+ExploreOutlined.propTypes = iconPropTypes;
+MessagesOutlined.propTypes = iconPropTypes;
+CommunitiesOutlined.propTypes = iconPropTypes;
+PremiumOutlined.propTypes = iconPropTypes;

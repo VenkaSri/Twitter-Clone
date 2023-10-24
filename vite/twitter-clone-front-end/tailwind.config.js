@@ -4,6 +4,7 @@ export default {
   theme: {
     screens: {
       sm: "500px",
+      tablet: "1265px",
     },
     fontFamily: {
       chirp: ["chirp", "sans-serif"],
