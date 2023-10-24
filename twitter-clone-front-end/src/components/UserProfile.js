@@ -24,7 +24,7 @@ export const UserProfile = ({ userData, isAuthUser }) => {
   return (
     <div className="flex-col-container grow overflow-hidden  px-[15px]">
       <div className="text-black dark:text-white break-words whitespace-nowrap text-ellipsis overflow-hidden font-cBold leading-5">
-        <span>{userName}</span>
+        <span>Captain Bartholomew's Magical Underwater Kingdomff</span>
       </div>
       <div className="text-[#71767B] break-words whitespace-nowrap text-ellipsis overflow-hidden font-cReg leading-5">
         <span>@{userUsername}</span>

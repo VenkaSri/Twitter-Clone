@@ -1,7 +1,7 @@
 @layer components {
   .header--logo {
-    @apply flex w-[50px] h-[50px]  rounded-full fill-[#1D9BF0]  items-center justify-center py-[2px] cursor-pointer
-    hover:bg-[#E6E7E7] dark:hover:bg-[var(--primary-dark-hov-bg-color)]
+    @apply flex w-[50px] h-[50px]  rounded-full items-center justify-center py-[2px] cursor-pointer
+    hover:bg-[#E6E7E7] dark:hover:bg-[#191919]
     tablet:self-start self-center;
   }
 
@@ -17,10 +17,6 @@
 
   .header--button-wrapper {
     @apply w-[90%]  tablet:self-start self-center;
-  }
-
-  .header--newPostButton {
-    @apply bg-[var(--primary-color)] text-white text-[17px];
   }
 
   .DraftEditor-root {

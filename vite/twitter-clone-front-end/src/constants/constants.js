@@ -1,5 +1,6 @@
 const ERROR_COLOR = "text-[#f1202d]";
 const PRIMARY_COLOR = "text-[#1e9bf0]";
+
 const DARK_TEXT_COLOR = "dark:text-[#71767b]";
 const DARK_INPUT_FIELD_BORDER_COLOR = "#333639";
 const DARK_BORDER_COLOR = "#536471";

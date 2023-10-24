@@ -14,7 +14,7 @@ const initialState = {
   isValidPasswordSet: false,
   isValidUsernameSet: false,
   password: "",
-  currentStep: 1,
+  currentStep: 0,
   signUpStep: 0,
   postRegisterSteps: 0,
   doesUserExist: false,

@@ -6,7 +6,7 @@ const RoundedTextButton = ({ text, className, disabled, onClick }) => {
   return (
     <>
       <a
-        className={clsx(className, "", {
+        className={clsx(className, "btn--roundedText", {
           "pointer-events-none opacity-50": disabled,
         })}
         role="button"

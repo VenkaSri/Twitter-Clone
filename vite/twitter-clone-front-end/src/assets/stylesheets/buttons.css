@@ -1,4 +1,12 @@
 @layer components {
+  .btn--roundedText {
+    @apply rounded-full flex flex-col border font-cR;
+  }
+
+  .btn--roundedIcon {
+    @apply rounded-full flex flex-col border items-center justify-center;
+  }
+
   .btn--primary {
     @apply border-black/0 bg-primary text-white hover:bg-[#1a8cd8] flex flex-col;
   }
@@ -25,9 +33,5 @@
 
   .footer--button {
     @apply flex flex-col min-h-[52px] my-6 min-w-[52px] rounded-full text-[17px] items-center justify-center font-cBold;
-  }
-
-  .button--roundedText {
-    @apply rounded-full flex flex-col border  max-w-[380px];
   }
 }

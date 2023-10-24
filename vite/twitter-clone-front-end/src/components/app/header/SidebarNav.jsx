@@ -1,74 +1,33 @@
 import { useTheme } from "@/hooks/useTheme";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import * as Icons from "@components/icons/Icons";
+import { LINKS } from "@components/app/header/navLinks";
+import PropTypes from "prop-types";
+import { useState } from "react";
+import clsx from "clsx";
 
 const SidebarNav = () => {
   const hide = useMediaQuery("(max-height:751px)");
-  const links = [
-    {
-      name: "Home",
-      // iconFilled: <Icons.HomeFilled />,
-      iconOutlined: Icons.HomeOutlined,
-    },
-    {
-      name: "Explore",
-      // iconFilled: <Icons.ExploreFilled />,
-      iconOutlined: Icons.ExploreOutlined,
-    },
-    {
-      name: "Notifications",
-      // iconFilled: <Icons.NotificationsFilled />,
-      iconOutlined: Icons.NotificationsOutlined,
-    },
-    {
-      name: "Messages",
-      // iconFilled: <Icons.MessagesFilled />,
-      iconOutlined: Icons.MessagesOutlined,
-    },
-    {
-      name: "Lists",
-      // iconFilled: <Icons.ListsFilled />,
-      iconOutlined: Icons.ListsOutlined,
-    },
-    {
-      name: "Bookmarks",
-      // iconFilled: <Icons.BookmarksFilled />,
-      iconOutlined: Icons.BookmarksOutlined,
-    },
-    {
-      name: "Communities",
-      // iconFilled: <Icons.CommunitiesFilled />,
-      iconOutlined: Icons.CommunitiesOutlined,
-    },
-    {
-      name: "Premium",
-      // iconFilled: <Icons.PremiumFilled />,
-      iconOutlined: Icons.ProfileOutlined,
-    },
-    {
-      name: "Profile",
-      // iconFilled: <Icons.ProfileFilled />,
-      iconOutlined: Icons.ProfileOutlined,
-    },
-    {
-      name: "More",
-      // iconFilled: <Icons.MoreFilled />,
-      iconOutlined: Icons.MoreOutlined,
-    },
-  ];
+  const [activeLink, setActiveLink] = useState("Home");
 
-  const headerButtons = links.map((link) => {
+  const handleClick = (link) => {
+    setActiveLink(link);
+    console.log(link);
+  };
+
+  const headerButtons = LINKS.map((link) => {
     let visibility = "";
 
-    if (link === "Bookmarks" && hide) {
+    if (link.name === "Bookmarks" && hide) {
       visibility = "hidden";
     }
     return (
       <HeaderButton
         key={link.name}
-        icon={link.iconOutlined}
+        icon={activeLink === link.name ? link.iconFilled : link.iconOutlined}
         text={link.name}
         visibility={visibility}
+        onClick={handleClick}
+        isActive={activeLink === link.name}
       />
     );
   });
@@ -82,8 +41,7 @@ const SidebarNav = () => {
 
 export default SidebarNav;
 
-const HeaderButton = ({ icon: Icon, text, visibility }) => {
-  const { darkMode } = useTheme();
+const HeaderButton = ({ icon: Icon, text, visibility, onClick, isActive }) => {
   const padding = useMediaQuery("(max-height:850px)");
 
   return (
@@ -91,13 +49,27 @@ const HeaderButton = ({ icon: Icon, text, visibility }) => {
       className={`w-full  flex flex-col items-start ${visibility} ${
         padding ? "py-0" : "py-1"
       }`}
+      onClick={() => onClick(text)}
     >
       <div className="header--link">
         <div>{<Icon className="w-[26.25px]" />}</div>
-        <div className="leading-6 mr-4 ml-5 text-[20px] font-cReg tablet:block hidden">
-          <span>{text}</span>
+        <div
+          className={clsx(
+            `leading-6 mr-4 ml-5 text-[20px] tablet:flex hidden`,
+            isActive ? "font-cBold" : "font-cR"
+          )}
+        >
+          <span className="self-end">{text}</span>
         </div>
       </div>
     </a>
   );
+};
+
+HeaderButton.propTypes = {
+  icon: PropTypes.func,
+  text: PropTypes.string,
+  visibility: PropTypes.string,
+  onClick: PropTypes.func,
+  isActive: PropTypes.bool,
 };

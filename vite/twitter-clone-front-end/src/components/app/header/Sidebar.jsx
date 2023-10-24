@@ -3,20 +3,16 @@ import { RoundedIconButton } from "@/components/RoundedIconButton";
 import RoundedTextButton from "@/components/RoundedTextButton";
 import { Ellipsis, Logo, Quill } from "@/components/icons/Icons";
 import { POST_BUTTON_VALUE } from "@/constants/app";
-import { useTheme } from "@/hooks/useTheme";
 import SidebarNav from "@components/app/header/SidebarNav";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import clsx from "clsx";
-import UserInfoCell from "../UserCard";
+import UserDisplayNameAndHandle from "@/components/UserDisplayNameAndHandle";
 
 const Sidebar = () => {
-  const { darkMode } = useTheme();
-
   return (
     <div className="header--siderbar">
       <div className="flex flex-col">
         <div className="header--logo">
-          <Logo className="w-[30px] dark:fill-white" />
+          <Logo className="w-[30px] dark:fill-white fill-black" />
         </div>
         <SidebarNav />
         <NewPostButton />
@@ -33,21 +29,21 @@ const NewPostButton = () => {
   return (
     <>
       <div
-        className={`header--button-wrapper shadow-nav-post-button-shadow overflow-hidden rounded-full ${
+        className={` w-[90%]  tablet:self-start self-center shadow-sidebar-nav-post-button overflow-hidden rounded-full ${
           btnYMargin ? "my-1" : "my-4"
         }`}
       >
         <div className="tablet:block hidden">
           <RoundedTextButton
             text={POST_BUTTON_VALUE}
-            className="header--newPostButton"
+            className="min-h-[52px] min-w-[52px]  btn--primary text-17 leading-5"
           />
         </div>
       </div>
-      <div className={`centered-column-container header--button-wrapper`}>
+      <div className={`flex flex-col justify-center items-center `}>
         <div className="tablet:hidden block">
           <RoundedIconButton
-            className={clsx("header--newPostButton button--rounded")}
+            className="min-h-[52px] min-w-[52px] btn--primary"
             icon={<Quill className="w-6 fill-white" />}
           />
         </div>
@@ -55,17 +51,17 @@ const NewPostButton = () => {
     </>
   );
 };
+
 const AccountMenu = () => {
-  const darkMode = useTheme();
   return (
     <>
       <div className="my-3  flex items-center justify-center ">
-        <div className="rounded-full max-w-full flex grow p-3 dark:hover:bg-[#191919] hover:bg-[var(--primary-hov-bg-color)] cursor-pointer  items-center">
+        <div className="rounded-full max-w-full flex  tablet:grow p-3 dark:hover:bg-[#191919] hover:bg-[#0f1419]/[0.1] cursor-pointer  items-center">
           <div className="w-[40px]">
             <ProfilePicture />
           </div>
-          <div className="flex flex-col overflow-hidden shrink-1 tablet:block hidden">
-            {/* <UserInfoCell isAuthUser /> */}
+          <div className=" flex-col overflow-hidden shrink-1 tablet:flex hidden px-[15px]">
+            <UserDisplayNameAndHandle principleUser />
           </div>
           <div className=" tablet:flex hidden ml-auto">
             <Ellipsis />

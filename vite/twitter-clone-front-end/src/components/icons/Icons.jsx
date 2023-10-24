@@ -6,23 +6,31 @@ import {
   BACK,
   BOOKMARK,
   BOOKMARKS,
+  BOOKMARKS_FILLED,
   CAMERA,
   CHECKMARK,
   CLOSE,
   COMMENT,
   COMMUNITIES,
+  COMMUNITIES_FILLED,
+  ELLIPSIS,
   EXCLAMATION,
   EXPLORE,
+  EXPLORE_FILLED,
   HOME,
+  HOME_FILLED,
   LIKE,
   LIKE_FILLED,
   LISTS,
+  LISTS_FILLED,
   MAGNIFY,
-  MESSSAGES,
+  MESSAGES,
+  MESSSAGES_FILLED,
   MORE,
   NOTIFICATION,
-  PREMIUM,
+  NOTIFICATION_FILLED,
   PROFILE,
+  PROFILE_FILLED,
   QUILL,
   REPOST,
   SHARE,
@@ -100,31 +108,55 @@ export const Exclamation = ({ className = "w-5" }) => (
 );
 
 export const Ellipsis = ({ className = "w-5" }) => (
-  <SVG path={EXCLAMATION} className={className} />
+  <SVG path={ELLIPSIS} className={className} />
 );
 
 export const HomeOutlined = ({ className = "w-5 dark:fill-white" }) => (
   <SVG path={HOME} className={className} />
 );
 
+export const HomeFilled = ({ className = "w-5 dark:fill-white" }) => (
+  <SVG path={HOME_FILLED} className={className} />
+);
+
 export const MessagesOutlined = ({ className = "w-5" }) => (
-  <SVG path={MESSSAGES} className={className} />
+  <SVG path={MESSAGES} className={className} />
+);
+
+export const MessagesFilled = ({ className = "w-5" }) => (
+  <SVG path={MESSSAGES_FILLED} className={className} />
 );
 
 export const CommunitiesOutlined = ({ className = "w-5" }) => (
   <SVG path={COMMUNITIES} className={className} />
 );
 
+export const CommunitiesFilled = ({ className = "w-5" }) => (
+  <SVG path={COMMUNITIES_FILLED} className={className} />
+);
+
 export const ExploreOutlined = ({ className = "w-5" }) => (
   <SVG path={EXPLORE} className={className} />
 );
 
-export const NotificationsOutlined = ({
-  className = "w-5 dark:fill-white",
-}) => <SVG path={NOTIFICATION} className={className} />;
+export const ExploreFilled = ({ className = "w-5" }) => (
+  <SVG path={EXPLORE_FILLED} className={className} />
+);
+
+export const NotificationOutlined = ({ className = "w-5 dark:fill-white" }) => (
+  <SVG path={NOTIFICATION} className={className} />
+);
+
+export const NotificationFilled = ({ className = "w-5 dark:fill-white" }) => (
+  <SVG path={NOTIFICATION_FILLED} className={className} />
+);
 
 export const BookmarksOutlined = ({ className = "w-5" }) => (
   <SVG path={BOOKMARKS} className={className} />
+);
+
+export const BookmarksFilled = ({ className = "w-5" }) => (
+  <SVG path={BOOKMARKS_FILLED} className={className} />
 );
 
 export const MoreOutlined = ({ className = "w-5" }) => (
@@ -135,12 +167,16 @@ export const ProfileOutlined = ({ className = "w-5" }) => (
   <SVG path={PROFILE} className={className} />
 );
 
+export const ProfileFilled = ({ className = "w-5" }) => (
+  <SVG path={PROFILE_FILLED} className={className} />
+);
+
 export const ListsOutlined = ({ className = "w-5" }) => (
   <SVG path={LISTS} className={className} />
 );
 
-export const PremiumOutlined = ({ className = "w-5" }) => (
-  <SVG path={PREMIUM} className={className} />
+export const ListsFilled = ({ className = "w-5" }) => (
+  <SVG path={LISTS_FILLED} className={className} />
 );
 
 const iconPropTypes = {
@@ -167,7 +203,8 @@ Camera.propTypes = iconPropTypes;
 Exclamation.propTypes = iconPropTypes;
 Ellipsis.propTypes = iconPropTypes;
 HomeOutlined.propTypes = iconPropTypes;
-NotificationsOutlined.propTypes = iconPropTypes;
+NotificationOutlined.propTypes = iconPropTypes;
+NotificationFilled.propTypes = iconPropTypes;
 ProfileOutlined.propTypes = iconPropTypes;
 MoreOutlined.propTypes = iconPropTypes;
 BookmarksOutlined.propTypes = iconPropTypes;
@@ -175,4 +212,10 @@ ListsOutlined.propTypes = iconPropTypes;
 ExploreOutlined.propTypes = iconPropTypes;
 MessagesOutlined.propTypes = iconPropTypes;
 CommunitiesOutlined.propTypes = iconPropTypes;
-PremiumOutlined.propTypes = iconPropTypes;
+HomeFilled.propTypes = iconPropTypes;
+CommunitiesFilled.propTypes = iconPropTypes;
+ExploreFilled.propTypes = iconPropTypes;
+MessagesFilled.propTypes = iconPropTypes;
+ListsFilled.propTypes = iconPropTypes;
+ProfileFilled.propTypes = iconPropTypes;
+BookmarksFilled.propTypes = iconPropTypes;
