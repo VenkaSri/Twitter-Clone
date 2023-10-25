@@ -10,6 +10,8 @@ const DOBSelectField = (props) => {
   const [isFocused, setIsFocused] = useState(false);
   const { darkMode } = useTheme();
 
+  console.log(darkMode);
+
   return (
     <FormControl
       variant="filled"

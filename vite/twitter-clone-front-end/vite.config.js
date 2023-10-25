@@ -46,6 +46,15 @@ export default defineConfig({
         find: "@services",
         replacement: fileURLToPath(new URL("./src/services", import.meta.url)),
       },
+      {
+        find: "@test",
+        replacement: fileURLToPath(new URL("./src/test", import.meta.url)),
+      },
     ],
+  },
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./src/test/setup.js",
   },
 });

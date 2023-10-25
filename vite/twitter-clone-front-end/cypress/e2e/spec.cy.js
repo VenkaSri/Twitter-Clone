@@ -1,8 +1,8 @@
-describe("template spec", () => {
-  it("passes", () => {
+describe("signup", () => {
+  it("should handle registration", () => {
     cy.visit("/");
-    cy.get('[data-testid="cypress-title"]')
-      .should("exist")
-      .should("have.text", "Happening now");
+
+    cy.get("a:contains('Create account')").click({ force: false });
+    cy.url().should("include", "/i/flow/signup");
   });
 });

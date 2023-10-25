@@ -8,7 +8,8 @@
       "@context/*": ["./src/context/*"],
       "@constants/*": ["./src/constants/*"],
       "@state/*": ["./src/state/*"],
-      "@services/*": ["./src/services/*"]
+      "@services/*": ["./src/services/*"],
+      "@test/*": ["./src/test/*"]
     }
   }
 }
