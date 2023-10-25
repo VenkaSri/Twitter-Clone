@@ -1,7 +1,12 @@
-import Sidebar from "@components/app/header/Sidebar";
+// import Sidebar from "@components/app/header/Sidebar";
 import { Outlet } from "react-router-dom";
+import { OverlayLoader } from "../dialog/OverlayLoader";
+import { Suspense, lazy } from "react";
+import PropTypes from "prop-types";
 
-const MainLayout = () => {
+const Sidebar = lazy(() => import("@components/app/header/Sidebar"));
+
+const MainLayout = ({ children }) => {
   return (
     <>
       <div className="flex w-full overflow-hidden">
@@ -10,7 +15,9 @@ const MainLayout = () => {
         >
           <div className="flex flex-col w-[275px] tablet:w-[275px]  ">
             <div className="h-full fixed top-0 flex flex-col ">
-              <Sidebar />
+              <Suspense fallback={<OverlayLoader />}>
+                <Sidebar />
+              </Suspense>
             </div>
           </div>
         </header>
@@ -33,3 +40,7 @@ const MainLayout = () => {
 };
 
 export default MainLayout;
+
+MainLayout.propTypes = {
+  children: PropTypes.node,
+};

@@ -35,6 +35,8 @@ DialogFooter.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
+/* Only shown in step 2 */
+
 const SignUpTerms = () => {
   return (
     <div className="mt-4 leading-[16px] text-[14px] font-cR text-[#71767b] flex flex-col ">

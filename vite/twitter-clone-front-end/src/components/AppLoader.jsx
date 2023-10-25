@@ -27,7 +27,7 @@ const AppProgess = () => {
       <div className="flex grow">
         <div className="m-auto">
           <Logo
-            className="w-20 dark:fill-[#0f1419]
+            className="dark:fill-[#0f1419] w-[80px]
         "
           />
         </div>

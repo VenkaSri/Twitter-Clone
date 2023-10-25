@@ -4,11 +4,15 @@ import RoundedTextAndIconButton from "@components/RoundedTextAndIconButton";
 import RoundedTextButton from "../RoundedTextButton";
 import { Apple } from "@components/icons/Icons";
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import { DialogContext } from "@/context/dialog/dialog-context";
 
 const SignUpOptions = () => {
   // const dispatch = useDispatch();
+  const { setIsOpen } = useContext(DialogContext);
   const navigate = useNavigate();
   const handleCreateAccount = () => {
+    setIsOpen(true);
     navigate("/i/flow/signup");
   };
 

@@ -9,7 +9,7 @@ export const useProfilePicture = (src) => {
   );
 
   useEffect(() => {
-    if (src === null) {
+    if (src === undefined) {
       setCachedImage(default_profile_picture);
       return;
     }

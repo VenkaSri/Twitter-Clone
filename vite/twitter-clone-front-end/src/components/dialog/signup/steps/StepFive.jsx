@@ -13,6 +13,8 @@ const StepFive = () => {
   const { usernameError, errorMessage } = useUsernameValidation();
   const username = useSelector((state) => state.userSlice.username);
 
+  console.log(usernameError);
+
   return (
     <>
       <DialogBodyHeading

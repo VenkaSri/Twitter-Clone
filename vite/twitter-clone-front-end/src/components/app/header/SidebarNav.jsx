@@ -2,16 +2,28 @@ import { useTheme } from "@/hooks/useTheme";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { LINKS } from "@components/app/header/navLinks";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { useLocation } from "react-router-dom";
 
 const SidebarNav = () => {
+  const location = useLocation();
   const hide = useMediaQuery("(max-height:751px)");
-  const [activeLink, setActiveLink] = useState("Home");
+  const [activeLink, setActiveLink] = useState(
+    LINKS.find((link) => location.pathname.includes(link.path))?.name
+  );
+
+  console.log(location.pathname);
+
+  useEffect(() => {
+    const activeLink = LINKS.find((link) =>
+      location.pathname.includes(link.path)
+    )?.name;
+    setActiveLink(activeLink || "Home");
+  }, [location]);
 
   const handleClick = (link) => {
     setActiveLink(link);
-    console.log(link);
   };
 
   const headerButtons = LINKS.map((link) => {
@@ -23,11 +35,11 @@ const SidebarNav = () => {
     return (
       <HeaderButton
         key={link.name}
-        icon={activeLink === link.name ? link.iconFilled : link.iconOutlined}
+        icon={activeLink === link.path ? link.iconFilled : link.iconOutlined}
         text={link.name}
         visibility={visibility}
         onClick={handleClick}
-        isActive={activeLink === link.name}
+        isActive={activeLink === link.path}
       />
     );
   });

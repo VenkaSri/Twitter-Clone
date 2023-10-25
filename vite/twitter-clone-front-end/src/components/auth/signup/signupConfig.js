@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { RegisterContext } from "@/context/auth/register-context";
 import {
+  authApi,
   useCheckAuthStatusQuery,
   useRegisterUserMutation,
 } from "../../../services/authApi";
@@ -16,12 +17,14 @@ import { userSliceActions } from "@/state/userSlice";
 import { useUploadProfilePicture } from "@/hooks/dialog/useUploadProfilePicture";
 import { DialogContext } from "@/context/dialog/dialog-context";
 import { useNavigate } from "react-router-dom";
+import { authSliceActions } from "@/state/authSlice";
 
 dayjs.extend(customParseFormat);
 
 export const useSignupConfig = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { setIsOpen } = useContext(DialogContext);
   const {
     step,
     setStep,
@@ -32,6 +35,7 @@ export const useSignupConfig = () => {
     dob,
     profilePicture,
     updatedUsername,
+    hasFollowedOneUser,
   } = useContext(RegisterContext);
   const [body, setBody] = useState(null);
   const [userId, setUserId] = useState(null);
@@ -143,7 +147,7 @@ export const useSignupConfig = () => {
             name: userInfo.name,
             username: userInfo.username,
             userId: userInfo.id,
-            profilePicture: userInfo.profile_image_url || "", // Use default empty string if profile_image_url is null
+            profilePicture: userInfo.profile_image_url || "",
             likedPosts: userInfo.likedPostsIds || [],
           })
         );
@@ -157,6 +161,7 @@ export const useSignupConfig = () => {
     if (step === 2) {
       setIsLoading(true);
       await handleRegistration();
+      dispatch(authApi.endpoints.checkAuthStatus.initiate());
     } else if (step === 3) {
       if (profilePicture !== default_profile_picture) {
         const response = await handleProfilePictureUpload();
@@ -171,6 +176,11 @@ export const useSignupConfig = () => {
     } else if (step === 4) {
       if (username !== updateUsername) {
         await updateUsernameHandler();
+      }
+    } else if (step === 5) {
+      if (hasFollowedOneUser) {
+        setIsOpen(false);
+        navigate("/");
       }
     } else {
       setStep(step + 1);

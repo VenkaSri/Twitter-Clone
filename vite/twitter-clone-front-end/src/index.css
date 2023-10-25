@@ -3,6 +3,7 @@
 @import "./assets/stylesheets/inputs.css";
 @import "./assets/stylesheets/cards.css";
 @import "./assets/stylesheets/layout/header.css";
+@import "./assets/stylesheets/layout.css";
 
 @tailwind base;
 @tailwind components;

@@ -1,10 +1,13 @@
 import LandingPage from "@/components/public/LandingPage";
+import { useSession } from "@/hooks/useSession";
 import Dialog from "@components/Dialog";
+import MainLayout from "../MainLayout";
 
 const Landing = () => {
+  const { isAuthenticated } = useSession();
   return (
     <>
-      <LandingPage />
+      {isAuthenticated ? <MainLayout /> : <LandingPage />}
       <Dialog />
     </>
   );

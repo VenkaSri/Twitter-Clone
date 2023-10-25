@@ -13,6 +13,7 @@ import { BrowserRouter } from "react-router-dom";
 
 const AppProvider = ({ children }) => {
   const dispatch = useDispatch();
+
   // const { data, error, isLoading } = useCheckAuthStatusQuery();
 
   // useEffect(() => {
@@ -26,15 +27,11 @@ const AppProvider = ({ children }) => {
   // }, [data, error, isLoading, dispatch]);
 
   return (
-    <Suspense fallback={<AppProgess />}>
-      <HelmetProvider>
-        <BrowserRouter>
-          <DialogProvider>
-            <RegisterProvider>{children}</RegisterProvider>
-          </DialogProvider>
-        </BrowserRouter>
-      </HelmetProvider>
-    </Suspense>
+    <HelmetProvider>
+      <BrowserRouter>
+        <DialogProvider>{children}</DialogProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 };
 
