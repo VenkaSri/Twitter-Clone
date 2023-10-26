@@ -9,7 +9,8 @@
       "@constants/*": ["./src/constants/*"],
       "@state/*": ["./src/state/*"],
       "@services/*": ["./src/services/*"],
-      "@test/*": ["./src/test/*"]
+      "@test/*": ["./src/test/*"],
+      "@routes/*": ["./src/routes/*"]
     }
   }
 }

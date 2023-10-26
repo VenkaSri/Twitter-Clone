@@ -7,6 +7,9 @@ export const protectedRoutes = [
   {
     path: PathConstants.HOME,
     element: <MainLayout />,
-    children: [{ path: PathConstants.HOME, element: <MainColumn /> }],
+    children: [
+      { path: PathConstants.HOME, element: <MainColumn /> },
+      { path: PathConstants.EXPLORE, element: <MainColumn /> },
+    ],
   },
 ];

@@ -1,14 +1,20 @@
 import { useRoutes } from "react-router-dom";
 
-import LandingPage from "@/components/public/LandingPage";
-import { protectedRoutes } from "./protected";
+import { protectedRoutes } from "@routes/protected";
+import { useSession } from "@hooks/useSession";
+import { publicRoutes } from "@routes/public";
+import { AppProgess } from "@components/AppLoader";
 
 const AppRoutes = () => {
-  const commonRoutes = [{ path: "/", element: <LandingPage /> }];
+  const { isAuthenticated, isAuthenticating } = useSession();
 
-  const routes = protectedRoutes;
+  const routes = isAuthenticated ? protectedRoutes : publicRoutes;
 
-  const element = useRoutes([...routes, ...commonRoutes]);
+  const element = useRoutes([...routes]);
+
+  if (isAuthenticating) {
+    return <AppProgess />;
+  }
 
   return <>{element}</>;
 };

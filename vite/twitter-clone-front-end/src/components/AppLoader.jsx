@@ -3,7 +3,7 @@ import { Logo } from "./icons/Icons";
 import { Backdrop } from "@mui/material";
 import { useTheme } from "../hooks/useTheme";
 
-const AppProgess = () => {
+export const AppProgess = () => {
   const { darkMode } = useTheme();
   const [open, setOpen] = useState(false);
   const handleClose = () => {
@@ -35,5 +35,3 @@ const AppProgess = () => {
     </Backdrop>
   );
 };
-
-export default AppProgess;

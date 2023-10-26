@@ -47,8 +47,8 @@ export default defineConfig({
         replacement: fileURLToPath(new URL("./src/services", import.meta.url)),
       },
       {
-        find: "@test",
-        replacement: fileURLToPath(new URL("./src/test", import.meta.url)),
+        find: "@routes",
+        replacement: fileURLToPath(new URL("./src/routes", import.meta.url)),
       },
     ],
   },

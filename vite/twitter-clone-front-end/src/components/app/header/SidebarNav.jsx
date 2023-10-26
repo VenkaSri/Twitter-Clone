@@ -4,25 +4,24 @@ import { LINKS } from "@components/app/header/navLinks";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const SidebarNav = () => {
   const location = useLocation();
   const hide = useMediaQuery("(max-height:751px)");
-  const [activeLink, setActiveLink] = useState(
-    LINKS.find((link) => location.pathname.includes(link.path))?.name
-  );
+  const [activeLink, setActiveLink] = useState("/" || "/home");
 
-  console.log(location.pathname);
+  console.log(activeLink);
 
   useEffect(() => {
     const activeLink = LINKS.find((link) =>
       location.pathname.includes(link.path)
-    )?.name;
-    setActiveLink(activeLink || "Home");
+    )?.path;
+    setActiveLink(activeLink);
   }, [location]);
 
   const handleClick = (link) => {
+    console.log(link);
     setActiveLink(link);
   };
 
@@ -40,6 +39,7 @@ const SidebarNav = () => {
         visibility={visibility}
         onClick={handleClick}
         isActive={activeLink === link.path}
+        path={link.path}
       />
     );
   });
@@ -53,15 +53,23 @@ const SidebarNav = () => {
 
 export default SidebarNav;
 
-const HeaderButton = ({ icon: Icon, text, visibility, onClick, isActive }) => {
+const HeaderButton = ({
+  icon: Icon,
+  text,
+  visibility,
+  onClick,
+  isActive,
+  path,
+}) => {
   const padding = useMediaQuery("(max-height:850px)");
-
+  const location = useLocation();
   return (
-    <a
+    <Link
+      to={path}
       className={`w-full  flex flex-col items-start ${visibility} ${
         padding ? "py-0" : "py-1"
       }`}
-      onClick={() => onClick(text)}
+      onClick={() => onClick(location.pathname)}
     >
       <div className="header--link">
         <div>{<Icon className="w-[26.25px]" />}</div>
@@ -74,7 +82,7 @@ const HeaderButton = ({ icon: Icon, text, visibility, onClick, isActive }) => {
           <span className="self-end">{text}</span>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 
