@@ -12,7 +12,7 @@ const RoundedTextAndIconButton = ({
 }) => {
   return (
     <a
-      className={clsx(className, "button--roundedText w-[300px]", {
+      className={clsx(className, "btn--roundedText ", {
         "pointer-events-none opacity-50": disabled,
       })}
       role="button"
@@ -40,7 +40,7 @@ RoundedTextAndIconButton.propTypes = {
   text: PropTypes.string.isRequired,
   className: PropTypes.string,
   disabled: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   icon: PropTypes.node,
   iconPosition: PropTypes.oneOf(["start", "end"]).isRequired,
 };

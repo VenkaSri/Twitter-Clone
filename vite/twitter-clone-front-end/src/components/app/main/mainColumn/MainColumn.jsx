@@ -1,4 +1,6 @@
 import ProfilePicture from "@/components/ProfilePicture";
+import { PostEditor } from "@/components/post/PostEditor";
+import { PostEditorProvider } from "@/context/home/post-editor-context";
 import { TabLink } from "@components/TabLink";
 import { Logo } from "@components/icons/Icons";
 import { useState } from "react";
@@ -10,9 +12,9 @@ export const MainColumn = () => {
         <MainColumnNav />
       </div>
       <div className="z-[1]">
-        {/* <TweetSectionProvider>
-          <TweetSection />
-        </TweetSectionProvider> */}
+        <PostEditorProvider>
+          <PostEditor />
+        </PostEditorProvider>
       </div>
     </div>
   );

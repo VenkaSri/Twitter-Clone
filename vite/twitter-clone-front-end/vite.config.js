@@ -5,6 +5,9 @@ import { visualizer } from "rollup-plugin-visualizer";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  define: {
+    global: {},
+  },
   base: "/",
   plugins: [react(), visualizer()],
   server: {

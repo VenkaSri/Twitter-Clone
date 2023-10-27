@@ -14,9 +14,7 @@ const SidebarNav = () => {
   console.log(activeLink);
 
   useEffect(() => {
-    const activeLink = LINKS.find((link) =>
-      location.pathname.includes(link.path)
-    )?.path;
+    const activeLink = location.pathname;
     setActiveLink(activeLink);
   }, [location]);
 
@@ -70,6 +68,7 @@ const HeaderButton = ({
         padding ? "py-0" : "py-1"
       }`}
       onClick={() => onClick(location.pathname)}
+      draggable={false}
     >
       <div className="header--link">
         <div>{<Icon className="w-[26.25px]" />}</div>

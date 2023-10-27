@@ -13,26 +13,33 @@ import {
   COMMENT,
   COMMUNITIES,
   COMMUNITIES_FILLED,
+  DOWN_ARROW,
   ELLIPSIS,
+  EMOJI,
   EXCLAMATION,
   EXPLORE,
   EXPLORE_FILLED,
+  GLOBE,
   HOME,
   HOME_FILLED,
   LIKE,
   LIKE_FILLED,
   LISTS,
   LISTS_FILLED,
+  LOCATION,
   MAGNIFY,
+  MEDIA,
   MESSAGES,
   MESSSAGES_FILLED,
   MORE,
   NOTIFICATION,
   NOTIFICATION_FILLED,
+  POLL,
   PROFILE,
   PROFILE_FILLED,
   QUILL,
   REPOST,
+  SCHEDULE,
   SHARE,
   VISIBILITY,
   VISIBILITY_OFF,
@@ -179,6 +186,34 @@ export const ListsFilled = ({ className = "w-5" }) => (
   <SVG path={LISTS_FILLED} className={className} />
 );
 
+export const DownArrow = ({ className = "w-5" }) => (
+  <SVG path={DOWN_ARROW} className={className} />
+);
+
+export const Globe = ({ className = "w-5" }) => (
+  <SVG path={GLOBE} className={className} />
+);
+
+export const Location = ({ className = "w-5" }) => (
+  <SVG path={LOCATION} className={className} />
+);
+export const Schedule = ({ className = "w-5" }) => (
+  <SVG path={SCHEDULE} className={className} />
+);
+export const Poll = ({ className = "w-5" }) => (
+  <SVG path={POLL} className={className} />
+);
+export const Media = ({ className = "w-5" }) => (
+  <SVG path={MEDIA} className={className} />
+);
+export const GIF = ({ className = "w-5" }) => (
+  <SVG path={GIF} className={className} />
+);
+
+export const Emoji = ({ className = "w-5" }) => (
+  <SVG path={EMOJI} className={className} />
+);
+
 const iconPropTypes = {
   className: PropTypes.string,
 };
@@ -219,3 +254,11 @@ MessagesFilled.propTypes = iconPropTypes;
 ListsFilled.propTypes = iconPropTypes;
 ProfileFilled.propTypes = iconPropTypes;
 BookmarksFilled.propTypes = iconPropTypes;
+DownArrow.propTypes = iconPropTypes;
+Globe.propTypes = iconPropTypes;
+GIF.propTypes = iconPropTypes;
+Schedule.propTypes = iconPropTypes;
+Media.propTypes = iconPropTypes;
+Poll.propTypes = iconPropTypes;
+Location.propTypes = iconPropTypes;
+Emoji.propTypes = iconPropTypes;
