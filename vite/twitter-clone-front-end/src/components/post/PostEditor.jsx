@@ -4,14 +4,14 @@ import { Close, DownArrow, Globe } from "@/components/icons/Icons";
 import { usePostEditorContext } from "@context/home/post-editor-context";
 import LinearProgress from "@mui/material/LinearProgress";
 import clsx from "clsx";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { PostInputField } from "@components/post/PostInputField";
 import { PostEditorMedia } from "@components/post/PostEditorMedia";
 import { usePostEditorState } from "@/hooks/post/usePostEditorState";
 import { useSession } from "@/hooks/useSession";
 import { PostAttachments } from "./PostAttachments";
-import CharactersProgress from "./CharactersProgress";
+import { CharactersProgress } from "./CharactersProgress";
 import { POST_BUTTON_VALUE } from "@/constants/app";
 import RoundedTextButton from "../RoundedTextButton";
 import { Link } from "react-router-dom";
@@ -39,7 +39,7 @@ export const PostEditor = () => {
     paths,
     setPostCreated,
   } = usePostEditorContext();
-  const [childHeight, setChildHeight] = usePostEditorState(48);
+  const [childHeight, setChildHeight] = useState(48);
   const parentRef = useRef(null);
   const { username } = useSession();
   useEffect(() => {
@@ -85,13 +85,13 @@ export const PostEditor = () => {
           <LinearProgress
             sx={{
               "& .MuiLinearProgress-bar": {
-                backgroundColor: "var(--primary-color)",
+                backgroundColor: "#1D9BF0",
               },
             }}
           />
         </div>
       )}
-      <div className="mobile:flex hidden border-b border-b-[#eff3f4] px-[16px] dark:border-b-[var(--primary-dark-border-color)] dark:bg-black w-full relative ">
+      <div className="mobile:flex hidden border-b border-b-[#eff3f4] px-[16px] dark:border-b-[#2f3336)] dark:bg-black w-full relative ">
         {isLoading && (
           <div className="absolute flex grow left-0 right-0 bottom-0 top-0 bg-white/40 z-[3]"></div>
         )}
@@ -103,14 +103,14 @@ export const PostEditor = () => {
             <div className="pt-1 flex flex-col  z-[1] relative">
               {isInputActive && (
                 <div
-                  className={clsx("pb-3 flex relative items-center", {
+                  className={clsx("pb-3 flex relative ", {
                     "hidden :": isLoading,
                   })}
                 >
                   <RoundedTextAndIconButton
                     text="Everyone"
                     className="border border-[#cfd9de] dark:border-[#536471] min-w-[24px] min-h-[24px] hover:bg-[#1d9bf0]/10 text-primary text-[14px]"
-                    icon={<DownArrow className="w-[18px]  mr-1 fill-primary" />}
+                    icon={<DownArrow className="w-[16px]  mr-1 fill-primary" />}
                     iconPosition="end"
                   />
                 </div>

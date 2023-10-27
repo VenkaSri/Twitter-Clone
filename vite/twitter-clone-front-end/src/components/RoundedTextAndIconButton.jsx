@@ -12,22 +12,22 @@ const RoundedTextAndIconButton = ({
 }) => {
   return (
     <a
-      className={clsx(className, "btn--roundedText ", {
+      className={clsx(className, "btn--roundedText", {
         "pointer-events-none opacity-50": disabled,
       })}
       role="button"
       onClick={onClick}
     >
-      <div className="flex grow justify-center">
+      <div className="flex px-3">
         {iconPosition === "start" && (
-          <div className="mr-1 flex items-center justify-center ">{icon}</div>
+          <div className="mr-1 flex items-center justify-center">{icon}</div>
         )}
         <div className="flex">
           <CenteredText text={text} />
         </div>
 
         {iconPosition === "end" && (
-          <div className="mr-1 flex items-center justify-center ">{icon}</div>
+          <div className="ml-1 flex items-center justify-center ">{icon}</div>
         )}
       </div>
     </a>

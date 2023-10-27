@@ -3,7 +3,7 @@ import { usePostEditorContext } from "@/context/home/post-editor-context";
 import CircularProgress from "@mui/material/CircularProgress";
 import clsx from "clsx";
 
-export default function CharactersProgress() {
+export const CharactersProgress = () => {
   const { numOfChars } = usePostEditorContext();
 
   const convertToPercent = (value, max) => {
@@ -17,10 +17,10 @@ export default function CharactersProgress() {
   const numberColor = numOfChars > 279;
 
   return (
-    <div className="min-h-[30px] min-w-[30px] centered-column-container ">
+    <div className="min-h-[30px] min-w-[30px] flex flex-col items-center justify-center">
       {!isPastLimit ? (
         <CircularProgress
-          determinate
+          variant="determinate"
           value={convertToPercent(numOfChars, CHARACTER_LIMIT)}
           color="primary"
           sx={{
@@ -34,7 +34,7 @@ export default function CharactersProgress() {
           {isApproachingLimit && (
             <span
               className={clsx(
-                "text-[13px] leading-[10.4px] font-cReg dark:text-white",
+                "text-[13px] leading-[10.4px] font-cR dark:text-white",
                 {
                   "text-[#f4212e] dark:text-[#f4212f]": numberColor,
                 }
@@ -46,11 +46,11 @@ export default function CharactersProgress() {
         </CircularProgress>
       ) : (
         isApproachingLimit && (
-          <span className="text-[13px] leading-[10.4px] font-cReg text-[#f4212e] dark:text-[red] tracking-widest">
+          <span className="text-[13px] leading-[10.4px] font-cR text-[#f4212e] dark:text-[red] tracking-widest">
             {(CHARACTER_LIMIT - numOfChars).toLocaleString()}
           </span>
         )
       )}
     </div>
   );
-}
+};

@@ -1,0 +1,12 @@
+.DraftEditor-root {
+  @apply max-w-full relative right-0 left-0 py-3 break-words leading-6 text-[20px] font-cR max-h-[700px] overflow-y-auto
+  text-black dark:text-white w-full;
+}
+
+.public-DraftEditorPlaceholder-root {
+  @apply absolute z-[1] text-[#536471] font-cR py-[2px] leading-6;
+}
+
+.DraftEditor-editorContainer {
+  @apply relative z-[1] text-black dark:text-white font-cR;
+}
