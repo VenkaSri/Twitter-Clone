@@ -2,12 +2,20 @@ import { useTheme } from "@/hooks/useTheme";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { RoundedIconButton } from "./RoundedIconButton";
+import { Gear } from "./icons/Icons";
 
-export const TabLink = ({ text, isSelected, onClick, disabled }) => {
+export const TabLink = ({
+  text,
+  isSelected,
+  onClick,
+  disabled,
+  icon: Icon,
+}) => {
   const { currentColor } = useTheme();
 
   return (
-    <button
+    <a
       className={clsx("mainColumn--topNav-link", { "opacity-40": disabled })}
       data-tab-type={text}
       onClick={onClick}
@@ -28,7 +36,7 @@ export const TabLink = ({ text, isSelected, onClick, disabled }) => {
           ></div>
         )}
       </div>
-    </button>
+    </a>
   );
 };
 

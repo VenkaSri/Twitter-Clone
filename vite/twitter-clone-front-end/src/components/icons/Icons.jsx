@@ -19,6 +19,7 @@ import {
   EXCLAMATION,
   EXPLORE,
   EXPLORE_FILLED,
+  GEAR,
   GLOBE,
   HOME,
   HOME_FILLED,
@@ -214,6 +215,10 @@ export const Emoji = ({ className = "w-5" }) => (
   <SVG path={EMOJI} className={className} />
 );
 
+export const Gear = ({ className = "w-5" }) => (
+  <SVG path={GEAR} className={className} />
+);
+
 const iconPropTypes = {
   className: PropTypes.string,
 };
@@ -262,3 +267,4 @@ Media.propTypes = iconPropTypes;
 Poll.propTypes = iconPropTypes;
 Location.propTypes = iconPropTypes;
 Emoji.propTypes = iconPropTypes;
+Gear.propTypes = iconPropTypes;
