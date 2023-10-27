@@ -5,6 +5,7 @@ import { usePostEditorContext } from "@/context/home/post-editor-context";
 import { useMediaUpload } from "@/hooks/useMediaUpload";
 import { ATTACHMENTS } from "./ATTACHEMENTS";
 import { useEffect } from "react";
+import { RoundedIconButton } from "../RoundedIconButton";
 
 const AttachmentButton = ({
   text,
@@ -50,9 +51,9 @@ export const PostAttachments = ({ isReply }) => {
     <div className="flex">
       <input {...getInputProps()} style={{ display: "none" }} />
       {attachmentsList.map((attachment) => (
-        <AttachmentButton
+        <RoundedIconButton
+          className="min-h-[36px] min-w-[36px] fill-primary border-transparent hover:bg-[#E8F5FE] dark:hover:bg-[#1d9cf0]/10"
           key={attachment.text}
-          {...attachment}
           isDisabled={attachment.isDisabled}
           isReply={isReply}
           icon={attachment.icon}

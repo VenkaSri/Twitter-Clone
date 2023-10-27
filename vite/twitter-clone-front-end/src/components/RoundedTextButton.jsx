@@ -2,7 +2,7 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import CenteredText from "./CenteredText";
 
-const RoundedTextButton = ({ text, className, disabled, onClick }) => {
+const RoundedTextButton = ({ text, className, disabled, onClick, style }) => {
   return (
     <>
       <a
@@ -12,6 +12,7 @@ const RoundedTextButton = ({ text, className, disabled, onClick }) => {
         role="button"
         onClick={onClick}
         aria-disabled={disabled}
+        style={style}
       >
         <CenteredText text={text} />
       </a>
@@ -26,4 +27,5 @@ RoundedTextButton.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
+  style: PropTypes.object,
 };

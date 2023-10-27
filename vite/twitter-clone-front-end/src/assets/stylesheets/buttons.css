@@ -1,6 +1,6 @@
 @layer components {
   .btn--roundedText {
-    @apply rounded-full flex flex-col border font-cR justify-center items-center;
+    @apply rounded-full flex flex-col border border-0 font-cR justify-center items-center;
   }
 
   .btn--roundedIcon {

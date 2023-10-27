@@ -1,15 +1,16 @@
 import clsx from "clsx";
 import PropTypes from "prop-types";
 
-export const RoundedIconButton = ({ className, icon, onClick }) => {
+export const RoundedIconButton = ({ className, icon, onClick, disabled }) => {
   return (
-    <div
+    <button
       className={clsx(className, "btn--roundedIcon")}
       role="button"
       onClick={onClick}
+      disabled={disabled}
     >
       {icon}
-    </div>
+    </button>
   );
 };
 

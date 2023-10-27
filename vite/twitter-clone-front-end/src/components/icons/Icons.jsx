@@ -16,6 +16,7 @@ import {
   DOWN_ARROW,
   ELLIPSIS,
   EMOJI,
+  GIF,
   EXCLAMATION,
   EXPLORE,
   EXPLORE_FILLED,
@@ -207,7 +208,7 @@ export const Poll = ({ className = "w-5" }) => (
 export const Media = ({ className = "w-5" }) => (
   <SVG path={MEDIA} className={className} />
 );
-export const GIF = ({ className = "w-5" }) => (
+export const Gif = ({ className = "w-5" }) => (
   <SVG path={GIF} className={className} />
 );
 
@@ -261,7 +262,7 @@ ProfileFilled.propTypes = iconPropTypes;
 BookmarksFilled.propTypes = iconPropTypes;
 DownArrow.propTypes = iconPropTypes;
 Globe.propTypes = iconPropTypes;
-GIF.propTypes = iconPropTypes;
+Gif.propTypes = iconPropTypes;
 Schedule.propTypes = iconPropTypes;
 Media.propTypes = iconPropTypes;
 Poll.propTypes = iconPropTypes;

@@ -6,6 +6,7 @@ import { POST_BUTTON_VALUE } from "@/constants/app";
 import SidebarNav from "@components/app/header/SidebarNav";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import UserDisplayNameAndHandle from "@/components/UserDisplayNameAndHandle";
+import { useTheme } from "@/hooks/useTheme";
 
 const Sidebar = () => {
   return (
@@ -26,6 +27,7 @@ export default Sidebar;
 
 const NewPostButton = () => {
   const btnYMargin = useMediaQuery("(max-height:900px)");
+  const { currentColor } = useTheme();
   return (
     <>
       <div
@@ -36,7 +38,8 @@ const NewPostButton = () => {
         <div className="tablet:block hidden">
           <RoundedTextButton
             text={POST_BUTTON_VALUE}
-            className="min-h-[52px] min-w-[52px]  btn--primary text-17 leading-5"
+            className="min-h-[52px] min-w-[52px] text-17 leading-5 "
+            style={{ backgroundColor: currentColor }}
           />
         </div>
       </div>

@@ -11,11 +11,11 @@
 
 .mainColumn--topNav-links {
   @apply flex flex-col mx-auto z-[3]
-  border-b border-b-[#eff3f4] dark:border-b-[var(--primary-dark-border-color)];
+  border-b border-b-[#eff3f4] dark:border-b-[#2f3336];
 }
 
 .mainColumn--topNav-link {
   @apply w-full  flex flex-col justify-center items-center cursor-pointer
-  hover:bg-[#0f1419]/[.1] dark:hover:bg-[var(--primary-dark-border-color)]
+  hover:bg-[#0f1419]/[.1] dark:hover:bg-[#2f3336]
   text-black dark:text-white text-[15px] leading-5;
 }

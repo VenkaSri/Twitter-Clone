@@ -1,4 +1,11 @@
-import * as Icons from "@components/icons/Icons";
+import {
+  Emoji,
+  Gif,
+  Media,
+  Schedule,
+  Poll,
+  Location,
+} from "@components/icons/Icons";
 
 export const ATTACHMENTS = (open, len) => [
   {
@@ -8,31 +15,31 @@ export const ATTACHMENTS = (open, len) => [
       open();
     },
     isDisabled: len === 4,
-    icon: Icons.Media,
+    icon: <Media />,
   },
   {
     text: "GIF",
     action: () => console.log("GIF"),
-    icon: Icons.Media,
+    icon: <Gif />,
   },
   {
     text: "Poll",
     action: () => console.log("Poll"),
-    icon: Icons.Media,
+    icon: <Poll />,
   },
   {
     text: "Emoji",
     action: () => console.log("Emoji"),
-    icon: Icons.Media,
+    icon: <Emoji />,
   },
   {
     text: "Schedule",
     action: () => console.log("Schedule"),
-    icon: Icons.Media,
+    icon: <Schedule />,
   },
   {
     text: "Tag Location",
     action: () => console.log("Tag Location"),
-    icon: Icons.Media,
+    icon: <Location />,
   },
 ];

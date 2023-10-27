@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-
+import { useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types";
 import { Editor, EditorState } from "draft-js";
 import { usePostEditorContext } from "@/context/home/post-editor-context";
 import { usePostEditorState } from "@/hooks/post/usePostEditorState";
@@ -9,12 +9,16 @@ import { useTheme } from "@/hooks/useTheme";
 export const PostInputField = ({ onHeightChange, placeholder }) => {
   const { setIsInputActive, postCreated, setPostCreated } =
     usePostEditorContext();
-  const darkMode = useTheme();
+  const [height, setHeight] = useState(null);
+  const { darkMode } = useTheme();
   const fieldRef = useRef(null);
   const [editorState, handleEditorChange, resetEditorState] =
-    usePostEditorState(EditorState.createEmpty());
+    usePostEditorState(EditorState.createEmpty(), darkMode);
 
-  useHeightObserver(fieldRef, onHeightChange);
+  useHeightObserver(fieldRef, (newHeight) => {
+    onHeightChange(newHeight);
+    setHeight(newHeight);
+  });
 
   const styleMap = {
     HIGHLIGHT: {
@@ -24,7 +28,6 @@ export const PostInputField = ({ onHeightChange, placeholder }) => {
 
   useEffect(() => {
     if (postCreated) {
-      // Reset the editorState using the reset function
       resetEditorState();
       setPostCreated(false);
     }
@@ -33,17 +36,25 @@ export const PostInputField = ({ onHeightChange, placeholder }) => {
   return (
     <div onClick={() => setIsInputActive(true)} className="w-full absolute">
       <Editor
+        key={darkMode}
         editorState={editorState}
         onChange={handleEditorChange}
         customStyleMap={styleMap}
         ref={fieldRef}
         placeholder={placeholder}
+        style={{ height: height ? `${height}px` : "auto" }}
       />
     </div>
   );
 };
 
-/* -------- same functionlity without Draft.js lib; but has issues with the caret position when typing in between text -------- */
+PostInputField.propTypes = {
+  placeholder: PropTypes.string,
+  onHeightChange: PropTypes.func,
+};
+
+/* -------- I opted not to install @Mui/Joy, which would have resulted in the same solution, in order to save 423.5kB minified (111.5kB gzipped) 
+while transitioning to Vite. -------- */
 
 // const { setNumOfChars, setHasUserTyped, setIsInputActive } =
 //   useTweetSectionContext();

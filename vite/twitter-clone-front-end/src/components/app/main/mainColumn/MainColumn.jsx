@@ -39,7 +39,7 @@ const MainColumnNav = () => {
             <ProfilePicture />
           </div>
           <div className="absolute inset-0 flex justify-center items-center mobile:hidden">
-            <Logo className="w-[30px] dark:fill-white fill-black" />
+            <Logo className="w-[30px" />
           </div>
         </div>
       </div>
