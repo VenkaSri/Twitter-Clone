@@ -11,7 +11,7 @@
 
   .header--link {
     @apply flex  p-3  rounded-full cursor-pointer tracking-[1px]
-    hover:bg-[#E6E7E7] dark:hover:bg-[var(--primary-dark-hov-bg-color)]
+    hover:bg-[#E6E7E7] dark:hover:bg-[#2f3336]/[.1] 
     text-black dark:text-white;
   }
 

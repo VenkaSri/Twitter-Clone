@@ -11,7 +11,7 @@ const MainLayout = ({ children }) => {
     <>
       <div className="flex w-full overflow-hidden">
         <header
-          className={` dark:bg-black bg-white grow  justify-end flex sm:flex hidden`}
+          className={` dark:bg-black bg-white grow  justify-end  sm:flex hidden`}
         >
           <div className="flex flex-col w-[275px] tablet:w-[275px]  ">
             <div className="h-full fixed top-0 flex flex-col ">
@@ -25,7 +25,7 @@ const MainLayout = ({ children }) => {
           <div
             className={`flex w-[990px] max-[1092px]:w-[920px] justify-between  grow max-[980px]:w-[600px] max-[680px]:w-full `}
           >
-            <div className="main--mainColumn">
+            <div className="main--mainColumn border-l dark:border-l-[#2f3336] border-r dark:border-r-[#2f3336]">
               <Outlet />
             </div>
 

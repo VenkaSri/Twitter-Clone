@@ -191,7 +191,7 @@ const PostActions = () => {
           <RoundedTextButton
             text={POST_BUTTON_VALUE}
             className="ml-3 min-w-[36px] min-h-[36px] px-4 text-17 font-cBold border-transparent text-white"
-            isDisabled={!validPost}
+            disabled={!validPost}
             style={{ backgroundColor: currentColor }}
           />
         </div>

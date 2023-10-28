@@ -71,7 +71,7 @@ const HeaderButton = ({
       draggable={false}
     >
       <div className="header--link">
-        <div>{<Icon className="w-[26.25px]" />}</div>
+        <div>{<Icon className="w-[26.25px] dark:fill-white" />}</div>
         <div
           className={clsx(
             `leading-6 mr-4 ml-5 text-[20px] tablet:flex hidden`,

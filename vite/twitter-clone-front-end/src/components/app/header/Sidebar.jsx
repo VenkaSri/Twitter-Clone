@@ -38,7 +38,7 @@ const NewPostButton = () => {
         <div className="tablet:block hidden">
           <RoundedTextButton
             text={POST_BUTTON_VALUE}
-            className="min-h-[52px] min-w-[52px] text-17 leading-5 "
+            className="min-h-[52px] min-w-[52px] text-17 leading-5 text-white"
             style={{ backgroundColor: currentColor }}
           />
         </div>
@@ -67,7 +67,7 @@ const AccountMenu = () => {
             <UserDisplayNameAndHandle principleUser />
           </div>
           <div className=" tablet:flex hidden ml-auto">
-            <Ellipsis />
+            <Ellipsis className="w-[20px] dark:fill-white" />
           </div>
         </div>
       </div>
