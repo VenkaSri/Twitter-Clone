@@ -28,18 +28,7 @@ const SnackbarMessage = ({ username, postId }) => (
 
 export const PostEditor = () => {
   const dispatch = useDispatch();
-  const {
-    hasUserTyped,
-    isInputActive,
-    validPost,
-    postText,
-    isLoading,
-    setIsLoading,
-    mediaFiles,
-    resetStates,
-    paths,
-    setPostCreated,
-  } = usePostEditorContext();
+  const { isInputActive, isLoading, paths } = usePostEditorContext();
   const [childHeight, setChildHeight] = useState(48);
   const parentRef = useRef(null);
   const { username } = useSession();
@@ -48,36 +37,6 @@ export const PostEditor = () => {
       parentRef.current.style.height = `${childHeight + 15}px`;
     }
   }, [childHeight]);
-
-  const post = async () => {
-    setIsLoading(true);
-    const formData = new FormData();
-    mediaFiles.forEach((file, index) => {
-      formData.append("photos", file);
-    });
-    formData.append("text", postText);
-    const result = await fetch("http://localhost:8080/api/v1/posts", {
-      method: "POST",
-      body: formData,
-      credentials: "include",
-    });
-    if (result.ok) {
-      const response = await result.json();
-      if (response.status === 200) {
-        console.log(response.postId);
-        setPostCreated(true);
-        resetStates();
-        // dispatch(snackbarSliceActions.setIsError(true));
-        // dispatch(
-        //   snackbarSliceActions.setMessage(
-        //     <SnackbarMessage username={username} postId={response.postId} />
-        //   )
-        // );
-      }
-    } else {
-      // Handle error
-    }
-  };
 
   return (
     <>
@@ -141,8 +100,47 @@ export const PostEditor = () => {
 };
 
 const PostActions = () => {
-  const { hasUserTyped, isInputActive, validPost, isLoading } =
-    usePostEditorContext();
+  const post = async () => {
+    setIsLoading(true);
+    const formData = new FormData();
+    mediaFiles.forEach((file, index) => {
+      formData.append("photos", file);
+    });
+    formData.append("text", postText);
+    const result = await fetch("http://localhost:8080/api/v1/posts", {
+      method: "POST",
+      body: formData,
+      credentials: "include",
+    });
+    if (result.ok) {
+      const response = await result.json();
+      if (response.status === 200) {
+        console.log(response.postId);
+        setPostCreated(true);
+        resetStates();
+        // dispatch(snackbarSliceActions.setIsError(true));
+        // dispatch(
+        //   snackbarSliceActions.setMessage(
+        //     <SnackbarMessage username={username} postId={response.postId} />
+        //   )
+        // );
+      }
+    } else {
+      // Handle error
+    }
+  };
+  const {
+    hasUserTyped,
+    isInputActive,
+    validPost,
+    postText,
+    isLoading,
+    setIsLoading,
+    mediaFiles,
+    resetStates,
+    paths,
+    setPostCreated,
+  } = usePostEditorContext();
   const { currentColor, darkMode } = useTheme();
   return (
     <div
@@ -193,6 +191,7 @@ const PostActions = () => {
             className="ml-3 min-w-[36px] min-h-[36px] px-4 text-17 font-cBold border-transparent text-white"
             disabled={!validPost}
             style={{ backgroundColor: currentColor }}
+            onClick={post}
           />
         </div>
       </div>

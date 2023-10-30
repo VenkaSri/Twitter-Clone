@@ -1,4 +1,3 @@
-import { useTheme } from "@/hooks/useTheme";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { LINKS } from "@components/app/header/navLinks";
 import PropTypes from "prop-types";

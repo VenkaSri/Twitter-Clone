@@ -1,5 +1,4 @@
 import MainLayout from "@/components/layout/MainLayout";
-import { Outlet } from "react-router-dom";
 import { PathConstants } from "./pathConstants";
 import { MainColumn } from "@/components/app/main/mainColumn/MainColumn";
 
@@ -10,6 +9,7 @@ export const protectedRoutes = [
     children: [
       { path: PathConstants.HOME, element: <MainColumn /> },
       { path: PathConstants.EXPLORE, element: <MainColumn /> },
+      { path: PathConstants.STATUS, element: <MainColumn /> },
     ],
   },
 ];
