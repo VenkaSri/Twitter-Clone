@@ -4,7 +4,7 @@ import { OverlayLoader } from "../dialog/OverlayLoader";
 import { Suspense, lazy } from "react";
 import PropTypes from "prop-types";
 
-const Sidebar = lazy(() => import("@components/app/header/Sidebar"));
+const Sidebar = lazy(() => import("@/components/home/header/Sidebar"));
 
 const MainLayout = ({ children }) => {
   return (

@@ -1,5 +1,5 @@
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { LINKS } from "@components/app/header/navLinks";
+import { LINKS } from "@/components/home/header/navLinks";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import clsx from "clsx";

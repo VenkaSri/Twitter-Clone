@@ -3,7 +3,7 @@ import { RoundedIconButton } from "@/components/RoundedIconButton";
 import RoundedTextButton from "@/components/RoundedTextButton";
 import { Ellipsis, Logo, Quill } from "@/components/icons/Icons";
 import { POST_BUTTON_VALUE } from "@/constants/app";
-import SidebarNav from "@components/app/header/SidebarNav";
+import SidebarNav from "@/components/home/header/SidebarNav";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import UserDisplayNameAndHandle from "@/components/UserDisplayNameAndHandle";
 import { useTheme } from "@/hooks/useTheme";

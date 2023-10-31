@@ -3,7 +3,7 @@ import DialogBodyHeading from "@components/dialog/body/DialogBodyHeading";
 import { OverlayLoader } from "../../OverlayLoader";
 
 const FollowSuggestionCard = lazy(() =>
-  import("@/components/app/FollowSuggestionCard")
+  import("@/components/home/FollowSuggestionCard")
 );
 
 export const FinalStep = () => {

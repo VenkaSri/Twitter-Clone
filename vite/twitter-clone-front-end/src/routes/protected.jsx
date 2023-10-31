@@ -1,6 +1,6 @@
 import MainLayout from "@/components/layout/MainLayout";
 import { PathConstants } from "./pathConstants";
-import { MainColumn } from "@/components/app/main/mainColumn/MainColumn";
+import { MainColumn } from "@/components/home/main/mainColumn/MainColumn";
 
 export const protectedRoutes = [
   {
