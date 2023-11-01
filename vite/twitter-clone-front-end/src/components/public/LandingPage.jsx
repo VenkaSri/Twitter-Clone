@@ -3,6 +3,7 @@ import SignUpOptions from "@components/public/SignUpOptions";
 import { LandingFooter } from "@components/public/LandingFooter";
 import RoundedTextButton from "@components/RoundedTextButton";
 import Head from "@components/head/Head";
+import { Outlet } from "react-router-dom";
 
 export const LandingPage = () => {
   const handleLogin = () => {
@@ -51,6 +52,7 @@ export const LandingPage = () => {
           <LandingFooter />
         </div>
       </div>
+      <Outlet />
     </>
   );
 };

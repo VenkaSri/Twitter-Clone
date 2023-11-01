@@ -21,14 +21,16 @@ export const useSession = () => {
           authApi.endpoints.checkAuthStatus.initiate()
         ).unwrap();
 
-        const userId = authStatus.user.id;
-        // If authentication is successful, fetch user details
-        const userDetails = await dispatch(
-          userApi.endpoints.getPrincipleUser.initiate(userId)
-        ).unwrap();
+        if (authStatus.user) {
+          const userId = authStatus.user.id;
+          // If authentication is successful, fetch user details
+          const userDetails = await dispatch(
+            userApi.endpoints.getPrincipleUser.initiate(userId)
+          ).unwrap();
 
-        // Set user details in the state
-        dispatch(userSliceActions.setUserInfo(userDetails));
+          // Set user details in the state
+          dispatch(userSliceActions.setUserInfo(userDetails));
+        }
       } catch (error) {
         console.error(
           "Failed to check authentication status or fetch user details:",

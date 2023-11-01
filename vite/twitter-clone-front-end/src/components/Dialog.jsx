@@ -33,6 +33,7 @@ Dialog.propTypes = {
 
 const AuthDialog = () => {
   const { isOpen } = useContext(DialogContext);
+  console.log(isOpen);
   const isMobile = useMediaQuery("(max-width:702px)");
   let sxStyles = {
     borderRadius: "16px",
@@ -53,7 +54,7 @@ const AuthDialog = () => {
 
   return (
     <MUIDialog
-      open={isOpen}
+      open={true}
       PaperProps={{ sx: sxStyles }}
       transitionDuration={0}
       fullScreen={isMobile}
