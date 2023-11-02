@@ -26,7 +26,7 @@
   @apply bg-[var(--primary-color)] text-white text-[17px];
 }
 
-.DraftEditor-root {
+/* .DraftEditor-root {
   @apply max-w-full relative right-0 left-0 py-3 break-words leading-6 text-[20px] font-cReg max-h-[700px] overflow-y-auto
   text-black dark:text-white w-full;
 }
@@ -37,4 +37,4 @@
 
 .DraftEditor-editorContainer {
   @apply relative z-[1] text-black dark:text-white font-cReg;
-}
+} */

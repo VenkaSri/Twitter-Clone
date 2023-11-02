@@ -13,6 +13,10 @@ import {
 import { RoundedIconButton } from "@components/RoundedIconButton";
 import ProfilePicture from "@components/ProfilePicture";
 import { UserProfile } from "../UserProfile";
+import { MoreOptionsButton } from "../MoreOptionsButton";
+import { PostMedia } from "./media/PostMedia";
+import { PostReply } from "./Reply";
+import PropTypes from "prop-types";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -99,6 +103,7 @@ const PostEngagementButton = ({ postId, onClick }) => {
   );
 };
 export const Post = ({ postData }) => {
+  console.log(postData);
   return (
     <div className="border-b border-b-[#eff3f4] dark:border-b-[var(--primary-dark-border-color)]">
       <article className="flex-col-container px-4">
@@ -111,7 +116,7 @@ export const Post = ({ postData }) => {
               <UserProfile userData={postData.userDetails} />
             </div>
             <div className="ml-auto self-start ">
-              <MoreButton />
+              <MoreOptionsButton />
             </div>
           </div>
         </div>
@@ -126,8 +131,12 @@ export const Post = ({ postData }) => {
         </div>
       </article>
       <div className="">
-        <PostReply postInfo={postData.authorUsername} />
+        {/* <PostReply postInfo={postData.authorUsername} /> */}
       </div>
     </div>
   );
+};
+
+Post.propTypes = {
+  postData: PropTypes.object,
 };
