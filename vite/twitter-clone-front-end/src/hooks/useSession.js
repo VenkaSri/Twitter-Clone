@@ -11,6 +11,7 @@ export const useSession = () => {
   const isAuthenticated = useSelector(
     (state) => state.authSlice.isAuthenticated
   );
+  const likedPosts = useSelector((state) => state.userSlice.likedPosts);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
 
   useEffect(() => {
@@ -44,5 +45,5 @@ export const useSession = () => {
     checkAuthStatusAndFetchUser();
   }, [dispatch]);
 
-  return { username, name, isAuthenticated, isAuthenticating };
+  return { username, name, isAuthenticated, isAuthenticating, likedPosts };
 };

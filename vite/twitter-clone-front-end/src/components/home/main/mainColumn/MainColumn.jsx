@@ -5,7 +5,7 @@ import { PostEditorProvider } from "@/context/home/post-editor-context";
 import { TabLink } from "@components/TabLink";
 import { Gear, Logo } from "@components/icons/Icons";
 import { useState } from "react";
-import { ForYou } from "../../ForYou";
+import { Timeline } from "../../timeline/Timeline";
 
 export const MainColumn = () => {
   return (
@@ -18,7 +18,7 @@ export const MainColumn = () => {
           <PostEditor />
         </PostEditorProvider>
       </div>
-      <ForYou />
+      <Timeline />
     </div>
   );
 };

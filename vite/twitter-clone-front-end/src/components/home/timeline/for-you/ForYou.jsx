@@ -5,10 +5,17 @@ import RelativeTime from "dayjs/plugin/relativeTime";
 import updateLocale from "dayjs/plugin/updateLocale";
 import { useGetAllPostsQuery } from "@/services/postApi";
 import { useNavigate } from "react-router-dom";
-import ProfilePicture from "../ProfilePicture";
-import { PostReply } from "../post/actions/PostReply";
-import UserDisplayNameAndHandle from "../UserDisplayNameAndHandle";
-import { PostSkeleton } from "../post/Skeleton";
+import ProfilePicture from "@/components/ProfilePicture";
+import { DisplayNameAndUsername } from "@components/home/timeline/DisplayNameAndUsername";
+import { MoreOptionsButton } from "@/components/MoreOptionsButton";
+import { PostMedia } from "@/components/post/media/PostMedia";
+import { ReplyPostButton } from "@/components/post/post-interactions/ReplyPostButton";
+import { RepostPostButton } from "@/components/post/post-interactions/RepostPostButton";
+import { LikePostButton } from "@/components/post/post-interactions/LikePostButton";
+import { BookmarkPostButton } from "@/components/post/post-interactions/BookmarkPostButton";
+import { ViewAnalyticsButton } from "@/components/post/post-interactions/ViewAnalyticsButton";
+import { SharePostButton } from "@/components/post/post-interactions/SharePostButton";
+import { PostSkeleton } from "@/components/post/Skeleton";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -42,45 +49,43 @@ export const ForYou = () => {
   if (isSuccess) {
     divs = posts.map((post) => {
       return (
-        <div key={post.id}>
+        <div key={post.postId}>
           <div
             onClick={() =>
               navigate(`/${post.userDetails.username}/status/${post.postId}`)
             }
             className="cursor-pointer hover:bg-black/[0.03]"
           >
-            <article className="flex-col-container px-4">
-              <div className="flex-col-container flex grow ">
+            <article className="flex flex-col px-4">
+              <div className="flex flex-col grow ">
                 <div className="flex grow pt-4"></div>
                 <div className="max-w-full flex  grow pb-3 ">
                   <div className="w-[40px] mr-4">
-                    <ProfilePicture />
+                    <ProfilePicture src={post.userDetails.profile_image_url} />
                   </div>
-                  <div className="flex-col-container grow  ">
+                  <div className="flex flex-col grow  ">
                     <div className="flex">
                       <div>
-                        {/* <TimelineUserInfo userData={post.userDetails} /> */}
-                        <UserDisplayNameAndHandle />
+                        <DisplayNameAndUsername userData={post.userDetails} />
                       </div>
                       <div>
                         <PostCreationInfo datetime={post.createdAt} />
                       </div>
                       <div className="ml-auto">
                         <div className="-m-[8px] self-end">
-                          {/* <MoreButton /> */}
+                          <MoreOptionsButton />
                         </div>
                       </div>
                     </div>
-                    {/* <PostText text={post.text} />
-                    <PostMedia media={post.media} /> */}
+                    <PostText text={post.text} />
+                    <PostMedia media={post.media} />
                     <div className="flex grow mt-3">
-                      <PostReply />
-                      {/* <ReplyPostButton postId={post.postId} />
+                      <ReplyPostButton postId={post.postId} />
                       <RepostPostButton postId={post.postId} />
                       <LikePostButton postId={post.postId} />
                       <BookmarkPostButton postId={post.postId} />
-                      <AnalyticsPostButton postId={post.postId} />
-                      <SharePostButton /> */}
+                      <ViewAnalyticsButton postId={post.postId} />
+                      <SharePostButton />
                     </div>
                   </div>
                 </div>
@@ -130,6 +135,16 @@ const PostCreationInfo = ({ datetime }) => {
   return (
     <div className="gap-1 text-[#536471] text-[15px] ">
       &nbsp;&#183;&nbsp;<span>{displayTime}</span>
+    </div>
+  );
+};
+
+const PostText = ({ text }) => {
+  return (
+    <div className=" flex grow">
+      <div className="flex leading-6 text-[17px] font-cReg ">
+        <span>{text}</span>
+      </div>
     </div>
   );
 };

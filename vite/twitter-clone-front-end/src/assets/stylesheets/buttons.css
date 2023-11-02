@@ -4,7 +4,7 @@
   }
 
   .btn--roundedIcon {
-    @apply rounded-full flex flex-col border items-center justify-center;
+    @apply rounded-full flex flex-col  items-center justify-center;
   }
 
   .btn--primary {
@@ -17,6 +17,10 @@
 
   .btn--action {
     @apply bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30] text-white dark:text-black font-cBold;
+  }
+
+  .btn--more {
+    @apply w-[34.75px] h-[34.75px] rounded-full flex items-center justify-center hover:bg-[#1e9bf0]/10 cursor-pointer;
   }
 
   .btn--media-action {
