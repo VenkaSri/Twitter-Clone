@@ -7,11 +7,7 @@ export const ViewPost = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
   const { data, error, isLoading, isSuccess } = useGetPostByIDQuery(postId);
-  if (isSuccess) {
-    console.log(data);
-  }
 
-  console.log(postId);
   return (
     <>
       <div className="sticky -top-[0.5px] bg-white/[.85] dark:bg-black/[.65] dark:bg-black z-[2]  backdrop-blur-md">

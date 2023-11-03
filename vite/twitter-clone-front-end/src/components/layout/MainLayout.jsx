@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { OverlayLoader } from "../dialog/OverlayLoader";
 import { Suspense, lazy } from "react";
 import PropTypes from "prop-types";
+import { SideColumn } from "../home/main/sideColumn/SideColumn";
 
 const Sidebar = lazy(() => import("@/components/home/header/Sidebar"));
 
@@ -29,7 +30,7 @@ const MainLayout = ({ children }) => {
               <Outlet />
             </div>
 
-            {/* <SideColumn /> */}
+            <SideColumn />
           </div>
         </main>
 

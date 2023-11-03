@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import Skeleton from "@mui/material/Skeleton";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useProfilePicture } from "@/hooks/user/useProfilePicture";
 
 const ProfilePicture = ({ size = 40, src }) => {

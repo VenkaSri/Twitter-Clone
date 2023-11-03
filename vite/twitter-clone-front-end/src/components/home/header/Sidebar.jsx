@@ -7,6 +7,7 @@ import SidebarNav from "@/components/home/header/SidebarNav";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import UserDisplayNameAndHandle from "@/components/UserDisplayNameAndHandle";
 import { useTheme } from "@/hooks/useTheme";
+import { useSession } from "@/hooks/useSession";
 
 const Sidebar = () => {
   return (
@@ -56,12 +57,13 @@ const NewPostButton = () => {
 };
 
 const AccountMenu = () => {
+  const { profilePicture } = useSession();
   return (
     <>
       <div className="my-3  flex items-center justify-center ">
         <div className="rounded-full max-w-full flex  tablet:grow p-3 dark:hover:bg-[#191919] hover:bg-[#0f1419]/[0.1] cursor-pointer  items-center">
           <div className="w-[40px]">
-            <ProfilePicture />
+            <ProfilePicture src={profilePicture} />
           </div>
           <div className=" flex-col overflow-hidden shrink-1 tablet:flex hidden px-[15px]">
             <UserDisplayNameAndHandle principleUser />

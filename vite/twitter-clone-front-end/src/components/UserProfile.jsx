@@ -11,16 +11,16 @@ export const UserProfile = ({ userData, isAuthUser }) => {
     if (isAuthUser) {
       setUserName(name);
       setUserUsername(username);
-    } else {
+    } else if (userData) {
       setUserName(userData.name);
       setUserUsername(userData.username);
     }
-  }, [isAuthUser]);
+  }, [isAuthUser, username, name, userData]);
 
   return (
-    <div className="flex-col-container grow overflow-hidden  px-[15px]">
+    <div className="flex flex-col grow overflow-hidden  px-[15px]">
       <div className="text-black dark:text-white break-words whitespace-nowrap text-ellipsis overflow-hidden font-cBold leading-5">
-        <span>Captain Bartholomew's Magical Underwater Kingdomff</span>
+        <span>{userName}</span>
       </div>
       <div className="text-[#71767B] break-words whitespace-nowrap text-ellipsis overflow-hidden font-cReg leading-5">
         <span>@{userUsername}</span>

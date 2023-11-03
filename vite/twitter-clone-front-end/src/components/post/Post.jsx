@@ -15,8 +15,10 @@ import ProfilePicture from "@components/ProfilePicture";
 import { UserProfile } from "../UserProfile";
 import { MoreOptionsButton } from "../MoreOptionsButton";
 import { PostMedia } from "./media/PostMedia";
-import { PostReply } from "./Reply";
+
 import PropTypes from "prop-types";
+import { PostReply } from "./PostReply";
+import { useSession } from "@/hooks/useSession";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -33,10 +35,8 @@ const PostText = ({ text }) => {
 
 const PostCreationInfo = ({ datetime }) => {
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  console.log(timeZone);
   const localTime = dayjs.utc(datetime).tz(timeZone).format("h:mm A");
   const localDate = dayjs.utc(datetime).tz(timeZone).format("MMM D, YYYY");
-  console.log(datetime);
   return (
     <div className="flex py-4 gap-1 text-[#536471] text-[15px]">
       <span>{localTime}</span>&#183;<span>{localDate}</span>
@@ -88,14 +88,19 @@ const PostActions = () => {
   );
 };
 
-const PostEngagementButton = ({ postId, onClick }) => {
+const PostEngagementButton = ({ usrName, onClick }) => {
+  const { username } = useSession();
   return (
     <div
-      className="button--post-engagement hover:bg-black/[0.03]"
+      className={clsx(
+        "flex flex-col grow  text-[#536471] text-[15px]" +
+          "border-t border-t-[#eff3f4] dark:border-t-[#2f3336] hover:bg-black/[0.03]",
+        { hidden: username !== usrName }
+      )}
       role="button"
       onClick={onClick}
     >
-      <div className="flex grow py-4 font-cReg leading-5">
+      <div className="flex grow py-4 font-cR leading-5">
         <Analytics className="w-[22.75px] h-[18.75px] pr-0.5 fill-[#536471] " />
         <span>View post engagements</span>
       </div>
@@ -103,16 +108,15 @@ const PostEngagementButton = ({ postId, onClick }) => {
   );
 };
 export const Post = ({ postData }) => {
-  console.log(postData);
   return (
-    <div className="border-b border-b-[#eff3f4] dark:border-b-[var(--primary-dark-border-color)]">
-      <article className="flex-col-container px-4">
+    <div className="border-b border-b-[#eff3f4] dark:border-b-[#2f3336]">
+      <article className="flex flex-col px-4">
         <div className=" flex grow ">
           <div className=" max-w-full flex  grow items-center">
             <div className="w-[40px]">
               <ProfilePicture src={postData.userDetails.profile_image_url} />
             </div>
-            <div className="flex-col-container overflow-hidden shrink-1 tablet:block hidden">
+            <div className="flex-col overflow-hidden shrink-1 flex">
               <UserProfile userData={postData.userDetails} />
             </div>
             <div className="ml-auto self-start ">
@@ -123,15 +127,15 @@ export const Post = ({ postData }) => {
         <PostText text={postData.text} />
         <PostMedia media={postData.media} />
         <PostCreationInfo datetime={postData.createdAt} />
-        <PostEngagementButton />
-        <div className="post-actions">
+        <PostEngagementButton usrName={postData.userDetails.username} />
+        <div className="flex flex-col h-[48px] justify-center border-y border-y-[#eff3f4] dark:border-y-[#2f3336]">
           <div className="flex grow items-center">
             <PostActions />
           </div>
         </div>
       </article>
       <div className="">
-        {/* <PostReply postInfo={postData.authorUsername} /> */}
+        <PostReply />
       </div>
     </div>
   );
@@ -139,4 +143,17 @@ export const Post = ({ postData }) => {
 
 Post.propTypes = {
   postData: PropTypes.object,
+};
+
+PostEngagementButton.propTypes = {
+  usrName: PropTypes.string,
+  onClick: PropTypes.func,
+};
+
+PostText.propTypes = {
+  text: PropTypes.string,
+};
+
+PostCreationInfo.propTypes = {
+  datetime: PropTypes.string,
 };

@@ -5,8 +5,7 @@ const initialState = {
   username: "",
   email: "",
   userId: "",
-  profilePicture:
-    "https://twitter-clone-2023-test.s3.amazonaws.com/profile-pictures/esafd/photo-1493612276216-ee3925520721.jpg",
+  profilePicture: "",
   likedPosts: [],
   followedIds: [],
 };
@@ -16,14 +15,14 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUserInfo(state, action) {
-      const { name, username, email, userId, profilePicture, likedPosts } =
+      const { name, username, email, id, profile_image_url, likedPostsIds } =
         action.payload;
       state.name = name;
       state.username = username;
       state.email = email;
-      state.userId = userId;
-      state.profilePicture = profilePicture;
-      state.likedPosts = likedPosts;
+      state.userId = id;
+      state.profilePicture = profile_image_url;
+      state.likedPosts = likedPostsIds;
     },
     addFollowedUser(state, action) {
       const userId = action.payload;

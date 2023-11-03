@@ -5,10 +5,15 @@ import { PostInputField } from "./PostInputField";
 import RoundedTextButton from "../RoundedTextButton";
 import clsx from "clsx";
 import { PostEditorMedia } from "./PostEditorMedia";
+import { useTheme } from "@/hooks/useTheme";
+import { PostActions } from "./PostOptions";
+import { useSession } from "@/hooks/useSession";
 
-export const PostReply = ({ postInfo }) => {
+export const PostReply = () => {
   const parentRef = useRef(null);
   const [childHeight, setChildHeight] = useState(48);
+  const { currentColor } = useTheme();
+  const { profilePicture } = useSession();
   const {
     hasUserTyped,
     isInputActive,
@@ -29,25 +34,25 @@ export const PostReply = ({ postInfo }) => {
   const handleReply = () => {
     console.log("hi");
   };
-  console.log(isInputActive);
+
   return (
     <div className="z-[1]">
       <div></div>
-      <div className="pt-1 pb-3 flex-col-container">
+      <div className="pt-1 pb-3 flex flex-col">
         {isInputActive && (
           <div className="min-h-[12px] px-4 flex">
             <div className="flex basis-10 mr-3"></div>
             <div className="flex grow text-[#536471]">
               Replying to&nbsp;
-              <span className="text-[var(--primary-color)]">@{postInfo}</span>
+              <span className="text-primary">@fdsaf</span>
             </div>
           </div>
         )}
         <div className="min-h-[12px] px-4 flex">
-          <div className="pt-3 mr-3 flex-col-container basis-10">
-            <ProfilePicture />
+          <div className="pt-3 mr-3 flex flex-col basis-10">
+            <ProfilePicture src={profilePicture} />
           </div>
-          <div className="flex-col-container grow pt-1">
+          <div className="flex flex-col grow pt-1">
             <div className="flex">
               <div
                 className="flex max-h-[720px] grow relative min-h-[48px]"
@@ -61,12 +66,10 @@ export const PostReply = ({ postInfo }) => {
               {!isInputActive && (
                 <div className="centered-column-container">
                   <RoundedTextButton
-                    onClick={handleReply}
-                    styles={
-                      "ml-3 min-w-[36px] min-h-[36px] px-4 header--newPostButton "
-                    }
                     text="Reply"
-                    isDisabled={true}
+                    className="ml-3 min-w-[36px] min-h-[36px] px-4 text-17 font-cBold border-transparent text-white"
+                    disabled={!validPost}
+                    style={{ backgroundColor: currentColor }}
                   />
                 </div>
               )}
@@ -76,7 +79,7 @@ export const PostReply = ({ postInfo }) => {
             >
               <PostEditorMedia uploadedImages={paths} />
             </div>
-            {/* {isInputActive && <PostOp />} */}
+            {isInputActive && <PostActions isReply />}
           </div>
         </div>
       </div>

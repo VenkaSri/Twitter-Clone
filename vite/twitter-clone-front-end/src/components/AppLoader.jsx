@@ -12,7 +12,6 @@ export const AppProgess = () => {
 
   const bgColor = darkMode ? "black" : "white";
 
-  console.log("rendered");
   return (
     <Backdrop
       sx={{

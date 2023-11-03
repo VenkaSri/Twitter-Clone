@@ -63,16 +63,6 @@
   font-display: "swap";
 }
 
-/* testing */
-
-.br {
-  @apply border border-[red];
-}
-
-.bg {
-  @apply border border-[#164204];
-}
-
 .heart {
   cursor: pointer;
   height: 50px;
@@ -98,4 +88,18 @@
   to {
     background-position: right;
   }
+}
+
+.centered-column-container {
+  @apply flex flex-col justify-center items-center;
+}
+
+/* testing */
+
+.br {
+  @apply border border-[red];
+}
+
+.bg {
+  @apply border border-[#164204];
 }

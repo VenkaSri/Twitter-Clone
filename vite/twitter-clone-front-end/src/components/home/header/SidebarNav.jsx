@@ -10,15 +10,12 @@ const SidebarNav = () => {
   const hide = useMediaQuery("(max-height:751px)");
   const [activeLink, setActiveLink] = useState("/" || "/home");
 
-  console.log(activeLink);
-
   useEffect(() => {
     const activeLink = location.pathname;
     setActiveLink(activeLink);
   }, [location]);
 
   const handleClick = (link) => {
-    console.log(link);
     setActiveLink(link);
   };
 

@@ -8,6 +8,7 @@ export const useSession = () => {
   const dispatch = useDispatch();
   const username = useSelector((state) => state.userSlice.username);
   const name = useSelector((state) => state.userSlice.name);
+  const profilePicture = useSelector((state) => state.userSlice.profilePicture);
   const isAuthenticated = useSelector(
     (state) => state.authSlice.isAuthenticated
   );
@@ -24,12 +25,9 @@ export const useSession = () => {
 
         if (authStatus.user) {
           const userId = authStatus.user.id;
-          // If authentication is successful, fetch user details
           const userDetails = await dispatch(
             userApi.endpoints.getPrincipleUser.initiate(userId)
           ).unwrap();
-
-          // Set user details in the state
           dispatch(userSliceActions.setUserInfo(userDetails));
         }
       } catch (error) {
@@ -45,5 +43,12 @@ export const useSession = () => {
     checkAuthStatusAndFetchUser();
   }, [dispatch]);
 
-  return { username, name, isAuthenticated, isAuthenticating, likedPosts };
+  return {
+    username,
+    name,
+    isAuthenticated,
+    isAuthenticating,
+    likedPosts,
+    profilePicture,
+  };
 };

@@ -3,33 +3,10 @@ import Fade from "@mui/material/Fade";
 import Snackbar from "@mui/material/Snackbar";
 import { usePostEditorContext } from "@/context/home/post-editor-context";
 import { useMediaUpload } from "@/hooks/useMediaUpload";
+import PropTypes from "prop-types";
 import { ATTACHMENTS } from "./ATTACHEMENTS";
 import { useEffect } from "react";
 import { RoundedIconButton } from "../RoundedIconButton";
-
-const AttachmentButton = ({
-  text,
-  action,
-  isDisabled,
-  isReply,
-  icon: Icon,
-}) => {
-  return (
-    <button
-      className={clsx(
-        isDisabled ? "button--icon-rounded-disabled " : "button--icon-rounded",
-        {
-          "max-[688px]:hidden": text === "Poll" || text === "Schedule",
-          hidden: isReply && (text === "Poll" || text === "Schedule"),
-        }
-      )}
-      onClick={action}
-      disabled={isDisabled}
-    >
-      <Icon className="w-5 fill-primary" />
-    </button>
-  );
-};
 
 export const PostAttachments = ({ isReply }) => {
   const { open, getInputProps, mediaFiles, error, setError } = useMediaUpload();
@@ -40,7 +17,11 @@ export const PostAttachments = ({ isReply }) => {
     setError(false);
   };
   const { setPaths, paths, setValidPost } = usePostEditorContext();
-  const attachmentsList = ATTACHMENTS(open, paths.length);
+  const attachmentsList = isReply
+    ? ATTACHMENTS(open, paths.length).filter((attachment) =>
+        ["Media", "GIF", "Emoji", "Tag Location"].includes(attachment.text)
+      )
+    : ATTACHMENTS(open, paths.length);
 
   useEffect(() => {
     const fileURLs = mediaFiles.map((file) => URL.createObjectURL(file));
@@ -52,7 +33,13 @@ export const PostAttachments = ({ isReply }) => {
       <input {...getInputProps()} style={{ display: "none" }} />
       {attachmentsList.map((attachment) => (
         <RoundedIconButton
-          className="min-h-[36px] min-w-[36px] fill-primary border-transparent hover:bg-[#E8F5FE] dark:hover:bg-[#1d9cf0]/10"
+          className={clsx(
+            "min-h-[36px] min-w-[36px] fill-primary border-transparent hover:bg-[#E8F5FE] dark:hover:bg-[#1d9cf0]/10",
+            {
+              "max-[688px]:hidden":
+                attachment.text === "Poll" || attachment.text === "Schedule",
+            }
+          )}
           key={attachment.text}
           isDisabled={attachment.isDisabled}
           isReply={isReply}
@@ -74,4 +61,8 @@ export const PostAttachments = ({ isReply }) => {
       />
     </div>
   );
+};
+
+PostAttachments.propTypes = {
+  isReply: PropTypes.bool,
 };
