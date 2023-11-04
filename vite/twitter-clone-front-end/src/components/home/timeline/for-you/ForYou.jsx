@@ -9,12 +9,12 @@ import ProfilePicture from "@/components/ProfilePicture";
 import { DisplayNameAndUsername } from "@components/home/timeline/DisplayNameAndUsername";
 import { MoreOptionsButton } from "@/components/MoreOptionsButton";
 import { PostMedia } from "@/components/post/media/PostMedia";
-import { ReplyPostButton } from "@/components/post/post-interactions/ReplyPostButton";
-import { RepostPostButton } from "@/components/post/post-interactions/RepostPostButton";
-import { LikePostButton } from "@/components/post/post-interactions/LikePostButton";
-import { BookmarkPostButton } from "@/components/post/post-interactions/BookmarkPostButton";
-import { ViewAnalyticsButton } from "@/components/post/post-interactions/ViewAnalyticsButton";
-import { SharePostButton } from "@/components/post/post-interactions/SharePostButton";
+import { ReplyPostButton } from "@/components/post/interaction-buttons/ReplyPostButton";
+import { RepostPostButton } from "@/components/post/interaction-buttons/RepostPostButton";
+import { LikePostButton } from "@/components/post/interaction-buttons/LikePostButton";
+import { BookmarkPostButton } from "@/components/post/interaction-buttons/BookmarkPostButton";
+import { ViewAnalyticsButton } from "@/components/post/interaction-buttons/ViewAnalyticsButton";
+import { SharePostButton } from "@/components/post/interaction-buttons/SharePostButton";
 import { PostSkeleton } from "@/components/post/Skeleton";
 
 dayjs.extend(utc);
@@ -63,7 +63,7 @@ export const ForYou = () => {
                   <div className="w-[40px] mr-4">
                     <ProfilePicture src={post.userDetails.profile_image_url} />
                   </div>
-                  <div className="flex flex-col grow  ">
+                  <div className="flex flex-col grow ">
                     <div className="flex">
                       <div>
                         <DisplayNameAndUsername userData={post.userDetails} />
@@ -133,7 +133,7 @@ const PostCreationInfo = ({ datetime }) => {
   }
 
   return (
-    <div className="gap-1 text-[#536471] text-[15px] ">
+    <div className=" text-[#536471] text-[15px] -mt-1">
       &nbsp;&#183;&nbsp;<span>{displayTime}</span>
     </div>
   );
@@ -142,7 +142,7 @@ const PostCreationInfo = ({ datetime }) => {
 const PostText = ({ text }) => {
   return (
     <div className=" flex grow">
-      <div className="flex leading-6 text-[17px] font-cReg ">
+      <div className="flex leading-6 text-[17px] font-cR ">
         <span>{text}</span>
       </div>
     </div>

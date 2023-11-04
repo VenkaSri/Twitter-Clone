@@ -7,15 +7,19 @@ import { useSelector } from "react-redux";
 
 export const LikePostButton = ({ postId }) => {
   const { data, isSuccess } = useGetPostByIDQuery(postId);
-  // const likedPosts = useSelector((state) => state.userSlice.likedPosts);
+  const likedPosts = useSelector((state) => state.userSlice.likedPosts);
 
-  const { handleLikePost, isActive, buttonIcon } = usePostInteraction(postId);
+  console.log(likedPosts);
+
+  const { handleLikePost, isActive, buttonIcon, handleUnlikePost } =
+    usePostInteraction(postId);
   const [isAnimating, setIsAnimating] = useState(false);
   const [likes, setLikes] = useState(false);
 
   const handleClick = (postId, e) => {
-    setIsAnimating(true);
-    handleLikePost(postId, e);
+    handleUnlikePost(postId, e);
+    // setIsAnimating(true);
+    // handleLikePost(postId, e);
   };
 
   const handleAnimationEnd = () => {
@@ -26,6 +30,8 @@ export const LikePostButton = ({ postId }) => {
     if (isSuccess && data.likes > 0) setLikes(true);
   }, [data?.likes]);
 
+  console.log(isAnimating);
+
   return (
     <>
       <div className={"flex grow "}>
@@ -34,16 +40,28 @@ export const LikePostButton = ({ postId }) => {
           onAnimationEnd={handleAnimationEnd}
           onClick={(e) => handleClick(postId, e)}
         >
-          <div
-            className={clsx("heart", isAnimating ? "is_animating" : "")}
-          ></div>
-          {/* <RoundedIconButton
+          <RoundedIconButton
             className={clsx(
               "w-[34.5px] h-[34.5px]  rounded-full hover:bg-[#f91881]/[0.1] hover:fill-[#f91881] -ml-[8px] group-hover:bg-[#f91881]/[0.1] group-hover:fill-[#f91881]",
-              { "fill-[#f91881]": isActive }
+              { "fill-[#f91881]": isActive },
+              isAnimating ? " heart is_animating" : ""
             )}
             icon={buttonIcon}
-          /> */}
+          />
+          {/* {isAnimating ? (
+            <div
+              className={clsx("heart", isAnimating ? "is_animating" : "")}
+            ></div>
+          ) : (
+            <RoundedIconButton
+              className={clsx(
+                "w-[34.5px] h-[34.5px] heart rounded-full hover:bg-[#f91881]/[0.1] hover:fill-[#f91881] -ml-[8px] group-hover:bg-[#f91881]/[0.1] group-hover:fill-[#f91881]",
+                { "fill-[#f91881]": isActive }
+              )}
+              icon={buttonIcon}
+            />
+          )} */}
+
           {likes && (
             <span
               className={clsx(

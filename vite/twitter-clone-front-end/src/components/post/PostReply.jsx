@@ -1,12 +1,12 @@
 import { usePostEditorContext } from "@/context/home/post-editor-context";
 import { useEffect, useRef, useState } from "react";
 import ProfilePicture from "../ProfilePicture";
-import { PostInputField } from "./PostInputField";
+import { PostInputField } from "./editor/PostInputField";
 import RoundedTextButton from "../RoundedTextButton";
 import clsx from "clsx";
-import { PostEditorMedia } from "./PostEditorMedia";
+import { PostEditorMedia } from "./editor/PostEditorMedia";
 import { useTheme } from "@/hooks/useTheme";
-import { PostActions } from "./PostOptions";
+import { PostActions } from "./editor/PostOptions";
 import { useSession } from "@/hooks/useSession";
 
 export const PostReply = () => {

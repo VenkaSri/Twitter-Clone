@@ -1,10 +1,8 @@
 import { useGetPostByIDQuery } from "@/services/postApi";
 import { useNavigate, useParams } from "react-router-dom";
 import { Back } from "../icons/Icons";
-import { Suspense, lazy } from "react";
+import { Post } from "@components/post/Post";
 import { OverlayLoader } from "../dialog/OverlayLoader";
-
-const Post = lazy(() => import("./Post"));
 
 export const ViewPost = () => {
   const navigate = useNavigate();
@@ -16,12 +14,8 @@ export const ViewPost = () => {
       <div className="sticky -top-[0.5px] bg-white/[.85] dark:bg-black/[.65] dark:bg-black z-[2]  backdrop-blur-md">
         <MainColumnHeader onClick={() => navigate(-1)} />
       </div>
-      {isSuccess && (
-        // Wrap the Post component with Suspense
-        <Suspense fallback={<OverlayLoader />}>
-          <Post postData={data} />
-        </Suspense>
-      )}
+      {isSuccess && <Post postData={data} />}
+      {isLoading && <OverlayLoader />}
     </>
   );
 };

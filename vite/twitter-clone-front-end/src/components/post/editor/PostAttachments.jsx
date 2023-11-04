@@ -6,7 +6,7 @@ import { useMediaUpload } from "@/hooks/useMediaUpload";
 import PropTypes from "prop-types";
 import { ATTACHMENTS } from "./ATTACHEMENTS";
 import { useEffect } from "react";
-import { RoundedIconButton } from "../RoundedIconButton";
+import { RoundedIconButton } from "../../RoundedIconButton";
 
 export const PostAttachments = ({ isReply }) => {
   const { open, getInputProps, mediaFiles, error, setError } = useMediaUpload();

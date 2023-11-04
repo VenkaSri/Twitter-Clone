@@ -24,7 +24,7 @@ export const DisplayNameAndUsername = ({ userData }) => {
   return (
     <>
       <ProfilePopover userId={user}>
-        <div className="overflow-hidden">
+        <div className="overflow-hidden ">
           <div className="text-black dark:text-white break-words whitespace-nowrap text-ellipsis overflow-hidden font-cBold leading-5">
             <div
               className="inline hover:underline underline-offset-2"

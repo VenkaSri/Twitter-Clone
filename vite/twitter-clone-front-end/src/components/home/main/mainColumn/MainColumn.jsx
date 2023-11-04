@@ -1,11 +1,12 @@
 import ProfilePicture from "@/components/ProfilePicture";
 import { RoundedIconButton } from "@/components/RoundedIconButton";
-import { PostEditor } from "@/components/post/PostEditor";
+import { PostEditor } from "@/components/post/editor/PostEditor";
 import { PostEditorProvider } from "@/context/home/post-editor-context";
 import { TabLink } from "@components/TabLink";
 import { Gear, Logo } from "@components/icons/Icons";
 import { useState } from "react";
 import { Timeline } from "../../timeline/Timeline";
+import { useSession } from "@/hooks/useSession";
 
 export const MainColumn = () => {
   return (
@@ -25,9 +26,9 @@ export const MainColumn = () => {
 
 const MainColumnNav = () => {
   const [selectedTab, setSelectedTab] = useState("For you");
+  const { profilePicture } = useSession();
   localStorage.setItem("timelinePrefernce", "For you");
   const handleClick = (event) => {
-    console.log;
     const tabType = event.currentTarget.getAttribute("data-tab-type");
     localStorage.setItem("timelinePrefernce", tabType);
     setSelectedTab(tabType);
@@ -38,7 +39,7 @@ const MainColumnNav = () => {
       <div className="mainColumn--topNav-heading mobile:hidden flex">
         <div className=" relative px-4 ">
           <div className="mobile:hidden block">
-            <ProfilePicture />
+            <ProfilePicture src={profilePicture} />
           </div>
           <div className="absolute inset-0 flex justify-center items-center mobile:hidden">
             <Logo className="w-[30px" />

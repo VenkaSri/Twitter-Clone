@@ -1,11 +1,11 @@
 import { usePostEditorContext } from "@/context/home/post-editor-context";
 import { useTheme } from "@/hooks/useTheme";
 import clsx from "clsx";
-import RoundedTextAndIconButton from "../RoundedTextAndIconButton";
-import { Close, Globe } from "../icons/Icons";
+import RoundedTextAndIconButton from "../../RoundedTextAndIconButton";
+import { Close, Globe } from "../../icons/Icons";
 import { PostAttachments } from "./PostAttachments";
 import { CharactersProgress } from "./CharactersProgress";
-import RoundedTextButton from "../RoundedTextButton";
+import RoundedTextButton from "../../RoundedTextButton";
 import { POST_BUTTON_VALUE } from "@/constants/app";
 import PropTypes from "prop-types";
 

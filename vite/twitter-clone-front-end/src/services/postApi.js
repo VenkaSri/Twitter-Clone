@@ -20,8 +20,18 @@ export const postApi = createApi({
         method: "POST",
       }),
     }),
+    unlikePost: builder.mutation({
+      query: (id) => ({
+        url: `/unlike/${id}`,
+        method: "POST",
+      }),
+    }),
   }),
 });
 
-export const { useGetPostByIDQuery, useGetAllPostsQuery, useLikePostMutation } =
-  postApi;
+export const {
+  useGetPostByIDQuery,
+  useGetAllPostsQuery,
+  useLikePostMutation,
+  useUnlikePostMutation,
+} = postApi;

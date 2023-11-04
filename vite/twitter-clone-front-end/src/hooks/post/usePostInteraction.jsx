@@ -1,11 +1,13 @@
 import { Like, LikeFilled } from "@/components/icons/Icons";
-import { useLikePostMutation } from "@/services/postApi";
+import { useLikePostMutation, useUnlikePostMutation } from "@/services/postApi";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useSession } from "../useSession";
 
 export const usePostInteraction = (postId) => {
-  const [likePost, { isLoading, isError }] = useLikePostMutation();
+  const [likePost] = useLikePostMutation();
+  const [unlikePost] = useUnlikePostMutation();
+
   const { likedPosts = [] } = useSession();
 
   const [buttonIcon, setButtonIcon] = useState(null);
@@ -15,6 +17,12 @@ export const usePostInteraction = (postId) => {
     e.stopPropagation();
     setIsActive(!isActive);
     likePost(id);
+  };
+
+  const handleUnlikePost = (id, e) => {
+    e.stopPropagation();
+    setIsActive(!isActive);
+    unlikePost(id);
   };
 
   useEffect(() => {
@@ -35,5 +43,5 @@ export const usePostInteraction = (postId) => {
   //   console.log(id);
   // };
 
-  return { handleLikePost, isActive, buttonIcon };
+  return { handleLikePost, isActive, buttonIcon, handleUnlikePost };
 };

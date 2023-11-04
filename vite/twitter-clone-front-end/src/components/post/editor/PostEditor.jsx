@@ -6,13 +6,13 @@ import LinearProgress from "@mui/material/LinearProgress";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { PostInputField } from "@components/post/PostInputField";
-import { PostEditorMedia } from "@components/post/PostEditorMedia";
+import { PostInputField } from "@/components/post/editor/PostInputField";
+import { PostEditorMedia } from "@/components/post/editor/PostEditorMedia";
 import { useSession } from "@hooks/useSession";
 import { PostAttachments } from "./PostAttachments";
 import { CharactersProgress } from "./CharactersProgress";
 import { POST_BUTTON_VALUE } from "@constants/app";
-import RoundedTextButton from "../RoundedTextButton";
+import RoundedTextButton from "../../RoundedTextButton";
 import { Link } from "react-router-dom";
 import { useTheme } from "@hooks/useTheme";
 
@@ -30,7 +30,7 @@ export const PostEditor = () => {
   const { isInputActive, isLoading, paths } = usePostEditorContext();
   const [childHeight, setChildHeight] = useState(48);
   const parentRef = useRef(null);
-  const { username } = useSession();
+  const { profilePicture } = useSession();
   useEffect(() => {
     if (parentRef.current && childHeight !== null) {
       parentRef.current.style.height = `${childHeight + 15}px`;
@@ -56,7 +56,7 @@ export const PostEditor = () => {
         )}
         <div className="flex max-w-full grow">
           <div className="pt-[12px] mr-[12px] flex basis-auto">
-            <ProfilePicture />
+            <ProfilePicture src={profilePicture} />
           </div>
           <div className="pt-1 flex flex-col  w-full max-w-full  basis-auto ">
             <div className="pt-1 flex flex-col  z-[1] relative">
