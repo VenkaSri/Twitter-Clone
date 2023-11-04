@@ -3,11 +3,16 @@ import { useCheckIfUsernameIsAvailableQuery } from "@/services/userApi";
 import { RegisterContext } from "@context/auth/register-context";
 import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import validator from "validator";
 
 const validatePasswordLength = (text) => /^.{8,}$/.test(text);
 const validatePasswordStrength = (text) => /^(.)\1*$/.test(text);
 const validateUsername = (text) => /^[a-zA-Z0-9_]+$/.test(text);
+const hasNonSpaceChars = (text) => /[^\s\\]/.test(text);
+const isValidEmail = (email) => {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailPattern.test(email);
+};
+const isNotEmpty = (text) => text.trim() !== "";
 
 export const useInputValidation = () => {
   const {
@@ -30,26 +35,25 @@ export const useInputValidation = () => {
   const [errorMessage, setErroMessage] = useState("");
 
   useEffect(() => {
-    if (!validator.isEmpty(name)) setHasTyped(true);
-  }, [hasTyped, name]);
+    if (hasNonSpaceChars(name)) {
+      setHasTyped(true);
+    }
+  }, [name]);
 
   useEffect(() => {
     if (hasTyped) {
-      if (!validator.isEmpty(name) && /[^\s\\]/.test(name)) {
-        setNameError(false);
-      } else {
-        setNameError(true);
-      }
+      setNameError(!hasNonSpaceChars(name));
     }
   }, [hasTyped, name]);
-  const hasOnlySpaceCharacters = (text) => !/[^\s\\]/.test(text);
   useEffect(() => {
+    const hasOnlySpaceCharacters = (text) => !hasNonSpaceChars(text);
+
     if (hasOnlySpaceCharacters(email)) {
       return;
     }
     const identifier = setTimeout(() => {
       setEmailChecking(false);
-      if (validator.isEmail(email.trim())) {
+      if (isValidEmail(email.trim())) {
         checkEmail(email.trim());
       } else {
         setEmailError(true);
@@ -66,9 +70,9 @@ export const useInputValidation = () => {
 
   useEffect(() => {
     if (
-      !validator.isEmpty(name) &&
-      /[^\s\\]/.test(name) &&
-      !validator.isEmpty(email) &&
+      isNotEmpty(name) &&
+      hasNonSpaceChars(name) &&
+      isNotEmpty(email) &&
       emailChecking &&
       !emailError &&
       dob.day !== "" &&

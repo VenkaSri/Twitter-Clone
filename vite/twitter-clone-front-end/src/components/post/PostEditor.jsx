@@ -8,7 +8,6 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { PostInputField } from "@components/post/PostInputField";
 import { PostEditorMedia } from "@components/post/PostEditorMedia";
-import { usePostEditorState } from "@hooks/post/usePostEditorState";
 import { useSession } from "@hooks/useSession";
 import { PostAttachments } from "./PostAttachments";
 import { CharactersProgress } from "./CharactersProgress";

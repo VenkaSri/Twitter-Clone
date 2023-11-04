@@ -9,7 +9,7 @@ export default defineConfig({
   //   global: {},
   // },
   base: "/",
-  plugins: [react(), visualizer()],
+  plugins: [react(), visualizer({ open: true })],
   server: {
     port: 3000,
   },
