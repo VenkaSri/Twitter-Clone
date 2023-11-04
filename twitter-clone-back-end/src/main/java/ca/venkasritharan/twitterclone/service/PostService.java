@@ -202,17 +202,24 @@ public class PostService {
   public ResponseEntity<?> unlikePost(long postId) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     Optional<User> user = userRepository.findByUsername(authentication.getName());
-    Post post = postRepository.findPostByPostId(postId).orElseThrow(() -> new ResourceNotFoundException(postId));
+    System.out.println(postId);
 
-
-    PostLike postLike = new PostLike();
-
-    if (user.isPresent()) {
-      postLike = postLikesRepository.findPostLikeByUser_Id(user.get().getId());
-      postLikesRepository.delete(postLike);
+    if (!user.isPresent()) {
+      return ResponseEntity.badRequest().body("User not found.");
     }
 
-    return ResponseEntity.ok("ok");
+    Post post = postRepository.findPostByPostId(postId).orElseThrow(() -> new ResourceNotFoundException(postId));
+
+    // Find the specific PostLike for this user and post
+    Optional<PostLike> postLikeOpt = postLikesRepository.findByUserAndPost(user.get(), post);
+
+    if (postLikeOpt.isPresent()) {
+      postLikesRepository.delete(postLikeOpt.get());
+    } else {
+      return ResponseEntity.badRequest().body("Like not found for the specified post and user.");
+    }
+
+    return ResponseEntity.ok("Successfully unliked the post.");
   }
 
 

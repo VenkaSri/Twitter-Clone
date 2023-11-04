@@ -1,17 +1,22 @@
 package ca.venkasritharan.twitterclone.service.impl;
 
+import ca.venkasritharan.twitterclone.entity.user.User;
 import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import ca.venkasritharan.twitterclone.repository.user.ProfileRepository;
 import ca.venkasritharan.twitterclone.response.AuthStatusResponse;
 import ca.venkasritharan.twitterclone.response.EmailAvailabilityResponse;
+import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
 import ca.venkasritharan.twitterclone.security.jwt.JwtTokenProvider;
 import ca.venkasritharan.twitterclone.service.AuthenticationService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -26,12 +31,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   private UserRepository userRepository;
   private JwtTokenProvider jwtTokenProvider;
   private final ProfileRepository profileRepository;
+  private final ModelMapper mapper;
 
-  public AuthenticationServiceImpl(AuthenticationManager authenticationManager, UserRepository userRepository, JwtTokenProvider jwtTokenProvider, ProfileRepository profileRepository) {
+  public AuthenticationServiceImpl(AuthenticationManager authenticationManager, UserRepository userRepository, JwtTokenProvider jwtTokenProvider, ProfileRepository profileRepository, ModelMapper mapper) {
     this.authenticationManager = authenticationManager;
     this.userRepository = userRepository;
     this.jwtTokenProvider = jwtTokenProvider;
     this.profileRepository = profileRepository;
+    this.mapper = mapper;
   }
 
 //  @Override
@@ -59,7 +66,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String token = optionalAuthTokenCookie.get().getValue();
         try {
           boolean isTokenValid = jwtTokenProvider.validateToken(token);
-          AuthStatusResponse response = new AuthStatusResponse(isTokenValid);
+          Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+          String username = authentication.getName();
+
+          Optional<User> optionalUser = userRepository.findByUsername(username);
+          UserDetailsResponse userDetailsResponse = new UserDetailsResponse();
+          if (optionalUser.isPresent()) {
+            userDetailsResponse = mapper.map(optionalUser.get(), UserDetailsResponse.class);
+
+          }
+
+
+          AuthStatusResponse response = new AuthStatusResponse(isTokenValid, userDetailsResponse);
           return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
           // Log the exception
@@ -68,7 +86,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
       } else {
         // Handle missing token
-        AuthStatusResponse response = new AuthStatusResponse(false);
+        AuthStatusResponse response = new AuthStatusResponse(false , null);
         return new ResponseEntity<>(response, HttpStatus.OK);
       }
     } catch (Exception e) {

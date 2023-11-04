@@ -29,5 +29,4 @@ public class PostLike {
   private Post post;
 
 
-
 }

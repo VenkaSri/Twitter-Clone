@@ -90,7 +90,7 @@ public class ProfileController {
 
     MessageAndCodeResponse messageAndCodeResponse = new MessageAndCodeResponse();
     messageAndCodeResponse.setMessage("Successfully uploaded");
-    messageAndCodeResponse.setStatus(201);
+    messageAndCodeResponse.setStatus(200);
         return ResponseEntity.status(HttpStatus.OK.value()).body(messageAndCodeResponse);
       } else {
 
