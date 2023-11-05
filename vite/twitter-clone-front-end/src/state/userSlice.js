@@ -34,6 +34,9 @@ const userSlice = createSlice({
       const userId = action.payload;
       state.followedIds = state.followedIds.filter((id) => id !== userId);
     },
+    updateLikedPosts(state, action) {
+      state.likedPosts = action.payload;
+    },
   },
 });
 

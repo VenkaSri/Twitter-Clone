@@ -7,20 +7,24 @@ import { Gear, Logo } from "@components/icons/Icons";
 import { useState } from "react";
 import { Timeline } from "../../timeline/Timeline";
 import { useSession } from "@/hooks/useSession";
+import Head from "@/components/head/Head";
 
 export const MainColumn = () => {
   return (
-    <div className="main--mainColumn ">
-      <div className="sticky -top-[0.5px] bg-white/[.85] dark:bg-black/[.65] dark:bg-black z-[2]  backdrop-blur-md">
-        <MainColumnNav />
+    <>
+      <Head title="Home" />
+      <div className="main--mainColumn ">
+        <div className="sticky -top-[0.5px] bg-white/[.85] dark:bg-black/[.65] dark:bg-black z-[2]  backdrop-blur-md">
+          <MainColumnNav />
+        </div>
+        <div className="z-[1]">
+          <PostEditorProvider>
+            <PostEditor />
+          </PostEditorProvider>
+        </div>
+        <Timeline />
       </div>
-      <div className="z-[1]">
-        <PostEditorProvider>
-          <PostEditor />
-        </PostEditorProvider>
-      </div>
-      <Timeline />
-    </div>
+    </>
   );
 };
 

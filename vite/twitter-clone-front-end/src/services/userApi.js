@@ -50,6 +50,9 @@ export const userApi = createApi({
         method: "POST",
       }),
     }),
+    getLikes: builder.query({
+      query: () => `/posts/likes`,
+    }),
   }),
 });
 
@@ -61,4 +64,5 @@ export const {
   useGetUserByIDQuery,
   useFollowUserMutation,
   useUnfollowUserMutation,
+  useGetLikesQuery,
 } = userApi;
