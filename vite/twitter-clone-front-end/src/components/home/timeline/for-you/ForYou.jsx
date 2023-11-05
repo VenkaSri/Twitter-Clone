@@ -16,6 +16,7 @@ import { BookmarkPostButton } from "@/components/post/interaction-buttons/Bookma
 import { ViewAnalyticsButton } from "@/components/post/interaction-buttons/ViewAnalyticsButton";
 import { SharePostButton } from "@/components/post/interaction-buttons/SharePostButton";
 import { PostSkeleton } from "@/components/post/Skeleton";
+import { PostActions } from "@/components/post/PostActions";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -72,7 +73,10 @@ export const ForYou = () => {
                         <PostCreationInfo datetime={post.createdAt} />
                       </div>
                       <div className="ml-auto">
-                        <div className="-m-[8px] self-end">
+                        <div
+                          className="-m-[8px] self-end"
+                          onClick={(e) => e.stopPropagation()}
+                        >
                           <MoreOptionsButton />
                         </div>
                       </div>
@@ -80,12 +84,7 @@ export const ForYou = () => {
                     <PostText text={post.text} />
                     <PostMedia media={post.media} />
                     <div className="flex grow mt-3">
-                      <ReplyPostButton postId={post.postId} />
-                      <RepostPostButton postId={post.postId} />
-                      <LikePostButton postId={post.postId} />
-                      <BookmarkPostButton postId={post.postId} />
-                      <ViewAnalyticsButton postId={post.postId} />
-                      <SharePostButton />
+                      <PostActions postId={post.postId} home />
                     </div>
                   </div>
                 </div>

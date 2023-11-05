@@ -19,6 +19,8 @@ import { PostMedia } from "./media/PostMedia";
 import PropTypes from "prop-types";
 import { PostReply } from "./PostReply";
 import { useSession } from "@/hooks/useSession";
+import { PostActions } from "./PostActions";
+import { useNavigate } from "react-router-dom";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -45,64 +47,25 @@ const PostCreationInfo = ({ datetime }) => {
   );
 };
 
-const PostActions = () => {
-  const icons = [
-    {
-      Component: Reply,
-      className: "hover:bg-[#1d9cf0]/[0.1] hover:fill-[var(--primary-color)]",
-    },
-    {
-      Component: Repost,
-      className: "hover:bg-[#00ba7c]/[0.1] hover:fill-[#00ba7c]",
-    },
-    {
-      Component: Like,
-      className: "hover:bg-[#f91881]/[0.1] hover:fill-[#f91881]",
-    },
-    {
-      Component: Bookmark,
-      className: "hover:bg-[#1d9cf0]/[0.1] hover:fill-[var(--primary-color)]",
-    },
-    {
-      Component: Share,
-      className: "hover:bg-[#1d9cf0]/[0.1] hover:fill-[var(--primary-color)]",
-      noFlex: true,
-    },
-  ];
-
-  return (
-    <>
-      {icons.map(({ Component, className, noFlex }, index) => {
-        return (
-          <div key={index} className={noFlex ? "" : "flex flex-1"}>
-            <RoundedIconButton
-              className={clsx(
-                "w-[38.5px] h-[38.5px] flex flex-col rounded-full " + className
-              )}
-              icon={<Component className={"w-[22.75px] h-[18.75px]"} />}
-            />
-          </div>
-        );
-      })}
-    </>
-  );
-};
-
-const PostEngagementButton = ({ usrName, onClick }) => {
+const PostEngagementButton = ({ post, onClick }) => {
   const { username } = useSession();
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/${post.userDetails.username}/status/${post.postId}/quotes`);
+  };
   return (
     <div
       className={clsx(
         "flex flex-col grow  text-[#536471] text-[15px]" +
-          "border-t border-t-[#eff3f4] dark:border-t-[#2f3336] hover:bg-black/[0.03]",
-        { hidden: username !== usrName }
+          "border-t border-t-[#eff3f4] dark:border-t-[#2f3336] hover:bg-black/[0.03] ",
+        { hidden: username !== post.userDetails.username }
       )}
       role="button"
-      onClick={onClick}
+      onClick={handleClick}
     >
-      <div className="flex grow py-4 font-cR leading-5">
-        <Analytics className="w-[22.75px] h-[18.75px] pr-0.5 fill-[#536471] " />
-        <span>View post engagements</span>
+      <div className="flex grow py-4 font-cR leading-5 items-center">
+        <Analytics className="w-[22.75px] h-[18.75px] pr-0.5 fill-[#536471]" />
+        <span className="mt-2">View post engagements</span>
       </div>
     </div>
   );
@@ -127,10 +90,10 @@ export const Post = ({ postData }) => {
         <PostText text={postData.text} />
         <PostMedia media={postData.media} />
         <PostCreationInfo datetime={postData.createdAt} />
-        <PostEngagementButton usrName={postData.userDetails.username} />
+        <PostEngagementButton post={postData} />
         <div className="flex flex-col h-[48px] justify-center border-y border-y-[#eff3f4] dark:border-y-[#2f3336]">
           <div className="flex grow items-center">
-            <PostActions />
+            <PostActions postId={postData.postId} />
           </div>
         </div>
       </article>
@@ -146,7 +109,7 @@ Post.propTypes = {
 };
 
 PostEngagementButton.propTypes = {
-  usrName: PropTypes.string,
+  post: PropTypes.object,
   onClick: PropTypes.func,
 };
 

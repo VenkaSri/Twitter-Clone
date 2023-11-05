@@ -92,7 +92,7 @@ export const Back = ({ className }) => (
   <SVG path={BACK} className={className} />
 );
 
-export const Close = ({ className }) => (
+export const Close = ({ className = "w-5" }) => (
   <SVG path={CLOSE} className={className} />
 );
 

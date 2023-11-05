@@ -40,9 +40,5 @@ export const usePostInteraction = (postId) => {
     }
   }, [isActive]);
 
-  // const handleLikePost = (id) => {
-  //   console.log(id);
-  // };
-
   return { handleLikePost, isActive, buttonIcon, handleUnlikePost };
 };
