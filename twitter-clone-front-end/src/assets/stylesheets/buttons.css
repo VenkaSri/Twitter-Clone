@@ -1,66 +1,45 @@
-:root {
-}
+@layer components {
+  .btn--roundedText {
+    @apply rounded-full flex flex-col border border-0 font-cR justify-center items-center;
+  }
 
-.button--footer-outline {
-  @apply border border-[#cfd9de] text-black hover:text-black  hover:bg-[#e7e7e8];
-}
+  .btn--roundedIcon {
+    @apply rounded-full flex flex-col  items-center justify-center;
+  }
 
-.footer--button {
-  @apply flex flex-col min-h-[52px] my-6 min-w-[52px] rounded-full text-[17px] items-center justify-center font-cBold;
-}
+  .btn--primary {
+    @apply border-black/0 bg-primary text-white hover:bg-[#1a8cd8] flex flex-col;
+  }
 
-.button--footer-filled {
-  @apply bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30] text-white dark:text-black;
-}
+  .btn--next {
+    @apply bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30] text-white dark:text-black;
+  }
 
-.button--footer-disabled {
-  @apply bg-[#86888b] dark:text-black text-white;
-}
+  .btn--action {
+    @apply bg-black dark:bg-white dark:hover:bg-[#D7DBDC] hover:bg-[#272C30] text-white dark:text-black font-cBold;
+  }
 
-.button--footer-signup {
-  @apply bg-[#1e9bf0] hover:bg-[#1A8CD8] text-white;
-}
+  .btn--more {
+    @apply w-[34.75px] h-[34.75px] rounded-full flex items-center justify-center hover:bg-[#1e9bf0]/10 cursor-pointer;
+  }
 
-.follow--button {
-  @apply rounded-full text-[14px] font-cBold min-w-[78px] cursor-pointer 
-  hover:bg-[#272c30] text-white  dark:hover:bg-[#D7DBDC]
-  bg-black dark:bg-white
-  dark:text-black;
-}
+  .btn--media-action {
+    @apply absolute  cursor-pointer  rounded-full bg-[#0f1419]/75 flex justify-center items-center backdrop-blur-sm hover:bg-[#272c30]/75;
+  }
 
-.follow--button-unfollow {
-  @apply bg-transparent hover:bg-[#F9D7DA] dark:hover:bg-[#200A0B] dark:bg-transparent
-  text-black hover:text-[#F54550] dark:text-white
-  border border-[#d4dde1] dark:border-[#2f3336] hover:border-[#fdc9ce]
-  dark:hover:border-[#67070f] dark:hover:bg-[#200A0B] dark:hover:text-[#F54550];
-}
+  .btn--skip {
+    @apply border border-[#cfd9de] text-black  hover:bg-[#e7e7e8] dark:border-[#536471]
+    dark:hover:bg-[#eff3f4]/[0.1] dark:text-white;
+  }
 
-.button--rounded {
-  @apply rounded-full flex flex-col justify-center items-center font-cBold leading-5 cursor-pointer min-w-[52px] min-h-[52px];
-}
+  .btn--unfollow {
+    @apply bg-transparent hover:bg-[#F9D7DA] dark:bg-transparent
+    text-black hover:text-[#F54550] dark:text-white
+    border border-[#d4dde1] dark:border-[#2f3336] hover:border-[#fdc9ce]
+    dark:hover:border-[#67070f] dark:hover:bg-[#200A0B] dark:hover:text-[#F54550];
+  }
 
-.button--rounded-audience {
-  @apply min-w-[24px] min-h-[24px] px-4 text-[var(--primary-color)] 
-  bg-transparent  hover:bg-[#1d9bf0]/10;
-}
-
-.button--icon-rounded {
-  @apply w-[34px] h-[34px] flex justify-center items-center rounded-full  font-bold hover:bg-[#E8F5FE] dark:hover:bg-[#1d9cf0]/10;
-}
-
-.button--icon-rounded-disabled {
-  @apply w-[34px] h-[34px] flex justify-center items-center rounded-full  font-bold opacity-50;
-}
-
-.button--media-action {
-  @apply absolute  cursor-pointer  rounded-full bg-[#0f1419]/75 flex justify-center items-center backdrop-blur-sm hover:bg-[#272c30]/75;
-}
-
-.button--more {
-  @apply w-[34.75px] h-[34.75px] rounded-full flex items-center justify-center hover:bg-[#1e9bf0]/10 cursor-pointer;
-}
-
-.button--post-engagement {
-  @apply flex flex-col grow  text-[#536471] text-[15px]
-  border-t border-t-[#eff3f4] dark:border-t-[var(--primary-dark-border-color)];
+  .footer--button {
+    @apply flex flex-col min-h-[52px] my-6 min-w-[52px] rounded-full text-[17px] items-center justify-center font-cBold;
+  }
 }

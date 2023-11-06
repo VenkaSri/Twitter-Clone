@@ -1,37 +1,54 @@
-import { getData } from "../services/auth/getData";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userSliceActions } from "../state/user/userSlice";
+import { authApi } from "@/services/authApi";
+import { userApi } from "@/services/userApi";
+import { userSliceActions } from "@/state/userSlice";
 
 export const useSession = () => {
   const dispatch = useDispatch();
-  const photoSRC = useSelector(
-    (state) => state.rootReducer.userSession.profilePicture
+  const username = useSelector((state) => state.userSlice.username);
+  const name = useSelector((state) => state.userSlice.name);
+  const profilePicture = useSelector((state) => state.userSlice.profilePicture);
+  const isAuthenticated = useSelector(
+    (state) => state.authSlice.isAuthenticated
   );
-  const { username, email, name } = useSelector(
-    (state) => state.rootReducer.userSession
-  );
+  const likedPosts = useSelector((state) => state.userSlice.likedPosts);
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
 
-  const getUserDetails = async () => {
-    try {
-      const response = await getData("/api/user_details");
-      saveUserDetailsToSlice(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  useEffect(() => {
+    const checkAuthStatusAndFetchUser = async () => {
+      try {
+        // Check the authentication status
+        const authStatus = await dispatch(
+          authApi.endpoints.checkAuthStatus.initiate()
+        ).unwrap();
 
-  const saveUserDetailsToSlice = (response) => {
-    dispatch(userSliceActions.setEmail(response.email));
-    dispatch(userSliceActions.setName(response.name));
-    dispatch(userSliceActions.setUserId(response.id));
-    dispatch(userSliceActions.setUsername(response.username));
-  };
+        if (authStatus.user) {
+          const userId = authStatus.user.id;
+          const userDetails = await dispatch(
+            userApi.endpoints.getPrincipleUser.initiate(userId)
+          ).unwrap();
+          dispatch(userSliceActions.setUserInfo(userDetails));
+        }
+      } catch (error) {
+        console.error(
+          "Failed to check authentication status or fetch user details:",
+          error
+        );
+      } finally {
+        setIsAuthenticating(false);
+      }
+    };
+
+    checkAuthStatusAndFetchUser();
+  }, [dispatch]);
 
   return {
-    getUserDetails,
-    photoSRC,
     username,
-    email,
     name,
+    isAuthenticated,
+    isAuthenticating,
+    likedPosts,
+    profilePicture,
   };
 };

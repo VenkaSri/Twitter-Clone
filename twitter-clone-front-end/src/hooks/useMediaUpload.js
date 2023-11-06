@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from "react";
+import { usePostEditorContext } from "@/context/home/post-editor-context";
+import { useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { useTweetSectionContext } from "../context/TweetSectionCtx";
 
 export const useMediaUpload = () => {
   const [error, setError] = useState(false);
-  const { mediaFiles, setMediaFiles } = useTweetSectionContext();
+  const { mediaFiles, setMediaFiles } = usePostEditorContext();
   const maxFileLimit = 4;
 
   const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
