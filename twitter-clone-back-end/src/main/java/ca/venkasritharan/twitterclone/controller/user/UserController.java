@@ -36,7 +36,7 @@ public class UserController {
     System.out.println("called");
     return userService.getUserById(userId);
   }
-  @GetMapping("/posts/liked")
+  @GetMapping("/posts/likes")
   public ResponseEntity<?> getAllLikedPosts() {
     return postService.getAllLikedPosts();
   };
