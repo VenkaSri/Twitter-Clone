@@ -5,11 +5,12 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import FlipNumbers from "react-flip-numbers";
 import PropTypes from "prop-types";
+import { useIconSize } from "@/hooks/post/useIconSize";
 
 export const LikePostButton = ({ postId }) => {
   const { data, isSuccess } = useGetPostByIDQuery(postId);
   const [numOfLikes, setNumOfLikes] = useState(0);
-
+  const { iconContainer } = useIconSize();
   const { handleLikePost, isActive, buttonIcon, handleUnlikePost } =
     usePostInteraction(postId);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -44,9 +45,10 @@ export const LikePostButton = ({ postId }) => {
         >
           <RoundedIconButton
             className={clsx(
-              "w-[34.5px] h-[34.5px] rounded-full hover:bg-[#f91881]/[0.1] hover:fill-[#f91881] -ml-[8px] group-hover:bg-[#f91881]/[0.1] group-hover:fill-[#f91881]",
+              "rounded-full hover:bg-[#f91881]/[0.1] hover:fill-[#f91881] -ml-[8px] group-hover:bg-[#f91881]/[0.1] group-hover:fill-[#f91881]",
               { "fill-[#f91881]": isActive },
-              isAnimating ? " heart is_animating" : ""
+              isAnimating ? " heart is_animating" : "",
+              iconContainer
             )}
             icon={buttonIcon}
           />

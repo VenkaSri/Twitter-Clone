@@ -55,6 +55,7 @@ const StepThree = () => {
                 {<PasswordEndornment />}
               </InputAdornment>
             }
+            showPassword={showPassword}
           />
           {passwordError && <ErrorField errorMessage={errorMessage} />}
         </div>

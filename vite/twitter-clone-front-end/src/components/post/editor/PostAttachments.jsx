@@ -44,6 +44,7 @@ export const PostAttachments = ({ isReply }) => {
           isDisabled={attachment.isDisabled}
           isReply={isReply}
           icon={attachment.icon}
+          onClick={open}
         />
       ))}
       <Snackbar

@@ -63,7 +63,7 @@ const MainColumnNav = () => {
             onClick={handleClick}
             disabled
           />
-          <div className="w-[36px] flex justify-center items-center ">
+          <div className="w-[36px] flex justify-center items-center disabled-link">
             <RoundedIconButton
               className="w-[36px] h-[36px] hover:bg-[#0f1419]/[.1] dark:hover:bg-[#eff3f1]/[.1] border-transparent"
               icon={<Gear className="w-[20px] dark:fill-white" />}

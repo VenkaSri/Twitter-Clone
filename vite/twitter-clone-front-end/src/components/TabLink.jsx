@@ -16,7 +16,7 @@ export const TabLink = ({
 
   return (
     <a
-      className={clsx("mainColumn--topNav-link", { "opacity-40": disabled })}
+      className={clsx("mainColumn--topNav-link", { "disabled-link": disabled })}
       data-tab-type={text}
       onClick={onClick}
       disabled={disabled}
@@ -42,4 +42,7 @@ export const TabLink = ({
 
 TabLink.propTypes = {
   isSelected: PropTypes.bool,
+  text: PropTypes.string,
+  onClick: PropTypes.func,
+  disabled: PropTypes.bool,
 };

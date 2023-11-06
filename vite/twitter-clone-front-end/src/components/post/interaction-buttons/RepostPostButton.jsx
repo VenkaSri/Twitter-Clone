@@ -1,11 +1,12 @@
 import { Repost } from "@/components/icons/Icons";
+import { useIconSize } from "@/hooks/post/useIconSize";
 import { RoundedIconButton } from "@components/RoundedIconButton";
 import clsx from "clsx";
 import { useState } from "react";
 
 export const RepostPostButton = ({ postId }) => {
   const [buttonIcon, setButtonIcon] = useState(null);
-
+  const { iconSvg, iconContainer } = useIconSize();
   const [isActive, setIsActive] = useState(false);
   const handleLikePost = (id, e) => {
     e.stopPropagation();
@@ -22,9 +23,10 @@ export const RepostPostButton = ({ postId }) => {
         >
           <RoundedIconButton
             className={clsx(
-              "w-[34.5px] h-[34.5px] centered-column-container rounded-full hover:bg-[#00ba7c]/[0.1] hover:fill-[#00ba7c] -ml-[8px] opacity-40"
+              "centered-column-container rounded-full hover:bg-[#00ba7c]/[0.1] hover:fill-[#00ba7c] -ml-[8px] opacity-40",
+              iconContainer
             )}
-            icon={<Repost className="w-[18.75px] h-[18.75px]" />}
+            icon={<Repost className={clsx(iconSvg)} />}
           />
           {/* {likes && (
           <span

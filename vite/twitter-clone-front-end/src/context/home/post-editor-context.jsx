@@ -73,3 +73,7 @@ const usePostEditorContext = () => {
 };
 
 export { PostEditorProvider, usePostEditorContext };
+
+PostEditorProvider.propTypes = {
+  children: PropTypes.node,
+};

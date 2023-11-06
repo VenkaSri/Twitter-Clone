@@ -17,7 +17,7 @@ const MainLayout = ({ children }) => {
         <header
           className={` dark:bg-black bg-white grow  justify-end  sm:flex hidden`}
         >
-          <div className="flex flex-col w-[88px] tablet:w-[275px]  ">
+          <div className="flex flex-col w-[88px] tablet:w-[275px]">
             <div className="h-full fixed top-0 flex flex-col ">
               <Suspense fallback={<OverlayLoader />}>
                 <Sidebar />

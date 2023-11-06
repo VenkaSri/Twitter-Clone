@@ -34,6 +34,7 @@ const SidebarNav = () => {
         onClick={handleClick}
         isActive={activeLink === link.path}
         path={link.path}
+        isDisabled={link.name !== "Home"}
       />
     );
   });
@@ -54,19 +55,24 @@ const HeaderButton = ({
   onClick,
   isActive,
   path,
+  isDisabled,
 }) => {
   const padding = useMediaQuery("(max-height:850px)");
   const location = useLocation();
+  console.log(isDisabled);
   return (
     <Link
       to={path}
-      className={`w-full  flex flex-col items-start ${visibility} ${
-        padding ? "py-0" : "py-1"
-      }`}
+      className={clsx(
+        "w-full  flex flex-col items-start",
+        visibility,
+        padding ? "py-0" : "py-1",
+        { "disabled-link": isDisabled }
+      )}
       onClick={() => onClick(location.pathname)}
       draggable={false}
     >
-      <div className="header--link">
+      <div className={clsx("header--sidebarLink")}>
         <div>{<Icon className="w-[26.25px] dark:fill-white" />}</div>
         <div
           className={clsx(
@@ -87,4 +93,5 @@ HeaderButton.propTypes = {
   visibility: PropTypes.string,
   onClick: PropTypes.func,
   isActive: PropTypes.bool,
+  isDisabled: PropTypes.bool,
 };

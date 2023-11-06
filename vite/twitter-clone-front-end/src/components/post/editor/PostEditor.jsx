@@ -169,7 +169,9 @@ const PostActions = () => {
           )}
         </div>
       </div>
-      <div className={`-ml-2 mt-1 h-[48px] flex items-center justify-between `}>
+      <div
+        className={`-ml-2 mt-1 h-[48px] flex items-center justify-between  pb-2`}
+      >
         <PostAttachments />
         <div className="h-[36px] flex   items-center ">
           {hasUserTyped && (

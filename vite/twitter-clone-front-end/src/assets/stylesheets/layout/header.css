@@ -15,6 +15,12 @@
     text-black dark:text-white;
   }
 
+  .header--sidebarLink {
+    @apply flex  p-3  rounded-full cursor-pointer tracking-[1px]
+    hover:bg-[#E6E7E7] dark:hover:bg-[#e7e9ea]/[.1] 
+    text-black dark:text-white;
+  }
+
   .header--button-wrapper {
     @apply w-[90%]  tablet:self-start self-center;
   }

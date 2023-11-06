@@ -20,3 +20,9 @@
 .textSpan {
   @apply max-w-full overflow-hidden text-ellipsis whitespace-nowrap;
 }
+
+@layer components {
+  .disabled-link {
+    @apply opacity-40 pointer-events-none cursor-default;
+  }
+}

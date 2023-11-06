@@ -1,5 +1,7 @@
+import { RegisterProvider } from "@/context/auth/register-context";
 import { DialogProvider } from "@/context/dialog/dialog-context";
 import { PostEditorProvider } from "@/context/home/post-editor-context";
+import { ViewProvider } from "@/context/home/view-context";
 import PropTypes from "prop-types";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
@@ -9,7 +11,11 @@ const AppProvider = ({ children }) => {
     <HelmetProvider>
       <BrowserRouter>
         <PostEditorProvider>
-          <DialogProvider>{children}</DialogProvider>
+          <ViewProvider>
+            <RegisterProvider>
+              <DialogProvider>{children}</DialogProvider>
+            </RegisterProvider>
+          </ViewProvider>
         </PostEditorProvider>
       </BrowserRouter>
     </HelmetProvider>

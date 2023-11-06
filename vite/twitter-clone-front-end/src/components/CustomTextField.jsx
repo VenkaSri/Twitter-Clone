@@ -15,10 +15,10 @@ const CustomTextField = ({
   type = "text",
   endAdornment,
   startAdornment,
+  showPassword,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const { borderColor, labelColor } = useErrorStyles(isFocused, hasError);
-  const { showPassword } = useContext(RegisterContext);
 
   return (
     <TextField
@@ -74,4 +74,5 @@ CustomTextField.propTypes = {
   startAdornment: PropTypes.func,
   type: PropTypes.string,
   inputStyle: PropTypes.object,
+  showPassword: PropTypes.object,
 };

@@ -33,7 +33,7 @@ dayjs.updateLocale("en", {
     mm: "%dm",
     h: "1h",
     hh: "%dh",
-    d: "a day",
+    d: "1d",
     dd: "%d",
     M: "a month",
     MM: "%d months",

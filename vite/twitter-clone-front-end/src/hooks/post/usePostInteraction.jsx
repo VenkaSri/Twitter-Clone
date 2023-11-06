@@ -3,10 +3,13 @@ import { useLikePostMutation, useUnlikePostMutation } from "@/services/postApi";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useSession } from "../useSession";
+import { useIconSize } from "./useIconSize";
+import clsx from "clsx";
 
 export const usePostInteraction = (postId) => {
   const [likePost] = useLikePostMutation();
   const [unlikePost] = useUnlikePostMutation();
+  const { iconSvg } = useIconSize();
 
   const { likedPosts = [] } = useSession();
 
@@ -34,9 +37,9 @@ export const usePostInteraction = (postId) => {
 
   useEffect(() => {
     if (isActive) {
-      setButtonIcon(<LikeFilled className="w-[18.75px] h-[18.75px]" />);
+      setButtonIcon(<LikeFilled className={clsx(iconSvg)} />);
     } else {
-      setButtonIcon(<Like className="w-[18.75px] h-[18.75px]" />);
+      setButtonIcon(<Like className={clsx(iconSvg)} />);
     }
   }, [isActive]);
 
