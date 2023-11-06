@@ -3,6 +3,7 @@ import { PathConstants } from "./pathConstants";
 import { MainColumn } from "@/components/home/main/mainColumn/MainColumn";
 import { ViewPost } from "@/components/post/ViewPost";
 import { PostEngagements } from "@/pages/PostEngagements";
+import { Logout } from "@/pages/Logout";
 
 export const protectedRoutes = [
   {
@@ -14,5 +15,9 @@ export const protectedRoutes = [
       { path: PathConstants.STATUS, element: <ViewPost /> },
       { path: PathConstants.QUOTES, element: <PostEngagements /> },
     ],
+  },
+  {
+    path: PathConstants.LOGOUT,
+    element: <Logout />,
   },
 ];

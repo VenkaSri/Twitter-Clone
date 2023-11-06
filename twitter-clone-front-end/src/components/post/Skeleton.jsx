@@ -23,16 +23,16 @@ export const PostSkeleton = () => {
   return (
     <div>
       <div className="cursor-pointer">
-        <article className="flex-col-container px-4">
-          <div className="flex-col-container flex grow ">
+        <article className="flex flex-col px-4">
+          <div className="flex flex-col  grow ">
             <div className="flex grow pt-4"></div>
             <div className="max-w-full flex  grow pb-3 ">
               <CircularAvatarSkeleton />
-              <div className="flex-col-container grow  ">
+              <div className="flex flex-col grow  ">
                 <div className="flex">
                   <RectangularSkeleton width="30%" height={10} />
                 </div>
-                <div className="flex-col-container mt-4 gap-1">
+                <div className="flex flex-col mt-4 gap-1">
                   <RectangularSkeleton width="100%" height={10} />
                   <RectangularSkeleton width="100%" height={10} />
                   <RectangularSkeleton width="30%" height={10} />

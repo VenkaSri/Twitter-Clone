@@ -5,7 +5,7 @@ import CenteredText from "./CenteredText";
 const RoundedTextButton = ({ text, className, disabled, onClick, style }) => {
   return (
     <>
-      <a
+      <div
         className={clsx(className, "btn--roundedText", {
           "pointer-events-none opacity-50": disabled,
         })}
@@ -15,7 +15,7 @@ const RoundedTextButton = ({ text, className, disabled, onClick, style }) => {
         style={style}
       >
         <CenteredText text={text} />
-      </a>
+      </div>
     </>
   );
 };

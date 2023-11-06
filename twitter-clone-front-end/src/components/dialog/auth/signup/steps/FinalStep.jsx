@@ -1,6 +1,6 @@
 import { Suspense, lazy } from "react";
 import DialogBodyHeading from "@components/dialog/body/DialogBodyHeading";
-import { OverlayLoader } from "../../OverlayLoader";
+import { OverlayLoader } from "../../../OverlayLoader";
 
 const FollowSuggestionCard = lazy(() =>
   import("@/components/home/FollowSuggestionCard")

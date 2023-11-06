@@ -1,3 +1,5 @@
+const APP_NAME = "X";
+
 const ERROR_COLOR = "text-[#f1202d]";
 const PRIMARY_COLOR = "text-[#1e9bf0]";
 
@@ -13,4 +15,5 @@ export {
   DARK_INPUT_FIELD_BORDER_COLOR,
   DARK_BORDER_COLOR,
   DARK_HOVER_BG_COLOR,
+  APP_NAME,
 };

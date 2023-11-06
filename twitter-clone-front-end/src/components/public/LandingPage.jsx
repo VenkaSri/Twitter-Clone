@@ -3,11 +3,14 @@ import SignUpOptions from "@components/public/SignUpOptions";
 import { LandingFooter } from "@components/public/LandingFooter";
 import RoundedTextButton from "@components/RoundedTextButton";
 import Head from "@components/head/Head";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { DialogContent } from "@mui/material";
 
 export const LandingPage = () => {
+  const navigate = useNavigate();
   const handleLogin = () => {
-    console.log("login");
+    navigate("/i/flow/login");
   };
 
   return (

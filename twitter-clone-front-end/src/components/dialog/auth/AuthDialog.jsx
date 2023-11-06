@@ -63,7 +63,7 @@ const AuthDialog = () => {
           </DialogTitle>
 
           <DialogContent
-            className="w-full max-w-[600px] mx-auto  flex flex-col relative dark:bg-black"
+            className="w-full max-w-[600px] mx-auto  flex flex-col relative dark:bg-black "
             sx={{
               "&.MuiDialogContent-root": {
                 padding: 0,

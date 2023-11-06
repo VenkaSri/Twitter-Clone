@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import PropTypes from "prop-types";
-import steps from "@components/dialog/signup/steps/index";
+import steps from "@/components/dialog/auth/signup/steps/index";
 import { useDynamicShadow } from "@/hooks/dialog/useDynamicShadow";
 
 const DialogBody = ({ step }) => {

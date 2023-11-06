@@ -17,7 +17,7 @@ import { OverlayLoader } from "./dialog/OverlayLoader";
 import Head from "./head/Head";
 import { DialogContext, DialogProvider } from "@/context/dialog/dialog-context";
 
-const Dialog = () => {
+const Dialog = ({ type }) => {
   return (
     <RegisterProvider>
       <AuthDialog />
@@ -33,11 +33,10 @@ Dialog.propTypes = {
 
 const AuthDialog = () => {
   const { isOpen } = useContext(DialogContext);
-  console.log(isOpen);
-  const isMobile = useMediaQuery("(max-width:702px)");
+  const fullscreen = useMediaQuery("(max-width:702px)");
+
   let sxStyles = {
     borderRadius: "16px",
-    width: "600px",
     height: "650px",
     maxHeight: "90vh",
     minHeight: "400px",
@@ -46,7 +45,6 @@ const AuthDialog = () => {
     display: "flex",
     boxShadow: "none",
     overflow: "hidden",
-    ackgroundColor: "transparent",
   };
 
   const { step, isLoading } = useContext(RegisterContext);
@@ -57,7 +55,7 @@ const AuthDialog = () => {
       open={true}
       PaperProps={{ sx: sxStyles }}
       transitionDuration={0}
-      fullScreen={isMobile}
+      fullScreen={fullscreen}
       sx={{
         "& .MuiBackdrop-root": {
           backgroundColor: "#5b7083",

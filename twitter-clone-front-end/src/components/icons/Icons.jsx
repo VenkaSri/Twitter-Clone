@@ -46,6 +46,7 @@ import {
   VISIBILITY,
   VISIBILITY_OFF,
   X_LOGO,
+  dArrow,
 } from "@/constants/icons";
 import SVG from "@components/icons/SVG";
 
@@ -220,6 +221,10 @@ export const Gear = ({ className = "w-5" }) => (
   <SVG path={GEAR} className={className} />
 );
 
+export const DArrow = ({ className = "w-5" }) => (
+  <SVG path={dArrow} className={className} />
+);
+
 const iconPropTypes = {
   className: PropTypes.string,
 };
@@ -269,3 +274,4 @@ Poll.propTypes = iconPropTypes;
 Location.propTypes = iconPropTypes;
 Emoji.propTypes = iconPropTypes;
 Gear.propTypes = iconPropTypes;
+DArrow.propTypes = iconPropTypes;

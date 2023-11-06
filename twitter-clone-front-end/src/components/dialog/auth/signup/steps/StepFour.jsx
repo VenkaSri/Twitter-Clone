@@ -2,7 +2,7 @@ import DialogBodyHeading from "@components/dialog/body/DialogBodyHeading";
 import default_profile_picture from "@assets/images/profile-pics/dialog_profile_picture.png";
 import AddPhoto from "@components/dialog/AddPhoto";
 import { useContext, useEffect, useState } from "react";
-import RemovePhoto from "../../RemovePhoto";
+import RemovePhoto from "../../../RemovePhoto";
 import { RegisterContext } from "@/context/auth/register-context";
 
 const StepFour = () => {

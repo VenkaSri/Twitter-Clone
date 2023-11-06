@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import Typography from "@mui/material/Typography";
 import Popover from "@mui/material/Popover";
+import { Box } from "@mui/material";
 
 export const usePopover = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -9,6 +10,7 @@ export const usePopover = () => {
 
   const handleShow = (event) => {
     setAnchorEl(event.currentTarget);
+
     setPopoverOpen(true);
   };
 
@@ -18,19 +20,32 @@ export const usePopover = () => {
     event.stopPropagation();
   };
 
-  const RenderPopover = () => (
-    <Popover
-      open={popoverOpen}
-      anchorEl={anchorEl}
-      onClose={handleClose}
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "left",
-      }}
-    >
-      <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
-    </Popover>
-  );
+  const RenderPopover = ({ children, sx }) => {
+    console.log(sx);
+    return (
+      <Popover
+        open={popoverOpen}
+        transitionDuration={0}
+        onClose={handleClose}
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: "bottom", // Adjust this as needed
+          horizontal: "center", // Adjust this as needed
+        }}
+        transformOrigin={{
+          vertical: "top", // Adjust this as needed
+          horizontal: "center", // Adjust this as needed
+        }}
+        slotProps={{
+          paper: {
+            sx: sx,
+          },
+        }}
+      >
+        {children}
+      </Popover>
+    );
+  };
 
   return { handleShow, RenderPopover };
 };
