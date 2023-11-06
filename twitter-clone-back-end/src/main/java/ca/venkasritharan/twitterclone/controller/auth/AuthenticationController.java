@@ -6,9 +6,11 @@ import ca.venkasritharan.twitterclone.service.AuthenticationService;
 import ca.venkasritharan.twitterclone.service.RegistrationService;
 //import ca.venkasritharan.twitterclone.util.response.RegistrationResponseBuilder;
 import ca.venkasritharan.twitterclone.util.response.CookieUtils;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,6 +48,25 @@ public class AuthenticationController {
 //
 //    return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
 //  }
+
+  @PostMapping("/logout")
+  public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response) {
+    // Create a cookie that has the same name as your Auth Token
+    Cookie cookie = new Cookie("authToken", null);
+
+    // Set the cookie's max age to 0 to delete it
+    cookie.setMaxAge(0);
+    cookie.setHttpOnly(true);
+    cookie.setPath("/"); // Ensure you set the same path as the cookie has
+
+    // Add this cookie to the response
+    response.addCookie(cookie);
+
+    // Build the response entity
+    return ResponseEntity.ok()
+            .header(HttpHeaders.SET_COOKIE, cookie.toString())
+            .build();
+  }
 
 
   @GetMapping("/auth_status")
