@@ -1,11 +1,12 @@
 import { Logo } from "@components/icons/Icons";
-import SignUpOptions from "@components/public/SignUpOptions";
+// import SignUpOptions from "@components/public/SignUpOptions";
 import { LandingFooter } from "@components/public/LandingFooter";
 import RoundedTextButton from "@components/RoundedTextButton";
 import Head from "@components/head/Head";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { DialogContent } from "@mui/material";
+import { Suspense, lazy, useContext } from "react";
+import { OverlayLoader } from "../dialog/OverlayLoader";
+const SignUpOptions = lazy(() => import("@components/public/SignUpOptions"));
 
 export const LandingPage = () => {
   const navigate = useNavigate();
@@ -35,7 +36,9 @@ export const LandingPage = () => {
                   Join today.
                 </span>
               </div>
-              <SignUpOptions />
+              <Suspense fallback={<OverlayLoader />}>
+                <SignUpOptions />
+              </Suspense>
               <div className="flex flex-col mt-10 gap-4 max-w-full">
                 <span
                   className={`font-cMed text-17 leading-[20px] font-bold mb-2`}

@@ -2,14 +2,14 @@ import { defineConfig } from "vite";
 import { fileURLToPath, URL } from "url";
 import react from "@vitejs/plugin-react-swc";
 import { visualizer } from "rollup-plugin-visualizer";
-
+import { splitVendorChunkPlugin } from "vite";
 // https://vitejs.dev/config/
 export default defineConfig({
   // define: {
   //   global: {},
   // },
   base: "/",
-  plugins: [react(), visualizer({ open: true })],
+  plugins: [react(), visualizer({ open: true }), splitVendorChunkPlugin()],
   server: {
     port: 3000,
   },

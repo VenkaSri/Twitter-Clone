@@ -9,18 +9,24 @@ import {
   RegisterProvider,
 } from "@context/auth/register-context";
 import DialogHeader from "@components/dialog/DialogHeader";
-import { useContext } from "react";
+import { Suspense, lazy, useContext } from "react";
 import DialogFooter from "@components/dialog/DialogFooter";
 import { useSignupConfig } from "@components/auth/signup/signupConfig";
 import DialogBody from "./dialog/body/DialogBody";
 import { OverlayLoader } from "./dialog/OverlayLoader";
 import Head from "./head/Head";
 import { DialogContext, DialogProvider } from "@/context/dialog/dialog-context";
+import { LoginHome } from "./dialog/auth/login/LoginHome";
+import { LoginDialog } from "./dialog/auth/login/Login";
+// const LoginDialog = lazy(() => import("@components/dialog/auth/login/Login"));
 
 const Dialog = ({ type }) => {
   return (
     <RegisterProvider>
-      <AuthDialog />
+      {/* <Suspense fallback={<OverlayLoader />}> */}
+      <LoginDialog />
+      {/* </Suspense> */}
+      {/* {type === "LOGIN" ? <LoginDialog /> : <SignUpDialog />} */}
     </RegisterProvider>
   );
 };
@@ -31,7 +37,7 @@ Dialog.propTypes = {
   body: PropTypes.node,
 };
 
-const AuthDialog = () => {
+const SignUpDialog = () => {
   const { isOpen } = useContext(DialogContext);
   const fullscreen = useMediaQuery("(max-width:702px)");
 
