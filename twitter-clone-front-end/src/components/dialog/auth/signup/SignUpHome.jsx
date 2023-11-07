@@ -7,15 +7,15 @@ import CustomTextField from "@/components/CustomTextField";
 import RoundedTextButton from "@/components/RoundedTextButton";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
+import { APP_NAME } from "@/constants/constants";
 import { useContext } from "react";
 import { RegisterContext } from "@/context/auth/register-context";
 
-export const LoginHome = () => {
-  const { setStep } = useContext(RegisterContext);
-
+export const SignupHome = () => {
+  const { setStep, step } = useContext(RegisterContext);
   return (
     <>
-      <Head title="Log in to X" />
+      <Head title={`Sign up for ${APP_NAME}`} />
       <Heading />
       <DialogContent
         className="w-full max-w-[600px] mx-auto  flex flex-col relative dark:bg-black"
@@ -34,7 +34,7 @@ flex flex-col items-stretch basis-full flex-grow bg-[#fff] dark:bg-[#000]`}
             <div className="flex flex-col ">
               <div className="flex flex-col my-5">
                 <h1 className="text-[31px] leading-8 font-cBold break-words inline dark:text-[#fff]">
-                  <span>Sign in to X</span>
+                  <span>Join {APP_NAME} today</span>
                 </h1>
               </div>
             </div>
@@ -69,31 +69,26 @@ flex flex-col items-stretch basis-full flex-grow bg-[#fff] dark:bg-[#000]`}
                 className={`flex-grow dark:border-b dark:border-[#3c3e42] border-b border-[#e2e9ec]`}
               ></div>
             </div>
-            <div className="py-3 flex flex-col">
-              <CustomTextField
-                label="Phone, email or username"
-                // inputValue={inputValue}
-                // onInputChange={handleInputChange}
+            <div className="my-3">
+              <RoundedTextButton
+                text="Creat account"
+                className="btn--action h-[36px]"
+                // onClick={handleCreateAccount}
+                onClick={() => setStep(step + 1)}
               />
             </div>
             <div className="my-3">
               <RoundedTextButton
-                text="Next"
+                text="Creat demo account"
                 className="btn--action h-[36px]"
                 // onClick={handleCreateAccount}
               />
             </div>
-            <div className="my-3">
-              <RoundedTextButton
-                text="Forgot password?"
-                className="btn--skip h-[36px]"
-                // onClick={handleCreateAccount}
-              />
-            </div>
+
             <div className="text-[#536471] text-[15px] mt-[40px] leading-5 font-cR">
               <span>
-                Don't have an account?{" "}
-                <Link to={"/i/flow/signup"} onClick={() => setStep(-1)}>
+                Have an account already?{" "}
+                <Link to={"/i/flow/login"}>
                   <span className="text-[#1d9bf0] hover:underline">
                     Sign up
                   </span>

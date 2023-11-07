@@ -12,9 +12,13 @@ const RoundedTextAndIconButton = ({
 }) => {
   return (
     <a
-      className={clsx(className, "btn--roundedText", {
-        "pointer-events-none opacity-50": disabled,
-      })}
+      className={clsx(
+        className,
+        "btn--roundedText border-[#cfd9de] border btn--skip",
+        {
+          "pointer-events-none opacity-50": disabled,
+        }
+      )}
       role="button"
       onClick={onClick}
     >

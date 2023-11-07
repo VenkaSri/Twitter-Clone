@@ -17,16 +17,12 @@ import { OverlayLoader } from "./dialog/OverlayLoader";
 import Head from "./head/Head";
 import { DialogContext, DialogProvider } from "@/context/dialog/dialog-context";
 import { LoginHome } from "./dialog/auth/login/LoginHome";
-import { LoginDialog } from "./dialog/auth/login/Login";
-// const LoginDialog = lazy(() => import("@components/dialog/auth/login/Login"));
+import { SignupHome } from "./dialog/auth/signup/SignUpHome";
 
 const Dialog = ({ type }) => {
   return (
     <RegisterProvider>
-      {/* <Suspense fallback={<OverlayLoader />}> */}
-      <LoginDialog />
-      {/* </Suspense> */}
-      {/* {type === "LOGIN" ? <LoginDialog /> : <SignUpDialog />} */}
+      <SignUpDialog />
     </RegisterProvider>
   );
 };
@@ -56,6 +52,8 @@ const SignUpDialog = () => {
   const { step, isLoading } = useContext(RegisterContext);
   const { goToNextStep } = useSignupConfig();
 
+  console.log(step);
+
   return (
     <MUIDialog
       open={true}
@@ -72,6 +70,8 @@ const SignUpDialog = () => {
       {/* {<ErrorDialog />} */}
       {isLoading ? (
         <OverlayLoader />
+      ) : step === -1 ? (
+        <SignupHome />
       ) : (
         <>
           <Head title="Sign up for X" />
