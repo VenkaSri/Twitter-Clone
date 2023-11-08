@@ -26,6 +26,10 @@ export const authApi = createApi({
         credentials: "include",
       }),
     }),
+    doesUserExist: builder.query({
+      query: (emailUsernameOrPhone) =>
+        `/user_availability?emailUsernameOrPhone=${emailUsernameOrPhone}`,
+    }),
     logout: builder.mutation({
       query: () => ({
         url: "/logout",
@@ -41,5 +45,6 @@ export const {
   useCheckEmailAvailableQuery,
   useRegisterUserMutation,
   useCheckAuthStatusQuery,
+  useDoesUserExistQuery,
   useLogoutMutation,
 } = authApi;

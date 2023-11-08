@@ -113,14 +113,14 @@ const Heading = () => {
         >
           <div
             // onClick={onClick}
-            className="min-w-[36px] min-h-[36px] rounded-full flex flex-col cursor-pointer items-center justify-center -ml-2 
+            className="min-w-[36px] min-h-[36px] rounded-full flex flex-col  cursor-pointer items-center justify-center -ml-2 z-[2]
         dark:fill-white dark:hover:bg-[#191919] hover:bg-[#E6E7E7]"
           >
             <Close className="w-5" />
           </div>
         </div>
 
-        <div className="flex h-full justify-center  flex-col absolute inset-0 ">
+        <div className="flex h-full justify-center  flex-col absolute inset-0 z-[1]">
           <div className="flex flex-col items-center shrink-0 ">
             <Logo className="w-10 dark:fill-white" />
           </div>

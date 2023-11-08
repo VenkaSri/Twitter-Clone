@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import RoundedTextButton from "../RoundedTextButton";
-import { useDialogFooterSettings } from "@/hooks/dialog/signup/useDialogFooterSettings";
+import { useDialogFooterSettings } from "@/hooks/dialog/auth/signup/useDialogFooterSettings";
 
 const DialogFooter = ({ step, onClick }) => {
   const { isDisabled, btnText, btnStyle, isContentOverflowing } =

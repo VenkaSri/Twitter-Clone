@@ -39,10 +39,10 @@ const SignUpDialog = () => {
 
   let sxStyles = {
     borderRadius: "16px",
-    height: "650px",
-    maxHeight: "90vh",
+    height: fullscreen ? "none" : "650px",
+
     minHeight: "400px",
-    maxWidth: "80vw",
+
     minWidth: "600px",
     display: "flex",
     boxShadow: "none",

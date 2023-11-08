@@ -1,3 +1,4 @@
+import { LoginProvider } from "@/context/auth/login-context";
 import { RegisterProvider } from "@/context/auth/register-context";
 import { DialogProvider } from "@/context/dialog/dialog-context";
 import { PostEditorProvider } from "@/context/home/post-editor-context";
@@ -13,7 +14,9 @@ const AppProvider = ({ children }) => {
         <PostEditorProvider>
           <ViewProvider>
             <RegisterProvider>
-              <DialogProvider>{children}</DialogProvider>
+              <LoginProvider>
+                <DialogProvider>{children}</DialogProvider>
+              </LoginProvider>
             </RegisterProvider>
           </ViewProvider>
         </PostEditorProvider>

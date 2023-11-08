@@ -9,9 +9,13 @@ import clsx from "clsx";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { RegisterContext } from "@/context/auth/register-context";
+import { LoginContext } from "@/context/auth/login-context";
 
 export const LoginHome = () => {
   const { setStep } = useContext(RegisterContext);
+  const { setUsername, username } = useContext(LoginContext);
+
+  console.log(username);
 
   return (
     <>
@@ -72,7 +76,7 @@ flex flex-col items-stretch basis-full flex-grow bg-[#fff] dark:bg-[#000]`}
             <div className="py-3 flex flex-col">
               <CustomTextField
                 label="Phone, email or username"
-                // inputValue={inputValue}
+                onChange={setUsername}
                 // onInputChange={handleInputChange}
               />
             </div>
