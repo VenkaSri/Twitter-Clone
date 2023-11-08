@@ -5,6 +5,7 @@ import ca.venkasritharan.twitterclone.repository.authentication.UserRepository;
 import ca.venkasritharan.twitterclone.repository.user.ProfileRepository;
 import ca.venkasritharan.twitterclone.response.AuthStatusResponse;
 import ca.venkasritharan.twitterclone.response.EmailAvailabilityResponse;
+import ca.venkasritharan.twitterclone.response.MessageAndCodeResponse;
 import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
 import ca.venkasritharan.twitterclone.security.jwt.JwtTokenProvider;
 import ca.venkasritharan.twitterclone.service.AuthenticationService;
@@ -115,5 +116,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
       message = "An user with this email already exists.";
     }
     return new EmailAvailabilityResponse(message, !isEmailAvailable);
+  }
+
+
+  @Override
+  public MessageAndCodeResponse doesUserExists(String emailOrusernameorPhone) {
+    boolean userExists = userRepository.existsByUsername(emailOrusernameorPhone);
+
+    if (userExists) {
+      return new MessageAndCodeResponse("User exists", 200);
+    } else {
+      return new MessageAndCodeResponse("User does not exist.", 400);
+    }
+
   }
 }

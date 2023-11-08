@@ -79,6 +79,14 @@ public class AuthenticationController {
     return authenticationService.checkIfEmailIsAvailable(email);
   }
 
+
+  @GetMapping("/user_availability")
+  public MessageAndCodeResponse doesUserExists(@RequestParam String emailUsernameOrPhone) {
+    return  authenticationService.doesUserExists(emailUsernameOrPhone);
+  }
+
+
+
 }
 
 
