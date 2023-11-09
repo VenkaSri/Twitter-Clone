@@ -1,3 +1,7 @@
+:root {
+  --primary-color: #1e9bf0;
+}
+
 @layer base {
   html {
     @apply text-15 font-chirp;

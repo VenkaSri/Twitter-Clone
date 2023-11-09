@@ -6,6 +6,7 @@ import authSlice from "@state/authSlice";
 import { userApi } from "@services/userApi";
 import { publicApi } from "@components/public/publicApi";
 import { postApi } from "@services/postApi";
+import snackbarSlice from "@state/snackbarSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     themeSlice,
     userSlice,
     authSlice,
+    snackbarSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(

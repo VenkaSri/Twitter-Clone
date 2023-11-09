@@ -7,15 +7,42 @@ import CustomTextField from "@/components/CustomTextField";
 import RoundedTextButton from "@/components/RoundedTextButton";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RegisterContext } from "@/context/auth/register-context";
 import { LoginContext } from "@/context/auth/login-context";
+import { useDoesUserExistQuery } from "@/services/authApi";
+
+import { CustomSnackbar } from "@/components/CustomSnackbar";
+
+import openSnackbar, { snackbarSliceActions } from "@state/snackbarSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export const LoginHome = () => {
   const { setStep } = useContext(RegisterContext);
   const { setUsername, username } = useContext(LoginContext);
+  const [isChecking, setIsChecking] = useState(false);
+  const { isSuccess, data } = useDoesUserExistQuery(username, {
+    skip: isChecking,
+  });
 
-  console.log(username);
+  const dispatch = useDispatch();
+  const { isOpen, message } = useSelector((state) => state.snackbarSlice);
+
+  const handleLogin = () => {
+    if (username.length !== 4) {
+      // setIsChecking(true);
+      // Dispatch the action to open the snackbar with a message
+      dispatch(
+        snackbarSliceActions.openSnackbar({
+          message: "Username must be 4 characters long",
+        })
+      );
+    }
+  };
+
+  // useEffect(() => {
+
+  // }, [])
 
   return (
     <>
@@ -77,14 +104,13 @@ flex flex-col items-stretch basis-full flex-grow bg-[#fff] dark:bg-[#000]`}
               <CustomTextField
                 label="Phone, email or username"
                 onChange={setUsername}
-                // onInputChange={handleInputChange}
               />
             </div>
             <div className="my-3">
               <RoundedTextButton
                 text="Next"
                 className="btn--action h-[36px]"
-                // onClick={handleCreateAccount}
+                onClick={handleLogin}
               />
             </div>
             <div className="my-3">
@@ -107,6 +133,7 @@ flex flex-col items-stretch basis-full flex-grow bg-[#fff] dark:bg-[#000]`}
           </div>
         </div>
       </DialogContent>
+      <CustomSnackbar message={message} isOpen={isOpen} />
     </>
   );
 };
