@@ -12,8 +12,8 @@ const LoginDialog = lazy(() => import("@/components/dialog/auth/login/Login"));
 
 export const publicRoutes = [
   {
-    path: PathConstants.HOME,
-    element: <LandingPage />,
+    path: PathConstants.ROOT,
+    element: <Home />,
     children: [
       { path: PathConstants.SIGN_UP, element: <Dialog type="SIGNUP" /> },
     ],
@@ -28,6 +28,6 @@ export const publicRoutes = [
   },
   {
     path: "*",
-    element: <Navigate to={PathConstants.HOME} replace />,
+    element: <Navigate to={PathConstants.ROOT} replace />,
   },
 ];

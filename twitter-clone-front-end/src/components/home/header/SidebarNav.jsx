@@ -59,7 +59,7 @@ const HeaderButton = ({
 }) => {
   const padding = useMediaQuery("(max-height:850px)");
   const location = useLocation();
-  console.log(isDisabled);
+
   return (
     <Link
       to={path}

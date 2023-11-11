@@ -5,6 +5,9 @@ import { Suspense, lazy } from "react";
 import PropTypes from "prop-types";
 import { SideColumn } from "../home/main/sideColumn/SideColumn";
 import { Back } from "../icons/Icons";
+import { useCheckAuthStatusQuery } from "@/services/authApi";
+import { AppProgess } from "../AppLoader";
+import { useSelector } from "react-redux";
 
 const Sidebar = lazy(() => import("@/components/home/header/Sidebar"));
 
@@ -25,17 +28,7 @@ const MainLayout = ({ children }) => {
             </div>
           </div>
         </header>
-        <main className="flex flex-col items-start grow max-[980px]:grow-[2] max-[680px]:w-full overflow-y-auto overflow-x-hidden dark:bg-black">
-          <div
-            className={`flex w-[990px] max-[1092px]:w-[920px] justify-between  grow max-[980px]:w-[600px] max-[680px]:w-full `}
-          >
-            <div className="main--mainColumn border-l dark:border-l-[#2f3336] border-r dark:border-r-[#2f3336]">
-              <Outlet />
-            </div>
-
-            <SideColumn />
-          </div>
-        </main>
+        <Main />
 
         {/* <BottomBar /> */}
       </div>
@@ -47,4 +40,23 @@ export default MainLayout;
 
 MainLayout.propTypes = {
   children: PropTypes.node,
+};
+
+const Main = () => {
+  const isProfileComplete = useSelector(
+    (state) => state.userSlice.isProfileComplete
+  );
+  return (
+    <main className="flex flex-col items-start grow max-[980px]:grow-[2] max-[680px]:w-full overflow-y-auto overflow-x-hidden dark:bg-black">
+      <div
+        className={`flex w-[990px] max-[1092px]:w-[920px] justify-between  grow max-[980px]:w-[600px] max-[680px]:w-full `}
+      >
+        <div className="main--mainColumn border-l dark:border-l-[#2f3336] border-r dark:border-r-[#2f3336]">
+          <Outlet />
+        </div>
+
+        {isProfileComplete ? <SideColumn /> : null}
+      </div>
+    </main>
+  );
 };

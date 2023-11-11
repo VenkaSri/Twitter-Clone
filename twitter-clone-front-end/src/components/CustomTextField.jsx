@@ -74,5 +74,5 @@ CustomTextField.propTypes = {
   startAdornment: PropTypes.func,
   type: PropTypes.string,
   inputStyle: PropTypes.object,
-  showPassword: PropTypes.object,
+  showPassword: PropTypes.bool,
 };

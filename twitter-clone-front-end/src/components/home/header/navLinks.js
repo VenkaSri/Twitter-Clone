@@ -5,7 +5,7 @@ export const LINKS = [
     name: "Home",
     iconFilled: Icons.HomeFilled,
     iconOutlined: Icons.HomeOutlined,
-    path: "/" || "home",
+    path: "/home",
   },
   {
     name: "Explore",

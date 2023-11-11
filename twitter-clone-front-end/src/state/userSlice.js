@@ -8,6 +8,8 @@ const initialState = {
   profilePicture: "",
   likedPosts: [],
   followedIds: [],
+  registered: false,
+  isProfileComplete: false,
 };
 
 const userSlice = createSlice({
@@ -36,6 +38,12 @@ const userSlice = createSlice({
     },
     updateLikedPosts(state, action) {
       state.likedPosts = action.payload;
+    },
+    setRegistered(state, action) {
+      state.registered = action.payload;
+    },
+    setIsProfileComplete(state, action) {
+      state.isProfileComplete = action.payload;
     },
   },
 });

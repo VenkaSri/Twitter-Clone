@@ -8,7 +8,11 @@ import { Navigate } from "react-router-dom";
 
 export const protectedRoutes = [
   {
-    path: PathConstants.HOME,
+    path: PathConstants.ROOT,
+    element: <Navigate to={PathConstants.HOME} replace />,
+  },
+  {
+    path: PathConstants.ROOT,
     element: <MainLayout />,
     children: [
       { path: PathConstants.HOME, element: <MainColumn /> },

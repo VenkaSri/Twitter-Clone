@@ -17,14 +17,13 @@ import { OverlayLoader } from "./dialog/OverlayLoader";
 import Head from "./head/Head";
 import { DialogContext, DialogProvider } from "@/context/dialog/dialog-context";
 import { LoginHome } from "./dialog/auth/login/LoginHome";
-import { SignupHome } from "./dialog/auth/signup/SignUpHome";
+
+const SignupHome = lazy(() =>
+  import("@/components/dialog/auth/signup/SignUpHome")
+);
 
 const Dialog = ({ type }) => {
-  return (
-    <RegisterProvider>
-      <SignUpDialog />
-    </RegisterProvider>
-  );
+  return <SignUpDialog />;
 };
 
 export default Dialog;
@@ -69,7 +68,9 @@ const SignUpDialog = () => {
       {isLoading ? (
         <OverlayLoader />
       ) : step === -1 ? (
-        <SignupHome />
+        <Suspense fallback={<OverlayLoader />}>
+          <SignupHome />
+        </Suspense>
       ) : (
         <>
           <Head title="Sign up for X" />

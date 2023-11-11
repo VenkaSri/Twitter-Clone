@@ -7,6 +7,7 @@ import { userApi } from "@services/userApi";
 import { publicApi } from "@components/public/publicApi";
 import { postApi } from "@services/postApi";
 import snackbarSlice from "@state/snackbarSlice";
+import appSlice from "./state/appSlice";
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     userSlice,
     authSlice,
     snackbarSlice,
+    appSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(

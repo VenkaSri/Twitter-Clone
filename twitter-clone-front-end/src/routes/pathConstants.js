@@ -1,5 +1,6 @@
 const PathConstants = {
-  HOME: "/",
+  ROOT: "/",
+  HOME: "/home",
   SIGN_UP: "/i/flow/signup",
   LOGIN: "/i/flow/login",
   EXPLORE: "/explore",

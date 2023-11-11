@@ -7,10 +7,10 @@ export const FollowSuggestions = () => {
   const userCards = data?.data.content ?? [];
   return (
     <>
-      {userCards.map((user) => (
+      {userCards.map((user, index) => (
         <div
           className="flex flex-col items-center justify-center mt-2 grow w-full "
-          key={user.id}
+          key={index}
         >
           <UserCard
             options={

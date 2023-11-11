@@ -21,7 +21,6 @@ export const usePopover = () => {
   };
 
   const RenderPopover = ({ children, sx }) => {
-    console.log(sx);
     return (
       <Popover
         open={popoverOpen}

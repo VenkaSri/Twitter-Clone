@@ -11,7 +11,7 @@ import { APP_NAME } from "@/constants/constants";
 import { useContext } from "react";
 import { RegisterContext } from "@/context/auth/register-context";
 
-export const SignupHome = () => {
+const SignupHome = () => {
   const { setStep, step } = useContext(RegisterContext);
   return (
     <>
@@ -101,6 +101,8 @@ flex flex-col items-stretch basis-full flex-grow bg-[#fff] dark:bg-[#000]`}
     </>
   );
 };
+
+export default SignupHome;
 
 const Heading = () => {
   return (
