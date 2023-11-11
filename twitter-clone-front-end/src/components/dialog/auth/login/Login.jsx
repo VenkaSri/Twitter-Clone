@@ -25,10 +25,7 @@ const LoginDialog = () => {
 
   let sxStyles = {
     borderRadius: "16px",
-    height: "650px",
-    maxHeight: "90vh",
-    minHeight: "400px",
-    maxWidth: "80vw",
+    height: fullscreen ? "none" : "650px",
     minWidth: "600px",
     display: "flex",
     boxShadow: "none",
@@ -50,7 +47,6 @@ const LoginDialog = () => {
         },
       }}
     >
-      {/* <div>hi</div> */}
       <LoginHome />
     </Dialog>
   );

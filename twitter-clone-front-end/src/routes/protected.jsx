@@ -4,6 +4,7 @@ import { MainColumn } from "@/components/home/main/mainColumn/MainColumn";
 import { ViewPost } from "@/components/post/ViewPost";
 import { PostEngagements } from "@/pages/PostEngagements";
 import { Logout } from "@/pages/Logout";
+import { Navigate } from "react-router-dom";
 
 export const protectedRoutes = [
   {
@@ -19,5 +20,9 @@ export const protectedRoutes = [
   {
     path: PathConstants.LOGOUT,
     element: <Logout />,
+  },
+  {
+    path: "*",
+    element: <Navigate to={PathConstants.HOME} replace />,
   },
 ];

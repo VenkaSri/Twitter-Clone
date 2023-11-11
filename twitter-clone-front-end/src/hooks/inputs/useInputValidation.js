@@ -9,7 +9,8 @@ const validatePasswordStrength = (text) => /^(.)\1*$/.test(text);
 const validateUsername = (text) => /^[a-zA-Z0-9_]+$/.test(text);
 const hasNonSpaceChars = (text) => /[^\s\\]/.test(text);
 const isValidEmail = (email) => {
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailPattern =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return emailPattern.test(email);
 };
 const isNotEmpty = (text) => text.trim() !== "";

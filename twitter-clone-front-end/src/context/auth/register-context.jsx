@@ -19,6 +19,8 @@ const RegisterProvider = ({ children }) => {
     day: "",
   });
 
+  const [isUserRegistered, setIsUserRegistered] = useState(false);
+
   const [autoFocusField, setAutoFocusField] = useState("");
 
   const [password, setPassword] = useState("");
@@ -44,6 +46,8 @@ const RegisterProvider = ({ children }) => {
   }, [username]);
 
   const value = {
+    isUserRegistered,
+    setIsUserRegistered,
     name,
     setName,
     email,

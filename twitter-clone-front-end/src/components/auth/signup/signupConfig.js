@@ -18,6 +18,7 @@ import { useUploadProfilePicture } from "@/hooks/dialog/useUploadProfilePicture"
 import { DialogContext } from "@/context/dialog/dialog-context";
 import { useNavigate } from "react-router-dom";
 import { authSliceActions } from "@/state/authSlice";
+import { useSession } from "@/hooks/useSession";
 
 dayjs.extend(customParseFormat);
 
@@ -36,9 +37,12 @@ export const useSignupConfig = () => {
     profilePicture,
     updatedUsername,
     hasFollowedOneUser,
+    setIsUserRegistered,
+    isUserRegistered,
   } = useContext(RegisterContext);
   const [body, setBody] = useState(null);
   const [userId, setUserId] = useState(null);
+  const { isAuthenticated } = useSession();
   const [headerAction, setHeaderAction] = useState(null);
   const [btnText, setBtnText] = useState("");
   const [btnStyle, setBtnStyle] = useState("");
@@ -47,12 +51,6 @@ export const useSignupConfig = () => {
   const { setHasError } = useContext(DialogContext);
   const [registerUser, { isSuccess: isRegistered, data: registeredUser }] =
     useRegisterUserMutation();
-  const { isSuccess: isAuthStatusChecked } = useCheckAuthStatusQuery(
-    undefined,
-    {
-      skip: !isRegistered,
-    }
-  );
 
   const { data: userInfo, isSuccess: fetchedUser } = useGetPrincipleUserQuery(
     userId,
@@ -60,6 +58,10 @@ export const useSignupConfig = () => {
       skip: userId === null,
     }
   );
+
+  // const { isSuccess: authenicated, data: authStatus } = useCheckAuthStatusQuery(
+  //   { skip: !isRegistered }
+  // );
 
   const [updateUsername, { isSuccess: usernameUpdated }] =
     useUpdateUsernameMutation();
@@ -136,32 +138,40 @@ export const useSignupConfig = () => {
     }
   }, [usernameUpdated]);
 
+  console.log(isUserRegistered);
+
   useEffect(() => {
-    if (isAuthStatusChecked) {
-      console.log(registeredUser);
-      console.log(registeredUser.id);
-      setUserId(registeredUser.id);
-      if (fetchedUser) {
-        dispatch(
-          userSliceActions.setUserInfo({
-            name: userInfo.name,
-            username: userInfo.username,
-            userId: userInfo.id,
-            profilePicture: userInfo.profile_image_url || "",
-            likedPosts: userInfo.likedPostsIds || [],
-          })
-        );
-        setIsLoading(false);
-        setStep(step + 1);
-      }
+    if (isRegistered) {
+      setIsUserRegistered(true);
+      setIsLoading(false);
+      setStep(step + 1);
     }
-  }, [isAuthStatusChecked, fetchedUser]);
+  }, [isRegistered, dispatch]);
+
+  // useEffect(() => {
+  //   if (isAuthStatusChecked) {
+  //     console.log(authStatus);
+  //     setUserId(registeredUser.id);
+  //     if (fetchedUser) {
+  //       dispatch(
+  //         userSliceActions.setUserInfo({
+  //           name: userInfo.name,
+  //           username: userInfo.username,
+  //           userId: userInfo.id,
+  //           profilePicture: userInfo.profile_image_url || "",
+  //           likedPosts: userInfo.likedPostsIds || [],
+  //         })
+  //       );
+  //       setIsLoading(false);
+  //       setStep(step + 1);
+  //     }
+  //   }
+  // }, [isAuthStatusChecked, fetchedUser]);
 
   const goToNextStep = async () => {
     if (step === 2) {
       setIsLoading(true);
       await handleRegistration();
-      dispatch(authApi.endpoints.checkAuthStatus.initiate());
     } else if (step === 3) {
       if (profilePicture !== default_profile_picture) {
         const response = await handleProfilePictureUpload();
@@ -180,10 +190,17 @@ export const useSignupConfig = () => {
     } else if (step === 5) {
       if (hasFollowedOneUser) {
         setIsOpen(false);
-        navigate("/");
+        const result = await dispatch(
+          authApi.endpoints.checkAuthStatus.initiate()
+        ).unwrap();
+        console.log(result);
       }
     } else {
-      setStep(step + 1);
+      if (step < 6) {
+        setStep(step + 1);
+      } else {
+        return;
+      }
     }
   };
 

@@ -52,8 +52,6 @@ const SignUpDialog = () => {
   const { step, isLoading } = useContext(RegisterContext);
   const { goToNextStep } = useSignupConfig();
 
-  console.log(step);
-
   return (
     <MUIDialog
       open={true}

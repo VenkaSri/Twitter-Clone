@@ -4,6 +4,7 @@ import { PathConstants } from "./pathConstants";
 import Dialog from "@/components/Dialog";
 import { Suspense, lazy } from "react";
 import { Navigate } from "react-router-dom";
+import Home from "@/components/layout/public/Home";
 // import { LoginDialog } from "@/components/dialog/auth/login/Login";
 
 const LandingPage = lazy(() => import("@/components/public/LandingPage"));

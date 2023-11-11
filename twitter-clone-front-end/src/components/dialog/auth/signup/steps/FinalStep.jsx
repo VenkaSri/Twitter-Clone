@@ -1,12 +1,16 @@
 import { Suspense, lazy } from "react";
 import DialogBodyHeading from "@components/dialog/body/DialogBodyHeading";
 import { OverlayLoader } from "../../../OverlayLoader";
+import { useSession } from "@/hooks/useSession";
 
 const FollowSuggestionCard = lazy(() =>
   import("@/components/home/FollowSuggestionCard")
 );
 
 export const FinalStep = () => {
+  const { isAuthenticated } = useSession();
+
+  console.log(isAuthenticated);
   return (
     <>
       <DialogBodyHeading
