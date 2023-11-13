@@ -68,7 +68,6 @@ public class AuthenticationController {
             .build();
   }
 
-
   @GetMapping("/auth_status")
   public ResponseEntity<AuthStatusResponse> getAuthStatus(HttpServletRequest httpServletRequest) {
     return authenticationService.getAuthStatus(httpServletRequest);
