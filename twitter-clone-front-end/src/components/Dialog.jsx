@@ -37,12 +37,10 @@ const SignUpDialog = () => {
   const fullscreen = useMediaQuery("(max-width:702px)");
 
   let sxStyles = {
-    borderRadius: "16px",
+    borderRadius: fullscreen ? "none" : "16px",
     height: fullscreen ? "none" : "650px",
-
     minHeight: "400px",
-
-    minWidth: "600px",
+    minWidth: fullscreen ? "100%" : "600px",
     display: "flex",
     boxShadow: "none",
     overflow: "hidden",
@@ -77,7 +75,6 @@ const SignUpDialog = () => {
           <DialogTitle style={{ padding: 0 }}>
             <DialogHeader step={step} />
           </DialogTitle>
-
           <DialogContent
             className="w-full max-w-[600px] mx-auto  flex flex-col relative dark:bg-black"
             sx={{
@@ -89,7 +86,7 @@ const SignUpDialog = () => {
           >
             <DialogBody step={step} />
             <DialogFooter step={step} onClick={goToNextStep} />
-          </DialogContent>
+          </DialogContent>{" "}
         </>
       )}
     </MUIDialog>

@@ -14,7 +14,7 @@ const StepOne = () => {
   return (
     <>
       <DialogContentHeading text="Create your account" />
-      <div className="flex-col-container py-3">
+      <div className="flex flex-col py-3">
         <div className="flex flex-col grow ">
           <CustomTextField
             label="Name"
@@ -27,7 +27,7 @@ const StepOne = () => {
           {nameError && <ErrorField errorMessage="What’s your name?" />}
         </div>
       </div>
-      <div className="flex-col-container py-3">
+      <div className="flex flex-col py-3">
         <div className="flex flex-col grow ">
           <CustomTextField
             label="Email"
@@ -44,7 +44,7 @@ const StepOne = () => {
           Use phone instead
         </span>
       </div>
-      <div className="flex-col-container mt-5">
+      <div className="flex flex-col mt-5">
         <div className={`font-cBold dark:text-white mb-2 leading-5`}>
           <span className="break-words">Date of Birth</span>
         </div>
@@ -54,7 +54,7 @@ const StepOne = () => {
             account is for a business, a pet, or something else.
           </span>
         </div>
-        <div className="flex-col-container">
+        <div className="flex flex-col">
           <DOBInput />
         </div>
       </div>
