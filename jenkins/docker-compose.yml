@@ -1,0 +1,30 @@
+version: '3'
+services: 
+  jenkins:
+    container_name: 'jenkins'
+    image: jenkins/docker
+    build:
+      context: ./pipeline
+    ports:
+      - "9080:8080"
+    volumes:
+      - "/Users/venkateshsritharan/intellij/Twitter\ Clone/jenkins/jenkins_home:/var/jenkins_home"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - net
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: twitterclone
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: example
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+
+networks:
+  net:
