@@ -1,4 +1,0 @@
-import PropTypes from "prop-types";
-LikePostButton.propTypes = {
-  postId: PropTypes.number,
-};
