@@ -9,20 +9,21 @@ import {
   RegisterProvider,
 } from "@context/auth/register-context";
 import DialogHeader from "@components/dialog/DialogHeader";
-import { useContext } from "react";
+import { Suspense, lazy, useContext } from "react";
 import DialogFooter from "@components/dialog/DialogFooter";
 import { useSignupConfig } from "@components/auth/signup/signupConfig";
 import DialogBody from "./dialog/body/DialogBody";
 import { OverlayLoader } from "./dialog/OverlayLoader";
 import Head from "./head/Head";
 import { DialogContext, DialogProvider } from "@/context/dialog/dialog-context";
+import { LoginHome } from "./dialog/auth/login/LoginHome";
 
-const Dialog = () => {
-  return (
-    <RegisterProvider>
-      <AuthDialog />
-    </RegisterProvider>
-  );
+const SignupHome = lazy(() =>
+  import("@/components/dialog/auth/signup/SignUpHome")
+);
+
+const Dialog = ({ type }) => {
+  return <SignUpDialog />;
 };
 
 export default Dialog;
@@ -31,22 +32,18 @@ Dialog.propTypes = {
   body: PropTypes.node,
 };
 
-const AuthDialog = () => {
+const SignUpDialog = () => {
   const { isOpen } = useContext(DialogContext);
-  console.log(isOpen);
-  const isMobile = useMediaQuery("(max-width:702px)");
+  const fullscreen = useMediaQuery("(max-width:702px)");
+
   let sxStyles = {
-    borderRadius: "16px",
-    width: "600px",
-    height: "650px",
-    maxHeight: "90vh",
+    borderRadius: fullscreen ? "none" : "16px",
+    height: fullscreen ? "none" : "650px",
     minHeight: "400px",
-    maxWidth: "80vw",
-    minWidth: "600px",
+    minWidth: fullscreen ? "100%" : "600px",
     display: "flex",
     boxShadow: "none",
     overflow: "hidden",
-    ackgroundColor: "transparent",
   };
 
   const { step, isLoading } = useContext(RegisterContext);
@@ -57,7 +54,7 @@ const AuthDialog = () => {
       open={true}
       PaperProps={{ sx: sxStyles }}
       transitionDuration={0}
-      fullScreen={isMobile}
+      fullScreen={fullscreen}
       sx={{
         "& .MuiBackdrop-root": {
           backgroundColor: "#5b7083",
@@ -68,13 +65,16 @@ const AuthDialog = () => {
       {/* {<ErrorDialog />} */}
       {isLoading ? (
         <OverlayLoader />
+      ) : step === -1 ? (
+        <Suspense fallback={<OverlayLoader />}>
+          <SignupHome />
+        </Suspense>
       ) : (
         <>
           <Head title="Sign up for X" />
           <DialogTitle style={{ padding: 0 }}>
             <DialogHeader step={step} />
           </DialogTitle>
-
           <DialogContent
             className="w-full max-w-[600px] mx-auto  flex flex-col relative dark:bg-black"
             sx={{
@@ -86,7 +86,7 @@ const AuthDialog = () => {
           >
             <DialogBody step={step} />
             <DialogFooter step={step} onClick={goToNextStep} />
-          </DialogContent>
+          </DialogContent>{" "}
         </>
       )}
     </MUIDialog>
