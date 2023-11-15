@@ -1,0 +1,32 @@
+:root {
+  --primary-color: #1e9bf0;
+}
+
+@layer base {
+  html {
+    @apply text-15 font-chirp;
+  }
+
+  body {
+    @apply m-0 bg-white dark:text-[#fff];
+  }
+
+  html,
+  body {
+    @apply h-full;
+  }
+
+  .default-border-color {
+    @apply border-[#cfd9de] dark:border-[#536471];
+  }
+}
+
+.textSpan {
+  @apply max-w-full overflow-hidden text-ellipsis whitespace-nowrap;
+}
+
+@layer components {
+  .disabled-link {
+    @apply opacity-40 pointer-events-none cursor-default;
+  }
+}
