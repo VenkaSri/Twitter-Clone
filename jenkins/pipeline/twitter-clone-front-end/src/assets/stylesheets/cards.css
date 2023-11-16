@@ -1,3 +1,0 @@
-.card--follow {
-  @apply flex w-full  cursor-pointer hover:bg-[#F7F7F7]  dark:hover:bg-[#080808];
-}

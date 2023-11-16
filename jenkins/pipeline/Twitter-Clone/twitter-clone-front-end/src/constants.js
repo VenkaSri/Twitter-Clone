@@ -1,3 +1,0 @@
-const CHARACTER_LIMIT = 280;
-
-export { CHARACTER_LIMIT };
