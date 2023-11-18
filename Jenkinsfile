@@ -4,22 +4,29 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // Define build steps here
-                sh 'echo "Building the project"'
+                sh '''
+
+                   ./jenkins/build-spring-app/mvn.sh mvn -B -DskipTests clean package
+                   ./jenkins/build-spring-app/build.sh
+                   '''
             }
         }
 
         stage('Test') {
             steps {
-                // Define test steps here
-                sh 'echo "Running tests"'
+                sh './jenkins/test/mvn.sh mvn test'
             }
         }
-
+ 	
+	stage('Push') {
+            steps {
+                sh './jenkins/push/push.sh'
+            }
+        
+}
         stage('Deploy') {
             steps {
-                // Define deployment steps here
-                sh 'echo "Deploying the project"'
+                sh './jenkins/deploy/deploy.sh'
             }
         }
     }
