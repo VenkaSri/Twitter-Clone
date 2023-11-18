@@ -190,3 +190,4 @@ mvnw
 mvnw.cmd
 .mvn/wrapper
 src/main/resources/.env
+.env
