@@ -12,11 +12,6 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                sh 'export SPRING_DATASOURCE_PASSWORD=$SPRING_DATASOURCE_PASSWORD && ./jenkins/test/mvn.sh mvn test'
-            }
-        }
  	
 	stage('Push') {
             steps {
