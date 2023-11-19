@@ -50,7 +50,7 @@ export const PostEditor = () => {
           />
         </div>
       )}
-      <div className="mobile:flex hidden border-b border-b-[#eff3f4] px-[16px] dark:border-b-[#2f3336] dark:bg-black w-full relative ">
+      <div className="mobile:flex hidden border-b border-b-[#eff3f4] px-[16px] dark:border-b-[#2f3336] dark:bg-black w-full relative">
         {isLoading && (
           <div className="absolute flex grow left-0 right-0 bottom-0 top-0 bg-white/40 z-[3]"></div>
         )}

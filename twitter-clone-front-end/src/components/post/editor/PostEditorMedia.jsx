@@ -25,7 +25,7 @@ const ImageContainer = ({ src, isGridLayout }) => {
           className="btn--media-action min-w-[30px] min-h-[30px] right-1 top-1 "
           onClick={() => handleRemoveFile(src)}
         >
-          <Close className="w-[18px]" />
+          <Close className="w-[18px] fill-white" />
         </div>
         <div className="btn--media-action  min-w-[32px] min-h-[32px] right-1 bottom-1 px-4">
           <span className="font-cBold text-white">Edit</span>

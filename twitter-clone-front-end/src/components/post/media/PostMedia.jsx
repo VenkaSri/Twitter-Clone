@@ -5,7 +5,7 @@ const MediaContainer = ({ src, borderRadius }) => {
     <>
       <div className="overflow-hidden flex-col basis-0 grow flex mr-0.5 cursor-pointer relative">
         <div className="abolute top-0 bottom-0 right-0 left-0 flex flex-col ">
-          <div className="h-full w-full max-w-full flex flex-col ">
+          <div className="h-full w-full max-w-full flex flex-col">
             <div
               style={{ backgroundImage: `url(${src})` }}
               className={`absolute top-0 left-0 w-full h-full bg-center bg-cover ${borderRadius}`}
