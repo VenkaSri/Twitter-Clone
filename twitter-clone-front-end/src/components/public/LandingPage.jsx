@@ -28,7 +28,7 @@ export const LandingPage = () => {
                 <Logo className="w-[45px] dark:fill-white" />
               </div>
               <div className="my-12 flex font-cHeavy leading-[54px] text-40 font-bold sm:text-64 sm:leading-[84px]">
-                <span className="">TEst now</span>
+                <span className="">Test 1</span>
               </div>
 
               <div className="mb-8">
