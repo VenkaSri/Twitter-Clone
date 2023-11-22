@@ -90,7 +90,9 @@ export const useInputValidation = () => {
     setTimeout(async () => {
       try {
         const result = await fetch(
-          `http://localhost:8080/api/auth/email_available?email=${enteredEmail}`,
+          `${
+            import.meta.env.VITE_AUTH_BASE_URL
+          }/email_available?email=${enteredEmail}`,
           {
             method: "GET",
             credentials: "omit",

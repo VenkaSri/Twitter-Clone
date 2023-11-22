@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const postApi = createApi({
   reducerPath: "postApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8080/api/v1/posts",
+    baseUrl: import.meta.env.VITE_POST_BASE_URL,
     credentials: "include",
   }),
   endpoints: (builder) => ({
