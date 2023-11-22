@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-
+	           ./jenkins/build-react/build.sh	
                    ./jenkins/build-spring-app/mvn.sh mvn -B -DskipTests clean package
                    ./jenkins/build-spring-app/build.sh
                    '''
