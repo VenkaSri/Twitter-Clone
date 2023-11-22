@@ -21,8 +21,10 @@ pipeline {
 }
         stage('Deploy') {
             steps {
+              withCredentials([usernamePassword(credentialsId: 'aws-cred', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    sh './jenkins/deploy/deploy-react.sh'
+                }
                 sh '''
-		   ./jenkins/deploy/deploy-react.sh
                    ./jenkins/deploy/deploy.sh
                    '''
             }
