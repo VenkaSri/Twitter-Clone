@@ -1,7 +1,7 @@
 #!/bin/bash
 WORKSPACE=/var/lib/jenkins/workspace/pipeline-backend
 
-docker buildx create --name mybuilder --use
+docker buildx create --name reactBuilder --use
 docker buildx inspect --bootstrap
 
 
