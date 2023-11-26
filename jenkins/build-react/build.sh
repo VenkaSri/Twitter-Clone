@@ -1,11 +1,9 @@
 #!/bin/bash
-WORKSPACE=/var/lib/jenkins/workspace/pipeline-backend
 
-# docker buildx create --name reactBuilder --use
-# docker buildx inspect --bootstrap
+source react-app.env
 
-
-
-# docker buildx build --platform linux/arm64 -t test-frontend:$BUILD_TAG -f jenkins/build-react/Dockerfile .
-docker build -t test-frontend:$BUILD_TAG -f jenkins/build-react/Dockerfile . 
+docker build -t test-frontend:$BUILD_TAG -f jenkins/build-react/Dockerfile \
+--build-arg VITE_AUTH_BASE_URL=$VITE_AUTH_BASE_URL \
+--build-arg VITE_POST_BASE_URL=$VITE_POST_BASE_URL \
+--build-arg VITE_USER_BASE_URL=$VITE_USER_BASE_URL .
 
