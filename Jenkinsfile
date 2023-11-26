@@ -5,8 +5,14 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-	           ./jenkins/build-react/build.sh	
-                   ./jenkins/build-spring-app/mvn.sh mvn -B -DskipTests clean package
+                   withCredentials([
+                    string(credentialsId: 'react-app-env-auth', variable: 'VITE_AUTH_BASE_URL'),
+                    string(credentialsId: 'react-app-env-post', variable: 'VITE_POST_BASE_URL'),
+                    string(credentialsId: 'react-app-env-user', variable: 'VITE_USER_BASE_URL')
+                ]) {
+                    sh './jenkins/build-react/build.sh'
+                }
+		   ./jenkins/build-spring-app/mvn.sh mvn -B -DskipTests clean package
                    ./jenkins/build-spring-app/build.sh
                    '''
             }
