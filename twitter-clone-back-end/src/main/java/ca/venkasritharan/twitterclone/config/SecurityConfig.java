@@ -2,6 +2,7 @@ package ca.venkasritharan.twitterclone.config;
 
 import ca.venkasritharan.twitterclone.security.jwt.JwtAuthenticationEntryPoint;
 import ca.venkasritharan.twitterclone.security.jwt.JwtAuthenticationFilter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -58,9 +59,9 @@ public class SecurityConfig {
   }
 
   @Bean
-  public CorsConfigurationSource corsConfigurationSource() {
+  public CorsConfigurationSource corsConfigurationSource(@Value("${cors.allowedOrigins}") String[] allowedOrigins) {
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:4173/"));
+    configuration.setAllowedOrigins(Arrays.asList(allowedOrigins));
     configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE", "OPTIONS"));
     configuration.setAllowCredentials(true);
     configuration.setAllowedHeaders(Arrays.asList("content-type", "authorization"));
