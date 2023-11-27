@@ -4,27 +4,26 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               
-		echo 'VITE_AUTH_BASE_URL' 
-		sh '''
-		   ./jenkins/build-spring-app/mvn.sh mvn -B -DskipTests clean package
+                echo '$VITE_AUTH_BASE_URL'
+                sh '''
+                   ./jenkins/build-spring-app/mvn.sh mvn -B -DskipTests clean package
                    ./jenkins/build-spring-app/build.sh
                    '''
             }
-        
- 	
-	stage('Push') {
+        }
+
+        stage('Push') {
             steps {
                 sh '''
-		   ./jenkins/push/push-react.sh
-		   ./jenkins/push/push.sh
-		   '''
+                   ./jenkins/push/push-react.sh
+                   ./jenkins/push/push.sh
+                   '''
             }
-        
-	}
+        }
+
         stage('Deploy') {
             steps {
-              withCredentials([usernamePassword(credentialsId: 'aws-cred', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                withCredentials([usernamePassword(credentialsId: 'aws-cred', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     sh './jenkins/deploy/deploy-react.sh'
                 }
                 sh '''
@@ -34,3 +33,4 @@ pipeline {
         }
     }
 }
+
