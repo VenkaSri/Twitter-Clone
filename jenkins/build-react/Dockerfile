@@ -14,9 +14,9 @@ RUN yarn install
 
 
 # Use build arguments as environment variables
-ENV $VITE_AUTH_BASE_URL
-ENV $VITE_POST_BASE_URL
-ENV $VITE_USER_BASE_URL
+ENV VITE_AUTH_BASE_URL=$VITE_AUTH_BASE_URL
+ENV VITE_POST_BASE_URL=$VITE_POST_BASE_URL
+ENV VITE_USER_BASE_URL=$VITE_USER_BASE_URL
 COPY twitter-clone-front-end/ ./
 RUN yarn build
 
