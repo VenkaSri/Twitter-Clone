@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "${env.VITE_AUTH_BASE_URL}"
                 sh '''
+		   ./jenkins/build-react/build.sh
                    ./jenkins/build-spring-app/mvn.sh mvn -B -DskipTests clean package
                    ./jenkins/build-spring-app/build.sh
                    '''
