@@ -13,7 +13,6 @@ export const LandingPage = () => {
   const handleLogin = () => {
     navigate("/i/flow/login");
   };
-  console.log(import.meta.env.VITE_AUTH_BASE_URL);
 
   return (
     <>
