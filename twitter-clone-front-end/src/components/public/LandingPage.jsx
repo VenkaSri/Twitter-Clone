@@ -4,7 +4,7 @@ import { LandingFooter } from "@components/public/LandingFooter";
 import RoundedTextButton from "@components/RoundedTextButton";
 import Head from "@components/head/Head";
 import { Outlet, useNavigate } from "react-router-dom";
-import { Suspense, lazy, useContext } from "react";
+import { Suspense, lazy } from "react";
 import { OverlayLoader } from "../dialog/OverlayLoader";
 const SignUpOptions = lazy(() => import("@components/public/SignUpOptions"));
 
