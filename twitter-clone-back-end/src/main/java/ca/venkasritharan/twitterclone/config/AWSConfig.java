@@ -14,7 +14,7 @@ public class AWSConfig {
   @Bean
   public S3Client s3() {
     return S3Client.builder()
-            .region(Region.US_EAST_1) // or your preferred region
+            .region(Region.US_EAST_1)
             .build();
   }
 }
