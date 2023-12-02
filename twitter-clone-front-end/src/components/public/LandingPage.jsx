@@ -48,7 +48,6 @@ export const LandingPage = () => {
                   text="Sign in"
                   className="button--roundedText h-[40px] text-primary mb-2 default-border-color hover:bg-primary/[0.1] sm:self-start self-center w-[300px]"
                   onClick={handleLogin}
-                  disabled
                 />
               </div>
             </div>

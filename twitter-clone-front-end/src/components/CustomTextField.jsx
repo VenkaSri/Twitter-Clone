@@ -16,6 +16,7 @@ const CustomTextField = ({
   endAdornment,
   startAdornment,
   showPassword,
+  readonly,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const { borderColor, labelColor } = useErrorStyles(isFocused, hasError);
@@ -40,10 +41,13 @@ const CustomTextField = ({
           fontSize: "17px",
           fontFamily: "chirpR",
           ...inputStyle,
+          backgroundColor: readonly ? "#F6F8F9" : "",
         },
       }}
       InputProps={{
-        className: `textfield-default  ${borderColor}  `,
+        className: `textfield-default  ${borderColor}  ${
+          readonly ? "border-0" : ""
+        }`,
 
         disableUnderline: true,
         style: { background: "none" },
@@ -56,6 +60,7 @@ const CustomTextField = ({
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
       onChange={(e) => onChange(e.target.value)}
+      disabled={readonly}
       autoFocus={autoFocus}
     />
   );

@@ -1,5 +1,7 @@
 package ca.venkasritharan.twitterclone.application.service;
 
+import ca.venkasritharan.twitterclone.api.exception.UserAlreadyExistsException;
+import ca.venkasritharan.twitterclone.application.dto.LoginDTO;
 import ca.venkasritharan.twitterclone.core.entity.User;
 import ca.venkasritharan.twitterclone.core.repository.UserRepository;
 import ca.venkasritharan.twitterclone.core.repository.user.ProfileRepository;
@@ -14,6 +16,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -40,22 +43,14 @@ public class AuthenticationService {
     this.mapper = mapper;
   }
 
-//  @Override
-//  public String login(LoginDTO loginDTO) {
-//    Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsernameOrEmailOrPhonenumber(),
-//                    loginDTO.getPassword()));
-//    SecurityContextHolder.getContext().setAuthentication(authentication);
-//    String token = jwtTokenProvider.createToken(authentication);
-//    return token;
-//  }
-//
-//
-//  @Override
-//  public void validateEmailOrPhone(String emailOrPhone) {
-//    if (userRepository.existsByEmail(emailOrPhone)) {
-//      throw new UserAlreadyExistsException("User with the given email or phone already exists.");
-//    }
-//  }
+  public String login(LoginDTO loginDTO) {
+    Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsernameOrEmailOrPhonenumber(),
+                    loginDTO.getPassword()));
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+    String token = jwtTokenProvider.createToken(authentication);
+    return token;
+  }
+
 
   public ResponseEntity<AuthStatusResponse> getAuthStatus(HttpServletRequest httpServletRequest) {
     try {

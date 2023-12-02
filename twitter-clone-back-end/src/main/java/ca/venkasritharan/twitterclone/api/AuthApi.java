@@ -1,6 +1,7 @@
 package ca.venkasritharan.twitterclone.api;
 
 
+import ca.venkasritharan.twitterclone.application.dto.LoginDTO;
 import ca.venkasritharan.twitterclone.application.dto.RegisterDTO;
 import ca.venkasritharan.twitterclone.application.service.AuthenticationService;
 import ca.venkasritharan.twitterclone.application.service.RegistrationService;
@@ -11,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,15 +39,15 @@ public class AuthApi {
     return registrationService.register(registerDTO, response);
   }
 
-//  @PostMapping(value = {"/login", "/sign-in"})
-//  public ResponseEntity<JwtResponse> login(@RequestBody LoginDTO loginDTO) {
-//    String token = authenticationService.login(loginDTO);
-//
-//    JwtResponse jwtResponse = new JwtResponse();
-//    jwtResponse.setAccessToken(token);
-//
-//    return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
-//  }
+  @PostMapping(value = {"/login", "/sign-in"})
+  public ResponseEntity<JwtResponse> login(@RequestBody LoginDTO loginDTO) {
+    String token = authenticationService.login(loginDTO);
+
+    JwtResponse jwtResponse = new JwtResponse();
+    jwtResponse.setAccessToken(token);
+
+    return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
+  }
 
   @PostMapping("/logout")
   public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response) {

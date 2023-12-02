@@ -5,6 +5,8 @@ import { OverlayLoader } from "../../OverlayLoader";
 import { LoginHome } from "./LoginHome";
 import { Suspense, lazy, useContext } from "react";
 import { RegisterContext } from "@/context/auth/register-context";
+import { LoginPassword } from "./LoginPassword";
+import { LoginContext } from "@/context/auth/login-context";
 // import Loadable from "react-loadable";
 
 // const LoginHome = lazy(() => import("@components/dialog/auth/login/LoginHome"));
@@ -24,15 +26,16 @@ const LoginDialog = () => {
   const fullscreen = useMediaQuery("(max-width:702px)");
 
   let sxStyles = {
-    borderRadius: "16px",
+    borderRadius: fullscreen ? "none" : "16px",
     height: fullscreen ? "none" : "650px",
-    minWidth: "600px",
+    minHeight: "400px",
+    minWidth: fullscreen ? "100%" : "600px",
     display: "flex",
     boxShadow: "none",
     overflow: "hidden",
   };
 
-  const { step, isLoading } = useContext(RegisterContext);
+  const { loginStep } = useContext(LoginContext);
 
   return (
     <Dialog
@@ -47,7 +50,7 @@ const LoginDialog = () => {
         },
       }}
     >
-      <LoginHome />
+      {loginStep === 1 ? <LoginPassword /> : <LoginHome />}
     </Dialog>
   );
 };

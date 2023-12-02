@@ -15,6 +15,9 @@ export const CustomSnackbar = ({ message, isOpen }) => {
 
     dispatch(snackbarSliceActions.closeSnackbar());
   };
+
+  const MessageComponent = () => <div className="font-cR">{message}</div>;
+
   return (
     <Snackbar
       ContentProps={{
@@ -22,6 +25,9 @@ export const CustomSnackbar = ({ message, isOpen }) => {
           backgroundColor: "var(--primary-color)",
           padding: 0,
           boxShadow: "none",
+          display: "flex",
+          justifyContent: "center",
+          height: 40,
         },
       }}
       autoHideDuration={4000}
@@ -29,7 +35,7 @@ export const CustomSnackbar = ({ message, isOpen }) => {
       open={isOpen}
       onClose={handleClose}
       TransitionComponent={Fade}
-      message={message}
+      message={<MessageComponent />}
     />
   );
 };
