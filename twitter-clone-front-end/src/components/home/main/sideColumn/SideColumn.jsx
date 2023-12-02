@@ -13,9 +13,9 @@ export const SideColumn = () => {
       <SideColumnCard title={"Repo & Updates"}>
         <div className="font-cBold  leading-6 flex flex-col">
           <span>
-            I&apos;ve cloned Twitter/X to refine my coding expertise, and
-            I&apos;m deploying updates using CI/CD to master this workflow. Take
-            a look at my repo to track what I&apos;m implementing next!
+            I&apos;m deploying updates using CI/CD to gain experience with the
+            workflow. Take a look at my repo to track what I&apos;m implementing
+            next!
           </span>
         </div>
 

@@ -11,7 +11,7 @@ const DialogFooter = ({ step, onClick }) => {
     <div
       role="button"
       className={clsx(
-        "flex flex-col dark:bg-[#000] justify-center items-center z-20 px-20",
+        "flex flex-col dark:bg-[#000] justify-center items-center z-20 mobile:px-20 px-8",
         { "pointer-events-none opacity-50": isDisabled },
         isContentOverflowing && "shadow-dialog-footer"
       )}

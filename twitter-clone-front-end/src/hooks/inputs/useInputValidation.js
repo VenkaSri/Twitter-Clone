@@ -206,8 +206,6 @@ export const useUsernameValidation = () => {
     }
   );
 
-  console.log(updatedUsername + " updatedUsernmae");
-
   useEffect(() => {
     if (username === updatedUsername) {
       setIsUsernameValid(true);
@@ -216,6 +214,7 @@ export const useUsernameValidation = () => {
     const identifier = setTimeout(() => {
       if (updatedUsername.length < USERNAME_MIN_LENGTH) {
         setUsernameError(true);
+        setIsUsernameValid(false);
         setErroMessage("Your username must be longer than 4 characters.");
       } else if (!validateUsername(updatedUsername)) {
         setUsernameError(true);
@@ -224,7 +223,6 @@ export const useUsernameValidation = () => {
         );
       } else {
         if (isSuccess) {
-          console.log(data.usernameAvailable);
           if (data.usernameAvailable) {
             setUsernameError(false);
             setIsUsernameValid(true);

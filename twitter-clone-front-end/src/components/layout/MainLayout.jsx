@@ -54,8 +54,8 @@ const Main = () => {
         <div className="main--mainColumn border-l dark:border-l-[#2f3336] border-r dark:border-r-[#2f3336]">
           <Outlet />
         </div>
-
-        {isProfileComplete ? <SideColumn /> : null}
+        <SideColumn />
+        {/* {isProfileComplete ? <SideColumn /> : null} */}
       </div>
     </main>
   );

@@ -6,12 +6,14 @@ import { Apple } from "@components/icons/Icons";
 import PropTypes from "prop-types";
 import { useContext } from "react";
 import { DialogContext } from "@/context/dialog/dialog-context";
+import { RegisterContext } from "@/context/auth/register-context";
 
 const SignUpOptions = () => {
-  // const dispatch = useDispatch();
   const { setIsOpen } = useContext(DialogContext);
+  const { setStep } = useContext(RegisterContext);
   const navigate = useNavigate();
   const handleCreateAccount = () => {
+    setStep(0);
     setIsOpen(true);
     navigate("/i/flow/signup");
   };
@@ -55,6 +57,7 @@ const SignUpOptions = () => {
           text="Create demo account"
           className="h-[40px]  rounded-full btn--primary"
           onClick={handleCreateAccount}
+          disabled
         />
       </div>
       <SigningUpTerms />

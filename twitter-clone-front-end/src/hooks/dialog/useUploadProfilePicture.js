@@ -14,7 +14,6 @@ export const useUploadProfilePicture = () => {
     formData.append("file", profilePicture);
     try {
       const response = await uploadProfilePicture(formData);
-      console.log(response);
       setHasError(true);
       return response;
     } catch (error) {

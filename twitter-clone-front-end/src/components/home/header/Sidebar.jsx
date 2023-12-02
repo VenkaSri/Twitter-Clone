@@ -43,6 +43,7 @@ const NewPostButton = () => {
             text={POST_BUTTON_VALUE}
             className="min-h-[52px] min-w-[52px] text-17 leading-5 text-white"
             style={{ backgroundColor: currentColor }}
+            disabled
           />
         </div>
       </div>

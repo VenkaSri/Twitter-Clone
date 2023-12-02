@@ -2,6 +2,8 @@ import RoundedTextButton from "@/components/RoundedTextButton";
 import { Logo } from "@/components/icons/Icons";
 import { APP_NAME } from "@/constants/constants";
 import { useLogoutMutation } from "@/services/authApi";
+import { appSliceActions } from "@/state/appSlice";
+import { authSliceActions } from "@/state/authSlice";
 import {
   Dialog,
   DialogActions,
@@ -9,14 +11,15 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export const Logout = () => {
-  console.log("rendered");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [logout, { isLoading }] = useLogoutMutation();
+  const [logout, { isLoading, isSuccess }] = useLogoutMutation();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -28,10 +31,9 @@ export const Logout = () => {
 
   const handleLogout = async () => {
     try {
-      // Calling the mutation
+      console.log("clicked");
       await logout().unwrap();
-      // Logout successful
-      // Here, you can navigate the user to the login page or somewhere else
+      dispatch(authSliceActions.setIsAuthenticated(false));
       navigate("/");
     } catch (error) {
       // Handle logout error
