@@ -7,6 +7,7 @@ const LoginProvider = ({ children }) => {
 
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const resetLoginState = () => {
     setLoginStep(0);
@@ -22,6 +23,8 @@ const LoginProvider = ({ children }) => {
     setLoginStep,
     loginStep,
     resetLoginState,
+    password,
+    setPassword,
   };
 
   return (

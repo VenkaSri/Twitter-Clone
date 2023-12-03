@@ -40,13 +40,10 @@ public class AuthApi {
   }
 
   @PostMapping(value = {"/login", "/sign-in"})
-  public ResponseEntity<JwtResponse> login(@RequestBody LoginDTO loginDTO) {
-    String token = authenticationService.login(loginDTO);
+  public LoginResponse login(@RequestBody LoginDTO loginDTO, HttpServletResponse response) {
 
-    JwtResponse jwtResponse = new JwtResponse();
-    jwtResponse.setAccessToken(token);
 
-    return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
+    return authenticationService.login(loginDTO, response);
   }
 
   @PostMapping("/logout")

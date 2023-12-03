@@ -38,6 +38,17 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["PrivateData"],
     }),
+    login: builder.mutation({
+      query: (form) => ({
+        url: "/login",
+        method: "POST",
+        body: form,
+        credentials: "include",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }),
+    }),
   }),
 });
 
@@ -47,4 +58,5 @@ export const {
   useCheckAuthStatusQuery,
   useDoesUserExistQuery,
   useLogoutMutation,
+  useLoginMutation,
 } = authApi;

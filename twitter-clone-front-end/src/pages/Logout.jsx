@@ -31,8 +31,8 @@ export const Logout = () => {
 
   const handleLogout = async () => {
     try {
-      console.log("clicked");
-      await logout().unwrap();
+      const res = await logout();
+      console.log(res);
       dispatch(authSliceActions.setIsAuthenticated(false));
       navigate("/");
     } catch (error) {

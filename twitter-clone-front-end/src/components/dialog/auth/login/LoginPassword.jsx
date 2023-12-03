@@ -1,23 +1,19 @@
 import Head from "@/components/head/Head";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
-import RoundedTextAndIconButton from "@/components/RoundedTextAndIconButton";
 import {
-  Apple,
   Close,
-  GoogleIcon,
   Logo,
   Visibility,
   VisibilityOff,
 } from "@/components/icons/Icons";
 import CustomTextField from "@/components/CustomTextField";
-import RoundedTextButton from "@/components/RoundedTextButton";
 import clsx from "clsx";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { RegisterContext } from "@/context/auth/register-context";
 import { LoginContext } from "@/context/auth/login-context";
-import { useDoesUserExistQuery } from "@/services/authApi";
+import { useDoesUserExistQuery, useLoginMutation } from "@/services/authApi";
 
 import { CustomSnackbar } from "@/components/CustomSnackbar";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -35,28 +31,31 @@ export const LoginPassword = () => {
   const { isSuccess, data } = useDoesUserExistQuery(username, {
     skip: !isChecking,
   });
+  const [login, { isSuccess: loggedIn, isLoading: loggingIn }] =
+    useLoginMutation();
 
+  const { setPassword, password } = useContext(LoginContext);
   const dispatch = useDispatch();
   const { isOpen, message } = useSelector((state) => state.snackbarSlice);
 
-  const handleLogin = () => {
-    if (username.length <= 4) {
+  const handleLogin = async () => {
+    if (password.length < 8) {
       dispatch(
         snackbarSliceActions.openSnackbar({
-          message: "Sorry, we could not find your account.",
+          message: "Wrong password!",
         })
       );
     } else {
-      setIsChecking(true);
-      if (isSuccess) {
-        console.log(data);
-      }
+      const form = JSON.stringify({
+        usernameOrEmailOrPhonenumber: username,
+        password: password,
+      });
+      const res = await login(form);
+      console.log(res.message);
     }
   };
 
-  const { errorMessage, passwordError } = useInputValidation();
-  const { setPassword, showPassword, setShowPassword } =
-    useContext(RegisterContext);
+  const { showPassword, setShowPassword } = useContext(RegisterContext);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -128,7 +127,7 @@ flex flex-col items-stretch basis-full flex-grow bg-[#fff] dark:bg-[#000]`}
           </div>
         </div>
       </DialogContent>
-      <DialogFooter login />
+      <DialogFooter login onClick={handleLogin} />
       <CustomSnackbar message={message} isOpen={isOpen} />
     </>
   );

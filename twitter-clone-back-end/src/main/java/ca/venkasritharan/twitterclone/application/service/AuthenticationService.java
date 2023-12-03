@@ -5,13 +5,12 @@ import ca.venkasritharan.twitterclone.application.dto.LoginDTO;
 import ca.venkasritharan.twitterclone.core.entity.User;
 import ca.venkasritharan.twitterclone.core.repository.UserRepository;
 import ca.venkasritharan.twitterclone.core.repository.user.ProfileRepository;
-import ca.venkasritharan.twitterclone.response.AuthStatusResponse;
-import ca.venkasritharan.twitterclone.response.EmailAvailabilityResponse;
-import ca.venkasritharan.twitterclone.response.MessageAndCodeResponse;
-import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
+import ca.venkasritharan.twitterclone.response.*;
 import ca.venkasritharan.twitterclone.api.security.jwt.JwtTokenProvider;
+import ca.venkasritharan.twitterclone.util.response.CookieUtils;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,12 +42,15 @@ public class AuthenticationService {
     this.mapper = mapper;
   }
 
-  public String login(LoginDTO loginDTO) {
+  public LoginResponse login(LoginDTO loginDTO, HttpServletResponse response) {
     Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsernameOrEmailOrPhonenumber(),
                     loginDTO.getPassword()));
     SecurityContextHolder.getContext().setAuthentication(authentication);
+
     String token = jwtTokenProvider.createToken(authentication);
-    return token;
+    CookieUtils.addAuthTokenCookie(response, token);
+
+    return new LoginResponse("Login success");
   }
 
 
@@ -119,5 +121,12 @@ public class AuthenticationService {
       return new MessageAndCodeResponse("User does not exist.", 400);
     }
 
+  }
+
+  private String generateAuthToken(User user) {
+    Authentication authentication = new UsernamePasswordAuthenticationToken(
+            user.getUsername(), user.getPassword());
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+    return jwtTokenProvider.createToken(authentication);
   }
 }
