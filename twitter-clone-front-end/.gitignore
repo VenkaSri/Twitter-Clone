@@ -12,6 +12,14 @@ dist
 dist-ssr
 *.local
 
+
+# Test artifacts and reports
+/cypress/
+/*.report.html
+
+# Build artifacts
+/stats.html
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
