@@ -21,7 +21,7 @@ export const LoginHome = () => {
   const { setLoginStep } = useContext(LoginContext);
   const { setUsername, username } = useContext(LoginContext);
   const [isChecking, setIsChecking] = useState(false);
-  const { isSuccess, data } = useDoesUserExistQuery(username, {
+  const { isSuccess, data, isError } = useDoesUserExistQuery(username, {
     skip: !isChecking,
   });
 
@@ -29,6 +29,7 @@ export const LoginHome = () => {
   const { isOpen, message } = useSelector((state) => state.snackbarSlice);
 
   const handleLogin = () => {
+    console.log("clicked");
     if (username.length <= 4) {
       dispatch(
         snackbarSliceActions.openSnackbar({
@@ -37,24 +38,16 @@ export const LoginHome = () => {
       );
     } else {
       setIsChecking(true);
-      if (isSuccess) {
-        console.log(data);
-        if (data.status === 200) {
-          setLoginStep(1);
-        } else {
-          setLoginStep(0);
-        }
-      }
     }
   };
 
-  console.log(username);
-
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     console.log(data);
-  //   }
-  // }, [isSuccess, data]);
+  useEffect(() => {
+    if (isSuccess) {
+      setLoginStep(1);
+    } else if (isError) {
+      console.log("hi");
+    }
+  }, [isSuccess, setLoginStep, data, isError]);
 
   return (
     <>

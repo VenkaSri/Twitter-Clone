@@ -22,7 +22,7 @@ export const useSession = () => {
         const authStatus = await dispatch(
           authApi.endpoints.checkAuthStatus.initiate()
         ).unwrap();
-
+        console.log(authStatus);
         if (authStatus.user) {
           const userId = authStatus.user.id;
           const userDetails = await dispatch(
@@ -43,6 +43,31 @@ export const useSession = () => {
     checkAuthStatusAndFetchUser();
   }, [dispatch]);
 
+  const checkAuthStatusAndFetchUser = async () => {
+    try {
+      // Check the authentication status
+      const authStatus = await dispatch(
+        authApi.endpoints.checkAuthStatus.initiate()
+      ).unwrap();
+
+      if (authStatus.user) {
+        const userId = authStatus.user.id;
+        const userDetails = await dispatch(
+          userApi.endpoints.getPrincipleUser.initiate(userId)
+        ).unwrap();
+        dispatch(userSliceActions.setUserInfo(userDetails));
+        return userDetails;
+      }
+    } catch (error) {
+      console.error(
+        "Failed to check authentication status or fetch user details:",
+        error
+      );
+    } finally {
+      setIsAuthenticating(false);
+    }
+  };
+
   return {
     username,
     name,
@@ -50,5 +75,6 @@ export const useSession = () => {
     isAuthenticating,
     likedPosts,
     profilePicture,
+    checkAuthStatusAndFetchUser,
   };
 };

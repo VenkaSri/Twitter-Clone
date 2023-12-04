@@ -23,6 +23,9 @@ import DialogContentHeading from "../../body/DialogBodyHeading";
 import { useInputValidation } from "@/hooks/inputs/useInputValidation";
 import ErrorField from "@/components/auth/ErrorField";
 import DialogFooter from "../../DialogFooter";
+import { authSliceActions } from "@/state/authSlice";
+import { appSliceActions } from "@/state/appSlice";
+import { AppProgess } from "@/components/AppLoader";
 
 export const LoginPassword = () => {
   const { setStep } = useContext(RegisterContext);
@@ -31,7 +34,7 @@ export const LoginPassword = () => {
   const { isSuccess, data } = useDoesUserExistQuery(username, {
     skip: !isChecking,
   });
-  const [login, { isSuccess: loggedIn, isLoading: loggingIn }] =
+  const [login, { isSuccess: loggedIn, isLoading: loggingIn, data: userData }] =
     useLoginMutation();
 
   const { setPassword, password } = useContext(LoginContext);
@@ -50,10 +53,18 @@ export const LoginPassword = () => {
         usernameOrEmailOrPhonenumber: username,
         password: password,
       });
-      const res = await login(form);
-      console.log(res.message);
+      await login(form);
     }
   };
+
+  useEffect(() => {
+    if (loggingIn) {
+      dispatch(appSliceActions.setAppLoading(true));
+    } else if (loggedIn) {
+      dispatch(appSliceActions.setAppLoading(false));
+      console.log(userData);
+    }
+  }, [loggingIn, loggedIn, dispatch, userData]);
 
   const { showPassword, setShowPassword } = useContext(RegisterContext);
 
