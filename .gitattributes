@@ -1,4 +1,9 @@
 *.js linguist-language=JavaScript
 *.html linguist-vendored
 *.java linguist-language=Java
+*.css linguist-language=CSS
+Dockerfile linguist-language=Dockerfile
+*.yml linguist-language=YAML
+*.yaml linguist-language=YAML
+*.sh linguist-language=Shell
 
