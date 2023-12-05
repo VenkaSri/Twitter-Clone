@@ -2,28 +2,12 @@ import RoundedTextButton from "@/components/RoundedTextButton";
 import { Logo } from "@/components/icons/Icons";
 import { APP_NAME } from "@/constants/constants";
 import { useLogoutMutation } from "@/services/authApi";
-import { appSliceActions } from "@/state/appSlice";
-import { authSliceActions } from "@/state/authSlice";
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 export const Logout = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
-  const [logout, { isLoading, isSuccess }] = useLogoutMutation();
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const [logout] = useLogoutMutation();
 
   const handleClose = (event, reason) => {
     navigate(-1);
@@ -31,10 +15,8 @@ export const Logout = () => {
 
   const handleLogout = async () => {
     try {
-      const res = await logout();
-      console.log(res);
-      dispatch(authSliceActions.setIsAuthenticated(false));
-      navigate("/");
+      await logout();
+      window.location.reload();
     } catch (error) {
       // Handle logout error
       console.error("Logout failed", error);

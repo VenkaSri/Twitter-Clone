@@ -22,7 +22,7 @@ export const useSession = () => {
         const authStatus = await dispatch(
           authApi.endpoints.checkAuthStatus.initiate()
         ).unwrap();
-        console.log(authStatus);
+
         if (authStatus.user) {
           const userId = authStatus.user.id;
           const userDetails = await dispatch(
@@ -44,6 +44,7 @@ export const useSession = () => {
   }, [dispatch]);
 
   const checkAuthStatusAndFetchUser = async () => {
+    console.log("hello");
     try {
       // Check the authentication status
       const authStatus = await dispatch(

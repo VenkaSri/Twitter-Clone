@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { RegisterContext } from "@/context/auth/register-context";
 import { LoginContext } from "@/context/auth/login-context";
-import { useDoesUserExistQuery } from "@/services/authApi";
+import { authApi, useDoesUserExistQuery } from "@/services/authApi";
 
 import { CustomSnackbar } from "@/components/CustomSnackbar";
 
@@ -18,18 +18,15 @@ import openSnackbar, { snackbarSliceActions } from "@state/snackbarSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export const LoginHome = () => {
-  const { setLoginStep } = useContext(LoginContext);
-  const { setUsername, username } = useContext(LoginContext);
-  const [isChecking, setIsChecking] = useState(false);
-  const { isSuccess, data, isError } = useDoesUserExistQuery(username, {
-    skip: !isChecking,
-  });
+  const { setUsername, username, setLoginStep } = useContext(LoginContext);
+  const [trigger, { data, isSuccess }] =
+    authApi.endpoints.doesUserExist.useLazyQuery();
 
   const dispatch = useDispatch();
   const { isOpen, message } = useSelector((state) => state.snackbarSlice);
 
-  const handleLogin = () => {
-    console.log("clicked");
+  const handleLogin = async () => {
+    console.log(username);
     if (username.length <= 4) {
       dispatch(
         snackbarSliceActions.openSnackbar({
@@ -37,17 +34,27 @@ export const LoginHome = () => {
         })
       );
     } else {
-      setIsChecking(true);
+      try {
+        const result = await trigger(username).unwrap();
+        if (result.message === "User exists") {
+          setLoginStep(1);
+        } else {
+          dispatch(
+            snackbarSliceActions.openSnackbar({
+              message: "Sorry, we could not find your account.",
+            })
+          );
+        }
+      } catch (error) {
+        console.error("Query failed", error);
+        dispatch(
+          snackbarSliceActions.openSnackbar({
+            message: "An error occurred. Please try again.",
+          })
+        );
+      }
     }
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      setLoginStep(1);
-    } else if (isError) {
-      console.log("hi");
-    }
-  }, [isSuccess, setLoginStep, data, isError]);
 
   return (
     <>
@@ -111,7 +118,7 @@ flex flex-col items-stretch basis-full flex-grow bg-[#fff] dark:bg-[#000]`}
                 onChange={setUsername}
               />
             </div>
-            <div className="my-3">
+            <div className="my-3" tabIndex="2">
               <RoundedTextButton
                 text="Next"
                 className="btn--action h-[36px]"

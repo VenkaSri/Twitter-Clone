@@ -9,31 +9,22 @@ import {
 } from "@/components/icons/Icons";
 import CustomTextField from "@/components/CustomTextField";
 import clsx from "clsx";
-import { Link, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
 import { RegisterContext } from "@/context/auth/register-context";
 import { LoginContext } from "@/context/auth/login-context";
-import { useDoesUserExistQuery, useLoginMutation } from "@/services/authApi";
+import { useLoginMutation } from "@/services/authApi";
 
 import { CustomSnackbar } from "@/components/CustomSnackbar";
 import InputAdornment from "@mui/material/InputAdornment";
-import openSnackbar, { snackbarSliceActions } from "@state/snackbarSlice";
+import { snackbarSliceActions } from "@state/snackbarSlice";
 import { useDispatch, useSelector } from "react-redux";
-import DialogContentHeading from "../../body/DialogBodyHeading";
-import { useInputValidation } from "@/hooks/inputs/useInputValidation";
-import ErrorField from "@/components/auth/ErrorField";
+import DialogContentHeading from "@/components/dialog/body/DialogBodyHeading";
 import DialogFooter from "../../DialogFooter";
-import { authSliceActions } from "@/state/authSlice";
-import { appSliceActions } from "@/state/appSlice";
-import { AppProgess } from "@/components/AppLoader";
 
 export const LoginPassword = () => {
-  const { setStep } = useContext(RegisterContext);
-  const { setUsername, username } = useContext(LoginContext);
-  const [isChecking, setIsChecking] = useState(false);
-  const { isSuccess, data } = useDoesUserExistQuery(username, {
-    skip: !isChecking,
-  });
+  const { username } = useContext(LoginContext);
+
   const [login, { isSuccess: loggedIn, isLoading: loggingIn, data: userData }] =
     useLoginMutation();
 
@@ -58,11 +49,8 @@ export const LoginPassword = () => {
   };
 
   useEffect(() => {
-    if (loggingIn) {
-      dispatch(appSliceActions.setAppLoading(true));
-    } else if (loggedIn) {
-      dispatch(appSliceActions.setAppLoading(false));
-      console.log(userData);
+    if (loggedIn) {
+      window.location.reload();
     }
   }, [loggingIn, loggedIn, dispatch, userData]);
 
