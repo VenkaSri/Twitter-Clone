@@ -11,7 +11,6 @@ public class CookieUtils {
     authTokenCookie.setPath("/");
     authTokenCookie.setMaxAge(0);
     authTokenCookie.setHttpOnly(true);
-    authTokenCookie.setSecure(true); // Set this to true if you are using HTTPS
     response.addCookie(authTokenCookie);
   }
 
@@ -22,5 +21,7 @@ public class CookieUtils {
     cookie.setPath("/");
     httpResponse.addCookie(cookie);
   }
+
+
 }
 

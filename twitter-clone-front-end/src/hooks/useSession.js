@@ -76,5 +76,6 @@ export const useSession = () => {
     isAuthenticating,
     likedPosts,
     profilePicture,
+    checkAuthStatusAndFetchUser,
   };
 };

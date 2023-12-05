@@ -4,7 +4,7 @@ import { RegisterContext } from "@/context/auth/register-context";
 import { useInputValidation } from "@/hooks/inputs/useInputValidation";
 import ErrorField from "@components/auth/ErrorField";
 import DialogContentHeading from "@components/dialog/body/DialogBodyHeading";
-import { InputAdornment } from "@mui/material";
+import InputAdornment from "@mui/material/InputAdornment";
 
 import { useContext } from "react";
 

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import RoundedTextButton from "../RoundedTextButton";
 import { useDialogFooterSettings } from "@/hooks/dialog/auth/signup/useDialogFooterSettings";
 
-const DialogFooter = ({ step, onClick }) => {
+const DialogFooter = ({ step, onClick, login }) => {
   const { isDisabled, btnText, btnStyle, isContentOverflowing } =
     useDialogFooterSettings(step);
 
@@ -20,8 +20,10 @@ const DialogFooter = ({ step, onClick }) => {
       <div className="flex flex-col grow  w-full">
         {step === 1 && <SignUpTerms />}
         <RoundedTextButton
-          text={btnText}
-          className={`footer--button ${btnStyle}`}
+          text={login ? "Next" : btnText}
+          className={
+            login ? "footer--button btn--action" : `footer--button ${btnStyle}`
+          }
         />
       </div>
     </div>
@@ -31,8 +33,9 @@ const DialogFooter = ({ step, onClick }) => {
 export default DialogFooter;
 
 DialogFooter.propTypes = {
-  step: PropTypes.number.isRequired,
-  onClick: PropTypes.func.isRequired,
+  step: PropTypes.number,
+  onClick: PropTypes.func,
+  login: PropTypes.bool,
 };
 
 /* Only shown in step 2 */

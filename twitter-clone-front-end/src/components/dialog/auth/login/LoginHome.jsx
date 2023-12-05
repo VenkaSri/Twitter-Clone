@@ -6,7 +6,7 @@ import { Apple, Close, GoogleIcon, Logo } from "@/components/icons/Icons";
 import CustomTextField from "@/components/CustomTextField";
 import RoundedTextButton from "@/components/RoundedTextButton";
 import clsx from "clsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { RegisterContext } from "@/context/auth/register-context";
 import { LoginContext } from "@/context/auth/login-context";
@@ -30,7 +30,7 @@ export const LoginHome = () => {
     if (username.length <= 4) {
       dispatch(
         snackbarSliceActions.openSnackbar({
-          message: "Username must be 4 characters long",
+          message: "Sorry, we could not find your account.",
         })
       );
     } else {
@@ -151,16 +151,17 @@ flex flex-col items-stretch basis-full flex-grow bg-[#fff] dark:bg-[#000]`}
 };
 
 const Heading = () => {
+  const navigate = useNavigate();
   return (
     <DialogTitle style={{ padding: 0 }}>
-      <div className="h-[53px] flex bg-[#fff] dark:bg-[#000] px-[16px] relative">
+      <div className="h-[53px] flex bg-[#fff] dark:bg-[#000] px-[16px] relative ">
         <div
           className={clsx(
-            `min-w-[56px] min-h-[32px] self-stretch flex items-start justify-center flex-col`
+            `min-w-[56px] min-h-[32px] self-stretch flex items-start justify-center flex-col z-[2]`
           )}
         >
           <div
-            // onClick={onClick}
+            onClick={() => navigate("/")}
             className="min-w-[36px] min-h-[36px] rounded-full flex flex-col cursor-pointer items-center justify-center -ml-2 
         dark:fill-white dark:hover:bg-[#191919] hover:bg-[#E6E7E7]"
           >
@@ -168,7 +169,7 @@ const Heading = () => {
           </div>
         </div>
 
-        <div className="flex h-full justify-center  flex-col absolute inset-0 ">
+        <div className="flex h-full justify-center  flex-col absolute inset-0 z-[1]">
           <div className="flex flex-col items-center shrink-0 ">
             <Logo className="w-10 dark:fill-white" />
           </div>

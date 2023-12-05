@@ -16,15 +16,15 @@ export const publicRoutes = [
     element: <Home />,
     children: [
       { path: PathConstants.SIGN_UP, element: <Dialog type="SIGNUP" /> },
+      {
+        path: PathConstants.LOGIN,
+        element: (
+          <Suspense fallback={<OverlayLoader />}>
+            <LoginDialog />
+          </Suspense>
+        ),
+      },
     ],
-  },
-  {
-    path: PathConstants.LOGIN,
-    element: (
-      <Suspense fallback={<OverlayLoader />}>
-        <LoginDialog />
-      </Suspense>
-    ),
   },
   {
     path: "*",
