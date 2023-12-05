@@ -7,14 +7,13 @@ import CustomTextField from "@/components/CustomTextField";
 import RoundedTextButton from "@/components/RoundedTextButton";
 import clsx from "clsx";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { RegisterContext } from "@/context/auth/register-context";
+import { useContext } from "react";
 import { LoginContext } from "@/context/auth/login-context";
-import { authApi, useDoesUserExistQuery } from "@/services/authApi";
+import { authApi } from "@/services/authApi";
 
 import { CustomSnackbar } from "@/components/CustomSnackbar";
 
-import openSnackbar, { snackbarSliceActions } from "@state/snackbarSlice";
+import { snackbarSliceActions } from "@state/snackbarSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export const LoginHome = () => {
@@ -26,7 +25,6 @@ export const LoginHome = () => {
   const { isOpen, message } = useSelector((state) => state.snackbarSlice);
 
   const handleLogin = async () => {
-    console.log(username);
     if (username.length <= 4) {
       dispatch(
         snackbarSliceActions.openSnackbar({
