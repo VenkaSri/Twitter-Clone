@@ -52,7 +52,6 @@ public class ProfileApi {
 
   @PostMapping("/profile_picture")
   public ResponseEntity<MessageAndCodeResponse> uploadProfilePicture(@RequestParam("file") MultipartFile file, Principal principal) {
-    System.out.println(file);
     String username = principal.getName();
     String bucketName = s3BucketName;
     String key = "profile-pictures/" + username + "/" + file.getOriginalFilename();

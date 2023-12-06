@@ -49,8 +49,6 @@ const SignUpDialog = () => {
   const { step, isLoading } = useContext(RegisterContext);
   const { goToNextStep } = useSignupConfig();
 
-  console.log(step);
-
   return (
     <MUIDialog
       open={true}
@@ -94,46 +92,3 @@ const SignUpDialog = () => {
     </MUIDialog>
   );
 };
-
-// const ErrorDialog = () => {
-//   const isMobile = useMediaQuery("(max-width:702px)");
-//   let sxStyles = {
-//     borderRadius: "16px",
-//     width: "300px",
-//     height: "150px",
-//     maxHeight: "90vh",
-//     maxWidth: "80vw",
-//     display: "flex",
-//     boxShadow: "none",
-//     overflow: "hidden",
-//     backgroundColor: "transparent",
-//     boxShadow:
-//       "rgba(101, 119, 134, 0.30) 0px 0px 12px, rgba(101, 119, 134, 0.50) 0px 1px 3px 1px",
-//   };
-
-//   return (
-//     <MUIDialog
-//       open={true}
-//       PaperProps={{ sx: sxStyles }}
-//       transitionDuration={0}
-//       fullScreen={isMobile}
-//       sx={{
-//         "& .MuiBackdrop-root": {
-//           backgroundColor: "transparent",
-//         },
-//       }}
-//     >
-//       <DialogContent
-//         className="w-full max-w-[600px] mx-auto  flex flex-col relative dark:bg-black"
-//         sx={{
-//           "&.MuiDialogContent-root": {
-//             padding: 0,
-//             overflow: "",
-//           },
-//         }}
-//       >
-//         <p className="text-white">Error</p>
-//       </DialogContent>
-//     </MUIDialog>
-//   );
-// };
