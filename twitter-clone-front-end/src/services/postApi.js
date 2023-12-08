@@ -7,9 +7,20 @@ export const postApi = createApi({
     baseUrl: import.meta.env.VITE_POST_BASE_URL,
     credentials: "include",
   }),
+
   endpoints: (builder) => ({
     getPostByID: builder.query({
       query: (id) => `${id}`,
+    }),
+    createPost: builder.mutation({
+      query: (form) => ({
+        method: "POST",
+        body: form,
+        credentials: "include",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }),
     }),
     getAllPosts: builder.query({
       query: () => "", // This will fetch from the base URL

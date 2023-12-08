@@ -19,12 +19,17 @@ export const SideColumn = () => {
           </span>
         </div>
 
-        <div className="flex">
+        <a
+          className="flex"
+          href="https://github.com/users/VenkaSri/projects/2"
+          target="_blank"
+          rel="noreferrer"
+        >
           <RoundedTextButton
             text="Repo"
             className="btn--action min-h-[36px] min-w-[36px] flex  px-8"
           />
-        </div>
+        </a>
       </SideColumnCard>
       <SideColumnCard title={"Who to follow"}>
         <Suspense fallback={<OverlayLoader />}>
