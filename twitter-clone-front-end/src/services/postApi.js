@@ -17,13 +17,10 @@ export const postApi = createApi({
         method: "POST",
         body: form,
         credentials: "include",
-        headers: {
-          "Content-type": "application/json",
-        },
       }),
     }),
     getAllPosts: builder.query({
-      query: () => "", // This will fetch from the base URL
+      query: () => "",
     }),
     likePost: builder.mutation({
       query: (id) => ({
@@ -45,4 +42,5 @@ export const {
   useGetAllPostsQuery,
   useLikePostMutation,
   useUnlikePostMutation,
+  useCreatePostMutation,
 } = postApi;

@@ -15,6 +15,7 @@ import { POST_BUTTON_VALUE } from "@constants/app";
 import RoundedTextButton from "../../RoundedTextButton";
 import { Link } from "react-router-dom";
 import { useTheme } from "@hooks/useTheme";
+import { useCreatePostMutation } from "@/services/postApi";
 
 const SnackbarMessage = ({ username, postId }) => (
   <div className="br flex w-full text-[17px] font-cReg grow ">
@@ -99,6 +100,7 @@ export const PostEditor = () => {
 };
 
 const PostActions = () => {
+  const [createPost] = useCreatePostMutation();
   const post = async () => {
     setIsLoading(true);
     const formData = new FormData();
@@ -106,26 +108,18 @@ const PostActions = () => {
       formData.append("photos", file);
     });
     formData.append("text", postText);
-    const result = await fetch("http://localhost:8080/api/v1/posts", {
-      method: "POST",
-      body: formData,
-      credentials: "include",
-    });
-    if (result.ok) {
-      const response = await result.json();
-      if (response.status === 200) {
-        console.log(response.postId);
-        setPostCreated(true);
-        resetStates();
-        // dispatch(snackbarSliceActions.setIsError(true));
-        // dispatch(
-        //   snackbarSliceActions.setMessage(
-        //     <SnackbarMessage username={username} postId={response.postId} />
-        //   )
-        // );
-      }
-    } else {
-      // Handle error
+
+    console.log(formData);
+    const result = await createPost(formData);
+    if (result.data.status === 200) {
+      setPostCreated(true);
+      resetStates();
+      // dispatch(snackbarSliceActions.setIsError(true));
+      // dispatch(
+      //   snackbarSliceActions.setMessage(
+      //     <SnackbarMessage username={username} postId={response.postId} />
+      //   )
+      // );
     }
   };
   const {
