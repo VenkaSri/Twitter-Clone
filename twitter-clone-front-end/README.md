@@ -46,6 +46,6 @@ yarn dev
 
 The backend of this project is handled by a Spring Boot application, which is located in a separate repository. Follow the instructions in the README.md of the backend repository to set up and run the Spring Boot server.
 
-    Backend Repository: [Link to the backend repository]
+    Backend Repository: [twitter-clone-backend](https://github.com/VenkaSri/Twitter-Clone/tree/main/twitter-clone-back-end)
 
     Navigate to the backend repository and follow the detailed setup instructions provided in the README.md there.
