@@ -17,6 +17,7 @@ public class CookieUtils {
     public static void addAuthTokenCookie(HttpServletResponse httpResponse, String token) {
     Cookie cookie = new Cookie("authToken", token);
     cookie.setHttpOnly(true);
+    cookie.setSecure(true);
     cookie.setMaxAge(604800); // 7 days
     cookie.setPath("/");
     httpResponse.addCookie(cookie);

@@ -88,6 +88,7 @@ public class AccountService {
     Cookie cookie = new Cookie("authToken", authToken);
     cookie.setHttpOnly(true);
     cookie.setMaxAge(604800); // 7 days
+    cookie.setSecure(true);
     cookie.setPath("/");
     httpResponse.addCookie(cookie);
   }
