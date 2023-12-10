@@ -1,4 +1,7 @@
+import { GitHub } from "../icons/Icons";
+
 export const LandingFooter = () => {
+  const date = new Date();
   const links = [
     "About",
     "Help Center",
@@ -33,9 +36,17 @@ export const LandingFooter = () => {
       </nav>
       <div className="flex items-center justify-center mt-2">
         <span className="font-cReg text-[13px] leading-[16px] text-[#536471]">
-          &copy;&nbsp;2023 Venka
+          &copy;&nbsp;{date.getFullYear()} Venka
         </span>
       </div>
+      <a
+        className="ml-0.5"
+        href="https://github.com/VenkaSri/Twitter-Clone/tree/main/twitter-clone-front-end"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <GitHub />
+      </a>
     </div>
   );
 };

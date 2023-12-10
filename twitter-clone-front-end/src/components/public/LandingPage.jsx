@@ -16,7 +16,7 @@ export const LandingPage = () => {
   return (
     <>
       <Head title="X. It's what's happening" />
-      <div className="h-screen w-screen flex flex-col overflow-x-hidden dark:bg-black">
+      <div className="flex flex-col grow overflow-x-hidden dark:bg-black">
         <div className="flex grow">
           <div className="flex flex-1 justify-center items-center max-[1016px]:hidden">
             <Logo className="w-[380px] dark:fill-white" />

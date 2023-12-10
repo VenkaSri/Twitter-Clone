@@ -47,6 +47,7 @@ import {
   VISIBILITY_OFF,
   X_LOGO,
   dArrow,
+  GITHUB,
 } from "@/constants/icons";
 import SVG from "@components/icons/SVG";
 
@@ -225,6 +226,10 @@ export const DArrow = ({ className = "w-5" }) => (
   <SVG path={dArrow} className={className} />
 );
 
+export const GitHub = ({ className = "w-5" }) => (
+  <SVG path={GITHUB} className={className} viewBox="0 0 30 30" />
+);
+
 export const GoogleIcon = ({ className }) => {
   return (
     <div className={className}>
@@ -304,3 +309,4 @@ Emoji.propTypes = iconPropTypes;
 Gear.propTypes = iconPropTypes;
 DArrow.propTypes = iconPropTypes;
 GoogleIcon.propTypes = iconPropTypes;
+GitHub.propTypes = iconPropTypes;
