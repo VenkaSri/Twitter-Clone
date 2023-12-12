@@ -23,7 +23,7 @@ export const RepostPostButton = ({ postId }) => {
         >
           <RoundedIconButton
             className={clsx(
-              "centered-column-container rounded-full hover:bg-[#00ba7c]/[0.1] hover:fill-[#00ba7c] -ml-[8px] opacity-40",
+              "centered-column-container rounded-full hover:bg-[#00ba7c]/[0.1] hover:fill-[#00ba7c] -ml-[8px] opacity-40 fill-[#71767b]",
               iconContainer
             )}
             icon={<Repost className={clsx(iconSvg)} />}

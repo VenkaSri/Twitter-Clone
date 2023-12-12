@@ -51,7 +51,7 @@ const Main = () => {
       <div
         className={`flex w-[990px] max-[1092px]:w-[920px] justify-between  grow max-[980px]:w-[600px] max-[680px]:w-full `}
       >
-        <div className="main--mainColumn border-l dark:border-l-[#2f3336] border-r dark:border-r-[#2f3336]">
+        <div className="main--mainColumn mobile:border-l dark:border-l-[#2f3336] border-r dark:border-r-[#2f3336] border-l-0">
           <Outlet />
         </div>
         <SideColumn />

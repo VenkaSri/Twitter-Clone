@@ -22,10 +22,11 @@ export const ReplyPostButton = ({ postId }) => {
         >
           <RoundedIconButton
             className={clsx(
-              " centered-column-container rounded-full hover:bg-[#1d9cf0]/[0.1] hover:fill-[var(--primary-color)] -ml-[8px] opacity-40",
+              " centered-column-container rounded-full hover:bg-[#1d9cf0]/[0.1] hover:fill-[var(--primary-color)] -ml-[8px]  opacity-40 fill-[#71767b]",
               iconContainer
             )}
             icon={<Reply className={clsx(iconSvg)} />}
+            disabled
           />
           {/* {likes && (
           <span
