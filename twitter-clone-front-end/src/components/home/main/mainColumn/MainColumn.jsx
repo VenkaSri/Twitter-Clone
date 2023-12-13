@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Timeline } from "../../timeline/Timeline";
 import { useSession } from "@/hooks/useSession";
 import Head from "@/components/head/Head";
+import Drawer from "@mui/material/Drawer";
 
 export const MainColumn = () => {
   return (
@@ -42,11 +43,11 @@ const MainColumnNav = () => {
     <>
       <div className="mainColumn--topNav-heading mobile:hidden flex">
         <div className=" relative px-4 ">
+          <div className="absolute inset-0 flex justify-center items-center mobile:hidden pointer-events-none">
+            <Logo className="w-[30px] dark:fill-white" />
+          </div>
           <div className="mobile:hidden block">
             <ProfilePicture src={profilePicture} />
-          </div>
-          <div className="absolute inset-0 flex justify-center items-center mobile:hidden">
-            <Logo className="w-[30px" />
           </div>
         </div>
       </div>
@@ -73,4 +74,8 @@ const MainColumnNav = () => {
       </div>
     </>
   );
+};
+
+const MobileDrawer = () => {
+  return <></>;
 };
