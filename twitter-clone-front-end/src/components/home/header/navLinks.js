@@ -62,3 +62,41 @@ export const LINKS = [
     path: "/more",
   },
 ];
+
+export const DRAWER_LINKS = [
+  {
+    name: "Profile",
+    iconFilled: Icons.ProfileFilled,
+    iconOutlined: Icons.ProfileOutlined,
+    path: "/profile",
+  },
+  {
+    name: "Premium",
+    iconFilled: Icons.Logo,
+    iconOutlined: Icons.Logo,
+    path: "/i/verified-choose",
+  },
+  {
+    name: "Lists",
+    iconFilled: Icons.ListsFilled,
+    iconOutlined: Icons.ListsOutlined,
+    path: "/lists",
+  },
+  {
+    name: "Bookmarks",
+    iconFilled: Icons.BookmarksFilled,
+    iconOutlined: Icons.BookmarksOutlined,
+    path: "/i/bookmarks",
+  },
+  {
+    name: "Communities",
+    iconFilled: Icons.CommunitiesFilled,
+    iconOutlined: Icons.CommunitiesOutlined,
+    path: "/communities",
+  },
+  {
+    name: "Monetization",
+    iconOutlined: Icons.Monetization,
+    path: "/communities",
+  },
+];

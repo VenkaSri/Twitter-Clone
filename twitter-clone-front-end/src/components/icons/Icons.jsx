@@ -48,6 +48,8 @@ import {
   X_LOGO,
   dArrow,
   GITHUB,
+  PLUS,
+  MONETIZATION,
 } from "@/constants/icons";
 import SVG from "@components/icons/SVG";
 
@@ -230,6 +232,14 @@ export const GitHub = ({ className = "w-5" }) => (
   <SVG path={GITHUB} className={className} viewBox="0 0 30 30" />
 );
 
+export const Plus = ({ className = "w-5" }) => (
+  <SVG path={PLUS} className={className} viewBox="0 0 30 30" />
+);
+
+export const Monetization = ({ className = "w-5" }) => (
+  <SVG path={MONETIZATION} className={className} viewBox="0 0 30 30" />
+);
+
 export const GoogleIcon = ({ className }) => {
   return (
     <div className={className}>
@@ -310,3 +320,5 @@ Gear.propTypes = iconPropTypes;
 DArrow.propTypes = iconPropTypes;
 GoogleIcon.propTypes = iconPropTypes;
 GitHub.propTypes = iconPropTypes;
+Plus.propTypes = iconPropTypes;
+Monetization.propTypes = iconPropTypes;

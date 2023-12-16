@@ -8,7 +8,9 @@ import { useState } from "react";
 import { Timeline } from "../../timeline/Timeline";
 import { useSession } from "@/hooks/useSession";
 import Head from "@/components/head/Head";
-import Drawer from "@mui/material/Drawer";
+import { useDispatch, useSelector } from "react-redux";
+import { appSliceActions } from "@/state/appSlice";
+import { MobileDrawer } from "../../header/MobileDrawer";
 
 export const MainColumn = () => {
   return (
@@ -30,8 +32,9 @@ export const MainColumn = () => {
 };
 
 const MainColumnNav = () => {
+  const dispatch = useDispatch();
+  const openDrawer = useSelector((state) => state.appSlice.openDrawer);
   const [selectedTab, setSelectedTab] = useState("For you");
-  const [open, setOpen] = useState(false);
   const { profilePicture } = useSession();
   localStorage.setItem("timelinePrefernce", "For you");
   const handleClick = (event) => {
@@ -41,35 +44,12 @@ const MainColumnNav = () => {
   };
 
   const handleProfileClick = () => {
-    setOpen(true);
-  };
-
-  const toggleDrawer = (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setOpen(!open);
+    dispatch(appSliceActions.setOpenDrawer(true));
   };
 
   return (
     <>
-      <Drawer
-        sx={{
-          width: 240,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: 240,
-            boxSizing: "border-box",
-          },
-        }}
-        anchor="left"
-        open={open}
-        onClose={toggleDrawer}
-      />
+      {openDrawer && <MobileDrawer />}
       <div className="mainColumn--topNav-heading mobile:hidden flex">
         <div className=" relative px-4 ">
           <div className="absolute inset-0 flex justify-center items-center mobile:hidden pointer-events-none">
@@ -103,8 +83,4 @@ const MainColumnNav = () => {
       </div>
     </>
   );
-};
-
-const MobileDrawer = () => {
-  return <></>;
 };
