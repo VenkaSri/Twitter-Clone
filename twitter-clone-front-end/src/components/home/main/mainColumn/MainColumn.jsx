@@ -31,6 +31,7 @@ export const MainColumn = () => {
 
 const MainColumnNav = () => {
   const [selectedTab, setSelectedTab] = useState("For you");
+  const [open, setOpen] = useState(false);
   const { profilePicture } = useSession();
   localStorage.setItem("timelinePrefernce", "For you");
   const handleClick = (event) => {
@@ -39,14 +40,42 @@ const MainColumnNav = () => {
     setSelectedTab(tabType);
   };
 
+  const handleProfileClick = () => {
+    setOpen(true);
+  };
+
+  const toggleDrawer = (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setOpen(!open);
+  };
+
   return (
     <>
+      <Drawer
+        sx={{
+          width: 240,
+          flexShrink: 0,
+          "& .MuiDrawer-paper": {
+            width: 240,
+            boxSizing: "border-box",
+          },
+        }}
+        anchor="left"
+        open={open}
+        onClose={toggleDrawer}
+      />
       <div className="mainColumn--topNav-heading mobile:hidden flex">
         <div className=" relative px-4 ">
           <div className="absolute inset-0 flex justify-center items-center mobile:hidden pointer-events-none">
             <Logo className="w-[30px] dark:fill-white" />
           </div>
-          <div className="mobile:hidden block">
+          <div className="mobile:hidden block" onClick={handleProfileClick}>
             <ProfilePicture src={profilePicture} />
           </div>
         </div>

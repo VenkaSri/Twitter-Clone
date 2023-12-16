@@ -22,7 +22,7 @@ const ProfilePicture = ({ size = 40, src }) => {
   return (
     <div
       style={profilePicStyle}
-      className="place-items-center grid cursor-pointer br"
+      className="place-items-center grid cursor-pointer"
     >
       {!imageLoaded && <Skeleton variant="circular" width={40} height={40} />}
       <img
