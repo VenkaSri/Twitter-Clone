@@ -7,7 +7,7 @@ import ca.venkasritharan.twitterclone.response.StandardResponse;
 import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
 import ca.venkasritharan.twitterclone.response.UsernameAvailabilityResponse;
 import ca.venkasritharan.twitterclone.api.security.jwt.JwtTokenProvider;
-import jakarta.servlet.http.Cookie;
+import ca.venkasritharan.twitterclone.util.response.CookieUtils;
 import jakarta.servlet.http.HttpServletResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +17,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.security.Principal;
-import java.util.Optional;
 
 @Service
 public class AccountService {
@@ -32,49 +30,39 @@ public class AccountService {
     this.jwtTokenProvider = jwtTokenProvider;
   }
 
-  public UserDetailsResponse getUserDetails(Principal principal) {
-    Optional<User> optionalUser = userRepository.findByUsername(principal.getName());
-    UserDetailsResponse userDetailsResponse = new UserDetailsResponse();
-    if (optionalUser.isPresent()) {
-      User user = optionalUser.get();
-      userDetailsResponse.setName(user.getProfile().getName());
-      userDetailsResponse.setEmail(user.getProfile().getEmail());
-      userDetailsResponse.setId(user.getId());
-      userDetailsResponse.setUsername(user.getUsername());
-      return userDetailsResponse;
-    } else {
-      throw new UserNotFoundException("User not found");
-    }
+  public UserDetailsResponse getUserDetails() {
+    User user = getAuthenticatedUser();
+    return mapToUserDetailsResponse(user);
   }
 
+  private UserDetailsResponse mapToUserDetailsResponse(User user) {
+    UserDetailsResponse userDetailsResponse = new UserDetailsResponse();
+    userDetailsResponse.setName(user.getProfile().getName());
+    userDetailsResponse.setEmail(user.getProfile().getEmail());
+    userDetailsResponse.setId(user.getId());
+    userDetailsResponse.setUsername(user.getUsername());
+    return userDetailsResponse;
+  }
 
   public UsernameAvailabilityResponse checkIfUsernameIsAvailable(String username) {
-    boolean isUsernameAvailable = userRepository.existsByUsername(username);
-    String message = "";
-
-    if (isUsernameAvailable) {
-      message = "Username is taken.";
-    } else {
-      message = "Username is available.";
-    }
-    return new UsernameAvailabilityResponse(message, !isUsernameAvailable);
+    boolean isUsernameAvailable = !userRepository.existsByUsername(username);
+    String message = isUsernameAvailable ? "Username is available." : "Username is taken.";
+    return new UsernameAvailabilityResponse(message, isUsernameAvailable);
   }
 
   public ResponseEntity<StandardResponse> updateUsername(String username, HttpServletResponse response) throws IOException {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    String principleUsername = authentication.getName();
-    Optional<User> optionalUser = userRepository.findByUsername(principleUsername);
+    User user = getAuthenticatedUser();
+    user.setUsername(username);
+    userRepository.save(user);
+    updateAuthenticationToken(user);
+    CookieUtils.addAuthTokenCookie(response, generateAuthToken(user));
+    return ResponseEntity.ok(new StandardResponse("Successfully updated username", 200));
+  }
 
-    if (optionalUser.isPresent()) {
-      User user = optionalUser.get();
-      user.setUsername(username);
-      userRepository.save(user);
-      String newToken = generateAuthToken(user);
-      handleSuccessfulRegistration(response, newToken);
-      return ResponseEntity.ok(new StandardResponse("Successfully updated username", 200));
-    } else {
-      throw new UserNotFoundException("User not found");
-    }
+  private User getAuthenticatedUser() {
+    String principleUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+    return userRepository.findByUsername(principleUsername)
+            .orElseThrow(() -> new UserNotFoundException("User not found"));
   }
 
   private String generateAuthToken(User user) {
@@ -84,12 +72,10 @@ public class AccountService {
     return jwtTokenProvider.createToken(authentication);
   }
 
-  private static void handleSuccessfulRegistration(HttpServletResponse httpResponse, String authToken) throws IOException {
-    Cookie cookie = new Cookie("authToken", authToken);
-    cookie.setHttpOnly(true);
-    cookie.setMaxAge(604800); // 7 days
-    cookie.setSecure(true);
-    cookie.setPath("/");
-    httpResponse.addCookie(cookie);
+  private void updateAuthenticationToken(User user) {
+    Authentication newAuth = new UsernamePasswordAuthenticationToken(
+            user.getUsername(), user.getPassword());
+    SecurityContextHolder.getContext().setAuthentication(newAuth);
   }
+
 }

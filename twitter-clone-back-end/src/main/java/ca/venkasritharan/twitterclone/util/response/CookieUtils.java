@@ -18,7 +18,7 @@ public class CookieUtils {
     Cookie cookie = new Cookie("authToken", token);
     cookie.setHttpOnly(true);
     cookie.setSecure(true);
-    cookie.setMaxAge(604800); // 7 days
+    cookie.setMaxAge(604800); // 7 days until i add refresh token
     cookie.setPath("/");
     httpResponse.addCookie(cookie);
   }

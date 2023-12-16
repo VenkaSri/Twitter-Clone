@@ -17,7 +17,6 @@ import jakarta.validation.Validator;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,7 +30,6 @@ import java.util.Set;
 @Service
 public class RegistrationService {
 
-  private final AuthenticationManager authenticationManager;
   private final ProfileRepository profileRepository;
   private final UserRepository userRepository;
   private final ModelMapper mapper;
@@ -40,12 +38,10 @@ public class RegistrationService {
   private final Validator validator;
 
 
-  public RegistrationService(AuthenticationManager authenticationManager,
-                                 ProfileRepository profileRepository, UserRepository userRepository,
+  public RegistrationService(ProfileRepository profileRepository, UserRepository userRepository,
                                  ModelMapper mapper,
                                  PasswordEncoder passwordEncoder,
                                  JwtTokenProvider jwtTokenProvider, Validator validator) {
-    this.authenticationManager = authenticationManager;
     this.profileRepository = profileRepository;
     this.userRepository = userRepository;
     this.mapper = mapper;
@@ -83,21 +79,6 @@ public class RegistrationService {
     return user;
   }
 
-//  private User createUser(RegisterDTO registerDTO) {
-//    User user = new User();
-//    user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
-//    user.setUsername(generateUniqueUsername(registerDTO.getName()));
-//
-//    Profile profile = mapper.map(registerDTO, Profile.class);
-//
-//    // Set any other profile properties as needed
-//
-//    user.setProfile(profile);
-//    profile.setUser(user);
-//
-//    return userRepository.save(user);
-//  }
-
 
   private void saveUser(User user) {
     userRepository.save(user);
@@ -125,20 +106,6 @@ public class RegistrationService {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(registrationResponse);
   }
 
-
-//  private void setUniqueUsername(User user) {
-//    String uniqueUsername = generateUniqueUsername(user.getName());
-//    user.setUsername(uniqueUsername);
-//  }
-
-  private User mapDtoToUser(RegisterDTO registerDTO) {
-    User user = mapper.map(registerDTO, User.class);
-    Set<ConstraintViolation<User>> violations = validator.validate(user);
-    if (!violations.isEmpty()) {
-      throw new ConstraintViolationException(violations);
-    }
-    return user;
-  }
 
   private void validateUserConstraints(RegisterDTO registerDTO) {
     User user = mapper.map(registerDTO, User.class);
@@ -195,10 +162,6 @@ public class RegistrationService {
       sb.append(random.nextInt(10));
     }
     return sb.toString();
-  }
-
-  private ResponseEntity<RegistrationResponse>  createResponse(HttpServletResponse response, RegistrationResponse registrationResponse) {
-    return ResponseEntity.status(response.getStatus()).body(registrationResponse);
   }
 
   private String generateAuthToken(User user) {

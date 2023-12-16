@@ -3,7 +3,6 @@ package ca.venkasritharan.twitterclone.api;
 
 import ca.venkasritharan.twitterclone.application.service.UserService;
 import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
-import ca.venkasritharan.twitterclone.application.service.PostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +12,9 @@ import org.springframework.web.bind.annotation.*;
 public class UserApi {
 
   private final UserService userService;
-  private final PostService postService;
 
-  public UserApi(UserService userService, PostService postService) {
+  public UserApi(UserService userService) {
     this.userService = userService;
-    this.postService = postService;
   }
 
 
@@ -27,14 +24,13 @@ public class UserApi {
   }
   @GetMapping("/posts/likes")
   public ResponseEntity<?> getAllLikedPosts() {
-    return postService.getAllLikedPosts();
+    return userService.getAllLikedPosts();
   };
 
   @GetMapping
   public UserDetailsResponse getUserDetails() {
     return userService.getUserDetails();
   }
-
 
 
 

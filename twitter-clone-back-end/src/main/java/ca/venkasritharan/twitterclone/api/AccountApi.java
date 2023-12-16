@@ -19,11 +19,9 @@ import java.security.Principal;
 @RequestMapping("/api/v1/users")
 public class AccountApi {
   private final AccountService accountService;
-  private final UserRepository userRepository;
 
-  public AccountApi(AccountService accountService, UserRepository userRepository) {
+  public AccountApi(AccountService accountService) {
     this.accountService = accountService;
-    this.userRepository = userRepository;
   }
 
   @GetMapping("/hello")
@@ -31,9 +29,10 @@ public class AccountApi {
     return "Hello";
   }
 
+  // principle user
   @GetMapping("/user_details")
-  public UserDetailsResponse getUserDetails(Principal principal) {
-    return accountService.getUserDetails(principal);
+  public UserDetailsResponse getUserDetails() {
+    return accountService.getUserDetails();
   }
 
   @GetMapping("/username_available")
@@ -46,19 +45,5 @@ public class AccountApi {
     String updatedUsername = updateUsernameDTO.getUpdatedUsername();
     return accountService.updateUsername(updatedUsername, response);
   }
-//
-//  @GetMapping("/allAccounts")
-//  public Response<Map<String, Object>> getAllAccounts(@RequestParam(name = "emailOrPhone") String emailOrPhone) {
-//    return accountService.getAllAccounts(emailOrPhone);
-//  }
-//
-//  @PostMapping("/users/follow")
-//  public Response<String> followUser(@RequestParam String followerEmail, @RequestParam String followedUsername) {
-//    return accountService.follow(followerEmail, followedUsername);
-//  }
-//
-//  @DeleteMapping("/users/follow")
-//  public Response<String> unFollowUser(@RequestParam String followerEmail, @RequestParam String followedUsername) {
-//    return accountService.unfollow(followerEmail, followedUsername);
-//  }
+
 }
