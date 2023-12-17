@@ -4,9 +4,6 @@ import { OverlayLoader } from "../dialog/OverlayLoader";
 import { Suspense, lazy } from "react";
 import PropTypes from "prop-types";
 import { SideColumn } from "../home/main/sideColumn/SideColumn";
-import { Back } from "../icons/Icons";
-import { useCheckAuthStatusQuery } from "@/services/authApi";
-import { AppProgess } from "../AppLoader";
 import { useSelector } from "react-redux";
 
 const Sidebar = lazy(() => import("@/components/home/header/Sidebar"));
@@ -51,7 +48,7 @@ const Main = () => {
       <div
         className={`flex w-[990px] max-[1092px]:w-[920px] justify-between  grow max-[980px]:w-[600px] max-[680px]:w-full `}
       >
-        <div className="main--mainColumn mobile:border-l dark:border-l-[#2f3336] border-r dark:border-r-[#2f3336] border-l-0">
+        <div className="main--mainColumn mobile:border-l dark:border-l-[#2f3336] mobile:border-r dark:border-r-[#2f3336] border-l-0">
           <Outlet />
         </div>
         <SideColumn />

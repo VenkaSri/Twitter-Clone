@@ -1,8 +1,8 @@
 import { useErrorStyles } from "@/hooks/inputs/useErrorStyles";
 import TextField from "@mui/material/TextField";
 import PropTypes from "prop-types";
-import { useContext, useState } from "react";
-import { RegisterContext } from "@/context/auth/register-context";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const CustomTextField = ({
   label,
@@ -20,6 +20,9 @@ const CustomTextField = ({
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const { borderColor, labelColor } = useErrorStyles(isFocused, hasError);
+  const darkMode = useSelector((state) => state.themeSlice.darkMode);
+
+  const readOnlyFieldClass = readonly ? (darkMode ? "#202327" : "#F6F8F9") : "";
 
   return (
     <TextField
@@ -34,19 +37,24 @@ const CustomTextField = ({
       inputProps={{ maxLength: maxLength }}
       variant="filled"
       sx={{
+        "& .MuiFilledInput-input.Mui-disabled": {
+          opacity: 1,
+          color: "#71767b",
+          "-webkit-text-fill-color": "#71767b",
+          backgroundColor: readOnlyFieldClass,
+        },
         input: {
           "@media (prefers-color-scheme: dark)": {
             color: "white",
           },
           fontSize: "17px",
           fontFamily: "chirpR",
+
           ...inputStyle,
-          backgroundColor: readonly ? "#F6F8F9" : "",
         },
       }}
       InputProps={{
-        className: `textfield-default  ${borderColor}  ${
-          readonly ? "border-0" : ""
+        className: `textfield-default  ${borderColor}  $
         }`,
 
         disableUnderline: true,
@@ -80,4 +88,5 @@ CustomTextField.propTypes = {
   type: PropTypes.string,
   inputStyle: PropTypes.object,
   showPassword: PropTypes.bool,
+  readonly: PropTypes.bool,
 };

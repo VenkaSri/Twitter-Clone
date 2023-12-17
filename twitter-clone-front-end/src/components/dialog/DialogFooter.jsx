@@ -20,7 +20,7 @@ const DialogFooter = ({ step, onClick, login }) => {
       <div className="flex flex-col grow  w-full">
         {step === 1 && <SignUpTerms />}
         <RoundedTextButton
-          text={login ? "Next" : btnText}
+          text={login ? "Log in" : btnText}
           className={
             login ? "footer--button btn--action" : `footer--button ${btnStyle}`
           }

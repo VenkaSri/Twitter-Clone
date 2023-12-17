@@ -51,7 +51,7 @@ export const PostSkeleton = () => {
         </article>
       </div>
       <div className="absolute w-full ">
-        <div className="border-b border-b-[#eff3f4]"></div>
+        <div className="border-b border-b-[#eff3f4] dark:border-b-[#2f3336]"></div>
       </div>
     </div>
   );

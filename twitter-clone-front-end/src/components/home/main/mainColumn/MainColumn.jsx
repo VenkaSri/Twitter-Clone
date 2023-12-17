@@ -46,7 +46,7 @@ const MainColumnNav = () => {
             <ProfilePicture src={profilePicture} />
           </div>
           <div className="absolute inset-0 flex justify-center items-center mobile:hidden">
-            <Logo className="w-[30px" />
+            <Logo className="w-[30px] dark:fill-white" />
           </div>
         </div>
       </div>
