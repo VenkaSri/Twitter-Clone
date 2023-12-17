@@ -106,7 +106,7 @@ flex flex-col items-stretch basis-full flex-grow bg-[#fff] dark:bg-[#000]`}
                   readonly
                 />
               </div>
-              <div className="flex flex-col py-3">
+              <div className="flex flex-col py-3 mt-4">
                 <div className="flex flex-col grow ">
                   <CustomTextField
                     label="Password"

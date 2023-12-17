@@ -9,12 +9,6 @@ import ProfilePicture from "@/components/ProfilePicture";
 import { DisplayNameAndUsername } from "@components/home/timeline/DisplayNameAndUsername";
 import { MoreOptionsButton } from "@/components/MoreOptionsButton";
 import { PostMedia } from "@/components/post/media/PostMedia";
-import { ReplyPostButton } from "@/components/post/interaction-buttons/ReplyPostButton";
-import { RepostPostButton } from "@/components/post/interaction-buttons/RepostPostButton";
-import { LikePostButton } from "@/components/post/interaction-buttons/LikePostButton";
-import { BookmarkPostButton } from "@/components/post/interaction-buttons/BookmarkPostButton";
-import { ViewAnalyticsButton } from "@/components/post/interaction-buttons/ViewAnalyticsButton";
-import { SharePostButton } from "@/components/post/interaction-buttons/SharePostButton";
 import { PostSkeleton } from "@/components/post/Skeleton";
 import { PostActions } from "@/components/post/PostActions";
 
@@ -92,7 +86,7 @@ export const ForYou = () => {
             </article>
           </div>
           <div className="absolute w-full ">
-            <div className="border-b border-b-[#eff3f4]"></div>
+            <div className="border-b border-b-[#eff3f4] dark:border-b-[#2f3336]"></div>
           </div>
         </div>
       );

@@ -45,7 +45,7 @@ export const LikePostButton = ({ postId }) => {
         >
           <RoundedIconButton
             className={clsx(
-              "rounded-full hover:bg-[#f91881]/[0.1] hover:fill-[#f91881] -ml-[8px] group-hover:bg-[#f91881]/[0.1] group-hover:fill-[#f91881]",
+              "rounded-full hover:bg-[#f91881]/[0.1] hover:fill-[#f91881] -ml-[8px] group-hover:bg-[#f91881]/[0.1] group-hover:fill-[#f91881] fill-[#71767b]",
               { "fill-[#f91881]": isActive },
               isAnimating ? " heart is_animating" : "",
               iconContainer
