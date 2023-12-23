@@ -15,75 +15,61 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import { SettingAndSupport } from "./SettingsAndSupport";
 import { useState } from "react";
 
-export const MobileDrawer = () => {
-  const dispatch = useDispatch();
+export const MobileDrawer = ({ isOpen, toggleFunction }) => {
   const { profilePicture } = useSession();
-  const openDrawer = useSelector((state) => state.appSlice.openDrawer);
   const { darkMode } = useSelector((state) => state.themeSlice.darkMode);
 
-  const toggleDrawer = (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    dispatch(appSliceActions.setOpenDrawer(!openDrawer));
-  };
-
   return (
-    <>
-      <Drawer
-        disableScrollLock={false}
-        sx={{
+    <Drawer
+      disableScrollLock={false}
+      sx={{
+        width: 280,
+        flexShrink: 0,
+        "& .MuiDrawer-paper": {
           width: 280,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: 280,
-            boxSizing: "border-box",
-            backgroundColor: darkMode ? "#fff" : "#000",
-          },
-          "& .MuiBackdrop-root": {
-            backgroundColor: "#5b7083",
-            opacity: "0.4 !important",
-          },
+          boxSizing: "border-box",
+          backgroundColor: darkMode ? "#fff" : "#000",
+        },
+        "& .MuiBackdrop-root": {
+          backgroundColor: "#5b7083",
+          opacity: "0.4 !important",
+        },
 
-          boxShadow:
-            "rgba(217, 217, 217, 0.2) 0px 0px 5px, rgba(217, 217, 217, 0.25) 0px 1px 4px 1px",
-        }}
-        anchor="left"
-        open={openDrawer}
-        onClose={toggleDrawer}
-      >
-        <div className="p-4">
-          <div className="flex justify-between items-center">
-            <ProfilePicture src={profilePicture} />
-            <div className="w-[30px] h-[30px]  rounded-full  relative border border-[#536471]">
-              <Plus className="w-[20px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 dark:fill-white" />
-            </div>
-          </div>
-          <div className=" flex-col overflow-hidden shrink-1 flex  mt-4">
-            <UserDisplayNameAndHandle principleUser />
-          </div>
-          <div className="mt-4 text-[14px] dark:text-white">
-            <span>
-              <span className="font-cBold ">803</span> Following
-            </span>
-            <span className="ml-2">
-              <span className="font-cBold">92</span> Followers
-            </span>
+        boxShadow: isOpen
+          ? "rgba(217, 217, 217, 0.2) 0px 0px 5px, rgba(217, 217, 217, 0.25) 0px 1px 4px 1px"
+          : "none",
+      }}
+      anchor="left"
+      open={isOpen}
+      onClose={toggleFunction}
+    >
+      <div className="p-4">
+        <div className="flex justify-between items-center">
+          <ProfilePicture src={profilePicture} />
+          <div className="w-[30px] h-[30px]  rounded-full  relative border border-[#536471] opacity-50">
+            <Plus className="w-[20px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 dark:fill-white" />
           </div>
         </div>
-        <div>
-          <DrawerNav />
+        <div className=" flex-col overflow-hidden shrink-1 flex  mt-4">
+          <UserDisplayNameAndHandle principleUser />
         </div>
-        <div className="h-[1px] my-0.5 bg-[#2f3336] w-[89%] self-center"></div>
-        <div>
-          <OtherSettings />
+        <div className="mt-4 text-[14px] dark:text-white opacity-50">
+          <span>
+            <span className="font-cBold "></span> Following
+          </span>
+          <span className="ml-2">
+            <span className="font-cBold"></span> Followers
+          </span>
         </div>
-      </Drawer>
-    </>
+      </div>
+      <div>
+        <DrawerNav />
+      </div>
+      <div className="h-[1px] my-0.5 bg-[#2f3336] w-[89%] self-center"></div>
+      <div>
+        <OtherSettings />
+      </div>
+    </Drawer>
   );
 };
 
@@ -209,4 +195,9 @@ HeaderButton.propTypes = {
   onClick: PropTypes.func,
   isActive: PropTypes.bool,
   isDisabled: PropTypes.bool,
+};
+
+MobileDrawer.propTypes = {
+  toggleFunction: PropTypes.func,
+  isOpen: PropTypes.bool,
 };

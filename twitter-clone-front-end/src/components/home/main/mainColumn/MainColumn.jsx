@@ -11,6 +11,7 @@ import Head from "@/components/head/Head";
 import { useDispatch, useSelector } from "react-redux";
 import { appSliceActions } from "@/state/appSlice";
 import { MobileDrawer } from "../../header/mobile/MobileDrawer";
+import { Drawer } from "@mui/material";
 
 export const MainColumn = () => {
   return (
@@ -32,8 +33,7 @@ export const MainColumn = () => {
 };
 
 const MainColumnNav = () => {
-  const dispatch = useDispatch();
-  const openDrawer = useSelector((state) => state.appSlice.openDrawer);
+  const [open, setOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState("For you");
   const { profilePicture } = useSession();
   localStorage.setItem("timelinePrefernce", "For you");
@@ -43,19 +43,19 @@ const MainColumnNav = () => {
     setSelectedTab(tabType);
   };
 
-  const handleProfileClick = () => {
-    dispatch(appSliceActions.setOpenDrawer(true));
+  const toggleOpen = () => {
+    setOpen(!open);
   };
 
   return (
     <>
-      {openDrawer && <MobileDrawer />}
+      <MobileDrawer isOpen={open} toggleFunction={toggleOpen} />
       <div className="mainColumn--topNav-heading mobile:hidden flex">
         <div className="flex relative px-4">
           <div className="absolute inset-0 flex justify-center items-center mobile:hidden pointer-events-none">
             <Logo className="w-[30px] dark:fill-white" />
           </div>
-          <div className="mobile:hidden block" onClick={handleProfileClick}>
+          <div className="mobile:hidden block" onClick={toggleOpen}>
             <ProfilePicture src={profilePicture} />
           </div>
           <div className="w-[36px] flex justify-center items-center disabled-link absolute right-0">

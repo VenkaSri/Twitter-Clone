@@ -238,7 +238,7 @@ export const GitHub = ({ className = "w-5" }) => (
 );
 
 export const Plus = ({ className = "w-5" }) => (
-  <SVG path={PLUS} className={className} viewBox="0 0 30 30" />
+  <SVG path={PLUS} className={className} />
 );
 
 export const Monetization = ({ className = "w-5" }) => (
