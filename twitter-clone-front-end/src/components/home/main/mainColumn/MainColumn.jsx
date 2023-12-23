@@ -10,7 +10,7 @@ import { useSession } from "@/hooks/useSession";
 import Head from "@/components/head/Head";
 import { useDispatch, useSelector } from "react-redux";
 import { appSliceActions } from "@/state/appSlice";
-import { MobileDrawer } from "../../header/MobileDrawer";
+import { MobileDrawer } from "../../header/mobile/MobileDrawer";
 
 export const MainColumn = () => {
   return (
