@@ -48,6 +48,13 @@ import {
   X_LOGO,
   dArrow,
   GITHUB,
+  PLUS,
+  MONETIZATION,
+  HELP,
+  DATA_SAVER,
+  LOGOUT,
+  ACCESSIBILITY,
+  DISPLAY,
 } from "@/constants/icons";
 import SVG from "@components/icons/SVG";
 
@@ -230,6 +237,34 @@ export const GitHub = ({ className = "w-5" }) => (
   <SVG path={GITHUB} className={className} viewBox="0 0 30 30" />
 );
 
+export const Plus = ({ className = "w-5" }) => (
+  <SVG path={PLUS} className={className} viewBox="0 0 30 30" />
+);
+
+export const Monetization = ({ className = "w-5" }) => (
+  <SVG path={MONETIZATION} className={className} viewBox="0 0 30 30" />
+);
+
+export const Help = ({ className = "w-5" }) => (
+  <SVG path={HELP} className={className} />
+);
+
+export const Data_Saver = ({ className = "w-5" }) => (
+  <SVG path={DATA_SAVER} className={className} />
+);
+
+export const Logout = ({ className = "w-5" }) => (
+  <SVG path={LOGOUT} className={className} />
+);
+
+export const Accessibility = ({ className = "w-5" }) => (
+  <SVG path={ACCESSIBILITY} className={className} />
+);
+
+export const Display = ({ className = "w-5" }) => (
+  <SVG path={DISPLAY} className={className} />
+);
+
 export const GoogleIcon = ({ className }) => {
   return (
     <div className={className}>
@@ -310,3 +345,10 @@ Gear.propTypes = iconPropTypes;
 DArrow.propTypes = iconPropTypes;
 GoogleIcon.propTypes = iconPropTypes;
 GitHub.propTypes = iconPropTypes;
+Plus.propTypes = iconPropTypes;
+Monetization.propTypes = iconPropTypes;
+Logout.propTypes = iconPropTypes;
+Data_Saver.propTypes = iconPropTypes;
+Help.propTypes = iconPropTypes;
+Accessibility.propTypes = iconPropTypes;
+Display.propTypes = iconPropTypes;

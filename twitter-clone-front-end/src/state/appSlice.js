@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   appLoading: false,
+  openDrawer: false,
 };
 
 const appSlice = createSlice({
@@ -10,6 +11,9 @@ const appSlice = createSlice({
   reducers: {
     setAppLoading(state, action) {
       state.appLoading = action.payload;
+    },
+    setOpenDrawer(state, action) {
+      state.openDrawer = action.payload;
     },
   },
 });

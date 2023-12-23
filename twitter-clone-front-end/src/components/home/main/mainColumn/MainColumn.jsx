@@ -8,6 +8,9 @@ import { useState } from "react";
 import { Timeline } from "../../timeline/Timeline";
 import { useSession } from "@/hooks/useSession";
 import Head from "@/components/head/Head";
+import { useDispatch, useSelector } from "react-redux";
+import { appSliceActions } from "@/state/appSlice";
+import { MobileDrawer } from "../../header/mobile/MobileDrawer";
 
 export const MainColumn = () => {
   return (
@@ -29,6 +32,8 @@ export const MainColumn = () => {
 };
 
 const MainColumnNav = () => {
+  const dispatch = useDispatch();
+  const openDrawer = useSelector((state) => state.appSlice.openDrawer);
   const [selectedTab, setSelectedTab] = useState("For you");
   const { profilePicture } = useSession();
   localStorage.setItem("timelinePrefernce", "For you");
@@ -38,15 +43,26 @@ const MainColumnNav = () => {
     setSelectedTab(tabType);
   };
 
+  const handleProfileClick = () => {
+    dispatch(appSliceActions.setOpenDrawer(true));
+  };
+
   return (
     <>
+      {openDrawer && <MobileDrawer />}
       <div className="mainColumn--topNav-heading mobile:hidden flex">
-        <div className=" relative px-4 ">
-          <div className="mobile:hidden block">
+        <div className="flex relative px-4">
+          <div className="absolute inset-0 flex justify-center items-center mobile:hidden pointer-events-none">
+            <Logo className="w-[30px] dark:fill-white" />
+          </div>
+          <div className="mobile:hidden block" onClick={handleProfileClick}>
             <ProfilePicture src={profilePicture} />
           </div>
-          <div className="absolute inset-0 flex justify-center items-center mobile:hidden">
-            <Logo className="w-[30px] dark:fill-white" />
+          <div className="w-[36px] flex justify-center items-center disabled-link absolute right-0">
+            <RoundedIconButton
+              className="w-[36px] h-[36px] hover:bg-[#0f1419]/[.1] dark:hover:bg-[#eff3f1]/[.1] border-transparent"
+              icon={<Gear className="w-[20px] dark:fill-white" />}
+            />
           </div>
         </div>
       </div>
@@ -63,7 +79,7 @@ const MainColumnNav = () => {
             onClick={handleClick}
             disabled
           />
-          <div className="w-[36px] flex justify-center items-center disabled-link">
+          <div className="w-[36px] hidden justify-center items-center disabled-link mobile:flex">
             <RoundedIconButton
               className="w-[36px] h-[36px] hover:bg-[#0f1419]/[.1] dark:hover:bg-[#eff3f1]/[.1] border-transparent"
               icon={<Gear className="w-[20px] dark:fill-white" />}

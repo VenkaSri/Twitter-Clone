@@ -26,6 +26,12 @@ export const Logout = () => {
   return (
     <>
       <Dialog
+        sx={{
+          "& .MuiBackdrop-root": {
+            backgroundColor: "#5b7083",
+            opacity: "0.4 !important",
+          },
+        }}
         PaperProps={{
           sx: {
             width: 320,
@@ -40,16 +46,16 @@ export const Logout = () => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
+        <DialogTitle id="alert-dialog-title" className="dark:bg-black">
           <div className="flex  h-[40px] justify-center mt-4">
-            <Logo className="w-[40px]" />
+            <Logo className="w-[40px] dark:fill-white" />
           </div>
         </DialogTitle>
-        <DialogContent>
-          <h1 className="font-cBold text-black leading-6 text-[20px] mt-2">
-            Log out of {APP_NAME}
+        <DialogContent className="dark:bg-black">
+          <h1 className="font-cBold text-black leading-6 text-[20px] mt-2 dark:text-white">
+            Log out of {APP_NAME}?
           </h1>
-          <div className="mt-2 font-cR">
+          <div className="mt-2 font-cR dark:text-white">
             <span>
               You can always log back in at any time. If you just want to switch
               accounts, you can do that by adding an existing account.

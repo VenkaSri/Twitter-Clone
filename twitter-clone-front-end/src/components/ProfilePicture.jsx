@@ -20,7 +20,10 @@ const ProfilePicture = ({ size = 40, src }) => {
     height: `calc(${size}px - 4px)`,
   };
   return (
-    <div style={profilePicStyle} className="place-items-center grid ">
+    <div
+      style={profilePicStyle}
+      className="place-items-center grid cursor-pointer"
+    >
       {!imageLoaded && <Skeleton variant="circular" width={40} height={40} />}
       <img
         src={cachedImage}
