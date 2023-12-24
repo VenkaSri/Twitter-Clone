@@ -17,7 +17,7 @@ import { useState } from "react";
 
 export const MobileDrawer = ({ isOpen, toggleFunction }) => {
   const { profilePicture } = useSession();
-  const { darkMode } = useSelector((state) => state.themeSlice.darkMode);
+  const darkMode = useSelector((state) => state.themeSlice.darkMode);
 
   return (
     <Drawer
@@ -25,10 +25,11 @@ export const MobileDrawer = ({ isOpen, toggleFunction }) => {
       sx={{
         width: 280,
         flexShrink: 0,
+
         "& .MuiDrawer-paper": {
           width: 280,
           boxSizing: "border-box",
-          backgroundColor: darkMode ? "#fff" : "#000",
+          backgroundColor: darkMode ? "#000" : "#fff",
         },
         "& .MuiBackdrop-root": {
           backgroundColor: "#5b7083",
@@ -65,7 +66,7 @@ export const MobileDrawer = ({ isOpen, toggleFunction }) => {
       <div>
         <DrawerNav />
       </div>
-      <div className="h-[1px] my-0.5 bg-[#2f3336] w-[89%] self-center"></div>
+      <div className="h-[1px] my-0.5 dark:bg-[#2f3336] w-[89%] self-center bg-[#eff3f4]"></div>
       <div>
         <OtherSettings />
       </div>
@@ -156,13 +157,28 @@ const OptionsLink = ({ text, isDisabled }) => {
 
   return (
     <Accordion
-      sx={{ backgroundColor: "transparent", height: 52 }}
-      disabled={!isDisabled}
+      elevation={0}
+      sx={{
+        backgroundColor: "transparent",
+        height: 52,
+        border: "none",
+        ...(!isDisabled && {
+          backgroundColor: "transparent",
+        }),
+        "&.MuiAccordion-root:before": {
+          display: "none",
+        },
+        "&.Mui-disabled": {
+          backgroundColor: "transparent",
+        },
+      }}
       disableGutters
+      disabled={!isDisabled}
       expanded={expanded === "panel1"}
       onChange={handleChange("panel1")}
     >
       <AccordionSummary
+        sx={{ border: "none" }}
         expandIcon={
           <DownArrow
             className={clsx(
