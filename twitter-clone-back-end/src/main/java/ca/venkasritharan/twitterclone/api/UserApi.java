@@ -22,6 +22,11 @@ public class UserApi {
   public ResponseEntity<?> getUserById(@PathVariable Long userId) {
     return userService.getUserById(userId);
   }
+
+  @GetMapping("/username")
+  public ResponseEntity<?> getUserByUsername(@RequestParam String username) {
+    return userService.getUserDetailsByUsername(username);
+  }
   @GetMapping("/posts/likes")
   public ResponseEntity<?> getAllLikedPosts() {
     return userService.getAllLikedPosts();

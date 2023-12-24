@@ -4,6 +4,7 @@ package ca.venkasritharan.twitterclone.application.service;
 import ca.venkasritharan.twitterclone.api.exception.UserNotFoundException;
 import ca.venkasritharan.twitterclone.core.entity.User;
 import ca.venkasritharan.twitterclone.core.repository.FollowerRepository;
+import ca.venkasritharan.twitterclone.core.repository.PostRepository;
 import ca.venkasritharan.twitterclone.core.repository.UserRepository;
 import ca.venkasritharan.twitterclone.core.entity.PostLike;
 import ca.venkasritharan.twitterclone.core.repository.PostLikesRepository;
@@ -25,14 +26,16 @@ import java.util.stream.Collectors;
 public class UserService {
 
   private final UserRepository userRepository;
-  private final FollowerRepository followerRepository;
   private final PostLikesRepository postLikesRepository;
+  private final FollowerRepository followerRepository;
+  private final PostRepository postRepository;
   private final ModelMapper mapper;
 
-  public UserService(UserRepository userRepository, FollowerRepository followerRepository, PostLikesRepository postLikesRepository, ModelMapper mapper) {
+  public UserService(UserRepository userRepository, FollowerRepository followerRepository, PostLikesRepository postLikesRepository, PostRepository postRepository, ModelMapper mapper) {
     this.userRepository = userRepository;
     this.followerRepository = followerRepository;
     this.postLikesRepository = postLikesRepository;
+    this.postRepository = postRepository;
     this.mapper = mapper;
   }
 
@@ -47,8 +50,14 @@ public class UserService {
     if (optionalUser.isPresent()) {
       user = optionalUser.get();
     }
-    System.out.println(user.getUsername());
     return ResponseEntity.status(200).body(createResponse(user));
+  }
+
+  public ResponseEntity<?> getUserDetailsByUsername(String username) {
+    User user = userRepository.findByUsername(username)
+            .orElseThrow(() -> new UserNotFoundException("With: " + username));
+
+    return ResponseEntity.ok(createResponse(user));
   }
 
   private UserDetailsResponse createResponse(User user) {
@@ -61,6 +70,7 @@ public class UserService {
     userDetailsResponse.setBio(user.getProfile().getBio());
     userDetailsResponse.setFollowerCount(user.getProfile().getProfileCount().getFollowerCount());
     userDetailsResponse.setFollowingCount(user.getProfile().getProfileCount().getFollowingCount());
+    userDetailsResponse.setPostsCount(postRepository.countByUserId(user.getId()));
     for (PostLike post: user.getLikedPosts()) {
       postIds.add(post.getPost().getPostId());
     }

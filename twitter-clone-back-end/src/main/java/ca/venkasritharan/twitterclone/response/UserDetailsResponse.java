@@ -22,6 +22,7 @@ public class UserDetailsResponse {
   private Long followerCount;
   private Long followingCount;
   private List<Long> likedPostsIds;
+  private Long postsCount;
 
   @JsonInclude(JsonInclude.Include.ALWAYS) // This field will always be included
   private String profile_image_url;
