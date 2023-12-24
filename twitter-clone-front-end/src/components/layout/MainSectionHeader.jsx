@@ -2,9 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { Back } from "../icons/Icons";
 import PropTypes from "prop-types";
 
-export const MainSectionHeader = ({ text, children }) => {
+export const MainSectionHeader = ({ text, children, numberOfPosts }) => {
   const navigate = useNavigate();
-
   return (
     <>
       <div className="sticky -top-[0.5px] bg-white/[.85] dark:bg-black/[.65] dark:bg-black z-[2]  backdrop-blur-md">
@@ -32,6 +31,11 @@ export const MainSectionHeader = ({ text, children }) => {
                   >
                     <span>{text}</span>
                   </h2>
+                  {numberOfPosts && (
+                    <div className="text-[13px] font-cR text-[#536471]">
+                      <span>{numberOfPosts}</span>&nbsp;posts
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -46,4 +50,6 @@ export const MainSectionHeader = ({ text, children }) => {
 
 MainSectionHeader.propTypes = {
   text: PropTypes.string.isRequired,
+  children: PropTypes.node,
+  numberOfPosts: PropTypes.number,
 };

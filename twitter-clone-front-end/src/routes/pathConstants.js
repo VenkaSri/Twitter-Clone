@@ -7,6 +7,7 @@ const PathConstants = {
   STATUS: "/:username/status/:postId",
   QUOTES: "/:username/status/:postId/quotes",
   LOGOUT: "/logout",
+  PROFILE: "/:username",
 };
 
 export { PathConstants };

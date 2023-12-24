@@ -14,6 +14,9 @@ export default {
       cR: ["chripR", "sans-serif"],
     },
     extend: {
+      padding: {
+        "pb-33": "33.3333%", // This creates a `pb-33` utility class
+      },
       fontSize: {
         15: "15px",
         17: "17px",

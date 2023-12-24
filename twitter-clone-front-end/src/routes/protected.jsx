@@ -5,6 +5,7 @@ import { ViewPost } from "@/components/post/ViewPost";
 import { PostEngagements } from "@/pages/PostEngagements";
 import { Logout } from "@/pages/Logout";
 import { Navigate } from "react-router-dom";
+import { Profile } from "@/pages/Profile";
 
 export const protectedRoutes = [
   {
@@ -19,6 +20,7 @@ export const protectedRoutes = [
       { path: PathConstants.EXPLORE, element: <MainColumn /> },
       { path: PathConstants.STATUS, element: <ViewPost /> },
       { path: PathConstants.QUOTES, element: <PostEngagements /> },
+      { path: PathConstants.PROFILE, element: <Profile /> },
     ],
   },
   {

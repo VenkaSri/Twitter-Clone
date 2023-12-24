@@ -51,6 +51,12 @@ export const userApi = createApi({
     getLikes: builder.query({
       query: () => `/posts/likes`,
     }),
+    getUserByUsername: builder.query({
+      query: (username) => ({
+        url: "/username",
+        params: { username },
+      }),
+    }),
   }),
 });
 
@@ -63,4 +69,5 @@ export const {
   useFollowUserMutation,
   useUnfollowUserMutation,
   useGetLikesQuery,
+  useGetUserByUsernameQuery,
 } = userApi;
