@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,6 +30,7 @@ public class User {
   @Size(min = 8, max = 120)
   @NotBlank(message = "Password must not be blank")
   private String password;
+  private LocalDateTime accountCreatedAt;
 
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "profile_id", referencedColumnName = "id")

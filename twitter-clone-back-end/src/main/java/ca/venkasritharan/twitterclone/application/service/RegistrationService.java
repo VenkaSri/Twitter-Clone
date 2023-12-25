@@ -23,6 +23,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -75,6 +76,7 @@ public class RegistrationService {
     profile.setProfileCount(profileCount);
     user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
     user.setUsername(generateUniqueUsername(registerDTO.getName()));
+    user.setAccountCreatedAt(LocalDateTime.now());
     user.setProfile(profile);
     return user;
   }
