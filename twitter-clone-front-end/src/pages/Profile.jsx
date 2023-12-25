@@ -3,7 +3,9 @@ import { MoreOptionsButton } from "@/components/MoreOptionsButton";
 import ProfilePicture from "@/components/ProfilePicture";
 import RoundedTextButton from "@/components/RoundedTextButton";
 import { TabLink } from "@/components/TabLink";
+import UserDisplayNameAndHandle from "@/components/UserDisplayNameAndHandle";
 import Head from "@/components/head/Head";
+import { Ellipsis, MoreOutlined } from "@/components/icons/Icons";
 import { MainSectionHeader } from "@/components/layout/MainSectionHeader";
 import { useSession } from "@/hooks/useSession";
 import { useGetUserByUsernameQuery } from "@/services/userApi";
@@ -17,6 +19,7 @@ export const Profile = () => {
     return <LoadingProfile />;
   }
 
+  console.log(data);
   return (
     <>
       <Head title={data.name + `(@${data.username})`} />
@@ -29,14 +32,29 @@ export const Profile = () => {
           <div className="w-full pb-33"></div>
           <div className="absolute h-full"></div>
         </div>
-        <div className="pt-3 px-4 mb-4 flex relative items-start br justify-between">
-          <div className="w-[145.5px] h-[145.5px] -mt-[15%]  mb-3 overflow-visible  rounded-full  dark:bg-black bg-white relative flex justify-center items-center">
-            <div className="">
-              <ProfilePicture src={data.profile_image_url} size={141.5} />
+        <div className="pt-3 px-4 mb-4">
+          <div className="flex relative items-start justify-between">
+            <div className="w-[145.5px] h-[145.5px] -mt-[15%]  mb-3 overflow-visible  rounded-full  dark:bg-black bg-white relative flex justify-center items-center">
+              <div className="">
+                <ProfilePicture src={data.profile_image_url} size={141.5} />
+              </div>
+            </div>
+            <div className=" flex justify-start items-end max-w-full">
+              <ProfileOptions username={data.username} />
             </div>
           </div>
-          <div className=" flex justify-start items-end max-w-full">
-            <ProfileOptions username={data.username} />
+          <div className="mb-3 mt-1">
+            <div className="flex flex-col grow overflow-hidden">
+              <div className="text-black dark:text-white break-words whitespace-nowrap text-ellipsis overflow-hidden font-cBold leading-6 text-[20px]">
+                <span>{data.name}</span>
+              </div>
+              <div className="text-[#71767B] break-words whitespace-nowrap text-ellipsis overflow-hidden font-cReg leading-5 text-[15px]">
+                <span>@{data.username}</span>
+              </div>
+            </div>
+          </div>
+          <div className="mb-3">
+            <div className="">{data.bio}</div>
           </div>
         </div>
       </div>
@@ -66,9 +84,18 @@ const ProfileOptions = ({ username }) => {
         />
       ) : (
         <div className="flex">
-          <div className="w-[36px] h-[36px] mb-3 rounded-full border border-[#536471]"></div>
-          <div className="mb-3 min-w-[81px]">
-            <FollowToggleButton />
+          <div
+            className="w-[36px] h-[36px] mb-3 rounded-full border border-[#536471] mr-2 flex justify-center items-center hover:bg-[#eff3f4]/[0.1]"
+            role="button"
+          >
+            <Ellipsis className="dark:fill-white w-[20px]" />
+          </div>
+          <div className="mb-3 min-w-[81px] ">
+            <RoundedTextButton
+              text={"Follow"}
+              className={`btn--action flex min-w-[81px] min-h-[36px] rounded-full mb-3 px-4`}
+              disabled
+            />
           </div>
         </div>
       )}
