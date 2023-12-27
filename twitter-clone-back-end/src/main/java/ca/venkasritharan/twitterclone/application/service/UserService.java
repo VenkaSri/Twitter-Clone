@@ -71,6 +71,7 @@ public class UserService {
     userDetailsResponse.setFollowerCount(user.getProfile().getProfileCount().getFollowerCount());
     userDetailsResponse.setFollowingCount(user.getProfile().getProfileCount().getFollowingCount());
     userDetailsResponse.setPostsCount(postRepository.countByUserId(user.getId()));
+    userDetailsResponse.setAccountCreatedAt(user.getAccountCreatedAt());
     for (PostLike post: user.getLikedPosts()) {
       postIds.add(post.getPost().getPostId());
     }

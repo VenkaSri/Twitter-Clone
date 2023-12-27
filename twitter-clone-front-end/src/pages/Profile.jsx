@@ -1,15 +1,16 @@
-import FollowToggleButton from "@/components/FollowToggleButton";
-import { MoreOptionsButton } from "@/components/MoreOptionsButton";
 import ProfilePicture from "@/components/ProfilePicture";
+import dayjs from "dayjs";
 import RoundedTextButton from "@/components/RoundedTextButton";
-import { TabLink } from "@/components/TabLink";
-import UserDisplayNameAndHandle from "@/components/UserDisplayNameAndHandle";
 import Head from "@/components/head/Head";
-import { Ellipsis, MoreOutlined } from "@/components/icons/Icons";
+import { Calender, Ellipsis } from "@/components/icons/Icons";
 import { MainSectionHeader } from "@/components/layout/MainSectionHeader";
 import { useSession } from "@/hooks/useSession";
 import { useGetUserByUsernameQuery } from "@/services/userApi";
 import { useParams } from "react-router-dom";
+import LocalizedFormat from "dayjs/plugin/localizedFormat";
+
+dayjs.extend(LocalizedFormat);
+
 export const Profile = () => {
   const { username } = useParams();
   const { data, error, isSuccess, isLoading, isError } =
@@ -19,7 +20,6 @@ export const Profile = () => {
     return <LoadingProfile />;
   }
 
-  console.log(data);
   return (
     <>
       <Head title={data.name + `(@${data.username})`} />
@@ -54,7 +54,14 @@ export const Profile = () => {
             </div>
           </div>
           <div className="mb-3">
-            <div className="">{data.bio}</div>
+            <div className="font-cR">{data.bio}</div>
+          </div>
+          <div className="mb-3 flex items-center">
+            <Calender className="w-[18.75px] fill-[#71767b] mr-2" />
+            <span className="font-cR text-[#71767b] ">
+              Joined{" "}
+              <span>{dayjs(data.accountCreatedAt).format("MMMM YYYY")}</span>
+            </span>
           </div>
         </div>
       </div>

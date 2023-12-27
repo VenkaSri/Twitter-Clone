@@ -55,6 +55,7 @@ import {
   LOGOUT,
   ACCESSIBILITY,
   DISPLAY,
+  CALENDER,
 } from "@/constants/icons";
 import SVG from "@components/icons/SVG";
 
@@ -265,6 +266,10 @@ export const Display = ({ className = "w-5" }) => (
   <SVG path={DISPLAY} className={className} />
 );
 
+export const Calender = ({ className = "w-5" }) => (
+  <SVG path={CALENDER} className={className} />
+);
+
 export const GoogleIcon = ({ className }) => {
   return (
     <div className={className}>
@@ -352,3 +357,4 @@ Data_Saver.propTypes = iconPropTypes;
 Help.propTypes = iconPropTypes;
 Accessibility.propTypes = iconPropTypes;
 Display.propTypes = iconPropTypes;
+Calender.propTypes = iconPropTypes;

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -23,6 +24,7 @@ public class UserDetailsResponse {
   private Long followingCount;
   private List<Long> likedPostsIds;
   private Long postsCount;
+  private LocalDateTime accountCreatedAt;
 
   @JsonInclude(JsonInclude.Include.ALWAYS) // This field will always be included
   private String profile_image_url;
