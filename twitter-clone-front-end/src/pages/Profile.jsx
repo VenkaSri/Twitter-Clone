@@ -8,6 +8,7 @@ import { useSession } from "@/hooks/useSession";
 import { useGetUserByUsernameQuery } from "@/services/userApi";
 import { useParams } from "react-router-dom";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
+import { FollowAndFollowingCount } from "@/components/FollowAndFollowingCount";
 
 dayjs.extend(LocalizedFormat);
 
@@ -63,6 +64,11 @@ export const Profile = () => {
               <span>{dayjs(data.accountCreatedAt).format("MMMM YYYY")}</span>
             </span>
           </div>
+          <FollowAndFollowingCount
+            className="text-[#71767b]"
+            followers={data.followerCount}
+            following={data.followingCount}
+          />
         </div>
       </div>
     </>
