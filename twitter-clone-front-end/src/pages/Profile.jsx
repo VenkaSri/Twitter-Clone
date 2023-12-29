@@ -9,6 +9,7 @@ import { useGetUserByUsernameQuery } from "@/services/userApi";
 import { useParams } from "react-router-dom";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
 import { FollowAndFollowingCount } from "@/components/FollowAndFollowingCount";
+import { ProfileNotFound } from "./profile/ProfileNotFound";
 
 dayjs.extend(LocalizedFormat);
 
@@ -19,6 +20,10 @@ export const Profile = () => {
 
   if (isLoading) {
     return <LoadingProfile />;
+  }
+
+  if (isError) {
+    return <ProfileNotFound />;
   }
 
   return (
