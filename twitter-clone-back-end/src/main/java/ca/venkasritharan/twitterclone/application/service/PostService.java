@@ -105,16 +105,12 @@ public class PostService {
 
   private ResponseEntity<PostResponse> buildSuccessResponse(Post post) {
     PostResponse postResponse = new PostResponse();
-    postResponse.setMessage("Successfully posted");
-    postResponse.setStatus(HttpStatus.OK.value());
     postResponse.setPostId(post.getPostId());
     return new ResponseEntity<>(postResponse, HttpStatus.OK);
   }
 
   private ResponseEntity<PostResponse> buildErrorResponse(Exception e) {
     PostResponse postResponse = new PostResponse();
-    postResponse.setMessage(e.getMessage());
-    postResponse.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
     return new ResponseEntity<>(postResponse, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
@@ -139,8 +135,6 @@ public class PostService {
     setUserDetailsToResponse(post, postResponse);
     setMediaToResponse(post, postResponse);
     setLikesToResponse(post, postResponse);
-    postResponse.setStatus(HttpStatus.OK.value());
-    postResponse.setMessage("Post retrieved successfully.");
     return postResponse;
   }
 

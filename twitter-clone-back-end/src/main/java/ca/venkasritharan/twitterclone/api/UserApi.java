@@ -2,9 +2,13 @@ package ca.venkasritharan.twitterclone.api;
 
 
 import ca.venkasritharan.twitterclone.application.service.UserService;
+import ca.venkasritharan.twitterclone.core.entity.Post;
+import ca.venkasritharan.twitterclone.response.PostResponse;
 import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin(origins = {"*"})
 @RestController
@@ -35,6 +39,11 @@ public class UserApi {
   @GetMapping
   public UserDetailsResponse getUserDetails() {
     return userService.getUserDetails();
+  }
+
+  @GetMapping("/{userId}/posts")
+  public List<PostResponse> getUserPosts(@PathVariable Long userId) {
+    return userService.getAllPostsByUserId(userId);
   }
 
 

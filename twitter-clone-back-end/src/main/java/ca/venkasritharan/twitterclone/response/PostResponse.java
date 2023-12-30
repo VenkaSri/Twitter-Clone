@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostResponse extends MessageAndCodeResponse {
+public class PostResponse {
   private Long postId;
   private String text;
   private String createdAt;

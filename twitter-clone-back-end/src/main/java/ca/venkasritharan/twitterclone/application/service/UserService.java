@@ -2,16 +2,20 @@ package ca.venkasritharan.twitterclone.application.service;
 
 
 import ca.venkasritharan.twitterclone.api.exception.UserNotFoundException;
+import ca.venkasritharan.twitterclone.core.entity.Post;
 import ca.venkasritharan.twitterclone.core.entity.User;
 import ca.venkasritharan.twitterclone.core.repository.FollowerRepository;
 import ca.venkasritharan.twitterclone.core.repository.PostRepository;
 import ca.venkasritharan.twitterclone.core.repository.UserRepository;
 import ca.venkasritharan.twitterclone.core.entity.PostLike;
 import ca.venkasritharan.twitterclone.core.repository.PostLikesRepository;
+import ca.venkasritharan.twitterclone.response.PostResponse;
 import ca.venkasritharan.twitterclone.response.Response;
 import ca.venkasritharan.twitterclone.response.UserDetailsResponse;
 import ca.venkasritharan.twitterclone.util.SecurityUtils;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,8 +23,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class UserService {
@@ -108,4 +114,37 @@ public class UserService {
             .map(postLike -> postLike.getPost().getPostId())
             .collect(Collectors.toList());
   }
+
+  public List<PostResponse> getAllPostsByUserId(Long userId) {
+    Optional<User> userOptional = userRepository.findById(userId);
+    List<PostResponse> postResponseList = new ArrayList<>();
+    List<Post> posts = postRepository.findAllByUserId(userId);
+    for (Post post: posts) {
+      postResponseList.add(createResponse(post));
+    }
+
+    return postResponseList;
+  }
+
+  private PostResponse createResponse(Post post) {
+    PostResponse postResponse = mapper.map(post, PostResponse.class);
+    setMediaToResponse(post, postResponse);
+    setLikesToResponse(post, postResponse);
+    return postResponse;
+  }
+
+
+  private void setMediaToResponse(Post post, PostResponse postResponse) {
+    List<String> photos = Stream.of(post.getPhoto1(), post.getPhoto2(), post.getPhoto3(), post.getPhoto4())
+            .filter(Objects::nonNull)
+            .collect(Collectors.toList());
+    postResponse.setMedia(photos);
+  }
+
+  private void setLikesToResponse(Post post, PostResponse postResponse) {
+    postResponse.setLikes(postLikesRepository.countByPost(post));
+  }
+
+
+
 }
