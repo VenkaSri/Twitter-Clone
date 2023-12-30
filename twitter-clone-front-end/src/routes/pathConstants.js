@@ -8,6 +8,7 @@ const PathConstants = {
   QUOTES: "/:username/status/:postId/quotes",
   LOGOUT: "/logout",
   PROFILE: "/:username",
+  LIKES: "/:username/likes",
 };
 
 export { PathConstants };

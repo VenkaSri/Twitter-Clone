@@ -9,12 +9,13 @@ import { useGetUserByUsernameQuery } from "@/services/userApi";
 import { useParams } from "react-router-dom";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
 import { FollowAndFollowingCount } from "@/components/FollowAndFollowingCount";
-import { ProfileNotFound } from "../components/home/main/profile/ProfileNotFound";
+import { ProfileNotFound } from "@/components/home/main/profile/ProfileNotFound";
 import { TabLink2 } from "@/components/TabLink2";
+import { ForYou } from "../../timeline/for-you/ForYou";
 
 dayjs.extend(LocalizedFormat);
 
-export const Profile = () => {
+export const ProfileHeaderSection = () => {
   const { username } = useParams();
   const { data, error, isSuccess, isLoading, isError } =
     useGetUserByUsernameQuery(username);
@@ -77,13 +78,13 @@ export const Profile = () => {
           />
         </div>
       </div>
-      <div className="">
+      <div className="border-b border-b-[red]">
         <nav className="w-full h-14 flex">
-          <TabLink2 text={"Posts"} isSelected to={"/home"} />
+          <TabLink2 text={"Posts"} isSelected />
           <TabLink2 text={"Replies"} disabled />
           <TabLink2 text={"Highlights"} disabled />
           <TabLink2 text={"Media"} disabled />
-          <TabLink2 text={"Likes"} disabled />
+          <TabLink2 text={"Likes"} to={"/test1/likes"} />
         </nav>
       </div>
     </>
