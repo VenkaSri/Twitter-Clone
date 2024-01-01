@@ -11,6 +11,7 @@ import LocalizedFormat from "dayjs/plugin/localizedFormat";
 import { FollowAndFollowingCount } from "@/components/FollowAndFollowingCount";
 import { ProfileNotFound } from "../components/home/main/profile/ProfileNotFound";
 import { TabLink2 } from "@/components/TabLink2";
+import { ForYou } from "@/components/home/timeline/for-you/ForYou";
 
 dayjs.extend(LocalizedFormat);
 
@@ -86,6 +87,7 @@ export const Profile = () => {
           <TabLink2 text={"Likes"} disabled />
         </nav>
       </div>
+      <ForYou />
     </>
   );
 };

@@ -8,10 +8,7 @@ import { useState } from "react";
 import { Timeline } from "../../timeline/Timeline";
 import { useSession } from "@/hooks/useSession";
 import Head from "@/components/head/Head";
-import { useDispatch, useSelector } from "react-redux";
-import { appSliceActions } from "@/state/appSlice";
 import { MobileDrawer } from "../../header/mobile/MobileDrawer";
-import { Drawer } from "@mui/material";
 
 export const MainColumn = () => {
   return (

@@ -2,15 +2,7 @@ import clsx from "clsx";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-import {
-  Reply,
-  Repost,
-  Like,
-  Bookmark,
-  Share,
-  Analytics,
-} from "@components/icons/Icons";
-import { RoundedIconButton } from "@components/RoundedIconButton";
+import { Analytics } from "@components/icons/Icons";
 import ProfilePicture from "@components/ProfilePicture";
 import { UserProfile } from "../UserProfile";
 import { MoreOptionsButton } from "../MoreOptionsButton";
