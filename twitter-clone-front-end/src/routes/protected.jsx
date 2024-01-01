@@ -7,6 +7,8 @@ import { Logout } from "@/pages/Logout";
 import { Navigate } from "react-router-dom";
 import { Profile } from "@/pages/Profile";
 import { ProfileLayout } from "@/components/layout/ProfileLayout";
+import { ForYou } from "@/components/home/timeline/for-you/ForYou";
+import { Posts } from "@/components/home/main/profile/Posts";
 
 export const protectedRoutes = [
   {
@@ -24,7 +26,10 @@ export const protectedRoutes = [
       {
         path: PathConstants.PROFILE,
         element: <ProfileLayout />,
-        children: [{ path: PathConstants.LIKES, element: <div>Hi</div> }],
+        children: [
+          { path: PathConstants.LIKES, element: <div>Hi</div> },
+          { path: PathConstants.PROFILE, element: <Posts /> },
+        ],
       },
     ],
   },

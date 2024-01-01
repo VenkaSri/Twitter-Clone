@@ -18,7 +18,6 @@ export const Logout = () => {
       await logout();
       window.location.reload();
     } catch (error) {
-      // Handle logout error
       console.error("Logout failed", error);
     }
   };

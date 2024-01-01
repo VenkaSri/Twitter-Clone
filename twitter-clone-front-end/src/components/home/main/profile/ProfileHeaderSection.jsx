@@ -78,7 +78,7 @@ export const ProfileHeaderSection = () => {
           />
         </div>
       </div>
-      <div className="border-b border-b-[red]">
+      <div className="border-b border-b-[#2f3336]">
         <nav className="w-full h-14 flex">
           <TabLink2 text={"Posts"} isSelected />
           <TabLink2 text={"Replies"} disabled />

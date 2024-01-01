@@ -20,6 +20,9 @@ export const userApi = createApi({
         body: formData,
       }),
     }),
+    getAllPostsByUsername: builder.query({
+      query: (username) => `/${username}/posts`,
+    }),
     checkIfUsernameIsAvailable: builder.query({
       query: (username) => ({
         url: `/username_available`,
@@ -70,4 +73,5 @@ export const {
   useUnfollowUserMutation,
   useGetLikesQuery,
   useGetUserByUsernameQuery,
+  useGetAllPostsByUsernameQuery,
 } = userApi;
