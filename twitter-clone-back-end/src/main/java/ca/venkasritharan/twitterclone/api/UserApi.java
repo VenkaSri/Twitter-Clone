@@ -41,9 +41,9 @@ public class UserApi {
     return userService.getUserDetails();
   }
 
-  @GetMapping("/{userId}/posts")
-  public List<PostResponse> getUserPosts(@PathVariable Long userId) {
-    return userService.getAllPostsByUserId(userId);
+  @GetMapping("/{username}/posts")
+  public List<PostResponse> getUserPosts(@PathVariable String username) {
+    return userService.getAllPostsByUsername(username);
   }
 
 

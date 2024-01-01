@@ -115,10 +115,10 @@ public class UserService {
             .collect(Collectors.toList());
   }
 
-  public List<PostResponse> getAllPostsByUserId(Long userId) {
-    Optional<User> userOptional = userRepository.findById(userId);
+  public List<PostResponse> getAllPostsByUsername(String username) {
+    Optional<User> userOptional = userRepository.findByUsername(username);
     List<PostResponse> postResponseList = new ArrayList<>();
-    List<Post> posts = postRepository.findAllByUserId(userId);
+    List<Post> posts = postRepository.findAllByUserId(userOptional.get().getId());
     for (Post post: posts) {
       postResponseList.add(createResponse(post));
     }
@@ -128,11 +128,22 @@ public class UserService {
 
   private PostResponse createResponse(Post post) {
     PostResponse postResponse = mapper.map(post, PostResponse.class);
+    setUserDetailsToResponse(post, postResponse);
     setMediaToResponse(post, postResponse);
     setLikesToResponse(post, postResponse);
     return postResponse;
   }
 
+
+  private void setUserDetailsToResponse(Post post, PostResponse postResponse) {
+    UserDetailsResponse userDetails = new UserDetailsResponse();
+    User user = post.getUser();
+    userDetails.setName(user.getProfile().getName());
+    userDetails.setEmail(user.getProfile().getEmail());
+    userDetails.setId(user.getId());
+    userDetails.setUsername(user.getUsername());
+    postResponse.setUserDetails(userDetails);
+  }
 
   private void setMediaToResponse(Post post, PostResponse postResponse) {
     List<String> photos = Stream.of(post.getPhoto1(), post.getPhoto2(), post.getPhoto3(), post.getPhoto4())
