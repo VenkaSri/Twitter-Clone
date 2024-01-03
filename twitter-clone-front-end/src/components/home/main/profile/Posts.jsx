@@ -37,7 +37,8 @@ dayjs.updateLocale("en", {
   },
 });
 
-export const Posts = () => {
+export const Posts = ({ type }) => {
+  // type will be likes/profile posts/timeline posts
   const { username } = useParams();
   const {
     data: posts,
