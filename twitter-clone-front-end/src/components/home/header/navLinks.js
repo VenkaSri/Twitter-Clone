@@ -53,7 +53,7 @@ export const LINKS = [
     name: "Profile",
     iconFilled: Icons.ProfileFilled,
     iconOutlined: Icons.ProfileOutlined,
-    path: "/profile",
+    path: "/:username",
   },
   {
     name: "More",

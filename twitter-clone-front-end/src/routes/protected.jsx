@@ -5,9 +5,7 @@ import { ViewPost } from "@/components/post/ViewPost";
 import { PostEngagements } from "@/pages/PostEngagements";
 import { Logout } from "@/pages/Logout";
 import { Navigate } from "react-router-dom";
-import { Profile } from "@/pages/Profile";
 import { ProfileLayout } from "@/components/layout/ProfileLayout";
-import { ForYou } from "@/components/home/timeline/for-you/ForYou";
 import { Posts } from "@/components/home/main/profile/Posts";
 
 export const protectedRoutes = [

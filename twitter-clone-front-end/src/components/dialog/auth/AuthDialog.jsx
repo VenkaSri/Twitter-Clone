@@ -15,10 +15,8 @@ import { useSignupConfig } from "@components/auth/signup/signupConfig";
 import DialogBody from "./dialog/body/DialogBody";
 import { OverlayLoader } from "./dialog/OverlayLoader";
 import Head from "./head/Head";
-import { DialogContext, DialogProvider } from "@/context/dialog/dialog-context";
 
 const AuthDialog = () => {
-  const { hasError, isOpen } = useContext(DialogContext);
   const isMobile = useMediaQuery("(max-width:702px)");
   let sxStyles = {
     borderRadius: "16px",
@@ -33,8 +31,6 @@ const AuthDialog = () => {
     overflow: "hidden",
     ackgroundColor: "transparent",
   };
-
-  console.log(hasError);
 
   const { step, isLoading } = useContext(RegisterContext);
   const { goToNextStep } = useSignupConfig();

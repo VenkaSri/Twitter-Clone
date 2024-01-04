@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { Link, useLocation } from "react-router-dom";
+import { useSession } from "@/hooks/useSession";
 
 const SidebarNav = () => {
   const location = useLocation();
@@ -34,7 +35,7 @@ const SidebarNav = () => {
         onClick={handleClick}
         isActive={activeLink === link.path}
         path={link.path}
-        isDisabled={link.name !== "Home"}
+        isDisabled={link.name !== "Home" && link.name !== "Profile"}
       />
     );
   });
@@ -59,10 +60,11 @@ const HeaderButton = ({
 }) => {
   const padding = useMediaQuery("(max-height:850px)");
   const location = useLocation();
+  const { username } = useSession();
 
   return (
     <Link
-      to={path}
+      to={path.replace(":username", username)}
       className={clsx(
         "w-full  flex flex-col items-start",
         visibility,
@@ -93,5 +95,6 @@ HeaderButton.propTypes = {
   visibility: PropTypes.string,
   onClick: PropTypes.func,
   isActive: PropTypes.bool,
+  path: PropTypes.string,
   isDisabled: PropTypes.bool,
 };
