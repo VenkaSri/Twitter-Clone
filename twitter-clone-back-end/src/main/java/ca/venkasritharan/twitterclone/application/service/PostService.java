@@ -144,6 +144,8 @@ public class PostService {
     userDetails.setName(user.getProfile().getName());
     userDetails.setEmail(user.getProfile().getEmail());
     userDetails.setId(user.getId());
+    userDetails.setFollowerCount(user.getProfile().getProfileCount().getFollowerCount());
+    userDetails.setFollowingCount(user.getProfile().getProfileCount().getFollowingCount());
     userDetails.setUsername(user.getUsername());
     postResponse.setUserDetails(userDetails);
   }

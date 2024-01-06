@@ -8,7 +8,7 @@ const theme = createTheme({
       styleOverrides: {
         tooltip: {
           width: 300,
-          backgroundColor: "white",
+          backgroundColor: "black",
           boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
           borderRadius: "8px",
           padding: 12,
@@ -30,7 +30,7 @@ const userDetails = {
 export const ProfilePopover = ({ children, userId }) => {
   const PopOverContent = () => {
     return (
-      <div className="bg-white flex-col-container grow max-w-[300px]">
+      <div className="bg-white flex-col-container grow max-w-[300px] dark:bg-black">
         <div className="flex grow">
           <ProfilePicture size={64} src={userDetails.profile_image_url} />
         </div>
