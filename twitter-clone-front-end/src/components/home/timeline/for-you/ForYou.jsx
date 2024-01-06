@@ -4,13 +4,15 @@ import timezone from "dayjs/plugin/timezone";
 import RelativeTime from "dayjs/plugin/relativeTime";
 import updateLocale from "dayjs/plugin/updateLocale";
 import { useGetAllPostsQuery } from "@/services/postApi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProfilePicture from "@/components/ProfilePicture";
 import { DisplayNameAndUsername } from "@components/home/timeline/DisplayNameAndUsername";
 import { MoreOptionsButton } from "@/components/MoreOptionsButton";
 import { PostMedia } from "@/components/post/media/PostMedia";
 import { PostSkeleton } from "@/components/post/Skeleton";
 import { PostActions } from "@/components/post/PostActions";
+import { ProfilePopover } from "@/components/ProfilePopover";
+import { Tooltip } from "@mui/material";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -55,17 +57,14 @@ export const ForYou = () => {
               <div className="flex flex-col grow ">
                 <div className="flex grow pt-4"></div>
                 <div className="max-w-full flex  grow pb-3 ">
-                  <div className="w-[40px] mr-4">
-                    <ProfilePicture src={post.userDetails.profile_image_url} />
-                  </div>
-                  <div className="flex flex-col grow ">
+                  <PostProfilePicture userData={post.userDetails} />
+                  <div className="flex flex-col grow">
                     <div className="flex">
-                      <div>
+                      <div onClick={(e) => e.stopPropagation()}>
                         <DisplayNameAndUsername userData={post.userDetails} />
                       </div>
-                      <div>
-                        <PostCreationInfo datetime={post.createdAt} />
-                      </div>
+
+                      <PostCreationInfo datetime={post.createdAt} />
                       <div className="ml-auto">
                         <div
                           className="-m-[8px] self-end"
@@ -112,6 +111,8 @@ const PostCreationInfo = ({ datetime }) => {
   const now = dayjs();
   const differenceInDays = now.diff(localDateTime, "day");
   const currentYear = now.year();
+  const tooltipTime = dayjs.utc(datetime).format("h:mm a");
+  const tooltipDate = dayjs.utc(datetime).format("MMM D, YYYY");
 
   let displayTime;
 
@@ -126,8 +127,13 @@ const PostCreationInfo = ({ datetime }) => {
   }
 
   return (
-    <div className=" text-[#536471] text-[15px] -mt-1">
-      &nbsp;&#183;&nbsp;<span>{displayTime}</span>
+    <div className=" text-[#536471] text-[15px] font-cR">
+      <div>
+        &nbsp;&#183;&nbsp;
+        <Tooltip title={`${tooltipTime}·${tooltipDate}`}>
+          <span className="hover:underline">{displayTime}</span>
+        </Tooltip>
+      </div>
     </div>
   );
 };
@@ -135,9 +141,24 @@ const PostCreationInfo = ({ datetime }) => {
 const PostText = ({ text }) => {
   return (
     <div className=" flex grow">
-      <div className="flex leading-6 text-[17px] font-cR ">
+      <div className="flex leading-6 text-[17px] font-cR">
         <span>{text}</span>
       </div>
     </div>
+  );
+};
+
+const PostProfilePicture = ({ userData }) => {
+  return (
+    <ProfilePopover userDetails={userData}>
+      <div
+        className="w-[40px] mr-4 self-start"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <Link to={`/${userData.username}`}>
+          <ProfilePicture src={userData.profile_image_url} />
+        </Link>
+      </div>
+    </ProfilePopover>
   );
 };

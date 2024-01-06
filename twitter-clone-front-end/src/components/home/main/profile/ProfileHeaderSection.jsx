@@ -12,6 +12,7 @@ import { FollowAndFollowingCount } from "@/components/FollowAndFollowingCount";
 import { ProfileNotFound } from "@/components/home/main/profile/ProfileNotFound";
 import { TabLink2 } from "@/components/TabLink2";
 import { ForYou } from "../../timeline/for-you/ForYou";
+import { OverlayLoader } from "@/components/dialog/OverlayLoader";
 
 dayjs.extend(LocalizedFormat);
 
@@ -95,7 +96,7 @@ const LoadingProfile = () => {
   return (
     <>
       <MainSectionHeader text={""}></MainSectionHeader>
-      <div className="br"></div>
+      <OverlayLoader />
     </>
   );
 };

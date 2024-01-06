@@ -1,9 +1,13 @@
 import ProfilePicture from "@components/ProfilePicture";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const UserInfoCell = ({ options, showBio, userData }) => {
   return (
-    <div className="flex grow max-w-full cursor-pointer hover:bg-[#F7F7F7]  dark:hover:bg-[#080808] p-3 w-full">
+    <Link
+      to={`/${userData.username}`}
+      className="flex grow max-w-full cursor-pointer hover:bg-[#F7F7F7]  dark:hover:bg-[#fff]/[.03] p-3 w-full"
+    >
       <div className="w-[40px] mr-3">
         <ProfilePicture src={userData.profile_image_url} />
       </div>
@@ -19,7 +23,7 @@ const UserInfoCell = ({ options, showBio, userData }) => {
         </div>
         {showBio && <UserBio text={userData.bio} />}
       </div>
-    </div>
+    </Link>
   );
 };
 

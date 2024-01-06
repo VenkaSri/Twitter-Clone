@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import Skeleton from "@mui/material/Skeleton";
 import { useState } from "react";
 import { useProfilePicture } from "@/hooks/user/useProfilePicture";
-import { Link } from "react-router-dom";
 
 const ProfilePicture = ({ size = 40, src }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -21,7 +20,7 @@ const ProfilePicture = ({ size = 40, src }) => {
     height: `calc(${size}px - 4px)`,
   };
   return (
-    <Link
+    <div
       style={profilePicStyle}
       className="place-items-center grid cursor-pointer"
     >
@@ -33,7 +32,7 @@ const ProfilePicture = ({ size = 40, src }) => {
         style={imgStyle}
         onLoad={handleImageLoad}
       />
-    </Link>
+    </div>
   );
 };
 

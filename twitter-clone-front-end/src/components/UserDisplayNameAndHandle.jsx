@@ -2,7 +2,11 @@ import { useSession } from "@/hooks/useSession";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-const UserDisplayNameAndHandle = ({ id, principleUser }) => {
+const UserDisplayNameAndHandle = ({
+  userDisplayName,
+  userHandle,
+  principleUser,
+}) => {
   const [displayName, setDisplayName] = useState("");
   const [handle, setHandle] = useState("");
   const { username, name } = useSession();
@@ -11,8 +15,11 @@ const UserDisplayNameAndHandle = ({ id, principleUser }) => {
     if (principleUser) {
       setDisplayName(name);
       setHandle(username);
+    } else {
+      setDisplayName(userDisplayName);
+      setHandle(userHandle);
     }
-  }, [principleUser, name, username]);
+  }, [principleUser, name, username, userDisplayName, userHandle]);
 
   return (
     <div className="flex flex-col grow overflow-hidden">
